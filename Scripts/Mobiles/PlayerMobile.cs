@@ -223,6 +223,7 @@ namespace Server.Mobiles
         private PlayerFlag m_Flags;
         private ExtendedPlayerFlag m_ExtendedFlags;
         private int m_Profession;
+        private bool isInsuredEnabled = false;
 
         private int m_NonAutoreinsuredItems;
         // number of items that could not be automaitically reinsured because gold in bank was not enough
@@ -2382,8 +2383,11 @@ namespace Server.Mobiles
                 return;
             }
 
-            BeginTarget(-1, false, TargetFlags.None, ToggleItemInsurance_Callback);
-            SendLocalizedMessage(1060868); // Target the item you wish to toggle insurance status on <ESC> to cancel
+            if (isInsuredEnabled)
+            {
+	            BeginTarget(-1, false, TargetFlags.None, ToggleItemInsurance_Callback);
+	            SendLocalizedMessage(1060868); // Target the item you wish to toggle insurance status on <ESC> to cancel    
+            }
         }
 
         private bool CanInsure(Item item)
@@ -2435,7 +2439,10 @@ namespace Server.Mobiles
             if (!CheckAlive())
                 return;
 
-            ToggleItemInsurance_Callback(from, obj as Item, true);
+            if (isInsuredEnabled)
+            {
+	            ToggleItemInsurance_Callback(from, obj as Item, true);
+            }
         }
 
         private void ToggleItemInsurance_Callback(Mobile from, Item item, bool target)

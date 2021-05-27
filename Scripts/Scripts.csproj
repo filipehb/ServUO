@@ -27,4 +27,9 @@
   <ItemGroup>
     <Reference Include="System.Web" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Custom\Class" />
+    <Folder Include="Custom\Race" />
+  </ItemGroup>
 </Project>
