@@ -6,6 +6,7 @@ namespace Server.Commands
 {
     public class CommandLogging
     {
+	    //TODO Verificar se está logando tudo
         private static readonly char[] m_NotSafe = new char[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|' };
         private static StreamWriter m_Output;
         private static bool m_Enabled = true;
