@@ -173,7 +173,7 @@ namespace Server
 		}
 
 		#region Expansions
-		public static Expansion Expansion => Expansion.EJ;
+		public static Expansion Expansion => Expansion.T2A; //TODO Verificar se é aqui que seta a expansão
 
 		public static bool T2A => Expansion >= Expansion.T2A;
 		public static bool UOR => Expansion >= Expansion.UOR;
