@@ -36,7 +36,7 @@ namespace Server.Gumps
 
 			AddLabel(229, 186, 0, @"Guerreiro");
 			AddLabel(229, 215, 0, @"Gatuno");
-			AddLabel(229, 244, 0, @"Mágico");
+			AddLabel(229, 244, 0, @"Magico");
 			AddLabel(229, 302, 0, @"Nobre");
 			AddLabel(229, 273, 0, @"Artifice");
 			AddLabel(229, 330, 0, @"Mestre da Sabedoria");

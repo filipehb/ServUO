@@ -27,7 +27,8 @@ namespace Server.Custom.System.Age
 			var resultList = new List<string>
 			{
 				"Voce teve um infarto e morreu", "Voce teve um aneurisma e morreu",
-				"Voce teve uma unha encravada infeccionada e morreu", "Voce faleceu de causas naturais"
+				"Voce teve uma unha encravada infeccionada e morreu", "Voce faleceu de causas naturais",
+				"Voce sofreu uma combustao espontanea"
 			};
 			int index = random.Next(resultList.Count);
 			return resultList[index];

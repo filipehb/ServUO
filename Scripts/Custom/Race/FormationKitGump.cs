@@ -32,22 +32,22 @@ namespace Server.Gumps
 			{
 				case RacesCustom.Anao:
 					{
-						AddLabel(263, 154, 1280, @"Seleção de kits de formação");
-						AddLabel(248, 193, 0, @"Anão da colônia de Balin");
-						AddLabel(251, 240, 0, @"Anão das Montanhas Azuis");
-						AddLabel(251, 281, 0, @"Anão de Erebor");
-						AddLabel(251, 365, 0, @"Anão das Colinas de Ferro");
-						AddLabel(252, 322, 0, @"Anão Errante");
+						AddLabel(263, 154, 1280, @"Selecao de kits de formacao");
+						AddLabel(248, 193, 0, @"Anao da colonia de Balin");
+						AddLabel(251, 240, 0, @"Anao das Montanhas Azuis");
+						AddLabel(251, 281, 0, @"Anao de Erebor");
+						AddLabel(251, 365, 0, @"Anao das Colinas de Ferro");
+						AddLabel(252, 322, 0, @"Anao Errante");
 					}
 					break;
 				case RacesCustom.Hobbit:
 					{
-						AddLabel(263, 154, 1280, @"Seleção de kits de formação");
+						AddLabel(263, 154, 1280, @"Selecao de kits de formacao");
 						AddLabel(248, 193, 0, @"Bolseiro (Cascalva)");
 						AddLabel(251, 240, 0, @"Bolger (Cascalva)");
 						AddLabel(251, 281, 0, @"Bradebuque (Cascalva)");
-						AddLabel(251, 365, 0, @"Cotton (Pé-Peludo)");
-						AddLabel(252, 322, 0, @"Proudfoot (Pé-Peludo)");
+						AddLabel(251, 365, 0, @"Cotton (Pe-Peludo)");
+						AddLabel(252, 322, 0, @"Proudfoot (Pe-Peludo)");
 						AddLabel(252, 322, 0, @"Tuk (Cascalva)");
 
 						AddButton(225, 240, 209, 208, (int)RacesCustom.Humano, GumpButtonType.Reply, 0);
@@ -69,24 +69,24 @@ namespace Server.Gumps
 					break;
 				case RacesCustom.Humano:
 					{
-						AddLabel(263, 154, 1280, @"Seleção de kits de formação");
-						AddLabel(248, 193, 0, @"Beorning (Homem Médio)");
-						AddLabel(251, 240, 0, @"Terra-Pardense (Homem Médio)");
+						AddLabel(263, 154, 1280, @"Selecao de kits de formacao");
+						AddLabel(248, 193, 0, @"Beorning (Homem Medio)");
+						AddLabel(251, 240, 0, @"Terra-Pardense (Homem Medio)");
 						AddLabel(251, 281, 0, @"Tribo Oriental (Oriental)");
 						AddLabel(251, 365, 0, @"Tribo Sulista (Sulista)");
-						AddLabel(252, 322, 0, @"Homem de Bri (Homem Médio)");
-						AddLabel(252, 322, 0, @"Homem de Vale (Homem Médio)");
-						AddLabel(252, 322, 0, @"Homem de Gondor (Homem Médio)");
-						AddLabel(252, 322, 0, @"Homem de Minas Tirith (Dúnadan)");
-						AddLabel(252, 322, 0, @"Cavaleiro de Rohan (Homem Médio)");
+						AddLabel(252, 322, 0, @"Homem de Bri (Homem Medio)");
+						AddLabel(252, 322, 0, @"Homem de Vale (Homem Medio)");
+						AddLabel(252, 322, 0, @"Homem de Gondor (Homem Medio)");
+						AddLabel(252, 322, 0, @"Homem de Minas Tirith (Dunadan)");
+						AddLabel(252, 322, 0, @"Cavaleiro de Rohan (Homem Medio)");
 					}
 					break;
 				case RacesCustom.Elfo:
 					{
-						AddLabel(263, 154, 1280, @"Seleção de kits de formação");
+						AddLabel(263, 154, 1280, @"Selecao de kits de formacao");
 						AddLabel(248, 193, 0, @"Elfo dos Portos Cinzentos (Sinda)");
-						AddLabel(251, 240, 0, @"Elfo de Lórien (Noldo)");
-						AddLabel(251, 281, 0, @"Elfo de Lórien (Silvestre)");
+						AddLabel(251, 240, 0, @"Elfo de Lorien (Noldo)");
+						AddLabel(251, 281, 0, @"Elfo de Lorien (Silvestre)");
 						AddLabel(251, 365, 0, @"Elfo da Floresta das Trevas");
 						AddLabel(252, 322, 0, @"Elfo da Floresta das Trevas (Silvestre)");
 						AddLabel(252, 322, 0, @"Elfo de Valfenda (Noldo)");

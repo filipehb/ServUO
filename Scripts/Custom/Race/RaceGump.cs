@@ -28,10 +28,10 @@ namespace Server.Gumps
 
             AddBackground(143, 117, 496, 336, 9200);
 
-            AddLabel(263, 154, 1280, @"Seleção de raça");
+            AddLabel(263, 154, 1280, @"Selecao de raca");
             AddLabel(248, 193, 0, @"Humano");
             AddLabel(251, 240, 0, @"Elfo");
-            AddLabel(251, 281, 0, @"Anão");
+            AddLabel(251, 281, 0, @"Anao");
             AddLabel(251, 365, 0, @"Hobbit");
             //AddLabel(252, 322, 0, @"Orc"); Removido no momento
 

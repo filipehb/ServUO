@@ -42,7 +42,7 @@ namespace Server.Custom.System.Age
 				         AgeUtils.AgeInMonths(state.Mobile.CreationTime) >= 5)
 				{
 					PlayerMobile playerMobile = state.Mobile as PlayerMobile;
-					playerMobile.SendMessage(38, "Você sente que está chegando sua hora de partir deste mundo");
+					playerMobile.SendMessage(38, "Voce sente que esta chegando sua hora de partir deste mundo");
 				}
 			}
 		}

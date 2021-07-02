@@ -8,7 +8,7 @@ namespace Server.Items
 	{
 		public override string DefaultName
 		{
-			get { return "Pedra de seleção"; }
+			get { return "Pedra de selecao"; }
 		}
 
 		[Constructable]
