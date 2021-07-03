@@ -24,7 +24,7 @@ namespace Server.Engines.Points
 
         public CleanUpBritanniaData()
         {
-            Enabled = true;
+            Enabled = false;
 
             if (Enabled)
             {
