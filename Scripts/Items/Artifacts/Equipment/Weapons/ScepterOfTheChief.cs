@@ -9,7 +9,6 @@ namespace Server.Items
 
         [Constructable]
         public ScepterOfTheChief()
-            : base()
         {
             Hue = 0x481;
             Slayer = SlayerName.Exorcism;

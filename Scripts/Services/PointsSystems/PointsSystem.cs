@@ -1,15 +1,15 @@
-using Server.Engines.ArenaSystem;
-using Server.Engines.CityLoyalty;
-using Server.Engines.SorcerersDungeon;
-using Server.Engines.Fellowship;
-using Server.Engines.JollyRoger;
-using Server.Engines.VvV;
-using Server.Misc;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Engines.ArenaSystem;
+using Server.Engines.CityLoyalty;
+using Server.Engines.Fellowship;
+using Server.Engines.JollyRoger;
+using Server.Engines.SorcerersDungeon;
+using Server.Engines.VvV;
+using Server.Misc;
+using Server.Mobiles;
 
 namespace Server.Engines.Points
 {
@@ -95,7 +95,7 @@ namespace Server.Engines.Points
 
         public virtual void ConvertFromOldSystem(PlayerMobile from, double points)
         {
-            PointsEntry entry = GetEntry(from, false);
+            PointsEntry entry = GetEntry(from);
 
             if (entry == null)
             {
@@ -140,7 +140,7 @@ namespace Server.Engines.Points
             if (quest)
                 from.SendLocalizedMessage(1113719, ((int)points).ToString(), 0x26); //You have received ~1_val~ loyalty points as a reward for completing the quest. 
             else
-                from.SendLocalizedMessage(1115920, string.Format("{0}\t{1}", Name.ToString(), ((int)points).ToString()));  // Your loyalty to ~1_GROUP~ has increased by ~2_AMOUNT~;Original
+                from.SendLocalizedMessage(1115920, string.Format("{0}\t{1}", Name, ((int)points).ToString()));  // Your loyalty to ~1_GROUP~ has increased by ~2_AMOUNT~;Original
         }
 
         public virtual bool DeductPoints(Mobile from, double points, bool message = false)
@@ -151,13 +151,11 @@ namespace Server.Engines.Points
             {
                 return false;
             }
-            else
-            {
-                entry.Points -= points;
 
-                if (message)
-                    from.SendLocalizedMessage(1115921, string.Format("{0}\t{1}", Name.ToString(), ((int)points).ToString()));  // Your loyalty to ~1_GROUP~ has decreased by ~2_AMOUNT~;Original
-            }
+            entry.Points -= points;
+
+            if (message)
+	            from.SendLocalizedMessage(1115921, string.Format("{0}\t{1}", Name, ((int)points).ToString()));  // Your loyalty to ~1_GROUP~ has decreased by ~2_AMOUNT~;Original
 
             return true;
         }

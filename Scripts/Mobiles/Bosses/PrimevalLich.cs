@@ -1,9 +1,10 @@
-using Server.Engines.CannedEvil;
-using Server.Items;
-using Server.Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Engines.CannedEvil;
+using Server.Items;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -145,8 +146,7 @@ namespace Server.Mobiles
         #region Blast Radius
         private static readonly int BlastRange = 16;
 
-        private static readonly double[] BlastChance = new[]
-            {
+        private static readonly double[] BlastChance = {
                 0.0, 0.0, 0.05, 0.95, 0.95, 0.95, 0.05, 0.95, 0.95,
                 0.95, 0.05, 0.95, 0.95, 0.95, 0.05, 0.95, 0.95
             };
@@ -248,8 +248,7 @@ namespace Server.Mobiles
         {
             private readonly Mobile m_Owner;
 
-            private static readonly int[] m_Offsets = new[]
-            {
+            private static readonly int[] m_Offsets = {
                 -1, -1,
                 -1,  0,
                 -1,  1,
@@ -312,15 +311,13 @@ namespace Server.Mobiles
                             to = new Point3D(x, y, m_Owner.Z);
                             break;
                         }
-                        else
-                        {
-                            int z = map.GetAverageZ(x, y);
 
-                            if (map.CanSpawnMobile(x, y, z))
-                            {
-                                to = new Point3D(x, y, z);
-                                break;
-                            }
+                        int z = map.GetAverageZ(x, y);
+
+                        if (map.CanSpawnMobile(x, y, z))
+                        {
+	                        to = new Point3D(x, y, z);
+	                        break;
                         }
                     }
 
@@ -330,8 +327,8 @@ namespace Server.Mobiles
 
                     m.Location = to;
 
-                    Spells.SpellHelper.Turn(m_Owner, toTeleport);
-                    Spells.SpellHelper.Turn(toTeleport, m_Owner);
+                    SpellHelper.Turn(m_Owner, toTeleport);
+                    SpellHelper.Turn(toTeleport, m_Owner);
 
                     m.ProcessDelta();
 

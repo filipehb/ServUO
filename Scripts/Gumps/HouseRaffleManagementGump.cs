@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Server.Accounting;
 using Server.Items;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Gumps
 {
@@ -236,17 +236,16 @@ namespace Server.Gumps
 
                 if (xIsNull && yIsNull)
                     return 0;
-                else if (xIsNull)
-                    return -1;
-                else if (yIsNull)
-                    return 1;
+                if (xIsNull)
+	                return -1;
+                if (yIsNull)
+	                return 1;
 
                 int result = Insensitive.Compare(x.From.Name, y.From.Name);
 
                 if (result == 0)
                     return x.Date.CompareTo(y.Date);
-                else
-                    return result;
+                return result;
             }
         }
 
@@ -261,27 +260,26 @@ namespace Server.Gumps
 
                 if (xIsNull && yIsNull)
                     return 0;
-                else if (xIsNull)
-                    return -1;
-                else if (yIsNull)
-                    return 1;
+                if (xIsNull)
+	                return -1;
+                if (yIsNull)
+	                return 1;
 
                 Account a = x.From.Account as Account;
                 Account b = y.From.Account as Account;
 
                 if (a == null && b == null)
                     return 0;
-                else if (a == null)
-                    return -1;
-                else if (b == null)
-                    return 1;
+                if (a == null)
+	                return -1;
+                if (b == null)
+	                return 1;
 
                 int result = Insensitive.Compare(a.Username, b.Username);
 
                 if (result == 0)
                     return x.Date.CompareTo(y.Date);
-                else
-                    return result;
+                return result;
             }
         }
 
@@ -296,10 +294,10 @@ namespace Server.Gumps
 
                 if (xIsNull && yIsNull)
                     return 0;
-                else if (xIsNull)
-                    return -1;
-                else if (yIsNull)
-                    return 1;
+                if (xIsNull)
+	                return -1;
+                if (yIsNull)
+	                return 1;
 
                 byte[] a = x.Address.GetAddressBytes();
                 byte[] b = y.Address.GetAddressBytes();

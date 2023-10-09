@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Server.Engines.RisingTide;
 using Server.Items;
 using Server.Mobiles;
-using Server.Engines.RisingTide;
-
-using System;
-using System.Linq;
 
 namespace Server.Engines.Points
 {
@@ -70,7 +70,7 @@ namespace Server.Engines.Points
         {
             if (PlunderBeaconSpawner.Spawner != null)
             {
-                foreach (System.Collections.Generic.List<PlunderBeaconAddon> list in PlunderBeaconSpawner.Spawner.PlunderBeacons.Values)
+                foreach (List<PlunderBeaconAddon> list in PlunderBeaconSpawner.Spawner.PlunderBeacons.Values)
                 {
                     PlunderBeaconAddon addon = list.FirstOrDefault(beacon => beacon.Crew.Contains(bc) || (beacon.Spawn.ContainsKey(bc) && beacon.Spawn[bc]));
 

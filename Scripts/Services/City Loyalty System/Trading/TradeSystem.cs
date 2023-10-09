@@ -1,12 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.Points;
 using Server.Engines.SeasonalEvents;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
+using Server.Network;
 using Server.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -234,7 +235,7 @@ namespace Server.Engines.CityLoyalty
         public override void OnPlayerAdded(PlayerMobile m)
         {
             m.Backpack.DropItem(new MysteriousNote());
-            m.PrivateOverheadMessage(Network.MessageType.Regular, 1150, 1151734, m.NetState); // *A passerby slips a rolled bit of parchment into your hand...*
+            m.PrivateOverheadMessage(MessageType.Regular, 1150, 1151734, m.NetState); // *A passerby slips a rolled bit of parchment into your hand...*
         }
 
         public static void CancelTradeOrder(Mobile from, TradeOrderCrate crate)
@@ -352,8 +353,8 @@ namespace Server.Engines.CityLoyalty
 
                     return info.Type;
                 }
-                else
-                    list.Remove(vendor);
+
+                list.Remove(vendor);
             }
             while (list.Count > 0);
 
@@ -544,7 +545,7 @@ namespace Server.Engines.CityLoyalty
                 }
             }
 
-            m.LocalOverheadMessage(Network.MessageType.Regular, 1150, 1155479); // *Your keen senses alert you to an incoming ambush of attackers!*
+            m.LocalOverheadMessage(MessageType.Regular, 1150, 1155479); // *Your keen senses alert you to an incoming ambush of attackers!*
             m.SendLocalizedMessage(1049330, "", 0x22); // You have been ambushed! Fight for your honor!!!
         }
 
@@ -620,8 +621,8 @@ namespace Server.Engines.CityLoyalty
 
             if (impassable && avgZ > z && (z + height) > lowZ)
                 return false;
-            else if (!impassable && z == avgZ && !lt.Ignored)
-                hasSurface = true;
+            if (!impassable && z == avgZ && !lt.Ignored)
+	            hasSurface = true;
 
             StaticTile[] staticTiles = map.Tiles.GetStaticTiles(x, y, true);
 
@@ -645,8 +646,8 @@ namespace Server.Engines.CityLoyalty
 
                 if ((surface || impassable) && (staticTiles[i].Z + id.CalcHeight) > z && (z + height) > staticTiles[i].Z)
                     return false;
-                else if (surface && !impassable && z == (staticTiles[i].Z + id.CalcHeight))
-                    hasSurface = true;
+                if (surface && !impassable && z == (staticTiles[i].Z + id.CalcHeight))
+	                hasSurface = true;
             }
 
             IPooledEnumerable eable = map.GetItemsInRange(new Point3D(x, y, z), 0);
@@ -675,9 +676,10 @@ namespace Server.Engines.CityLoyalty
                         eable.Free();
                         return false;
                     }
-                    else if (surface && !impassable && !item.Movable && z == (item.Z + id.CalcHeight))
+
+                    if (surface && !impassable && !item.Movable && z == (item.Z + id.CalcHeight))
                     {
-                        hasSurface = true;
+	                    hasSurface = true;
                     }
                 }
             }

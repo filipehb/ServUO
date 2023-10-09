@@ -1,8 +1,9 @@
-using Server.Commands;
-using Server.Network;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Commands;
+using Server.Network;
+using Server.Spells.SkillMasteries;
+using Server.Targeting;
 
 namespace Server.Engines.PartySystem
 {
@@ -257,17 +258,15 @@ namespace Server.Engines.PartySystem
 
                         break;
                     }
-                    else
-                    {
-                        if (mob != null && mob.NetState != null && mob.NetState.IsEnhancedClient)
-                        {
-                            Waypoints.Remove(mob, m);
-                        }
 
-                        if (m.NetState != null && m.NetState.IsEnhancedClient)
-                        {
-                            Waypoints.Remove(m, mob);
-                        }
+                    if (mob != null && mob.NetState != null && mob.NetState.IsEnhancedClient)
+                    {
+	                    Waypoints.Remove(mob, m);
+                    }
+
+                    if (m.NetState != null && m.NetState.IsEnhancedClient)
+                    {
+	                    Waypoints.Remove(m, mob);
                     }
                 }
 
@@ -278,7 +277,7 @@ namespace Server.Engines.PartySystem
                 }
             }
 
-            Spells.SkillMasteries.SkillMasterySpell.OnPartyRemoved(m, m_Members == null || m_Members.Count == 0);
+            SkillMasterySpell.OnPartyRemoved(m, m_Members == null || m_Members.Count == 0);
         }
 
         public bool Contains(Mobile m)

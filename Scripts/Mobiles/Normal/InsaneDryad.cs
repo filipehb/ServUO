@@ -1,8 +1,7 @@
-using Server.Items;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -219,7 +218,6 @@ namespace Server.Mobiles
 
         [Constructable]
         public InsaneDryad()
-            : base()
         {
             Name = "an insane dryad";
             Hue = 0x487;

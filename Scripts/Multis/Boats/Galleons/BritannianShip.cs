@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Multis
 {
@@ -53,8 +53,7 @@ namespace Server.Multis
         }
 
         public override int[] CannonTileIDs => m_CannonTileIDs;
-        private static readonly int[] m_CannonTileIDs = new int[]
-        {
+        private static readonly int[] m_CannonTileIDs = {
             23612, 23631, 23630, 23632, 23634, 23639, 23637, 23643, 23641, //SOUTH
             23666, 23684, 23685, 23686, 23688, 23691, 23693, 23695, 23697, //WEST
             23558, 23576, 23577, 23580, 23578, 23583, 23585, 23587, 23589, //NORTH 
@@ -67,8 +66,7 @@ namespace Server.Multis
         };
 
         public override int[] HoldIDs => m_HoldIDs;
-        private static readonly int[] m_HoldIDs = new int[]
-        {
+        private static readonly int[] m_HoldIDs = {
             23649, 23650, 23652, 23653, 23654, 23655, 23656, 23651,  //SOUTH
             23703, 23704, 23706, 23707, 23708, 23709, 23710, 23705,  //WEST
             23595, 23596, 23598, 23599, 23600, 23601, 23602, 23597,  //NORTH
@@ -81,15 +79,13 @@ namespace Server.Multis
         };
 
         public override int[] HoldItemIDs => m_HoldItemIDs;
-        private static readonly int[] m_HoldItemIDs = new int[]
-        {
+        private static readonly int[] m_HoldItemIDs = {
             23648, 23702, 23594, 23540,
             23648, 23702, 23594, 23540,
         };
 
         public override int[] WheelItemIDs => m_WheelItemIDs;
-        private static readonly int[] m_WheelItemIDs = new int[]
-        {
+        private static readonly int[] m_WheelItemIDs = {
 
             23618, 23672, 23564, 23510,
             25154, 25208, 25100, 25046
@@ -105,79 +101,75 @@ namespace Server.Multis
                 case Direction.North:
                     if (x == X && y < Y)
                         return ShipPosition.Bow;
-                    else if (x > X && y + 5 == Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x < X && y + 5 == Y)
-                        return ShipPosition.BowPort;
-                    else if (x > X && y + 1 == Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x < X && y + 1 == Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x > X && y - 3 == Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x < X && y - 3 == Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x > X && y - 3 > Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x > X && y + 5 == Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x < X && y + 5 == Y)
+	                    return ShipPosition.BowPort;
+                    if (x > X && y + 1 == Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x < X && y + 1 == Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x > X && y - 3 == Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x < X && y - 3 == Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x > X && y - 3 > Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
                 case Direction.West:
                     if (x < X && y == Y)
                         return ShipPosition.Bow;
-                    else if (x + 5 == X && y < Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x + 5 == X && y > Y)
-                        return ShipPosition.BowPort;
-                    else if (x + 1 == X && y < Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x + 1 == X && y > Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x - 3 == X && y < Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x - 3 == X && y > Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x - 3 > X && y < Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x + 5 == X && y < Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x + 5 == X && y > Y)
+	                    return ShipPosition.BowPort;
+                    if (x + 1 == X && y < Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x + 1 == X && y > Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x - 3 == X && y < Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x - 3 == X && y > Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x - 3 > X && y < Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
                 case Direction.South:
                     if (x == X && y > Y)
                         return ShipPosition.Bow;
-                    else if (x < X && y - 5 == Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x > X && y - 5 == Y)
-                        return ShipPosition.BowPort;
-                    else if (x < X && y - 1 == Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x > X && y - 1 == Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x < X && y + 3 == Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x > X && y + 3 == Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x < X && y + 3 < Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x < X && y - 5 == Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x > X && y - 5 == Y)
+	                    return ShipPosition.BowPort;
+                    if (x < X && y - 1 == Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x > X && y - 1 == Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x < X && y + 3 == Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x > X && y + 3 == Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x < X && y + 3 < Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
                 case Direction.East:
                     if (x > X && y == Y)
                         return ShipPosition.Bow;
-                    else if (x - 5 == X && y > Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x - 5 == X && y < Y)
-                        return ShipPosition.BowPort;
-                    else if (x - 1 == X && y > Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x - 1 == X && y < Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x + 3 == X && y > Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x + 3 == X && y < Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x + 3 < X && y > Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x - 5 == X && y > Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x - 5 == X && y < Y)
+	                    return ShipPosition.BowPort;
+                    if (x - 1 == X && y > Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x - 1 == X && y < Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x + 3 == X && y > Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x + 3 == X && y < Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x + 3 < X && y > Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
             }
         }
 

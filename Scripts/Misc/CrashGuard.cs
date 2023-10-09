@@ -1,10 +1,11 @@
-using Server.Accounting;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Mail;
+using Server.Accounting;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.Misc
 {
@@ -61,7 +62,7 @@ namespace Server.Misc
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return "";
             }
         }
@@ -116,7 +117,7 @@ namespace Server.Misc
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -130,7 +131,7 @@ namespace Server.Misc
 
                 string root = GetRoot();
                 string rootBackup = Combine(root, string.Format("Backups/Crashed/{0}/", timeStamp));
-                string rootOrigin = Combine(root, string.Format("Saves/"));
+                string rootOrigin = Combine(root, "Saves/");
 
                 // Create new directories
                 CreateDirectory(rootBackup);
@@ -195,7 +196,7 @@ namespace Server.Misc
                     }
                     catch (Exception ex)
                     {
-                        Diagnostics.ExceptionLogging.LogException(ex);
+                        ExceptionLogging.LogException(ex);
                     }
 
                     try
@@ -204,7 +205,7 @@ namespace Server.Misc
                     }
                     catch (Exception ex)
                     {
-                        Diagnostics.ExceptionLogging.LogException(ex);
+                        ExceptionLogging.LogException(ex);
                     }
 
                     op.WriteLine("Exception:");

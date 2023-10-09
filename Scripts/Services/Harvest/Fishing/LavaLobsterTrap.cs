@@ -1,4 +1,6 @@
-﻿namespace Server.Items
+﻿using Server.Engines.Harvest;
+
+namespace Server.Items
 {
     public class LavaLobsterTrap : LobsterTrap
     {
@@ -7,7 +9,7 @@
         {
         }
 
-        public override int[] UseableTiles => Engines.Harvest.Fishing.LavaTiles;
+        public override int[] UseableTiles => Fishing.LavaTiles;
 
         public override void AddNameProperty(ObjectPropertyList list)
         {

@@ -1,9 +1,12 @@
 #region References
-using Server.Commands;
-using Server.Network;
+
 using System;
 using System.Collections;
 using System.Reflection;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Network;
+
 #endregion
 
 namespace Server.Gumps
@@ -127,7 +130,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -151,7 +154,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -175,7 +178,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 

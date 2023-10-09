@@ -1,10 +1,10 @@
+using System;
+using System.Linq;
+using System.Xml;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
 using Server.Spells;
-using System;
-using System.Linq;
-using System.Xml;
 
 namespace Server.Engines.Exodus
 {
@@ -86,8 +86,7 @@ namespace Server.Engines.Exodus
         {
         }
 
-        private static readonly Type[] m_Mobile = new Type[]
-        {
+        private static readonly Type[] m_Mobile = {
             typeof(ExodusDrone), typeof(ExodusMinion), typeof(ExodusMinionLord), typeof(ExodusSentinel), typeof(ExodusOverseer),
             typeof(EnslavedGargoyle), typeof(ExodusZealot), typeof(ExodusJuggernaut), typeof(Golem), typeof(GolemController),
             typeof(GargoyleDestroyer), typeof(DupresChampion) , typeof(DupresKnight), typeof(DupresSquire) 

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class UnholyConstructQuest : BaseQuest
     {
         public UnholyConstructQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Golem), "golems", 10));
 
@@ -43,7 +42,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[] { typeof(UnholyConstructQuest) };
+        public override Type[] Quests => new[] { typeof(UnholyConstructQuest) };
         public override void InitBody()
         {
             InitStats(100, 100, 25);

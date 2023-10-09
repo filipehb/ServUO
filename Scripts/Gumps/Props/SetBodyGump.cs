@@ -1,9 +1,13 @@
 #region References
-using Server.Commands;
-using Server.Network;
+
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Network;
+
 #endregion
 
 namespace Server.Gumps
@@ -196,7 +200,7 @@ namespace Server.Gumps
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         m_Mobile.SendGump(
@@ -213,7 +217,7 @@ namespace Server.Gumps
             m_Sea = new ArrayList();
             m_Human = new ArrayList();
 
-            System.Collections.Generic.List<BodyEntry> entries = Docs.LoadBodies();
+            List<BodyEntry> entries = Docs.LoadBodies();
 
             for (int i = 0; i < entries.Count; ++i)
             {

@@ -1,9 +1,9 @@
+using System.Globalization;
 using Server.Accounting;
 using Server.Engines.Points;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System.Globalization;
 
 namespace Server.Engines.ResortAndCasino
 {
@@ -173,7 +173,7 @@ namespace Server.Engines.ResortAndCasino
                             if (num2 <= (int)PointsSystem.CasinoData.GetPoints(User))
                             {
                                 Banker.Deposit(User, num2 * CasinoData.ChipCost);
-                                PointsSystem.CasinoData.DeductPoints(User, num2, false);
+                                PointsSystem.CasinoData.DeductPoints(User, num2);
                                 User.SendLocalizedMessage(1060397, (num2 * CasinoData.ChipCost).ToString(CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold has been deposited into your bank box.
 
                                 Section = Section.None;
@@ -491,7 +491,7 @@ namespace Server.Engines.ResortAndCasino
 
                         if (bet > 0 && bet <= chips)
                         {
-                            PointsSystem.CasinoData.DeductPoints(User, bet, false);
+                            PointsSystem.CasinoData.DeductPoints(User, bet);
 
                             Game.CurrentBet = bet;
                             Game.BettingOn = info.ButtonID;
@@ -641,7 +641,7 @@ namespace Server.Engines.ResortAndCasino
 
                         if (bet > 0 && bet <= chips)
                         {
-                            PointsSystem.CasinoData.DeductPoints(User, bet, false);
+                            PointsSystem.CasinoData.DeductPoints(User, bet);
 
                             Game.CurrentBet = bet;
                             Game.BettingOn = info.ButtonID;
@@ -848,7 +848,7 @@ namespace Server.Engines.ResortAndCasino
 
                         if (bet > 0 && bet <= (int)PointsSystem.CasinoData.GetPoints(User))
                         {
-                            PointsSystem.CasinoData.DeductPoints(User, bet, false);
+                            PointsSystem.CasinoData.DeductPoints(User, bet);
 
                             Game.CurrentBet = bet;
                             Game.Bet1 = bet / 3;

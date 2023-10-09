@@ -1,5 +1,6 @@
 using Server.Gumps;
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.Quests
 {
@@ -602,10 +603,9 @@ namespace Server.Engines.Quests
 
             if (hours > 0 && minutes > 0)
                 return hours + ":" + minutes + ":" + seconds;
-            else if (minutes > 0)
-                return minutes + ":" + seconds;
-            else
-                return seconds.ToString();
+            if (minutes > 0)
+	            return minutes + ":" + seconds;
+            return seconds.ToString();
         }
 
         public virtual string ReturnTo()
@@ -628,7 +628,7 @@ namespace Server.Engines.Quests
             return null;
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             if (m_From != null)
                 m_From.CloseGump(typeof(MondainQuestGump));

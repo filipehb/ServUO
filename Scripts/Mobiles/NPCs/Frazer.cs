@@ -1,14 +1,13 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
     public class InTheBellyOfTheBeastQuest : BaseQuest
     {
         public InTheBellyOfTheBeastQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(LuckyDagger), "lucky dagger", 1));
 
@@ -57,7 +56,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(InTheBellyOfTheBeastQuest),
                 };

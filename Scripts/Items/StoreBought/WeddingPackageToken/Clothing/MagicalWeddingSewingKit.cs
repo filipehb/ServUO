@@ -26,9 +26,7 @@ namespace Server.Items
 
             switch (choice)
             {
-                default:
-                    break;
-                case 1:
+	            case 1:
                     {
                         bag.DropItem(new WeddingDress());
                         bag.DropItem(new FemaleTopper());

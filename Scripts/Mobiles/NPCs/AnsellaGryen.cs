@@ -39,10 +39,9 @@ namespace Server.Engines.Quests.Zento
 
         public override int GetAutoTalkRange(PlayerMobile m)
         {
-            if (m.Quest == null)
+	        if (m.Quest == null)
                 return 3;
-            else
-                return -1;
+	        return -1;
         }
 
         public override void OnTalk(PlayerMobile player, bool contextMenu)

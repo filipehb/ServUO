@@ -15,8 +15,7 @@ namespace Server.Engines.TombOfKings
             }
         }
 
-        private static readonly Point3D[] m_LeverLocations = new Point3D[]
-        {
+        private static readonly Point3D[] m_LeverLocations = {
             new Point3D( 25, 229, 2 ),
             new Point3D( 25, 227, 2 ),
             new Point3D( 25, 225, 2 ),

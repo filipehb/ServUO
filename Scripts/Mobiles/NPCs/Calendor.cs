@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class DreadhornQuest : BaseQuest
     {
         public DreadhornQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(DreadHorn), "dread horn", 1));
 
@@ -65,7 +64,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(DreadhornQuest)
                 };

@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class SlimeStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0x1C9, 0x1CA, 0x1CB, 0x1CC, 0x1CD
         };
         [Constructable]

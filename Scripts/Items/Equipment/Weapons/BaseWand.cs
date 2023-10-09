@@ -1,6 +1,6 @@
+using System;
 using Server.Spells;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {

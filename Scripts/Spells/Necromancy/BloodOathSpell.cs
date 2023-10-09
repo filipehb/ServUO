@@ -1,7 +1,7 @@
-using Server.Spells.SkillMasteries;
-using Server.Targeting;
 using System;
 using System.Collections;
+using Server.Spells.SkillMasteries;
+using Server.Targeting;
 
 namespace Server.Spells.Necromancy
 {
@@ -115,8 +115,8 @@ namespace Server.Spells.Necromancy
             timer = new ExpireTimer(Caster, m, duration);
             timer.Start();
 
-            BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.BloodOathCaster, 1075659, duration, Caster, m.Name.ToString()));
-            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.BloodOathCurse, 1075661, duration, m, Caster.Name.ToString()));
+            BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.BloodOathCaster, 1075659, duration, Caster, m.Name));
+            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.BloodOathCurse, 1075661, duration, m, Caster.Name));
 
             m_Table[m] = timer;
             HarmfulSpell(m);

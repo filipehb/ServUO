@@ -8,7 +8,6 @@ namespace Server.Items
         public virtual int Level => 1;
 
         public BaseRewardBackpack()
-            : base()
         {
             Hue = 1127;
 
@@ -82,7 +81,6 @@ namespace Server.Items
 
         [Constructable]
         public DustyAdventurersBackpack()
-            : base()
         {
         }
 
@@ -113,7 +111,6 @@ namespace Server.Items
 
         [Constructable]
         public DustyExplorersBackpack()
-            : base()
         {
         }
 
@@ -144,7 +141,6 @@ namespace Server.Items
 
         [Constructable]
         public DustyHuntersBackpack()
-            : base()
         {
         }
 

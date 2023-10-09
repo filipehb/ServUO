@@ -1,6 +1,6 @@
+using System;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server
 {
@@ -413,7 +413,7 @@ namespace Server
                 m_Stream.Fill(2);
 
                 //m_Stream.WriteLittleUniNull( "\t#1018280" );
-                m_Stream.WriteLittleUniNull(string.Format("\t{0}", args.ToString()));
+                m_Stream.WriteLittleUniNull(string.Format("\t{0}", args));
 
                 m_Stream.Write((short)0x1);	//Even more Unknown -> Possibly something saying 'hey, I have more data!'?
                 m_Stream.Fill(2);

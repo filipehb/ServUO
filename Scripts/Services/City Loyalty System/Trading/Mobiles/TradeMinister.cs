@@ -1,12 +1,13 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
+using Server.SkillHandlers;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -258,7 +259,7 @@ namespace Server.Engines.CityLoyalty
                     }
                     break;
                 case 3:
-                    Item item = Loot.Construct(SkillHandlers.Imbuing.IngredTypes[Utility.Random(SkillHandlers.Imbuing.IngredTypes.Length)]);
+                    Item item = Loot.Construct(Imbuing.IngredTypes[Utility.Random(Imbuing.IngredTypes.Length)]);
 
                     amount /= 10;
 

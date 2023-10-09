@@ -1,8 +1,9 @@
+using System;
+using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
-using System;
-using System.Linq;
+using Server.Spells;
 
 namespace Server.Engines.Quests.RitualQuest
 {
@@ -297,7 +298,7 @@ namespace Server.Engines.Quests.RitualQuest
                 }
             }
 
-            public override bool CheckTravel(Mobile traveller, Point3D p, Spells.TravelCheckType type)
+            public override bool CheckTravel(Mobile traveller, Point3D p, TravelCheckType type)
             {
                 return false;
             }

@@ -235,6 +235,5 @@ namespace Server.Items
                 m_Chest.Reset();
             }
         }
-        ;
     }
 }

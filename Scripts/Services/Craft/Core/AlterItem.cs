@@ -1,9 +1,10 @@
+using System;
+using System.Linq;
+using Server.Engines.VendorSearching;
 using Server.Engines.VeteranRewards;
 using Server.Items;
 using Server.SkillHandlers;
 using Server.Targeting;
-using System;
-using System.Linq;
 
 namespace Server.Engines.Craft
 {
@@ -287,10 +288,10 @@ namespace Server.Engines.Craft
                 {
                     newitem.Name = origItem.Name;
                 }
-                else if (VendorSearching.VendorSearch.StringList != null)
+                else if (VendorSearch.StringList != null)
                 {
                     if (origItem.LabelNumber > 0 && RetainsName(origItem))
-                        newitem.Name = VendorSearching.VendorSearch.StringList.GetString(origItem.LabelNumber);
+                        newitem.Name = VendorSearch.StringList.GetString(origItem.LabelNumber);
                 }
 
                 AlterResists(newitem, origItem);

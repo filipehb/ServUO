@@ -1,7 +1,8 @@
 #region References
-using System;
 
+using System;
 using Server.Network;
+
 #endregion
 
 namespace Server.Targeting
@@ -191,7 +192,8 @@ namespace Server.Targeting
 					OnTargetFinish(from);
 					return;
 				}
-				else if (!((Mobile)targeted).CanTarget)
+
+				if (!((Mobile)targeted).CanTarget)
 				{
 					OnTargetUntargetable(from, targeted);
 					OnTargetFinish(from);
@@ -211,7 +213,8 @@ namespace Server.Targeting
 					OnTargetFinish(from);
 					return;
 				}
-				else if (!item.CanTarget)
+
+				if (!item.CanTarget)
 				{
 					OnTargetUntargetable(from, targeted);
 					OnTargetFinish(from);

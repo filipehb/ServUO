@@ -1,5 +1,6 @@
-using Server.Gumps;
 using System;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -17,7 +18,7 @@ namespace Server.Items
         public override void OnDoubleClick(Mobile from)
         {
             if (!from.InRange(GetWorldLocation(), 2))
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             else
             {
                 from.CloseGump(typeof(InternalGump));

@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public StormCaller()
-            : base()
         {
             Hue = 456;
             WeaponAttributes.BattleLust = 1;

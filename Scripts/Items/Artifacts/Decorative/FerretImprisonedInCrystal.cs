@@ -40,7 +40,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public ShimmeringFerret()
-            : base()
         {
             SetSkill(SkillName.MagicResist, 100.0);
             SetSkill(SkillName.Tactics, 100.0);

@@ -1,4 +1,5 @@
 using System;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -94,7 +95,7 @@ namespace Server.Items
                                 AOS.Damage(from, damage, 0, 100, 0, 0, 0);
 
                                 // Your skin blisters from the heat!
-                                from.LocalOverheadMessage(Network.MessageType.Regular, 0x2A, 503000);
+                                from.LocalOverheadMessage(MessageType.Regular, 0x2A, 503000);
                             }
 
                             Effects.SendLocationEffect(loc, facet, 0x36BD, 15, 10);
@@ -136,7 +137,7 @@ namespace Server.Items
                                 AOS.Damage(from, damage, 100, 0, 0, 0, 0);
 
                                 // A dart imbeds itself in your flesh!
-                                from.LocalOverheadMessage(Network.MessageType.Regular, 0x62, 502998);
+                                from.LocalOverheadMessage(MessageType.Regular, 0x62, 502998);
                             }
 
                             Effects.PlaySound(loc, facet, 0x223);
@@ -164,7 +165,7 @@ namespace Server.Items
                                 from.ApplyPoison(from, poison);
 
                                 // You are enveloped in a noxious green cloud!
-                                from.LocalOverheadMessage(Network.MessageType.Regular, 0x44, 503004);
+                                from.LocalOverheadMessage(MessageType.Regular, 0x44, 503004);
                             }
 
                             Effects.SendLocationEffect(loc, facet, 0x113A, 10, 20);
@@ -243,7 +244,7 @@ namespace Server.Items
             if (Deleted || !to.CanSee(this))
                 return;
 
-            to.Send(new Network.MessageLocalized(Serial, ItemID, Network.MessageType.Regular, hue, 3, number, "", ""));
+            to.Send(new MessageLocalized(Serial, ItemID, MessageType.Regular, hue, 3, number, "", ""));
         }
 
         private void SendMessageTo(Mobile to, string text, int hue)
@@ -251,7 +252,7 @@ namespace Server.Items
             if (Deleted || !to.CanSee(this))
                 return;
 
-            to.Send(new Network.UnicodeMessage(Serial, ItemID, Network.MessageType.Regular, hue, 3, "ENU", "", text));
+            to.Send(new UnicodeMessage(Serial, ItemID, MessageType.Regular, hue, 3, "ENU", "", text));
         }
     }
 }

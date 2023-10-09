@@ -1,7 +1,7 @@
-using Server.Engines.Harvest;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Server.Engines.Harvest;
 
 namespace Server.Items
 {
@@ -228,7 +228,7 @@ namespace Server.Items
 
         public static List<Point2D> LoadLocsFor(Map map, HarvestMap hMap)
         {
-            string path = string.Format("Data/HarvestLocs/{0}_{1}.cfg", hMap.IsMinerMap ? "MinerLocs" : "LumberLocs", map.ToString());
+            string path = string.Format("Data/HarvestLocs/{0}_{1}.cfg", hMap.IsMinerMap ? "MinerLocs" : "LumberLocs", map);
 
             if (!File.Exists(path))
             {

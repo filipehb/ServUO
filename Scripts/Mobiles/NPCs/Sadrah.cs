@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class FleeAndFatigueQuest : BaseQuest
     {
         public FleeAndFatigueQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(RefreshPotion), "refresh potion", 10, 0xF0B));
 
@@ -58,7 +57,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(FleeAndFatigueQuest)
                 };
@@ -104,7 +103,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public AlchemistsSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

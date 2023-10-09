@@ -1,10 +1,11 @@
-using Server.Commands;
-using Server.Gumps;
-using Server.Items;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Items;
 
 namespace Server
 {
@@ -484,7 +485,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return null;
             }
         }
@@ -536,7 +537,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 count = -1;
             }
 

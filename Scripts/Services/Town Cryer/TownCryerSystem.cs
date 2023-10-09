@@ -1,5 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Xml;
 using Server.Commands;
 using Server.ContextMenus;
+using Server.Diagnostics;
 using Server.Engines.CityLoyalty;
 using Server.Engines.Khaldun;
 using Server.Engines.Quests;
@@ -7,12 +14,6 @@ using Server.Guilds;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Xml;
 
 namespace Server.Services.TownCryer
 {
@@ -383,7 +384,7 @@ namespace Server.Services.TownCryer
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                     Utility.WriteConsoleColor(ConsoleColor.Cyan, "...FAILED! ***");
                     return;
                 }
@@ -473,7 +474,7 @@ namespace Server.Services.TownCryer
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             return datetime;

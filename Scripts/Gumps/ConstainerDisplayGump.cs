@@ -1,13 +1,13 @@
-using Server.Mobiles;
-using Server.Items;
-using Server.Network;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Gumps
 {
     public class ContainerDisplayGump : BaseGump
     {
-        public int Page { get; private set; } = 0;
+        public int Page { get; private set; }
 
         public TextDefinition Title { get; }
         public Container Container { get; }
@@ -17,7 +17,7 @@ namespace Server.Gumps
         public int Pages => Contents.Count / 50 + 1;
 
         public ContainerDisplayGump(PlayerMobile pm, Container c, TextDefinition title, bool canTake = false)
-            : base(pm, 120, 50)
+            : base(pm, 120)
         {
             Container = c;
             Title = title;

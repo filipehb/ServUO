@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Server.Mobiles;
 using Server.Engines.Auction;
+using Server.Mobiles;
 
 namespace Server.AccountVault
 {
@@ -37,10 +37,8 @@ namespace Server.AccountVault
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public void OnAuctionTray()
@@ -182,8 +180,7 @@ namespace Server.AccountVault
             }
         }
 
-        private static Point3D[] Locs = new[]
-        {
+        private static Point3D[] Locs = {
             new Point3D(1465, 1720, 0), new Point3D(1465, 1722, 0), new Point3D(1465, 1724, 0), new Point3D(1465, 1726, 0),
             new Point3D(1467, 1720, 0), new Point3D(1467, 1722, 0), new Point3D(1467, 1724, 0), new Point3D(1467, 1726, 0),
             new Point3D(1469, 1720, 0), new Point3D(1469, 1722, 0), new Point3D(1469, 1724, 0), new Point3D(1469, 1726, 0)

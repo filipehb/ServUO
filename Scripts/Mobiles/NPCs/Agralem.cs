@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class IntoTheVoidQuest : BaseQuest
     {
         public IntoTheVoidQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(BaseVoidCreature), "Void Daemons", 10));
 
@@ -57,7 +56,7 @@ namespace Server.Engines.Quests
             Say(1112688); // Daemons from the void! They must be vanquished!
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(IntoTheVoidQuest)
                 };

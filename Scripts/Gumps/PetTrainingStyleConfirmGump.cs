@@ -1,6 +1,5 @@
-using Server.Mobiles;
-
 using System;
+using Server.Mobiles;
 
 namespace Server.Gumps
 {
@@ -13,7 +12,7 @@ namespace Server.Gumps
         private Action CancelCallback { get; }
 
         public PetTrainingStyleConfirmGump(PlayerMobile pm, TextDefinition title, TextDefinition body, Action confirmCallback, Action cancelCallback = null)
-            : base(pm, 250, 50)
+            : base(pm, 250)
         {
             pm.CloseGump(GetType());
 

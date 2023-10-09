@@ -1,9 +1,10 @@
-using Server.Engines.MyrmidexInvasion;
-using Server.Items;
-using Server.Spells.SkillMasteries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.MyrmidexInvasion;
+using Server.Items;
+using Server.Network;
+using Server.Spells.SkillMasteries;
 
 namespace Server.Mobiles
 {
@@ -179,7 +180,7 @@ namespace Server.Mobiles
 
                     if (!tribesman.HasYelled)
                     {
-                        m.PublicOverheadMessage(Network.MessageType.Regular, 0x47E, 1156584); // Ahhhh-OOOO! Ahhh-OOOO!
+                        m.PublicOverheadMessage(MessageType.Regular, 0x47E, 1156584); // Ahhhh-OOOO! Ahhh-OOOO!
                         tribesman.HasYelled = true;
                     }
                 }

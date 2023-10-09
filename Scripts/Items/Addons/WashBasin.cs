@@ -133,7 +133,6 @@ namespace Server.Items
 
         [Constructable]
         public WashBasinDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

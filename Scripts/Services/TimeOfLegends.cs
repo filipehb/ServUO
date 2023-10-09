@@ -1,11 +1,12 @@
+using System;
 using Server.Commands;
 using Server.Engines.CannedEvil;
+using Server.Engines.MyrmidexInvasion;
 using Server.Engines.Shadowguard;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
-using System;
 
 namespace Server
 {
@@ -77,7 +78,7 @@ namespace Server
             gate.MoveToWorld(new Point3D(719, 1863, 40), Map.TerMur);
 
             ShadowguardController.SetupShadowguard(e.Mobile);
-            Engines.MyrmidexInvasion.GenerateMyrmidexQuest.Generate();
+            GenerateMyrmidexQuest.Generate();
 
             MacawSpawner.Generate();
 

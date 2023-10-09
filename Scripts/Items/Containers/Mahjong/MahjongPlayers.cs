@@ -54,10 +54,9 @@ namespace Server.Engines.Mahjong
         public int DealerPosition => m_DealerPosition;
         public Mobile GetPlayer(int index)
         {
-            if (index < 0 || index >= m_Players.Length)
+	        if (index < 0 || index >= m_Players.Length)
                 return null;
-            else
-                return m_Players[index];
+	        return m_Players[index];
         }
 
         public int GetPlayerIndex(Mobile mobile)
@@ -72,18 +71,16 @@ namespace Server.Engines.Mahjong
 
         public bool IsInGameDealer(Mobile mobile)
         {
-            if (Dealer != mobile)
+	        if (Dealer != mobile)
                 return false;
-            else
-                return m_InGame[m_DealerPosition];
+	        return m_InGame[m_DealerPosition];
         }
 
         public bool IsInGamePlayer(int index)
         {
-            if (index < 0 || index >= m_Players.Length || m_Players[index] == null)
+	        if (index < 0 || index >= m_Players.Length || m_Players[index] == null)
                 return false;
-            else
-                return m_InGame[index];
+	        return m_InGame[index];
         }
 
         public bool IsInGamePlayer(Mobile mobile)
@@ -100,18 +97,16 @@ namespace Server.Engines.Mahjong
 
         public int GetScore(int index)
         {
-            if (index < 0 || index >= m_Scores.Length)
+	        if (index < 0 || index >= m_Scores.Length)
                 return 0;
-            else
-                return m_Scores[index];
+	        return m_Scores[index];
         }
 
         public bool IsPublic(int index)
         {
-            if (index < 0 || index >= m_PublicHand.Length)
+	        if (index < 0 || index >= m_PublicHand.Length)
                 return false;
-            else
-                return m_PublicHand[index];
+	        return m_PublicHand[index];
         }
 
         public void SetPublic(int index, bool value)
@@ -494,10 +489,8 @@ namespace Server.Engines.Mahjong
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         private void AddPlayer(Mobile player, int index, bool sendJoinGame)

@@ -1,21 +1,19 @@
+using System;
 using Server.Items;
 using Server.Spells;
-using System;
 
 namespace Server.Mobiles
 {
     [CorpseName("a changeling corpse")]
     public class Changeling : BaseCreature
     {
-        private static readonly int[] m_FireNorth = new int[]
-        {
+        private static readonly int[] m_FireNorth = {
             -1, -1,
             1, -1,
             -1, 2,
             1, 2
         };
-        private static readonly int[] m_FireEast = new int[]
-        {
+        private static readonly int[] m_FireEast = {
             -1, 0,
             2, 0
         };

@@ -1,7 +1,7 @@
-using Server.Engines.Craft;
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -108,8 +108,8 @@ namespace Server.Items
         {
             if (!ValidateEdit(from))
                 return;
-            else if (Pins.Count >= MaxUserPins)
-                return;
+            if (Pins.Count >= MaxUserPins)
+	            return;
 
             Validate(ref x, ref y);
             AddPin(x, y);
@@ -136,8 +136,8 @@ namespace Server.Items
         {
             if (!ValidateEdit(from))
                 return;
-            else if (Pins.Count >= MaxUserPins)
-                return;
+            if (Pins.Count >= MaxUserPins)
+	            return;
 
             Validate(ref x, ref y);
             InsertPin(number, x, y);
@@ -181,10 +181,10 @@ namespace Server.Items
         {
             if (!from.CanSee(this) || from.Map != Map || !from.Alive || InSecureTrade)
                 return false;
-            else if (from.AccessLevel >= AccessLevel.GameMaster)
-                return true;
-            else if (!Movable || Protected || !from.InRange(GetWorldLocation(), 2))
-                return false;
+            if (from.AccessLevel >= AccessLevel.GameMaster)
+	            return true;
+            if (!Movable || Protected || !from.InRange(GetWorldLocation(), 2))
+	            return false;
 
             object root = RootParent;
 

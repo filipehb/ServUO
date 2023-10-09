@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class SomethingToWailAboutQuest : BaseQuest
     {
         public SomethingToWailAboutQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(WailingBanshee), "wailing banshees", 12));
 
@@ -41,7 +40,6 @@ namespace Server.Engines.Quests
     public class RunawaysQuest : BaseQuest
     {
         public RunawaysQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(FrenziedOstard), "frenzied ostards", 12));
 
@@ -75,7 +73,6 @@ namespace Server.Engines.Quests
     public class ViciousPredatorQuest : BaseQuest
     {
         public ViciousPredatorQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(DireWolf), "dire wolves ", 10));
 
@@ -119,7 +116,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(SomethingToWailAboutQuest),
                     typeof(RunawaysQuest),

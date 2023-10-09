@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.TreasuresOfKotlCity
 {
@@ -12,7 +12,7 @@ namespace Server.Engines.TreasuresOfKotlCity
 
         public static int Levels = 7;
         public static Rectangle2D SpawnBounds = new Rectangle2D(500, 2272, 87, 71);
-        public static Type[] SpawnTypes = new Type[] { typeof(SpectralKotlWarrior), typeof(SpectralMyrmidexWarrior) };
+        public static Type[] SpawnTypes = { typeof(SpectralKotlWarrior), typeof(SpectralMyrmidexWarrior) };
 
         public static TimeSpan BattleDuration = TimeSpan.FromMinutes(60);
         public static TimeSpan NextSpawnDuration => TimeSpan.FromSeconds(Utility.RandomMinMax(2, 25));
@@ -109,15 +109,13 @@ namespace Server.Engines.TreasuresOfKotlCity
 
                 if (Kills >= KillsPerWave)
                 {
-                    if (Level >= Levels)
+	                if (Level >= Levels)
                     {
                         EndSimulation();
                         return;
                     }
-                    else
-                    {
-                        IncreaseLevel();
-                    }
+
+	                IncreaseLevel();
                 }
 
                 Timer.DelayCall(NextSpawnDuration, DoSpawn);
@@ -280,10 +278,8 @@ namespace Server.Engines.TreasuresOfKotlCity
                         EndSimulation();
                         return;
                     }
-                    else
-                    {
-                        IncreaseLevel();
-                    }
+
+                    IncreaseLevel();
                 }
                 else
                 {

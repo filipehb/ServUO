@@ -1,10 +1,11 @@
-using Server.Gumps;
-using Server.Network;
-using Server.Prompts;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Network;
+using Server.Prompts;
 
 namespace Server.Misc
 {
@@ -110,7 +111,7 @@ namespace Server.Misc
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                     return TimeSpan.Zero;
                 }
             }

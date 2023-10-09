@@ -1,7 +1,8 @@
+using System;
+using Server.Engines.Points;
 using Server.Items;
 using Server.Mobiles;
 using Server.Services.TownCryer;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -253,14 +254,14 @@ namespace Server.Engines.Quests
             TownCryerSystem.CompleteQuest(Owner, 1158280, 1158281, 0x623);
             GiveRewards();
 
-            Points.PointsSystem.VoidPool.AwardPoints(Owner, 2000, false, false);
+            PointsSystem.VoidPool.AwardPoints(Owner, 2000, false, false);
             Owner.SendLocalizedMessage(1158282); // For your accomplishments you have been awarded a bonus 2000 Covetous points! Visit Vela in the Town of Cove to redeem them!
         }
     }
 
     public class SheriffOfMinoc : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(ToolsOfTheTradeQuest) };
+        public override Type[] Quests => new[] { typeof(ToolsOfTheTradeQuest) };
 
         public static SheriffOfMinoc TramInstance { get; set; }
         public static SheriffOfMinoc FelInstance { get; set; }
@@ -336,15 +337,15 @@ namespace Server.Engines.Quests
                         return;
                     }
 
-                    BaseQuest q = QuestHelper.RandomQuest(pm, new Type[] { typeof(ClearingCovetousQuest) }, this, false);
+                    BaseQuest q = QuestHelper.RandomQuest(pm, new[] { typeof(ClearingCovetousQuest) }, this, false);
 
                     if (q == null)
                     {
-                        q = QuestHelper.RandomQuest(pm, new Type[] { typeof(AForcedSacraficeQuest) }, this, false);
+                        q = QuestHelper.RandomQuest(pm, new[] { typeof(AForcedSacraficeQuest) }, this, false);
 
                         if (q == null)
                         {
-                            q = QuestHelper.RandomQuest(pm, new Type[] { typeof(AForcedSacraficeQuest2) }, this, false);
+                            q = QuestHelper.RandomQuest(pm, new[] { typeof(AForcedSacraficeQuest2) }, this, false);
                         }
                     }
 

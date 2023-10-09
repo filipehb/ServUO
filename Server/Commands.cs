@@ -1,8 +1,9 @@
 #region References
+
 using System;
 using System.Collections.Generic;
-
 using Server.Network;
+
 #endregion
 
 namespace Server.Commands
@@ -110,7 +111,8 @@ namespace Server.Commands
 			{
 				return 0;
 			}
-			else if (obj == null)
+
+			if (obj == null)
 			{
 				return 1;
 			}

@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -36,12 +36,11 @@ namespace Server.Engines.Quests
         public override object Complete => 1077739;
 
         public ItsHammerTimeQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.Blacksmith, 50, "Gorge's Shop", 1077733, 1077734));
 
-            // 1077733 By using George’s forge and anvil, he is able to give you advice as you create blacksmithing items. This helps you hone your Blacksmithing skill a bit faster than normal.
-            // 1077734 You’re not using George’s forge and anvil any longer, and he cannot give you advice. Your Blacksmithing learning potential is no longer enhanced. 
+            // 1077733 By using Georgeâ€™s forge and anvil, he is able to give you advice as you create blacksmithing items. This helps you hone your Blacksmithing skill a bit faster than normal.
+            // 1077734 Youâ€™re not using Georgeâ€™s forge and anvil any longer, and he cannot give you advice. Your Blacksmithing learning potential is no longer enhanced. 
 
             AddReward(new BaseReward(typeof(HammerOfHephaestus), 1077740));
         }
@@ -49,15 +48,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.Blacksmith.Base < 50;
+
+            return Owner.Skills.Blacksmith.Base < 50;
         }
 
         public override void OnCompleted()
@@ -83,7 +82,7 @@ namespace Server.Engines.Quests
 
     public class GeorgeHephaestus : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ItsHammerTimeQuest)
                 };

@@ -1,19 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
+using Server.Engines.Craft;
 using Server.Engines.PartySystem;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
     public class TreasureMapChest : LockableContainer
     {
         public static Type[] Artifacts => m_Artifacts;
-        private static readonly Type[] m_Artifacts = new Type[]
-        {
+        private static readonly Type[] m_Artifacts = {
             typeof(CandelabraOfSouls), typeof(GoldBricks), typeof(PhillipsWoodenSteed),
             typeof(ArcticDeathDealer), typeof(BlazeOfDeath), typeof(BurglarsBandana),
             typeof(CavortingClub), typeof(DreadPirateHat),
@@ -26,28 +26,24 @@ namespace Server.Items
         };
 
         public static Type[] ArtifactsLevelFiveToSeven => m_LevelFiveToSeven;
-        private static readonly Type[] m_LevelFiveToSeven = new Type[]
-        {
+        private static readonly Type[] m_LevelFiveToSeven = {
             typeof(ForgedPardon), typeof(ManaPhasingOrb), typeof(RunedSashOfWarding), typeof(SurgeShield)
         };
 
         public static Type[] ArtifactsLevelSeven => m_LevelSevenOnly;
-        private static readonly Type[] m_LevelSevenOnly = new Type[]
-        {
+        private static readonly Type[] m_LevelSevenOnly = {
             typeof(CoffinPiece), typeof(MasterSkeletonKey)
         };
 
         public static Type[] SOSArtifacts => m_SOSArtifacts;
-        private static readonly Type[] m_SOSArtifacts = new Type[]
-        {
+        private static readonly Type[] m_SOSArtifacts = {
             typeof(AntiqueWeddingDress),
             typeof(KelpWovenLeggings),
             typeof(RunedDriftwoodBow),
             typeof(ValkyrieArmor)
         };
         public static Type[] SOSDecor => m_SOSDecor;
-        private static readonly Type[] m_SOSDecor = new Type[]
-        {
+        private static readonly Type[] m_SOSDecor = {
             typeof(GrapeVine),
             typeof(LargeFishingNet)
         };
@@ -501,7 +497,7 @@ namespace Server.Items
 
         public static Item GetRandomRecipe()
         {
-            List<Engines.Craft.Recipe> recipes = new List<Engines.Craft.Recipe>(Engines.Craft.Recipe.Recipes.Values);
+            List<Recipe> recipes = new List<Recipe>(Recipe.Recipes.Values);
 
             return new RecipeScroll(recipes[Utility.Random(recipes.Count)]);
         }
@@ -524,9 +520,10 @@ namespace Server.Items
                 LockPick(from);
                 return false;
             }
-            else if (CanOpen(from))
+
+            if (CanOpen(from))
             {
-                return base.CheckLocked(from);
+	            return base.CheckLocked(from);
             }
 
             return true;
@@ -536,16 +533,17 @@ namespace Server.Items
         {
             if (TreasureMapInfo.NewSystem)
             {
-                if (!Locked && TrapType != TrapType.None)
+	            if (!Locked && TrapType != TrapType.None)
                 {
                     from.SendLocalizedMessage(1159008); // That appears to be trapped, using the remove trap skill would yield better results...
                     return false;
                 }
-                else if (AncientGuardians.Any(ag => ag.Alive))
-                {
-                    from.SendLocalizedMessage(1046448); // You must first kill the guardians before you may open this chest.
-                    return false;
-                }
+
+	            if (AncientGuardians.Any(ag => ag.Alive))
+	            {
+		            from.SendLocalizedMessage(1046448); // You must first kill the guardians before you may open this chest.
+		            return false;
+	            }
             }
 
             return !Locked;
@@ -780,7 +778,7 @@ namespace Server.Items
 
         public override bool ExecuteTrap(Mobile from)
         {
-            if (TreasureMapInfo.NewSystem && TrapType != TrapType.None)
+	        if (TreasureMapInfo.NewSystem && TrapType != TrapType.None)
             {
                 int damage;
 
@@ -799,10 +797,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return base.ExecuteTrap(from);
-            }
+
+	        return base.ExecuteTrap(from);
         }
 
         public void BeginRemove(Mobile from)

@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Spells.First
 {
@@ -12,8 +12,7 @@ namespace Server.Spells.First
             Reagent.Garlic,
             Reagent.Ginseng,
             Reagent.MandrakeRoot);
-        private static readonly FoodInfo[] m_Food = new FoodInfo[]
-        {
+        private static readonly FoodInfo[] m_Food = {
             new FoodInfo(typeof(Grapes), "a grape bunch"),
             new FoodInfo(typeof(Ham), "a ham"),
             new FoodInfo(typeof(CheeseWedge), "a wedge of cheese"),

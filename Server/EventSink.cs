@@ -1,16 +1,17 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
-
 using Server.Accounting;
 using Server.Commands;
 using Server.ContextMenus;
 using Server.Guilds;
 using Server.Items;
 using Server.Network;
+
 #endregion
 
 namespace Server
@@ -1065,17 +1066,11 @@ namespace Server
 
 	public class BeforeWorldSaveEventArgs : EventArgs
 	{
-		public BeforeWorldSaveEventArgs()
-		{
-		}
 	}
 
 
 	public class AfterWorldSaveEventArgs : EventArgs
 	{
-		public AfterWorldSaveEventArgs()
-		{
-		}
 	}
 
 

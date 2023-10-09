@@ -1,8 +1,9 @@
-using Server.Gumps;
-using Server.Mobiles;
-using Server.Spells.Necromancy;
 using System;
 using System.Collections.Generic;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells.Necromancy;
 
 namespace Server.Spells.Chivalry
 {
@@ -35,7 +36,7 @@ namespace Server.Spells.Chivalry
                     if (m is BaseCreature || (m.Player && (m.Criminal || m.Murderer)))
                         continue;
 
-                    if (Caster != m && m.InLOS(Caster) && Caster.CanBeBeneficial(m, false, true) && (!(m is IRepairableMobile) || ((IRepairableMobile)m).RepairResource == typeof(Items.Bandage)))
+                    if (Caster != m && m.InLOS(Caster) && Caster.CanBeBeneficial(m, false, true) && (!(m is IRepairableMobile) || ((IRepairableMobile)m).RepairResource == typeof(Bandage)))
                         targets.Add(m);
                 }
                 eable.Free();

@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Spells.SkillMasteries;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Misc
 {

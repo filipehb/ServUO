@@ -1,13 +1,13 @@
+using System;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Multis;
-using System;
 
 namespace Server.Mobiles
 {
     public class SeaMarketOfficer : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(ProfessionalBountyQuest) };
+        public override Type[] Quests => new[] { typeof(ProfessionalBountyQuest) };
 
         public SeaMarketOfficer()
         {

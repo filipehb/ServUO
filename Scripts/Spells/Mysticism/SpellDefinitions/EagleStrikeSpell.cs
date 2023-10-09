@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Spells.Mysticism
 {
@@ -34,37 +34,38 @@ namespace Server.Spells.Mysticism
             {
                 return;
             }
-            else if (CheckHSequence(d))
+
+            if (CheckHSequence(d))
             {
-                IDamageable target = d;
-                IDamageable source = Caster;
+	            IDamageable target = d;
+	            IDamageable source = Caster;
 
-                SpellHelper.Turn(Caster, target);
+	            SpellHelper.Turn(Caster, target);
 
-                if (HasDelayContext(target))
-                {
-                    DoHurtFizzle();
-                    return;
-                }
+	            if (HasDelayContext(target))
+	            {
+		            DoHurtFizzle();
+		            return;
+	            }
 
-                if (SpellHelper.CheckReflect(this, ref source, ref target))
-                {
-                    Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
-                    {
-                        source.MovingEffect(target, 0x407A, 8, 1, false, true, 0, 0);
-                        source.PlaySound(0x2EE);
-                    });
-                }
+	            if (SpellHelper.CheckReflect(this, ref source, ref target))
+	            {
+		            Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
+		            {
+			            source.MovingEffect(target, 0x407A, 8, 1, false, true, 0, 0);
+			            source.PlaySound(0x2EE);
+		            });
+	            }
 
-                Caster.MovingEffect(d, 0x407A, 8, 1, false, true, 0, 0);
-                Caster.PlaySound(0x2EE);
+	            Caster.MovingEffect(d, 0x407A, 8, 1, false, true, 0, 0);
+	            Caster.PlaySound(0x2EE);
 
-                Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
-                {
-                    Caster.PlaySound(0x64D);
-                });
+	            Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
+	            {
+		            Caster.PlaySound(0x64D);
+	            });
 
-                SpellHelper.Damage(this, target, GetNewAosDamage(19, 1, 5, target), 0, 0, 0, 0, 100);
+	            SpellHelper.Damage(this, target, GetNewAosDamage(19, 1, 5, target), 0, 0, 0, 0, 100);
             }
 
             FinishSequence();

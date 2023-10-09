@@ -1,7 +1,7 @@
-using Server.Commands;
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Commands;
+using Server.Items;
 
 //
 // This implements the Primeval Lich Lever Puzzle for SA.  
@@ -95,14 +95,14 @@ namespace Server.Engines.CannedEvil
         // puzzle lever data
         private static readonly int[][] leverdata =
         { // 3D coord, hue for levers
-            new int[] { 6981, 977, -15, 1204 }, // red
-            new int[] { 6984, 977, -15, 1150 }, // white
-            new int[] { 6987, 977, -15, 1175 }, // black
-            new int[] { 6990, 977, -15, 1264 }, // blue
-            new int[] { 7009, 977, -15, 1275 }, // purple
-            new int[] { 7012, 977, -15, 1272 }, // green
-            new int[] { 7015, 977, -15, 1260 }, // gold
-            new int[] { 7018, 977, -15, 1166 }, // pink 
+            new[] { 6981, 977, -15, 1204 }, // red
+            new[] { 6984, 977, -15, 1150 }, // white
+            new[] { 6987, 977, -15, 1175 }, // black
+            new[] { 6990, 977, -15, 1264 }, // blue
+            new[] { 7009, 977, -15, 1275 }, // purple
+            new[] { 7012, 977, -15, 1272 }, // green
+            new[] { 7015, 977, -15, 1260 }, // gold
+            new[] { 7018, 977, -15, 1166 }, // pink 
         };
 
         // these are serialized
@@ -275,8 +275,9 @@ namespace Server.Engines.CannedEvil
                 return;
             }
             // if the lever is correct, increment the count of correct levers pulled
-            else if (key == m_NextKey)
-                m_Correct++;
+
+            if (key == m_NextKey)
+	            m_Correct++;
 
             // stop and restart the lever reset timer
             if (null != l_Timer)

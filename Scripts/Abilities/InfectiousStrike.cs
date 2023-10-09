@@ -1,3 +1,5 @@
+using Server.Spells.SkillMasteries;
+
 namespace Server.Items
 {
     /// <summary>
@@ -48,7 +50,7 @@ namespace Server.Items
                 return;
 
             // Skill Masteries
-            int noChargeChance = Spells.SkillMasteries.MasteryInfo.NonPoisonConsumeChance(attacker);
+            int noChargeChance = MasteryInfo.NonPoisonConsumeChance(attacker);
 
             if (noChargeChance == 0 || noChargeChance < Utility.Random(100))
                 --weapon.PoisonCharges;

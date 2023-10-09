@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public BlackthornsKryss()
-            : base()
         {
             Hue = 0x5E5;
             Slayer = SlayerGroup.RandomSuperSlayerAOS();
@@ -43,7 +42,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public SwordOfJustice()
-            : base()
         {
             Hue = 0x47E;
             Slayer = SlayerGroup.RandomSuperSlayerAOS();
@@ -83,7 +81,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public GeoffreysAxe()
-            : base()
         {
             Hue = 0x21;
             Slayer = SlayerGroup.RandomSuperSlayerAOS();

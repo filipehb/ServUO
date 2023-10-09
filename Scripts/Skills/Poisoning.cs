@@ -1,6 +1,7 @@
-using Server.Items;
-using Server.Targeting;
 using System;
+using Server.Items;
+using Server.Misc;
+using Server.Targeting;
 
 namespace Server.SkillHandlers
 {
@@ -126,7 +127,7 @@ namespace Server.SkillHandlers
 
                             m_From.SendLocalizedMessage(1010517); // You apply the poison
 
-                            Misc.Titles.AwardKarma(m_From, -20, true);
+                            Titles.AwardKarma(m_From, -20, true);
                         }
                         else // Failed
                         {

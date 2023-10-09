@@ -1,6 +1,8 @@
 #region References
+
 using System;
 using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Network
@@ -164,17 +166,20 @@ namespace Server.Network
 			{
 				throw new ArgumentNullException("buffer");
 			}
-			else if (!(offset >= 0 && offset < buffer.Length))
+
+			if (!(offset >= 0 && offset < buffer.Length))
 			{
 				throw new ArgumentOutOfRangeException(
 					"offset", offset, "Offset must be greater than or equal to zero and less than the size of the buffer.");
 			}
-			else if (length < 0 || length > buffer.Length)
+
+			if (length < 0 || length > buffer.Length)
 			{
 				throw new ArgumentOutOfRangeException(
 					"length", length, "Length cannot be less than zero or greater than the size of the buffer.");
 			}
-			else if ((buffer.Length - offset) < length)
+
+			if ((buffer.Length - offset) < length)
 			{
 				throw new ArgumentException("Offset and length do not point to a valid segment within the buffer.");
 			}

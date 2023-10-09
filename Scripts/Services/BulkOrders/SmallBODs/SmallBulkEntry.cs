@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Server.Diagnostics;
 
 namespace Server.Engines.BulkOrders
 {
@@ -144,7 +145,7 @@ namespace Server.Engines.BulkOrders
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                 }

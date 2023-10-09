@@ -1,10 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
+using Server.Network;
 using Server.Prompts;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -64,8 +65,7 @@ namespace Server.Items
 
         public RecipeScrollFilter Filter { get; set; }
 
-        public RecipeScrollDefinition[] Definitions = new RecipeScrollDefinition[]
-        {
+        public RecipeScrollDefinition[] Definitions = {
             new RecipeScrollDefinition(1, 501, Expansion.ML, RecipeSkillName.Tailoring),
             new RecipeScrollDefinition(2, 502, Expansion.ML, RecipeSkillName.Tailoring),
             new RecipeScrollDefinition(3, 503, Expansion.ML, RecipeSkillName.Tailoring),
@@ -297,7 +297,7 @@ namespace Server.Items
         {
             if (!from.InRange(GetWorldLocation(), 2))
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045);
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045);
             }
             else
             {
@@ -342,44 +342,41 @@ namespace Server.Items
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (!IsChildOf(from.Backpack) && !IsLockedDown)
+	        if (!IsChildOf(from.Backpack) && !IsLockedDown)
             {
                 from.SendLocalizedMessage(1158823); // You must have the book in your backpack to add recipes to it.
                 return false;
             }
-            else if (dropped is RecipeScroll)
-            {
-                RecipeScroll recipe = dropped as RecipeScroll;
 
-                if (Recipes.Any(x => x.RecipeID == recipe.RecipeID))
-                {
-                    Recipes.ForEach(x =>
-                    {
-                        if (x.RecipeID == recipe.RecipeID)
-                            x.Amount += 1;
-                    });
+	        if (dropped is RecipeScroll)
+	        {
+		        RecipeScroll recipe = dropped as RecipeScroll;
 
-                    InvalidateProperties();
+		        if (Recipes.Any(x => x.RecipeID == recipe.RecipeID))
+		        {
+			        Recipes.ForEach(x =>
+			        {
+				        if (x.RecipeID == recipe.RecipeID)
+					        x.Amount += 1;
+			        });
 
-                    from.SendLocalizedMessage(1158826); // Recipe added to the book.
+			        InvalidateProperties();
 
-                    if (from is PlayerMobile)
-                        from.SendGump(new RecipeBookGump((PlayerMobile)from, this));
+			        from.SendLocalizedMessage(1158826); // Recipe added to the book.
 
-                    dropped.Delete();
-                    return true;
-                }
-                else
-                {
-                    from.SendLocalizedMessage(1158825); // That is not a recipe.
-                    return false;
-                }
-            }
-            else
-            {
-                from.SendLocalizedMessage(1158825); // That is not a recipe.
-                return false;
-            }
+			        if (from is PlayerMobile)
+				        from.SendGump(new RecipeBookGump((PlayerMobile)from, this));
+
+			        dropped.Delete();
+			        return true;
+		        }
+
+		        from.SendLocalizedMessage(1158825); // That is not a recipe.
+		        return false;
+	        }
+
+	        from.SendLocalizedMessage(1158825); // That is not a recipe.
+	        return false;
         }
 
         public RecipeBook(Serial serial)

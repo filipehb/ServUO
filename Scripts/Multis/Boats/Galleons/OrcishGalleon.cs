@@ -34,8 +34,7 @@ namespace Server.Multis
         }
 
         public override int[] CannonTileIDs => m_CannonTileIDs;
-        private static readonly int[] m_CannonTileIDs = new int[]
-        {
+        private static readonly int[] m_CannonTileIDs = {
 
             30012, 30037, 30041, 30065, 30069, 30093, 30097, //SOUTH
             30512, 30537, 30541, 30565, 30569, 30593, 30597, //WEST
@@ -54,8 +53,7 @@ namespace Server.Multis
         };
 
         public override int[] HoldIDs => m_HoldIDs;
-        private static readonly int[] m_HoldIDs = new int[]
-        {
+        private static readonly int[] m_HoldIDs = {
             30127, 30124, 30122, 30115, 30120,  //SOUTH
             30627, 30624, 30622, 30615, 30620,  //WEST
             31127, 31124, 31122, 31115, 31120,  //NORTH
@@ -73,16 +71,14 @@ namespace Server.Multis
         };
 
         public override int[] HoldItemIDs => m_HoldItemIDs;
-        private static readonly int[] m_HoldItemIDs = new int[]
-        {
+        private static readonly int[] m_HoldItemIDs = {
             30117, 30617, 31117, 31617,
             31817, 32018, 32217, 32417,
             32617, 32817, 33017, 33217
         };
 
         public override int[] WheelItemIDs => m_WheelItemIDs;
-        private static readonly int[] m_WheelItemIDs = new int[]
-        {
+        private static readonly int[] m_WheelItemIDs = {
             30141, 30641, 31141, 31642,
             31890, 32090, 32290, 32493,
             32692, 32891, 33090, 33290
@@ -104,57 +100,53 @@ namespace Server.Multis
                         return ShipPosition.BowPort;
                     if (x > X && y + 2 == Y)
                         return ShipPosition.AmidShipStarboard;
-                    else if (x < X && y + 2 == Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x > X && y > Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x < X && y + 2 == Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x > X && y > Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
                 case Direction.West:
                     if (x < X && y == Y)
                         return ShipPosition.Bow;
-                    else if (x < X && y < Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x < X && y > Y)
-                        return ShipPosition.BowPort;
-                    else if (x + 2 == X && y < Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x + 2 == X && y > Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x > X && y < Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x < X && y < Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x < X && y > Y)
+	                    return ShipPosition.BowPort;
+                    if (x + 2 == X && y < Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x + 2 == X && y > Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x > X && y < Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
                 case Direction.South:
                     if (x == X && y > Y)
                         return ShipPosition.Bow;
-                    else if (x < X && y > Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x > X && y > Y)
-                        return ShipPosition.BowPort;
-                    else if (x < X && y - 2 == Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x > X && y - 2 == Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x < X && y < Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x < X && y > Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x > X && y > Y)
+	                    return ShipPosition.BowPort;
+                    if (x < X && y - 2 == Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x > X && y - 2 == Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x < X && y < Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
                 case Direction.East:
                     if (x > X && y == Y)
                         return ShipPosition.Bow;
-                    else if (x > X && y > Y)
-                        return ShipPosition.BowStarboard;
-                    else if (x > X && y < Y)
-                        return ShipPosition.BowPort;
-                    else if (x - 2 == X && y > Y)
-                        return ShipPosition.AmidShipStarboard;
-                    else if (x - 2 == X && y < Y)
-                        return ShipPosition.AmidShipPort;
-                    else if (x < X && y > Y)
-                        return ShipPosition.AftStarboard;
-                    else
-                        return ShipPosition.AftPort;
+                    if (x > X && y > Y)
+	                    return ShipPosition.BowStarboard;
+                    if (x > X && y < Y)
+	                    return ShipPosition.BowPort;
+                    if (x - 2 == X && y > Y)
+	                    return ShipPosition.AmidShipStarboard;
+                    if (x - 2 == X && y < Y)
+	                    return ShipPosition.AmidShipPort;
+                    if (x < X && y > Y)
+	                    return ShipPosition.AftStarboard;
+                    return ShipPosition.AftPort;
             }
         }
 

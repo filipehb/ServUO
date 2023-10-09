@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Server.Items;
 using Server.Spells;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -228,16 +228,14 @@ namespace Server.Mobiles
         #endregion
 
         #region Fire Ring
-        private static readonly int[] m_North = new int[]
-        {
+        private static readonly int[] m_North = {
             -1, -1,
             1, -1,
             -1, 2,
             1, 2
         };
 
-        private static readonly int[] m_East = new int[]
-        {
+        private static readonly int[] m_East = {
             -1, 0,
             2, 0
         };
@@ -256,7 +254,7 @@ namespace Server.Mobiles
                 p.X += m_North[i];
                 p.Y += m_North[i + 1];
 
-                IPoint3D po = p as IPoint3D;
+                IPoint3D po = p;
 
                 SpellHelper.GetSurfaceTop(ref po);
 
@@ -270,7 +268,7 @@ namespace Server.Mobiles
                 p.X += m_East[i];
                 p.Y += m_East[i + 1];
 
-                IPoint3D po = p as IPoint3D;
+                IPoint3D po = p;
 
                 SpellHelper.GetSurfaceTop(ref po);
 

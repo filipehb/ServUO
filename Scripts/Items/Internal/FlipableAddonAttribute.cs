@@ -1,6 +1,7 @@
-using Server.Multis;
 using System;
 using System.Reflection;
+using Server.Diagnostics;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -8,8 +9,7 @@ namespace Server.Items
     public class FlipableAddonAttribute : Attribute
     {
         private static readonly string m_MethodName = "Flip";
-        private static readonly Type[] m_Params = new Type[]
-        {
+        private static readonly Type[] m_Params = {
             typeof(Mobile), typeof(Direction)
         };
         private readonly Direction[] m_Directions;
@@ -85,7 +85,7 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

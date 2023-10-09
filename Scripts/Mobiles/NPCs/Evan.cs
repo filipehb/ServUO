@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -16,7 +16,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[] { typeof(HonestBeggarQuest) };
+        public override Type[] Quests => new[] { typeof(HonestBeggarQuest) };
         public override void InitBody()
         {
             InitStats(100, 100, 25);

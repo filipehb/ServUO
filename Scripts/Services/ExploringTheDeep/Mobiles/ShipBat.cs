@@ -5,7 +5,6 @@
     {
         [Constructable]
         public ShipBat()
-            : base()
         {
             Name = "a ship bat";
             Body = 317;

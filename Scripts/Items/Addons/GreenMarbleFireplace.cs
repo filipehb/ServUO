@@ -102,7 +102,6 @@ namespace Server.Items
 
         [Constructable]
         public GreenMarbleFireplaceDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

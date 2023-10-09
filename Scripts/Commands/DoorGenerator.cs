@@ -1,12 +1,12 @@
 using Server.Commands;
 using Server.Items;
+using Server.Network;
 
 namespace Server
 {
     public class DoorGenerator
     {
-        private static readonly Rectangle2D[] m_BritRegions = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_BritRegions = {
             new Rectangle2D(new Point2D(250, 750), new Point2D(775, 1330)),
             new Rectangle2D(new Point2D(525, 2095), new Point2D(925, 2430)),
             new Rectangle2D(new Point2D(1025, 2155), new Point2D(1265, 2310)),
@@ -24,16 +24,13 @@ namespace Server
             new Rectangle2D(new Point2D(1410, 1500), new Point2D(1745, 1795)),
             new Rectangle2D(new Point2D(5120, 2300), new Point2D(6143, 4095))
         };
-        private static readonly Rectangle2D[] m_IlshRegions = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_IlshRegions = {
             new Rectangle2D(new Point2D(0, 0), new Point2D(288 * 8, 200 * 8))
         };
-        private static readonly Rectangle2D[] m_MalasRegions = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_MalasRegions = {
             new Rectangle2D(new Point2D(0, 0), new Point2D(320 * 8, 256 * 8))
         };
-        private static readonly int[] m_SouthFrames = new int[]
-        {
+        private static readonly int[] m_SouthFrames = {
             0x0006,
             0x0008,
             0x000B,
@@ -105,8 +102,7 @@ namespace Server
             0x0208,
             0x020A
         };
-        private static readonly int[] m_NorthFrames = new int[]
-        {
+        private static readonly int[] m_NorthFrames = {
             0x0006,
             0x0008,
             0x000D,
@@ -177,8 +173,7 @@ namespace Server
             0x0208,
             0x020A
         };
-        private static readonly int[] m_EastFrames = new int[]
-        {
+        private static readonly int[] m_EastFrames = {
             0x0007,
             0x000A,
             0x001A,
@@ -250,8 +245,7 @@ namespace Server
             0x0207,
             0x0209
         };
-        private static readonly int[] m_WestFrames = new int[]
-        {
+        private static readonly int[] m_WestFrames = {
             0x0007,
             0x000C,
             0x001A,
@@ -340,8 +334,8 @@ namespace Server
         {
             World.Broadcast(0x35, true, "Generating doors, please wait.");
 
-            Network.NetState.FlushAll();
-            Network.NetState.Pause();
+            NetState.FlushAll();
+            NetState.Pause();
 
             m_Map = Map.Trammel;
             m_Count = 0;
@@ -375,7 +369,7 @@ namespace Server
 
             int malasCount = m_Count;
 
-            Network.NetState.Resume();
+            NetState.Resume();
 
             World.Broadcast(0x35, true, "Door generation complete. Trammel: {0}; Felucca: {1}; Ilshenar: {2}; Malas: {3};", trammelCount, feluccaCount, ilshenarCount, malasCount);
         }
@@ -391,8 +385,8 @@ namespace Server
 
                 if (delta < 0)
                     return false;
-                else if (delta == 0)
-                    return true;
+                if (delta == 0)
+	                return true;
             }
 
             return false;

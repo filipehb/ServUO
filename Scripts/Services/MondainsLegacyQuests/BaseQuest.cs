@@ -1,7 +1,8 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Diagnostics;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
@@ -94,14 +95,12 @@ namespace Server.Engines.Quests
         {
             get
             {
-                if (AllObjectives)
+	            if (AllObjectives)
                 {
                     return m_Objectives.All(obj => obj.Completed);
                 }
-                else
-                {
-                    return m_Objectives.Any(obj => obj.Completed);
-                }
+
+	            return m_Objectives.Any(obj => obj.Completed);
             }
         }
 
@@ -109,14 +108,12 @@ namespace Server.Engines.Quests
         {
             get
             {
-                if (AllObjectives)
+	            if (AllObjectives)
                 {
                     return m_Objectives.All(obj => obj.Failed);
                 }
-                else
-                {
-                    return m_Objectives.Any(obj => obj.Failed);
-                }
+
+	            return m_Objectives.Any(obj => obj.Failed);
             }
         }
 
@@ -298,7 +295,7 @@ namespace Server.Engines.Quests
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                     reward = null;
                 }
 
@@ -340,7 +337,7 @@ namespace Server.Engines.Quests
             // offer next quest if present
             if (NextQuest != null)
             {
-                BaseQuest quest = QuestHelper.RandomQuest(m_Owner, new Type[] { NextQuest }, StartingMobile);
+                BaseQuest quest = QuestHelper.RandomQuest(m_Owner, new[] { NextQuest }, StartingMobile);
 
                 if (quest != null && quest.ChainID == ChainID)
                     m_Owner.SendGump(new MondainQuestGump(quest));
@@ -365,7 +362,7 @@ namespace Server.Engines.Quests
             // offer next quest if present
             if (NextQuest != null)
             {
-                BaseQuest quest = QuestHelper.RandomQuest(m_Owner, new Type[] { NextQuest }, StartingMobile);
+                BaseQuest quest = QuestHelper.RandomQuest(m_Owner, new[] { NextQuest }, StartingMobile);
 
                 if (quest != null && quest.ChainID == ChainID)
                     m_Owner.SendGump(new MondainQuestGump(quest));

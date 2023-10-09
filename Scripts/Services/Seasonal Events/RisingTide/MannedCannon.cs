@@ -1,9 +1,9 @@
-using Server.Mobiles;
-using Server.Multis;
-using Server.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -173,7 +173,7 @@ namespace Server.Items
                                         Range = currentRange
                                     };
 
-                                    return new Target[] { target };
+                                    return new[] { target };
                                 }
                             }
                         }
@@ -206,7 +206,7 @@ namespace Server.Items
                                 {
                                     Target toHit = mobiles[Utility.Random(mobiles.Count)];
                                     ColUtility.Free(mobiles);
-                                    return new Target[] { toHit };
+                                    return new[] { toHit };
                                 }
                             }
 

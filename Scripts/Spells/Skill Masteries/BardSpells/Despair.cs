@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 /*Target Strength Reduced by up to 32, 20 – 60 Damage (Physical), every 2 seconds, 
 affected by the target's magic resistance. (PvP and specific Mobs only).*/
@@ -82,8 +82,8 @@ namespace Server.Spells.SkillMasteries
                 m_Rounds = 5 + (int)((BaseSkillBonus * .75) + (CollectiveBonus / 2));
 
                 string args = string.Format("{0}\t{1}", m_StatMod, m_Damage);
-                BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.DespairTarget, 1115741, 1115743, args.ToString()));
-                BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.DespairCaster, 1115741, 1115743, args.ToString()));
+                BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.DespairTarget, 1115741, 1115743, args));
+                BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.DespairCaster, 1115741, 1115743, args));
 
                 BeginTimer();
             }

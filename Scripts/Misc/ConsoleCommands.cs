@@ -1,11 +1,16 @@
 #region References
-using Server.Accounting;
-using Server.Engines.Help;
-using Server.Network;
+
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
-using System.IO;
+using Server.Accounting;
+using Server.Diagnostics;
+using Server.Engines.Help;
+using Server.Network;
+
 #endregion
 
 namespace Server.Misc
@@ -52,7 +57,7 @@ namespace Server.Misc
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             };
         }
@@ -133,7 +138,7 @@ namespace Server.Misc
             {
                 string sub = input.Substring(3).Trim();
 
-                System.Collections.Generic.List<NetState> states = NetState.Instances;
+                List<NetState> states = NetState.Instances;
 
                 if (states.Count == 0)
                 {
@@ -157,7 +162,7 @@ namespace Server.Misc
             {
                 string sub = input.Substring(4).Trim();
 
-                System.Collections.Generic.List<NetState> states = NetState.Instances;
+                List<NetState> states = NetState.Instances;
 
                 if (states.Count == 0)
                 {
@@ -213,7 +218,7 @@ namespace Server.Misc
                         {
                             AutoSave.Save();
 
-                            System.Diagnostics.Process.Start(path);
+                            Process.Start(path);
                             Core.Kill();
                         }
                     }
@@ -228,7 +233,7 @@ namespace Server.Misc
                         }
                         else
                         {
-                            System.Diagnostics.Process.Start(path);
+                            Process.Start(path);
                             Core.Kill();
                         }
                     }
@@ -240,7 +245,7 @@ namespace Server.Misc
                     break;
                 case "online":
                     {
-                        System.Collections.Generic.List<NetState> states = NetState.Instances;
+                        List<NetState> states = NetState.Instances;
 
                         if (states.Count == 0)
                         {

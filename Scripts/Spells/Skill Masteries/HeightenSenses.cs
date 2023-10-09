@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 /*Toggle ability that provides the Parrying Master with increased chance to parry based on parry skill, 
   best weapon skill and mastery level that consumes mana while active.*/

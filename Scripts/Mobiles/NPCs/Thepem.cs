@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.BulkOrders;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests
 {
@@ -75,16 +75,15 @@ namespace Server.Engines.Quests
 			SetWearable(new FemaleGargishClothArms(), 0x738, 1);
         }
 
-        private static readonly Type[][] m_PileTypes = new Type[][]
-            {
-                new Type[] {typeof(DullCopperIngot),  typeof(PileofInspectedDullCopperIngots) },
-                new Type[] {typeof(ShadowIronIngot),  typeof(PileofInspectedShadowIronIngots) },
-                new Type[] {typeof(CopperIngot),      typeof(PileofInspectedCopperIngots) },
-                new Type[] {typeof(BronzeIngot),      typeof(PileofInspectedBronzeIngots) },
-                new Type[] {typeof(GoldIngot),        typeof(PileofInspectedGoldIngots) },
-                new Type[] {typeof(AgapiteIngot),     typeof(PileofInspectedAgapiteIngots) },
-                new Type[] {typeof(VeriteIngot),      typeof(PileofInspectedVeriteIngots) },
-                new Type[] {typeof(ValoriteIngot),    typeof(PileofInspectedValoriteIngots) }
+        private static readonly Type[][] m_PileTypes = {
+                new[] {typeof(DullCopperIngot),  typeof(PileofInspectedDullCopperIngots) },
+                new[] {typeof(ShadowIronIngot),  typeof(PileofInspectedShadowIronIngots) },
+                new[] {typeof(CopperIngot),      typeof(PileofInspectedCopperIngots) },
+                new[] {typeof(BronzeIngot),      typeof(PileofInspectedBronzeIngots) },
+                new[] {typeof(GoldIngot),        typeof(PileofInspectedGoldIngots) },
+                new[] {typeof(AgapiteIngot),     typeof(PileofInspectedAgapiteIngots) },
+                new[] {typeof(VeriteIngot),      typeof(PileofInspectedVeriteIngots) },
+                new[] {typeof(ValoriteIngot),    typeof(PileofInspectedValoriteIngots) }
             };
 
         private const int NeededIngots = 20;
@@ -110,38 +109,33 @@ namespace Server.Engines.Quests
 
             if (pileType != null)
             {
-                if (item.Amount > NeededIngots)
+	            if (item.Amount > NeededIngots)
                 {
                     SayTo(from, 1113037); // That's too many.
                     return false;
                 }
-                else if (item.Amount < NeededIngots)
-                {
-                    SayTo(from, 1113036); // That's not enough.
-                    return false;
-                }
-                else
-                {
-                    SayTo(from, 1113040); // Good. I can use this.
 
-                    from.AddToBackpack(Activator.CreateInstance(pileType) as Item);
-                    from.SendLocalizedMessage(1113041); // Now mark the inspected item as a quest item to turn it in.					
+	            if (item.Amount < NeededIngots)
+	            {
+		            SayTo(from, 1113036); // That's not enough.
+		            return false;
+	            }
 
-                    return true;
-                }
+	            SayTo(from, 1113040); // Good. I can use this.
+
+	            from.AddToBackpack(Activator.CreateInstance(pileType) as Item);
+	            from.SendLocalizedMessage(1113041); // Now mark the inspected item as a quest item to turn it in.					
+
+	            return true;
             }
-            else
+
+            if (item is Gold)
             {
-                if (item is Gold)
-                {
-                    return base.CheckGold(from, item);
-                }
-                else
-                {
-                    SayTo(from, 1113035); // Oooh, shiney. I have no use for this, though.
-                    return false;
-                }
+	            return base.CheckGold(from, item);
             }
+
+            SayTo(from, 1113035); // Oooh, shiney. I have no use for this, though.
+            return false;
         }
 
         public override void Serialize(GenericWriter writer)

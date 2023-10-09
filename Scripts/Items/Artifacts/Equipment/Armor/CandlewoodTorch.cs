@@ -1,3 +1,5 @@
+using Server.Mobiles;
+
 namespace Server.Items
 {
     public class CandlewoodTorch : BaseShield
@@ -43,7 +45,7 @@ namespace Server.Items
 
             if (parent == from && Burning)
             {
-                Mobiles.MeerMage.StopEffect(parent, true);
+                MeerMage.StopEffect(parent, true);
                 SwarmContext.CheckRemove(parent);
             }
         }
@@ -54,7 +56,7 @@ namespace Server.Items
 
             if (parent is Mobile && Burning)
             {
-                Mobiles.MeerMage.StopEffect((Mobile)parent, true);
+                MeerMage.StopEffect((Mobile)parent, true);
                 SwarmContext.CheckRemove((Mobile)parent);
             }
         }

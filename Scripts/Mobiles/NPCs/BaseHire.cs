@@ -1,9 +1,8 @@
-using Server.ContextMenus;
-using Server.Items;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -205,7 +204,7 @@ namespace Server.Mobiles
                     // Is the item the payment in gold
                     if (item is Gold)
                     {
-                        // Is the payment in gold sufficient
+	                    // Is the payment in gold sufficient
                         if (item.Amount >= Pay)
                         {
                             if (from.Followers + ControlSlots > from.FollowersMax)
@@ -225,15 +224,11 @@ namespace Server.Mobiles
                                 PayTimer.RegisterTimer(this);
                                 return true;
                             }
-                            else
-                            {
-                                return false;
-                            }
+
+                            return false;
                         }
-                        else
-                        {
-                            SayHireCost();
-                        }
+
+                        SayHireCost();
                     }
                     else
                     {

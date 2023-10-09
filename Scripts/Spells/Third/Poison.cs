@@ -1,3 +1,4 @@
+using Server.Spells.Mysticism;
 using Server.Targeting;
 
 namespace Server.Spells.Third
@@ -39,7 +40,7 @@ namespace Server.Spells.Third
 
                 m.Paralyzed = false;
 
-                if (CheckResisted(m) || Mysticism.StoneFormSpell.CheckImmunity(m))
+                if (CheckResisted(m) || StoneFormSpell.CheckImmunity(m))
                 {
                     m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
                 }

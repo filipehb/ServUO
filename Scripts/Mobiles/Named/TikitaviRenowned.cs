@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Misc;
-using System;
 
 namespace Server.Mobiles
 {
@@ -48,8 +48,8 @@ namespace Server.Mobiles
         }
         public override bool AllureImmune => true;
 
-        public override Type[] UniqueSAList => new Type[] { typeof(BasiliskHideBreastplate) };
-        public override Type[] SharedSAList => new Type[] { typeof(LegacyOfDespair), typeof(MysticsGarb) };
+        public override Type[] UniqueSAList => new[] { typeof(BasiliskHideBreastplate) };
+        public override Type[] SharedSAList => new[] { typeof(LegacyOfDespair), typeof(MysticsGarb) };
         public override InhumanSpeech SpeechType => InhumanSpeech.Ratman;
         public override bool CanRummageCorpses => true;
         public override int Hides => 8;

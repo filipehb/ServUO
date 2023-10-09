@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -165,7 +165,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public AttendantMaleLuckyDealer()
-            : base()
         {
         }
 
@@ -216,7 +215,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public AttendantFemaleLuckyDealer()
-            : base()
         {
         }
 

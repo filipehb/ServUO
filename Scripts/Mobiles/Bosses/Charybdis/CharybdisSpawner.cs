@@ -1,6 +1,7 @@
+using System;
 using Server.Items;
 using Server.Multis;
-using System;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -115,10 +116,11 @@ namespace Server.Mobiles
                     from.SendLocalizedMessage(1150198); //The spyglass goes dark, it has failed to find what you seek.
                 return false;
             }
-            else if (DateTime.UtcNow < m_NextSpawn)
+
+            if (DateTime.UtcNow < m_NextSpawn)
             {
-                from.SendLocalizedMessage(1150198); //The spyglass goes dark, it has failed to find what you seek.
-                return false;
+	            from.SendLocalizedMessage(1150198); //The spyglass goes dark, it has failed to find what you seek.
+	            return false;
             }
 
             Map map = from.Map;
@@ -216,7 +218,7 @@ namespace Server.Mobiles
 
                 LandTile t = map.Tiles.GetLandTile(tx, ty);
 
-                if (t.Z == -5 && ((t.ID >= 0xA8 && t.ID <= 0xAB) || (t.ID >= 0x136 && t.ID <= 0x137)) && !Spells.SpellHelper.CheckMulti(new Point3D(tx, ty, -5), map))
+                if (t.Z == -5 && ((t.ID >= 0xA8 && t.ID <= 0xAB) || (t.ID >= 0x136 && t.ID <= 0x137)) && !SpellHelper.CheckMulti(new Point3D(tx, ty, -5), map))
                 {
                     x = tx;
                     y = ty;

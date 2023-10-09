@@ -1,7 +1,9 @@
 #region References
+
+using System;
 using Server.Engines.Craft;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.Items

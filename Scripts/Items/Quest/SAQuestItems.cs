@@ -1,6 +1,7 @@
+using System;
+using Server.Engines.Quests;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -94,7 +95,7 @@ namespace Server.Items
 
                         wall.PublicOverheadMessage(0, 1358, 1111662); // The acid quickly burns through the writhing wallvines, revealing the strange wall.
 
-                        Timer.DelayCall(TimeSpan.FromSeconds(15.0), delegate ()
+                        Timer.DelayCall(TimeSpan.FromSeconds(15.0), delegate
                         {
                             wallandvine.MoveToWorld(wall.Location, wall.Map);
 
@@ -107,7 +108,6 @@ namespace Server.Items
                 {
                     from.SendLocalizedMessage(1111657); // The acid swiftly burn through it.
                     m_Item.Consume();
-                    return; // Exit the method, because addoncomponent is null
                 }
             }
         }
@@ -1052,7 +1052,7 @@ namespace Server.Items
 
     public class DuganMissingQuestCorpse : QuestHintItem
     {
-        public override Type QuestType => typeof(Engines.Quests.Missing);
+        public override Type QuestType => typeof(Missing);
 
         [Constructable]
         public DuganMissingQuestCorpse()
@@ -1080,7 +1080,7 @@ namespace Server.Items
 
     public class FlintLostBarrelHint : QuestHintItem
     {
-        public override Type QuestType => typeof(Engines.Quests.ThievesBeAfootQuest);
+        public override Type QuestType => typeof(ThievesBeAfootQuest);
         public override Type QuestItemType => typeof(BarrelOfBarley);
         public override int DefaultRange => 5;
 
@@ -1110,7 +1110,7 @@ namespace Server.Items
 
     public class FlintLostLogbookHint : QuestHintItem
     {
-        public override Type QuestType => typeof(Engines.Quests.BibliophileQuest);
+        public override Type QuestType => typeof(BibliophileQuest);
         public override Type QuestItemType => typeof(FlintsLogbook);
         public override int DefaultRange => 5;
 

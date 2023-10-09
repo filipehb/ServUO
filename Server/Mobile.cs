@@ -1,12 +1,14 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
-
 using Server.Accounting;
 using Server.Commands;
 using Server.ContextMenus;
+using Server.Diagnostics;
 using Server.Guilds;
 using Server.Gumps;
 using Server.HuePickers;
@@ -16,6 +18,7 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
 using Server.Targeting;
+
 #endregion
 
 namespace Server
@@ -525,7 +528,7 @@ namespace Server
 	/// <summary>
 	///     Base class representing players, npcs, and creatures.
 	/// </summary>
-	[System.Runtime.InteropServices.ComVisible(true)]
+	[ComVisible(true)]
 	public class Mobile : IEntity, IHued, IComparable<Mobile>, ISerializable, ISpawnable, IDamageable
 	{
 		#region CompareTo(...)
@@ -6301,7 +6304,7 @@ namespace Server
 				}
 				catch (Exception e)
 				{
-					Diagnostics.ExceptionLogging.LogException(e);
+					ExceptionLogging.LogException(e);
 				}
 			}
 

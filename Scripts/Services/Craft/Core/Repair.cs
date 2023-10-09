@@ -1,7 +1,7 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
 
 namespace Server.Engines.Craft
 {
@@ -106,39 +106,38 @@ namespace Server.Engines.Craft
 
                     if (value < minSkill)
                         return false; // Too difficult
-                    else if (value >= maxSkill)
-                        return true; // No challenge
+                    if (value >= maxSkill)
+	                    return true; // No challenge
 
                     double chance = (value - minSkill) / (maxSkill - minSkill);
 
                     return (chance >= Utility.RandomDouble());
                 }
-                else if (m_Addon != null)
+
+                if (m_Addon != null)
                 {
-                    double value = m_Addon.Tools.Find(x => x.System == m_CraftSystem).SkillValue;
-                    double minSkill = difficulty - 25.0;
-                    double maxSkill = difficulty + 25;
+	                double value = m_Addon.Tools.Find(x => x.System == m_CraftSystem).SkillValue;
+	                double minSkill = difficulty - 25.0;
+	                double maxSkill = difficulty + 25;
 
-                    if (value < minSkill)
-                        return false; // Too difficult
-                    else if (value >= maxSkill)
-                        return true; // No challenge
+	                if (value < minSkill)
+		                return false; // Too difficult
+	                if (value >= maxSkill)
+		                return true; // No challenge
 
-                    double chance = (value - minSkill) / (maxSkill - minSkill);
+	                double chance = (value - minSkill) / (maxSkill - minSkill);
 
-                    return (chance >= Utility.RandomDouble());
+	                return (chance >= Utility.RandomDouble());
                 }
-                else
-                {
-                    SkillLock sl = mob.Skills[SkillName.Tinkering].Lock;
-                    mob.Skills[SkillName.Tinkering].SetLockNoRelay(SkillLock.Locked);
 
-                    bool check = mob.CheckSkill(skill, difficulty - 25.0, difficulty + 25.0);
+                SkillLock sl = mob.Skills[SkillName.Tinkering].Lock;
+                mob.Skills[SkillName.Tinkering].SetLockNoRelay(SkillLock.Locked);
 
-                    mob.Skills[SkillName.Tinkering].SetLockNoRelay(sl);
+                bool check = mob.CheckSkill(skill, difficulty - 25.0, difficulty + 25.0);
 
-                    return check;
-                }
+                mob.Skills[SkillName.Tinkering].SetLockNoRelay(sl);
+
+                return check;
             }
 
             private bool CheckDeed(Mobile from)
@@ -659,13 +658,14 @@ namespace Server.Engines.Craft
 
                                 return true;
                             }
-                            else if (m is Golem)
+
+                            if (m is Golem)
                             {
-                                from.SendLocalizedMessage(1113615, name); // You need some iron or bronze ingots to repair the ~1_CREATURE~.
+	                            from.SendLocalizedMessage(1113615, name); // You need some iron or bronze ingots to repair the ~1_CREATURE~.
                             }
                             else
                             {
-                                from.SendLocalizedMessage(1044037); // You do not have sufficient metal to make that.
+	                            from.SendLocalizedMessage(1044037); // You do not have sufficient metal to make that.
                             }
                         }
                         else

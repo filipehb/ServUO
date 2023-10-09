@@ -1,6 +1,6 @@
+using System;
 using Server.Network;
 using Server.Spells;
-using System;
 
 namespace Server.Items
 {
@@ -37,7 +37,6 @@ namespace Server.Items
     {
         [Constructable]
         public GuillotineAddon()
-            : base()
         {
             AddComponent(new GuillotineComponent(), 0, 0, 0);
         }
@@ -148,7 +147,6 @@ namespace Server.Items
     {
         [Constructable]
         public GuillotineDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

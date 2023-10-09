@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.CannedEvil;
 using Server.Engines.PartySystem;
 using Server.Guilds;
 using Server.Items;
 using Server.Regions;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Spells.Necromancy
 {
@@ -17,8 +17,7 @@ namespace Server.Spells.Necromancy
             Reagent.NoxCrystal,
             Reagent.GraveDust);
         private static readonly int Range = 48;
-        private static readonly Point3D[] m_BritanniaLocs = new Point3D[]
-        {
+        private static readonly Point3D[] m_BritanniaLocs = {
             new Point3D(1470, 843, 0),
             new Point3D(1857, 865, -1),
             new Point3D(4220, 563, 36),
@@ -29,8 +28,7 @@ namespace Server.Spells.Necromancy
             new Point3D(2500, 3931, 3),
             new Point3D(4264, 3707, 0)
         };
-        private static readonly Point3D[] m_IllshLocs = new Point3D[]
-        {
+        private static readonly Point3D[] m_IllshLocs = {
             new Point3D(1222, 474, -17),
             new Point3D(718, 1360, -60),
             new Point3D(297, 1014, -19),
@@ -39,12 +37,10 @@ namespace Server.Spells.Necromancy
             new Point3D(1538, 1341, -3),
             new Point3D(528, 223, -38)
         };
-        private static readonly Point3D[] m_MalasLocs = new Point3D[]
-        {
+        private static readonly Point3D[] m_MalasLocs = {
             new Point3D(976, 517, -30)
         };
-        private static readonly Point3D[] m_TokunoLocs = new Point3D[]
-        {
+        private static readonly Point3D[] m_TokunoLocs = {
             new Point3D(710, 1162, 25),
             new Point3D(1034, 515, 18),
             new Point3D(295, 712, 55)

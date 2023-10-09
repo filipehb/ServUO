@@ -1,13 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using Server.Commands;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
 
 namespace Server.Regions
 {
@@ -53,8 +53,7 @@ namespace Server.Regions
         }
 
         public static Rectangle2D[] Bounds => m_Bounds;
-        private static readonly Rectangle2D[] m_Bounds = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_Bounds = {
             new Rectangle2D(4529, 2296, 45, 112),
         };
 
@@ -266,8 +265,7 @@ namespace Server.Regions
                 boat.Owner.SendMessage("You can only dock your boat here for {0} minutes.", (int)KickDuration.TotalMinutes);
         }
 
-        private readonly Rectangle2D[] m_KickLocs = new Rectangle2D[]
-        {
+        private readonly Rectangle2D[] m_KickLocs = {
             new Rectangle2D(m_Bounds[0].X - 100, m_Bounds[0].X - 100, 200 + m_Bounds[0].Width, 100),
             new Rectangle2D(m_Bounds[0].X - 100, m_Bounds[0].Y, 100, m_Bounds[0].Height + 100),
             new Rectangle2D(m_Bounds[0].X, m_Bounds[0].Y + m_Bounds[0].Height, m_Bounds[0].Width + 100, 100),

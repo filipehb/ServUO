@@ -1,11 +1,11 @@
-using Server.Engines.CityLoyalty;
-using Server.Mobiles;
-using Server.Items;
 using System;
-using System.Xml;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
+using Server.Engines.CityLoyalty;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Regions
 {
@@ -142,7 +142,7 @@ namespace Server.Regions
 
                     if (id > -1)
                     {
-                        if (!fromMap.FindItems<Static>(from, 0).Any(s => s.ItemID == id))
+                        if (!fromMap.FindItems<Static>(from).Any(s => s.ItemID == id))
                         {
                             var st = new Static(id);
 

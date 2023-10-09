@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class UntanglingTheWebQuest : BaseQuest
     {
         public UntanglingTheWebQuest()
-            : base()
         {
             AddObjective(new AcidCreaturesObjective(typeof(IAcidCreature), "acid creatures", 12));
 
@@ -85,7 +84,6 @@ namespace Server.Engines.Quests
     public class GreenWithEnvyQuest : BaseQuest
     {
         public GreenWithEnvyQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(EyeOfNavrey), "eye of Navrey", 1, 0x1F1C));
 
@@ -139,7 +137,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(UntanglingTheWebQuest),
                     typeof(GreenWithEnvyQuest),

@@ -1,5 +1,5 @@
-using Server.Gumps;
 using System.Collections;
+using Server.Gumps;
 
 namespace Server.Commands.Generic
 {

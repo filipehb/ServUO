@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System.Collections.Generic;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -62,16 +62,14 @@ namespace Server.Items
 
                     if (eq.IsArcane)
                     {
-                        if (eq.CurArcaneCharges > amount)
+	                    if (eq.CurArcaneCharges > amount)
                         {
                             eq.CurArcaneCharges -= amount;
                             break;
                         }
-                        else
-                        {
-                            amount -= eq.CurArcaneCharges;
-                            eq.CurArcaneCharges = 0;
-                        }
+
+	                    amount -= eq.CurArcaneCharges;
+	                    eq.CurArcaneCharges = 0;
                     }
                 }
             }
@@ -97,8 +95,8 @@ namespace Server.Items
 
             if (v < 16)
                 return 16;
-            else if (v > 24)
-                return 24;
+            if (v > 24)
+	            return 24;
 
             return v;
         }

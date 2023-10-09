@@ -1,12 +1,15 @@
+using System;
+using System.Linq;
+using System.Xml;
+using Server.Engines.Fellowship;
+using Server.Engines.Quests;
 using Server.Mobiles;
+using Server.Network;
 using Server.Regions;
 using Server.Spells;
 using Server.Spells.Bushido;
 using Server.Spells.Chivalry;
 using Server.Spells.Ninjitsu;
-using System;
-using System.Linq;
-using System.Xml;
 
 namespace Server.Engines.Blackthorn
 {
@@ -32,7 +35,7 @@ namespace Server.Engines.Blackthorn
 
         public void OnTick()
         {
-            if (!Fellowship.ForsakenFoesEvent.Instance.Running)
+            if (!ForsakenFoesEvent.Instance.Running)
             {
                 foreach (Mobile m in GetEnumeratedMobiles().Where(m => m is PlayerMobile && m.AccessLevel == AccessLevel.Player))
                 {
@@ -60,7 +63,7 @@ namespace Server.Engines.Blackthorn
             }
 
             Effects.PlaySound(m.Location, m.Map, 0x231);
-            m.LocalOverheadMessage(Network.MessageType.Regular, 0x22, 500855); // You are enveloped by a noxious gas cloud!                
+            m.LocalOverheadMessage(MessageType.Regular, 0x22, 500855); // You are enveloped by a noxious gas cloud!                
             m.ApplyPoison(m, Poison.Lethal);
 
             IPooledEnumerable eable = Map.GetMobilesInRange(m.Location, 12);
@@ -101,7 +104,7 @@ namespace Server.Engines.Blackthorn
 
     public class BlackthornCastle : GuardedRegion
     {
-        public static readonly Point3D[] StableLocs = new Point3D[] { new Point3D(1510, 1543, 25),
+        public static readonly Point3D[] StableLocs = { new Point3D(1510, 1543, 25),
             new Point3D(1516, 1542, 25), new Point3D(1520, 1542, 25), new Point3D(1525, 1542, 25) };
 
         public BlackthornCastle(XmlElement xml, Map map, Region parent)
@@ -133,7 +136,7 @@ namespace Server.Engines.Blackthorn
 
             if (m is PlayerMobile && m.X <= 1525 && m.X >= 1520 && m.Y <= 1485 && oldLocation.Y > 1485)
             {
-                Quests.AVisitToCastleBlackthornQuest.CheckLocation((PlayerMobile)m, oldLocation);
+                AVisitToCastleBlackthornQuest.CheckLocation((PlayerMobile)m, oldLocation);
             }
 
             if (m.AccessLevel > AccessLevel.Player)

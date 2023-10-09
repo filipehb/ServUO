@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class EvilEyeQuest : BaseQuest
     {
         public EvilEyeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Gazer), "gazers", 12));
 
@@ -43,7 +42,6 @@ namespace Server.Engines.Quests
     public class ImpishDelightsQuest : BaseQuest
     {
         public ImpishDelightsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Imp), "imps", 12));
 
@@ -78,7 +76,6 @@ namespace Server.Engines.Quests
     public class StirringTheNestQuest : BaseQuest
     {
         public StirringTheNestQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(RedSolenQueen), "red solen queens", 3));
             AddObjective(new SlayObjective(typeof(BlackSolenQueen), "black solen queens", 3));
@@ -115,7 +112,6 @@ namespace Server.Engines.Quests
     public class UndeadMagesQuest : BaseQuest
     {
         public UndeadMagesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(BoneMagi), "bone mages", 10));
             AddObjective(new SlayObjective(typeof(SkeletalMage), "skeletal mages", 10));
@@ -152,7 +148,6 @@ namespace Server.Engines.Quests
     public class TheAfterlifeQuest : BaseQuest
     {
         public TheAfterlifeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Mummy), "mummies", 15));
 
@@ -187,7 +182,6 @@ namespace Server.Engines.Quests
     public class FriendlyNeighborhoodSpiderkillerQuest : BaseQuest
     {
         public FriendlyNeighborhoodSpiderkillerQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(DreadSpider), "dread spiders", 8));
 
@@ -222,7 +216,6 @@ namespace Server.Engines.Quests
     public class GargoylesWrathQuest : BaseQuest
     {
         public GargoylesWrathQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GargoyleEnforcer), "gargoyle enforcers", 6));
 
@@ -257,7 +250,6 @@ namespace Server.Engines.Quests
     public class ThreeWishesQuest : BaseQuest
     {
         public ThreeWishesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Efreet), "efreets", 8));
 
@@ -292,7 +284,6 @@ namespace Server.Engines.Quests
     public class ForkedTongueQuest : BaseQuest
     {
         public ForkedTongueQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(OphidianKnight), "ophidian knight-errants", 10));
             AddObjective(new SlayObjective(typeof(OphidianMage), "ophidian mages", 10));
@@ -329,7 +320,6 @@ namespace Server.Engines.Quests
     public class MongbatMenaceQuest : BaseQuest
     {
         public MongbatMenaceQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Mongbat), "mongbats", 10));
             AddObjective(new SlayObjective(typeof(GreaterMongbat), "greater mongbats", 4));
@@ -376,7 +366,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(EvilEyeQuest),
                     typeof(ImpishDelightsQuest),

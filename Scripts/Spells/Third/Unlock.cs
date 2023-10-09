@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 using Server.Network;
 using Server.Targeting;
 
@@ -62,7 +63,7 @@ namespace Server.Spells.Third
                     {
                         LockableContainer cont = (LockableContainer)o;
 
-                        if (Multis.BaseHouse.CheckSecured(cont))
+                        if (BaseHouse.CheckSecured(cont))
                             from.SendLocalizedMessage(503098); // You cannot cast this on a secure item.
                         else if (!cont.Locked)
                             from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 503101); // That did not need to be unlocked.

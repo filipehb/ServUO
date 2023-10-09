@@ -1,8 +1,8 @@
-﻿using Server.Accounting;
+﻿using System;
+using Server.Accounting;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {

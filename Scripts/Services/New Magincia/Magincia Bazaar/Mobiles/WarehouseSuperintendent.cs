@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.NewMagincia
 {
@@ -148,8 +148,8 @@ namespace Server.Engines.NewMagincia
                     deed.Delete();
                     return false;
                 }
-                else
-                    entry.RemoveCommodity(type, 60000);
+
+                entry.RemoveCommodity(type, 60000);
             }
 
             CommodityDeed deed2 = new CommodityDeed();
@@ -162,8 +162,8 @@ namespace Server.Engines.NewMagincia
                 deed2.Delete();
                 return false;
             }
-            else
-                entry.RemoveCommodity(type, amount);
+
+            entry.RemoveCommodity(type, amount);
 
             return true;
         }

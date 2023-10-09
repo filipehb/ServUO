@@ -1,12 +1,14 @@
 #region References
-using Server.Engines.CityLoyalty;
-using Server.Mobiles;
-using Server.Network;
-using Server.Spells;
-using Server.Regions;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Server.Engines.CityLoyalty;
+using Server.Mobiles;
+using Server.Network;
+using Server.Regions;
+using Server.Spells;
+
 #endregion
 
 namespace Server.Items
@@ -762,10 +764,11 @@ namespace Server.Items
                 int h = (int)Math.Round(ts.TotalHours);
                 return string.Format("{0} hour{1}", h, (h == 1) ? "" : "s");
             }
-            else if (ts.TotalMinutes >= 1)
+
+            if (ts.TotalMinutes >= 1)
             {
-                int m = (int)Math.Round(ts.TotalMinutes);
-                return string.Format("{0} minute{1}", m, (m == 1) ? "" : "s");
+	            int m = (int)Math.Round(ts.TotalMinutes);
+	            return string.Format("{0} minute{1}", m, (m == 1) ? "" : "s");
             }
 
             int s = Math.Max((int)Math.Round(ts.TotalSeconds), 0);
@@ -778,7 +781,7 @@ namespace Server.Items
 
             if (m_Table.TryGetValue(m, out info))
             {
-                if (info.Teleporter == this)
+	            if (info.Teleporter == this)
                 {
                     if (m.BeginAction(this))
                     {
@@ -801,10 +804,8 @@ namespace Server.Items
 
                     return;
                 }
-                else
-                {
-                    info.Timer.Stop();
-                }
+
+	            info.Timer.Stop();
             }
 
             if (m_StartMessage != null)

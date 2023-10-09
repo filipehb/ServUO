@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -36,7 +36,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1078194;
 
         public EnGuardeQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.Fencing, 50, "Old Haven Training", 1078188, 1078189));
 
@@ -49,15 +48,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.Fencing.Base < 50;
+
+            return Owner.Skills.Fencing.Base < 50;
         }
 
         public override void OnCompleted()
@@ -83,7 +82,7 @@ namespace Server.Engines.Quests
 
     public class Recaro : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(EnGuardeQuest)
                 };

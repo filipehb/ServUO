@@ -1,9 +1,10 @@
-using Server.Engines.Quests;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.Khaldun
 {
@@ -319,7 +320,7 @@ namespace Server.Engines.Khaldun
                     {
                         quest.FoundCipherBook = true;
 
-                        from.PrivateOverheadMessage(Network.MessageType.Regular, 0x47E, 1158713, from.NetState);
+                        from.PrivateOverheadMessage(MessageType.Regular, 0x47E, 1158713, from.NetState);
                         // *You find the cipher text hidden among the books! Return to the Cryptologist to tell him where it is!*
 
                         Region region = Region.Find(from.Location, from.Map);

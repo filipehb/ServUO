@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
+using Server.Spells.SkillMasteries;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Spells.Seventh
 {
@@ -65,7 +66,7 @@ namespace Server.Spells.Seventh
                     double dispelChance = (50.0 + ((100 * (Caster.Skills.Magery.Value - bc.GetDispelDifficulty())) / (bc.DispelFocus * 2))) / 100;
 
                     // Skill Masteries
-                    dispelChance -= ((double)SkillMasteries.MasteryInfo.EnchantedSummoningBonus(bc) / 100);
+                    dispelChance -= ((double)MasteryInfo.EnchantedSummoningBonus(bc) / 100);
 
                     if (dispelChance > Utility.RandomDouble())
                     {

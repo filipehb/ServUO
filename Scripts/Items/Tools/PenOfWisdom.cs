@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -260,7 +260,7 @@ namespace Server.Items
                 {
                     if (i + 1 < 10)
                     {
-                        description = "0" + (i + 1).ToString();
+                        description = "0" + (i + 1);
                     }
                     else
                     {

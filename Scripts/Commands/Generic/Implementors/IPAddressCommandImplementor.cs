@@ -1,6 +1,8 @@
-using Server.Network;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.Commands.Generic
 {
@@ -8,7 +10,7 @@ namespace Server.Commands.Generic
     {
         public IPAddressCommandImplementor()
         {
-            Accessors = new string[] { "IPAddress" };
+            Accessors = new[] { "IPAddress" };
             SupportRequirement = CommandSupport.IPAddress;
             SupportsConditionals = true;
             AccessLevel = AccessLevel.Administrator;
@@ -36,7 +38,7 @@ namespace Server.Commands.Generic
                 ArrayList list = new ArrayList();
                 ArrayList addresses = new ArrayList();
 
-                System.Collections.Generic.List<NetState> states = NetState.Instances;
+                List<NetState> states = NetState.Instances;
 
                 for (int i = 0; i < states.Count; ++i)
                 {
@@ -57,7 +59,7 @@ namespace Server.Commands.Generic
             catch (Exception e)
             {
                 from.SendMessage(e.Message);
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
     }

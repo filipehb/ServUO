@@ -1,7 +1,7 @@
+using System;
 using Server.Engines.Craft;
 using Server.Prompts;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -153,7 +153,7 @@ namespace Server.Items
             if (cont == null || keyValue == 0)
                 return;
 
-            Item[] items = cont.FindItemsByType(new Type[] { typeof(Key), typeof(KeyRing) });
+            Item[] items = cont.FindItemsByType(new[] { typeof(Key), typeof(KeyRing) });
 
             foreach (Item item in items)
             {
@@ -178,7 +178,7 @@ namespace Server.Items
             if (cont == null)
                 return false;
 
-            Item[] items = cont.FindItemsByType(new Type[] { typeof(Key), typeof(KeyRing) });
+            Item[] items = cont.FindItemsByType(new[] { typeof(Key), typeof(KeyRing) });
 
             foreach (Item item in items)
             {
@@ -342,54 +342,50 @@ namespace Server.Items
 
         public bool UseOn(Mobile from, ILockable o)
         {
-            if (o.KeyValue == KeyValue)
-            {
-                if (o is BaseDoor && !((BaseDoor)o).UseLocks())
+	        if (o.KeyValue == KeyValue)
+	        {
+		        if (o is BaseDoor && !((BaseDoor)o).UseLocks())
                 {
                     return false;
                 }
-                else
-                {
-                    o.Locked = !o.Locked;
 
-                    if (o is LockableContainer)
-                    {
-                        LockableContainer cont = (LockableContainer)o;
+		        o.Locked = !o.Locked;
 
-                        if (cont.LockLevel == -255)
-                            cont.LockLevel = cont.RequiredSkill - 10;
-                    }
+		        if (o is LockableContainer)
+		        {
+			        LockableContainer cont = (LockableContainer)o;
 
-                    if (o is Item)
-                    {
-                        Item item = (Item)o;
+			        if (cont.LockLevel == -255)
+				        cont.LockLevel = cont.RequiredSkill - 10;
+		        }
 
-                        if (o.Locked)
-                            item.SendLocalizedMessageTo(from, 1048000); // You lock it.
-                        else
-                            item.SendLocalizedMessageTo(from, 1048001); // You unlock it.
+		        if (o is Item)
+		        {
+			        Item item = (Item)o;
 
-                        if (item is LockableContainer)
-                        {
-                            LockableContainer cont = (LockableContainer)item;
+			        if (o.Locked)
+				        item.SendLocalizedMessageTo(from, 1048000); // You lock it.
+			        else
+				        item.SendLocalizedMessageTo(from, 1048001); // You unlock it.
 
-                            if (cont.TrapType != TrapType.None && cont.TrapOnLockpick)
-                            {
-                                if (o.Locked)
-                                    item.SendLocalizedMessageTo(from, 501673); // You re-enable the trap.
-                                else
-                                    item.SendLocalizedMessageTo(from, 501672); // You disable the trap temporarily.  Lock it again to re-enable it.
-                            }
-                        }
-                    }
+			        if (item is LockableContainer)
+			        {
+				        LockableContainer cont = (LockableContainer)item;
 
-                    return true;
-                }
-            }
-            else
-            {
-                return false;
-            }
+				        if (cont.TrapType != TrapType.None && cont.TrapOnLockpick)
+				        {
+					        if (o.Locked)
+						        item.SendLocalizedMessageTo(from, 501673); // You re-enable the trap.
+					        else
+						        item.SendLocalizedMessageTo(from, 501672); // You disable the trap temporarily.  Lock it again to re-enable it.
+				        }
+			        }
+		        }
+
+		        return true;
+	        }
+
+	        return false;
         }
 
         private class RenamePrompt : Prompt

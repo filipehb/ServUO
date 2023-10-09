@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Gumps
 {
     public class BaseConfirmGump : Gump
@@ -64,7 +66,7 @@ namespace Server.Gumps
         public virtual string TitleString => null;
         public virtual string LabelString => null;
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             if (info.ButtonID == (int)Buttons.Confirm)
             {

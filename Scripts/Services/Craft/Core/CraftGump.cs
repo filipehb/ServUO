@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Collections.Generic;
+using Server.SkillHandlers;
 
 namespace Server.Engines.Craft
 {
@@ -261,19 +262,18 @@ namespace Server.Engines.Craft
             return null;
         }
 
-        private readonly Type[][] m_TypesTable = new Type[][]
-        {
-            new Type[]{ typeof( Log ), typeof( Board ) },
-            new Type[]{ typeof( HeartwoodLog ), typeof( HeartwoodBoard ) },
-            new Type[]{ typeof( BloodwoodLog ), typeof( BloodwoodBoard ) },
-            new Type[]{ typeof( FrostwoodLog ), typeof( FrostwoodBoard ) },
-            new Type[]{ typeof( OakLog ), typeof( OakBoard ) },
-            new Type[]{ typeof( AshLog ), typeof( AshBoard ) },
-            new Type[]{ typeof( YewLog ), typeof( YewBoard ) },
-            new Type[]{ typeof( Leather ), typeof( Hides ) },
-            new Type[]{ typeof( SpinedLeather ), typeof( SpinedHides ) },
-            new Type[]{ typeof( HornedLeather ), typeof( HornedHides ) },
-            new Type[]{ typeof( BarbedLeather ), typeof( BarbedHides ) },
+        private readonly Type[][] m_TypesTable = {
+            new[]{ typeof( Log ), typeof( Board ) },
+            new[]{ typeof( HeartwoodLog ), typeof( HeartwoodBoard ) },
+            new[]{ typeof( BloodwoodLog ), typeof( BloodwoodBoard ) },
+            new[]{ typeof( FrostwoodLog ), typeof( FrostwoodBoard ) },
+            new[]{ typeof( OakLog ), typeof( OakBoard ) },
+            new[]{ typeof( AshLog ), typeof( AshBoard ) },
+            new[]{ typeof( YewLog ), typeof( YewBoard ) },
+            new[]{ typeof( Leather ), typeof( Hides ) },
+            new[]{ typeof( SpinedLeather ), typeof( SpinedHides ) },
+            new[]{ typeof( HornedLeather ), typeof( HornedHides ) },
+            new[]{ typeof( BarbedLeather ), typeof( BarbedHides ) },
         };
 
         public void CreateResList(bool opt, Mobile from)
@@ -729,7 +729,7 @@ namespace Server.Engines.Craft
                                 {
                                     if (system.CanAlter)
                                     {
-                                        if (SkillHandlers.Imbuing.CheckSoulForge(m_From, 1, false))
+                                        if (Imbuing.CheckSoulForge(m_From, 1, false))
                                         {
                                             AlterItem.BeginTarget(m_From, system, m_Tool);
                                         }

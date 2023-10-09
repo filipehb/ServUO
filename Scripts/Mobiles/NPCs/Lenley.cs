@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Regions;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -9,7 +9,6 @@ namespace Server.Engines.Quests
         public override bool DoneOnce => true;
 
         public FreedomQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Sanctuary Entrance"));
 
@@ -49,13 +48,12 @@ namespace Server.Engines.Quests
 
     public class Lenley : BaseEscort
     {
-        public override Type[] Quests => new Type[] { typeof(FreedomQuest) };
+        public override Type[] Quests => new[] { typeof(FreedomQuest) };
 
         public LenleyRegion _Region { get; set; }
 
         [Constructable]
         public Lenley()
-            : base()
         {
             Name = "Lenley";
             Title = "the Snitch";

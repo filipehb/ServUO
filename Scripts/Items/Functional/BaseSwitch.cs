@@ -1,5 +1,5 @@
-using Server.Network;
 using System;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -44,69 +44,67 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile m)
         {
-            if (!m.InRange(this, 2))
+	        if (!m.InRange(this, 2))
             {
                 m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
                 return;
             }
-            else
-            {
-                int MessageA = 0;
 
-                if (m_LocMessageA == 0)
-                    MessageA = 500357 + Utility.Random(5);
-                else
-                    MessageA = m_LocMessageA;
+	        int MessageA = 0;
 
-                int MessageB = 0;
+	        if (m_LocMessageA == 0)
+		        MessageA = 500357 + Utility.Random(5);
+	        else
+		        MessageA = m_LocMessageA;
 
-                if (m_LocMessageB == 0)
-                    MessageB = 500357 + Utility.Random(5);
-                else
-                    MessageB = m_LocMessageB;
+	        int MessageB = 0;
 
-                /*
+	        if (m_LocMessageB == 0)
+		        MessageB = 500357 + Utility.Random(5);
+	        else
+		        MessageB = m_LocMessageB;
+
+	        /*
                 500357 - If this lever ever did anything, it doesn't do it anymore.
                 500358 - The lever feels loose, and you realize it no longer controls anything.
                 500359 - You flip the lever and think you hear something, but realize it was just your imagination.
                 500360 - The lever flips without effort, doing nothing.
                 */
 
-                if (ItemID == m_TurnOff && m_Used == false)
-                {
-                    ItemID = m_TurnOn;
-                    m_Used = true;
-                    Effects.PlaySound(Location, Map, 0x3E8);
+	        if (ItemID == m_TurnOff && m_Used == false)
+	        {
+		        ItemID = m_TurnOn;
+		        m_Used = true;
+		        Effects.PlaySound(Location, Map, 0x3E8);
 
-                    m.LocalOverheadMessage(MessageType.Regular, 0, MessageA); //Message received when it is turned on by first time.
+		        m.LocalOverheadMessage(MessageType.Regular, 0, MessageA); //Message received when it is turned on by first time.
 
-                    //This call to another method to do something special, so you don't need
-                    //to override OnDoubleClick and rewrite this section again.
-                    if (m_Working == true)
-                    {
-                        DoSomethingSpecial(m);
-                    }
+		        //This call to another method to do something special, so you don't need
+		        //to override OnDoubleClick and rewrite this section again.
+		        if (m_Working)
+		        {
+			        DoSomethingSpecial(m);
+		        }
 
-                    //Refresh time of two minutes, equal to RunUO's RaiseSwith
-                    Timer.DelayCall(TimeSpan.FromMinutes(2.0), delegate ()
-                    {
-                        ItemID = m_TurnOff;
-                        m_Used = false;
-                    });
-                }
-                else if (ItemID == m_TurnOff && m_Used == true)
-                {
-                    ItemID = m_TurnOn;
-                    Effects.PlaySound(Location, Map, 0x3E8);
-                    m.LocalOverheadMessage(MessageType.Regular, 0, MessageB); //Message received after click it again until the refresh.
-                }
-                else //TurnOn and m_Used true
-                {
-                    ItemID = m_TurnOff;
-                    Effects.PlaySound(Location, Map, 0x3E8);
-                    m.LocalOverheadMessage(MessageType.Regular, 0, MessageB); //Message received after click it again until the refresh.
-                }
-            }
+		        //Refresh time of two minutes, equal to RunUO's RaiseSwith
+		        Timer.DelayCall(TimeSpan.FromMinutes(2.0), delegate
+		        {
+			        ItemID = m_TurnOff;
+			        m_Used = false;
+		        });
+	        }
+	        else if (ItemID == m_TurnOff && m_Used)
+	        {
+		        ItemID = m_TurnOn;
+		        Effects.PlaySound(Location, Map, 0x3E8);
+		        m.LocalOverheadMessage(MessageType.Regular, 0, MessageB); //Message received after click it again until the refresh.
+	        }
+	        else //TurnOn and m_Used true
+	        {
+		        ItemID = m_TurnOff;
+		        Effects.PlaySound(Location, Map, 0x3E8);
+		        m.LocalOverheadMessage(MessageType.Regular, 0, MessageB); //Message received after click it again until the refresh.
+	        }
         }
 
         public virtual void DoSomethingSpecial(Mobile from)

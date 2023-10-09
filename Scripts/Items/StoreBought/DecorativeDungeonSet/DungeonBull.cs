@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public DungeonBullAddon(bool east)
-            : base()
         {
             if (east)
             {
@@ -61,7 +60,6 @@ namespace Server.Items
 
         [Constructable]
         public DungeonBullDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

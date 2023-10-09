@@ -1,6 +1,8 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
+using Server.Items;
+using Server.Spells.Ninjitsu;
 
 namespace Server.Mobiles
 {
@@ -117,7 +119,7 @@ namespace Server.Mobiles
         {
             if (0.1 > Utility.RandomDouble() && m_NextMirrorImage < DateTime.UtcNow)
             {
-                new Spells.Ninjitsu.MirrorImage(this, null).Cast();
+                new MirrorImage(this, null).Cast();
 
                 m_NextMirrorImage = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(20, 45));
             }
@@ -191,7 +193,7 @@ namespace Server.Mobiles
                     {
                         if (item is BaseWeapon)
                         {
-                            var crItem = Engines.Craft.CraftItem.GetCraftItem(item.GetType(), true);
+                            var crItem = CraftItem.GetCraftItem(item.GetType(), true);
 
                             if (crItem != null)
                             {

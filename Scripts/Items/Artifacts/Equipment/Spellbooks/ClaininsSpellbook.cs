@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public ClaininsSpellbook()
-            : base()
         {
             Hue = 0x84D;
             Attributes.SpellChanneling = 1;

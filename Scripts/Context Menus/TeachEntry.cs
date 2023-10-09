@@ -1,4 +1,5 @@
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.ContextMenus
 {
@@ -16,7 +17,7 @@ namespace Server.ContextMenus
             m_From = from;
 
             if (!enabled)
-                Flags |= Network.CMEFlags.Disabled;
+                Flags |= CMEFlags.Disabled;
         }
 
         public override void OnClick()

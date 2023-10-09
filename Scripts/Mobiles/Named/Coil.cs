@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Coil()
-            : base()
         {
             ActiveSpeed = 0.1;
             PassiveSpeed = 0.2;

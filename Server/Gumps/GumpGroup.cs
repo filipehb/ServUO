@@ -18,6 +18,7 @@
  *
  ***************************************************************************/
 
+using System;
 using Server.Network;
 
 namespace Server.Gumps
@@ -39,7 +40,7 @@ namespace Server.Gumps
 
 		public override string Compile()
 		{
-			return System.String.Format("{{ group {0} }}", m_Group);
+			return String.Format("{{ group {0} }}", m_Group);
 		}
 
 		private static readonly byte[] m_LayoutName = Gump.StringToBuffer("group");

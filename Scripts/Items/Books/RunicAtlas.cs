@@ -1,10 +1,11 @@
+using System;
+using Server.Engines.Craft;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Prompts;
 using Server.Spells.Chivalry;
 using Server.Spells.Fourth;
 using Server.Spells.Seventh;
-using System;
 
 namespace Server.Items
 {
@@ -92,7 +93,7 @@ namespace Server.Items
             return d;
         }
 
-        public override int OnCraft(int quality, bool makersMark, Mobile from, Engines.Craft.CraftSystem craftSystem, Type typeRes, ITool tool, Engines.Craft.CraftItem craftItem, int resHue)
+        public override int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             if (makersMark)
                 Crafter = from;

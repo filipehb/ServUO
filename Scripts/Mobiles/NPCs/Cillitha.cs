@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class LethalDartsQuest : BaseQuest
     {
         public LethalDartsQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Bolt), "crossbow bolts", 10, 0x1BFB));
 
@@ -45,7 +44,6 @@ namespace Server.Engines.Quests
     public class SimpleBowQuest : BaseQuest
     {
         public SimpleBowQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Bow), "bows", 10, 0x13B2));
 
@@ -81,7 +79,6 @@ namespace Server.Engines.Quests
     public class IngeniousArcheryPartOneQuest : BaseQuest
     {
         public IngeniousArcheryPartOneQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Crossbow), "crossbows", 10, 0xF50));
 
@@ -117,7 +114,6 @@ namespace Server.Engines.Quests
     public class IngeniousArcheryPartTwoQuest : BaseQuest
     {
         public IngeniousArcheryPartTwoQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(HeavyCrossbow), "heavy crossbows", 8, 0x13FD));
 
@@ -154,7 +150,6 @@ namespace Server.Engines.Quests
     public class IngeniousArcheryPartThreeQuest : BaseQuest
     {
         public IngeniousArcheryPartThreeQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(RepeatingCrossbow), "repeating crossbows", 10, 0x26C3));
 
@@ -203,7 +198,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(LethalDartsQuest),
                     typeof(SimpleBowQuest),

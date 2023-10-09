@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class TheyreBreedingLikeRabbitsQuest : BaseQuest
     {
         public TheyreBreedingLikeRabbitsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Rabbit), "rabbits", 10));
 
@@ -41,7 +40,6 @@ namespace Server.Engines.Quests
     public class TheyllEatAnythingQuest : BaseQuest
     {
         public TheyllEatAnythingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Pig), "pigs", 10));
 
@@ -77,7 +75,6 @@ namespace Server.Engines.Quests
     public class NoGoodFishStealingQuest : BaseQuest
     {
         public NoGoodFishStealingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Walrus), "walruses", 10));
 
@@ -111,7 +108,6 @@ namespace Server.Engines.Quests
     public class HeroInTheMakingQuest : BaseQuest
     {
         public HeroInTheMakingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Mongbat), "mongbats", 10));
 
@@ -145,7 +141,6 @@ namespace Server.Engines.Quests
     public class BullfightingSortOfQuest : BaseQuest
     {
         public BullfightingSortOfQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Bull), "bulls", 10));
 
@@ -180,7 +175,6 @@ namespace Server.Engines.Quests
     public class FineFeastQuest : BaseQuest
     {
         public FineFeastQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Sheep), "sheep", 10));
 
@@ -214,7 +208,6 @@ namespace Server.Engines.Quests
     public class ForcedMigrationQuest : BaseQuest
     {
         public ForcedMigrationQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Bird), "birds", 10));
 
@@ -248,7 +241,6 @@ namespace Server.Engines.Quests
     public class FilthyPestsQuest : BaseQuest
     {
         public FilthyPestsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Sewerrat), "sewer rats", 10));
 
@@ -295,7 +287,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(TheyreBreedingLikeRabbitsQuest),
                     typeof(ThinningTheHerdQuest),

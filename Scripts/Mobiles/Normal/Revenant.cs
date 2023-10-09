@@ -1,7 +1,9 @@
 #region References
+
+using System;
 using Server.Items;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.Mobiles
@@ -91,48 +93,47 @@ namespace Server.Mobiles
                 Kill();
                 return;
             }
-            else if (Map != m_Target.Map || !InRange(m_Target, 15))
+
+            if (Map != m_Target.Map || !InRange(m_Target, 15))
             {
-                Map fromMap = Map;
-                Point3D from = Location;
+	            Map fromMap = Map;
+	            Point3D from = Location;
 
-                Map toMap = m_Target.Map;
-                Point3D to = m_Target.Location;
+	            Map toMap = m_Target.Map;
+	            Point3D to = m_Target.Location;
 
-                if (toMap != null)
-                {
-                    for (int i = 0; i < 5; ++i)
-                    {
-                        Point3D loc = new Point3D(to.X - 4 + Utility.Random(9), to.Y - 4 + Utility.Random(9), to.Z);
+	            if (toMap != null)
+	            {
+		            for (int i = 0; i < 5; ++i)
+		            {
+			            Point3D loc = new Point3D(to.X - 4 + Utility.Random(9), to.Y - 4 + Utility.Random(9), to.Z);
 
-                        if (toMap.CanSpawnMobile(loc))
-                        {
-                            to = loc;
-                            break;
-                        }
-                        else
-                        {
-                            loc.Z = toMap.GetAverageZ(loc.X, loc.Y);
+			            if (toMap.CanSpawnMobile(loc))
+			            {
+				            to = loc;
+				            break;
+			            }
 
-                            if (toMap.CanSpawnMobile(loc))
-                            {
-                                to = loc;
-                                break;
-                            }
-                        }
-                    }
-                }
+			            loc.Z = toMap.GetAverageZ(loc.X, loc.Y);
 
-                Map = toMap;
-                Location = to;
+			            if (toMap.CanSpawnMobile(loc))
+			            {
+				            to = loc;
+				            break;
+			            }
+		            }
+	            }
 
-                ProcessDelta();
+	            Map = toMap;
+	            Location = to;
 
-                Effects.SendLocationParticles(
-                    EffectItem.Create(from, fromMap, EffectItem.DefaultDuration), 0x3728, 1, 13, 37, 7, 5023, 0);
-                FixedParticles(0x3728, 1, 13, 5023, 37, 7, EffectLayer.Waist);
+	            ProcessDelta();
 
-                PlaySound(0x37D);
+	            Effects.SendLocationParticles(
+		            EffectItem.Create(from, fromMap, EffectItem.DefaultDuration), 0x3728, 1, 13, 37, 7, 5023, 0);
+	            FixedParticles(0x3728, 1, 13, 5023, 37, 7, EffectLayer.Waist);
+
+	            PlaySound(0x37D);
             }
 
             if (m_Target.Hidden && InRange(m_Target, 3) && Core.TickCount >= NextSkillTime && UseSkill(SkillName.DetectHidden))

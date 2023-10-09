@@ -1,11 +1,11 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Engines.Plants
 {
@@ -220,14 +220,13 @@ namespace Server.Engines.Plants
 
         public int GetLocalizedPlantStatus()
         {
-            if (m_PlantStatus >= PlantStatus.Plant)
+	        if (m_PlantStatus >= PlantStatus.Plant)
                 return 1060812; // plant
-            else if (m_PlantStatus >= PlantStatus.Sapling)
-                return 1023305; // sapling
-            else if (m_PlantStatus >= PlantStatus.Seed)
-                return 1060810; // seed
-            else
-                return 1026951; // dirt
+	        if (m_PlantStatus >= PlantStatus.Sapling)
+		        return 1023305; // sapling
+	        if (m_PlantStatus >= PlantStatus.Seed)
+		        return 1060810; // seed
+	        return 1026951; // dirt
         }
 
         public int GetLocalizedContainerType()
@@ -360,7 +359,7 @@ namespace Server.Engines.Plants
             else if (m_PlantStatus != PlantStatus.BowlOfDirt)
             {
                 if (RequiresUpkeep && !MaginciaPlant)
-                    from.SendLocalizedMessage(1080389, "#" + GetLocalizedPlantStatus().ToString()); // This bowl of dirt already has a ~1_val~ in it!
+                    from.SendLocalizedMessage(1080389, "#" + GetLocalizedPlantStatus()); // This bowl of dirt already has a ~1_val~ in it!
                 else
                     from.SendLocalizedMessage(1150441); // This mound of dirt already has a seed in it!
             }
@@ -552,11 +551,9 @@ namespace Server.Engines.Plants
                 message = 1053065; // The plant is already soaked with this type of potion!
                 return false;
             }
-            else
-            {
-                message = 1053067; // You pour the potion over the plant.
-                return true;
-            }
+
+            message = 1053067; // You pour the potion over the plant.
+            return true;
         }
 
         public override void Serialize(GenericWriter writer)

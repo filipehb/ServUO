@@ -45,10 +45,9 @@ namespace Server.Engines.Mahjong
         public bool IsMovable => m_Game.GetStackLevel(Dimensions) <= m_StackLevel;
         public static MahjongPieceDim GetDimensions(Point2D position, MahjongPieceDirection direction)
         {
-            if (direction == MahjongPieceDirection.Up || direction == MahjongPieceDirection.Down)
+	        if (direction == MahjongPieceDirection.Up || direction == MahjongPieceDirection.Down)
                 return new MahjongPieceDim(position, 20, 30);
-            else
-                return new MahjongPieceDim(position, 30, 20);
+	        return new MahjongPieceDim(position, 30, 20);
         }
 
         public void Move(Point2D position, MahjongPieceDirection direction, bool flip, int validHandArea)

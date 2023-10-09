@@ -1,9 +1,12 @@
+using System;
 using Server.Commands;
+using Server.Diagnostics;
+using Server.Items;
 using Server.PathAlgorithms;
 using Server.PathAlgorithms.FastAStar;
 using Server.PathAlgorithms.SlowAStar;
+using Server.Spells;
 using Server.Targeting;
-using System;
 
 namespace Server
 {
@@ -51,7 +54,7 @@ namespace Server
             catch (Exception e)
             {
                 Console.WriteLine("Warning: {0}: Pathing error from {1} to {2}", e.GetType().Name, start, goal);
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -89,7 +92,7 @@ namespace Server
             if (p == null)
                 return;
 
-            Spells.SpellHelper.GetSurfaceTop(ref p);
+            SpellHelper.GetSurfaceTop(ref p);
 
             Path(from, p, FastAStarAlgorithm.Instance, "Fast", 0);
             Path(from, p, SlowAStarAlgorithm.Instance, "Slow", 2);
@@ -130,7 +133,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -159,7 +162,7 @@ namespace Server
                 {
                     Movement.Movement.Offset(path.Directions[i], ref x, ref y);
 
-                    new Items.RecallRune().MoveToWorld(new Point3D(x, y, z + zOffset), from.Map);
+                    new RecallRune().MoveToWorld(new Point3D(x, y, z + zOffset), from.Map);
                 }
             }
         }

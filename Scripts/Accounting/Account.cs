@@ -1,10 +1,5 @@
 #region References
-using Server.Commands;
-using Server.Items;
-using Server.Misc;
-using Server.Mobiles;
-using Server.Multis;
-using Server.Network;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +7,14 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Network;
+
 #endregion
 
 namespace Server.Accounting
@@ -148,13 +151,13 @@ namespace Server.Accounting
                     }
                     catch (Exception ex)
                     {
-                        Diagnostics.ExceptionLogging.LogException(ex);
+                        ExceptionLogging.LogException(ex);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
 
             NetState.Resume();
@@ -369,7 +372,7 @@ namespace Server.Accounting
                     }
                     catch (Exception ex)
                     {
-                        Diagnostics.ExceptionLogging.LogException(ex);
+                        ExceptionLogging.LogException(ex);
                     }
                 }
             }
@@ -946,7 +949,7 @@ namespace Server.Accounting
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 
@@ -977,7 +980,7 @@ namespace Server.Accounting
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 
@@ -1008,7 +1011,7 @@ namespace Server.Accounting
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 

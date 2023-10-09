@@ -27,17 +27,15 @@ namespace Server.Items
 
         public static double HandleLifeDrain(PlayerMobile pm, double damage)
         {
-            if (IsUnderThieveConsumableEffect(pm, ThieveConsumableEffect.LifeShieldLotionEffect))
+	        if (IsUnderThieveConsumableEffect(pm, ThieveConsumableEffect.LifeShieldLotionEffect))
             {
                 int rnd = 50 + Utility.Random(50);
                 int dmgMod = (int)(damage * (rnd / 100.0));
                 damage = damage - dmgMod;
                 return damage;
             }
-            else
-            {
-                return damage;
-            }
+
+	        return damage;
         }
 
         public LifeShieldLotion(Serial serial)

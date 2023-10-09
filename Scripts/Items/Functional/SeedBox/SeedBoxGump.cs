@@ -1,8 +1,8 @@
+using System;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Prompts;
 using Server.Targeting;
-using System;
 
 namespace Server.Engines.Plants
 {
@@ -324,7 +324,7 @@ namespace Server.Engines.Plants
                         if (Parent is SeedBoxGump)
                             ((SeedBoxGump)Parent).CheckPage(Entry);
 
-                        RefreshParent(false);
+                        RefreshParent();
                     }
                     break;
                 case 7: // shift left
@@ -337,7 +337,7 @@ namespace Server.Engines.Plants
                         if (Parent is SeedBoxGump)
                             ((SeedBoxGump)Parent).CheckPage(Entry);
 
-                        RefreshParent(false);
+                        RefreshParent();
                     }
                     break;
             }

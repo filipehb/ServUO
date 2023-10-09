@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class DabblingontheDarkSide : BaseQuest, ITierQuest
     {
         public DabblingontheDarkSide()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BouraSkin), "BouraSkin", 5, 0x11f4));
             AddObjective(new ObtainObjective(typeof(FairyDragonWing), "Fairy Dragon Wings", 10, 0x1084));
@@ -41,7 +40,6 @@ namespace Server.Engines.Quests
     public class TheBrainyAlchemist : BaseQuest, ITierQuest
     {
         public TheBrainyAlchemist()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(ArcaneGem), "Arcane Gem", 1, 0x1ea7));
             AddObjective(new ObtainObjective(typeof(UndeadGargHorn), "Undamaged Undead Gargoyle Horns", 10, 0x315C));
@@ -77,7 +75,6 @@ namespace Server.Engines.Quests
     public class ArmorUp : BaseQuest, ITierQuest
     {
         public ArmorUp()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BouraSkin), "BouraSkin", 5, 0x11f4));
             AddObjective(new ObtainObjective(typeof(LeatherWolfSkin), "Leather Wolf Skin", 10, 0x3189));
@@ -112,7 +109,6 @@ namespace Server.Engines.Quests
     public class ToTurnBaseMetalIntoVerite : BaseQuest, ITierQuest
     {
         public ToTurnBaseMetalIntoVerite()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(UndeadGargoyleMedallions), "Undead Gargoyle Medallions", 5, 0x2AAA));
             AddObjective(new ObtainObjective(typeof(PileofInspectedVeriteIngots), "Pile of Inspected Verite Ingots", 1, 0x1BEA));
@@ -146,7 +142,6 @@ namespace Server.Engines.Quests
     public class PureValorite : BaseQuest, ITierQuest
     {
         public PureValorite()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(InfusedGlassStave), "Infused Glass Stave", 5, 0x2AAA));
             AddObjective(new ObtainObjective(typeof(PileofInspectedValoriteIngots), "Pile of Inspected Valorite Ingots", 1, 0x1BEA));
@@ -180,7 +175,6 @@ namespace Server.Engines.Quests
     public class TheForbiddenFruit : BaseQuest, ITierQuest
     {
         public TheForbiddenFruit()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BouraSkin), "BouraSkin", 5, 0x11f4));
             AddObjective(new ObtainObjective(typeof(TreefellowWood), "TreefellowWood", 10, 0x1BDD));

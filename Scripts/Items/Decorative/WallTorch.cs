@@ -25,20 +25,18 @@ namespace Server.Items
         {
             get
             {
-                if (ItemID == 0xA05)
+	            if (ItemID == 0xA05)
                     return 0xA07;
-                else
-                    return 0xA0C;
+	            return 0xA0C;
             }
         }
         public override int UnlitItemID
         {
             get
             {
-                if (ItemID == 0xA07)
+	            if (ItemID == 0xA07)
                     return 0xA05;
-                else
-                    return 0xA0A;
+	            return 0xA0A;
             }
         }
         public void Flip()

@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 255;
 
         [Constructable]
-        public ScoutGloves() : base()
+        public ScoutGloves()
         {
             Hue = 1148;
             Weight = 1;

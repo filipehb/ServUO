@@ -1,5 +1,6 @@
-using Server.Network;
 using System;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -32,7 +33,7 @@ namespace Server.Items
                 {
                     Effects.PlaySound(from.Location, from.Map, from.GetHurtSound());
                     from.PublicOverheadMessage(MessageType.Regular, from.SpeechHue, true, "Ouch!");
-                    Spells.SpellHelper.Damage(TimeSpan.FromSeconds(0.5), from, Utility.Dice(2, 10, 5));
+                    SpellHelper.Damage(TimeSpan.FromSeconds(0.5), from, Utility.Dice(2, 10, 5));
                 }
 
                 Effects.PlaySound(GetWorldLocation(), Map, 0x387);

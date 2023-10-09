@@ -1,9 +1,9 @@
-using Server.Commands;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Gumps
 {
@@ -216,63 +216,64 @@ namespace Server.Gumps
 
         public override void OnResponse(RelayInfo info)
         {
-            if (info.ButtonID == 0)
+	        if (info.ButtonID == 0)
             {
                 return;
             }
-            else if (info.ButtonID == 1)
-            {
-                if (Filter == PropFilter.Other)
-                {
-                    Filter = PropFilter.All;
-                }
-                else
-                {
-                    Filter++;
-                }
 
-                TypeFilter = ItemType.Invalid;
-                Refresh();
-            }
-            else if (info.ButtonID < 10)
-            {
-                switch (info.ButtonID)
-                {
-                    case 2:
-                        TypeFilter = ItemType.Melee;
-                        break;
-                    case 3:
-                        TypeFilter = ItemType.Ranged;
-                        break;
-                    case 4:
-                        TypeFilter = ItemType.Armor;
-                        break;
-                    case 5:
-                        TypeFilter = ItemType.Shield;
-                        break;
-                    case 6:
-                        TypeFilter = ItemType.Hat;
-                        break;
-                    case 7:
-                        TypeFilter = ItemType.Jewel;
-                        break;
-                }
+	        if (info.ButtonID == 1)
+	        {
+		        if (Filter == PropFilter.Other)
+		        {
+			        Filter = PropFilter.All;
+		        }
+		        else
+		        {
+			        Filter++;
+		        }
 
-                Refresh();
-            }
-            else
-            {
-                Refresh();
+		        TypeFilter = ItemType.Invalid;
+		        Refresh();
+	        }
+	        else if (info.ButtonID < 10)
+	        {
+		        switch (info.ButtonID)
+		        {
+			        case 2:
+				        TypeFilter = ItemType.Melee;
+				        break;
+			        case 3:
+				        TypeFilter = ItemType.Ranged;
+				        break;
+			        case 4:
+				        TypeFilter = ItemType.Armor;
+				        break;
+			        case 5:
+				        TypeFilter = ItemType.Shield;
+				        break;
+			        case 6:
+				        TypeFilter = ItemType.Hat;
+				        break;
+			        case 7:
+				        TypeFilter = ItemType.Jewel;
+				        break;
+		        }
 
-                int id = info.ButtonID - 10;
+		        Refresh();
+	        }
+	        else
+	        {
+		        Refresh();
 
-                if (id >= 0 && id < Infos.Count)
-                {
-                    ItemPropertyInfo propInfo = Infos[id];
+		        int id = info.ButtonID - 10;
 
-                    SendGump(new InfoSpecificGump(User, propInfo, TypeFilter));
-                }
-            }
+		        if (id >= 0 && id < Infos.Count)
+		        {
+			        ItemPropertyInfo propInfo = Infos[id];
+
+			        SendGump(new InfoSpecificGump(User, propInfo, TypeFilter));
+		        }
+	        }
         }
     }
 

@@ -1,9 +1,9 @@
-using Server.Engines.CannedEvil;
-using Server.Items;
-using Server.Services.Virtues;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Engines.CannedEvil;
+using Server.Items;
+using Server.Services.Virtues;
 
 namespace Server.Mobiles
 {
@@ -309,18 +309,18 @@ namespace Server.Mobiles
 
             if (0.1 >= random)
                 return 25;
-            else if (0.25 >= random)
-                return 20;
-            else if (0.45 >= random)
-                return 15;
-            else if (0.70 >= random)
-                return 10;
+            if (0.25 >= random)
+	            return 20;
+            if (0.45 >= random)
+	            return 15;
+            if (0.70 >= random)
+	            return 10;
             return 5;
         }
 
         public override bool OnBeforeDeath()
         {
-            if (m_TrueForm)
+	        if (m_TrueForm)
             {
                 List<DamageStore> rights = GetLootingRights();
 
@@ -361,11 +361,9 @@ namespace Server.Mobiles
 
                 return base.OnBeforeDeath();
             }
-            else
-            {
-                Morph();
-                return false;
-            }
+
+	        Morph();
+	        return false;
         }
 
         public virtual void RegisterDamageTo(Mobile m)
@@ -460,10 +458,10 @@ namespace Server.Mobiles
             double random = Utility.RandomDouble();
             if (0.05 >= random)
                 return CreateArtifact(UniqueList);
-            else if (0.15 >= random)
-                return CreateArtifact(SharedList);
-            else if (0.30 >= random)
-                return CreateArtifact(DecorativeList);
+            if (0.15 >= random)
+	            return CreateArtifact(SharedList);
+            if (0.30 >= random)
+	            return CreateArtifact(DecorativeList);
             return null;
         }
 

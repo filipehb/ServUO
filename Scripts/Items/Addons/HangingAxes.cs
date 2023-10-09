@@ -7,7 +7,6 @@ namespace Server.Items
     {
         [Constructable]
         public HangingAxesAddon(bool east)
-            : base()
         {
             if (east) // east
             {
@@ -47,7 +46,6 @@ namespace Server.Items
         private bool m_East;
         [Constructable]
         public HangingAxesDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

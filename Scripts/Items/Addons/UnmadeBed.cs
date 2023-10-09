@@ -7,7 +7,6 @@ namespace Server.Items
     {
         [Constructable]
         public UnmadeBedAddon(bool east)
-            : base()
         {
             if (east) // east
             {
@@ -51,7 +50,6 @@ namespace Server.Items
         private bool m_East;
         [Constructable]
         public UnmadeBedDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

@@ -1,7 +1,10 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Server.Diagnostics;
+
 #endregion
 
 namespace Server.Engines.Quests
@@ -40,7 +43,7 @@ namespace Server.Engines.Quests
                 catch (Exception e)
                 {
                     Console.WriteLine("Quest Save Failure: {0}", Utility.FormatDelegate(serializer));
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
 
                     writer.Write(0L);
 

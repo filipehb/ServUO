@@ -1,6 +1,6 @@
+using System;
 using Server.Multis;
 using Server.Regions;
-using System;
 
 namespace Server.Items
 {

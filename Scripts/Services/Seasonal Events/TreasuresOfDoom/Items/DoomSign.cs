@@ -1,9 +1,8 @@
-using Server.Gumps;
-using Server.Network;
-using Server.Engines.TreasuresOfDoom;
-
 using System;
 using System.Collections.Generic;
+using Server.Engines.TreasuresOfDoom;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Items
 {

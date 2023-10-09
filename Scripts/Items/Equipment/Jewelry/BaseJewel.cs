@@ -1,9 +1,11 @@
-using Server.ContextMenus;
-using Server.Engines.Craft;
-using Server.Misc;
-
 using System;
 using System.Collections.Generic;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Engines.Craft;
+using Server.Engines.VvV;
+using Server.Misc;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -305,7 +307,7 @@ namespace Server.Items
             set { m_GorgonLenseType = value; InvalidateProperties(); }
         }
 
-        public virtual int[] BaseResists => new int[] { 0, 0, 0, 0, 0 };
+        public virtual int[] BaseResists => new[] { 0, 0, 0, 0, 0 };
 
         public virtual void OnAfterImbued(Mobile m, int mod, int value)
         {
@@ -488,7 +490,7 @@ namespace Server.Items
 
                 if (this is IAccountRestricted && ((IAccountRestricted)this).Account != null)
                 {
-                    Accounting.Account acct = from.Account as Accounting.Account;
+                    Account acct = from.Account as Account;
 
                     if (acct == null || acct.Username != ((IAccountRestricted)this).Account)
                     {
@@ -497,7 +499,7 @@ namespace Server.Items
                     }
                 }
 
-                if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(from))
+                if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(from))
                 {
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
@@ -547,7 +549,7 @@ namespace Server.Items
                             MaxHitPoints -= wear;
 
                             if (Parent is Mobile)
-                                ((Mobile)Parent).LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
+                                ((Mobile)Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
                         }
                         else
                         {

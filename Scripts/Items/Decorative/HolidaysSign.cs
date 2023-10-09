@@ -1,8 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
-using System.Collections.Generic;
-using System.Linq;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -31,7 +32,7 @@ namespace Server.Items
         {
             if (!m.InRange(GetWorldLocation(), 3))
             {
-                m.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
             else
             {
@@ -59,7 +60,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly Dictionary<int, string> SingType = new Dictionary<int, string>()
+        private static readonly Dictionary<int, string> SingType = new Dictionary<int, string>
         {
             {1673,"Happy Holidays"},
             {1674,"Merry Christmas"},

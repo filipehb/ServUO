@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
+using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
 using Server.Regions;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -144,7 +145,7 @@ namespace Server.Items
                 {
                     from.SendLocalizedMessage(1150422, "#1150424"); // The ~1_NAME~ will not function while being traded.
                 }
-                else if (!item.VerifyMove(from) || item is Engines.Quests.QuestItem)
+                else if (!item.VerifyMove(from) || item is QuestItem)
                 {
                     from.SendLocalizedMessage(1150421, "#1150424"); // The ~1_NAME~ rejects that item.
                 }

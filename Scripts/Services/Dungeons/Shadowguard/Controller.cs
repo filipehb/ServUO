@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Commands;
 using Server.ContextMenus;
 using Server.Engines.PartySystem;
@@ -8,9 +11,6 @@ using Server.Network;
 using Server.Regions;
 using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.Shadowguard
 {
@@ -322,7 +322,7 @@ namespace Server.Engines.Shadowguard
 
         public ShadowguardInstance GetAvailableInstance(EncounterType type)
         {
-            if (RandomInstances)
+	        if (RandomInstances)
             {
                 List<ShadowguardInstance> instances;
 
@@ -339,13 +339,10 @@ namespace Server.Engines.Shadowguard
                 ColUtility.Free(instances);
                 return inst;
             }
-            else
-            {
-                if (type == EncounterType.Roof)
-                    return Instances.FirstOrDefault(e => e.IsRoof && !e.InUse);
-                else
-                    return Instances.FirstOrDefault(e => !e.IsRoof && !e.InUse);
-            }
+
+	        if (type == EncounterType.Roof)
+		        return Instances.FirstOrDefault(e => e.IsRoof && !e.InUse);
+	        return Instances.FirstOrDefault(e => !e.IsRoof && !e.InUse);
         }
 
         public void AddToQueue(Mobile m, EncounterType encounter)
@@ -422,7 +419,6 @@ namespace Server.Engines.Shadowguard
                         message = true;
 
                     RemoveFromQueue(m);
-                    continue;
                 }
 
                 if (Queue.Count > 0)
@@ -686,7 +682,7 @@ namespace Server.Engines.Shadowguard
                 {
                     Timer.DelayCall(TimeSpan.FromSeconds(1), mob =>
                     {
-                        ShadowguardEncounter.MovePlayer(mob, Instance.KickLocation, true);
+                        ShadowguardEncounter.MovePlayer(mob, Instance.KickLocation);
                         /*StormLevelGump menu = new StormLevelGump(mob);
                         menu.BeginClose();
                         mob.SendGump(menu);*/
@@ -700,7 +696,7 @@ namespace Server.Engines.Shadowguard
                     {
                         Timer.DelayCall(TimeSpan.FromSeconds(1), mob =>
                         {
-                            ShadowguardEncounter.MovePlayer(mob, Instance.KickLocation, true);
+                            ShadowguardEncounter.MovePlayer(mob, Instance.KickLocation);
                             /*StormLevelGump menu = new StormLevelGump(mob);
                             menu.BeginClose();
                             mob.SendGump(menu);*/

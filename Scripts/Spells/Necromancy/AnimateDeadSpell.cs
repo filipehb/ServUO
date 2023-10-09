@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-
-using System;
-using System.Collections.Generic;
 
 namespace Server.Spells.Necromancy
 {
@@ -75,12 +75,11 @@ namespace Server.Spells.Necromancy
             return null;
         }
 
-        private static readonly CreatureGroup[] m_Groups = new CreatureGroup[]
-        {
+        private static readonly CreatureGroup[] m_Groups = {
             // Undead group--empty
             new CreatureGroup(SlayerGroup.GetEntryByName(SlayerName.Silver).Types, new SummonEntry[0]),
             // Insects
-            new CreatureGroup(new Type[]
+            new CreatureGroup(new[]
             {
                 typeof(DreadSpider), typeof(FrostSpider), typeof(GiantSpider), typeof(GiantBlackWidow),
                 typeof(BlackSolenInfiltratorQueen), typeof(BlackSolenInfiltratorWarrior),
@@ -91,22 +90,22 @@ namespace Server.Spells.Necromancy
                 typeof(TerathanWarrior)
                 // TODO: Giant beetle? Ant lion? Ophidians?
             },
-                new SummonEntry[]
+                new[]
                 {
                     new SummonEntry(0, typeof(MoundOfMaggots))
                 }),
             // Mounts
-            new CreatureGroup(new Type[]
+            new CreatureGroup(new[]
             {
                 typeof(Horse), typeof(Nightmare), typeof(FireSteed),
                 typeof(Kirin), typeof(Unicorn)
-            }, new SummonEntry[]
+            }, new[]
                {
                    new SummonEntry(10000, typeof(HellSteed)),
                    new SummonEntry(0, typeof(SkeletalMount))
                }),
             // Elementals
-            new CreatureGroup(new Type[]
+            new CreatureGroup(new[]
             {
                 typeof(BloodElemental), typeof(EarthElemental), typeof(SummonedEarthElemental),
                 typeof(AgapiteElemental), typeof(BronzeElemental), typeof(CopperElemental),
@@ -115,18 +114,18 @@ namespace Server.Spells.Necromancy
                 typeof(FireElemental), typeof(SummonedFireElemental), typeof(SnowElemental),
                 typeof(AirElemental), typeof(SummonedAirElemental), typeof(WaterElemental),
                 typeof(SummonedAirElemental), typeof (ToxicElemental)
-            }, new SummonEntry[]
+            }, new[]
                {
                    new SummonEntry(5000, typeof(WailingBanshee)),
                    new SummonEntry(0, typeof(Wraith))
                }),
             // Dragons
-            new CreatureGroup(new Type[]
+            new CreatureGroup(new[]
             {
                 typeof(AncientWyrm), typeof(Dragon), typeof(GreaterDragon), typeof(SerpentineDragon),
                 typeof(ShadowWyrm), typeof(SkeletalDragon), typeof(WhiteWyrm),
                 typeof(Drake), typeof(Wyvern), typeof(LesserHiryu), typeof(Hiryu)
-            }, new SummonEntry[]
+            }, new[]
                {
                    new SummonEntry(18000, typeof(SkeletalDragon)),
                    new SummonEntry(10000, typeof(FleshGolem)),
@@ -137,7 +136,7 @@ namespace Server.Spells.Necromancy
                    new SummonEntry(0, typeof(PatchworkSkeleton))
                }),
             // Default group
-            new CreatureGroup(new Type[0], new SummonEntry[]
+            new CreatureGroup(new Type[0], new[]
             {
                 new SummonEntry(18000, typeof(LichLord)),
                 new SummonEntry(10000, typeof(FleshGolem)),
@@ -312,13 +311,13 @@ namespace Server.Spells.Necromancy
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             if (summoned == null)
                 return;
 
-            BaseCreature bc = (BaseCreature)summoned;
+            BaseCreature bc = summoned;
 
             // to be sure
             bc.Tamable = false;
@@ -330,7 +329,7 @@ namespace Server.Spells.Necromancy
 
             Effects.PlaySound(loc, map, bc.GetAngerSound());
 
-            BaseCreature.Summon((BaseCreature)summoned, false, caster, loc, 0x28, TimeSpan.FromDays(1.0));
+            BaseCreature.Summon(summoned, false, caster, loc, 0x28, TimeSpan.FromDays(1.0));
 
             if (summoned is SkeletalDragon)
                 Scale((SkeletalDragon)summoned, 50); // lose 50% hp and strength

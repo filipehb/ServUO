@@ -1,5 +1,5 @@
-using Server.Engines.Craft;
 using System;
+using Server.Engines.Craft;
 
 namespace Server.Items
 {
@@ -10,7 +10,6 @@ namespace Server.Items
 
         [Constructable]
         public ElegantCollarOfFortune()
-            : base()
         {
             Attributes.Luck = 300;
             Attributes.RegenMana = 1;

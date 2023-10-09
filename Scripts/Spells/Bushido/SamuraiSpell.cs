@@ -1,5 +1,5 @@
-using Server.Network;
 using System;
+using Server.Network;
 
 namespace Server.Spells.Bushido
 {
@@ -41,10 +41,11 @@ namespace Server.Spells.Bushido
                 Caster.SendLocalizedMessage(1063013, args); // You need at least ~1_SKILL_REQUIREMENT~ ~2_SKILL_NAME~ skill to use that ability.
                 return false;
             }
-            else if (Caster.Mana < mana)
+
+            if (Caster.Mana < mana)
             {
-                Caster.SendLocalizedMessage(1060174, mana.ToString()); // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
-                return false;
+	            Caster.SendLocalizedMessage(1060174, mana.ToString()); // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
+	            return false;
             }
 
             return true;
@@ -59,10 +60,11 @@ namespace Server.Spells.Bushido
                 Caster.SendLocalizedMessage(1070768, RequiredSkill.ToString("F1")); // You need ~1_SKILL_REQUIREMENT~ Bushido skill to perform that attack!
                 return false;
             }
-            else if (Caster.Mana < mana)
+
+            if (Caster.Mana < mana)
             {
-                Caster.SendLocalizedMessage(1060174, mana.ToString()); // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
-                return false;
+	            Caster.SendLocalizedMessage(1060174, mana.ToString()); // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
+	            return false;
             }
 
             if (!base.CheckFizzle())

@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public ProtectoroftheBattleMage()
-            : base()
         {
             Hue = 1159;
             Attributes.LowerManaCost = 8;

@@ -53,7 +53,7 @@ namespace Server.Spells.SkillMasteries
             m.SendLocalizedMessage(1115739); // The bard's spellsong fills you with a feeling of invincibility.
 
             string args = string.Format("{0}\t-{1}\t{2}", m_PropertyBonus, m_DamageMod, m_PropertyBonus2);
-            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Perseverance, 1115615, 1115732, args.ToString()));
+            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Perseverance, 1115615, 1115732, args));
         }
 
         public override void RemovePartyEffects(Mobile m)

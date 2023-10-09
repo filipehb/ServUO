@@ -5,7 +5,6 @@ namespace Server.Engines.Quests
     public class ALittleSomething : BaseQuest
     {
         public ALittleSomething()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BrilliantAmber), "Brilliant Amber", 1, 0x3199));
 

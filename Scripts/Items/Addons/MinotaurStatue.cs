@@ -16,7 +16,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public MinotaurStatue(MinotaurStatueType type)
-            : base()
         {
             switch (type)
             {
@@ -97,7 +96,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public MinotaurStatueDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

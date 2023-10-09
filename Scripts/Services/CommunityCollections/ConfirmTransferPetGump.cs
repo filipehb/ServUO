@@ -1,4 +1,5 @@
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Gumps
 {
@@ -35,7 +36,7 @@ namespace Server.Gumps
             Cancel,
             Continue,
         }
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             if (m_Collection == null || m_Pet == null || m_Pet.Deleted || m_Pet.ControlMaster != state.Mobile || !state.Mobile.InRange(m_Location, 2))
                 return;

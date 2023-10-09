@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.ArenaSystem
 {
@@ -61,30 +61,32 @@ namespace Server.Engines.ArenaSystem
                 PVPArenaSystem.SendMessage(pm, 1149696); // As a young player, you may not enter this area.
                 return false;
             }
-            else if (pm.Followers > Duel.PetSlots)
+
+            if (pm.Followers > Duel.PetSlots)
             {
-                PVPArenaSystem.SendMessage(pm, 1115974); // You currently exceed the maximum number of pet slots for this duel. Please stable your pet(s) with the arena manager before proceeding.
-                return false;
+	            PVPArenaSystem.SendMessage(pm, 1115974); // You currently exceed the maximum number of pet slots for this duel. Please stable your pet(s) with the arena manager before proceeding.
+	            return false;
             }
-            else if (Duel.EntryFee > EntryFee.Zero)
+
+            if (Duel.EntryFee > EntryFee.Zero)
             {
-                int fee = (int)Duel.EntryFee;
+	            int fee = (int)Duel.EntryFee;
 
-                if (pm.Backpack != null && pm.Backpack.ConsumeTotal(typeof(Gold), fee))
-                {
-                    pm.SendLocalizedMessage(1149610); // You have paid the entry fee from your backpack.
-                }
-                else if (Banker.Withdraw(pm, fee, true))
-                {
-                    pm.SendLocalizedMessage(1149609); // You have paid the entry fee from your bank account.
-                }
-                else
-                {
-                    pm.SendLocalizedMessage(1149611); // You don't have enough money to pay the entry fee.
-                    return false;
-                }
+	            if (pm.Backpack != null && pm.Backpack.ConsumeTotal(typeof(Gold), fee))
+	            {
+		            pm.SendLocalizedMessage(1149610); // You have paid the entry fee from your backpack.
+	            }
+	            else if (Banker.Withdraw(pm, fee, true))
+	            {
+		            pm.SendLocalizedMessage(1149609); // You have paid the entry fee from your bank account.
+	            }
+	            else
+	            {
+		            pm.SendLocalizedMessage(1149611); // You don't have enough money to pay the entry fee.
+		            return false;
+	            }
 
-                Duel.Pot += fee;
+	            Duel.Pot += fee;
             }
 
             return true;

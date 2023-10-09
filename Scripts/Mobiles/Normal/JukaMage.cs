@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Spells;
-using System;
 
 namespace Server.Mobiles
 {
@@ -127,7 +127,7 @@ namespace Server.Mobiles
 
                         DoBeneficial(toBuff);
 
-                        object[] state = new object[] { toBuff, toBuff.HitsMaxSeed, toBuff.RawStr, toBuff.RawDex };
+                        object[] state = { toBuff, toBuff.HitsMaxSeed, toBuff.RawStr, toBuff.RawDex };
 
                         SpellHelper.Turn(this, toBuff);
 

@@ -1,17 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Engines.NewMagincia;
+using Server.Engines.UOStore;
+using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using Server.Gumps;
-using Server.Accounting;
-using Server.Engines.NewMagincia;
-using Server.Engines.UOStore;
-using Server.ContextMenus;
 using Server.Spells;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Globalization;
 
 namespace Server.AccountVault
 {
@@ -321,7 +320,7 @@ namespace Server.AccountVault
                                 m,
                                 new NewMaginciaMessage(
                                     1158081, // Rent Past Due
-                                    string.Format("Your vault contents have been put up for auction and no longer can be claimed. This vault is located at {0} [{1}].", GetWorldLocation().ToString(), Map.ToString()),
+                                    string.Format("Your vault contents have been put up for auction and no longer can be claimed. This vault is located at {0} [{1}].", GetWorldLocation().ToString(), Map),
                                     SystemSettings.PastDuePeriod,
                                     true));
                         }
@@ -433,7 +432,7 @@ namespace Server.AccountVault
                         m,
                         new NewMaginciaMessage(
                             1158081, // Rent Past Due
-                            string.Format("Rent is past due for your Vault and your items will be lost after 168 hours unless you claim your Vault from the Vault Manager. This vault is located at {0} [{1}].", GetWorldLocation().ToString(), Map.ToString()),
+                            string.Format("Rent is past due for your Vault and your items will be lost after 168 hours unless you claim your Vault from the Vault Manager. This vault is located at {0} [{1}].", GetWorldLocation().ToString(), Map),
                             SystemSettings.PastDuePeriod,
                             true));
                 }
@@ -608,10 +607,7 @@ namespace Server.AccountVault
                         }));
                     }
                 }
-                else
-                {
-                    // TODO: Message?
-                }
+                // TODO: Message?
             }
         }
 

@@ -1,10 +1,12 @@
-using Server.ContextMenus;
-using Server.Engines.Craft;
-using Server.Network;
-using Server.Misc;
-
 using System;
 using System.Collections.Generic;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Engines.Craft;
+using Server.Engines.VvV;
+using Server.Misc;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -399,7 +401,7 @@ namespace Server.Items
 
                 if (this is IAccountRestricted && ((IAccountRestricted)this).Account != null)
                 {
-                    Accounting.Account acct = from.Account as Accounting.Account;
+                    Account acct = from.Account as Account;
 
                     if (acct == null || acct.Username != ((IAccountRestricted)this).Account)
                     {
@@ -408,7 +410,7 @@ namespace Server.Items
                     }
                 }
 
-                if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(from))
+                if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(from))
                 {
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
@@ -418,42 +420,43 @@ namespace Server.Items
                 {
                     return false;
                 }
-                else if (!AllowMaleWearer && !from.Female)
-                {
-                    if (AllowFemaleWearer)
-                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1010388); // Only females can wear this.
-                    else
-                        from.SendLocalizedMessage(1071936); // You cannot equip that.
 
-                    return false;
+                if (!AllowMaleWearer && !from.Female)
+                {
+	                if (AllowFemaleWearer)
+		                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1010388); // Only females can wear this.
+	                else
+		                from.SendLocalizedMessage(1071936); // You cannot equip that.
+
+	                return false;
                 }
-                else if (!AllowFemaleWearer && from.Female)
-                {
-                    if (AllowMaleWearer)
-                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1063343); // Only males can wear this.
-                    else
-                        from.SendLocalizedMessage(1071936); // You cannot equip that.
 
-                    return false;
+                if (!AllowFemaleWearer && from.Female)
+                {
+	                if (AllowMaleWearer)
+		                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1063343); // Only males can wear this.
+	                else
+		                from.SendLocalizedMessage(1071936); // You cannot equip that.
+
+	                return false;
                 }
                 #region Personal Bless Deed
-                else if (BlessedBy != null && BlessedBy != from)
-                {
-                    from.SendLocalizedMessage(1075277); // That item is blessed by another player.
 
-                    return false;
+                if (BlessedBy != null && BlessedBy != from)
+                {
+	                from.SendLocalizedMessage(1075277); // That item is blessed by another player.
+
+	                return false;
                 }
                 #endregion
-                else
-                {
-                    int strBonus = ComputeStatBonus(StatType.Str);
-                    int strReq = ComputeStatReq(StatType.Str);
 
-                    if (from.Str < strReq || (from.Str + strBonus) < 1)
-                    {
-                        from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
-                        return false;
-                    }
+                int strBonus = ComputeStatBonus(StatType.Str);
+                int strReq = ComputeStatReq(StatType.Str);
+
+                if (from.Str < strReq || (from.Str + strBonus) < 1)
+                {
+	                from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
+	                return false;
                 }
             }
 
@@ -477,12 +480,11 @@ namespace Server.Items
 
         public int ComputeStatBonus(StatType type)
         {
-            if (type == StatType.Str)
+	        if (type == StatType.Str)
                 return BaseStrBonus + Attributes.BonusStr;
-            else if (type == StatType.Dex)
-                return BaseDexBonus + Attributes.BonusDex;
-            else
-                return BaseIntBonus + Attributes.BonusInt;
+	        if (type == StatType.Dex)
+		        return BaseDexBonus + Attributes.BonusDex;
+	        return BaseIntBonus + Attributes.BonusInt;
         }
 
         public virtual void AddStatBonuses(Mobile parent)
@@ -878,7 +880,7 @@ namespace Server.Items
             if (m_Quality == ItemQuality.Exceptional)
                 list.Add(1018303); // Exceptional
 
-            if (IsImbued == true)
+            if (IsImbued)
                 list.Add(1080418); // (Imbued)
 
             if (m_Altered)
@@ -1348,7 +1350,7 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.Resistances, !m_AosResistances.IsEmpty);
             SetSaveFlag(ref flags, SaveFlag.MaxHitPoints, m_MaxHitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.HitPoints, m_HitPoints != 0);
-            SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed != false);
+            SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
             SetSaveFlag(ref flags, SaveFlag.Crafter, m_Crafter != null);
             SetSaveFlag(ref flags, SaveFlag.Quality, m_Quality != ItemQuality.Normal);
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
@@ -1643,8 +1645,8 @@ namespace Server.Items
         {
             if (Deleted)
                 return false;
-            else if (RootParent is Mobile && from != RootParent)
-                return false;
+            if (RootParent is Mobile && from != RootParent)
+	            return false;
 
             Hue = sender.DyedHue;
 
@@ -1687,7 +1689,7 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 

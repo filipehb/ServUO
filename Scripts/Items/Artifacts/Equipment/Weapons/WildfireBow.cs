@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public WildfireBow()
-            : base()
         {
             Hue = 1161;
             SkillBonuses.SetValues(0, SkillName.Archery, 10);

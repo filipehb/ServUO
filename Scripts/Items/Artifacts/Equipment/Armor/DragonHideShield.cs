@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public DragonHideShield()
-            : base()
         {
             Hue = 44;
             AbsorptionAttributes.EaterFire = 20;

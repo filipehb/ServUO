@@ -1,5 +1,6 @@
-using Server.Items;
 using System.Collections;
+using Server.Engines.Plants;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -50,7 +51,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.Average, 2);
             AddLoot(LootPack.MageryRegs, 3);
             AddLoot(LootPack.LootItems(new[] { new LootPackItem(typeof(Board), 1), new LootPackItem(typeof(Log), 3) }, 10));
-            AddLoot(LootPack.LootItem<Engines.Plants.Seed>(), 2);
+            AddLoot(LootPack.LootItem<Seed>(), 2);
         }
 
         public override void Serialize(GenericWriter writer)

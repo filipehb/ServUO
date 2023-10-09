@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -20,8 +20,7 @@ namespace Server.Items
     [Flipable(0x2AF9, 0x2AFD)]
     public class DawnsMusicBox : Item, ISecurable
     {
-        public static MusicName[] m_CommonTracks = new MusicName[]
-        {
+        public static MusicName[] m_CommonTracks = {
             MusicName.Samlethe, MusicName.Sailing, MusicName.Britain2, MusicName.Britain1,
             MusicName.Bucsden, MusicName.Forest_a, MusicName.Cove, MusicName.Death,
             MusicName.Dungeon9, MusicName.Dungeon2, MusicName.Cave01, MusicName.Combat3,
@@ -33,23 +32,21 @@ namespace Server.Items
             MusicName.OldUlt01, MusicName.Ocllo, MusicName.Vesper, MusicName.Victory,
             MusicName.Mountn_a, MusicName.Wind, MusicName.Yew, MusicName.Zento
         };
-        public static MusicName[] m_UncommonTracks = new MusicName[]
-        {
+        public static MusicName[] m_UncommonTracks = {
             MusicName.GwennoConversation, MusicName.DreadHornArea, MusicName.ElfCity,
             MusicName.GoodEndGame, MusicName.GoodVsEvil, MusicName.GreatEarthSerpents,
             MusicName.GrizzleDungeon, MusicName.Humanoids_U9, MusicName.MelisandesLair,
             MusicName.MinocNegative, MusicName.ParoxysmusLair, MusicName.Paws
         };
-        public static MusicName[] m_RareTracks = new MusicName[]
-        {
+        public static MusicName[] m_RareTracks = {
             MusicName.SelimsBar, MusicName.SerpentIsleCombat_U7, MusicName.ValoriaShips
         };
         private static readonly Dictionary<MusicName, DawnsMusicInfo> m_Info = new Dictionary<MusicName, DawnsMusicInfo>();
         private List<MusicName> m_Tracks;
         private SecureLevel m_Level;
         private Timer m_Timer;
-        private int m_ItemID = 0;
-        private int m_Count = 0;
+        private int m_ItemID;
+        private int m_Count;
         [Constructable]
         public DawnsMusicBox()
             : base(0x2AF9)

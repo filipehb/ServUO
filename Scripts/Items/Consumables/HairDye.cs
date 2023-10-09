@@ -47,8 +47,7 @@ namespace Server.Items
 
     public class HairDyeGump : Gump
     {
-        private static readonly HairDyeEntry[] m_Entries = new HairDyeEntry[]
-        {
+        private static readonly HairDyeEntry[] m_Entries = {
             new HairDyeEntry("*****", 1602, 26),
             new HairDyeEntry("*****", 1628, 27),
             new HairDyeEntry("*****", 1502, 32),

@@ -1,6 +1,6 @@
+using System;
 using Server.Network;
 using Server.Spells.Third;
-using System;
 
 namespace Server.Items
 {

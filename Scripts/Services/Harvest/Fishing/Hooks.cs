@@ -44,18 +44,17 @@ namespace Server.Items
 
         public static int GetCondition(int uses)
         {
-            if (uses < 10)
+	        if (uses < 10)
                 return 1149853; //worn
-            else if (uses < 20)
-                return 1149852; //fair
-            else if (uses < 30)
-                return 1149851; //very good
-            else if (uses < 40)
-                return 1149850; //good
-            else if (uses < 50)
-                return 1149849; //excellent
-            else
-                return 1149848; //new
+	        if (uses < 20)
+		        return 1149852; //fair
+	        if (uses < 30)
+		        return 1149851; //very good
+	        if (uses < 40)
+		        return 1149850; //good
+	        if (uses < 50)
+		        return 1149849; //excellent
+	        return 1149848; //new
         }
 
         public override void OnDoubleClick(Mobile from)

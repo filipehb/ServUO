@@ -1,7 +1,9 @@
 ﻿#region References
+
 using System;
 using System.Net;
 using System.Net.Sockets;
+
 #endregion
 
 namespace Server.Network

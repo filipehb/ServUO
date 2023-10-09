@@ -1,8 +1,10 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
-    public class SpikedWhip : BaseSword, Engines.Craft.IRepairable
+    public class SpikedWhip : BaseSword, IRepairable
     {
-        public Engines.Craft.CraftSystem RepairSystem => Engines.Craft.DefTinkering.CraftSystem;
+        public CraftSystem RepairSystem => DefTinkering.CraftSystem;
         public override int LabelNumber => 1125634;  // Spiked Whip
 
         [Constructable]

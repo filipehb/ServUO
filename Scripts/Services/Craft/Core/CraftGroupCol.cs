@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace Server.Engines.Craft
 {
-    public class CraftGroupCol : System.Collections.CollectionBase
+    public class CraftGroupCol : CollectionBase
     {
         public int Add(CraftGroup craftGroup)
         {

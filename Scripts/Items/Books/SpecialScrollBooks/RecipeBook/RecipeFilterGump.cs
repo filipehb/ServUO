@@ -28,8 +28,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly int[,] m_SkillFilters = new int[,]
-        {
+        private static readonly int[,] m_SkillFilters = {
             { 1062229, 0 }, // All
             { 1150187, 1 }, // Blacksmith
             { 1150188, 2 }, // Tailor
@@ -42,31 +41,28 @@ namespace Server.Items
             { 1002057, 9 }, // Cartography
         };
 
-        private static readonly int[,] m_ExpansionFilters = new int[,]
-        {
+        private static readonly int[,] m_ExpansionFilters = {
             { 1062229, 0 }, // All
             { 1158817, 1 }, // Mondain's Legacy
             { 1095190, 2 }, // Stygian Abyss
             { 1158818, 3 }, // Time of Legends
         };
 
-        private static readonly int[,] m_AmountFilters = new int[,]
-        {
+        private static readonly int[,] m_AmountFilters = {
             { 1062229, 0 }, // All
             { 1158815, 1 }, // Owned
             { 1074235, 2 }, // Unknown
         };
 
-        private static readonly int[][,] m_Filters = new int[][,]
-        {
+        private static readonly int[][,] m_Filters = {
             m_SkillFilters,
             m_ExpansionFilters,
             m_AmountFilters
         };
 
-        private static readonly int[] m_XOffsets_Skill = new int[] { 0, 125, 250, 375 };
-        private static readonly int[] m_XOffsets_Expansion = new int[] { 0, 125, 250, 375 };
-        private static readonly int[] m_XOffsets_Amount = new int[] { 0, 125, 250 };
+        private static readonly int[] m_XOffsets_Skill = { 0, 125, 250, 375 };
+        private static readonly int[] m_XOffsets_Expansion = { 0, 125, 250, 375 };
+        private static readonly int[] m_XOffsets_Amount = { 0, 125, 250 };
 
         public RecipeScrollFilterGump(Mobile from, RecipeBook book)
             : base(12, 24)

@@ -33,12 +33,11 @@ namespace Server.Items
 
         public override int GetDropSound()
         {
-            if (Amount <= 1)
+	        if (Amount <= 1)
                 return 0x2E4;
-            else if (Amount <= 5)
-                return 0x2E5;
-            else
-                return 0x2E6;
+	        if (Amount <= 5)
+		        return 0x2E5;
+	        return 0x2E6;
         }
 
 #if NEWPARENT

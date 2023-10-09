@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
+using System.Threading;
 using Server.Accounting;
 using Server.Commands;
 using Server.Items;
@@ -5,11 +11,7 @@ using Server.Misc;
 using Server.Multis;
 using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+using Server.RemoteAdmin;
 
 namespace Server.Gumps
 {
@@ -161,16 +163,15 @@ namespace Server.Gumps
                     {
                         if (m.Murderer)
                             return 0x21;
-                        else if (m.Criminal)
-                            return 0x3B1;
+                        if (m.Criminal)
+	                        return 0x3B1;
 
                         return 0x58;
                     }
             }
         }
 
-        private static readonly string[] m_AccessLevelStrings = new string[]
-        {
+        private static readonly string[] m_AccessLevelStrings = {
             "Player",
             "VIP",
             "Counselor",
@@ -294,8 +295,8 @@ namespace Server.Gumps
                         int curUser, maxUser;
                         int curIOCP, maxIOCP;
 
-                        System.Threading.ThreadPool.GetAvailableThreads(out curUser, out curIOCP);
-                        System.Threading.ThreadPool.GetMaxThreads(out maxUser, out maxIOCP);
+                        ThreadPool.GetAvailableThreads(out curUser, out curIOCP);
+                        ThreadPool.GetMaxThreads(out maxUser, out maxIOCP);
 
                         sb.Append("Worker Threads:<br>Capacity: ");
                         sb.Append(maxUser);
@@ -560,7 +561,7 @@ namespace Server.Gumps
 
                             if (m == null)
                             {
-                                if (RemoteAdmin.AdminNetwork.IsAuth(ns))
+                                if (AdminNetwork.IsAuth(ns))
                                     AddLabelCropped(12, offset, 81, 20, LabelHue, "(remote admin)");
                                 else
                                     AddLabelCropped(12, offset, 81, 20, LabelHue, "(logging in)");
@@ -3030,7 +3031,7 @@ namespace Server.Gumps
 
                             if (m_PageType == AdminGumpPage.AccountDetails_Access_ClientIPs)
                             {
-                                from.SendGump(new WarningGump(1060635, 30720, string.Format("You are about to firewall {0}. All connection attempts from a matching IP will be refused. Are you sure?", m_List[index]), 0xFFC000, 420, 280, Firewall_Callback, new object[] { a, m_List[index] }));
+                                from.SendGump(new WarningGump(1060635, 30720, string.Format("You are about to firewall {0}. All connection attempts from a matching IP will be refused. Are you sure?", m_List[index]), 0xFFC000, 420, 280, Firewall_Callback, new[] { a, m_List[index] }));
                             }
                             else if (m_PageType == AdminGumpPage.AccountDetails_Access_Restrictions)
                             {
@@ -3212,10 +3213,10 @@ namespace Server.Gumps
             {
                 if (x == null && y == null)
                     return 0;
-                else if (x == null)
-                    return -1;
-                else if (y == null)
-                    return 1;
+                if (x == null)
+	                return -1;
+                if (y == null)
+	                return 1;
 
                 NetState a = x as NetState;
                 NetState b = y as NetState;
@@ -3228,17 +3229,16 @@ namespace Server.Gumps
 
                 if (aMob == null && bMob == null)
                     return 0;
-                else if (aMob == null)
-                    return 1;
-                else if (bMob == null)
-                    return -1;
+                if (aMob == null)
+	                return 1;
+                if (bMob == null)
+	                return -1;
 
                 if (aMob.AccessLevel > bMob.AccessLevel)
                     return -1;
-                else if (aMob.AccessLevel < bMob.AccessLevel)
-                    return 1;
-                else
-                    return Insensitive.Compare(aMob.Name, bMob.Name);
+                if (aMob.AccessLevel < bMob.AccessLevel)
+	                return 1;
+                return Insensitive.Compare(aMob.Name, bMob.Name);
             }
         }
 
@@ -3250,10 +3250,10 @@ namespace Server.Gumps
             {
                 if (x == null && y == null)
                     return 0;
-                else if (x == null)
-                    return -1;
-                else if (y == null)
-                    return 1;
+                if (x == null)
+	                return -1;
+                if (y == null)
+	                return 1;
 
                 Account a = x as Account;
                 Account b = y as Account;
@@ -3269,14 +3269,13 @@ namespace Server.Gumps
 
                 if (aOnline && !bOnline)
                     return -1;
-                else if (bOnline && !aOnline)
-                    return 1;
-                else if (aLevel > bLevel)
-                    return -1;
-                else if (aLevel < bLevel)
-                    return 1;
-                else
-                    return Insensitive.Compare(a.Username, b.Username);
+                if (bOnline && !aOnline)
+	                return 1;
+                if (aLevel > bLevel)
+	                return -1;
+                if (aLevel < bLevel)
+	                return 1;
+                return Insensitive.Compare(a.Username, b.Username);
             }
         }
     }

@@ -94,7 +94,6 @@ namespace Server.Items
         public override BaseAddonDeed Deed => new CurtainsDeed();
         [Constructable]
         public CurtainsAddon(bool east)
-            : base()
         {
             if (east) // east
             {
@@ -141,7 +140,6 @@ namespace Server.Items
 
         [Constructable]
         public CurtainsDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

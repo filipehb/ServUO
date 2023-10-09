@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -26,21 +26,25 @@ namespace Server.Items
             {
                 return true;
             }
-            else if (f.Bracelet && item is BaseBracelet)
+
+            if (f.Bracelet && item is BaseBracelet)
             {
-                return true;
+	            return true;
             }
-            else if (f.Earrings && item is BaseEarrings)
+
+            if (f.Earrings && item is BaseEarrings)
             {
-                return true;
+	            return true;
             }
-            else if (f.Necklace && item is BaseNecklace)
+
+            if (f.Necklace && item is BaseNecklace)
             {
-                return true;
+	            return true;
             }
-            else if (f.Talisman && item is BaseTalisman)
+
+            if (f.Talisman && item is BaseTalisman)
             {
-                return true;
+	            return true;
             }
 
             return false;
@@ -211,7 +215,6 @@ namespace Server.Items
                 else if (!dropped.IsChildOf(from.Backpack))
                 {
                     from.SendLocalizedMessage(1157726); // You must be carrying the item to add it to the jewelry box.
-                    return;
                 }
                 else if (m_Box.IsAccept(dropped))
                 {
@@ -235,16 +238,14 @@ namespace Server.Items
                     {
                         if (i < c.Items.Count && m_Box.IsAccept(c.Items[i]))
                         {
-                            if (m_Box.IsFull)
+	                        if (m_Box.IsFull)
                             {
                                 from.SendLocalizedMessage(1157723); // The jewelry box is full.
                                 break;
                             }
-                            else
-                            {
-                                m_Box.DropItem(c.Items[i]);
-                                count++;
-                            }
+
+	                        m_Box.DropItem(c.Items[i]);
+	                        count++;
                         }
                     }
 

@@ -13,10 +13,8 @@ namespace Server
 			{
 				return 0;
 			}
-			else
-			{
-				return m_Values[index];
-			}
+
+			return m_Values[index];
 		}
 
 		public void SetValue(int index, int value)

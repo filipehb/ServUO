@@ -1,12 +1,15 @@
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
-using Server.Regions;
-using Server.Services.Virtues;
-using Server.Spells.Necromancy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Diagnostics;
+using Server.Engines.CityLoyalty;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
+using Server.Regions;
+using Server.Services.Virtues;
+using Server.Spells.Necromancy;
 
 namespace Server.Engines.CannedEvil
 {
@@ -536,7 +539,7 @@ namespace Server.Engines.CannedEvil
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
             }
@@ -660,7 +663,7 @@ namespace Server.Engines.CannedEvil
 
                                 info.Award(m_Type, mobSubLevel);
 
-                                CityLoyalty.CityLoyaltySystem.OnSpawnCreatureKilled(m as BaseCreature, mobSubLevel);
+                                CityLoyaltySystem.OnSpawnCreatureKilled(m as BaseCreature, mobSubLevel);
                             }
                         }
                     }
@@ -742,7 +745,7 @@ namespace Server.Engines.CannedEvil
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             if (m_Champion != null)
@@ -902,7 +905,7 @@ namespace Server.Engines.CannedEvil
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return null;
             }
         }
@@ -1450,7 +1453,7 @@ namespace Server.Engines.CannedEvil
                 AddLabel(gWidth - (gBoarder + 100), top, gFontHue, "Refresh");
             }
 
-            public override void OnResponse(Network.NetState sender, RelayInfo info)
+            public override void OnResponse(NetState sender, RelayInfo info)
             {
                 switch (info.ButtonID)
                 {

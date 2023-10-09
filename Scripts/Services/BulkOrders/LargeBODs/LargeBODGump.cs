@@ -1,9 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System.Collections.Generic;
-using System.Linq;
+using Server.Targeting;
 
 namespace Server.Engines.BulkOrders
 {
@@ -152,7 +153,7 @@ namespace Server.Engines.BulkOrders
             }
             else if (info.ButtonID == 4) // combine from container
             {
-                m_From.BeginTarget(-1, false, Targeting.TargetFlags.None, (m, targeted) =>
+                m_From.BeginTarget(-1, false, TargetFlags.None, (m, targeted) =>
                 {
                     if (!m_Deed.Deleted && targeted is Container)
                     {

@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public JaacarBox()
-            : base()
         {
             Movable = true;
             Hue = 1266;

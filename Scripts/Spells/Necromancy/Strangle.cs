@@ -1,7 +1,8 @@
-using Server.Spells.SkillMasteries;
-using Server.Targeting;
 using System;
 using System.Collections;
+using Server.Spells.Mysticism;
+using Server.Spells.SkillMasteries;
+using Server.Targeting;
 
 namespace Server.Spells.Necromancy
 {
@@ -87,7 +88,7 @@ namespace Server.Spells.Necromancy
             m.FixedParticles(0x36CB, 1, 9, 9911, 67, 5, EffectLayer.Head);
             m.FixedParticles(0x374A, 1, 17, 9502, 1108, 4, (EffectLayer)255);
 
-            if (Mysticism.StoneFormSpell.CheckImmunity(m))
+            if (StoneFormSpell.CheckImmunity(m))
             {
                 Caster.SendLocalizedMessage(1095250); // Your target resists strangle.
             }
@@ -134,7 +135,7 @@ namespace Server.Spells.Necromancy
                 }
 
                 TimeSpan t_Duration = TimeSpan.FromSeconds(i_Length * strength);
-                BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Strangle, 1075794, 1075795, t_Duration, m, args.ToString()));
+                BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Strangle, 1075794, 1075795, t_Duration, m, args));
             }
 
             HarmfulSpell(m);

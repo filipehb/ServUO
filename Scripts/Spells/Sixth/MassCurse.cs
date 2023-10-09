@@ -1,6 +1,6 @@
+using System.Linq;
 using Server.Spells.Fourth;
 using Server.Targeting;
-using System.Linq;
 
 namespace Server.Spells.Sixth
 {

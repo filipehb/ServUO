@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Server.Items;
 
 namespace Server.Engines.CityLoyalty
@@ -144,12 +143,11 @@ namespace Server.Engines.CityLoyalty
             }
 
             public static Type[][] Interchangeables => _Interchangeables;
-            private static Type[][] _Interchangeables = new Type[][]
-            {
-                new Type[] { typeof(PewterBowlOfPeas), typeof(WoodenBowlOfPeas) },
-                new Type[] { typeof(PewterBowlOfCarrots), typeof(WoodenBowlOfCarrots) },
-                new Type[] { typeof(PewterBowlOfCorn), typeof(WoodenBowlOfCorn) },
-                new Type[] { typeof(PewterBowlOfLettuce), typeof(WoodenBowlOfLettuce) },
+            private static Type[][] _Interchangeables = {
+                new[] { typeof(PewterBowlOfPeas), typeof(WoodenBowlOfPeas) },
+                new[] { typeof(PewterBowlOfCarrots), typeof(WoodenBowlOfCarrots) },
+                new[] { typeof(PewterBowlOfCorn), typeof(WoodenBowlOfCorn) },
+                new[] { typeof(PewterBowlOfLettuce), typeof(WoodenBowlOfLettuce) },
             };
         }
 

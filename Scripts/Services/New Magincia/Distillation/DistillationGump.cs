@@ -1,9 +1,10 @@
+using System;
+using Server.Guilds;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
 using Server.Prompts;
 using Server.Targeting;
-using System;
 
 namespace Server.Engines.Distillation
 {
@@ -96,14 +97,12 @@ namespace Server.Engines.Distillation
 
                     continue;
                 }
-                else
-                {
-                    int total = strong ? amt * 2 : amt;
-                    int amount = DistillationTarget.GetAmount(from, type, liquor);
-                    if (amount > total)
-                        amount = total;
-                    AddHtmlLocalized(295, y, 200, 20, 1150733, string.Format("#{0}\t{1}", m_Def.Labels[i], string.Format("{0}/{1}", amount.ToString(), total.ToString())), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
-                }
+
+                int total = strong ? amt * 2 : amt;
+                int amount = DistillationTarget.GetAmount(from, type, liquor);
+                if (amount > total)
+	                amount = total;
+                AddHtmlLocalized(295, y, 200, 20, 1150733, string.Format("#{0}\t{1}", m_Def.Labels[i], string.Format("{0}/{1}", amount.ToString(), total.ToString())), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
 
                 y += 26;
             }
@@ -212,7 +211,7 @@ namespace Server.Engines.Distillation
                 else if (text != null)
                 {
                     text = text.Trim();
-                    if (text.Length > 15 || !Guilds.BaseGuildGump.CheckProfanity(text))
+                    if (text.Length > 15 || !BaseGuildGump.CheckProfanity(text))
                         from.SendMessage("That label is unacceptable. Please try again.");
                     else
                         m_Context.Label = text;
@@ -337,9 +336,10 @@ namespace Server.Engines.Distillation
 
                     return amount;
                 }
-                else if (type == typeof(PewterBowlOfCorn))
+
+                if (type == typeof(PewterBowlOfCorn))
                 {
-                    return pack.GetAmount(type) + pack.GetAmount(typeof(WoodenBowlOfCorn));
+	                return pack.GetAmount(type) + pack.GetAmount(typeof(WoodenBowlOfCorn));
                 }
 
                 return pack.GetAmount(type);

@@ -1,6 +1,6 @@
+using System;
 using Server.Gumps;
 using Server.Multis;
-using System;
 
 namespace Server.Items
 {
@@ -112,7 +112,6 @@ namespace Server.Items
 
         [Constructable]
         public FirePaintingDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

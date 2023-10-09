@@ -1,12 +1,12 @@
 using Server.Gumps;
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.BulkOrders
 {
     public class BOBFilterGump : Gump
     {
-        private static readonly int[,] m_MaterialFilters = new int[,]
-            {
+        private static readonly int[,] m_MaterialFilters = {
                 { 1044067,  1 }, // Blacksmithy
 				{ 1062226,  3 }, // Iron
 				{ 1018332,  4 }, // Dull Copper
@@ -29,8 +29,7 @@ namespace Server.Engines.BulkOrders
 				{ 1062238, 16 }  // Barbed
 			};
 
-        private static readonly int[,] m_MaterialFiltersNew = new int[,]
-        {
+        private static readonly int[,] m_MaterialFiltersNew = {
             { 1044067, 1 }, // Blacksmithy
             { 1062226, 9 }, // Iron
             { 1018332, 10 }, // Dull Copper
@@ -116,50 +115,45 @@ namespace Server.Engines.BulkOrders
             { 0, 0 }, // --Blank--
         };
 
-        private static readonly int[,] m_TypeFilters = new int[,]
-        {
+        private static readonly int[,] m_TypeFilters = {
             { 1062229, 0 }, // All
             { 1062224, 1 }, // Small
             { 1062225, 2 }// Large
         };
 
-        private static readonly int[,] m_QualityFilters = new int[,]
-        {
+        private static readonly int[,] m_QualityFilters = {
             { 1062229, 0 }, // All
             { 1011542, 1 }, // Normal
             { 1060636, 2 }// Exceptional
         };
 
-        private static readonly int[,] m_AmountFilters = new int[,]
-        {
+        private static readonly int[,] m_AmountFilters = {
             { 1062229, 0 }, // All
             { 1049706, 1 }, // 10
             { 1016007, 2 }, // 15
             { 1062239, 3 }// 20
         };
 
-        private static readonly int[][,] m_Filters = new int[][,]
-        {
+        private static readonly int[][,] m_Filters = {
             m_TypeFilters,
             m_QualityFilters,
             m_MaterialFilters,
             m_AmountFilters
         };
 
-        private static readonly int[][,] m_FiltersNew = new int[][,]
-        {
+        private static readonly int[][,] m_FiltersNew = {
             m_TypeFilters,
             m_QualityFilters,
             m_MaterialFiltersNew,
             m_AmountFilters
         };
 
-        private static readonly int[] m_XOffsets_Type = new int[] { 0, 75, 170 };
-        private static readonly int[] m_XOffsets_Quality = new int[] { 0, 75, 170 };
-        private static readonly int[] m_XOffsets_Amount = new int[] { 0, 75, 180, 275 };
-        private static readonly int[] m_XOffsets_Material = new int[] { 0, 108, 212, 307, 392, 487 };
-        private static readonly int[] m_XWidths_Small = new int[] { 50, 50, 70, 50 };
-        private static readonly int[] m_XWidths_Large = new int[] { 80, 60, 60, 60, 60, 60 };
+        private static readonly int[] m_XOffsets_Type = { 0, 75, 170 };
+        private static readonly int[] m_XOffsets_Quality = { 0, 75, 170 };
+        private static readonly int[] m_XOffsets_Amount = { 0, 75, 180, 275 };
+        private static readonly int[] m_XOffsets_Material = { 0, 108, 212, 307, 392, 487 };
+        private static readonly int[] m_XWidths_Small = { 50, 50, 70, 50 };
+        private static readonly int[] m_XWidths_Large = { 80, 60, 60, 60, 60, 60 };
 
         private const int LabelColor = 0x7FFF;
         private readonly PlayerMobile m_From;
@@ -215,7 +209,7 @@ namespace Server.Engines.BulkOrders
             AddButton(505, 670, 4017, 4018, 0, GumpButtonType.Reply, 0);
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             BOBFilter f = (m_From.UseOwnFilter ? m_From.BOBFilter : m_Book.Filter);
 

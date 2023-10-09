@@ -1,7 +1,9 @@
 #region References
-using Server.Items;
+
 using System;
 using System.Linq;
+using Server.Items;
+
 #endregion
 
 namespace Server.Services.Virtues

@@ -1,17 +1,21 @@
-using Server.Commands.Generic;
-using Server.Gumps;
-using Server.Items;
-using Server.Menus.ItemLists;
-using Server.Menus.Questions;
-using Server.Mobiles;
-using Server.Network;
-using Server.Spells;
-using Server.Targeting;
-using Server.Targets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Server.Commands.Generic;
+using Server.Diagnostics;
+using Server.Engines.Help;
+using Server.Gumps;
+using Server.Items;
+using Server.Menus.ItemLists;
+using Server.Menus.Questions;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Network;
+using Server.Spells;
+using Server.Targeting;
+using Server.Targets;
 
 namespace Server.Commands
 {
@@ -96,12 +100,12 @@ namespace Server.Commands
                 {
                     StringBuilder builder = new StringBuilder();
 
-                    builder.Append(reg.ToString());
+                    builder.Append(reg);
                     reg = reg.Parent;
 
                     while (reg != null)
                     {
-                        builder.Append(" <- " + reg.ToString());
+                        builder.Append(" <- " + reg);
                         reg = reg.Parent;
                     }
 
@@ -133,7 +137,7 @@ namespace Server.Commands
                 {
                     if (from.AccessLevel == AccessLevel.Counselor)
                     {
-                        Engines.Help.PageEntry pe = Engines.Help.PageQueue.GetEntry(targ);
+                        PageEntry pe = PageQueue.GetEntry(targ);
 
                         if (pe == null || pe.Handler != from)
                         {
@@ -476,7 +480,7 @@ namespace Server.Commands
         {
             if (e.Length == 1)
             {
-                if (!Multis.DesignContext.Check(e.Mobile))
+                if (!DesignContext.Check(e.Mobile))
                     return; // They are customizing
 
                 Spell spell = SpellRegistry.NewSpell(e.GetString(0), e.Mobile, null);
@@ -580,7 +584,7 @@ namespace Server.Commands
         [Description("Saves the world.")]
         private static void Save_OnCommand(CommandEventArgs e)
         {
-            Misc.AutoSave.Save();
+            AutoSave.Save();
         }
 
         [Usage("BackgroundSave")]
@@ -588,7 +592,7 @@ namespace Server.Commands
         [Description("Saves the world, writing to the disk in the background")]
         private static void BackgroundSave_OnCommand(CommandEventArgs e)
         {
-            Misc.AutoSave.Save(true);
+            AutoSave.Save(true);
         }
 
         private static bool FixMap(ref Map map, ref Point3D loc, Item item)
@@ -648,110 +652,115 @@ namespace Server.Commands
                             from.SendMessage("You can not go to what you can not see.");
                             return;
                         }
-                        else if (owner != null && (owner.Map == null || owner.Map == Map.Internal) && owner.Hidden && owner.AccessLevel >= from.AccessLevel)
+
+                        if (owner != null && (owner.Map == null || owner.Map == Map.Internal) && owner.Hidden && owner.AccessLevel >= from.AccessLevel)
                         {
-                            from.SendMessage("You can not go to what you can not see.");
-                            return;
+	                        from.SendMessage("You can not go to what you can not see.");
+	                        return;
                         }
-                        else if (!FixMap(ref map, ref loc, item))
+
+                        if (!FixMap(ref map, ref loc, item))
                         {
-                            from.SendMessage("That is an internal item and you cannot go to it.");
-                            return;
+	                        from.SendMessage("That is an internal item and you cannot go to it.");
+	                        return;
                         }
 
                         from.MoveToWorld(loc, map);
 
                         return;
                     }
-                    else if (ent is Mobile)
+
+                    if (ent is Mobile)
                     {
-                        Mobile m = (Mobile)ent;
+	                    Mobile m = (Mobile)ent;
 
-                        Map map = m.Map;
-                        Point3D loc = m.Location;
+	                    Map map = m.Map;
+	                    Point3D loc = m.Location;
 
-                        Mobile owner = m;
+	                    Mobile owner = m;
 
-                        if (owner != null && (owner.Map != null && owner.Map != Map.Internal) && !BaseCommand.IsAccessible(from, owner) /* !from.CanSee( owner )*/)
-                        {
-                            from.SendMessage("You can not go to what you can not see.");
-                            return;
-                        }
-                        else if (owner != null && (owner.Map == null || owner.Map == Map.Internal) && owner.Hidden && owner.AccessLevel >= from.AccessLevel)
-                        {
-                            from.SendMessage("You can not go to what you can not see.");
-                            return;
-                        }
-                        else if (!FixMap(ref map, ref loc, m))
-                        {
-                            from.SendMessage("That is an internal mobile and you cannot go to it.");
-                            return;
-                        }
+	                    if (owner != null && (owner.Map != null && owner.Map != Map.Internal) && !BaseCommand.IsAccessible(from, owner) /* !from.CanSee( owner )*/)
+	                    {
+		                    from.SendMessage("You can not go to what you can not see.");
+		                    return;
+	                    }
 
-                        from.MoveToWorld(loc, map);
+	                    if (owner != null && (owner.Map == null || owner.Map == Map.Internal) && owner.Hidden && owner.AccessLevel >= from.AccessLevel)
+	                    {
+		                    from.SendMessage("You can not go to what you can not see.");
+		                    return;
+	                    }
 
-                        return;
+	                    if (!FixMap(ref map, ref loc, m))
+	                    {
+		                    from.SendMessage("That is an internal mobile and you cannot go to it.");
+		                    return;
+	                    }
+
+	                    from.MoveToWorld(loc, map);
+
+	                    return;
                     }
                     else
                     {
-                        string name = e.GetString(0);
-                        Map map;
+	                    string name = e.GetString(0);
+	                    Map map;
 
-                        for (int i = 0; i < Map.AllMaps.Count; ++i)
-                        {
-                            map = Map.AllMaps[i];
+	                    for (int i = 0; i < Map.AllMaps.Count; ++i)
+	                    {
+		                    map = Map.AllMaps[i];
 
-                            if (map.MapIndex == 0x7F || map.MapIndex == 0xFF)
-                                continue;
+		                    if (map.MapIndex == 0x7F || map.MapIndex == 0xFF)
+			                    continue;
 
-                            if (Insensitive.Equals(name, map.Name))
-                            {
-                                from.Map = map;
-                                return;
-                            }
-                        }
+		                    if (Insensitive.Equals(name, map.Name))
+		                    {
+			                    from.Map = map;
+			                    return;
+		                    }
+	                    }
 
-                        Dictionary<string, Region> list = from.Map.Regions;
+	                    Dictionary<string, Region> list = from.Map.Regions;
 
-                        foreach (KeyValuePair<string, Region> kvp in list)
-                        {
-                            Region r = kvp.Value;
+	                    foreach (KeyValuePair<string, Region> kvp in list)
+	                    {
+		                    Region r = kvp.Value;
 
-                            if (Insensitive.Equals(r.Name, name))
-                            {
-                                from.Location = new Point3D(r.GoLocation);
-                                return;
-                            }
-                        }
+		                    if (Insensitive.Equals(r.Name, name))
+		                    {
+			                    from.Location = new Point3D(r.GoLocation);
+			                    return;
+		                    }
+	                    }
 
-                        for (int i = 0; i < Map.AllMaps.Count; ++i)
-                        {
-                            Map m = Map.AllMaps[i];
+	                    for (int i = 0; i < Map.AllMaps.Count; ++i)
+	                    {
+		                    Map m = Map.AllMaps[i];
 
-                            if (m.MapIndex == 0x7F || m.MapIndex == 0xFF || from.Map == m)
-                                continue;
+		                    if (m.MapIndex == 0x7F || m.MapIndex == 0xFF || from.Map == m)
+			                    continue;
 
-                            foreach (Region r in m.Regions.Values)
-                            {
-                                if (Insensitive.Equals(r.Name, name))
-                                {
-                                    from.MoveToWorld(r.GoLocation, m);
-                                    return;
-                                }
-                            }
-                        }
+		                    foreach (Region r in m.Regions.Values)
+		                    {
+			                    if (Insensitive.Equals(r.Name, name))
+			                    {
+				                    from.MoveToWorld(r.GoLocation, m);
+				                    return;
+			                    }
+		                    }
+	                    }
 
-                        if (ser != 0)
-                            from.SendMessage("No object with that serial was found.");
-                        else
-                            from.SendMessage("No region with that name was found.");
+	                    if (ser != 0)
+		                    from.SendMessage("No object with that serial was found.");
+	                    else
+		                    from.SendMessage("No region with that name was found.");
 
-                        return;
+	                    return;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Diagnostics.ExceptionLogging.LogException(ex);
+                    ExceptionLogging.LogException(ex);
                 }
 
                 from.SendMessage("Region name not found");
@@ -859,7 +868,7 @@ namespace Server.Commands
                     private readonly Mobile m_Mobile;
                     private readonly Item m_Item;
                     public EquipDetailsMenu(Mobile m, Item item)
-                        : base(string.Format("{0}: {1}", item.Layer, item.GetType().Name), new string[] { "Move", "Delete", "Props" })
+                        : base(string.Format("{0}: {1}", item.Layer, item.GetType().Name), new[] { "Move", "Delete", "Props" })
                     {
                         m_Mobile = m;
                         m_Item = item;

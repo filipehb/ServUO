@@ -41,11 +41,11 @@ namespace Server.Mobiles
 			CraftResource res = (CraftResource)Utility.RandomMinMax(201, 206); // All normal scales
 
             SetWearable((Item)Activator.CreateInstance(Utility.RandomList(_WeaponsList)));
-			SetWearable(new DragonHelm() { Resource = res });
-			SetWearable(new DragonChest() { Resource = res });
-			SetWearable(new DragonArms() { Resource = res });
-			SetWearable(new DragonGloves() { Resource = res });
-			SetWearable(new DragonLegs() { Resource = res });
+			SetWearable(new DragonHelm { Resource = res });
+			SetWearable(new DragonChest { Resource = res });
+			SetWearable(new DragonArms { Resource = res });
+			SetWearable(new DragonGloves { Resource = res });
+			SetWearable(new DragonLegs { Resource = res });
 			SetWearable(new ChaosShield());
 			SetWearable(new Shirt(), dropChance: 1);
 			SetWearable(new Boots(), dropChance: 1);
@@ -84,8 +84,7 @@ namespace Server.Mobiles
         {
         }
 
-		private static readonly Type[] _WeaponsList = new Type[]
-		{
+		private static readonly Type[] _WeaponsList = {
 			typeof(Kryss), typeof(Broadsword), typeof(Katana)
 		};
 

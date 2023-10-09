@@ -1,8 +1,8 @@
+using System;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -18,7 +18,6 @@ namespace Server.Items
 
         [Constructable]
         public TreeStump(int itemID)
-            : base()
         {
             AddComponent(new InternalAddonComponent(itemID), 0, 0, 0);
             NextResourceCount = DateTime.UtcNow + TimeSpan.FromDays(1);
@@ -230,7 +229,6 @@ namespace Server.Items
 
         [Constructable]
         public TreeStumpDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

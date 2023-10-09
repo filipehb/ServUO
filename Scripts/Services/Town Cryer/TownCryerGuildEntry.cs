@@ -1,5 +1,5 @@
-using Server.Guilds;
 using System;
+using Server.Guilds;
 
 namespace Server.Services.TownCryer
 {

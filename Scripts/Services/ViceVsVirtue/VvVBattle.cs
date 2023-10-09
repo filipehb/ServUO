@@ -1,12 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Guilds;
 using Server.Gumps;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.VvV
 {
@@ -560,8 +560,7 @@ namespace Server.Engines.VvV
 
                         if (added.Contains(g))
                             continue;
-                        else
-                            added.Add(g);
+                        added.Add(g);
 
                         if (!ViceVsVirtueSystem.Instance.GuildStats.ContainsKey(g))
                             ViceVsVirtueSystem.Instance.GuildStats[g] = new VvVGuildStats(g);

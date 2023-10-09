@@ -57,20 +57,19 @@ namespace Server.Items
 
         public override bool OnDragLift(Mobile from)
         {
-            if (m_Board == null || m_Board.Deleted)
+	        if (m_Board == null || m_Board.Deleted)
             {
                 Delete();
                 return false;
             }
-            else if (!IsChildOf(m_Board))
-            {
-                m_Board.DropItem(this);
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+
+	        if (!IsChildOf(m_Board))
+	        {
+		        m_Board.DropItem(this);
+		        return false;
+	        }
+
+	        return true;
         }
 
         public override bool DropToMobile(Mobile from, Mobile target, Point3D p)

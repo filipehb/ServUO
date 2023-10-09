@@ -1,5 +1,6 @@
-using Server.Regions;
 using System;
+using Server.Regions;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -28,7 +29,7 @@ namespace Server.Items
             ItemID = 0x1126;
             Effects.PlaySound(Location, Map, 0x306);
 
-            Spells.SpellHelper.Damage(TimeSpan.FromSeconds(0.5), from, from, Utility.Dice(2, 4, 0));
+            SpellHelper.Damage(TimeSpan.FromSeconds(0.5), from, from, Utility.Dice(2, 4, 0));
 
             Timer.DelayCall(TimeSpan.FromSeconds(2.0), OnMushroomReset);
         }

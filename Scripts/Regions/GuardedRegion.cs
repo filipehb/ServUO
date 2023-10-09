@@ -1,9 +1,12 @@
 #region References
-using Server.Commands;
-using Server.Mobiles;
+
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Mobiles;
+
 #endregion
 
 namespace Server.Regions
@@ -65,14 +68,12 @@ namespace Server.Regions
         {
             get
             {
-                if (Map == Map.Ilshenar || Map == Map.Malas)
+	            if (Map == Map.Ilshenar || Map == Map.Malas)
                 {
                     return typeof(ArcherGuard);
                 }
-                else
-                {
-                    return typeof(WarriorGuard);
-                }
+
+	            return typeof(WarriorGuard);
             }
         }
 
@@ -151,7 +152,7 @@ namespace Server.Regions
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
             else
@@ -177,7 +178,6 @@ namespace Server.Regions
         {
             if (IsDisabled())
             {
-                return;
             }
         }
 

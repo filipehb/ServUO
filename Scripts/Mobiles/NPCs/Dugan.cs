@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -17,7 +17,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
         {
             typeof(Missing)
         };
@@ -49,7 +49,7 @@ namespace Server.Engines.Quests
 
                         if (q == null)
                         {
-                            var quest = QuestHelper.RandomQuest(pm, new Type[] { typeof(EndingtheThreat) }, this);
+                            var quest = QuestHelper.RandomQuest(pm, new[] { typeof(EndingtheThreat) }, this);
 
                             if (quest != null)
                             {

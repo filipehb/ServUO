@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalZooStuddedLegs()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusHits = 2;
@@ -55,7 +54,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalZooStuddedGloves()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusHits = 2;
@@ -96,7 +94,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalZooStuddedGorget()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusHits = 2;
@@ -137,7 +134,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalZooStuddedArms()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusHits = 2;
@@ -178,7 +174,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalZooStuddedChest()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusHits = 2;
@@ -219,7 +214,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalZooStuddedFemaleChest()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusHits = 2;

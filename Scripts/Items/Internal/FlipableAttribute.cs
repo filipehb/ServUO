@@ -1,7 +1,8 @@
-using Server.Commands;
-using Server.Targeting;
 using System;
 using System.Reflection;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -84,7 +85,7 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
             else

@@ -6,7 +6,6 @@
 
         [Constructable]
         public PumpkinPizza()
-            : base()
         {
             Hue = 0xF3;
         }

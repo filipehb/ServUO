@@ -1,6 +1,6 @@
-﻿using Server.Prompts;
+﻿using System;
+using Server.Prompts;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {

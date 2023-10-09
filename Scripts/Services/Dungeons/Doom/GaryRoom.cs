@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Server.Spells;
 
 namespace Server.Engines.Doom
 {
@@ -48,8 +49,7 @@ namespace Server.Engines.Doom
         private static Point3D _SpawnLoc = new Point3D(396, 8, 4);
         private static Point3D _DoorOneLoc = new Point3D(395, 15, -1);
         private static Point3D _DoorTwoLoc = new Point3D(396, 15, -1);
-        private static readonly Point3D[] _StatueLocs = new Point3D[]
-        {
+        private static readonly Point3D[] _StatueLocs = {
             new Point3D(393, 4, 5),
             new Point3D(395, 4 ,5),
             new Point3D(397, 4, 5)
@@ -256,15 +256,15 @@ namespace Server.Engines.Doom
             g.SayTo(m, 1080098); // Ah... visitors!
         }
 
-        public override bool CheckTravel(Mobile traveller, Point3D p, Spells.TravelCheckType type)
+        public override bool CheckTravel(Mobile traveller, Point3D p, TravelCheckType type)
         {
             switch (type)
             {
-                case Spells.TravelCheckType.Mark:
-                case Spells.TravelCheckType.RecallTo:
-                case Spells.TravelCheckType.RecallFrom:
-                case Spells.TravelCheckType.GateTo:
-                case Spells.TravelCheckType.GateFrom:
+                case TravelCheckType.Mark:
+                case TravelCheckType.RecallTo:
+                case TravelCheckType.RecallFrom:
+                case TravelCheckType.GateTo:
+                case TravelCheckType.GateFrom:
                     return false;
             }
 

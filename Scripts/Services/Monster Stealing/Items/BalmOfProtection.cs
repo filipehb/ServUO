@@ -8,17 +8,15 @@ namespace Server.Items
         public static double HandleDamage(PlayerMobile pm, double damage)
         {
 
-            if (IsUnderThieveConsumableEffect(pm, ThieveConsumableEffect.BalmOfProtectionEffect))
+	        if (IsUnderThieveConsumableEffect(pm, ThieveConsumableEffect.BalmOfProtectionEffect))
             {
                 int rnd = 50 + Utility.Random(51);
 
                 damage = damage - (damage * (rnd / 100.0));
                 return damage;
             }
-            else
-            {
-                return damage;
-            }
+
+	        return damage;
         }
 
         public override int LabelNumber => 1094943;  // Balm of Protection

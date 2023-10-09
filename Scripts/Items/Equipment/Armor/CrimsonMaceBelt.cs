@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public CrimsonMaceBelt()
-            : base()
         {
             Attributes.BonusDex = 5;
             Attributes.BonusHits = 10;

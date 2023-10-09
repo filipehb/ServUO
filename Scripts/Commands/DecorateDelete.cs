@@ -1,9 +1,10 @@
-using Server.Engines.Quests.Haven;
-using Server.Items;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Server.Engines.Quests.Haven;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Commands
 {
@@ -448,7 +449,7 @@ namespace Server.Commands
                     }
 
                     if (fill)
-                        item = (Item)Activator.CreateInstance(m_Type, new object[] { content });
+                        item = (Item)Activator.CreateInstance(m_Type, content);
                     else
                         item = (Item)Activator.CreateInstance(m_Type);
                 }
@@ -470,7 +471,7 @@ namespace Server.Commands
                         }
                     }
 
-                    item = (Item)Activator.CreateInstance(m_Type, new object[] { facing });
+                    item = (Item)Activator.CreateInstance(m_Type, facing);
                 }
                 else
                 {
@@ -520,9 +521,9 @@ namespace Server.Commands
                 if (m_ItemID > 0)
                     item.ItemID = m_ItemID;
             }
-            else if (item is Mobiles.Spawner)
+            else if (item is Spawner)
             {
-                Mobiles.Spawner sp = (Mobiles.Spawner)item;
+                Spawner sp = (Spawner)item;
 
                 sp.NextSpawn = TimeSpan.Zero;
 
@@ -533,7 +534,7 @@ namespace Server.Commands
                         int indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
-                            sp.SpawnObjects.Add(new Mobiles.SpawnObject(m_Params[i].Substring(++indexOf)));
+                            sp.SpawnObjects.Add(new SpawnObject(m_Params[i].Substring(++indexOf)));
                     }
                     else if (m_Params[i].StartsWith("MinDelay"))
                     {

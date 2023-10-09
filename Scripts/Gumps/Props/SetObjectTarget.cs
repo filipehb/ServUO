@@ -1,10 +1,12 @@
 #region References
-using Server.Commands;
-using Server.Items;
-using Server.Targeting;
+
 using System;
 using System.Collections;
 using System.Reflection;
+using Server.Commands;
+using Server.Items;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Gumps

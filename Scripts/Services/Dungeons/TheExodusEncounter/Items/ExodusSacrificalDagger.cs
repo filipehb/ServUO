@@ -1,8 +1,9 @@
+using System;
 using Server.Engines.Craft;
 using Server.Engines.PartySystem;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -53,7 +54,6 @@ namespace Server.Items
             else if (!((PlayerMobile)from).UseSummoningRite)
             {
                 from.SendLocalizedMessage(1153603); // You must first use the Summoning Rite on a Summoning Tome.
-                return;
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Server.Items
                             from.Say(1153605); // *You thrust the dagger into your flesh as tribute to Exodus!*
                             altar.Rituals.Find(s => s.RitualMobile == from).Ritual2 = true;
                             m_Dagger.Delete();
-                            Misc.Titles.AwardKarma(from, 10000, true);
+                            Titles.AwardKarma(from, 10000, true);
                             Effects.SendLocationParticles(EffectItem.Create(altar.Location, altar.Map, TimeSpan.FromSeconds(2)), 0x373A, 10, 10, 2023);
 
                             from.SendLocalizedMessage(1153598, from.Name); // ~1_PLAYER~ has read the Summoning Rite! 

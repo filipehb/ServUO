@@ -1,7 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -100,9 +100,9 @@ namespace Server.Mobiles
 
         public Type[][] m_EvolutionCycle =
         {
-            new Type[] { typeof(Betballem),     typeof(Ballem),     typeof(UsagralemBallem) },
-            new Type[] { typeof(Anlorzen),      typeof(Anlorlem),   typeof(Anlorvaglem) },
-            new Type[] { typeof(Anzuanord),     typeof(Relanord),   typeof(Vasanord) }
+            new[] { typeof(Betballem),     typeof(Ballem),     typeof(UsagralemBallem) },
+            new[] { typeof(Anlorzen),      typeof(Anlorlem),   typeof(Anlorvaglem) },
+            new[] { typeof(Anzuanord),     typeof(Relanord),   typeof(Vasanord) }
         };
 
         private BaseCreature _MutateTo;

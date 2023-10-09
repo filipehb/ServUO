@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.Craft;
 using Server.Mobiles;
-using System;
 
 namespace Server.Items
 {
@@ -39,19 +39,19 @@ namespace Server.Items
         {
             // Clockwork Leather Wolf
             new GolemInfo(1,
-                new Type[] { typeof(Leather), typeof(OilFlask) },
-                new int[] { 100, 1 },
-                new int[] { 1113058, 1113059 }),
+                new[] { typeof(Leather), typeof(OilFlask) },
+                new[] { 100, 1 },
+                new[] { 1113058, 1113059 }),
             // ClockWork Scorpion
             new GolemInfo(1,
-                new Type[] { typeof(BronzeIngot), typeof(Gears) },
-                new int[] { 100, 10 },
-                new int[] { 1113060, 1113061 }),
+                new[] { typeof(BronzeIngot), typeof(Gears) },
+                new[] { 100, 10 },
+                new[] { 1113060, 1113061 }),
             // Vollem
             new GolemInfo(2,
-                new Type[] { typeof(BronzeIngot), typeof(WhiteScales) },
-                new int[] { 50, 25 },
-                new int[] { 1113060, 1113062 })
+                new[] { typeof(BronzeIngot), typeof(WhiteScales) },
+                new[] { 50, 25 },
+                new[] { 1113060, 1113062 })
         };
 
         private ClockworkType m_Type;

@@ -1,4 +1,6 @@
 using Server.Commands;
+using Server.Engines.ExploringTheDeep;
+using Server.Engines.ResortAndCasino;
 using Server.Items;
 
 namespace Server
@@ -16,7 +18,7 @@ namespace Server
         {
             WeakEntityCollection.Delete("sa");
 
-            Engines.ExploringTheDeep.GenerateExploringTheDeep.Delete(e);
+            GenerateExploringTheDeep.Delete(e);
 
             SpawnerPersistence.RemoveSpawnsFromXmlFile("Spawns", "GravewaterLake");
         }
@@ -37,8 +39,8 @@ namespace Server
 
             GenerateUnderworldRooms.Generate();
 
-            Engines.ResortAndCasino.FireCasinoGenerator.Generate(e);
-            Engines.ExploringTheDeep.GenerateExploringTheDeep.Generate(e);
+            FireCasinoGenerator.Generate(e);
+            GenerateExploringTheDeep.Generate(e);
 
             e.Mobile.SendMessage("Stygian Abyss world generation complete.");
         }

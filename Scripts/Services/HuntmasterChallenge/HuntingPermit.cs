@@ -1,8 +1,9 @@
-using Server.Engines.HuntsmasterChallenge;
-using Server.Mobiles;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Engines.HuntsmasterChallenge;
+using Server.Mobiles;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -153,7 +154,7 @@ namespace Server.Items
                                 c.VisitedByTaxidermist = true;
 
                                 from.PlaySound(0x249);
-                                from.PrivateOverheadMessage(Network.MessageType.Regular, 0x45, 1155713, from.NetState); // *You document your kill on the permit*
+                                from.PrivateOverheadMessage(MessageType.Regular, 0x45, 1155713, from.NetState); // *You document your kill on the permit*
                                 m_Permit.InvalidateProperties();
                                 return;
                             }

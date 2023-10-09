@@ -1,9 +1,12 @@
 #region References
+
+using System;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
+using Server.Spells.SkillMasteries;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.SkillHandlers
@@ -75,7 +78,7 @@ namespace Server.SkillHandlers
                     int masteryBonus = 0;
 
                     if (from is PlayerMobile)
-                        masteryBonus = Spells.SkillMasteries.BardSpell.GetMasteryBonus((PlayerMobile)from, SkillName.Peacemaking);
+                        masteryBonus = BardSpell.GetMasteryBonus((PlayerMobile)from, SkillName.Peacemaking);
 
                     if (targeted == from)
                     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Diagnostics;
 
 namespace Server.Engines.Quests
 {
@@ -14,7 +15,7 @@ namespace Server.Engines.Quests
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return null;
             }
         }

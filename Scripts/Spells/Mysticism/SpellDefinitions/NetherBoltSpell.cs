@@ -1,5 +1,6 @@
-using Server.Targeting;
 using System;
+using Server.Spells.First;
+using Server.Targeting;
 
 namespace Server.Spells.Mysticism
 {
@@ -21,7 +22,7 @@ namespace Server.Spells.Mysticism
 
         public override bool DelayedDamage => true;
         public override bool DelayedDamageStacking => false;
-        public override Type[] DelayDamageFamily => new Type[] { typeof(First.MagicArrowSpell) };
+        public override Type[] DelayDamageFamily => new[] { typeof(MagicArrowSpell) };
 
         public override void OnCast()
         {
@@ -34,34 +35,35 @@ namespace Server.Spells.Mysticism
             {
                 return;
             }
-            else if (CheckHSequence(d))
+
+            if (CheckHSequence(d))
             {
-                IDamageable target = d;
-                IDamageable source = Caster;
+	            IDamageable target = d;
+	            IDamageable source = Caster;
 
-                SpellHelper.Turn(Caster, target);
+	            SpellHelper.Turn(Caster, target);
 
-                if (HasDelayContext(target))
-                {
-                    DoHurtFizzle();
-                    return;
-                }
+	            if (HasDelayContext(target))
+	            {
+		            DoHurtFizzle();
+		            return;
+	            }
 
-                if (SpellHelper.CheckReflect(this, ref source, ref target))
-                {
-                    Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
-                    {
-                        source.MovingParticles(target, 0x36D4, 7, 0, false, true, 0x49A, 0, 0, 9502, 4019, 0x160);
-                        source.PlaySound(0x211);
-                    });
-                }
+	            if (SpellHelper.CheckReflect(this, ref source, ref target))
+	            {
+		            Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
+		            {
+			            source.MovingParticles(target, 0x36D4, 7, 0, false, true, 0x49A, 0, 0, 9502, 4019, 0x160);
+			            source.PlaySound(0x211);
+		            });
+	            }
 
-                double damage = GetNewAosDamage(10, 1, 4, target);
+	            double damage = GetNewAosDamage(10, 1, 4, target);
 
-                SpellHelper.Damage(this, target, damage, 0, 0, 0, 0, 0, 100, 0);
+	            SpellHelper.Damage(this, target, damage, 0, 0, 0, 0, 0, 100, 0);
 
-                Caster.MovingParticles(d, 0x36D4, 7, 0, false, true, 0x49A, 0, 0, 9502, 4019, 0x160);
-                Caster.PlaySound(0x211);
+	            Caster.MovingParticles(d, 0x36D4, 7, 0, false, true, 0x49A, 0, 0, 9502, 4019, 0x160);
+	            Caster.PlaySound(0x211);
             }
 
             FinishSequence();

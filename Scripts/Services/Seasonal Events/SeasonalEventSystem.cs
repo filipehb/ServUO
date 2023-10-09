@@ -1,20 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Server.Commands;
+using Server.Engines.ArtisanFestival;
 using Server.Engines.Fellowship;
 using Server.Engines.JollyRoger;
 using Server.Engines.Khaldun;
 using Server.Engines.RisingTide;
 using Server.Engines.SorcerersDungeon;
-using Server.Engines.TreasuresOfKotlCity;
 using Server.Engines.TreasuresOfDoom;
-using Server.Engines.ArtisanFestival;
+using Server.Engines.TreasuresOfKotlCity;
 using Server.Gumps;
 using Server.Misc;
 using Server.Mobiles;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Server.Engines.SeasonalEvents
 {
@@ -305,10 +304,8 @@ namespace Server.Engines.SeasonalEvents
                         {
                             return now.Month == MonthStart && now.Day == DayStart;
                         }
-                        else
-                        {
-                            return now > starts && now < starts + TimeSpan.FromDays(Duration);
-                        }
+
+                        return now > starts && now < starts + TimeSpan.FromDays(Duration);
                     }
             }
         }
@@ -377,6 +374,6 @@ namespace Server.Engines.SeasonalEvents
             }
         }
 
-        protected bool InheritInsertion = false;
+        protected bool InheritInsertion;
     }
 }

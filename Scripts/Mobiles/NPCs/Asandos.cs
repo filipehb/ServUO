@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class BakersDozenQuest : BaseQuest
     {
         public BakersDozenQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(CookieMix), "cookie mix", 5, 0x103F));
 
@@ -56,7 +55,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(BakersDozenQuest)
                 };
@@ -102,7 +101,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public ChefsSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

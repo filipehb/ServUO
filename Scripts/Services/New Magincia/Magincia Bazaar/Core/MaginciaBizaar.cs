@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Accounting;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.NewMagincia
 {
@@ -417,7 +417,7 @@ namespace Server.Engines.NewMagincia
                     /*You won a lease on Stall ~1_STALLNAME~ at the ~2_FACET~ New Magincia Bazaar. 
                      *Your bid amount of ~3_BIDAMT~gp won the auction and has been remitted. Your 
                      *lease begins immediately and will continue for 7 days.*/
-                    MaginciaLottoSystem.SendMessageTo(winner, new NewMaginciaMessage(null, new TextDefinition(1150426), string.Format("{0}\t{1}\t{2}", plot.PlotDef.ID, plot.PlotDef.Map.ToString(), highest.ToString("###,###,###"))));
+                    MaginciaLottoSystem.SendMessageTo(winner, new NewMaginciaMessage(null, new TextDefinition(1150426), string.Format("{0}\t{1}\t{2}", plot.PlotDef.ID, plot.PlotDef.Map, highest.ToString("###,###,###"))));
                 }
 
                 plot.Reset();
@@ -821,8 +821,7 @@ namespace Server.Engines.NewMagincia
             RegisterPlot(new PlotDef("J-4", m_StallLocs[idx], 0));
         }
 
-        private static readonly Point3D[] m_StallLocs = new Point3D[]
-        {
+        private static readonly Point3D[] m_StallLocs = {
             //A
             new Point3D(3716, 2198, 20),
             new Point3D(3709, 2198, 20),

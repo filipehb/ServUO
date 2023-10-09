@@ -49,7 +49,7 @@ namespace Server.Spells.SkillMasteries
             m.SendLocalizedMessage(1115738); // The bard's spellsong fills you with a feeling of resilience.
 
             string args = string.Format("{0}\t{1}\t{2}", m_PropertyBonus, m_PropertyBonus, m_PropertyBonus);
-            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Resilience, 1115614, 1115731, args.ToString()));
+            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Resilience, 1115614, 1115731, args));
 
             m.ResetStatTimers();
         }

@@ -97,8 +97,7 @@ namespace Server.Items
             }
         }
 
-        public static readonly ChangeHairstyleEntry[] HumanMaleEntries = new[]
-            {
+        public static readonly ChangeHairstyleEntry[] HumanMaleEntries = {
                 /* Hair */
                 new ChangeHairstyleEntry(0xC8F7, 1125404, StyleType.Hair, 0xA1A4),
                 new ChangeHairstyleEntry(0xC8F8, 1125405, StyleType.Hair, 0xA1A5),
@@ -111,8 +110,7 @@ namespace Server.Items
                 new ChangeHairstyleEntry(0xC8FE, 1125411, StyleType.Beard, 0xA1AB)
             };
 
-        public static readonly ChangeHairstyleEntry[] HumanFemaleEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] HumanFemaleEntries = {
                 /* Hair */
                 new ChangeHairstyleEntry(0xF00F, 1125412, StyleType.Hair, 0xA1AC),
                 new ChangeHairstyleEntry(0xF010, 1125413, StyleType.Hair, 0xA1AD),
@@ -120,8 +118,7 @@ namespace Server.Items
                 new ChangeHairstyleEntry(0xF012, 1125415, StyleType.Hair, 0xA1AF)
             };
 
-        public static readonly ChangeHairstyleEntry[] ElfMaleEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] ElfMaleEntries = {
                 /* Hair */
                 new ChangeHairstyleEntry(0xC903, 1125416, StyleType.Hair, 0xA1B0),
                 new ChangeHairstyleEntry(0xC904, 1125417, StyleType.Hair, 0xA1B1),
@@ -129,8 +126,7 @@ namespace Server.Items
                 new ChangeHairstyleEntry(0xC906, 1125419, StyleType.Hair, 0xA1B3)
             };
 
-        public static readonly ChangeHairstyleEntry[] ElfFemaleEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] ElfFemaleEntries = {
                 /* Hair */
                 new ChangeHairstyleEntry(0xF017, 1125420, StyleType.Hair, 0xA1B4),
                 new ChangeHairstyleEntry(0xF018, 1125421, StyleType.Hair, 0xA1B5),
@@ -138,8 +134,7 @@ namespace Server.Items
                 new ChangeHairstyleEntry(0xF01A, 1125423, StyleType.Hair, 0xA1B7)
             };
 
-        public static readonly ChangeHairstyleEntry[] GargoyleMaleEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] GargoyleMaleEntries = {
                 /* Hair */
                 new ChangeHairstyleEntry(0xC90B, 1125424, StyleType.Hair, 0xA1B8),
                 new ChangeHairstyleEntry(0xC90C, 1125425, StyleType.Hair, 0xA1B9),
@@ -152,8 +147,7 @@ namespace Server.Items
                 new ChangeHairstyleEntry(0xC912, 1125431, StyleType.Beard, 0xA1BF)
             };
 
-        public static readonly ChangeHairstyleEntry[] GargoyleFemaleEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] GargoyleFemaleEntries = {
                 /* Hair */
                 new ChangeHairstyleEntry(0xF023, 1125432, StyleType.Hair, 0xA1C0),
                 new ChangeHairstyleEntry(0xF024, 1125433, StyleType.Hair, 0xA1C1),

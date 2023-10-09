@@ -357,7 +357,7 @@ namespace Server.Engines.JollyRoger
             return Notes.Select(x => new { n = x, rand = Utility.Random(Notes.Count) }).OrderBy(x => x.rand).Select(x => x.n).ToList();
         }
 
-        public List<NoteArray> Notes = new List<NoteArray>()
+        public List<NoteArray> Notes = new List<NoteArray>
         {
             new NoteArray( "C4", 0x404 ),
             new NoteArray( "D", 0x409 ),
@@ -369,8 +369,7 @@ namespace Server.Engines.JollyRoger
             new NoteArray( "C5", 0x405 )
         };
 
-        public readonly static Point3D[] LuteLocations = new Point3D[]
-        {
+        public readonly static Point3D[] LuteLocations = {
             new Point3D(1350, 1646, 80), new Point3D(1350, 1650, 80), new Point3D(1350, 1655, 80), new Point3D(1350, 1659, 80),
             new Point3D(1355, 1646, 80), new Point3D(1355, 1650, 80), new Point3D(1355, 1655, 80), new Point3D(1355, 1659, 80)
         };

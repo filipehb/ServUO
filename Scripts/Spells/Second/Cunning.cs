@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Spells.Second
 {

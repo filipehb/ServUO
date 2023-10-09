@@ -1,7 +1,8 @@
-using Server.ContextMenus;
-using Server.Engines.Craft;
 using System;
 using System.Collections.Generic;
+using Server.ContextMenus;
+using Server.Engines.Craft;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -1536,7 +1537,7 @@ namespace Server.Items
                     ItemID = 0x4BA4
                 };
 
-                from.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1157341, from.NetState); // *You cut a slice from the cake.*
+                from.PrivateOverheadMessage(MessageType.Regular, 1154, 1157341, from.NetState); // *You cut a slice from the cake.*
                 from.AddToBackpack(cake);
 
                 Pieces--;

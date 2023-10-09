@@ -1,6 +1,7 @@
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.BulkOrders
 {
@@ -37,7 +38,7 @@ namespace Server.Engines.BulkOrders
             AddHtmlLocalized(152, 130, 100, 24, 1011036, false, false); // OKAY
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             if (info.ButtonID == 2)
             {

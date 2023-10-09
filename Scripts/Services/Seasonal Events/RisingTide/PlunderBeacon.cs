@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Items
@@ -48,7 +49,7 @@ namespace Server.Items
         {
             if (DamageStore != null)
             {
-                System.Collections.Generic.List<Mobile> eligables = DamageStore.Keys.Where(m => m.InRange(Location, 20)).ToList();
+                List<Mobile> eligables = DamageStore.Keys.Where(m => m.InRange(Location, 20)).ToList();
 
                 for (int i = 0; i < eligables.Count; i++)
                 {

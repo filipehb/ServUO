@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public AmuletOfRighteousness(int uses)
-            : base()
         {
             LootType = LootType.Blessed;
             Weight = 1.0;

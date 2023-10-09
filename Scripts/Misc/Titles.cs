@@ -1,9 +1,9 @@
-using Server.Accounting;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Server.Accounting;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Misc
 {
@@ -171,7 +171,7 @@ namespace Server.Misc
             return list;
         }
 
-        public static string[] HarrowerTitles = new string[] { "Spite", "Opponent", "Hunter", "Venom", "Executioner", "Annihilator", "Champion", "Assailant", "Purifier", "Nullifier" };
+        public static string[] HarrowerTitles = { "Spite", "Opponent", "Hunter", "Venom", "Executioner", "Annihilator", "Champion", "Assailant", "Purifier", "Nullifier" };
 
         public static string ComputeFameTitle(Mobile beheld)
         {
@@ -285,8 +285,7 @@ namespace Server.Misc
             return highest;
         }
 
-        private static readonly string[,] m_Levels = new string[,]
-        {
+        private static readonly string[,] m_Levels = {
             { "Neophyte", "Neophyte", "Neophyte" },
             { "Novice", "Novice", "Novice" },
             { "Apprentice", "Apprentice", "Apprentice" },
@@ -326,9 +325,8 @@ namespace Server.Misc
             return (fp - 300) / 100;
         }
 
-        private static readonly FameEntry[] m_FameEntries = new FameEntry[]
-        {
-            new FameEntry(1249, new KarmaEntry[]
+        private static readonly FameEntry[] m_FameEntries = {
+            new FameEntry(1249, new[]
             {
                 new KarmaEntry(-10000, "The Outcast {0}"),
                 new KarmaEntry(-5000, "The Despicable {0}"),
@@ -342,7 +340,7 @@ namespace Server.Misc
                 new KarmaEntry(9999, "The Honest {0}"),
                 new KarmaEntry(10000, "The Trustworthy {0}")
             }),
-            new FameEntry(2499, new KarmaEntry[]
+            new FameEntry(2499, new[]
             {
                 new KarmaEntry(-10000, "The Wretched {0}"),
                 new KarmaEntry(-5000, "The Dastardly {0}"),
@@ -356,7 +354,7 @@ namespace Server.Misc
                 new KarmaEntry(9999, "The Commendable {0}"),
                 new KarmaEntry(10000, "The Estimable {0}")
             }),
-            new FameEntry(4999, new KarmaEntry[]
+            new FameEntry(4999, new[]
             {
                 new KarmaEntry(-10000, "The Nefarious {0}"),
                 new KarmaEntry(-5000, "The Wicked {0}"),
@@ -370,7 +368,7 @@ namespace Server.Misc
                 new KarmaEntry(9999, "The Famed {0}"),
                 new KarmaEntry(10000, "The Great {0}")
             }),
-            new FameEntry(9999, new KarmaEntry[]
+            new FameEntry(9999, new[]
             {
                 new KarmaEntry(-10000, "The Dread {0}"),
                 new KarmaEntry(-5000, "The Evil {0}"),
@@ -384,7 +382,7 @@ namespace Server.Misc
                 new KarmaEntry(9999, "The Illustrious {0}"),
                 new KarmaEntry(10000, "The Glorious {0}")
             }),
-            new FameEntry(10000, new KarmaEntry[]
+            new FameEntry(10000, new[]
             {
                 new KarmaEntry(-10000, "The Dread {1} {0}"),
                 new KarmaEntry(-5000, "The Evil {1} {0}"),

@@ -1,8 +1,8 @@
+using System;
+using System.Linq;
 using Server.Engines.Quests;
 using Server.Mobiles;
 using Server.Spells;
-using System;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -176,20 +176,17 @@ namespace Server.Items
             if (!mobile.Alive || !mobile.IsPlayer())
                 return;
 
-            else if (m_Active && CanTeleport(from))
+            if (m_Active && CanTeleport(from))
             {
-                int equipment = mobile.Items.Where(i => (i is CanvassRobe || i is BootsOfBallast || i is NictitatingLens || i is AquaPendant || i is GargishNictitatingLens) && (i.Parent is Mobile && ((Mobile)i.Parent).FindItemOnLayer(i.Layer) == i)).Count();
+	            int equipment = mobile.Items.Where(i => (i is CanvassRobe || i is BootsOfBallast || i is NictitatingLens || i is AquaPendant || i is GargishNictitatingLens) && (i.Parent is Mobile && ((Mobile)i.Parent).FindItemOnLayer(i.Layer) == i)).Count();
 
-                if (equipment < 4)
-                {
-                    mobile.Kill();
-                    return;
-                }
-                else
-                {
-                    StartTeleport(from);
-                    return;
-                }
+	            if (equipment < 4)
+	            {
+		            mobile.Kill();
+		            return;
+	            }
+
+	            StartTeleport(from);
             }
         }
 
@@ -199,15 +196,17 @@ namespace Server.Items
             {
                 return false;
             }
-            else if (m_CriminalCheck && m.Criminal)
+
+            if (m_CriminalCheck && m.Criminal)
             {
-                m.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
-                return false;
+	            m.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
+	            return false;
             }
-            else if (m_CombatCheck && SpellHelper.CheckCombat(m))
+
+            if (m_CombatCheck && SpellHelper.CheckCombat(m))
             {
-                m.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
+	            m.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+	            return false;
             }
 
             return true;
@@ -215,19 +214,20 @@ namespace Server.Items
 
         public virtual void StartTeleport(Mobile m)
         {
-            if (m.Holding != null)
+	        if (m.Holding != null)
             {
                 m.SendLocalizedMessage(1071955); // You cannot teleport while dragging an object.
                 return;
             }
-            else if (m_Delay == TimeSpan.Zero)
-            {
-                DoTeleport(m);
-            }
-            else
-            {
-                Timer.DelayCall(m_Delay, DoTeleport, m);
-            }
+
+	        if (m_Delay == TimeSpan.Zero)
+	        {
+		        DoTeleport(m);
+	        }
+	        else
+	        {
+		        Timer.DelayCall(m_Delay, DoTeleport, m);
+	        }
         }
 
         public virtual void DoTeleport(Mobile m)

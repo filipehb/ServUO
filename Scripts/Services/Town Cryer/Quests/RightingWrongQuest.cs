@@ -1,7 +1,7 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Services.TownCryer;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -264,7 +264,7 @@ namespace Server.Engines.Quests
 
     public class Arnold : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(RightingWrongQuest2) };
+        public override Type[] Quests => new[] { typeof(RightingWrongQuest2) };
 
         public static Arnold TramInstance { get; set; }
         public static Arnold FelInstance { get; set; }

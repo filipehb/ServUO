@@ -1,7 +1,8 @@
-using Server.Engines.PartySystem;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Engines.PartySystem;
+using Server.Spells.Second;
+using Server.Targeting;
 
 namespace Server.Spells.Fourth
 {
@@ -64,7 +65,7 @@ namespace Server.Spells.Fourth
                     if (m == Caster || (party != null && party.Contains(m)))
                     {
                         Caster.DoBeneficial(m);
-                        Second.ProtectionSpell.Toggle(Caster, m, true);
+                        ProtectionSpell.Toggle(Caster, m, true);
                     }
                 }
             }

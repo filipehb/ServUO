@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class MaraudersQuest : BaseQuest
     {
         public MaraudersQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Ogre), "ogres", 10, "Sanctuary"));
 
@@ -51,7 +50,6 @@ namespace Server.Engines.Quests
     public class TheBrainsOfTheOperationQuest : BaseQuest
     {
         public TheBrainsOfTheOperationQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(OgreLord), "ogre lords", 10, "Sanctuary"));
 
@@ -94,7 +92,6 @@ namespace Server.Engines.Quests
     public class TheBrawnQuest : BaseQuest
     {
         public TheBrawnQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Cyclops), "cyclops", 6, "Sanctuary"));
 
@@ -136,7 +133,6 @@ namespace Server.Engines.Quests
     public class TheBiggerTheyAreQuest : BaseQuest
     {
         public TheBiggerTheyAreQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Titan), "titans", 3, "Sanctuary"));
 

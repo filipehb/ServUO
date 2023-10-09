@@ -1,5 +1,6 @@
-using Server.Items;
 using System;
+using Server.Items;
+using Server.SkillHandlers;
 
 namespace Server.Mobiles
 {
@@ -159,7 +160,7 @@ namespace Server.Mobiles
 
             if (version < 3 && Controlled && RawStr >= 1200 && ControlSlots == ControlSlotsMin)
             {
-                SkillHandlers.AnimalTaming.ScaleStats(this, 0.5);
+                AnimalTaming.ScaleStats(this, 0.5);
             }
 
             if (version < 1 && Name == "a Cu Sidhe")

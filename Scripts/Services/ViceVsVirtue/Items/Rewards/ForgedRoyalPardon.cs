@@ -1,5 +1,6 @@
 using Server.Gumps;
 using Server.Mobiles;
+using Server.Spells;
 
 namespace Server.Engines.VvV
 {
@@ -24,7 +25,7 @@ namespace Server.Engines.VvV
                     {
                         m.SendMessage("You have no use for this item.");
                     }
-                    else if (Spells.SpellHelper.CheckCombat(m))
+                    else if (SpellHelper.CheckCombat(m))
                     {
                         m.SendLocalizedMessage(1116588); //You cannot use a forged pardon while in combat.
                     }

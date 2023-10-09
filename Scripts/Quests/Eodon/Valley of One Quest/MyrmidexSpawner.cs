@@ -1,7 +1,7 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -192,12 +192,12 @@ namespace Server.Items
     {
         public static void Initialize()
         {
-            _Zones[0] = new EodonTribeRegion(EodonTribe.Jukari, new Rectangle2D[] { new Rectangle2D(640, 2046, 115, 115) }, 6);
-            _Zones[1] = new EodonTribeRegion(EodonTribe.Kurak, new Rectangle2D[] { new Rectangle2D(291, 1817, 125, 90) }, 6);
-            _Zones[2] = new EodonTribeRegion(EodonTribe.Barrab, new Rectangle2D[] { new Rectangle2D(134, 1767, 33, 20), new Rectangle2D(142, 1786, 57, 80), new Rectangle2D(145, 1750, 20, 20) }, 5);
-            _Zones[3] = new EodonTribeRegion(EodonTribe.Barako, new Rectangle2D[] { new Rectangle2D(620, 1677, 95, 100) }, 5);
-            _Zones[4] = new EodonTribeRegion(EodonTribe.Urali, new Rectangle2D[] { new Rectangle2D(320, 1551, 160, 72) }, 5);
-            _Zones[5] = new EodonTribeRegion(EodonTribe.Sakkhra, new Rectangle2D[] { new Rectangle2D(482, 1375, 200, 200) }, 8);
+            _Zones[0] = new EodonTribeRegion(EodonTribe.Jukari, new[] { new Rectangle2D(640, 2046, 115, 115) }, 6);
+            _Zones[1] = new EodonTribeRegion(EodonTribe.Kurak, new[] { new Rectangle2D(291, 1817, 125, 90) }, 6);
+            _Zones[2] = new EodonTribeRegion(EodonTribe.Barrab, new[] { new Rectangle2D(134, 1767, 33, 20), new Rectangle2D(142, 1786, 57, 80), new Rectangle2D(145, 1750, 20, 20) }, 5);
+            _Zones[3] = new EodonTribeRegion(EodonTribe.Barako, new[] { new Rectangle2D(620, 1677, 95, 100) }, 5);
+            _Zones[4] = new EodonTribeRegion(EodonTribe.Urali, new[] { new Rectangle2D(320, 1551, 160, 72) }, 5);
+            _Zones[5] = new EodonTribeRegion(EodonTribe.Sakkhra, new[] { new Rectangle2D(482, 1375, 200, 200) }, 8);
         }
 
         public static EodonTribeRegion[] _Zones = new EodonTribeRegion[6];

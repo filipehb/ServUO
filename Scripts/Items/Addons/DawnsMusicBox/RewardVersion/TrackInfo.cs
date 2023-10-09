@@ -11,8 +11,7 @@ namespace Server.Items.MusicBox
 
     public class TrackInfo
     {
-        private static readonly TrackInfo[] m_Table = new TrackInfo[]
-        {
+        private static readonly TrackInfo[] m_Table = {
             // There are currently 40 Common Music Box Gears
             new TrackInfo(56, 1075152, MusicName.Samlethe, TrackRarity.Common),
             new TrackInfo(18, 1075163,  MusicName.Sailing, TrackRarity.Common),

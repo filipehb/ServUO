@@ -1,12 +1,15 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
+using Server.Engines.CityLoyalty;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Prompts;
+using Server.Regions;
 using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -111,7 +114,7 @@ namespace Server.Items
         }
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            list.Add(1054000, m_Charges.ToString() + (m_Inscription.Length == 0 ? "\t " : " :\t" + m_Inscription)); // a bracelet of binding : ~1_val~ ~2_val~
+            list.Add(1054000, m_Charges + (m_Inscription.Length == 0 ? "\t " : " :\t" + m_Inscription)); // a bracelet of binding : ~1_val~ ~2_val~
         }
 
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
@@ -269,71 +272,81 @@ namespace Server.Items
                 from.SendLocalizedMessage(1054005); // The bracelet glows black. It must be charged before it can be used again.
                 return false;
             }
-            else if (from.FindItemOnLayer(Layer.Bracelet) != this)
-            {
-                from.SendLocalizedMessage(1054004); // You must equip the bracelet in order to use its power.
-                return false;
-            }
-            else if (boundRoot == null || boundRoot.NetState == null || boundRoot.FindItemOnLayer(Layer.Bracelet) != bound)
-            {
-                from.SendLocalizedMessage(1054006); // The bracelet emits a red glow. The bracelet's twin is not available for transport.
-                return false;
-            }
-            else if (!SpellHelper.CheckTravel(from, TravelCheckType.RecallFrom))
-            {
-                return false;
-            }
-            else if (!SpellHelper.CheckTravel(from, boundRoot.Map, boundRoot.Location, TravelCheckType.RecallTo))
-            {
-                return false;
-            }
-            else if (boundRoot.Map == Map.Felucca && from is PlayerMobile && ((PlayerMobile)from).Young)
-            {
-                from.SendLocalizedMessage(1049543); // You decide against traveling to Felucca while you are still young.
-                return false;
-            }
-            else if (SpellHelper.RestrictRedTravel && from.Murderer && boundRoot.Map != Map.Felucca)
-            {
-                from.SendLocalizedMessage(1019004); // You are not allowed to travel there.
-                return false;
-            }
-            else if (from.Criminal)
-            {
-                from.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
-                return false;
-            }
-            else if (SpellHelper.CheckCombat(from))
-            {
-                from.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
-            }
-            else if (Misc.WeightOverloading.IsOverloaded(from))
-            {
-                from.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
-                return false;
-            }
-            else if (Engines.CityLoyalty.CityTradeSystem.HasTrade(from))
-            {
-                from.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
-                return false;
-            }
-            else if (from.Region.IsPartOf<Regions.Jail>())
-            {
-                from.SendLocalizedMessage(1114345, "", 0x35); // You'll need a better jailbreak plan than that!
-                return false;
-            }
-            else if (boundRoot.Region.IsPartOf<Regions.Jail>())
-            {
-                from.SendLocalizedMessage(1019004); // You are not allowed to travel there.
-                return false;
-            }
-            else
-            {
-                if (successMessage)
-                    from.SendLocalizedMessage(1054015); // The bracelet's twin is available for transport.
 
-                return true;
+            if (from.FindItemOnLayer(Layer.Bracelet) != this)
+            {
+	            from.SendLocalizedMessage(1054004); // You must equip the bracelet in order to use its power.
+	            return false;
             }
+
+            if (boundRoot == null || boundRoot.NetState == null || boundRoot.FindItemOnLayer(Layer.Bracelet) != bound)
+            {
+	            from.SendLocalizedMessage(1054006); // The bracelet emits a red glow. The bracelet's twin is not available for transport.
+	            return false;
+            }
+
+            if (!SpellHelper.CheckTravel(from, TravelCheckType.RecallFrom))
+            {
+	            return false;
+            }
+
+            if (!SpellHelper.CheckTravel(from, boundRoot.Map, boundRoot.Location, TravelCheckType.RecallTo))
+            {
+	            return false;
+            }
+
+            if (boundRoot.Map == Map.Felucca && from is PlayerMobile && ((PlayerMobile)from).Young)
+            {
+	            from.SendLocalizedMessage(1049543); // You decide against traveling to Felucca while you are still young.
+	            return false;
+            }
+
+            if (SpellHelper.RestrictRedTravel && from.Murderer && boundRoot.Map != Map.Felucca)
+            {
+	            from.SendLocalizedMessage(1019004); // You are not allowed to travel there.
+	            return false;
+            }
+
+            if (from.Criminal)
+            {
+	            from.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
+	            return false;
+            }
+
+            if (SpellHelper.CheckCombat(from))
+            {
+	            from.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+	            return false;
+            }
+
+            if (WeightOverloading.IsOverloaded(from))
+            {
+	            from.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
+	            return false;
+            }
+
+            if (CityTradeSystem.HasTrade(from))
+            {
+	            from.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
+	            return false;
+            }
+
+            if (from.Region.IsPartOf<Jail>())
+            {
+	            from.SendLocalizedMessage(1114345, "", 0x35); // You'll need a better jailbreak plan than that!
+	            return false;
+            }
+
+            if (boundRoot.Region.IsPartOf<Jail>())
+            {
+	            from.SendLocalizedMessage(1019004); // You are not allowed to travel there.
+	            return false;
+            }
+
+            if (successMessage)
+	            from.SendLocalizedMessage(1054015); // The bracelet's twin is available for transport.
+
+            return true;
         }
 
         private class BraceletEntry : ContextMenuEntry

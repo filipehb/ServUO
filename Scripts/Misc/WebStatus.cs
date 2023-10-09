@@ -1,11 +1,14 @@
 #region References
-using Server.Guilds;
-using Server.Network;
+
 using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Server.Diagnostics;
+using Server.Guilds;
+using Server.Network;
+
 #endregion
 
 namespace Server.Misc
@@ -76,7 +79,7 @@ namespace Server.Misc
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             Listen();

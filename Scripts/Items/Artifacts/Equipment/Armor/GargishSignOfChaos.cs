@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public GargishSignOfChaos()
-            : base()
         {
             Hue = 2075;
             ArmorAttributes.SoulCharge = 20;

@@ -118,14 +118,12 @@ namespace Server.Items
             {
                 get
                 {
-                    if (Info != null)
+	                if (Info != null)
                     {
                         return Info.TrophyName.Number;
                     }
-                    else
-                    {
-                        return base.LabelNumber;
-                    }
+
+	                return base.LabelNumber;
                 }
             }
 

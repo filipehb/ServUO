@@ -1,6 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Items;
-using System;
+using Server.Network;
 
 namespace Server.Engines.Craft
 {
@@ -38,7 +39,7 @@ namespace Server.Engines.Craft
             AddButton(20, 125, 4005, 4007, 0, GumpButtonType.Reply, 0);
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             bool makersMark = (info.ButtonID == 1);
 

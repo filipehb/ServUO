@@ -1,4 +1,7 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.SkillHandlers;
 using Server.Spells;
@@ -15,7 +18,7 @@ using Server.Spells.SkillMasteries;
 using Server.Spells.Spellweaving;
 using Server.Spells.Third;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.Mobiles
@@ -520,8 +523,8 @@ namespace Server.Mobiles
 
             if (activeOnly)
             {
-                System.Collections.Generic.List<AggressorInfo> aggressed = m_Mobile.Aggressed;
-                System.Collections.Generic.List<AggressorInfo> aggressors = m_Mobile.Aggressors;
+                List<AggressorInfo> aggressed = m_Mobile.Aggressed;
+                List<AggressorInfo> aggressors = m_Mobile.Aggressors;
 
                 Mobile active = null;
                 double activePrio = 0.0;

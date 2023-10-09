@@ -1,16 +1,15 @@
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
     public class FlourMillSouthAddon : BaseAddon, IFlourMill
     {
-        private static readonly int[][] m_StageTable = new int[][]
-        {
-            new int[] { 0x192C, 0x192D, 0x1931 },
-            new int[] { 0x192E, 0x192F, 0x1932 },
-            new int[] { 0x1930, 0x1930, 0x1934 }
+        private static readonly int[][] m_StageTable = {
+            new[] { 0x192C, 0x192D, 0x1931 },
+            new[] { 0x192E, 0x192F, 0x1932 },
+            new[] { 0x1930, 0x1930, 0x1934 }
         };
         private int m_Flour;
         private Timer m_Timer;
@@ -74,7 +73,7 @@ namespace Server.Items
 
             for (int i = 0; i < components.Count; ++i)
             {
-                AddonComponent component = components[i] as AddonComponent;
+                AddonComponent component = components[i];
 
                 if (component == null)
                     continue;

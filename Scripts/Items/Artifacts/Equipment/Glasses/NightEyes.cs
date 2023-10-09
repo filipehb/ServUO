@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public NightEyes()
-            : base()
         {
             Hue = 26;
             Attributes.NightSight = 1;

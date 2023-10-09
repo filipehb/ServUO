@@ -1,13 +1,14 @@
 #region References
-using Server.Accounting;
-using Server.Commands.Generic;
-using Server.Network;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using Server.Accounting;
+using Server.Commands.Generic;
+using Server.Network;
 using CPA = Server.CommandPropertyAttribute;
 #endregion
 

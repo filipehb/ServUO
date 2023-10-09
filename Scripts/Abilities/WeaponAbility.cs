@@ -1,8 +1,12 @@
-using Server.Network;
-using Server.Spells;
-using Server.Spells.SkillMasteries;
 using System;
 using System.Collections;
+using Server.Network;
+using Server.Spells;
+using Server.Spells.Bushido;
+using Server.Spells.Mysticism;
+using Server.Spells.Necromancy;
+using Server.Spells.Ninjitsu;
+using Server.Spells.SkillMasteries;
 
 namespace Server.Items
 {
@@ -49,8 +53,8 @@ namespace Server.Items
 
             if (weapon != null && (weapon.PrimaryAbility == this || weapon.PrimaryAbility == Bladeweave))
                 return 70.0;
-            else if (weapon != null && (weapon.SecondaryAbility == this || weapon.SecondaryAbility == Bladeweave))
-                return 90.0;
+            if (weapon != null && (weapon.SecondaryAbility == this || weapon.SecondaryAbility == Bladeweave))
+	            return 90.0;
 
             return 200.0;
         }
@@ -64,8 +68,8 @@ namespace Server.Items
 
             if (weapon != null && (weapon.PrimaryAbility == this || weapon.PrimaryAbility == Bladeweave))
                 return 30.0;
-            else if (weapon != null && (weapon.SecondaryAbility == this || weapon.SecondaryAbility == Bladeweave))
-                return 60.0;
+            if (weapon != null && (weapon.SecondaryAbility == this || weapon.SecondaryAbility == Bladeweave))
+	            return 60.0;
 
             return 200.0;
         }
@@ -88,12 +92,12 @@ namespace Server.Items
 
             double scalar = 1.0;
 
-            if (!Spells.Necromancy.MindRotSpell.GetMindRotScalar(from, ref scalar))
+            if (!MindRotSpell.GetMindRotScalar(from, ref scalar))
             {
                 scalar = 1.0;
             }
 
-            if (Spells.Mysticism.PurgeMagicSpell.IsUnderCurseEffects(from))
+            if (PurgeMagicSpell.IsUnderCurseEffects(from))
             {
                 scalar += .5;
             }
@@ -232,7 +236,7 @@ namespace Server.Items
             if (state == null)
                 return false;
 
-            if (Spells.Bushido.HonorableExecution.IsUnderPenalty(from) || Spells.Ninjitsu.AnimalForm.UnderTransformation(from))
+            if (HonorableExecution.IsUnderPenalty(from) || AnimalForm.UnderTransformation(from))
             {
                 from.SendLocalizedMessage(1063024); // You cannot perform this special move right now.
                 return false;

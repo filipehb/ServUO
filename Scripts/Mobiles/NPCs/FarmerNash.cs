@@ -1,13 +1,12 @@
-using Server.Items;
 using System;
 using System.Collections;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class InTheWeeds : BaseQuest
     {
         public InTheWeeds()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FNPitchfork), "Farmer Nash's Pitchfork", 1, 0xE87));
 
@@ -108,7 +107,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(InTheWeeds)
                 };

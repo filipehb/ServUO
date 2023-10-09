@@ -1,8 +1,10 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
-    public class VirtueShield : BaseShield, Engines.Craft.IRepairable
+    public class VirtueShield : BaseShield, IRepairable
     {
-        public Engines.Craft.CraftSystem RepairSystem => Engines.Craft.DefBlacksmithy.CraftSystem;
+        public CraftSystem RepairSystem => DefBlacksmithy.CraftSystem;
         public override int BasePhysicalResistance => 8;
         public override int BaseFireResistance => 8;
         public override int BaseColdResistance => 8;

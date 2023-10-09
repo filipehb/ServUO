@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Craft;
 using Server.Engines.Harvest;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -125,7 +125,7 @@ namespace Server.Items
 
         public virtual void DisplayDurabilityTo(Mobile m)
         {
-            LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString()); // Durability
+            LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining); // Durability
         }
 
         public override void OnDoubleClick(Mobile from)

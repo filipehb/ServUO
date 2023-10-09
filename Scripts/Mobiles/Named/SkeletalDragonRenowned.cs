@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -52,7 +52,7 @@ namespace Server.Mobiles
         }
 
         public override Type[] UniqueSAList => new Type[] { };
-        public override Type[] SharedSAList => new Type[] { typeof(AxeOfAbandon), typeof(DemonBridleRing), typeof(VoidInfusedKilt), typeof(BladeOfBattle) };
+        public override Type[] SharedSAList => new[] { typeof(AxeOfAbandon), typeof(DemonBridleRing), typeof(VoidInfusedKilt), typeof(BladeOfBattle) };
         public override bool ReacquireOnMovement => true;
         public override double BonusPetDamageScalar => 3.0;
         // TODO: Undead summoning?

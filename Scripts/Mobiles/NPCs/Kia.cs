@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class MomentoQuest : BaseQuest
     {
         public MomentoQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(ResolvesBridle), "resolve's bridle", 1, 0x1727));
 
@@ -59,7 +58,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(MomentoQuest)
                 };

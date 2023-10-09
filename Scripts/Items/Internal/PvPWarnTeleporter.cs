@@ -22,10 +22,10 @@ namespace Server.Items
 
             if (pm != null)
             {
-                if (pm.DisabledPvpWarning)
+	            if (pm.DisabledPvpWarning)
                     return base.OnMoveOver(m);
-                else if (!pm.HasGump(typeof(PvpWarningGump)))
-                    pm.SendGump(new PvpWarningGump(m, this));
+	            if (!pm.HasGump(typeof(PvpWarningGump)))
+		            pm.SendGump(new PvpWarningGump(m, this));
             }
 
             return true;

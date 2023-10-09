@@ -1,6 +1,6 @@
+using System;
 using Server.Mobiles;
 using Server.Spells.Spellweaving;
-using System;
 
 namespace Server.Spells.SkillMasteries
 {

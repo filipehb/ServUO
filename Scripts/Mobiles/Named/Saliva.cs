@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Saliva()
-            : base()
         {
             Name = "a saliva";
             Hue = 0x11E;

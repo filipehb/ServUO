@@ -1,7 +1,9 @@
 #region References
+
+using System;
 using Server.Spells;
 using Server.Spells.Bushido;
-using System;
+
 #endregion
 
 namespace Server.Mobiles

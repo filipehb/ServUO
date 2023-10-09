@@ -1,13 +1,13 @@
-using Server.Commands;
-using Server.Engines.Points;
-using Server.Engines.SeasonalEvents;
-using Server.Items;
-using Server.Mobiles;
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Server.Commands;
+using Server.Engines.Points;
+using Server.Engines.SeasonalEvents;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -381,7 +381,7 @@ namespace Server.Engines.CityLoyalty
 
                     if (e.Love > 10)
                     {
-                        double convert = (double)e.Love / 75.0;
+                        double convert = e.Love / 75.0;
 
                         if (convert > 0.0)
                         {
@@ -417,13 +417,15 @@ namespace Server.Engines.CityLoyalty
                 {
                     return GetHateRating(hate);
                 }
-                else if (neut > 0 && neut > love && neut > hate)
+
+                if (neut > 0 && neut > love && neut > hate)
                 {
-                    return GetNeutralRating(neut);
+	                return GetNeutralRating(neut);
                 }
-                else if (love > 0)
+
+                if (love > 0)
                 {
-                    return GetLoveRating(love);
+	                return GetLoveRating(love);
                 }
             }
 
@@ -661,7 +663,7 @@ namespace Server.Engines.CityLoyalty
             EventSink.Login += OnLogin;
             Timer.DelayCall(TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(10), OnTick);
 
-            CommandSystem.Register("ElectionStartTime", AccessLevel.Administrator, e => Gumps.BaseGump.SendGump(new ElectionStartTimeGump(e.Mobile as PlayerMobile)));
+            CommandSystem.Register("ElectionStartTime", AccessLevel.Administrator, e => BaseGump.SendGump(new ElectionStartTimeGump(e.Mobile as PlayerMobile)));
             CommandSystem.Register("RemoveWait", AccessLevel.Administrator, e =>
                 {
                     foreach (CityLoyaltySystem city in Cities)
@@ -675,7 +677,7 @@ namespace Server.Engines.CityLoyalty
                 if (e.Mobile is PlayerMobile)
                 {
                     e.Mobile.CloseGump(typeof(SystemInfoGump));
-                    Gumps.BaseGump.SendGump(new SystemInfoGump((PlayerMobile)e.Mobile));
+                    BaseGump.SendGump(new SystemInfoGump((PlayerMobile)e.Mobile));
                 }
             });
         }
@@ -1061,42 +1063,42 @@ namespace Server.Engines.CityLoyalty
 
         public static int[][] _LoveHatePointsTable =
         {
-            new int[] { 250 }, 								// Tier 1
-			new int[] { 500, 1000 }, 						// Tier 2
-			new int[] { 5000, 10000, 25000 }, 				// Tier 3
-			new int[] { 100000, 250000, 500000, 1000000  }, // Tier 4
+            new[] { 250 }, 								// Tier 1
+			new[] { 500, 1000 }, 						// Tier 2
+			new[] { 5000, 10000, 25000 }, 				// Tier 3
+			new[] { 100000, 250000, 500000, 1000000  }, // Tier 4
 		};
 
         public static int[][] _NuetralPointsTable =
         {
-            new int[] { 250 }, 								// Tier 1
-			new int[] { 1000 }, 							// Tier 2
-			new int[] { 25000 }, 							// Tier 3
-			new int[] { 1000000 }, 							// Tier 4
+            new[] { 250 }, 								// Tier 1
+			new[] { 1000 }, 							// Tier 2
+			new[] { 25000 }, 							// Tier 3
+			new[] { 1000000 }, 							// Tier 4
 		};
 
         public static LoyaltyRating[][] _LoveLoyaltyTable =
         {
-            new LoyaltyRating[] { LoyaltyRating.Commended }, 																		// Tier 1
-			new LoyaltyRating[] { LoyaltyRating.Esteemed, LoyaltyRating.Respected }, 												// Tier 2
-			new LoyaltyRating[] { LoyaltyRating.Honored, LoyaltyRating.Admired, LoyaltyRating.Adored }, 							// Tier 3
-			new LoyaltyRating[] { LoyaltyRating.Lauded, LoyaltyRating.Exalted, LoyaltyRating.Revered, LoyaltyRating.Venerated  },   // Tier 4
+            new[] { LoyaltyRating.Commended }, 																		// Tier 1
+			new[] { LoyaltyRating.Esteemed, LoyaltyRating.Respected }, 												// Tier 2
+			new[] { LoyaltyRating.Honored, LoyaltyRating.Admired, LoyaltyRating.Adored }, 							// Tier 3
+			new[] { LoyaltyRating.Lauded, LoyaltyRating.Exalted, LoyaltyRating.Revered, LoyaltyRating.Venerated  },   // Tier 4
 		};
 
         public static LoyaltyRating[][] _HateLoyaltyTable =
         {
-            new LoyaltyRating[] { LoyaltyRating.Disfavored }, 																		// Tier 1
-			new LoyaltyRating[] { LoyaltyRating.Disliked, LoyaltyRating.Detested }, 											    // Tier 2
-			new LoyaltyRating[] { LoyaltyRating.Loathed, LoyaltyRating.Despised, LoyaltyRating.Reviled }, 							// Tier 3
-			new LoyaltyRating[] { LoyaltyRating.Scorned, LoyaltyRating.Shunned, LoyaltyRating.Villified, LoyaltyRating.Abhorred  }, // Tier 4
+            new[] { LoyaltyRating.Disfavored }, 																		// Tier 1
+			new[] { LoyaltyRating.Disliked, LoyaltyRating.Detested }, 											    // Tier 2
+			new[] { LoyaltyRating.Loathed, LoyaltyRating.Despised, LoyaltyRating.Reviled }, 							// Tier 3
+			new[] { LoyaltyRating.Scorned, LoyaltyRating.Shunned, LoyaltyRating.Villified, LoyaltyRating.Abhorred  }, // Tier 4
 		};
 
         public static LoyaltyRating[][] _NuetralLoyaltyTable =
         {
-            new LoyaltyRating[] { LoyaltyRating.Doubted }, 							// Tier 1
-			new LoyaltyRating[] { LoyaltyRating.Distrusted }, 						// Tier 2
-			new LoyaltyRating[] { LoyaltyRating.Disgraced }, 						// Tier 3
-			new LoyaltyRating[] { LoyaltyRating.Denigrated }, 						// Tier 4
+            new[] { LoyaltyRating.Doubted }, 							// Tier 1
+			new[] { LoyaltyRating.Distrusted }, 						// Tier 2
+			new[] { LoyaltyRating.Disgraced }, 						// Tier 3
+			new[] { LoyaltyRating.Denigrated }, 						// Tier 4
 		};
 
         public static bool IsLove(LoyaltyRating rating)

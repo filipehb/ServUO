@@ -15,7 +15,6 @@ namespace Server.Gumps
         }
 
         public ConfirmRewardGump(IComunityCollection collection, Point3D location, CollectionItem item, int hue)
-            : base()
         {
             m_Collection = collection;
             m_Location = location;

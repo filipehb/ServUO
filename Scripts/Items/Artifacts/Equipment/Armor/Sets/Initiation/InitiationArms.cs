@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 150;
 
         [Constructable]
-        public InitiationArms() : base()
+        public InitiationArms()
         {
 
             Weight = 2;

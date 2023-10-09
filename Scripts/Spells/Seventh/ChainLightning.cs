@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Linq;
 
 namespace Server.Spells.Seventh
 {
@@ -43,7 +44,7 @@ namespace Server.Spells.Seventh
                 if (p is Item)
                     p = ((Item)p).GetWorldLocation();
 
-                System.Collections.Generic.List<IDamageable> targets = AcquireIndirectTargets(p, 2).ToList();
+                List<IDamageable> targets = AcquireIndirectTargets(p, 2).ToList();
                 int count = Math.Max(1, targets.Count);
 
                 foreach (IDamageable dam in targets)

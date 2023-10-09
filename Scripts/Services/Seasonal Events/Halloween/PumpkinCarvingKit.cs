@@ -1,6 +1,6 @@
+using System.Linq;
 using Server.Network;
 using Server.Targeting;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -158,7 +158,7 @@ namespace Server.Items
 
     public class CarvablePumpkinTall : BaseCarvablePumpkin
     {
-        public override PumpkinDefinition[] PumpkinDefinition => new PumpkinDefinition[]
+        public override PumpkinDefinition[] PumpkinDefinition => new[]
                 {
                      new PumpkinDefinition(0x9934, 0x9931),
                      new PumpkinDefinition(0x9935, 0x9936),
@@ -200,7 +200,7 @@ namespace Server.Items
 
     public class CarvableGordPumpkinTall : BaseCarvablePumpkin
     {
-        public override PumpkinDefinition[] PumpkinDefinition => new PumpkinDefinition[]
+        public override PumpkinDefinition[] PumpkinDefinition => new[]
                 {
                      new PumpkinDefinition(0x9D23, 0x9D24),
                      new PumpkinDefinition(0x9D27, 0x9D28),
@@ -246,7 +246,7 @@ namespace Server.Items
     {
         public override bool ForceShowProperties => true;
 
-        public override PumpkinDefinition[] PumpkinDefinition => new PumpkinDefinition[]
+        public override PumpkinDefinition[] PumpkinDefinition => new[]
                 {
                      new PumpkinDefinition(0x9F23, 0x9F24),
                      new PumpkinDefinition(0x9F27, 0x9F28),

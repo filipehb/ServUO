@@ -23,8 +23,7 @@ namespace Server
         }
 
         public static WorldLocationInfo[][] Locations => m_Locations;
-        private static readonly WorldLocationInfo[][] m_Locations = new[]
-        {
+        private static readonly WorldLocationInfo[][] m_Locations = {
             new[] // Felucca
 			{
                 new WorldLocationInfo("an island southeast of Britain", new Rectangle2D(1620, 1900, 594, 150),

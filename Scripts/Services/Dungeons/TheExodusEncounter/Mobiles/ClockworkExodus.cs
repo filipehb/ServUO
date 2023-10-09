@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -18,8 +18,7 @@ namespace Server.Mobiles
 
         public static List<ClockworkExodus> Instances { get; set; }
 
-        private static readonly Type[] m_Artifact = new Type[]
-        {
+        private static readonly Type[] m_Artifact = {
             typeof(ScrollofValiantCommendation),
             typeof(BracersofAlchemicalDevastation),
             typeof(HygieiasAmulet),

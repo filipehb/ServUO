@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
+using Server.Regions;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -227,10 +228,11 @@ namespace Server.Items
                 LightFuse(from);
                 return;
             }
-            else if (i != null && i is Torch && ((Torch)i).Burning)
+
+            if (i != null && i is Torch && ((Torch)i).Burning)
             {
-                LightFuse(from);
-                return;
+	            LightFuse(from);
+	            return;
             }
 
             AddAction(from, 1149669); //Need a lighted match.
@@ -266,7 +268,7 @@ namespace Server.Items
         {
             Region r = Region.Find(from.Location, from.Map);
 
-            if (r is Regions.GuardedRegion && !((Regions.GuardedRegion)r).IsDisabled())
+            if (r is GuardedRegion && !((GuardedRegion)r).IsDisabled())
             {
                 from.SendMessage("You are forbidden from discharging cannons within the town limits.");
                 return false;
@@ -1422,7 +1424,7 @@ namespace Server.Items
 
         public override ShipCannonDeed GetDeed => new LightShipCannonDeed();
 
-        public override Type[] LoadTypes => new Type[] {    typeof(LightCannonball),        typeof(LightGrapeshot),
+        public override Type[] LoadTypes => new[] {    typeof(LightCannonball),        typeof(LightGrapeshot),
                                                                         typeof(LightFlameCannonball),   typeof(LightFrostCannonball) };
 
         public LightShipCannon(BaseGalleon g) : base(g)
@@ -1456,7 +1458,7 @@ namespace Server.Items
 
         public override int LabelNumber => 0;
 
-        public override Type[] LoadTypes => new Type[] {    typeof(HeavyCannonball),        typeof(HeavyGrapeshot),
+        public override Type[] LoadTypes => new[] {    typeof(HeavyCannonball),        typeof(HeavyGrapeshot),
                                                                         typeof(HeavyFrostCannonball),   typeof(HeavyFlameCannonball) };
 
         public HeavyShipCannon(BaseGalleon g) : base(g)

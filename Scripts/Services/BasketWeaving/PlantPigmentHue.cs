@@ -179,18 +179,18 @@ namespace Server.Engines.Plants
 
             if (first == PlantPigmentHue.Plain)
                 return second | PlantPigmentHue.Bright;
-            else if (second == PlantPigmentHue.Plain)
-                return first | PlantPigmentHue.Bright;
+            if (second == PlantPigmentHue.Plain)
+	            return first | PlantPigmentHue.Bright;
 
             if (first == PlantPigmentHue.White)
                 return second | PlantPigmentHue.Ice;
-            else if (second == PlantPigmentHue.White)
-                return first | PlantPigmentHue.Ice;
+            if (second == PlantPigmentHue.White)
+	            return first | PlantPigmentHue.Ice;
 
             if (first == PlantPigmentHue.Black)
                 return second | PlantPigmentHue.Dark;
-            else if (second == PlantPigmentHue.Black)
-                return first | PlantPigmentHue.Dark;
+            if (second == PlantPigmentHue.Black)
+	            return first | PlantPigmentHue.Dark;
 
             bool firstPrimary = IsPrimary(first);
             bool secondPrimary = IsPrimary(second);

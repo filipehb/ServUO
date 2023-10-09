@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Server.Diagnostics;
 
 namespace Server.Commands.Generic
 {
@@ -235,7 +236,7 @@ namespace Server.Commands.Generic
             catch (Exception ex)
             {
                 from.SendMessage(ex.Message);
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
 

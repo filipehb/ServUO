@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public GargishHalfApronBearingTheCrestOfBlackthorn2()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.BonusDex = 5;

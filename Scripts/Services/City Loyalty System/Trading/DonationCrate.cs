@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -75,11 +75,9 @@ namespace Server.Engines.CityLoyalty
                     SendMessageTo(from, 1152926); // The City thanks you for your generosity!
                     return !(dropped is Container);
                 }
-                else
-                {
-                    SendMessageTo(from, 1152927); // Your generosity is appreciated but the City does not require this item.
-                    return false;
-                }
+
+                SendMessageTo(from, 1152927); // Your generosity is appreciated but the City does not require this item.
+                return false;
             }
 
             return false;

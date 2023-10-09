@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Multis;
-using System.Collections.Generic;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -156,7 +157,7 @@ namespace Server.Items
 
             Map map = from.Map;
 
-            if (Spells.SpellHelper.CheckMulti(p, map))
+            if (SpellHelper.CheckMulti(p, map))
                 return false;
 
             StaticTile[] staticTiles = map.Tiles.GetStaticTiles(x, y, true);

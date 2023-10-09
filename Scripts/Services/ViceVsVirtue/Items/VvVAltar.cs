@@ -1,7 +1,8 @@
-using Server.Guilds;
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Guilds;
+using Server.Items;
+using Server.Misc;
 
 namespace Server.Engines.VvV
 {
@@ -176,7 +177,7 @@ namespace Server.Engines.VvV
             {
                 Timer.DelayCall(TimeSpan.FromMilliseconds((i - 2) * 600), o =>
                 {
-                    Misc.Geometry.Circle2D(Location, Map, o, (pnt, map) =>
+                    Geometry.Circle2D(Location, Map, o, (pnt, map) =>
                     {
                         LaunchFireworks(pnt, map);
                     });
@@ -420,8 +421,8 @@ namespace Server.Engines.VvV
 
         private readonly int[][] _Tiles =
         {
-            new int[] { 5283,  5291,  5299,  5307,  5315,  5323,  5331,  5390 },
-            new int[] { 39372, 39380, 39388, 39396, 39404, 39412, 39420, 39428 }
+            new[] { 5283,  5291,  5299,  5307,  5315,  5323,  5331,  5390 },
+            new[] { 39372, 39380, 39388, 39396, 39404, 39412, 39420, 39428 }
         };
     }
 
@@ -449,12 +450,13 @@ namespace Server.Engines.VvV
                 Timer.Stop();
                 return;
             }
-            else if (Mobile.NetState == null || Mobile.Deleted || Altar.Deleted || Mobile.Map != Altar.Map
+
+            if (Mobile.NetState == null || Mobile.Deleted || Altar.Deleted || Mobile.Map != Altar.Map
                 || ViceVsVirtueSystem.Instance.Battle == null || !ViceVsVirtueSystem.Instance.Battle.OnGoing || !Mobile.Region.IsPartOf(ViceVsVirtueSystem.Instance.Battle.Region)
                 || Altar.Contains(Mobile))
             {
-                Stop();
-                return;
+	            Stop();
+	            return;
             }
 
             // this should never happen!

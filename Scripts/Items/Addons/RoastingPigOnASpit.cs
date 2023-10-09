@@ -1,7 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -127,7 +127,6 @@ namespace Server.Items
 
         [Constructable]
         public RoastingPigOnASpitDeed()
-            : base()
         {
         }
 

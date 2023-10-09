@@ -1,3 +1,5 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
     public class ShrineOfWisdomAddon : BaseAddon
@@ -32,7 +34,7 @@ namespace Server.Items
         }
     }
 
-    [Engines.Craft.Forge]
+    [Forge]
     public class ShrineOfWisdomComponent : AddonComponent
     {
         [Constructable]

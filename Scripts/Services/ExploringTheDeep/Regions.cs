@@ -1,13 +1,14 @@
+using System.Linq;
+using System.Xml;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
+using Server.Spells;
 using Server.Spells.Chivalry;
 using Server.Spells.Fourth;
 using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
-using System.Linq;
-using System.Xml;
 
 namespace Server.Regions
 {
@@ -62,15 +63,13 @@ namespace Server.Regions
 
         public override bool OnBeginSpellCast(Mobile from, ISpell s)
         {
-            if ((s is TeleportSpell || s is GateTravelSpell || s is RecallSpell || s is MarkSpell || s is SacredJourneySpell) && from.IsPlayer())
+	        if ((s is TeleportSpell || s is GateTravelSpell || s is RecallSpell || s is MarkSpell || s is SacredJourneySpell) && from.IsPlayer())
             {
                 from.SendLocalizedMessage(500015); // You do not have that spell!
                 return false;
             }
-            else
-            {
-                return base.OnBeginSpellCast(from, s);
-            }
+
+	        return base.OnBeginSpellCast(from, s);
         }
     }
 
@@ -81,7 +80,7 @@ namespace Server.Regions
         {
         }
 
-        public override bool CheckTravel(Mobile m, Point3D newLocation, Spells.TravelCheckType travelType)
+        public override bool CheckTravel(Mobile m, Point3D newLocation, TravelCheckType travelType)
         {
             return false;
         }
@@ -107,29 +106,30 @@ namespace Server.Regions
 
                 if (m.AccessLevel == AccessLevel.Player)
                 {
-                    if (m.Mounted || m.Flying)
+	                if (m.Mounted || m.Flying)
                     {
                         m.SendLocalizedMessage(1154411); // You cannot proceed while mounted or flying!
                         return false;
                     }
-                    else if (pm.AllFollowers.Count != 0)
-                    {
-                        if (pm.AllFollowers.Where(x => x is Paralithode).Count() == 0)
-                        {
-                            pm.SendLocalizedMessage(1154412); // You cannot proceed while pets are under your control!
-                            return false;
-                        }
-                    }
-                    else if (pm.ExploringTheDeepQuest != ExploringTheDeepQuestChain.CollectTheComponentComplete)
-                    {
-                        m.SendLocalizedMessage(1154325); // You feel as though by doing this you are missing out on an important part of your journey...
-                        return false;
-                    }
-                    else if (equipment < 4)
-                    {
-                        m.SendLocalizedMessage(1154413); // You couldn't hope to survive proceeding without the proper equipment...
-                        return false;
-                    }
+
+	                if (pm.AllFollowers.Count != 0)
+	                {
+		                if (pm.AllFollowers.Where(x => x is Paralithode).Count() == 0)
+		                {
+			                pm.SendLocalizedMessage(1154412); // You cannot proceed while pets are under your control!
+			                return false;
+		                }
+	                }
+	                else if (pm.ExploringTheDeepQuest != ExploringTheDeepQuestChain.CollectTheComponentComplete)
+	                {
+		                m.SendLocalizedMessage(1154325); // You feel as though by doing this you are missing out on an important part of your journey...
+		                return false;
+	                }
+	                else if (equipment < 4)
+	                {
+		                m.SendLocalizedMessage(1154413); // You couldn't hope to survive proceeding without the proper equipment...
+		                return false;
+	                }
                 }
             }
             else if (m is BaseCreature && !(m is Paralithode))
@@ -153,7 +153,7 @@ namespace Server.Regions
             return false;
         }
 
-        public override bool CheckTravel(Mobile m, Point3D newLocation, Spells.TravelCheckType travelType)
+        public override bool CheckTravel(Mobile m, Point3D newLocation, TravelCheckType travelType)
         {
             return false;
         }

@@ -6,7 +6,7 @@ namespace Server.Items
 {
     public abstract class BaseWindChimes : Item
     {
-        private static readonly int[] m_Sounds = new int[] { 0x505, 0x506, 0x507 };
+        private static readonly int[] m_Sounds = { 0x505, 0x506, 0x507 };
         private bool m_TurnedOn;
         public BaseWindChimes(int itemID)
             : base(itemID)

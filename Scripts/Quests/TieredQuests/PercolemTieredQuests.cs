@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -8,7 +8,6 @@ namespace Server.Engines.Quests
     public class BouraBouraQuest : BaseQuest, ITierQuest
     {
         public BouraBouraQuest()
-            : base()
         {
             if (0.50 > Utility.RandomDouble())
             {
@@ -51,7 +50,6 @@ namespace Server.Engines.Quests
     public class RaptorliciousQuest : BaseQuest, ITierQuest
     {
         public RaptorliciousQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Raptor), "Raptor's", 20));
 
@@ -86,7 +84,6 @@ namespace Server.Engines.Quests
     public class TheSlithWarsQuest : BaseQuest, ITierQuest
     {
         public TheSlithWarsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Slith), "Slith's", 20));
 
@@ -122,7 +119,6 @@ namespace Server.Engines.Quests
     public class BouraBouraAndMoreBouraQuest : BaseQuest, ITierQuest
     {
         public BouraBouraAndMoreBouraQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(HighPlainsBoura), "High Plains Boura", 20));
 
@@ -158,7 +154,6 @@ namespace Server.Engines.Quests
     public class RevengeOfTheSlithQuest : BaseQuest, ITierQuest
     {
         public RevengeOfTheSlithQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(ToxicSlith), "Toxic Slith's", 20));
 
@@ -194,7 +189,6 @@ namespace Server.Engines.Quests
     public class WeveGotAnAntProblemQuest : BaseQuest, ITierQuest
     {
         public WeveGotAnAntProblemQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(FireAnt), "Fire Ant's", 20));
 
@@ -230,7 +224,6 @@ namespace Server.Engines.Quests
     public class AmbushingTheAmbushersQuest : BaseQuest, ITierQuest
     {
         public AmbushingTheAmbushersQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(KepetchAmbusher), "Kepetch Ambusher's", 20));////////////////
 
@@ -266,7 +259,6 @@ namespace Server.Engines.Quests
     public class ItMakesMeSickQuest : BaseQuest, ITierQuest
     {
         public ItMakesMeSickQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(PutridUndeadGargoyle), "Putrid Undead Gargoyle's", 20));
 
@@ -302,7 +294,6 @@ namespace Server.Engines.Quests
     public class ItsAMadMadWorldQuest : BaseQuest, ITierQuest
     {
         public ItsAMadMadWorldQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(MaddeningHorror), "Maddening Horror's", 20));/////////////
 
@@ -337,7 +328,6 @@ namespace Server.Engines.Quests
     public class TheDreamersQuest : BaseQuest, ITierQuest
     {
         public TheDreamersQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(DreamWraith), "Dream Wraith's", 20));
 

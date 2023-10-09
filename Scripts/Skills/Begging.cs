@@ -1,10 +1,12 @@
 #region References
+
+using System;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.SkillHandlers

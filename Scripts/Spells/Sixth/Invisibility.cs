@@ -1,7 +1,8 @@
-using Server.Items;
-using Server.Targeting;
 using System;
 using System.Collections;
+using Server.Items;
+using Server.Mobiles;
+using Server.Targeting;
 
 namespace Server.Spells.Sixth
 {
@@ -47,7 +48,7 @@ namespace Server.Spells.Sixth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (m is Mobiles.BaseVendor || m is Mobiles.PlayerVendor || m is Mobiles.PlayerBarkeeper || m.AccessLevel > Caster.AccessLevel)
+            else if (m is BaseVendor || m is PlayerVendor || m is PlayerBarkeeper || m.AccessLevel > Caster.AccessLevel)
             {
                 Caster.SendLocalizedMessage(501857); // This spell won't work on that!
             }

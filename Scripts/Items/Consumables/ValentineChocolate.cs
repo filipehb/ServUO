@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class ValentineChocolate : Food
     {
-        private static readonly int[] m_Labels = new int[]
-        {
+        private static readonly int[] m_Labels = {
             1114827, // "Someone Likes You"
 			1114834, // "You’re Sexy"
 			1114836, // "You’re The Best"

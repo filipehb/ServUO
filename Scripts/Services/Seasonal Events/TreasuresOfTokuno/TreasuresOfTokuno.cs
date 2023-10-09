@@ -1,12 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Engines.Points;
 using Server.Gumps;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
+using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Server.Regions;
 
 namespace Server.Misc
 {
@@ -30,8 +33,7 @@ namespace Server.Misc
 
         public const int ItemsPerReward = 10;
 
-        private static readonly Type[] m_LesserArtifactsTotal = new Type[]
-        {
+        private static readonly Type[] m_LesserArtifactsTotal = {
             typeof(AncientFarmersKasa), typeof(AncientSamuraiDo), typeof(ArmsOfTacticalExcellence), typeof(BlackLotusHood),
             typeof(DaimyosHelm), typeof(DemonForks), typeof(DragonNunchaku), typeof(Exiler), typeof(GlovesOfTheSun),
             typeof(HanzosBow), typeof(LegsOfStability), typeof(PeasantsBokuto), typeof(PilferedDancerFans), typeof(TheDestroyer),
@@ -68,10 +70,9 @@ namespace Server.Misc
             }
         }
 
-        private static readonly Type[][] m_LesserArtifacts = new Type[][]
-        {
+        private static readonly Type[][] m_LesserArtifacts = {
             // ToT One Rewards
-            new Type[]
+            new[]
             {
                 typeof(AncientFarmersKasa), typeof(AncientSamuraiDo), typeof(ArmsOfTacticalExcellence), typeof(BlackLotusHood),
                 typeof(DaimyosHelm), typeof(DemonForks), typeof(DragonNunchaku), typeof(Exiler), typeof(GlovesOfTheSun),
@@ -80,7 +81,7 @@ namespace Server.Misc
                 typeof(FluteOfRenewal), typeof(ChestOfHeirlooms)
             },
             // ToT Two Rewards
-            new Type[]
+            new[]
             {
                 typeof(MetalPigmentsOfTokuno), typeof(AncientFarmersKasa), typeof(AncientSamuraiDo), typeof(ArmsOfTacticalExcellence),
                 typeof(MetalPigmentsOfTokuno), typeof(BlackLotusHood), typeof(DaimyosHelm), typeof(DemonForks),
@@ -90,7 +91,7 @@ namespace Server.Misc
                 typeof(MetalPigmentsOfTokuno), typeof(FluteOfRenewal), typeof(ChestOfHeirlooms)
             },
             // ToT Three Rewards
-            new Type[]
+            new[]
             {
                 typeof(LesserPigmentsOfTokuno), typeof(AncientFarmersKasa), typeof(AncientSamuraiDo), typeof(ArmsOfTacticalExcellence),
                 typeof(LesserPigmentsOfTokuno), typeof(BlackLotusHood), typeof(DaimyosHelm), typeof(HanzosBow),
@@ -103,7 +104,7 @@ namespace Server.Misc
 
         public static Type[] LesserArtifacts => m_LesserArtifacts[(int)RewardEra - 1];
 
-        private static Type[][] m_GreaterArtifacts = null;
+        private static Type[][] m_GreaterArtifacts;
 
         public static Type[] GreaterArtifacts
         {
@@ -132,7 +133,7 @@ namespace Server.Misc
         {
             Region r = m.Region;
 
-            if (r.IsPartOf<Regions.HouseRegion>() || Multis.BaseBoat.FindBoatAt(m, m.Map) != null)
+            if (r.IsPartOf<HouseRegion>() || BaseBoat.FindBoatAt(m, m.Map) != null)
                 return false;
 
             if (r.IsPartOf("Yomotsu Mines") || r.IsPartOf("Fan Dancer's Dojo"))
@@ -220,7 +221,7 @@ namespace Server.Misc
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (i != null)
@@ -589,10 +590,9 @@ namespace Server.Gumps
         }
 
         #region ToT Normal Rewards Table
-        private static readonly TypeTileButtonInfo[][] m_NormalRewards = new TypeTileButtonInfo[][]
-        {
+        private static readonly TypeTileButtonInfo[][] m_NormalRewards = {
             // ToT One Rewards
-            new TypeTileButtonInfo[]
+            new[]
             {
                 new TypeTileButtonInfo(typeof(SwordsOfProsperity), 0x27A9, 1070963, 1071002),
                 new TypeTileButtonInfo(typeof(SwordOfTheStampede), 0x27A2, 1070964, 1070978),
@@ -606,7 +606,7 @@ namespace Server.Gumps
                 new TypeTileButtonInfo(typeof(PigmentsOfTokuno), 0x0EFF, 1070933, 1071011)
             },
             // ToT Two Rewards
-            new TypeTileButtonInfo[]
+            new[]
             {
                 new TypeTileButtonInfo(typeof(SwordsOfProsperity), 0x27A9, 1070963, 1071002),
                 new TypeTileButtonInfo(typeof(SwordOfTheStampede), 0x27A2, 1070964, 1070978),
@@ -620,7 +620,7 @@ namespace Server.Gumps
                 new TypeTileButtonInfo(typeof(PigmentsOfTokuno), 0x0EFF, 1070933, 1071011)
             },
             // ToT Three Rewards
-            new TypeTileButtonInfo[]
+            new[]
             {
                 new TypeTileButtonInfo(typeof(SwordsOfProsperity), 0x27A9, 1070963, 1071002),
                 new TypeTileButtonInfo(typeof(SwordOfTheStampede), 0x27A2, 1070964, 1070978),
@@ -638,10 +638,9 @@ namespace Server.Gumps
         public static TypeTileButtonInfo[][] NormalRewards => m_NormalRewards;
 
         #region ToT Pigment Rewards Table
-        private static readonly PigmentsTileButtonInfo[][] m_PigmentRewards = new PigmentsTileButtonInfo[][]
-        {
+        private static readonly PigmentsTileButtonInfo[][] m_PigmentRewards = {
             // ToT One Pigment Rewards
-            new PigmentsTileButtonInfo[]
+            new[]
             {
                 new PigmentsTileButtonInfo(PigmentType.ParagonGold),
                 new PigmentsTileButtonInfo(PigmentType.VioletCouragePurple),
@@ -655,7 +654,7 @@ namespace Server.Gumps
                 new PigmentsTileButtonInfo(PigmentType.FireOrange)
             },
             // ToT Two Pigment Rewards
-            new PigmentsTileButtonInfo[]
+            new[]
             {
                 new PigmentsTileButtonInfo(PigmentType.FadedCoal),
                 new PigmentsTileButtonInfo(PigmentType.Coal),
@@ -668,7 +667,7 @@ namespace Server.Gumps
                 new PigmentsTileButtonInfo(PigmentType.DeepRose)
             },
             // ToT Three Pigment Rewards
-            new PigmentsTileButtonInfo[]
+            new[]
             {
                 new PigmentsTileButtonInfo(PigmentType.ParagonGold),
                 new PigmentsTileButtonInfo(PigmentType.VioletCouragePurple),

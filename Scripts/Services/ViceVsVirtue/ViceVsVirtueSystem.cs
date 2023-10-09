@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Accounting;
+using Server.Commands;
 using Server.Engines.ArenaSystem;
 using Server.Engines.Points;
 using Server.Guilds;
@@ -6,9 +10,7 @@ using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Server.Targeting;
 
 namespace Server.Engines.VvV
 {
@@ -417,27 +419,27 @@ namespace Server.Engines.VvV
             EventSink.Login += OnLogin;
             EventSink.PlayerDeath += OnPlayerDeath;
 
-            Commands.CommandSystem.Register("BattleProps", AccessLevel.GameMaster, e =>
+            CommandSystem.Register("BattleProps", AccessLevel.GameMaster, e =>
                 {
                     if (Instance.Battle != null)
                         e.Mobile.SendGump(new PropertiesGump(e.Mobile, Instance.Battle));
                 });
 
-            Commands.CommandSystem.Register("ForceStartBattle", AccessLevel.GameMaster, e =>
+            CommandSystem.Register("ForceStartBattle", AccessLevel.GameMaster, e =>
             {
                 if (Instance.Battle != null && !Instance.Battle.OnGoing)
                     Instance.Battle.Begin();
             });
 
-            Commands.CommandSystem.Register("ExemptCities", AccessLevel.Administrator, e =>
+            CommandSystem.Register("ExemptCities", AccessLevel.Administrator, e =>
             {
                 e.Mobile.SendGump(new ExemptCitiesGump());
             });
 
-            Commands.CommandSystem.Register("VvVKick", AccessLevel.GameMaster, e =>
+            CommandSystem.Register("VvVKick", AccessLevel.GameMaster, e =>
             {
                 e.Mobile.SendMessage("Target the person you'd like to remove from VvV.");
-                e.Mobile.BeginTarget(-1, false, Targeting.TargetFlags.None, (from, targeted) =>
+                e.Mobile.BeginTarget(-1, false, TargetFlags.None, (from, targeted) =>
                     {
                         if (targeted is PlayerMobile)
                         {

@@ -1,9 +1,8 @@
 using System;
-using System.Text;
 using System.Globalization;
-
-using Server.Mobiles;
+using System.Text;
 using Server.Engines.UOStore;
+using Server.Mobiles;
 
 namespace Server.AccountVault
 {
@@ -58,19 +57,17 @@ namespace Server.AccountVault
         /// <returns></returns>
         public static TextDefinition RentMessage()
         {
-            if (UseTokens)
+	        if (UseTokens)
             {
                 return string.Format("Do you wish to rent a storage vault for {0} vault token[s] a month? You will need to keep your vault token balance up to date or risk losing your vault contents.", RentTokenValue);
             }
-            else
-            {
-                return string.Format("Do you wish to rent a storage vault for {0} gold a month? You will need to keep your vault token balance up to date or risk losing your vault contents.", RentGoldValue.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
-            }
+
+	        return string.Format("Do you wish to rent a storage vault for {0} gold a month? You will need to keep your vault token balance up to date or risk losing your vault contents.", RentGoldValue.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
         }
 
         public static bool HasBalance(PlayerMobile pm, int amount = -1)
         {
-            if (UseTokens)
+	        if (UseTokens)
             {
                 if (amount == -1)
                 {
@@ -81,15 +78,13 @@ namespace Server.AccountVault
 
                 return storeProfile != null && storeProfile.VaultTokens >= amount;
             }
-            else
-            {
-                if (amount == -1)
-                {
-                    amount = RentGoldValue;
-                }
 
-                return pm.AccountGold.TotalCurrency >= amount;
-            }
+	        if (amount == -1)
+	        {
+		        amount = RentGoldValue;
+	        }
+
+	        return pm.AccountGold.TotalCurrency >= amount;
         }
 
         public static void WithdrawBalance(PlayerMobile pm, int amount = -1)
@@ -116,8 +111,7 @@ namespace Server.AccountVault
 
         public static string[] VaultRegions => _VaultRegions;
 
-        private static string[] _VaultRegions = new[]
-        {
+        private static string[] _VaultRegions = {
             "Royal City",
             "Papua",
             "Delucia",

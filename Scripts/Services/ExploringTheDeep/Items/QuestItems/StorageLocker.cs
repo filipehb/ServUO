@@ -10,7 +10,7 @@ namespace Server.Items
         WireSpool,
         PowerCore,
         BearingAssembly,
-    };
+    }
 
     [Furniture]
     [Flipable(0x285D, 0x285E)]
@@ -93,14 +93,14 @@ namespace Server.Items
 
         public static int[][] WoodenToMetalBarrelCoordinate =
         {
-            new int[] { 0, 1 },
-            new int[] { 1, 1 },
-            new int[] { 1, 0 },
-            new int[] { 1, -1 },
-            new int[] { 0, -1 },
-            new int[] { -1, -1 },
-            new int[] { -1, 0 },
-            new int[] { -1, 1 }
+            new[] { 0, 1 },
+            new[] { 1, 1 },
+            new[] { 1, 0 },
+            new[] { 1, -1 },
+            new[] { 0, -1 },
+            new[] { -1, -1 },
+            new[] { -1, 0 },
+            new[] { -1, 1 }
         };
 
         private Parts key;

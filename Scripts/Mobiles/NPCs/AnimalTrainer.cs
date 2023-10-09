@@ -1,13 +1,16 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
+using Server.Spells.SkillMasteries;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Mobiles
@@ -177,7 +180,7 @@ namespace Server.Mobiles
                 max += (int)((vetern - 90.0) / 10);
             }
 
-            return max + Spells.SkillMasteries.MasteryInfo.BoardingSlotIncrease(from);
+            return max + MasteryInfo.BoardingSlotIncrease(from);
         }
 
         private void CloseClaimList(Mobile from)

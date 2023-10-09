@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class BlackOrderBadgesQuest : BaseQuest
     {
         public BlackOrderBadgesQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SerpentFangSectBadge), "serpent fang badges", 5));
             AddObjective(new ObtainObjective(typeof(TigerClawSectBadge), "tiger claw badges", 5));
@@ -48,7 +47,6 @@ namespace Server.Engines.Quests
     public class EvidenceQuest : BaseQuest
     {
         public EvidenceQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(OrdersFromMinax), "orders from minax", 1));
 
@@ -98,7 +96,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(BlackOrderBadgesQuest),
                     typeof(EvidenceQuest)

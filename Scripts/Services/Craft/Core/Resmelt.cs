@@ -1,6 +1,7 @@
+using System;
+using Server.Diagnostics;
 using Server.Items;
 using Server.Targeting;
-using System;
 
 namespace Server.Engines.Craft
 {
@@ -173,7 +174,7 @@ namespace Server.Engines.Craft
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 return SmeltResult.Invalid;

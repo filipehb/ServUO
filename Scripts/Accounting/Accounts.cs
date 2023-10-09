@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Server.Diagnostics;
 
 namespace Server.Accounting
 {
@@ -68,7 +69,7 @@ namespace Server.Accounting
                 catch (Exception e)
                 {
                     Console.WriteLine("Warning: Account instance load failed");
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

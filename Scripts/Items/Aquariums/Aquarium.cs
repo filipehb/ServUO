@@ -1,12 +1,13 @@
-using Server.ContextMenus;
-using Server.Gumps;
-using Server.Multis;
-using Server.Network;
-using Server.Targeting;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Multis;
+using Server.Network;
+using Server.Spells;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -753,7 +754,7 @@ namespace Server.Items
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             if (item == null)
@@ -1658,7 +1659,7 @@ namespace Server.Items
                 {
                     var addon = _Barrel.Addon as Aquarium;
 
-                    Spells.SpellHelper.GetSurfaceTop(ref p);
+                    SpellHelper.GetSurfaceTop(ref p);
 
                     BaseHouse house = null;
 

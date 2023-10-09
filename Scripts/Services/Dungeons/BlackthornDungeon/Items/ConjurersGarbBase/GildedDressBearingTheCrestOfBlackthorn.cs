@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public GildedDressBearingTheCrestOfBlackthorn7()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.RegenMana = 2;

@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class PlagueBeastStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0x1BF, 0x1C0, 0x1C1, 0x1C2
         };
         [Constructable]

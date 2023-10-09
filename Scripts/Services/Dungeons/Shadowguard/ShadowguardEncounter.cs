@@ -1,9 +1,9 @@
-using Server.Engines.PartySystem;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.PartySystem;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Shadowguard
 {
@@ -453,12 +453,12 @@ namespace Server.Engines.Shadowguard
 
             Defs[EncounterType.Bar] = new EncounterDef(
                             new Point3D(0, 0, 0),
-                            new Point3D[] { new Point3D(-16, 8, 0), new Point3D(-16, 4, 0), new Point3D(-16, -6, 0), new Point3D(-16, -10, 0) },
-                            new Rectangle2D[] { new Rectangle2D(-15, -12, 1, 8), new Rectangle2D(-15, 2, 1, 8) });
+                            new[] { new Point3D(-16, 8, 0), new Point3D(-16, 4, 0), new Point3D(-16, -6, 0), new Point3D(-16, -10, 0) },
+                            new[] { new Rectangle2D(-15, -12, 1, 8), new Rectangle2D(-15, 2, 1, 8) });
 
             Defs[EncounterType.Orchard] = new EncounterDef(
                             new Point3D(0, 0, 0),
-                            new Point3D[] { new Point3D(-10, -11, 0), new Point3D(-18, -15, 0), new Point3D(-11, -19, 0), new Point3D(-17, -10, 0),
+                            new[] { new Point3D(-10, -11, 0), new Point3D(-18, -15, 0), new Point3D(-11, -19, 0), new Point3D(-17, -10, 0),
                                             new Point3D(-21, 10, 0), new Point3D(-17, 16, 0), new Point3D(-13, 12, 0), new Point3D(-11, 18, 0),
                                             new Point3D(10, -20, 0), new Point3D(10, -11, 0), new Point3D(14, -15, 0), new Point3D(17, -10, 0),
                                             new Point3D(10, 10, 0), new Point3D(9, 16, 0), new Point3D(13, 16, 0), new Point3D(15, 10, 0)},
@@ -466,7 +466,7 @@ namespace Server.Engines.Shadowguard
 
             Defs[EncounterType.Armory] = new EncounterDef(
                             new Point3D(0, 0, 0),
-                            new Point3D[] { new Point3D(5, -7, 0), new Point3D(5, -9, 0), new Point3D(5, -11, 0), new Point3D(5, -13, 0),
+                            new[] { new Point3D(5, -7, 0), new Point3D(5, -9, 0), new Point3D(5, -11, 0), new Point3D(5, -13, 0),
                                             new Point3D(5, -17, 0), new Point3D(5, -19, 0), new Point3D(5, -21, 0), new Point3D(5, 16, 0),
                                             new Point3D(5, 18, 0), new Point3D(5, 11, 0), new Point3D(5, 9, 0),
                                             new Point3D(-23, -10, 0), new Point3D(-20, -15, 0), new Point3D(-16, -19, 0),
@@ -475,22 +475,22 @@ namespace Server.Engines.Shadowguard
                                             new Point3D(-21, 5, 0), new Point3D(-19, 5, 0), new Point3D(-17, 5, 0), new Point3D(-12, 5, 0),
                                             new Point3D(-10, 5, 0), new Point3D(-8, 5, 0), new Point3D(-23, 5, 0),
                                             new Point3D(-18, -17, 0), new Point3D(-10, -23, 0), new Point3D(-13, -21, 0)},
-                            new Rectangle2D[] { new Rectangle2D(-25, -24, 18, 18), new Rectangle2D(-25, 4, 18, 18), new Rectangle2D(4, 20, 18, 18), new Rectangle2D(4, -6, 18, 18), });
+                            new[] { new Rectangle2D(-25, -24, 18, 18), new Rectangle2D(-25, 4, 18, 18), new Rectangle2D(4, 20, 18, 18), new Rectangle2D(4, -6, 18, 18), });
 
             Defs[EncounterType.Fountain] = new EncounterDef(
                             new Point3D(11, 11, 0),
-                            new Point3D[] { new Point3D(-6, 7, 0), new Point3D(5, 7, 0), new Point3D(7, 5, 0), new Point3D(7, -6, 0) },
-                            new Rectangle2D[] { new Rectangle2D(-24, 8, 45, 17), new Rectangle2D(-24, -25, 45, 16), new Rectangle2D(-25, -8, 16, 15), new Rectangle2D(8, -8, 16, 15 ),
+                            new[] { new Point3D(-6, 7, 0), new Point3D(5, 7, 0), new Point3D(7, 5, 0), new Point3D(7, -6, 0) },
+                            new[] { new Rectangle2D(-24, 8, 45, 17), new Rectangle2D(-24, -25, 45, 16), new Rectangle2D(-25, -8, 16, 15), new Rectangle2D(8, -8, 16, 15 ),
                                                 new Rectangle2D(12, -4, 2, 6), new Rectangle2D(-4, 12, 6, 2)});
 
             Defs[EncounterType.Belfry] = new EncounterDef(
                             new Point3D(15, 1, 0),
-                            new Point3D[] { new Point3D(0, 0, 22), new Point3D(-5, -5, 22) },
-                            new Rectangle2D[] { new Rectangle2D(8, -9, 15, 15), new Rectangle2D(-24, -9, 15, 18) });
+                            new[] { new Point3D(0, 0, 22), new Point3D(-5, -5, 22) },
+                            new[] { new Rectangle2D(8, -9, 15, 15), new Rectangle2D(-24, -9, 15, 18) });
 
             Defs[EncounterType.Roof] = new EncounterDef(
                             new Point3D(-8, -8, 0),
-                            new Point3D[] { new Point3D(0, 0, 30) },
+                            new[] { new Point3D(0, 0, 30) },
                             new Rectangle2D[] { });
         }
 

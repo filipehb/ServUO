@@ -1,14 +1,16 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-
 using Server.ContextMenus;
+using Server.Diagnostics;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
+
 #endregion
 
 namespace Server
@@ -1003,7 +1005,7 @@ namespace Server
 			}
 			catch (Exception e)
 			{
-				Diagnostics.ExceptionLogging.LogException(e);
+				ExceptionLogging.LogException(e);
 			}
 
 			return null;
@@ -6103,7 +6105,7 @@ namespace Server
 			}
 			catch (Exception e)
 			{
-				Diagnostics.ExceptionLogging.LogException(e);
+				ExceptionLogging.LogException(e);
 			}
 
 			if (newSocket != null)

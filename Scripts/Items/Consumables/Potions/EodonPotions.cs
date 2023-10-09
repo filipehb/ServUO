@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Network;
+using Server.Spells.Bushido;
 
 namespace Server.Items
 {
@@ -315,7 +317,7 @@ namespace Server.Items
             {
                 m.SendLocalizedMessage(1156868); // You may not use this while poisoned!
             }
-            else if (Spells.Bushido.Confidence.IsConfident(m))
+            else if (Confidence.IsConfident(m))
             {
                 m.SendLocalizedMessage(1156873); // You may not use this while under the effects of confidence!
             }
@@ -695,12 +697,12 @@ namespace Server.Items
             {
                 LavaBerry berry = new LavaBerry(1);
                 from.AddToBackpack(berry);
-                from.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1156736, "#1156727", from.NetState);
+                from.PrivateOverheadMessage(MessageType.Regular, 1154, 1156736, "#1156727", from.NetState);
 
                 Delete();
             }
             else
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
         }
 
         public LavaBerryBush(Serial serial)
@@ -775,12 +777,12 @@ namespace Server.Items
             {
                 RiverMoss rm = new RiverMoss(1);
                 from.AddToBackpack(rm);
-                from.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1156736, "#1156731", from.NetState);
+                from.PrivateOverheadMessage(MessageType.Regular, 1154, 1156736, "#1156731", from.NetState);
 
                 Delete();
             }
             else
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
         }
 
         public RiverMossDecorate(Serial serial)
@@ -901,12 +903,12 @@ namespace Server.Items
                 if (Utility.RandomDouble() < 0.70)
                 {
                     corn = new EarOfCorn(1);
-                    from.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1156736, "#1156737", from.NetState);
+                    from.PrivateOverheadMessage(MessageType.Regular, 1154, 1156736, "#1156737", from.NetState);
                 }
                 else
                 {
                     corn = new BlueCorn(1);
-                    from.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1156736, "#1156733", from.NetState);
+                    from.PrivateOverheadMessage(MessageType.Regular, 1154, 1156736, "#1156733", from.NetState);
                 }
 
                 from.AddToBackpack(corn);
@@ -922,7 +924,7 @@ namespace Server.Items
             }
             else
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
         }
 

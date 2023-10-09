@@ -1,4 +1,5 @@
 using System;
+using Server.Diagnostics;
 
 namespace Server.Engines.VeteranRewards
 {
@@ -58,7 +59,7 @@ namespace Server.Engines.VeteranRewards
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             return null;

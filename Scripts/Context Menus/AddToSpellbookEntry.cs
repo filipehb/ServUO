@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Network;
 using Server.Targeting;
 
 namespace Server.ContextMenus
@@ -52,7 +53,7 @@ namespace Server.ContextMenus
 
                                 m_Scroll.Consume();
 
-                                from.Send(new Network.PlaySound(0x249, book.GetWorldLocation()));
+                                from.Send(new PlaySound(0x249, book.GetWorldLocation()));
                             }
                         }
                     }

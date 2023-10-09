@@ -1,8 +1,9 @@
-using Server.ContextMenus;
-using Server.Engines.Points;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Engines.Points;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -86,7 +87,7 @@ namespace Server.Items
 
             if (items.Count > 0)
             {
-                PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, Utility.Random(1042891, 8), "");
+                PublicOverheadMessage(MessageType.Regular, 0x3B2, Utility.Random(1042891, 8), "");
 
                 for (int i = items.Count - 1; i >= 0; --i)
                 {

@@ -1,3 +1,4 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
@@ -7,7 +8,6 @@ using Server.Spells.Fourth;
 using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
-using System;
 
 namespace Server.Engines.ArenaSystem
 {

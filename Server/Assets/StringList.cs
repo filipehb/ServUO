@@ -1,16 +1,18 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+
 #endregion
 
 namespace Server
 {
 	public class StringList
 	{
-		private static readonly char[] m_Tab = new[] { '\t' };
+		private static readonly char[] m_Tab = { '\t' };
 
 		//C# argument support
 		public static readonly Regex FormatExpression = new Regex(@"~(\d)+_.*?~", RegexOptions.IgnoreCase);
@@ -29,7 +31,7 @@ namespace Server
 
 		public static string FormatArguments(string entry)
 		{
-			return FormatExpression.Replace(entry, new MatchEvaluator(MatchComparison));
+			return FormatExpression.Replace(entry, MatchComparison);
 		}
 
 		public static string CombineArguments(string str, string args)
@@ -136,7 +138,7 @@ namespace Server
 	{
 		private static readonly Regex m_RegEx = new Regex(@"~(\d+)[_\w]+~", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.CultureInvariant);
 
-		private static readonly object[] m_Args = new object[] { "", "", "", "", "", "", "", "", "", "", "" };
+		private static readonly object[] m_Args = { "", "", "", "", "", "", "", "", "", "", "" };
 
 		public int Number { get; private set; }
 		public string Text { get; private set; }

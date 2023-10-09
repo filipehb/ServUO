@@ -1,13 +1,13 @@
+using System;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Multis;
-using System;
 
 namespace Server.Mobiles
 {
     public class FishMonger : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(ProfessionalFisherQuest) };
+        public override Type[] Quests => new[] { typeof(ProfessionalFisherQuest) };
 
         [Constructable]
         public FishMonger()

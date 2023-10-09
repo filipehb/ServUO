@@ -1,7 +1,8 @@
-using Server.Items;
-using Server.Targeting;
 using System;
 using System.Collections;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Targeting;
 
 namespace Server.Commands.Generic
 {
@@ -9,7 +10,7 @@ namespace Server.Commands.Generic
     {
         public ContainedCommandImplementor()
         {
-            Accessors = new string[] { "Contained" };
+            Accessors = new[] { "Contained" };
             SupportRequirement = CommandSupport.Contained;
             AccessLevel = AccessLevel.GameMaster;
             Usage = "Contained <command> [condition]";
@@ -77,7 +78,7 @@ namespace Server.Commands.Generic
                 catch (Exception e)
                 {
                     from.SendMessage(e.Message);
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

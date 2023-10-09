@@ -1,9 +1,10 @@
-using Server.Commands;
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using System.Text;
+using Server.Commands;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -188,7 +189,7 @@ namespace Server.Mobiles
             private XmlSpawner m_Spawner;
             public string m_Condition;
             public int m_Goto;
-            public bool Deleted = false;
+            public bool Deleted;
             public int Serial = -1;
             public Mobile m_TrigMob;
             public string Typename;
@@ -2441,7 +2442,7 @@ namespace Server.Mobiles
         #region String parsing methods
         public static string ApplySubstitution(XmlSpawner spawner, object o, string typeName)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             // go through the string looking for instances of {keyword}
             string remaining = typeName;

@@ -1,12 +1,13 @@
-using Server.Accounting;
-using Server.ContextMenus;
-using Server.Gumps;
-using Server.Network;
-using Server.Regions;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
+using Server.Regions;
 
 namespace Server.Items
 {
@@ -344,10 +345,9 @@ namespace Server.Items
 
         public string FormatPrice()
         {
-            if (m_TicketPrice == 0)
+	        if (m_TicketPrice == 0)
                 return "FREE";
-            else
-                return string.Format("{0} gold", m_TicketPrice);
+	        return string.Format("{0} gold", m_TicketPrice);
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -427,7 +427,7 @@ namespace Server.Items
             {
                 Container bank = from.FindBankNoCreate();
 
-                if (m_TicketPrice == 0 || (from.Backpack != null && from.Backpack.ConsumeTotal(typeof(Gold), m_TicketPrice)) || Mobiles.Banker.Withdraw(from, m_TicketPrice, true))
+                if (m_TicketPrice == 0 || (from.Backpack != null && from.Backpack.ConsumeTotal(typeof(Gold), m_TicketPrice)) || Banker.Withdraw(from, m_TicketPrice, true))
                 {
                     m_Entries.Add(new RaffleEntry(from));
 

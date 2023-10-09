@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -16,7 +16,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1094981;
 
-        public Curiosities() : base()
+        public Curiosities()
         {
             AddObjective(new ObtainObjective(typeof(FertileDirt), "Fertil Dirt", 3, 0xF81));
             AddObjective(new ObtainObjective(typeof(Bone), "Bone", 3, 0xF7e));
@@ -41,7 +41,7 @@ namespace Server.Engines.Quests
 
     public class Gretchen : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
 {
             typeof( Curiosities )
 };

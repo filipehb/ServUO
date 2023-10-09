@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using Server.Engines.HuntsmasterChallenge;
 using Server.Gumps;
-using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -88,7 +89,7 @@ namespace Server.Items
 
                     AddHtml(20, y, 150, 16, entry.Owner != null ? FormatFont(entry.Owner.Name, i) : FormatFont("Unknown", i), false, false);
                     AddHtml(170, y, 120, 16, FormatFont(GetHuntTypeString(info.HuntType), i), false, false);
-                    AddHtml(290, y, 100, 16, info.MeasuredBy == MeasuredBy.Weight ? FormatFont(entry.Measurement.ToString() + " stones", i) : FormatFont(entry.Measurement.ToString() + " feet", i), false, false);
+                    AddHtml(290, y, 100, 16, info.MeasuredBy == MeasuredBy.Weight ? FormatFont(entry.Measurement + " stones", i) : FormatFont(entry.Measurement + " feet", i), false, false);
                     AddHtml(390, y, 150, 16, FormatFont(entry.DateKilled.ToShortDateString(), i), false, false);
 
                     y += 20;
@@ -107,7 +108,7 @@ namespace Server.Items
                 return string.Format("<BaseFont Color=#{0}>{1}</basefont>", hue.ToString(), str);
             }
 
-            public override void OnResponse(Network.NetState state, RelayInfo info)
+            public override void OnResponse(NetState state, RelayInfo info)
             {
                 Mobile from = state.Mobile;
 

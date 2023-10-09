@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public MyrmidonLegs()
-            : base()
         {
             SetHue = 0x331;
 

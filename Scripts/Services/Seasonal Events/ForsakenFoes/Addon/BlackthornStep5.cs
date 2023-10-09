@@ -5,8 +5,7 @@ namespace Server.Items
         public static BlackthornStep5 InstanceTram { get; set; }
         public static BlackthornStep5 InstanceFel { get; set; }
 
-        private static readonly int[,] m_AddOnSimpleComponents = new int[,]
-        {
+        private static readonly int[,] m_AddOnSimpleComponents = {
               {4306, 7, 7, 0}, {4317, 5, 7, 0}, {4314, 5, 7, 0}// 2	3	4	
 			, {4308, 3, 7, 0}, {4280, -1, 7, 0}, {4286, -7, -3, 0}// 5	6	7	
 			, {4287, -6, -4, 0}, {4288, -5, -5, 0}, {9750, -7, -6, 3}// 8	9	10	

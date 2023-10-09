@@ -1,9 +1,10 @@
+using System;
+using System.Collections.Generic;
+using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Despise
 {
@@ -65,7 +66,7 @@ namespace Server.Engines.Despise
 
                 if (controller != null && controller.Boss == m)
                 {
-                    Quests.WhisperingWithWispsQuest.OnBossSlain((DespiseBoss)m);
+                    WhisperingWithWispsQuest.OnBossSlain((DespiseBoss)m);
 
                     controller.OnBossSlain();
                 }

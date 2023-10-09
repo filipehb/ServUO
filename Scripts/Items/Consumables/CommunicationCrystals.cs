@@ -1,14 +1,13 @@
-using Server.Network;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Items
 {
     public class CrystalRechargeInfo
     {
-        public static readonly CrystalRechargeInfo[] Table = new CrystalRechargeInfo[]
-        {
+        public static readonly CrystalRechargeInfo[] Table = {
             new CrystalRechargeInfo(typeof(Citrine), 500),
             new CrystalRechargeInfo(typeof(Amber), 500),
             new CrystalRechargeInfo(typeof(Tourmaline), 750),

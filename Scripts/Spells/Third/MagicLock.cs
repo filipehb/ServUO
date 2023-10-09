@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 using Server.Network;
 using Server.Targeting;
 
@@ -26,7 +27,7 @@ namespace Server.Spells.Third
 
         public void Target(LockableContainer targ)
         {
-            if (Multis.BaseHouse.CheckLockedDownOrSecured(targ))
+            if (BaseHouse.CheckLockedDownOrSecured(targ))
             {
                 // You cannot cast this on a locked down item.
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 501761);

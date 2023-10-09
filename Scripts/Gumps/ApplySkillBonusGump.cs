@@ -12,7 +12,7 @@ namespace Server.Gumps
         public int Index { get; set; }
 
         public ApplySkillBonusGump(PlayerMobile pm, AosSkillBonuses bonuses, SkillName[] skills, double value, int index)
-            : base(pm, 50, 50)
+            : base(pm)
         {
             Item = bonuses.Owner;
             Bonuses = bonuses;

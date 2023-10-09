@@ -1,10 +1,11 @@
-using Server.Commands.Generic;
-using Server.Gumps;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Server.Commands.Generic;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Network;
 using CommandInfo = Server.Commands.Docs.DocCommandEntry;
 using CommandInfoSorter = Server.Commands.Docs.CommandEntrySorter;
 
@@ -214,8 +215,8 @@ namespace Server.Commands
 
                     return;
                 }
-                else
-                    e.Mobile.SendMessage(string.Format("Command '{0}' not found!", arg));
+
+                e.Mobile.SendMessage(string.Format("Command '{0}' not found!", arg));
             }
 
             e.Mobile.SendGump(new CommandListGump(0, e.Mobile, null));
@@ -407,7 +408,7 @@ namespace Server.Commands
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 //else close the gump silently
             }

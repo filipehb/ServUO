@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Items
 {
     [Flipable(0xA4B2, 0xA4B1)]
@@ -53,7 +55,7 @@ namespace Server.Items
         {
             if (!m.InRange(GetWorldLocation(), 3))
             {
-                m.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
             else
             {

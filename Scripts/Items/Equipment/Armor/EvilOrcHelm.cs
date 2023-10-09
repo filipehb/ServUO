@@ -6,7 +6,6 @@ namespace Server.Items
     {
         [Constructable]
         public EvilOrcHelm()
-            : base()
         {
             Hue = 0x96E;
             Attributes.BonusStr = 10;

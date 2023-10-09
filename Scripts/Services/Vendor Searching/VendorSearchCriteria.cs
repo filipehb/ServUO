@@ -17,8 +17,7 @@ namespace Server.Engines.VendorSearching
             Criteria = criteria;
         }
 
-        public static SearchCriteriaCategory[] AllCategories = new SearchCriteriaCategory[]
-        {
+        public static SearchCriteriaCategory[] AllCategories = {
             new SearchCriteriaCategory(Category.PriceRange, 2, 1154512, new SearchCriterionEntry[] { /* Price Range */
             }),
             new SearchCriteriaCategory(Category.Equipment, 3, 1154531, new[] // Equipment

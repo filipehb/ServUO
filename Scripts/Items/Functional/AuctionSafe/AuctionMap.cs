@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Auction;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
-using System.Collections.Generic;
+using Server.Spells.Fourth;
 
 namespace Server.Items
 {
@@ -138,11 +139,11 @@ namespace Server.Items
 
                 if (Sextant.Format(new Point3D(x, y, z), map, ref xLong, ref yLat, ref xMins, ref yMins, ref xEast, ref ySouth))
                 {
-                    return new string[] { string.Format("{0}° {1}'{2}, {3}° {4}'{5}", yLat, yMins, ySouth ? "S" : "N", xLong, xMins, xEast ? "E" : "W"), map.ToString() };
+                    return new[] { string.Format("{0}° {1}'{2}, {3}° {4}'{5}", yLat, yMins, ySouth ? "S" : "N", xLong, xMins, xEast ? "E" : "W"), map.ToString() };
                 }
             }
 
-            return new string[] { "an unknown location", "Unknown" };
+            return new[] { "an unknown location", "Unknown" };
         }
 
         public BaseHouse GetHouse()
@@ -323,8 +324,7 @@ namespace Server.Items
             {
                 switch (info.ButtonID)
                 {
-                    default: break;
-                    case 1:
+	                case 1:
                         {
                             if (Banker.GetBalance(User) < AuctionMap.TeleportCost)
                             {
@@ -340,7 +340,7 @@ namespace Server.Items
                             }
                             else
                             {
-                                new Spells.Fourth.RecallSpell(User, AuctionMap, AuctionMap).Cast();
+                                new RecallSpell(User, AuctionMap, AuctionMap).Cast();
                             }
 
                             break;

@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -130,10 +130,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)

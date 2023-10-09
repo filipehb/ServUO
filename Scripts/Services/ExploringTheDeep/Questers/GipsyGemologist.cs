@@ -11,7 +11,7 @@ namespace Server.Mobiles
         public virtual bool IsInvulnerable => true;
 
         [Constructable]
-        public GipsyGemologist() : base()
+        public GipsyGemologist()
         {
             Name = "Zalia";
             Title = "The Gypsy Gemologist";

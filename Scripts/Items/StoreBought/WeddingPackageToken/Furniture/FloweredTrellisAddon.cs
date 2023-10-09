@@ -32,13 +32,11 @@ namespace Server.Items
                 AddComponent(new AddonComponent(list[i, 0]), list[i, 1], list[i, 2], list[i, 3]);
         }
 
-        private static readonly int[,] _RoseEast = new int[,]
-        {
+        private static readonly int[,] _RoseEast = {
             {40585, 0, 0, 0}, {40586, -1, 0, 0}, {40587, -2, 0, 0}, {40588, -3, 0, 0}
 		};
 
-        private static readonly int[,] _RoseSouth = new int[,]
-        {
+        private static readonly int[,] _RoseSouth = {
             {40600, 0, 0, 0}, {40601, 0, -1, 0}, {40602, 0, -2, 0}, {40603, 0, -3, 0}
         };
 

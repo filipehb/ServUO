@@ -1,10 +1,13 @@
+using System;
+using Server.Engines.CityLoyalty;
+using Server.Engines.NewMagincia;
+using Server.Engines.VvV;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Spells.Seventh
 {
@@ -46,32 +49,35 @@ namespace Server.Spells.Seventh
                 }
                 else
                 {
-                    Effect(m_Entry.Location, m_Entry.Map, true, false);
+                    Effect(m_Entry.Location, m_Entry.Map, true);
                 }
             }
         }
 
         public override bool CheckCast()
         {
-            if (Engines.VvV.VvVSigil.ExistsOn(Caster))
+            if (VvVSigil.ExistsOn(Caster))
             {
                 Caster.SendLocalizedMessage(1061632); // You can't do that while carrying the sigil.
                 return false;
             }
-            else if (Engines.CityLoyalty.CityTradeSystem.HasTrade(Caster))
+
+            if (CityTradeSystem.HasTrade(Caster))
             {
-                Caster.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
-                return false;
+	            Caster.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
+	            return false;
             }
-            else if (Caster.Criminal)
+
+            if (Caster.Criminal)
             {
-                Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
-                return false;
+	            Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
+	            return false;
             }
-            else if (SpellHelper.CheckCombat(Caster))
+
+            if (SpellHelper.CheckCombat(Caster))
             {
-                Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
+	            Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+	            return false;
             }
 
             return SpellHelper.CheckTravel(Caster, TravelCheckType.GateFrom);
@@ -99,7 +105,7 @@ namespace Server.Spells.Seventh
 
         public void Effect(Point3D loc, Map map, bool checkMulti, bool isboatkey = false)
         {
-            if (Engines.VvV.VvVSigil.ExistsOn(Caster))
+            if (VvVSigil.ExistsOn(Caster))
             {
                 Caster.SendLocalizedMessage(1061632); // You can't do that while carrying the sigil.
             }
@@ -141,7 +147,7 @@ namespace Server.Spells.Seventh
             {
                 Caster.SendLocalizedMessage(1071242); // There is already a gate there.
             }
-            else if (Engines.CityLoyalty.CityTradeSystem.HasTrade(Caster))
+            else if (CityTradeSystem.HasTrade(Caster))
             {
                 Caster.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
             }
@@ -342,9 +348,9 @@ namespace Server.Spells.Seventh
                         from.SendLocalizedMessage(502354); // Target is not marked.
                     }
                 }
-                else if (o is Engines.NewMagincia.WritOfLease)
+                else if (o is WritOfLease)
                 {
-                    Engines.NewMagincia.WritOfLease lease = (Engines.NewMagincia.WritOfLease)o;
+                    WritOfLease lease = (WritOfLease)o;
 
                     if (lease.RecallLoc != Point3D.Zero && lease.Facet != null && lease.Facet != Map.Internal)
                         m_Owner.Effect(lease.RecallLoc, lease.Facet, false);

@@ -53,8 +53,7 @@ namespace Server.Engines.TombOfKings
 
         public static List<Chamber> Chambers => m_Chambers;
 
-        private static readonly ChamberInfo[] m_ChamberInfos = new ChamberInfo[]
-        {
+        private static readonly ChamberInfo[] m_ChamberInfos = {
 			// left side
 			new ChamberInfo( new Point3D( 15, 200, -5 ), new Point3D( 13, 195, 7 ), 0x1091 ),
             new ChamberInfo( new Point3D( 15, 184, -5 ), new Point3D( 13, 179, 7 ), 0x1091 ),

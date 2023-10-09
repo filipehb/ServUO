@@ -1,8 +1,8 @@
+using System;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -90,7 +90,6 @@ namespace Server.Items
 
         [Constructable]
         public MiningCart(MiningCartType type)
-            : base()
         {
             m_CartType = type;
 
@@ -505,7 +504,6 @@ namespace Server.Items
 
         [Constructable]
         public MiningCartDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

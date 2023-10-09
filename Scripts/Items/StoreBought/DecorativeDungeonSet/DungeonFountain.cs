@@ -12,7 +12,6 @@ namespace Server.Items
 
         [Constructable]
         public DungeonFountainAddon(bool east)
-            : base()
         {
             AddComponent(new AddonComponent(42226), 0, 0, 0);
             AddComponent(new AddonComponent(42227), 1, 0, 0);
@@ -45,7 +44,6 @@ namespace Server.Items
 
         [Constructable]
         public DungeonFountainDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

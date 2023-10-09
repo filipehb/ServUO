@@ -1,7 +1,7 @@
-using Server.Mobiles;
-using Server.Spells.Fifth;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Spells.Fifth;
 
 namespace Server.Engines.Quests
 {
@@ -37,8 +37,8 @@ namespace Server.Engines.Quests
 
             if (j == player.DoneQuests.Count)
                 return false;
-            else if (delete)
-                player.DoneQuests.RemoveAt(j);
+            if (delete)
+	            player.DoneQuests.RemoveAt(j);
 
             return true;
         }
@@ -244,7 +244,7 @@ namespace Server.Engines.Quests
 
         public static HeritageQuester Pending(Mobile m)
         {
-            return m_Pending.ContainsKey(m) ? m_Pending[m] as HeritageQuester : null;
+            return m_Pending.ContainsKey(m) ? m_Pending[m] : null;
         }
 
         public static void Say(Mobile m, object message)

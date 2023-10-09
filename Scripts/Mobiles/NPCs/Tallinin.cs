@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ImpressivePlaidQuest : BaseQuest
     {
         public ImpressivePlaidQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Kilt), "kilts", 10, 0x1537));
 
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class NiceShirtQuest : BaseQuest
     {
         public NiceShirtQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FancyShirt), "fancy shirt", 10, 0x1EFD));
 
@@ -78,7 +76,6 @@ namespace Server.Engines.Quests
     public class LeatherAndLaceQuest : BaseQuest
     {
         public LeatherAndLaceQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(StuddedBustierArms), "studded bustiers", 10, 0x1C0C));
 
@@ -114,7 +111,6 @@ namespace Server.Engines.Quests
     public class FeyHeadgearQuest : BaseQuest
     {
         public FeyHeadgearQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FlowerGarland), "flower garlands", 10, 0x2306));
 
@@ -150,7 +146,6 @@ namespace Server.Engines.Quests
     public class NewCloakQuest : BaseQuest
     {
         public NewCloakQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(GrobusFur), "grobu's fur", 1));
 
@@ -202,7 +197,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ImpressivePlaidQuest),
                     typeof(NiceShirtQuest),

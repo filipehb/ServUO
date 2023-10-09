@@ -1,15 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using System.Linq;
 
 namespace Server.Multis
 {
@@ -1090,8 +1090,7 @@ namespace Server.Multis
 
                 if (mcl.Width >= 14 || mcl.Height >= 14)
                     return 4;
-                else
-                    return 3;
+                return 3;
             }
         }
 
@@ -1554,7 +1553,7 @@ namespace Server.Multis
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -2602,7 +2601,7 @@ namespace Server.Multis
                         }
                         catch (Exception ex)
                         {
-                            Diagnostics.ExceptionLogging.LogException(ex);
+                            ExceptionLogging.LogException(ex);
                         }
                     }
                     finally

@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -264,11 +264,11 @@ namespace Server.Items
 
         private readonly Type[][] _FruitTypes =
         {
-            new Type[] { typeof(GrapeBunch), typeof(Grapes) },
-            new Type[] { typeof(Apple) },
-            new Type[] { typeof(Peach) },
-            new Type[] { typeof(Pear) },
-            new Type[] { typeof(Plum) }
+            new[] { typeof(GrapeBunch), typeof(Grapes) },
+            new[] { typeof(Apple) },
+            new[] { typeof(Peach) },
+            new[] { typeof(Pear) },
+            new[] { typeof(Plum) }
         };
 
         public override void GetProperties(ObjectPropertyList list)

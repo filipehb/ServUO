@@ -1,16 +1,18 @@
 #region References
-using Server.Accounting;
-using Server.Commands;
-using Server.Gumps;
-using Server.Misc;
-using Server.Mobiles;
-using Server.Network;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using Server.Accounting;
+using Server.Commands;
+using Server.Gumps;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Network;
+
 #endregion
 
 namespace Server.Engines.Help
@@ -30,7 +32,7 @@ namespace Server.Engines.Help
     public class PageEntry
     {
         // What page types should have a speech log as attachment?
-        public static readonly PageType[] SpeechLogAttachment = new[] { PageType.VerbalHarassment };
+        public static readonly PageType[] SpeechLogAttachment = { PageType.VerbalHarassment };
 
         private readonly Mobile m_Sender;
         private Mobile m_Handler;
@@ -292,10 +294,11 @@ namespace Server.Engines.Help
                 from.SendLocalizedMessage(500182); // You cannot request help while customizing a house or transferring a character.
                 return false;
             }
-            else if (pm.PagingSquelched)
+
+            if (pm.PagingSquelched)
             {
-                from.SendMessage("You cannot request help, sorry.");
-                return false;
+	            from.SendMessage("You cannot request help, sorry.");
+	            return false;
             }
 
             return true;
@@ -303,18 +306,17 @@ namespace Server.Engines.Help
 
         public static string GetPageTypeName(PageType type)
         {
-            if (type == PageType.VerbalHarassment)
+	        if (type == PageType.VerbalHarassment)
             {
                 return "Verbal Harassment";
             }
-            else if (type == PageType.PhysicalHarassment)
-            {
-                return "Physical Harassment";
-            }
-            else
-            {
-                return type.ToString();
-            }
+
+	        if (type == PageType.PhysicalHarassment)
+	        {
+		        return "Physical Harassment";
+	        }
+
+	        return type.ToString();
         }
 
         public static void OnHandlerChanged(Mobile old, Mobile value, PageEntry entry)

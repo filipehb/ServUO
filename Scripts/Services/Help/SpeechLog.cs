@@ -1,10 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Server.Commands;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Engines.Help
 {

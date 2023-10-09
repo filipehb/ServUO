@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.SkillHandlers;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Gumps
 {
@@ -14,7 +14,7 @@ namespace Server.Gumps
         private const int LabelColor = 0x7FFF;
 
         public ImbuingGump(PlayerMobile pm)
-            : base(pm, 25, 50)
+            : base(pm, 25)
         {
             User.CloseGump(typeof(ImbueSelectGump));
             User.CloseGump(typeof(ImbueGump));
@@ -113,10 +113,8 @@ namespace Server.Gumps
                             User.EndAction(typeof(Imbuing));
                             break;
                         }
-                        else
-                        {
-                            ImbueStep1(User, item);
-                        }
+
+                        ImbueStep1(User, item);
                         break;
                     }
                 case 10008:  // Imbue Last Property
@@ -134,10 +132,8 @@ namespace Server.Gumps
                             User.EndAction(typeof(Imbuing));
                             break;
                         }
-                        else
-                        {
-                            ImbueLastProp(User, mod, modint);
-                        }
+
+                        ImbueLastProp(User, mod, modint);
 
                         break;
                     }
@@ -160,8 +156,6 @@ namespace Server.Gumps
                         break;
                     }
             }
-
-            return;
         }
 
         private class UnravelTarget : Target
@@ -293,7 +287,7 @@ namespace Server.Gumps
             {
                 c.Items.ForEach(y =>
                 {
-                    Imbuing.CanUnravelItem(User, y, true);
+                    Imbuing.CanUnravelItem(User, y);
                 });
 
                 User.SendLocalizedMessage(1111814, string.Format("{0}\t{1}", 0, c.Items.Count)); // Unraveled: ~1_COUNT~/~2_NUM~ items
@@ -305,7 +299,7 @@ namespace Server.Gumps
                 private readonly List<Item> m_List;
 
                 public UnravelContainerGump(PlayerMobile pm, Container c)
-                    : base(pm, 25, 50)
+                    : base(pm, 25)
                 {
                     m_Container = c;
                     m_List = new List<Item>(c.Items);
@@ -348,7 +342,7 @@ namespace Server.Gumps
 
                     m_List.ForEach(x =>
                     {
-                        if (Imbuing.CanUnravelItem(User, x, true) && Imbuing.UnravelItem(User, x, true))
+                        if (Imbuing.CanUnravelItem(User, x) && Imbuing.UnravelItem(User, x))
                         {
                             count++;
                         }

@@ -1,18 +1,17 @@
+using System;
+using System.Collections.Generic;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Misc;
 using Server.Multis;
 using Server.Prompts;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
     public class VendorRentalDuration
     {
-        public static readonly VendorRentalDuration[] Instances = new VendorRentalDuration[]
-        {
+        public static readonly VendorRentalDuration[] Instances = {
             new VendorRentalDuration(TimeSpan.FromDays(7.0), 1062361), // 1 Week
             new VendorRentalDuration(TimeSpan.FromDays(14.0), 1062362), // 2 Weeks
             new VendorRentalDuration(TimeSpan.FromDays(21.0), 1062363), // 3 Weeks
@@ -190,7 +189,7 @@ namespace Server.Mobiles
             int days, hours;
             ComputeRentalExpireDelay(out days, out hours);
 
-            to.SendLocalizedMessage(1062464, days.ToString() + "\t" + hours.ToString()); // The rental contract on this vendor will expire in ~1_DAY~ day(s) and ~2_HOUR~ hour(s).
+            to.SendLocalizedMessage(1062464, days + "\t" + hours); // The rental contract on this vendor will expire in ~1_DAY~ day(s) and ~2_HOUR~ hour(s).
         }
 
         public override void Destroy(bool toBackpack)

@@ -1,8 +1,9 @@
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.VvV;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Misc
 {
@@ -107,7 +108,7 @@ namespace Server.Misc
 
         public static bool CheckHasAggression(Mobile m, bool aggressedOnly = false)
         {
-            if (Engines.VvV.ViceVsVirtueSystem.HasBattleAggression(m))
+            if (ViceVsVirtueSystem.HasBattleAggression(m))
             {
                 return true;
             }

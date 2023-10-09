@@ -1,7 +1,8 @@
-using Server.Regions;
-using Server.Spells;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Engines.Points;
+using Server.Regions;
+using Server.Spells;
 
 namespace Server.Multis
 {
@@ -24,8 +25,7 @@ namespace Server.Multis
     {
         // Any land tile which matches one of these ID numbers is considered a road and cannot be placed over.
         public static int[] RoadIDs => m_RoadIDs;
-        private static readonly int[] m_RoadIDs = new int[]
-        {
+        private static readonly int[] m_RoadIDs = {
             0x0071, 0x0078,
             0x00E8, 0x00EB,
             0x07AE, 0x07B1,
@@ -57,7 +57,7 @@ namespace Server.Multis
                 return HousePlacementResult.InvalidCastleKeep;
 
             #region SA
-            if (map == Map.TerMur && !Engines.Points.PointsSystem.QueensLoyalty.IsNoble(from))
+            if (map == Map.TerMur && !PointsSystem.QueensLoyalty.IsNoble(from))
             {
                 return HousePlacementResult.NoQueenLoyalty;
             }

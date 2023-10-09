@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public JaanasStaff()
-            : base()
         {
             Hue = 0x58C;
             WeaponAttributes.MageWeapon = 10;

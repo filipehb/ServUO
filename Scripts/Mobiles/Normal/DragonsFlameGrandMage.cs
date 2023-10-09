@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public DragonsFlameGrandMage()
-            : base()
         {
             Name = "Black Order Grand Mage";
             Title = "of the Dragon's Flame Sect";

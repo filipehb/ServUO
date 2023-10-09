@@ -1,3 +1,5 @@
+using Server.Regions;
+
 namespace Server.Mobiles
 {
     public class BoundSoul : BaseCreature
@@ -45,7 +47,7 @@ namespace Server.Mobiles
 
         public override bool OnBeforeDeath()
         {
-            if (Region.IsPartOf<Regions.CorgulRegion>())
+            if (Region.IsPartOf<CorgulRegion>())
             {
                 CorgulTheSoulBinder.CheckDropSOT(this);
             }

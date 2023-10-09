@@ -19,7 +19,7 @@ namespace Server.Items
         public override int InitMaxHits => 125;
 
         [Constructable]
-        public BestialGorget() : base()
+        public BestialGorget()
         {
             Hue = 2010;
             Weight = 1;

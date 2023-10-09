@@ -1,11 +1,13 @@
-using Server.Gumps;
-using Server.Items;
-using Server.Network;
-using Server.Targeting;
-using Server.Mobiles;
-
 using System;
 using System.Collections.Generic;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
+using Server.Spells.Seventh;
+using Server.Spells.Sixth;
+using Server.Spells.Third;
+using Server.Targeting;
 
 namespace Server.Regions
 {
@@ -109,7 +111,7 @@ namespace Server.Regions
             if (m.AccessLevel > AccessLevel.Player)
                 return true;
 
-            if (s is Spells.Sixth.MarkSpell || s is Spells.Seventh.GateTravelSpell || s is Spells.Third.TeleportSpell)
+            if (s is MarkSpell || s is GateTravelSpell || s is TeleportSpell)
             {
                 m.SendLocalizedMessage(501802); // that spell doesn't seem to work.
                 return false;
@@ -120,7 +122,7 @@ namespace Server.Regions
 
         public override bool OnTarget(Mobile m, Target t, object o)
         {
-            if (m.AccessLevel == AccessLevel.Player && t is Spells.Third.TeleportSpell.InternalTarget)
+            if (m.AccessLevel == AccessLevel.Player && t is TeleportSpell.InternalTarget)
             {
                 m.SendLocalizedMessage(501802); // that spell doesn't seem to work.
                 return false;

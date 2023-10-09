@@ -1,7 +1,7 @@
-using Server.Mobiles;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Targeting;
 
 namespace Server.Spells.Mysticism
 {
@@ -133,8 +133,7 @@ namespace Server.Spells.Mysticism
             {
                 switch (amount)
                 {
-                    default: break;
-                    case 0: 
+	                case 0: 
                     case 1: damage /= 2; break;
                     case 2: damage /= 1.66; break;
                     case 3: damage /= 1.33; break;
@@ -146,7 +145,7 @@ namespace Server.Spells.Mysticism
             from.FixedParticles(0x375A, 1, 17, 9919, 1161, 7, EffectLayer.Waist);
             from.FixedParticles(0x3728, 1, 13, 9502, 1161, 7, (EffectLayer)255);
 
-            SpellHelper.Damage(null, TimeSpan.Zero, from, caster, (int)damage, 0, 0, 0, 0, 0, DFAlgorithm.Standard, 100, 0);
+            SpellHelper.Damage(null, TimeSpan.Zero, from, caster, (int)damage, 0, 0, 0, 0, 0, DFAlgorithm.Standard, 100);
         }
 
         public static int BonusDamage(Mobile caster)

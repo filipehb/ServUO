@@ -1,11 +1,12 @@
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells.Fourth;
 
 namespace Server.Engines.VendorSearching
 {
@@ -227,7 +228,7 @@ namespace Server.Engines.VendorSearching
                         {
                             Task<List<SearchItem>> resultsTask = FindVendorItemsAsync(User, Criteria);
 
-                            TaskPollingTimer<List<SearchItem>> pollingTimer = new TaskPollingTimer<List<SearchItem>>(resultsTask, (results) =>
+                            TaskPollingTimer<List<SearchItem>> pollingTimer = new TaskPollingTimer<List<SearchItem>>(resultsTask, results =>
                             {
                                 User.CloseGump(typeof(SearchWaitGump));
 
@@ -555,8 +556,7 @@ namespace Server.Engines.VendorSearching
         {
             switch (info.ButtonID)
             {
-                default: break;
-                case 1:
+	            case 1:
                     {
                         if (Banker.GetBalance(User) < VendorMap.TeleportCost)
                         {
@@ -572,7 +572,7 @@ namespace Server.Engines.VendorSearching
                         }
                         else
                         {
-                            new Spells.Fourth.RecallSpell(User, VendorMap, VendorMap).Cast();
+                            new RecallSpell(User, VendorMap, VendorMap).Cast();
                         }
 
                         break;

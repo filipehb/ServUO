@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Network;
 using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -56,7 +57,7 @@ namespace Server.Items
             from.PlaySound(0x15F);
             Effects.SendPacket(from, from.Map, new HuedEffect(EffectType.Moving, from.Serial, Serial.Zero, 0x36D4, from.Location, loc, 5, 0, false, true, 0, 0));
 
-            System.Collections.Generic.List<Mobile> targets = SpellHelper.AcquireIndirectTargets(from, loc, from.Map, 2).OfType<Mobile>().ToList();
+            List<Mobile> targets = SpellHelper.AcquireIndirectTargets(from, loc, from.Map, 2).OfType<Mobile>().ToList();
             int count = targets.Count;
             bool playerVsPlayer = targets.Any(t => t.Player);
 

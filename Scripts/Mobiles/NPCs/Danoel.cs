@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class InstrumentOfWarQuest : BaseQuest
     {
         public InstrumentOfWarQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Broadsword), "broadswords", 12, 0xF5E));
 
@@ -43,7 +42,6 @@ namespace Server.Engines.Quests
     public class TheShieldQuest : BaseQuest
     {
         public TheShieldQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(HeaterShield), "heater shields", 10, 0x1B76));
 
@@ -79,7 +77,6 @@ namespace Server.Engines.Quests
     public class MusicToMyEarsQuest : BaseQuest
     {
         public MusicToMyEarsQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(LapHarp), "lap harp", 10, 0xEB2));
 
@@ -116,7 +113,6 @@ namespace Server.Engines.Quests
     public class TheGlassEyeQuest : BaseQuest
     {
         public TheGlassEyeQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Spyglass), "spyglasses", 10, 0x14F5));
 
@@ -152,7 +148,6 @@ namespace Server.Engines.Quests
     public class LazyHumansQuest : BaseQuest
     {
         public LazyHumansQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FootStool), "foot stools", 10, 0xB5E));
 
@@ -189,7 +184,6 @@ namespace Server.Engines.Quests
     public class InventiveToolsQuest : BaseQuest
     {
         public InventiveToolsQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(TinkerTools), "tinker's tools", 10, 0x1EB8));
 
@@ -236,7 +230,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ReptilianDentistQuest),
                     typeof(TickTockQuest),

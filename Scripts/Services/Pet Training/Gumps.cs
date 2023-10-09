@@ -1,9 +1,11 @@
-using Server.Gumps;
-using Server.Items;
-using Server.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Items;
+using Server.Misc;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -14,7 +16,7 @@ namespace Server.Mobiles
         public BaseCreature Creature { get; private set; }
 
         public NewAnimalLoreGump(PlayerMobile pm, BaseCreature bc)
-            : base(pm, 250, 50)
+            : base(pm, 250)
         {
             Creature = bc;
         }
@@ -521,7 +523,7 @@ namespace Server.Mobiles
                     trainProfile2.BeginTraining();
                     Refresh();
 
-                    Engines.Quests.UsingAnimalLoreQuest.CheckComplete(User);
+                    UsingAnimalLoreQuest.CheckComplete(User);
                     break;
             }
         }
@@ -604,7 +606,7 @@ namespace Server.Mobiles
             if (color == null)
             {
                 if (val <= 0)
-                    return string.Format("<div align=right>---</div>");
+                    return "<div align=right>---</div>";
 
                 return string.Format("<div align=right>{0}%</div>", val);
             }
@@ -1573,7 +1575,7 @@ namespace Server.Mobiles
                     {
                         User.SendLocalizedMessage(1153204); // The pet is too far away from you!
                     }
-                    else if (Spells.SpellHelper.CheckCombat(User) || Spells.SpellHelper.CheckCombat(Creature) ||
+                    else if (SpellHelper.CheckCombat(User) || SpellHelper.CheckCombat(Creature) ||
                         Creature.Aggressed.Count > 0 || Creature.Combatant != null)
                     {
                         User.SendLocalizedMessage(1156876); // Since you have been in combat recently you may not use this feature.
@@ -1626,7 +1628,7 @@ namespace Server.Mobiles
 
                                     ResendGumps(profile.HasBegunTraining);
 
-                                    Engines.Quests.TeachingSomethingNewQuest.CheckComplete(User);
+                                    TeachingSomethingNewQuest.CheckComplete(User);
                                 }
                             },
                             () =>

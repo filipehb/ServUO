@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public CavalrysFolly()
-            : base()
         {
             Hue = 1165;
             Attributes.BonusHits = 2;

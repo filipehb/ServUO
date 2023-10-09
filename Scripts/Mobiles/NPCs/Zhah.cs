@@ -1,12 +1,12 @@
+using System;
 using Server.Engines.Quests;
 using Server.Items;
-using System;
 
 namespace Server.Mobiles
 {
     public class QueenZhah : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(JourneyToTheAthenaeumIsleQuest) };
+        public override Type[] Quests => new[] { typeof(JourneyToTheAthenaeumIsleQuest) };
 
         [Constructable]
         public QueenZhah() : base("Zhah", "the Gargoyle Queen")

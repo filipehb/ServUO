@@ -1,11 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Server.Accounting;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Gumps
 {
@@ -164,14 +166,14 @@ namespace Server.Gumps
                 TextDefinition.AddTooltip(this, item.Tooltip);
 
                 if (item.Points < 1 && item.Points > 0)
-                    AddLabel(65 + m_Max, offset + height / 2 - 10, 0x64, "1 per " + ((int)Math.Pow(item.Points, -1)).ToString());
+                    AddLabel(65 + m_Max, offset + height / 2 - 10, 0x64, "1 per " + ((int)Math.Pow(item.Points, -1)));
                 else
                     AddLabel(65 + m_Max, offset + height / 2 - 10, 0x64, item.Points.ToString());
 
                 TextDefinition.AddTooltip(this, item.Tooltip);
 
                 if (amount > 0)
-                    AddLabel(235, offset + height / 2 - 5, 0xB1, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+                    AddLabel(235, offset + height / 2 - 5, 0xB1, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
 
                 offset += 5 + height;
                 m_Index += 1;
@@ -320,7 +322,7 @@ namespace Server.Gumps
             }
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             if (m_Collection == null || !m_Owner.InRange(m_Location, 2))
                 return;
@@ -488,11 +490,12 @@ namespace Server.Gumps
                             from.SendGump(new CommunityCollectionGump((PlayerMobile)from, m_Collection, m_Location));
                             return;
                         }
-                        else if (amount * m_Selected.Points < 1)
+
+                        if (amount * m_Selected.Points < 1)
                         {
-                            from.SendLocalizedMessage(m_Selected.Type == typeof(Gold) ? 1073182 : 1073167); // You do not have enough of that item to make a donation!
-                            from.SendGump(new CommunityCollectionGump((PlayerMobile)from, m_Collection, m_Location));
-                            return;
+	                        from.SendLocalizedMessage(m_Selected.Type == typeof(Gold) ? 1073182 : 1073167); // You do not have enough of that item to make a donation!
+	                        from.SendGump(new CommunityCollectionGump((PlayerMobile)from, m_Collection, m_Location));
+	                        return;
                         }
 
                         // donate
@@ -580,29 +583,28 @@ namespace Server.Gumps
             {
                 return true;
             }
-            else if (!checkDerives)
+
+            if (!checkDerives)
             {
-                return false;
+	            return false;
             }
-            else
+
+            if (type == typeof(Lobster) && BaseHighseasFish.Lobsters.Any(x => x == t))
             {
-                if (type == typeof(Lobster) && BaseHighseasFish.Lobsters.Any(x => x == t))
-                {
-                    return true;
-                }
-                else if (type == typeof(Crab) && BaseHighseasFish.Crabs.Any(x => x == t))
-                {
-                    return true;
-                }
-                else if (type == typeof(Fish) && t != typeof(BaseCrabAndLobster) && !t.IsSubclassOf(typeof(BaseCrabAndLobster)) && (t.IsSubclassOf(type) || t == typeof(BaseHighseasFish) || t.IsSubclassOf(typeof(BaseHighseasFish))))
-                {
-                    return true;
-                }
-                else
-                {
-                    return t.IsSubclassOf(type);
-                }
+	            return true;
             }
+
+            if (type == typeof(Crab) && BaseHighseasFish.Crabs.Any(x => x == t))
+            {
+	            return true;
+            }
+
+            if (type == typeof(Fish) && t != typeof(BaseCrabAndLobster) && !t.IsSubclassOf(typeof(BaseCrabAndLobster)) && (t.IsSubclassOf(type) || t == typeof(BaseHighseasFish) || t.IsSubclassOf(typeof(BaseHighseasFish))))
+            {
+	            return true;
+            }
+
+            return t.IsSubclassOf(type);
         }
 
         public static int GetTypes(PlayerMobile pm, CollectionItem colItem)

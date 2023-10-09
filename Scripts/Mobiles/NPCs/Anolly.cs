@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class StopHarpingOnMeQuest : BaseQuest
     {
         public StopHarpingOnMeQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(LapHarp), "lap harp", 20, 0xEB2));
 
@@ -43,7 +42,6 @@ namespace Server.Engines.Quests
     public class TheFarEyeQuest : BaseQuest
     {
         public TheFarEyeQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Spyglass), "spyglasses", 20, 0x14F5));
 
@@ -91,7 +89,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(StopHarpingOnMeQuest),
                     typeof(TheFarEyeQuest),

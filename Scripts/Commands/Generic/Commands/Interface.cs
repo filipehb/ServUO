@@ -1,9 +1,9 @@
-using Server.Gumps;
-using Server.Network;
-using Server.Targets;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Server.Gumps;
+using Server.Network;
+using Server.Targets;
 
 namespace Server.Commands.Generic
 {
@@ -13,7 +13,7 @@ namespace Server.Commands.Generic
         {
             AccessLevel = AccessLevel.GameMaster;
             Supports = CommandSupport.Complex | CommandSupport.Simple;
-            Commands = new string[] { "Interface" };
+            Commands = new[] { "Interface" };
             ObjectTypes = ObjectTypes.Both;
             Usage = "Interface [view <properties ...>]";
             Description = "Opens an interface to interact with matched objects. Generally used with condition arguments.";
@@ -298,11 +298,12 @@ namespace Server.Commands.Generic
                 m_From.SendGump(new InterfaceGump(m_From, m_Columns, m_List, m_Page, m_Item));
                 return;
             }
-            else if (!BaseCommand.IsAccessible(m_From, m_Item))
+
+            if (!BaseCommand.IsAccessible(m_From, m_Item))
             {
-                m_From.SendMessage("That is no longer accessible.");
-                m_From.SendGump(new InterfaceGump(m_From, m_Columns, m_List, m_Page, m_Item));
-                return;
+	            m_From.SendMessage("That is no longer accessible.");
+	            m_From.SendGump(new InterfaceGump(m_From, m_Columns, m_List, m_Page, m_Item));
+	            return;
             }
 
             switch (info.ButtonID)
@@ -455,11 +456,12 @@ namespace Server.Commands.Generic
                 m_From.SendGump(new InterfaceGump(m_From, m_Columns, m_List, m_Page, m_Mobile));
                 return;
             }
-            else if (!BaseCommand.IsAccessible(m_From, m_Mobile))
+
+            if (!BaseCommand.IsAccessible(m_From, m_Mobile))
             {
-                m_From.SendMessage("That is no longer accessible.");
-                m_From.SendGump(new InterfaceGump(m_From, m_Columns, m_List, m_Page, m_Mobile));
-                return;
+	            m_From.SendMessage("That is no longer accessible.");
+	            m_From.SendGump(new InterfaceGump(m_From, m_Columns, m_List, m_Page, m_Mobile));
+	            return;
             }
 
             switch (info.ButtonID)

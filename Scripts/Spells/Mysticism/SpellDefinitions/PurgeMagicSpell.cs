@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Spells.Fifth;
 using Server.Spells.First;
@@ -5,8 +7,6 @@ using Server.Spells.Ninjitsu;
 using Server.Spells.Second;
 using Server.Spells.Third;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Spells.Mysticism
 {

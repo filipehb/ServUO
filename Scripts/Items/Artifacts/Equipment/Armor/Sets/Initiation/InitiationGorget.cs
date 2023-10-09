@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 150;
 
         [Constructable]
-        public InitiationGorget() : base()
+        public InitiationGorget()
         {
 
             Hue = 0x9C4;

@@ -1,10 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.Despise
 {

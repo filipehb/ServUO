@@ -1,9 +1,8 @@
-using Server.Commands;
-using Server.Mobiles;
-using Server.Gumps;
-
 using System;
 using System.Linq;
+using Server.Commands;
+using Server.Gumps;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -65,7 +64,7 @@ namespace Server.Items
         {
             WeakEntityCollection.Delete(EntityName);
 
-            var ladder = Map.Trammel.FindItem<ShipLadder>(new Point3D(6400, 1656, 0), 0);
+            var ladder = Map.Trammel.FindItem<ShipLadder>(new Point3D(6400, 1656, 0));
 
             if (ladder != null)
             {
@@ -76,12 +75,12 @@ namespace Server.Items
         public override int LabelNumber => 1154433;  // Winch Assembly
         public override bool ForceShowProperties => true;
 
-        public override Type[] Keys => new Type[] { typeof(BearingAssembly), typeof(FlyWheel), typeof(PowerCore), typeof(WireSpool) };
+        public override Type[] Keys => new[] { typeof(BearingAssembly), typeof(FlyWheel), typeof(PowerCore), typeof(WireSpool) };
         public override int KeyCount => 0;
         public override MasterKey MasterKey => null;
 
         public override BasePeerless Boss => new Shadowlord();
-        public override Rectangle2D[] BossBounds => new Rectangle2D[] { new Rectangle2D(6399, 1631, 38, 38) };
+        public override Rectangle2D[] BossBounds => new[] { new Rectangle2D(6399, 1631, 38, 38) };
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Hatch Hatch { get; set; }
@@ -229,7 +228,6 @@ namespace Server.Items
 
         [Constructable]
         public Hatch(WinchAssembly winch)
-            : base()
         {
             Winch = winch;
             winch.Hatch = this;

@@ -1,3 +1,4 @@
+using System;
 using Server.Gumps;
 using Server.Prompts;
 
@@ -13,7 +14,7 @@ namespace Server.Network
 			}
 			else
 			{
-				if (prompt.MessageCliloc != 1042971 || prompt.MessageArgs != System.String.Empty)
+				if (prompt.MessageCliloc != 1042971 || prompt.MessageArgs != String.Empty)
 					m.SendLocalizedMessage(prompt.MessageCliloc, prompt.MessageArgs, prompt.MessageHue);
 
 				m.Send(new UnicodePrompt(prompt, m));

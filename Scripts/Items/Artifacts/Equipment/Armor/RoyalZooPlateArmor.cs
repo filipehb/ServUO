@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateLegs()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;
@@ -46,7 +45,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateGloves()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;
@@ -87,7 +85,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateGorget()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;
@@ -128,7 +125,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateArms()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;
@@ -169,7 +165,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateChest()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;
@@ -210,7 +205,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateFemaleChest()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;
@@ -251,7 +245,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooPlateHelm()
-            : base()
         {
             Hue = 0x109;
             Attributes.Luck = 100;

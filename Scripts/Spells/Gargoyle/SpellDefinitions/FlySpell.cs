@@ -1,5 +1,10 @@
-using Server.Network;
 using System;
+using Server.Mobiles;
+using Server.Network;
+using Server.Spells.Mysticism;
+using Server.Spells.Necromancy;
+using Server.Spells.Ninjitsu;
+using Server.Spells.Seventh;
 
 namespace Server.Spells
 {
@@ -60,26 +65,27 @@ namespace Server.Spells
             {
                 return false;
             }
-            else if (!Caster.Alive)
-            {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1113082); // You may not fly while dead.
-            }
-            else if (!Caster.CanBeginAction(typeof(Seventh.PolymorphSpell)))
-            {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1112453); // You can't fly in your current form!
-            }
-            else if (Ninjitsu.AnimalForm.UnderTransformation(Caster) || Mysticism.StoneFormSpell.IsEffected(Caster) || (TransformationSpellHelper.UnderTransformation(Caster)
-                && !TransformationSpellHelper.UnderTransformation(Caster, typeof(Necromancy.VampiricEmbraceSpell))) || (Caster.IsBodyMod && !Caster.Body.IsHuman))
-            {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1112453); // You can't fly in your current form!
-            }
-            else if (Caster.Region.OnBeginSpellCast(Caster, this) && Mobiles.BaseMount.CheckMountAllowed(Caster, true, true))
-            {
-                Caster.Flying = true;
-                BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.Fly, 1112193, 1112567)); // Flying & You are flying.
-                Caster.Animate(AnimationType.TakeOff, 0);
 
-                return true;
+            if (!Caster.Alive)
+            {
+	            Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1113082); // You may not fly while dead.
+            }
+            else if (!Caster.CanBeginAction(typeof(PolymorphSpell)))
+            {
+	            Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1112453); // You can't fly in your current form!
+            }
+            else if (AnimalForm.UnderTransformation(Caster) || StoneFormSpell.IsEffected(Caster) || (TransformationSpellHelper.UnderTransformation(Caster)
+	                     && !TransformationSpellHelper.UnderTransformation(Caster, typeof(VampiricEmbraceSpell))) || (Caster.IsBodyMod && !Caster.Body.IsHuman))
+            {
+	            Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1112453); // You can't fly in your current form!
+            }
+            else if (Caster.Region.OnBeginSpellCast(Caster, this) && BaseMount.CheckMountAllowed(Caster, true, true))
+            {
+	            Caster.Flying = true;
+	            BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.Fly, 1112193, 1112567)); // Flying & You are flying.
+	            Caster.Animate(AnimationType.TakeOff, 0);
+
+	            return true;
             }
 
             return false;

@@ -35,12 +35,10 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                m.SendLocalizedMessage(1112226); // Thou must be on a Sacred Quest to pass through.
 
-                return false;
-            }
+            m.SendLocalizedMessage(1112226); // Thou must be on a Sacred Quest to pass through.
+
+            return false;
         }
 
         public override void Serialize(GenericWriter writer)

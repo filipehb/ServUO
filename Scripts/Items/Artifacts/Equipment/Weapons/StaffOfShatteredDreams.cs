@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public StaffOfShatteredDreams()
-            : base()
         {
             Hue = 1151;
             WeaponAttributes.HitDispel = 25;

@@ -1,7 +1,7 @@
-using Server.Accounting;
-using Server.Engines.VeteranRewards;
 using System;
 using System.Collections.Generic;
+using Server.Accounting;
+using Server.Engines.VeteranRewards;
 
 namespace Server.Items
 {

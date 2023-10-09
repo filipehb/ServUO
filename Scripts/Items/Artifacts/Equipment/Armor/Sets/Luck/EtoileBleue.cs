@@ -8,7 +8,7 @@ namespace Server.Items
         public override int Pieces => 2;
 
         [Constructable]
-        public EtoileBleue() : base()
+        public EtoileBleue()
         {
             Weight = 1.0;
             Hue = 1165;

@@ -1,6 +1,7 @@
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
+using Server.Spells;
 using Server.Targeting;
 
 namespace Server.Items
@@ -70,8 +71,7 @@ namespace Server.Items
 
                     switch (result)
                     {
-                        default: break;
-                        case AddonFitResult.Blocked: from.SendLocalizedMessage(500269); break; // You cannot build that there.
+	                    case AddonFitResult.Blocked: from.SendLocalizedMessage(500269); break; // You cannot build that there.
                         case AddonFitResult.NotInHouse: from.SendLocalizedMessage(500274); break; // You can only place this in a house that you own!
                         case AddonFitResult.NoWall: from.SendLocalizedMessage(500268); break; // This object needs to be mounted on something.
                     }
@@ -92,7 +92,7 @@ namespace Server.Items
                 if (addon is InterchangeableAddon)
                     ((InterchangeableAddon)addon).EastFacing = east;
 
-                Spells.SpellHelper.GetSurfaceTop(ref p);
+                SpellHelper.GetSurfaceTop(ref p);
 
                 addon.MoveToWorld(new Point3D(p), map);
 

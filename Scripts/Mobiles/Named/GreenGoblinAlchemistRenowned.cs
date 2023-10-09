@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -44,7 +44,7 @@ namespace Server.Mobiles
         {
         }
 
-        public override Type[] UniqueSAList => new Type[] { typeof(ObsidianEarrings), typeof(TheImpalersPick) };
+        public override Type[] UniqueSAList => new[] { typeof(ObsidianEarrings), typeof(TheImpalersPick) };
         public override Type[] SharedSAList => new Type[] { };
 
         public override bool AllureImmune => true;

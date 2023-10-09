@@ -6,8 +6,7 @@ namespace Server.Engines.BulkOrders
     {
         public override BODType BODType => BODType.Carpentry;
 
-        public static double[] m_CarpentryingMaterialChances = new double[]
-        {
+        public static double[] m_CarpentryingMaterialChances = {
             0.513718750, // None
             0.292968750, // Oak
             0.117187500, // Ash

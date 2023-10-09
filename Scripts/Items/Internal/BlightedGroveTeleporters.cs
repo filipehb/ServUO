@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public BlightedGroveTele()
-            : base()
         {
         }
 
@@ -51,8 +50,8 @@ namespace Server.Items
 
                 return base.OnMoveOver(m);
             }
-            else
-                m.SendLocalizedMessage(1074275); // You are unable to push your way through the tangling roots of the mighty tree.
+
+            m.SendLocalizedMessage(1074275); // You are unable to push your way through the tangling roots of the mighty tree.
 
             return true;
         }
@@ -76,7 +75,6 @@ namespace Server.Items
     {
         [Constructable]
         public BlightedGroveTreeInTele()
-            : base()
         {
         }
 
@@ -110,7 +108,6 @@ namespace Server.Items
     {
         [Constructable]
         public BlightedGroveTreeOutTele()
-            : base()
         {
         }
 

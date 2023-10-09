@@ -1,14 +1,14 @@
+using System;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
     public class KingBlackthornOrders : BaseQuestItem
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                     {
                         typeof( TimeIsOfTheEssenceQuest )
                     };

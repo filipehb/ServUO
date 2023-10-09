@@ -1,5 +1,8 @@
 using Server.Items;
+using Server.Misc;
 using Server.Regions;
+using Server.Spells.Fifth;
+using Server.Spells.Fourth;
 using Server.Targeting;
 
 namespace Server.Spells.Third
@@ -20,7 +23,7 @@ namespace Server.Spells.Third
         public override SpellCircle Circle => SpellCircle.Third;
         public override bool CheckCast()
         {
-            if (Misc.WeightOverloading.IsOverloaded(Caster))
+            if (WeightOverloading.IsOverloaded(Caster))
             {
                 Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
                 return false;
@@ -44,7 +47,7 @@ namespace Server.Spells.Third
             Point3D from = Caster.Location;
             Point3D to = new Point3D(p);
 
-            if (Misc.WeightOverloading.IsOverloaded(Caster))
+            if (WeightOverloading.IsOverloaded(Caster))
             {
                 Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
             }
@@ -91,7 +94,7 @@ namespace Server.Spells.Third
 
                 foreach (Item item in eable)
                 {
-                    if (item is Fifth.PoisonFieldSpell.InternalItem || item is Fourth.FireFieldSpell.FireFieldItem)
+                    if (item is PoisonFieldSpell.InternalItem || item is FireFieldSpell.FireFieldItem)
                         item.OnMoveOver(m);
                 }
 

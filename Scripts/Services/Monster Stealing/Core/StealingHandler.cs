@@ -1,8 +1,8 @@
+using System;
 using Server.Engines.CannedEvil;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
-using System;
 
 namespace Server.Engines.CreatureStealing
 {

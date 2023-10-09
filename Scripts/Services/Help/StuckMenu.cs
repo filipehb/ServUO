@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.CityLoyalty;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
-using System;
-using System.Linq;
 
 namespace Server.Menus.Questions
 {
@@ -24,10 +25,9 @@ namespace Server.Menus.Questions
 
     public class StuckMenu : Gump
     {
-        private static readonly StuckMenuEntry[] m_Entries = new StuckMenuEntry[]
-        {
+        private static readonly StuckMenuEntry[] m_Entries = {
             // Britain
-            new StuckMenuEntry(1011028, new Point3D[]
+            new StuckMenuEntry(1011028, new[]
             {
                 new Point3D(1522, 1757, 28),
                 new Point3D(1519, 1619, 10),
@@ -37,7 +37,7 @@ namespace Server.Menus.Questions
             }),
 
             // Trinsic
-            new StuckMenuEntry(1011029, new Point3D[]
+            new StuckMenuEntry(1011029, new[]
             {
                 new Point3D(2005, 2754, 30),
                 new Point3D(1993, 2827, 0),
@@ -47,7 +47,7 @@ namespace Server.Menus.Questions
             }),
 
             // Vesper
-            new StuckMenuEntry(1011030, new Point3D[]
+            new StuckMenuEntry(1011030, new[]
             {
                 new Point3D(2973, 891, 0),
                 new Point3D(3003, 776, 0),
@@ -57,7 +57,7 @@ namespace Server.Menus.Questions
             }),
 
             // Minoc
-            new StuckMenuEntry(1011031, new Point3D[]
+            new StuckMenuEntry(1011031, new[]
             {
                 new Point3D(2498, 392, 0),
                 new Point3D(2433, 541, 0),
@@ -67,7 +67,7 @@ namespace Server.Menus.Questions
             }),
 
             // Yew
-            new StuckMenuEntry(1011032, new Point3D[]
+            new StuckMenuEntry(1011032, new[]
             {
                 new Point3D(490, 1166, 0),
                 new Point3D(652, 1098, 0),
@@ -77,7 +77,7 @@ namespace Server.Menus.Questions
             }),
 
             // Cove
-            new StuckMenuEntry(1011033, new Point3D[]
+            new StuckMenuEntry(1011033, new[]
             {
                 new Point3D(2230, 1159, 0),
                 new Point3D(2218, 1203, 0),
@@ -87,10 +87,9 @@ namespace Server.Menus.Questions
             })
         };
 
-        private static readonly StuckMenuEntry[] m_T2AEntries = new StuckMenuEntry[]
-        {
+        private static readonly StuckMenuEntry[] m_T2AEntries = {
             // Papua
-            new StuckMenuEntry(1011057, new Point3D[]
+            new StuckMenuEntry(1011057, new[]
             {
                 new Point3D(5720, 3109, -1),
                 new Point3D(5677, 3176, -3),
@@ -100,7 +99,7 @@ namespace Server.Menus.Questions
             }),
 
             // Delucia
-            new StuckMenuEntry(1011058, new Point3D[]
+            new StuckMenuEntry(1011058, new[]
             {
                 new Point3D(5216, 4033, 37),
                 new Point3D(5262, 4049, 37),
@@ -110,10 +109,9 @@ namespace Server.Menus.Questions
             })
         };
 
-        private static readonly StuckMenuEntry[] m_TerMurEntries = new StuckMenuEntry[]
-        {
+        private static readonly StuckMenuEntry[] m_TerMurEntries = {
             // Royal City
-            new StuckMenuEntry(1112571, new Point3D[]
+            new StuckMenuEntry(1112571, new[]
             {
                 new Point3D(750, 3440, -20),
                 new Point3D(709, 3444, -20),
@@ -123,7 +121,7 @@ namespace Server.Menus.Questions
             }),
 
             // Holy City
-            new StuckMenuEntry(1112572, new Point3D[]
+            new StuckMenuEntry(1112572, new[]
             {
                 new Point3D(997, 3869, -42),
                 new Point3D(961, 3921, -42),
@@ -286,7 +284,7 @@ namespace Server.Menus.Questions
                 Map fromMap = m_Mobile.LogoutMap;
                 Point3D fromLoc = m_Mobile.LogoutLocation;
 
-                System.Collections.Generic.List<BaseCreature> move = fromMap.GetMobilesInRange(fromLoc, 3).Where(m => m is BaseCreature).Cast<BaseCreature>()
+                List<BaseCreature> move = fromMap.GetMobilesInRange(fromLoc, 3).Where(m => m is BaseCreature).Cast<BaseCreature>()
                     .Where(pet => pet.Controlled && pet.ControlMaster == m_Mobile && pet.ControlOrder == OrderType.Guard || pet.ControlOrder == OrderType.Follow || pet.ControlOrder == OrderType.Come).ToList();
 
                 move.ForEach(x => x.MoveToWorld(dest, destMap));

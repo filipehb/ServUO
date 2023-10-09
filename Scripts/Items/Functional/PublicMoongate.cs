@@ -1,13 +1,16 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Commands;
 using Server.Engines.CityLoyalty;
+using Server.Engines.VvV;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Items
@@ -510,7 +513,7 @@ namespace Server.Items
                 {
                     checkLists = PMList.Lists;
                 }
-                else if (Engines.VvV.VvVSigil.ExistsOn(mobile))
+                else if (VvVSigil.ExistsOn(mobile))
                 {
                     checkLists = PMList.SigilLists;
                 }
@@ -643,7 +646,7 @@ namespace Server.Items
                 m_Mobile.SendLocalizedMessage(1019004); // You are not allowed to travel there.
                 return;
             }
-            else if (Engines.VvV.VvVSigil.ExistsOn(m_Mobile) && map != Engines.VvV.ViceVsVirtueSystem.Facet)
+            else if (VvVSigil.ExistsOn(m_Mobile) && map != ViceVsVirtueSystem.Facet)
             {
                 m_Mobile.SendLocalizedMessage(1019004); // You are not allowed to travel there.
                 return;

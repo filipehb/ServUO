@@ -1,10 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using Server.Commands;
 using Server.Engines.Points;
 using Server.Gumps;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Server.Targeting;
 
 //TODO: Party: 1152064 You cannot invite other players in an arena to your party!
 namespace Server.Engines.ArenaSystem
@@ -317,8 +319,8 @@ namespace Server.Engines.ArenaSystem
             if (one.NetState == null || two.NetState == null || one.AccessLevel > AccessLevel.Player || two.AccessLevel > AccessLevel.Player)
                 return false;
 
-            System.Net.IPAddress oneAddress = one.NetState.Address;
-            System.Net.IPAddress twoAddress = two.NetState.Address;
+            IPAddress oneAddress = one.NetState.Address;
+            IPAddress twoAddress = two.NetState.Address;
 
             return one.NetState.Address == two.NetState.Address;
         }
@@ -391,7 +393,7 @@ namespace Server.Engines.ArenaSystem
         {
             Mobile m = e.Mobile;
 
-            m.BeginTarget(-1, false, Targeting.TargetFlags.None, (fro, targeted) =>
+            m.BeginTarget(-1, false, TargetFlags.None, (fro, targeted) =>
                 {
                     if (m is PlayerMobile && targeted is ArenaStone)
                     {

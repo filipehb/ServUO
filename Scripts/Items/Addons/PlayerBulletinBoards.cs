@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -266,19 +266,22 @@ namespace Server.Items
                     from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
                     return;
                 }
-                else if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
+
+                if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
                 {
-                    from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
-                    return;
+	                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+	                return;
                 }
-                else if (!board.CheckAccess(house, from))
+
+                if (!board.CheckAccess(house, from))
                 {
-                    from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
-                    return;
+	                from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
+	                return;
                 }
-                else if (m_Greeting && !board.CanPostGreeting(house, from))
+
+                if (m_Greeting && !board.CanPostGreeting(house, from))
                 {
-                    return;
+	                return;
                 }
 
                 text = text.Trim();
@@ -342,15 +345,17 @@ namespace Server.Items
                     from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
                     return;
                 }
-                else if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
+
+                if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
                 {
-                    from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
-                    return;
+	                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+	                return;
                 }
-                else if (!board.CheckAccess(house, from))
+
+                if (!board.CheckAccess(house, from))
                 {
-                    from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
-                    return;
+	                from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
+	                return;
                 }
 
                 text = text.Trim();
@@ -548,15 +553,17 @@ namespace Server.Items
                 from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
                 return;
             }
-            else if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
+
+            if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
             {
-                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
-                return;
+	            from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+	            return;
             }
-            else if (!board.CheckAccess(house, from))
+
+            if (!board.CheckAccess(house, from))
             {
-                from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
-                return;
+	            from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
+	            return;
             }
 
             switch (info.ButtonID)

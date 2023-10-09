@@ -1,10 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.Craft;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -28,50 +28,60 @@ namespace Server.Items
             {
                 return false;
             }
-            else if (f.Skill == 2 && recipe.Skill != RecipeSkillName.Tailoring)
+
+            if (f.Skill == 2 && recipe.Skill != RecipeSkillName.Tailoring)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 3 && recipe.Skill != RecipeSkillName.Fletching)
+
+            if (f.Skill == 3 && recipe.Skill != RecipeSkillName.Fletching)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 4 && recipe.Skill != RecipeSkillName.Carpentry && recipe.Skill != RecipeSkillName.Masonry)
+
+            if (f.Skill == 4 && recipe.Skill != RecipeSkillName.Carpentry && recipe.Skill != RecipeSkillName.Masonry)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 5 && recipe.Skill != RecipeSkillName.Inscription)
+
+            if (f.Skill == 5 && recipe.Skill != RecipeSkillName.Inscription)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 6 && recipe.Skill != RecipeSkillName.Cooking)
+
+            if (f.Skill == 6 && recipe.Skill != RecipeSkillName.Cooking)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 7 && recipe.Skill != RecipeSkillName.Alchemy)
+
+            if (f.Skill == 7 && recipe.Skill != RecipeSkillName.Alchemy)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 8 && recipe.Skill != RecipeSkillName.Tinkering)
+
+            if (f.Skill == 8 && recipe.Skill != RecipeSkillName.Tinkering)
             {
-                return false;
+	            return false;
             }
-            else if (f.Skill == 9 && recipe.Skill != RecipeSkillName.Cartography)
+
+            if (f.Skill == 9 && recipe.Skill != RecipeSkillName.Cartography)
             {
-                return false;
+	            return false;
             }
 
             if (f.Expansion == 1 && recipe.Expansion != Expansion.ML)
             {
                 return false;
             }
-            else if (f.Expansion == 2 && recipe.Expansion != Expansion.SA)
+
+            if (f.Expansion == 2 && recipe.Expansion != Expansion.SA)
             {
-                return false;
+	            return false;
             }
-            else if (f.Expansion == 3 && recipe.Expansion != Expansion.TOL)
+
+            if (f.Expansion == 3 && recipe.Expansion != Expansion.TOL)
             {
-                return false;
+	            return false;
             }
 
 

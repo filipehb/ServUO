@@ -1,14 +1,14 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Mobiles
 {
     [CorpseName("a Niporailem corpse")]
     public class Niporailem : BaseSABoss
     {
-        public override Type[] UniqueSAList => new Type[]
+        public override Type[] UniqueSAList => new[]
         {
           typeof(HelmOfVillainousEpiphany),
           typeof(GorgetOfVillainousEpiphany),
@@ -36,7 +36,7 @@ namespace Server.Mobiles
           typeof(GargishLegsOfVirtuousEpiphany)
         };
 
-        public override Type[] SharedSAList => new Type[]
+        public override Type[] SharedSAList => new[]
         {
             typeof(BladeOfBattle),
             typeof(DemonBridleRing),

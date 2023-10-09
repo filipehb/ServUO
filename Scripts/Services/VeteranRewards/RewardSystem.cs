@@ -1,8 +1,11 @@
-using Server.Accounting;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Accounting;
+using Server.Engines.Auction;
+using Server.Engines.Plants;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.VeteranRewards
 {
@@ -314,7 +317,7 @@ namespace Server.Engines.VeteranRewards
             RewardCategory houseAddOns = new RewardCategory(1049754);
             RewardCategory miscellaneous = new RewardCategory(1078596);
 
-            m_Categories = new RewardCategory[]
+            m_Categories = new[]
             {
                 monsterStatues,
                 cloaksAndRobes,
@@ -341,9 +344,9 @@ namespace Server.Engines.VeteranRewards
             const int GreenForest = 0x4A9;
             const int RoyalBlue = 0x538;
 
-            m_Lists = new RewardList[]
+            m_Lists = new[]
             {
-                new RewardList(RewardInterval, 1, new RewardEntry[]
+                new RewardList(RewardInterval, 1, new[]
                 {
                     new RewardEntry(specialDyeTubs, 1006008, typeof(RewardBlackDyeTub)),
                     new RewardEntry(specialDyeTubs, 1006013, typeof(FurnitureDyeTub)),
@@ -391,9 +394,9 @@ namespace Server.Engines.VeteranRewards
 
                     new RewardEntry(miscellaneous,    1123603,  typeof(CoralTheOwl)),
                     new RewardEntry(miscellaneous,    1151769,  typeof(GreaterBraceletOfBinding)),
-                    new RewardEntry(miscellaneous,    1156371,  typeof(Auction.AuctionSafeDeed))
+                    new RewardEntry(miscellaneous,    1156371,  typeof(AuctionSafeDeed))
                 }),
-                new RewardList(RewardInterval, 2, new RewardEntry[]
+                new RewardList(RewardInterval, 2, new[]
                 {
                     new RewardEntry(specialDyeTubs, 1006052, typeof(LeatherDyeTub)),
 
@@ -417,7 +420,7 @@ namespace Server.Engines.VeteranRewards
                     new RewardEntry(houseAddOns,    1006049, typeof(FlamingHeadDeed)),
                     new RewardEntry(houseAddOns,    1080409, typeof(MinotaurStatueDeed))
                 }),
-                new RewardList(RewardInterval, 3, new RewardEntry[]
+                new RewardList(RewardInterval, 3, new[]
                 {
                     new RewardEntry(cloaksAndRobes, 1006020, typeof(RewardCloak), Verite, 1041294),
                     new RewardEntry(cloaksAndRobes, 1006021, typeof(RewardRobe), Verite, 1041295),
@@ -443,7 +446,7 @@ namespace Server.Engines.VeteranRewards
 
                     new RewardEntry(houseAddOns,    1080407, typeof(PottedCactusDeed))
                 }),
-                new RewardList(RewardInterval, 4, new RewardEntry[]
+                new RewardList(RewardInterval, 4, new[]
                 {
                     new RewardEntry(specialDyeTubs, 1049740, typeof(RunebookDyeTub)),
 
@@ -479,10 +482,10 @@ namespace Server.Engines.VeteranRewards
                     new RewardEntry(houseAddOns,    1049737, typeof(DecorativeShieldDeed)),
                     new RewardEntry(houseAddOns,    1049738, typeof(HangingSkeletonDeed)),
 
-                    new RewardEntry(miscellaneous,  1098160, typeof(Plants.SeedBox)),
+                    new RewardEntry(miscellaneous,  1098160, typeof(SeedBox)),
                     new RewardEntry(miscellaneous,  1158880, typeof(EmbroideryTool))
                 }),
-                new RewardList(RewardInterval, 5, new RewardEntry[]
+                new RewardList(RewardInterval, 5, new[]
                 {
                     new RewardEntry(specialDyeTubs, 1049741, typeof(StatuetteDyeTub)),
                     new RewardEntry(specialDyeTubs, 1153495, typeof(MetallicLeatherDyeTub)),
@@ -515,14 +518,14 @@ namespace Server.Engines.VeteranRewards
                     new RewardEntry(houseAddOns,    1154582, typeof(LighthouseAddonDeed)),
                     new RewardEntry(houseAddOns,    1158860, typeof(RepairBenchDeed))
                 }),
-                new RewardList(RewardInterval, 6, new RewardEntry[]
+                new RewardList(RewardInterval, 6, new[]
                 {
                     new RewardEntry(houseAddOns,    1076188, typeof(CharacterStatueMaker), StatueType.Jade),
                     new RewardEntry(houseAddOns,    1076189, typeof(CharacterStatueMaker), StatueType.Marble),
                     new RewardEntry(houseAddOns,    1076190, typeof(CharacterStatueMaker), StatueType.Bronze),
                     new RewardEntry(houseAddOns,    1080527, typeof(RewardBrazierDeed))
                 }),
-                new RewardList(RewardInterval, 7, new RewardEntry[]
+                new RewardList(RewardInterval, 7, new[]
                 {
                     new RewardEntry(houseAddOns,    1076157, typeof(CannonDeed)),
                     new RewardEntry(houseAddOns,    1080550, typeof(TreeStumpDeed)),
@@ -536,19 +539,19 @@ namespace Server.Engines.VeteranRewards
                     new RewardEntry(houseAddOns,    1157989, typeof(WritingDeskDeed)),
                     new RewardEntry(houseAddOns,    1125529, typeof(TinkerBenchDeed))
                 }),
-                new RewardList(RewardInterval, 8, new RewardEntry[]
+                new RewardList(RewardInterval, 8, new[]
                 {
                     new RewardEntry(miscellaneous,  1076158, typeof(WeaponEngravingTool)),
                     new RewardEntry(houseAddOns,   1153535, typeof(DaviesLockerAddonDeed)),
                     new RewardEntry(houseAddOns,   1154583, typeof(GadgetryTableAddonDeed))
                 }),
-                new RewardList(RewardInterval, 9, new RewardEntry[]
+                new RewardList(RewardInterval, 9, new[]
                 {
                     new RewardEntry(monsterStatues, 1153592, typeof(MonsterStatuette), MonsterStatuetteType.Virtuebane),
                     new RewardEntry(etherealSteeds, 1076159, typeof(RideablePolarBear)),
                     new RewardEntry(houseAddOns,    1080549, typeof(WallBannerDeed))
                 }),
-                new RewardList(RewardInterval, 10, new RewardEntry[]
+                new RewardList(RewardInterval, 10, new[]
                 {
                     new RewardEntry(monsterStatues, 1080520, typeof(MonsterStatuette), MonsterStatuetteType.Harrower),
                     new RewardEntry(monsterStatues, 1080521, typeof(MonsterStatuette), MonsterStatuetteType.Efreet),
@@ -574,7 +577,7 @@ namespace Server.Engines.VeteranRewards
                     new RewardEntry(houseAddOns,    1157996, typeof(KoiPondDeed)),
                     new RewardEntry(houseAddOns,    1158881, typeof(WaterWheelDeed))
                 }),
-                new RewardList(RewardInterval, 11, new RewardEntry[]
+                new RewardList(RewardInterval, 11, new[]
                 {
                     new RewardEntry(etherealSteeds, 1113908, typeof(EtherealReptalon)),
 
@@ -589,7 +592,7 @@ namespace Server.Engines.VeteranRewards
 
                     new RewardEntry(miscellaneous,  1113814, typeof(EtherealRetouchingTool))
                 }),
-                new RewardList(RewardInterval, 12, new RewardEntry[]
+                new RewardList(RewardInterval, 12, new[]
                 {
                     new RewardEntry(etherealSteeds, 1113813, typeof(EtherealHiryu)),
 
@@ -603,12 +606,12 @@ namespace Server.Engines.VeteranRewards
 
                     new RewardEntry(houseAddOns,    1113954, typeof(AllegiancePouch))
                 }),
-                new RewardList(RewardInterval, 13, new RewardEntry[]
+                new RewardList(RewardInterval, 13, new[]
                 {
                     new RewardEntry(etherealSteeds, 1150006, typeof(EtherealBoura)),
                     new RewardEntry(monsterStatues, 1153594, typeof(MonsterStatuette), MonsterStatuetteType.Exodus)
                 }),
-                new RewardList(RewardInterval, 15, new RewardEntry[]
+                new RewardList(RewardInterval, 15, new[]
                 {
                     new RewardEntry(etherealSteeds, 1154589, typeof(EtherealTiger)),
                     new RewardEntry(etherealSteeds, 1155723, typeof(EtherealAncientHellHound)),
@@ -617,7 +620,7 @@ namespace Server.Engines.VeteranRewards
 
                     new RewardEntry(houseAddOns,    1153491, typeof(GardenShedDeed))
                 }),
-                new RewardList(RewardInterval, 20, new RewardEntry[]
+                new RewardList(RewardInterval, 20, new[]
                 {
                     new RewardEntry(etherealSteeds, 1157995, typeof(EtherealSerpentineDragon))
                 })
@@ -648,7 +651,7 @@ namespace Server.Engines.VeteranRewards
 
             if (e.Mobile is PlayerMobile && !((PlayerMobile)e.Mobile).HasStatReward && HasHalfLevel(e.Mobile))
             {
-                Gumps.BaseGump.SendGump(new StatRewardGump((PlayerMobile)e.Mobile));
+                BaseGump.SendGump(new StatRewardGump((PlayerMobile)e.Mobile));
             }
 
             if (cur < max)

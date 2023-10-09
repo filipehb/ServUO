@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.NewMagincia
 {
@@ -99,7 +100,7 @@ namespace Server.Engines.NewMagincia
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
 
                     if (amount > 0)
@@ -116,7 +117,7 @@ namespace Server.Engines.NewMagincia
                     {
                         amount1 = Convert.ToInt32(text2);
                     }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                    catch (Exception e) { ExceptionLogging.LogException(e); }
 
                     if (amount1 > 0)
                     {
@@ -147,13 +148,13 @@ namespace Server.Engines.NewMagincia
                     m_Broker.CheckInventory();
                     if (m_Broker.BrokerEntries.Count > 0)
                     {
-                        if (m_Broker.BankBalance < 0)
+	                    if (m_Broker.BankBalance < 0)
                         {
                             from.SendGump(new BazaarInformationGump(1150623, 1150615));
                             return;
                         }
-                        else
-                            from.SendGump(new SetPetPricesGump(m_Broker));
+
+	                    from.SendGump(new SetPetPricesGump(m_Broker));
                     }
                     else
                         from.SendLocalizedMessage(1150336); // The animal broker has no pets in its inventory.
@@ -220,45 +221,46 @@ namespace Server.Engines.NewMagincia
                 from.SendGump(new PetBrokerGump(m_Broker, from));
                 return;
             }
-            else if (info.ButtonID == 501) // ADD PET
+
+            if (info.ButtonID == 501) // ADD PET
             {
-                if (m_Index >= 0 && m_Index < m_List.Count)
-                {
-                    if (m_Broker.BankBalance < 0)
-                    {
-                        from.SendGump(new BazaarInformationGump(1150623, 1150615));
-                        return;
-                    }
+	            if (m_Index >= 0 && m_Index < m_List.Count)
+	            {
+		            if (m_Broker.BankBalance < 0)
+		            {
+			            from.SendGump(new BazaarInformationGump(1150623, 1150615));
+			            return;
+		            }
 
-                    TextRelay relay = info.TextEntries[0];
-                    int cost = PetBrokerEntry.DefaultPrice;
+		            TextRelay relay = info.TextEntries[0];
+		            int cost = PetBrokerEntry.DefaultPrice;
 
-                    try
-                    {
-                        cost = Convert.ToInt32(relay.Text);
-                    }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+		            try
+		            {
+			            cost = Convert.ToInt32(relay.Text);
+		            }
+		            catch (Exception e) { ExceptionLogging.LogException(e); }
 
-                    if (cost > 0)
-                    {
-                        BaseCreature bc = m_List[m_Index];
+		            if (cost > 0)
+		            {
+			            BaseCreature bc = m_List[m_Index];
 
-                        if (m_Broker.TryAddEntry(bc, from, cost))
-                        {
-                            from.Stabled.Remove(bc);
-                            from.SendGump(new SetPetPricesGump(m_Broker));
-                            from.SendLocalizedMessage(1150345, string.Format("{0}\t{1}\t{2}\t{3}", PetBrokerEntry.GetOriginalName(bc), bc.Name, m_Broker.Name, cost)); // Your pet ~1_TYPE~ named ~2_NAME~ has been transferred to the inventory of your animal broker named ~3_SHOP~ with an asking price of ~4_PRICE~.
-                        }
-                    }
-                    else
-                        from.SendLocalizedMessage(1150343); // You have entered an invalid price.
+			            if (m_Broker.TryAddEntry(bc, from, cost))
+			            {
+				            from.Stabled.Remove(bc);
+				            from.SendGump(new SetPetPricesGump(m_Broker));
+				            from.SendLocalizedMessage(1150345, string.Format("{0}\t{1}\t{2}\t{3}", PetBrokerEntry.GetOriginalName(bc), bc.Name, m_Broker.Name, cost)); // Your pet ~1_TYPE~ named ~2_NAME~ has been transferred to the inventory of your animal broker named ~3_SHOP~ with an asking price of ~4_PRICE~.
+			            }
+		            }
+		            else
+			            from.SendLocalizedMessage(1150343); // You have entered an invalid price.
 
-                }
-                else
-                    from.SendLocalizedMessage(1150341); // You did not select a pet.	
+	            }
+	            else
+		            from.SendLocalizedMessage(1150341); // You did not select a pet.	
             }
             else
-                from.SendGump(new SelectPetsGump(m_Broker, from, info.ButtonID - 1));
+	            from.SendGump(new SelectPetsGump(m_Broker, from, info.ButtonID - 1));
         }
 
         public List<BaseCreature> GetList(Mobile from)
@@ -336,33 +338,34 @@ namespace Server.Engines.NewMagincia
                 from.SendGump(new PetBrokerGump(m_Broker, from));
                 return;
             }
-            else if (info.ButtonID == 501) // REMOVE PET
+
+            if (info.ButtonID == 501) // REMOVE PET
             {
-                if (m_Index >= 0 && m_Index < m_Broker.BrokerEntries.Count)
-                {
-                    PetBrokerEntry entry = m_Broker.BrokerEntries[m_Index];
+	            if (m_Index >= 0 && m_Index < m_Broker.BrokerEntries.Count)
+	            {
+		            PetBrokerEntry entry = m_Broker.BrokerEntries[m_Index];
 
-                    if (from.Stabled.Count >= AnimalTrainer.GetMaxStabled(from) || entry.Pet == null)
-                        from.SendLocalizedMessage(1150634); // Failed to transfer the selected pet to your stables. Either the pet is no longer in the broker's inventory, or you do not have any available stable slots.
-                    else
-                    {
-                        BaseCreature bc = entry.Pet;
-                        m_Broker.RemoveEntry(entry);
+		            if (from.Stabled.Count >= AnimalTrainer.GetMaxStabled(from) || entry.Pet == null)
+			            from.SendLocalizedMessage(1150634); // Failed to transfer the selected pet to your stables. Either the pet is no longer in the broker's inventory, or you do not have any available stable slots.
+		            else
+		            {
+			            BaseCreature bc = entry.Pet;
+			            m_Broker.RemoveEntry(entry);
 
-                        PetBroker.SendToStables(from, bc);
+			            PetBroker.SendToStables(from, bc);
 
-                        from.SendLocalizedMessage(1150635, string.Format("{0}\t{1}", entry.TypeName, bc.Name)); // Your pet ~1_TYPE~ named ~2_NAME~ has been transferred to the stables.
-                        from.SendGump(new PetBrokerGump(m_Broker, from));
-                        return;
-                    }
-                }
-                else
-                    from.SendLocalizedMessage(1150341); // You did not select a pet.
+			            from.SendLocalizedMessage(1150635, string.Format("{0}\t{1}", entry.TypeName, bc.Name)); // Your pet ~1_TYPE~ named ~2_NAME~ has been transferred to the stables.
+			            from.SendGump(new PetBrokerGump(m_Broker, from));
+			            return;
+		            }
+	            }
+	            else
+		            from.SendLocalizedMessage(1150341); // You did not select a pet.
 
-                from.SendGump(new RemovePetsGump(m_Broker, from, m_Index));
+	            from.SendGump(new RemovePetsGump(m_Broker, from, m_Index));
             }
             else
-                from.SendGump(new RemovePetsGump(m_Broker, from, info.ButtonID - 1));
+	            from.SendGump(new RemovePetsGump(m_Broker, from, info.ButtonID - 1));
         }
     }
 
@@ -436,7 +439,7 @@ namespace Server.Engines.NewMagincia
                             {
                                 amount = Convert.ToInt32(relay.Text);
                             }
-                            catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                            catch (Exception e) { ExceptionLogging.LogException(e); }
 
                             if (amount > 0)
                                 entry.SalePrice = amount;

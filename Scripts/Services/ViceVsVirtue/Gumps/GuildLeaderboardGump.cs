@@ -1,9 +1,10 @@
-using Server.Gumps;
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.VvV
 {
@@ -27,9 +28,9 @@ namespace Server.Engines.VvV
 
             AddHtmlLocalized(10, 55, 60, 20, 1114981, 0xFFFF, false, false); // <DIV ALIGN=CENTER>#:</DIV>
             AddHtmlLocalized(50, 55, 180, 20, 1114978, 0xFFFF, false, false); // <DIV ALIGN=CENTER>Guild:</DIV>
-            AddHtmlLocalized(230, 55, 100, 20, 1114977, Filter == Filter.Score ? Quests.BaseQuestGump.C32216(0x00FA9A) : 0xFFFF, false, false); // <DIV ALIGN=RIGHT>Score:</DIV>
-            AddHtmlLocalized(330, 55, 85, 20, 1114975, Filter == Filter.Kills ? Quests.BaseQuestGump.C32216(0x00FA9A) : 0xFFFF, false, false); // <DIV ALIGN=RIGHT>Kills:</DIV>
-            AddHtmlLocalized(425, 55, 95, 20, 1155575, Filter == Filter.ReturnedSigils ? Quests.BaseQuestGump.C32216(0x00FA9A) : 0xFFFF, false, false); // <DIV ALIGN=RIGHT>Returned Sigil:</DIV>
+            AddHtmlLocalized(230, 55, 100, 20, 1114977, Filter == Filter.Score ? BaseQuestGump.C32216(0x00FA9A) : 0xFFFF, false, false); // <DIV ALIGN=RIGHT>Score:</DIV>
+            AddHtmlLocalized(330, 55, 85, 20, 1114975, Filter == Filter.Kills ? BaseQuestGump.C32216(0x00FA9A) : 0xFFFF, false, false); // <DIV ALIGN=RIGHT>Kills:</DIV>
+            AddHtmlLocalized(425, 55, 95, 20, 1155575, Filter == Filter.ReturnedSigils ? BaseQuestGump.C32216(0x00FA9A) : 0xFFFF, false, false); // <DIV ALIGN=RIGHT>Returned Sigil:</DIV>
 
             if (Filter != Filter.Score)
                 AddButton(330, 55, 2437, 2438, 1, GumpButtonType.Reply, 0);
@@ -74,7 +75,7 @@ namespace Server.Engines.VvV
             {
                 VvVGuildStats entry = list[i];
 
-                AddHtml(10, y, 65, 20, CenterGray((i + 1).ToString() + "."), false, false);
+                AddHtml(10, y, 65, 20, CenterGray((i + 1) + "."), false, false);
                 AddHtml(50, y, 180, 20, CenterGray(entry.Guild == null ? "" : entry.Guild.Name), false, false);
                 AddHtml(230, y, 100, 20, Filter == Filter.Score ? RightGreen(entry.Score.ToString()) : RightGray(entry.Score.ToString()), false, false);
                 AddHtml(330, y, 85, 20, Filter == Filter.Kills ? RightGreen(entry.Kills.ToString()) : RightGray(entry.Kills.ToString()), false, false);
@@ -109,8 +110,7 @@ namespace Server.Engines.VvV
         {
             switch (info.ButtonID)
             {
-                default: break;
-                case 1:
+	            case 1:
                 case 2:
                 case 3:
                     Filter f = (Filter)info.ButtonID - 1;

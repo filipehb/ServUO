@@ -90,8 +90,7 @@ namespace Server.Items
             return total;
         }
 
-        private static readonly Type[] m_Bandage = new Type[]
-        {
+        private static readonly Type[] m_Bandage = {
             typeof(Bandage), typeof(EnhancedBandage)
         };
 
@@ -138,8 +137,7 @@ namespace Server.Items
 
                 if (item.Amount + currentAmount <= MaxBandage)
                     return base.CheckHold(m, item, message, checkItems, plusItems, plusWeight);
-                else
-                    m.SendLocalizedMessage(1080017); // That container cannot hold more items.
+                m.SendLocalizedMessage(1080017); // That container cannot hold more items.
             }
 
             return false;

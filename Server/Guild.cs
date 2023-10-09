@@ -1,5 +1,8 @@
 #region References
+
+using System;
 using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Guilds
@@ -107,7 +110,7 @@ namespace Server.Guilds
 
 		public override string ToString()
 		{
-			return System.String.Format("0x{0:X} \"{1} [{2}]\"", m_Id, Name, Abbreviation);
+			return String.Format("0x{0:X} \"{1} [{2}]\"", m_Id, Name, Abbreviation);
 		}
 	}
 }

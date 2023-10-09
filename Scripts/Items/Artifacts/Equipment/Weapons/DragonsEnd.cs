@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public DragonsEnd()
-            : base()
         {
             Hue = 0x554;
             Slayer = SlayerName.DragonSlaying;

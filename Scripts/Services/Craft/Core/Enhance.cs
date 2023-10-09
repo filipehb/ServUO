@@ -1,8 +1,9 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells.Mysticism;
+using Server.Targeting;
 
 namespace Server.Engines.Craft
 {
@@ -73,7 +74,7 @@ namespace Server.Engines.Craft
                     return EnhanceResult.BadItem;
             }
 
-            if (item is BaseWeapon && Spells.Mysticism.EnchantSpell.IsUnderSpellEffects(from, (BaseWeapon)item))
+            if (item is BaseWeapon && EnchantSpell.IsUnderSpellEffects(from, (BaseWeapon)item))
                 return EnhanceResult.Enchanted;
 
             if (CraftResources.IsStandard(resource))

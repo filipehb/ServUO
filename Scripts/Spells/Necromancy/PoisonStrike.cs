@@ -1,8 +1,8 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells.SkillMasteries;
 using Server.Targeting;
-using System;
 
 namespace Server.Spells.Necromancy
 {

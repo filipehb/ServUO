@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Network;
-using System;
 
 namespace Server.Mobiles
 {
@@ -133,10 +133,9 @@ namespace Server.Mobiles
 
         public override bool IsEnemy(Mobile m)
         {
-            if (SolenHelper.CheckRedFriendship(m))
+	        if (SolenHelper.CheckRedFriendship(m))
                 return false;
-            else
-                return base.IsEnemy(m);
+	        return base.IsEnemy(m);
         }
 
         public override void OnDamage(int amount, Mobile from, bool willKill)

@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
-using System.Collections.Generic;
 
 namespace Server.Engines.Auction
 {
@@ -45,10 +45,8 @@ namespace Server.Engines.Auction
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public void OnAuctionTray()

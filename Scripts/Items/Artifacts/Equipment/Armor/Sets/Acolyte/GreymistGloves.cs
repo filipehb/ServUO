@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public GreymistGloves()
-            : base()
         {
             SetHue = 0xCB;
 

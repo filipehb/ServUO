@@ -1,22 +1,27 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Server.Accounting;
 using Server.ContextMenus;
 using Server.Engines.Craft;
+using Server.Engines.VvV;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
 using Server.Services.Virtues;
 using Server.Spells;
 using Server.Spells.Bushido;
 using Server.Spells.Chivalry;
+using Server.Spells.Fourth;
+using Server.Spells.Mysticism;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Spells.Sixth;
 using Server.Spells.SkillMasteries;
 using Server.Spells.Spellweaving;
-using Server.Misc;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 #endregion
 
 namespace Server.Items
@@ -556,7 +561,7 @@ namespace Server.Items
             set { m_DImodded = value; }
         }
 
-        public int[] BaseResists => new int[] { 0, 0, 0, 0, 0 };
+        public int[] BaseResists => new[] { 0, 0, 0, 0, 0 };
 
         public virtual void OnAfterImbued(Mobile m, int mod, int value)
         {
@@ -762,10 +767,11 @@ namespace Server.Items
                 m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 500214); // You already have something in both hands.
                 return true;
             }
-            else if (Layer == Layer.OneHanded && layer == Layer.TwoHanded && !(item is BaseShield) && !(item is BaseEquipableLight))
+
+            if (Layer == Layer.OneHanded && layer == Layer.TwoHanded && !(item is BaseShield) && !(item is BaseEquipableLight))
             {
-                m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 500215); // // You can only wield one weapon at a time.
-                return true;
+	            m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 500215); // // You can only wield one weapon at a time.
+	            return true;
             }
 
             return false;
@@ -783,7 +789,7 @@ namespace Server.Items
 
                 if (this is IAccountRestricted && ((IAccountRestricted)this).Account != null)
                 {
-                    Accounting.Account acct = from.Account as Accounting.Account;
+                    Account acct = from.Account as Account;
 
                     if (acct == null || acct.Username != ((IAccountRestricted)this).Account)
                     {
@@ -792,7 +798,7 @@ namespace Server.Items
                     }
                 }
 
-                if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(from))
+                if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(from))
                 {
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
@@ -803,36 +809,39 @@ namespace Server.Items
             {
                 return false;
             }
-            else if (from.Dex < DexRequirement)
-            {
-                from.SendLocalizedMessage(1071936); // You cannot equip that.
-                return false;
-            }
-            else if (from.Str < AOS.Scale(StrRequirement, 100 - GetLowerStatReq()))
-            {
-                from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
-                return false;
-            }
-            else if (from.Int < IntRequirement)
-            {
-                from.SendLocalizedMessage(1071936); // You cannot equip that.
-                return false;
-            }
-            else if (!from.CanBeginAction(typeof(BaseWeapon)))
-            {
-                from.SendLocalizedMessage(3000201); // You must wait to perform another action.
-                return false;
-            }
-            else if (BlessedBy != null && BlessedBy != from)
-            {
-                from.SendLocalizedMessage(1075277); // That item is blessed by another player.
 
-                return false;
-            }
-            else
+            if (from.Dex < DexRequirement)
             {
-                return base.CanEquip(from);
+	            from.SendLocalizedMessage(1071936); // You cannot equip that.
+	            return false;
             }
+
+            if (from.Str < AOS.Scale(StrRequirement, 100 - GetLowerStatReq()))
+            {
+	            from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
+	            return false;
+            }
+
+            if (from.Int < IntRequirement)
+            {
+	            from.SendLocalizedMessage(1071936); // You cannot equip that.
+	            return false;
+            }
+
+            if (!from.CanBeginAction(typeof(BaseWeapon)))
+            {
+	            from.SendLocalizedMessage(3000201); // You must wait to perform another action.
+	            return false;
+            }
+
+            if (BlessedBy != null && BlessedBy != from)
+            {
+	            from.SendLocalizedMessage(1075277); // That item is blessed by another player.
+
+	            return false;
+            }
+
+            return base.CanEquip(from);
         }
 
         public override bool OnEquip(Mobile from)
@@ -949,7 +958,7 @@ namespace Server.Items
                 m_AosSkillBonuses.Remove();
 
                 ImmolatingWeaponSpell.StopImmolating(this, (Mobile)parent);
-                Spells.Mysticism.EnchantSpell.OnWeaponRemoved(this, m);
+                EnchantSpell.OnWeaponRemoved(this, m);
 
                 if (FocusWeilder != null)
                     FocusWeilder = null;
@@ -1323,14 +1332,12 @@ namespace Server.Items
 
         public virtual int GetMissAttackSound(Mobile attacker, Mobile defender)
         {
-            if (attacker.GetAttackSound() == -1)
+	        if (attacker.GetAttackSound() == -1)
             {
                 return MissSound;
             }
-            else
-            {
-                return -1;
-            }
+
+	        return -1;
         }
 
         public virtual int GetMissDefendSound(Mobile attacker, Mobile defender)
@@ -1393,63 +1400,64 @@ namespace Server.Items
 
                 return success;
             }
-            else if (!(defender.Weapon is Fists) && !(defender.Weapon is BaseRanged))
+
+            if (!(defender.Weapon is Fists) && !(defender.Weapon is BaseRanged))
             {
-                BaseWeapon weapon = defender.Weapon as BaseWeapon;
+	            BaseWeapon weapon = defender.Weapon as BaseWeapon;
 
-                if (weapon.Attributes.BalancedWeapon > 0)
-                {
-                    return false;
-                }
+	            if (weapon.Attributes.BalancedWeapon > 0)
+	            {
+		            return false;
+	            }
 
-                double divisor = (weapon.Layer == Layer.OneHanded && defender.Player) ? 48000.0 : 41140.0;
+	            double divisor = (weapon.Layer == Layer.OneHanded && defender.Player) ? 48000.0 : 41140.0;
 
-                double chance = (parry * bushido) / divisor;
+	            double chance = (parry * bushido) / divisor;
 
-                double aosChance = parry / 800.0;
+	            double aosChance = parry / 800.0;
 
-                // Parry or Bushido over 100 grant a 5% bonus.
-                if (parry >= 100.0)
-                {
-                    chance += 0.05;
-                    aosChance += 0.05;
-                }
-                else if (bushido >= 100.0)
-                {
-                    chance += 0.05;
-                }
+	            // Parry or Bushido over 100 grant a 5% bonus.
+	            if (parry >= 100.0)
+	            {
+		            chance += 0.05;
+		            aosChance += 0.05;
+	            }
+	            else if (bushido >= 100.0)
+	            {
+		            chance += 0.05;
+	            }
 
-                // Evasion grants a variable bonus post ML. 50% prior.
-                if (Evasion.IsEvading(defender))
-                {
-                    chance *= Evasion.GetParryScalar(defender);
-                }
+	            // Evasion grants a variable bonus post ML. 50% prior.
+	            if (Evasion.IsEvading(defender))
+	            {
+		            chance *= Evasion.GetParryScalar(defender);
+	            }
 
-                // Low dexterity lowers the chance.
-                if (defender.Dex < 80)
-                {
-                    chance = chance * (20 + defender.Dex) / 100;
-                }
+	            // Low dexterity lowers the chance.
+	            if (defender.Dex < 80)
+	            {
+		            chance = chance * (20 + defender.Dex) / 100;
+	            }
 
-                bool success;
+	            bool success;
 
-                if (chance > aosChance)
-                {
-                    success = defender.CheckSkill(SkillName.Parry, chance);
-                }
-                else
-                {
-                    success = (aosChance > Utility.RandomDouble());
-                    // Only skillcheck if wielding a shield & there's no effect from Bushido
-                }
+	            if (chance > aosChance)
+	            {
+		            success = defender.CheckSkill(SkillName.Parry, chance);
+	            }
+	            else
+	            {
+		            success = (aosChance > Utility.RandomDouble());
+		            // Only skillcheck if wielding a shield & there's no effect from Bushido
+	            }
 
-                if (success)
-                {
-                    weapon.LastParryChance = (int)(chance * 100);
-                    weapon.InvalidateProperties();
-                }
+	            if (success)
+	            {
+		            weapon.LastParryChance = (int)(chance * 100);
+		            weapon.InvalidateProperties();
+	            }
 
-                return success;
+	            return success;
             }
 
             return false;
@@ -1565,7 +1573,7 @@ namespace Server.Items
             return items[Utility.Random(items.Length)];
         }
 
-        private readonly List<Layer> _DamageLayers = new List<Layer>()
+        private readonly List<Layer> _DamageLayers = new List<Layer>
         {
             Layer.FirstValid,
             Layer.OneHanded,
@@ -1656,17 +1664,20 @@ namespace Server.Items
             {
                 return 100;
             }
-            else if (inPack >= 4)
+
+            if (inPack >= 4)
             {
-                return 75;
+	            return 75;
             }
-            else if (inPack >= 3)
+
+            if (inPack >= 3)
             {
-                return 50;
+	            return 50;
             }
-            else if (inPack >= 2)
+
+            if (inPack >= 2)
             {
-                return 25;
+	            return 25;
             }
 
             return 0;
@@ -2059,7 +2070,7 @@ namespace Server.Items
             percentageBonus = Math.Min(percentageBonus, 300);
 
             // bonus is seprate from weapon damage, ie not capped
-            percentageBonus += Spells.Mysticism.StoneFormSpell.GetMaxResistBonus(attacker);
+            percentageBonus += StoneFormSpell.GetMaxResistBonus(attacker);
 
             damage = AOS.Scale(damage, 100 + percentageBonus);
             #endregion
@@ -2701,7 +2712,7 @@ namespace Server.Items
             int percentage = -10; //(int)(SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
             string args = string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", percentage, percentage, percentage, 10, 10, 10, 10);
 
-            Spells.Fourth.CurseSpell.AddEffect(defender, duration, 10, 10, 10);
+            CurseSpell.AddEffect(defender, duration, 10, 10, 10);
             BuffInfo.AddBuff(defender, new BuffInfo(BuffIcon.Curse, 1075835, 1075836, duration, defender, args));
 
             if (ProcessingMultipleHits)
@@ -2840,15 +2851,16 @@ namespace Server.Items
             {
                 return CheckSlayerResult.Slayer;
             }
-            else if (Slayer3 != TalismanSlayerName.None && TalismanSlayer.Slays(Slayer3, defender))
+
+            if (Slayer3 != TalismanSlayerName.None && TalismanSlayer.Slays(Slayer3, defender))
             {
-                return CheckSlayerResult.Slayer;
+	            return CheckSlayerResult.Slayer;
             }
 
             return CheckSlayerResult.None;
         }
 
-        private readonly List<SlayerName> _SuperSlayers = new List<SlayerName>()
+        private readonly List<SlayerName> _SuperSlayers = new List<SlayerName>
         {
             SlayerName.Repond, SlayerName.Silver, SlayerName.Fey,
             SlayerName.ElementalBan, SlayerName.Exorcism, SlayerName.ArachnidDoom,
@@ -2914,7 +2926,7 @@ namespace Server.Items
         #region Elemental Damage
         public static int[] GetElementDamages(Mobile m)
         {
-            int[] o = new[] { 100, 0, 0, 0, 0, 0, 0 };
+            int[] o = { 100, 0, 0, 0, 0, 0, 0 };
 
             BaseWeapon w = m.Weapon as BaseWeapon ?? Fists;
 
@@ -4594,11 +4606,11 @@ namespace Server.Items
             #region Stygian Abyss
             if (EnchantedWeilder != null)
             {
-                if (Spells.Mysticism.EnchantSpell.IsUnderSpellEffects(EnchantedWeilder, this))
+                if (EnchantSpell.IsUnderSpellEffects(EnchantedWeilder, this))
                 {
-                    bonus = Spells.Mysticism.EnchantSpell.BonusAttribute(EnchantedWeilder);
-                    enchantBonus = Spells.Mysticism.EnchantSpell.BonusValue(EnchantedWeilder);
-                    fcMalus = Spells.Mysticism.EnchantSpell.CastingMalus(EnchantedWeilder, this);
+                    bonus = EnchantSpell.BonusAttribute(EnchantedWeilder);
+                    enchantBonus = EnchantSpell.BonusValue(EnchantedWeilder);
+                    fcMalus = EnchantSpell.CastingMalus(EnchantedWeilder, this);
                 }
             }
             #endregion

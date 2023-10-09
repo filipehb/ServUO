@@ -5,7 +5,6 @@ namespace Server.Items
 
         [Constructable]
         public StolenRing()
-            : base()
         {
             LootType = LootType.Blessed;
             Weight = 1;

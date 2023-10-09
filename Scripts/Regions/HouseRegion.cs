@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Regions
 {
@@ -90,8 +90,7 @@ namespace Server.Regions
             return IsStairArea(item) || m_ItemTypes.Any(t => t == item.GetType() || item.GetType().IsSubclassOf(t));
         }
 
-        private static readonly Type[] m_ItemTypes = new Type[]
-        {
+        private static readonly Type[] m_ItemTypes = {
             typeof(BaseHouse),  typeof(HouseTeleporter),
             typeof(BaseDoor),   typeof(Static),
             typeof(HouseSign)
@@ -248,10 +247,9 @@ namespace Server.Regions
 
         public override bool OnDecay(Item item)
         {
-            if ((House.IsLockedDown(item) || House.IsSecure(item)) && House.IsInside(item))
+	        if ((House.IsLockedDown(item) || House.IsSecure(item)) && House.IsInside(item))
                 return false;
-            else
-                return base.OnDecay(item);
+	        return base.OnDecay(item);
         }
 
         public override TimeSpan GetLogoutDelay(Mobile m)
@@ -314,82 +312,82 @@ namespace Server.Regions
             if (!House.IsInside(from) || !House.IsActive)
                 return;
 
-            else if (e.HasKeyword(0x33)) // remove thyself
+            if (e.HasKeyword(0x33)) // remove thyself
             {
-                from.SendLocalizedMessage(501326); // Target the individual to eject from this house.
-                from.Target = new HouseKickTarget(House);
+	            from.SendLocalizedMessage(501326); // Target the individual to eject from this house.
+	            from.Target = new HouseKickTarget(House);
             }
             else if (e.HasKeyword(0x34)) // I ban thee
             {
-                if (!House.Public)
-                {
-                    from.SendLocalizedMessage(1062521); // You cannot ban someone from a private house.  Revoke their access instead.
-                }
-                else
-                {
-                    from.SendLocalizedMessage(501325); // Target the individual to ban from this house.
-                    from.Target = new HouseBanTarget(true, House);
-                }
+	            if (!House.Public)
+	            {
+		            from.SendLocalizedMessage(1062521); // You cannot ban someone from a private house.  Revoke their access instead.
+	            }
+	            else
+	            {
+		            from.SendLocalizedMessage(501325); // Target the individual to ban from this house.
+		            from.Target = new HouseBanTarget(true, House);
+	            }
             }
             else if (e.HasKeyword(0x23)) // I wish to lock this down
             {
-                from.SendLocalizedMessage(502097); // Lock what down?
-                from.Target = new LockdownTarget(false, House);
+	            from.SendLocalizedMessage(502097); // Lock what down?
+	            from.Target = new LockdownTarget(false, House);
             }
             else if (e.HasKeyword(0x24)) // I wish to release this
             {
-                from.SendLocalizedMessage(502100); // Choose the item you wish to release
-                from.Target = new LockdownTarget(true, House);
+	            from.SendLocalizedMessage(502100); // Choose the item you wish to release
+	            from.Target = new LockdownTarget(true, House);
             }
             else if (e.HasKeyword(0x25)) // I wish to secure this
             {
-                if (isCoOwner)
-                {
-                    from.SendLocalizedMessage(502103); // Choose the item you wish to secure
-                    from.Target = new SecureTarget(false, House);
-                }
-                else
-                {
-                    from.SendLocalizedMessage(502094); // You must be in your house to do this. 
-                }
+	            if (isCoOwner)
+	            {
+		            from.SendLocalizedMessage(502103); // Choose the item you wish to secure
+		            from.Target = new SecureTarget(false, House);
+	            }
+	            else
+	            {
+		            from.SendLocalizedMessage(502094); // You must be in your house to do this. 
+	            }
             }
             else if (e.HasKeyword(0x26)) // I wish to unsecure this
             {
-                if (isOwner)
-                {
-                    from.SendLocalizedMessage(502106); // Choose the item you wish to unsecure
-                    from.Target = new SecureTarget(true, House);
-                }
-                else
-                {
-                    from.SendLocalizedMessage(502094); // You must be in your house to do this. 
-                }
+	            if (isOwner)
+	            {
+		            from.SendLocalizedMessage(502106); // Choose the item you wish to unsecure
+		            from.Target = new SecureTarget(true, House);
+	            }
+	            else
+	            {
+		            from.SendLocalizedMessage(502094); // You must be in your house to do this. 
+	            }
             }
             else if (e.HasKeyword(0x27)) // I wish to place a strongbox
             {
-                if (isOwner)
-                {
-                    from.SendLocalizedMessage(502109); // Owners do not get a strongbox of their own.
-                }
-                else if (isCoOwner)
-                {
-                    House.AddStrongBox(from);
-                }
-                else
-                {
-                    from.SendLocalizedMessage(1010587); // You are not a co-owner of this house.
-                }
+	            if (isOwner)
+	            {
+		            from.SendLocalizedMessage(502109); // Owners do not get a strongbox of their own.
+	            }
+	            else if (isCoOwner)
+	            {
+		            House.AddStrongBox(from);
+	            }
+	            else
+	            {
+		            from.SendLocalizedMessage(1010587); // You are not a co-owner of this house.
+	            }
             }
             else if (e.HasKeyword(0x28)) // trash barrel
             {
-                if (isCoOwner)
-                {
-                    House.AddTrashBarrel(from);
-                }
-                else
-                {
-                    from.SendLocalizedMessage(1010587); // You are not a co-owner of this house.
-                }
+	            if (isCoOwner)
+	            {
+		            House.AddTrashBarrel(from);
+	            }
+	            else
+	            {
+		            from.SendLocalizedMessage(1010587); // You are not a co-owner of this house.
+	            }
             }
         }
 

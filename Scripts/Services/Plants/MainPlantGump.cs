@@ -1,7 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System;
 
 namespace Server.Engines.Plants
 {
@@ -85,7 +85,7 @@ namespace Server.Engines.Plants
             if (from.Backpack == null)
                 return null;
 
-            Item[] items = from.Backpack.FindItemsByType(new Type[] { typeof(BasePotion), typeof(PotionKeg) });
+            Item[] items = from.Backpack.FindItemsByType(new[] { typeof(BasePotion), typeof(PotionKeg) });
 
             foreach (Item item in items)
             {
@@ -200,7 +200,7 @@ namespace Server.Engines.Plants
                         if (!foundUsableWater)
                         {
                             from.Target = new PlantPourTarget(m_Plant);
-                            from.SendLocalizedMessage(1060808, "#" + m_Plant.GetLocalizedPlantStatus().ToString()); // Target the container you wish to use to water the ~1_val~.
+                            from.SendLocalizedMessage(1060808, "#" + m_Plant.GetLocalizedPlantStatus()); // Target the container you wish to use to water the ~1_val~.
                         }
 
                         from.SendGump(new MainPlantGump(m_Plant));
@@ -436,14 +436,12 @@ namespace Server.Engines.Plants
                     from.SendLocalizedMessage(1061884); // You don't have any strong potions of that type in your pack.
 
                     from.Target = new PlantPourTarget(m_Plant);
-                    from.SendLocalizedMessage(1060808, "#" + m_Plant.GetLocalizedPlantStatus().ToString()); // Target the container you wish to use to water the ~1_val~.
+                    from.SendLocalizedMessage(1060808, "#" + m_Plant.GetLocalizedPlantStatus()); // Target the container you wish to use to water the ~1_val~.
 
                     return;
                 }
-                else
-                {
-                    m_Plant.LabelTo(from, message);
-                }
+
+                m_Plant.LabelTo(from, message);
             }
 
             from.SendGump(new MainPlantGump(m_Plant));

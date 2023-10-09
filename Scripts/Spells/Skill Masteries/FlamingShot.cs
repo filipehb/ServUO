@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Linq;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -58,7 +59,7 @@ namespace Server.Spells.SkillMasteries
 
                 if (p != null && SpellHelper.CheckTown(p, Caster) && CheckSequence())
                 {
-                    System.Collections.Generic.List<Mobile> targets = AcquireIndirectTargets(p, 5).OfType<Mobile>().ToList();
+                    List<Mobile> targets = AcquireIndirectTargets(p, 5).OfType<Mobile>().ToList();
                     int count = targets.Count;
 
                     foreach (Mobile mob in targets)
@@ -78,7 +79,7 @@ namespace Server.Spells.SkillMasteries
 
                             Server.Timer.DelayCall(TimeSpan.FromMilliseconds(800), obj =>
                             {
-                                Mobile mobile = obj as Mobile;
+                                Mobile mobile = obj;
 
                                 if (mobile != null)
                                     mobile.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);

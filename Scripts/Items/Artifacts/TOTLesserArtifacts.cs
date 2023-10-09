@@ -20,7 +20,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public AncientFarmersKasa()
-            : base()
         {
             Attributes.BonusStr = 5;
             Attributes.BonusStam = 5;
@@ -67,7 +66,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public AncientSamuraiDo()
-            : base()
         {
             ArmorAttributes.LowerStatReq = 100;
             ArmorAttributes.MageArmor = 1;
@@ -107,7 +105,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public ArmsOfTacticalExcellence()
-            : base()
         {
             Attributes.BonusDex = 5;
             SkillBonuses.SetValues(0, SkillName.Tactics, 12.0);
@@ -144,7 +141,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public BlackLotusHood()
-            : base()
         {
             Attributes.LowerManaCost = 6;
             Attributes.AttackChance = 6;
@@ -190,7 +186,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public DaimyosHelm()
-            : base()
         {
             ArmorAttributes.LowerStatReq = 100;
             ArmorAttributes.MageArmor = 1;
@@ -227,7 +222,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public DemonForks()
-            : base()
         {
             WeaponAttributes.ResistFireBonus = 10;
             WeaponAttributes.ResistPoisonBonus = 10;
@@ -265,7 +259,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public DragonNunchaku()
-            : base()
         {
             WeaponAttributes.ResistFireBonus = 5;
             WeaponAttributes.SelfRepair = 3;
@@ -303,7 +296,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public Exiler()
-            : base()
         {
             WeaponAttributes.HitDispel = 33;
             Slayer = SlayerName.Exorcism;
@@ -347,7 +339,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public GlovesOfTheSun()
-            : base()
         {
             Attributes.RegenHits = 2;
             Attributes.NightSight = 1;
@@ -384,7 +375,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public HanzosBow()
-            : base()
         {
             WeaponAttributes.HitLeechHits = 40;
             WeaponAttributes.SelfRepair = 3;
@@ -422,7 +412,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public LegsOfStability()
-            : base()
         {
             Attributes.BonusStam = 5;
 
@@ -461,7 +450,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public PeasantsBokuto()
-            : base()
         {
             WeaponAttributes.SelfRepair = 3;
             WeaponAttributes.HitLowerDefend = 30;
@@ -499,7 +487,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public PilferedDancerFans()
-            : base()
         {
             Attributes.WeaponDamage = 20;
             Attributes.WeaponSpeed = 20;
@@ -536,7 +523,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public TheDestroyer()
-            : base()
         {
             WeaponAttributes.HitLeechStam = 40;
 
@@ -573,7 +559,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public TomeOfEnlightenment()
-            : base()
         {
             LootType = LootType.Regular;
             Hue = 0x455;
@@ -609,7 +594,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public LeurociansMempoOfFortune()
-            : base()
         {
             LootType = LootType.Regular;
             Hue = 0x501;
@@ -650,8 +634,7 @@ namespace Server.Items
     public class AncientUrn : Item
     {
         public override bool IsArtifact => true;
-        private static readonly string[] m_Names = new string[]
-        {
+        private static readonly string[] m_Names = {
             "Akira",
             "Avaniaga",
             "Aya",
@@ -882,7 +865,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public FluteOfRenewal()
-            : base()
         {
             Slayer = SlayerGroup.RandomSuperSlayerAOS();
 
@@ -918,20 +900,19 @@ namespace Server.Items
     public class LesserPigmentsOfTokuno : BasePigmentsOfTokuno
     {
         public override bool IsArtifact => true;
-        private static readonly int[][] m_Table = new int[][]
-        {
+        private static readonly int[][] m_Table = {
             // Hue, Label
-            new int[] { /*PigmentType.None,*/ 0, -1 },
-            new int[] { /*PigmentType.PaleOrange,*/ 0x02E, 1071458 },
-            new int[] { /*PigmentType.FreshRose,*/ 0x4B9, 1071455 },
-            new int[] { /*PigmentType.ChaosBlue,*/ 0x005, 1071459 },
-            new int[] { /*PigmentType.Silver,*/ 0x3E9, 1071451 },
-            new int[] { /*PigmentType.NobleGold,*/ 0x227, 1071457 },
-            new int[] { /*PigmentType.LightGreen,*/ 0x1C8, 1071454 },
-            new int[] { /*PigmentType.PaleBlue,*/ 0x24F, 1071456 },
-            new int[] { /*PigmentType.FreshPlum,*/ 0x145, 1071450 },
-            new int[] { /*PigmentType.DeepBrown,*/ 0x3F0, 1071452 },
-            new int[] { /*PigmentType.BurntBrown,*/ 0x41A, 1071453 }
+            new[] { /*PigmentType.None,*/ 0, -1 },
+            new[] { /*PigmentType.PaleOrange,*/ 0x02E, 1071458 },
+            new[] { /*PigmentType.FreshRose,*/ 0x4B9, 1071455 },
+            new[] { /*PigmentType.ChaosBlue,*/ 0x005, 1071459 },
+            new[] { /*PigmentType.Silver,*/ 0x3E9, 1071451 },
+            new[] { /*PigmentType.NobleGold,*/ 0x227, 1071457 },
+            new[] { /*PigmentType.LightGreen,*/ 0x1C8, 1071454 },
+            new[] { /*PigmentType.PaleBlue,*/ 0x24F, 1071456 },
+            new[] { /*PigmentType.FreshPlum,*/ 0x145, 1071450 },
+            new[] { /*PigmentType.DeepBrown,*/ 0x3F0, 1071452 },
+            new[] { /*PigmentType.BurntBrown,*/ 0x41A, 1071453 }
         };
         private LesserPigmentType m_Type;
         [Constructable]

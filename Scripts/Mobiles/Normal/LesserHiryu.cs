@@ -155,14 +155,14 @@ namespace Server.Mobiles
 
             if (rand <= 0)
                 return 0x8258;
-            else if (rand <= 1)
-                return 0x88AB;
-            else if (rand <= 6)
-                return 0x87D4;
-            else if (rand <= 16)
-                return 0x8163;
-            else if (rand <= 26)
-                return 0x8295;
+            if (rand <= 1)
+	            return 0x88AB;
+            if (rand <= 6)
+	            return 0x87D4;
+            if (rand <= 16)
+	            return 0x8163;
+            if (rand <= 26)
+	            return 0x8295;
 
             return 0;
         }

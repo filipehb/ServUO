@@ -1,5 +1,6 @@
-using Server.Network;
 using System;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -21,7 +22,7 @@ namespace Server.Items
         public override double DefaultWeight => 1.0;
         public virtual bool Apply(Mobile from)
         {
-            bool applied = Spells.SpellHelper.AddStatOffset(from, Type, Bonus, TimeSpan.FromMinutes(1.0));
+            bool applied = SpellHelper.AddStatOffset(from, Type, Bonus, TimeSpan.FromMinutes(1.0));
 
             if (!applied)
                 from.SendLocalizedMessage(502173); // You are already under a similar effect.

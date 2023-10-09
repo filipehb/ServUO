@@ -1,8 +1,8 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Shadowguard
 {
@@ -1030,20 +1030,21 @@ namespace Server.Engines.Shadowguard
                     {
                         if (Connects(item, next))
                         {
-                            if (next is ShadowguardDrain)
+	                        if (next is ShadowguardDrain)
                             {
                                 _Drain = (ShadowguardDrain)next;
                                 return;
                             }
-                            else if (next is ShadowguardCanal)
-                            {
-                                if (_Checked == null)
-                                    _Checked = new List<ShadowguardCanal>();
 
-                                _Checked.Add((ShadowguardCanal)next);
+	                        if (next is ShadowguardCanal)
+	                        {
+		                        if (_Checked == null)
+			                        _Checked = new List<ShadowguardCanal>();
 
-                                RecursiveCheck(next, item);
-                            }
+		                        _Checked.Add((ShadowguardCanal)next);
+
+		                        RecursiveCheck(next, item);
+	                        }
                         }
                     }
                 }
@@ -1067,9 +1068,10 @@ namespace Server.Engines.Shadowguard
 
                     return canConnect;
                 }
-                else if (two is ShadowguardCanal)
+
+                if (two is ShadowguardCanal)
                 {
-                    return ((ShadowguardCanal)one).Connects((ShadowguardCanal)two);
+	                return ((ShadowguardCanal)one).Connects((ShadowguardCanal)two);
                 }
 
                 return false;
@@ -1120,8 +1122,7 @@ namespace Server.Engines.Shadowguard
                 }
             }
 
-            private readonly int[] _Offsets = new int[]
-            {
+            private readonly int[] _Offsets = {
                 0, -1,
                 1, 0,
                 0, 1,
@@ -1426,7 +1427,7 @@ namespace Server.Engines.Shadowguard
 
         public List<Type> Bosses { get; set; }
 
-        private readonly Type[] _Bosses = new Type[] { typeof(Anon), typeof(Virtuebane), typeof(Ozymandias), typeof(Juonar) };
+        private readonly Type[] _Bosses = { typeof(Anon), typeof(Virtuebane), typeof(Ozymandias), typeof(Juonar) };
 
         public override TimeSpan EncounterDuration => TimeSpan.MaxValue;
         public override TimeSpan ResetDuration => TimeSpan.FromMinutes(5);

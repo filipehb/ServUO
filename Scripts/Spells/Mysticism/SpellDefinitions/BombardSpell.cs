@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Spells.Mysticism
 {
@@ -34,48 +34,49 @@ namespace Server.Spells.Mysticism
             {
                 return;
             }
-            else if (CheckHSequence(d))
+
+            if (CheckHSequence(d))
             {
-                IDamageable target = d;
-                IDamageable source = Caster;
+	            IDamageable target = d;
+	            IDamageable source = Caster;
 
-                SpellHelper.Turn(Caster, target);
+	            SpellHelper.Turn(Caster, target);
 
-                if (HasDelayContext(target))
-                {
-                    DoHurtFizzle();
-                    return;
-                }
+	            if (HasDelayContext(target))
+	            {
+		            DoHurtFizzle();
+		            return;
+	            }
 
-                if (SpellHelper.CheckReflect(this, ref source, ref target))
-                {
-                    Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
-                    {
-                        source.MovingEffect(target, 0x1363, 12, 1, false, true, 0, 0);
-                        source.PlaySound(0x64B);
-                    });
-                }
+	            if (SpellHelper.CheckReflect(this, ref source, ref target))
+	            {
+		            Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
+		            {
+			            source.MovingEffect(target, 0x1363, 12, 1, false, true, 0, 0);
+			            source.PlaySound(0x64B);
+		            });
+	            }
 
-                Caster.MovingEffect(d, 0x1363, 12, 1, false, true, 0, 0);
-                Caster.PlaySound(0x64B);
+	            Caster.MovingEffect(d, 0x1363, 12, 1, false, true, 0, 0);
+	            Caster.PlaySound(0x64B);
 
-                SpellHelper.Damage(this, target, GetNewAosDamage(40, 1, 5, target), 100, 0, 0, 0, 0);
+	            SpellHelper.Damage(this, target, GetNewAosDamage(40, 1, 5, target), 100, 0, 0, 0, 0);
 
-                if (target is Mobile)
-                {
-                    Timer.DelayCall(TimeSpan.FromMilliseconds(1200), () =>
-                    {
-                        if (!CheckResisted((Mobile)target))
-                        {
-                            int secs = (int)((GetDamageSkill(Caster) / 10) - (GetResistSkill((Mobile)target) / 10));
+	            if (target is Mobile)
+	            {
+		            Timer.DelayCall(TimeSpan.FromMilliseconds(1200), () =>
+		            {
+			            if (!CheckResisted((Mobile)target))
+			            {
+				            int secs = (int)((GetDamageSkill(Caster) / 10) - (GetResistSkill((Mobile)target) / 10));
 
-                            if (secs < 0)
-                                secs = 0;
+				            if (secs < 0)
+					            secs = 0;
 
-                            ((Mobile)target).Paralyze(TimeSpan.FromSeconds(secs));
-                        }
-                    });
-                }
+				            ((Mobile)target).Paralyze(TimeSpan.FromSeconds(secs));
+			            }
+		            });
+	            }
             }
 
             FinishSequence();

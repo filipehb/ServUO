@@ -1,8 +1,10 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
-    public class BladedWhip : BaseSword, Engines.Craft.IRepairable
+    public class BladedWhip : BaseSword, IRepairable
     {
-        public Engines.Craft.CraftSystem RepairSystem => Engines.Craft.DefTinkering.CraftSystem;
+        public CraftSystem RepairSystem => DefTinkering.CraftSystem;
         public override int LabelNumber => 1125643;  // Bladed Whip
 
         [Constructable]

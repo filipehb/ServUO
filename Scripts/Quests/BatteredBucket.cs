@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class LostAndFoundQuest : BaseQuest
     {
         public LostAndFoundQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(BatteredBucket), "battered bucket", 1, typeof(Dallid), "Dallid (Sanctuary)", 600));
 
@@ -53,7 +52,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(LostAndFoundQuest)
                 };

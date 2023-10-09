@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items.MusicBox
 {
@@ -35,7 +36,7 @@ namespace Server.Items.MusicBox
         {
         }
 
-        public override int LabelNumber => 1075198;// Dawn’s Music Box
+        public override int LabelNumber => 1075198;// Dawnâ€™s Music Box
         [CommandProperty(AccessLevel.GameMaster, AccessLevel.Developer)]
         public bool IsPlaying => m_PlayingTimer != null;
         public List<MusicName> Tracks => m_Tracks;
@@ -142,15 +143,13 @@ namespace Server.Items.MusicBox
 
         public bool AddSong(MusicName song)
         {
-            if (m_Tracks.Contains(song))
+	        if (m_Tracks.Contains(song))
             {
                 return false;
             }
-            else
-            {
-                m_Tracks.Add(song);
-                return true;
-            }
+
+	        m_Tracks.Add(song);
+	        return true;
         }
 
         public void Animate()
@@ -218,7 +217,7 @@ namespace Server.Items.MusicBox
 
                 foreach (Mobile m in mobsEable)
                 {
-                    if (m is Mobiles.PlayerMobile)
+                    if (m is PlayerMobile)
                         ToggleMusic(m, hasToStart);
                 }
 
@@ -419,25 +418,25 @@ namespace Server.Items.MusicBox
 
                 if (info.ButtonID == 0)
                     return;
-                else if (info.ButtonID == 200) // Previous page
+                if (info.ButtonID == 200) // Previous page
                 {
-                    m_Page--;
-                    from.SendGump(new MusicGump(m_Box, m_Songs, m_Page));
+	                m_Page--;
+	                from.SendGump(new MusicGump(m_Box, m_Songs, m_Page));
                 }
                 else if (info.ButtonID == 300)  // Next Page
                 {
-                    m_Page++;
-                    from.SendGump(new MusicGump(m_Box, m_Songs, m_Page));
+	                m_Page++;
+	                from.SendGump(new MusicGump(m_Box, m_Songs, m_Page));
                 }
                 else if (m_HasStopSongEntry && info.ButtonID == m_Songs.Count)
                 {
-                    m_Box.TogglePlaying(false);
+	                m_Box.TogglePlaying(false);
                 }
                 else
                 {
-                    TrackInfo ti = TrackInfo.GetInfo(m_Songs[info.ButtonID - 1]);
-                    m_Box.ActualSong = ti.Name;
-                    m_Box.TogglePlaying(true);
+	                TrackInfo ti = TrackInfo.GetInfo(m_Songs[info.ButtonID - 1]);
+	                m_Box.ActualSong = ti.Name;
+	                m_Box.TogglePlaying(true);
                 }
             }
 

@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System.Collections.Generic;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -59,7 +59,7 @@ namespace Server.Items
             Donations.Add(new CollectionItem(typeof(Buckler), 0x1B73, 1074907, 0x0, 9));
             Donations.Add(new CollectionItem(typeof(BattleAxe), 0xF47, 1074908, 0x0, 9));
 
-            int[] hues = new int[] { 0x1E0, 0x190, 0x151 };
+            int[] hues = { 0x1E0, 0x190, 0x151 };
             Rewards.Add(new CollectionHuedItem(typeof(LibraryFriendBodySash), 0x1541, 1073346, 0x190, 100000.0, hues));
             Rewards.Add(new CollectionHuedItem(typeof(LibraryFriendFeatheredHat), 0x171A, 1073347, 0x190, 100000.0, hues));
             Rewards.Add(new CollectionHuedItem(typeof(LibraryFriendSurcoat), 0x1FFD, 1073348, 0x190, 100000.0, hues));
@@ -69,7 +69,7 @@ namespace Server.Items
             Rewards.Add(new CollectionHuedItem(typeof(LibraryFriendSkirt), 0x1537, 1073352, 0x190, 100000.0, hues));
             Rewards.Add(new CollectionTitle(1073341, 1073859, 100000.0)); // Britain Public Library Contributor
 
-            hues = new int[] { 0x0, 0x1C2, 0x320, 0x190, 0x1E0 };
+            hues = new[] { 0x0, 0x1C2, 0x320, 0x190, 0x1E0 };
             Rewards.Add(new CollectionHuedItem(typeof(LibraryFriendLantern), 0xA25, 1073339, 0x1C2, 200000.0, hues));
             Rewards.Add(new CollectionHuedItem(typeof(LibraryFriendReadingChair), 0x2DEB, 1073340, 0x1C2, 200000.0, hues));
             Rewards.Add(new CollectionTitle(1073342, 1073860, 200000.0)); // Distinguished Library Contributor

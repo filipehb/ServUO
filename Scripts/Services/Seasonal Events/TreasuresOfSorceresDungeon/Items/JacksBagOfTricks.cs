@@ -1,5 +1,6 @@
-using Server.Events.Halloween;
 using System;
+using Server.Events.Halloween;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -109,7 +110,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Network.MessageType.Regular, 0, 1157635, m.NetState); // *It smells terrible!*
+                PrivateOverheadMessage(MessageType.Regular, 0, 1157635, m.NetState); // *It smells terrible!*
             }
         }
 
@@ -183,7 +184,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Network.MessageType.Regular, 0, 1157638, m.NetState); // *You hear the faint jingle of cheery bells...*
+                PrivateOverheadMessage(MessageType.Regular, 0, 1157638, m.NetState); // *You hear the faint jingle of cheery bells...*
             }
         }
 
@@ -224,7 +225,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Network.MessageType.Regular, 0, 1157640, m.NetState); // Uh oh...
+                PrivateOverheadMessage(MessageType.Regular, 0, 1157640, m.NetState); // Uh oh...
             }
         }
 
@@ -262,7 +263,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Network.MessageType.Regular, 0, Utility.RandomMinMax(1157642, 1157646), m.NetState);
+                PrivateOverheadMessage(MessageType.Regular, 0, Utility.RandomMinMax(1157642, 1157646), m.NetState);
             }
         }
 

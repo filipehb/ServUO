@@ -1,4 +1,6 @@
 
+using Server.Items;
+
 namespace Server.Mobiles
 {
     [CorpseName("an angered spirit corpse")]
@@ -157,7 +159,7 @@ namespace Server.Mobiles
             Body = 400;
             Hue = 0x847E;
 
-            Items.Robe shroud = new Items.Robe
+            Robe shroud = new Robe
             {
                 ItemID = 0x2683,
                 Hue = 0x4001,
@@ -165,7 +167,7 @@ namespace Server.Mobiles
             };
             SetWearable(shroud);
 
-            Items.Boots boots = new Items.Boots
+            Boots boots = new Boots
             {
                 Hue = 0x4001,
                 Movable = false

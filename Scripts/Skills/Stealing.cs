@@ -1,17 +1,19 @@
 #region References
+
+using System;
+using System.Collections;
+using Server.Engines.CreatureStealing;
 using Server.Engines.VvV;
 using Server.Items;
 using Server.Mobiles;
+using Server.Multis;
 using Server.Network;
 using Server.Spells;
 using Server.Spells.Fifth;
 using Server.Spells.Ninjitsu;
 using Server.Spells.Seventh;
 using Server.Targeting;
-using Server.Multis;
 
-using System;
-using System.Collections;
 #endregion
 
 namespace Server.SkillHandlers
@@ -350,7 +352,7 @@ namespace Server.SkillHandlers
                         {
                             from.SendLocalizedMessage(1010579); // You reach into the backpack... and try to take something.
 
-                            Engines.CreatureStealing.StealingHandler.HandleSteal(bc, (PlayerMobile)from, ref stolen);
+                            StealingHandler.HandleSteal(bc, (PlayerMobile)from, ref stolen);
 
                             if (stolen == null)
                             {

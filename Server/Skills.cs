@@ -1,10 +1,11 @@
 #region References
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
 using Server.Network;
+
 #endregion
 
 namespace Server
@@ -888,11 +889,13 @@ namespace Server
 			{
 				return false;
 			}
-			else if (!from.Region.OnSkillUse(from, skillID))
+
+			if (!from.Region.OnSkillUse(from, skillID))
 			{
 				return false;
 			}
-			else if (!from.AllowSkillUse((SkillName)skillID))
+
+			if (!from.AllowSkillUse((SkillName)skillID))
 			{
 				return false;
 			}
@@ -911,10 +914,8 @@ namespace Server
 
 						return true;
 					}
-					else
-					{
-						from.SendSkillMessage();
-					}
+
+					from.SendSkillMessage();
 				}
 				else
 				{

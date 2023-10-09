@@ -1,7 +1,7 @@
+using System;
 using Server.Engines.Craft;
 using Server.Mobiles;
 using Server.Regions;
-using System;
 
 namespace Server.Items
 {
@@ -117,7 +117,7 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            list.Add(1061133, string.Format("{0}\t{1}", GetSkillTitle(m_SkillLevel).ToString(), RepairSkillInfo.GetInfo(m_Skill).Name)); // A repair service contract from ~1_SKILL_TITLE~ ~2_SKILL_NAME~.
+            list.Add(1061133, string.Format("{0}\t{1}", GetSkillTitle(m_SkillLevel), RepairSkillInfo.GetInfo(m_Skill).Name)); // A repair service contract from ~1_SKILL_TITLE~ ~2_SKILL_NAME~.
         }
 
         public override void AddWeightProperty(ObjectPropertyList list)
@@ -256,8 +256,8 @@ namespace Server.Items
 
             if (skill >= 11)
                 return (1062008 + skill - 11);
-            else if (skill >= 5)
-                return (1061123 + skill - 5);
+            if (skill >= 5)
+	            return (1061123 + skill - 5);
 
             switch (skill)
             {
@@ -273,8 +273,7 @@ namespace Server.Items
 
     public class RepairSkillInfo
     {
-        private static readonly RepairSkillInfo[] m_Table = new RepairSkillInfo[]
-        {
+        private static readonly RepairSkillInfo[] m_Table = {
                 new RepairSkillInfo(DefBlacksmithy.CraftSystem,     typeof(Blacksmith), 1047013, 1023015),
                 new RepairSkillInfo(DefTailoring.CraftSystem,       typeof(Tailor),     1061132, 1022981),
                 new RepairSkillInfo(DefTinkering.CraftSystem,       typeof(Tinker),     1061166, 1022983),
@@ -300,7 +299,7 @@ namespace Server.Items
         }
 
         public RepairSkillInfo(CraftSystem system, Type nearbyType, TextDefinition notNearbyMessage, TextDefinition name, TextDefinition description = null)
-            : this(system, new Type[] { nearbyType }, notNearbyMessage, name, description)
+            : this(system, new[] { nearbyType }, notNearbyMessage, name, description)
         {
         }
 

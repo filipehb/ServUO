@@ -1,6 +1,6 @@
-using Server.Engines.Harvest;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Harvest;
 
 namespace Server.Items
 {
@@ -102,7 +102,6 @@ namespace Server.Items
                 {
                     from.SendMessage("You have mined the last of the niter deposit.");
                     Delete();
-                    return;
                 }
             }
             else

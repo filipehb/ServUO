@@ -1,12 +1,12 @@
+using System;
 using Server.Engines.Quests;
 using Server.Items;
-using System;
 
 namespace Server.Mobiles
 {
     public class Hawkwind2 : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(TimeIsOfTheEssenceQuest) };
+        public override Type[] Quests => new[] { typeof(TimeIsOfTheEssenceQuest) };
 
         [Constructable]
         public Hawkwind2()
@@ -56,7 +56,7 @@ namespace Server.Mobiles
 
     public class SirGeoffery : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(UnitingTheTribesQuest) };
+        public override Type[] Quests => new[] { typeof(UnitingTheTribesQuest) };
 
         public override bool ChangeRace => false;
 
@@ -133,7 +133,7 @@ namespace Server.Mobiles
 
     public class SakkhraHighChieftess : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(TheGreatHuntQuest) };
+        public override Type[] Quests => new[] { typeof(TheGreatHuntQuest) };
 
         [Constructable]
         public SakkhraHighChieftess()
@@ -182,7 +182,7 @@ namespace Server.Mobiles
 
     public class UraliHighChieftess : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(EmptyNestQuest) };
+        public override Type[] Quests => new[] { typeof(EmptyNestQuest) };
 
         [Constructable]
         public UraliHighChieftess()
@@ -232,7 +232,7 @@ namespace Server.Mobiles
 
     public class JukariHighChief : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(TheGreatVolcanoQuest) };
+        public override Type[] Quests => new[] { typeof(TheGreatVolcanoQuest) };
 
         [Constructable]
         public JukariHighChief()
@@ -278,7 +278,7 @@ namespace Server.Mobiles
 
     public class KurakHighChief : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(PrideOfTheAmbushQuest) };
+        public override Type[] Quests => new[] { typeof(PrideOfTheAmbushQuest) };
 
         [Constructable]
         public KurakHighChief()
@@ -325,7 +325,7 @@ namespace Server.Mobiles
 
     public class BarakoHighChief : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(TheGreatApeQuest) };
+        public override Type[] Quests => new[] { typeof(TheGreatApeQuest) };
 
         [Constructable]
         public BarakoHighChief()

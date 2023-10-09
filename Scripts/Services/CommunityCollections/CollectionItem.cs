@@ -1,6 +1,7 @@
+using System;
+using Server.Diagnostics;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server
 {
@@ -34,7 +35,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 rec = new Rectangle2D(0, 0, 0, 0);
             }
 

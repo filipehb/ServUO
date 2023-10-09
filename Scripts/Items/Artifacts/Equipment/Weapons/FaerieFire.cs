@@ -9,7 +9,6 @@ namespace Server.Items
 
         [Constructable]
         public FaerieFire()
-            : base()
         {
             Hue = 0x489;
             Balanced = true;

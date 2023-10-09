@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+using System.Globalization;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
-using System.Collections.Generic;
-using System.Globalization;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -81,8 +83,7 @@ namespace Server.Items
 
             if (ItemID == 0x2375)
                 return BaseAddon.IsWall(p.X, p.Y - 1, p.Z, map); // North wall
-            else
-                return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // West wall
+            return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // West wall
         }
 
         public override void OnDoubleClick(Mobile m)
@@ -171,7 +172,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                m.BeginTarget(8, false, Targeting.TargetFlags.None, (from, targeted) =>
+                m.BeginTarget(8, false, TargetFlags.None, (from, targeted) =>
                     {
                         if (targeted is IPoint3D)
                         {
@@ -296,7 +297,7 @@ namespace Server.Items
             }
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             Account account = User.Account as Account;
             int secureAmount = 0;

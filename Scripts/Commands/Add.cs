@@ -1,9 +1,10 @@
-using Server.Items;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Targeting;
 using CPA = Server.CommandPropertyAttribute;
 
 namespace Server.Commands
@@ -15,17 +16,15 @@ namespace Server.Commands
         private static readonly Type m_EnumType = typeof(Enum);
         private static readonly Type m_TypeType = typeof(Type);
         private static readonly Type m_ParsableType = typeof(ParsableAttribute);
-        private static readonly Type[] m_ParseTypes = new Type[] { typeof(string) };
+        private static readonly Type[] m_ParseTypes = { typeof(string) };
         private static readonly object[] m_ParseArgs = new object[1];
-        private static readonly Type[] m_SignedNumerics = new Type[]
-        {
+        private static readonly Type[] m_SignedNumerics = {
             typeof(long),
             typeof(int),
             typeof(short),
             typeof(sbyte)
         };
-        private static readonly Type[] m_UnsignedNumerics = new Type[]
-        {
+        private static readonly Type[] m_UnsignedNumerics = {
             typeof(ulong),
             typeof(uint),
             typeof(ushort),
@@ -244,37 +243,36 @@ namespace Server.Commands
         {
             try
             {
-                if (IsEnum(type))
+	            if (IsEnum(type))
                 {
                     return Enum.Parse(type, value, true);
                 }
-                else if (IsType(type))
-                {
-                    return ScriptCompiler.FindTypeByName(value);
-                }
-                else if (IsParsable(type))
-                {
-                    return ParseParsable(type, value);
-                }
-                else
-                {
-                    object obj = value;
 
-                    if (value != null && value.StartsWith("0x"))
-                    {
-                        if (IsSignedNumeric(type))
-                            obj = Convert.ToInt64(value.Substring(2), 16);
-                        else if (IsUnsignedNumeric(type))
-                            obj = Convert.ToUInt64(value.Substring(2), 16);
+	            if (IsType(type))
+	            {
+		            return ScriptCompiler.FindTypeByName(value);
+	            }
 
-                        obj = Convert.ToInt32(value.Substring(2), 16);
-                    }
+	            if (IsParsable(type))
+	            {
+		            return ParseParsable(type, value);
+	            }
 
-                    if (obj == null && !type.IsValueType)
-                        return null;
-                    else
-                        return Convert.ChangeType(obj, type);
-                }
+	            object obj = value;
+
+	            if (value != null && value.StartsWith("0x"))
+	            {
+		            if (IsSignedNumeric(type))
+			            obj = Convert.ToInt64(value.Substring(2), 16);
+		            else if (IsUnsignedNumeric(type))
+			            obj = Convert.ToUInt64(value.Substring(2), 16);
+
+		            obj = Convert.ToInt32(value.Substring(2), 16);
+	            }
+
+	            if (obj == null && !type.IsValueType)
+		            return null;
+	            return Convert.ChangeType(obj, type);
             }
             catch
             {
@@ -405,7 +403,7 @@ namespace Server.Commands
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return 0;
             }
         }

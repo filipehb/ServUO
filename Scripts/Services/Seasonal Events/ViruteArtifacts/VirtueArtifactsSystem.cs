@@ -1,8 +1,11 @@
+using System;
+using Server.Diagnostics;
 using Server.Engines.Points;
 using Server.Engines.SeasonalEvents;
 using Server.Items;
 using Server.Mobiles;
-using System;
+using Server.Multis;
+using Server.Regions;
 
 namespace Server.Misc
 {
@@ -10,8 +13,7 @@ namespace Server.Misc
     {
         public static bool Enabled => SeasonalEventSystem.IsActive(EventType.VirtueArtifacts);
 
-        private static readonly Type[] m_VirtueArtifacts = new Type[]
-            {
+        private static readonly Type[] m_VirtueArtifacts = {
                 typeof( KatrinasCrook ), typeof( JaanasStaff ), typeof( DragonsEnd ), typeof( AnkhPendant ),
                 typeof( SentinelsGuard ), typeof( LordBlackthornsExemplar ), typeof( MapOfTheKnownWorld ), typeof( TenthAnniversarySculpture ),
                 typeof( CompassionArms ), typeof( JusticeBreastplate ), typeof( ValorGauntlets ), typeof( HonestyGorget ),
@@ -35,7 +37,7 @@ namespace Server.Misc
             if (m is BaseCreature && ((BaseCreature)m).IsChampionSpawn)
                 return false;
 
-            if (r.IsPartOf<Regions.HouseRegion>() || Multis.BaseBoat.FindBoatAt(m, m.Map) != null)
+            if (r.IsPartOf<HouseRegion>() || BaseBoat.FindBoatAt(m, m.Map) != null)
                 return false;
 
             return (r.IsPartOf("Covetous") || r.IsPartOf("Deceit") || r.IsPartOf("Despise") || r.IsPartOf("Destard") ||
@@ -84,7 +86,7 @@ namespace Server.Misc
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (i != null)

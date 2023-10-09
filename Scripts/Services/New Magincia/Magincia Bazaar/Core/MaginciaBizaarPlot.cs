@@ -1,5 +1,6 @@
-using Server.Accounting;
 using System;
+using Server.Accounting;
+using Server.Guilds;
 
 namespace Server.Engines.NewMagincia
 {
@@ -282,7 +283,7 @@ namespace Server.Engines.NewMagincia
 
         public bool TrySetShopName(Mobile from, string text)
         {
-            if (text == null || !Guilds.BaseGuildGump.CheckProfanity(text) || text.Length == 0 || text.Length > 40)
+            if (text == null || !BaseGuildGump.CheckProfanity(text) || text.Length == 0 || text.Length > 40)
                 return false;
 
             m_ShopName = text;

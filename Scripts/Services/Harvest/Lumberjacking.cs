@@ -1,7 +1,8 @@
-using Server.Items;
-using Server.Network;
 using System;
 using System.Linq;
+using Server.Items;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Engines.Harvest
 {
@@ -59,9 +60,9 @@ namespace Server.Engines.Harvest
                 ConsumedPerFeluccaHarvest = 20,
 
                 // The chopping effect
-                EffectActions = new int[] { 7 },
-                EffectSounds = new int[] { 0x13E },
-                EffectCounts = (new int[] { 1 }),
+                EffectActions = new[] { 7 },
+                EffectSounds = new[] { 0x13E },
+                EffectCounts = (new[] { 1 }),
                 EffectDelay = TimeSpan.FromSeconds(1.6),
                 EffectSoundDelay = TimeSpan.FromSeconds(0.9),
 
@@ -72,7 +73,7 @@ namespace Server.Engines.Harvest
                 ToolBrokeMessage = 500499 // You broke your axe.
             };
 
-            res = new HarvestResource[]
+            res = new[]
             {
                 new HarvestResource(00.0, 00.0, 100.0, 1072540, typeof(Log)),
                 new HarvestResource(65.0, 25.0, 105.0, 1072541, typeof(OakLog)),
@@ -83,7 +84,7 @@ namespace Server.Engines.Harvest
                 new HarvestResource(100.0, 60.0, 140.0, 1072546, typeof(FrostwoodLog)),
             };
 
-            veins = new HarvestVein[]
+            veins = new[]
             {
                 new HarvestVein(49.0, 0.0, res[0], null), // Ordinary Logs
                 new HarvestVein(30.0, 0.5, res[1], res[0]), // Oak
@@ -94,7 +95,7 @@ namespace Server.Engines.Harvest
                 new HarvestVein(01.0, 0.5, res[6], res[0]), // Frostwood
             };
 
-            lumber.BonusResources = new BonusHarvestResource[]
+            lumber.BonusResources = new[]
             {
                 new BonusHarvestResource(0, 82.0, null, null), //Nothing
                 new BonusHarvestResource(100, 10.0, 1072548, typeof(BarkFragment)),
@@ -157,25 +158,23 @@ namespace Server.Engines.Harvest
         {
             if (item != null)
             {
-                if (item != null && item.GetType().IsSubclassOf(typeof(BaseWoodBoard)))
+	            if (item != null && item.GetType().IsSubclassOf(typeof(BaseWoodBoard)))
                 {
                     from.SendLocalizedMessage(1158776); // The axe magically creates boards from your logs.
                     return;
                 }
-                else
-                {
-                    foreach (HarvestResource res in m_Definition.Resources.Where(r => r.Types != null))
-                    {
-                        foreach (Type type in res.Types)
-                        {
-                            if (item.GetType() == type)
-                            {
-                                res.SendSuccessTo(from);
-                                return;
-                            }
-                        }
-                    }
-                }
+
+	            foreach (HarvestResource res in m_Definition.Resources.Where(r => r.Types != null))
+	            {
+		            foreach (Type type in res.Types)
+		            {
+			            if (item.GetType() == type)
+			            {
+				            res.SendSuccessTo(from);
+				            return;
+			            }
+		            }
+	            }
             }
 
             base.SendSuccessTo(from, item, resource);
@@ -237,7 +236,7 @@ namespace Server.Engines.Harvest
                 ((Mobile)toHarvest).PrivateOverheadMessage(MessageType.Regular, 0x3B2, 500450, from.NetState); // You can only skin dead creatures.
             else if (toHarvest is Item)
                 ((Item)toHarvest).LabelTo(from, 500464); // Use this on corpses to carve away meat and hide
-            else if (toHarvest is Targeting.StaticTarget || toHarvest is Targeting.LandTarget)
+            else if (toHarvest is StaticTarget || toHarvest is LandTarget)
                 from.SendLocalizedMessage(500489); // You can't use an axe on that.
             else
                 from.SendLocalizedMessage(1005213); // You can't do that
@@ -256,8 +255,7 @@ namespace Server.Engines.Harvest
         }
 
         #region Tile lists
-        private static readonly int[] m_TreeTiles = new int[]
-        {
+        private static readonly int[] m_TreeTiles = {
             0x4CCA, 0x4CCB, 0x4CCC, 0x4CCD, 0x4CD0, 0x4CD3, 0x4CD6, 0x4CD8,
             0x4CDA, 0x4CDD, 0x4CE0, 0x4CE3, 0x4CE6, 0x4CF8, 0x4CFB, 0x4CFE,
             0x4D01, 0x4D41, 0x4D42, 0x4D43, 0x4D44, 0x4D57, 0x4D58, 0x4D59,

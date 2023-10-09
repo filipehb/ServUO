@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public DarkSapphireBracelet()
-            : base()
         {
             Weight = 1.0;
 

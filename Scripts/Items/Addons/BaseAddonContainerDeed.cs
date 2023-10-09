@@ -1,7 +1,8 @@
+using System;
 using Server.Engines.Craft;
 using Server.Multis;
+using Server.Spells;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -127,7 +128,7 @@ namespace Server.Items
                     BaseAddonContainer addon = m_Deed.Addon;
                     addon.Resource = m_Deed.Resource;
 
-                    Spells.SpellHelper.GetSurfaceTop(ref p);
+                    SpellHelper.GetSurfaceTop(ref p);
 
                     BaseHouse house = null;
 

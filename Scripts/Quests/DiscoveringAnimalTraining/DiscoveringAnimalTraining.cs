@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class TamingPetQuest : BaseQuest
     {
         public TamingPetQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 
@@ -93,7 +92,6 @@ namespace Server.Engines.Quests
     public class UsingAnimalLoreQuest : BaseQuest
     {
         public UsingAnimalLoreQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 
@@ -187,7 +185,6 @@ namespace Server.Engines.Quests
     public class LeadingIntoBattleQuest : BaseQuest
     {
         public LeadingIntoBattleQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 
@@ -283,7 +280,6 @@ namespace Server.Engines.Quests
     public class TeachingSomethingNewQuest : BaseQuest
     {
         public TeachingSomethingNewQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 

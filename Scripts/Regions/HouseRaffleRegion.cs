@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Server.Items;
 using Server.Spells.Sixth;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Regions
 {

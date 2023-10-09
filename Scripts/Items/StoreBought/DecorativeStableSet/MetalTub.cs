@@ -54,7 +54,6 @@ namespace Server.Items
 
         [Constructable]
         public MetalTubDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

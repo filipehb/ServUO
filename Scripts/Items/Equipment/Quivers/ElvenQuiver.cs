@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public ElvenQuiver()
-            : base()
         {
             WeightReduction = 30;
         }

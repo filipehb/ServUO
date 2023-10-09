@@ -1,8 +1,8 @@
+using System;
+using System.Collections;
 using Server.Engines.Craft;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Collections;
 
 namespace Server.Items
 {

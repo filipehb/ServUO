@@ -1,6 +1,8 @@
+using Server.Engines.VeteranRewards;
+
 namespace Server.Items
 {
-    public class MetallicDyeTub : DyeTub, Engines.VeteranRewards.IRewardItem
+    public class MetallicDyeTub : DyeTub, IRewardItem
     {
         private bool m_IsRewardItem;
 
@@ -31,7 +33,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (m_IsRewardItem && !Engines.VeteranRewards.RewardSystem.CheckIsUsableBy(from, this, null))
+            if (m_IsRewardItem && !RewardSystem.CheckIsUsableBy(from, this, null))
                 return;
 
             base.OnDoubleClick(from);

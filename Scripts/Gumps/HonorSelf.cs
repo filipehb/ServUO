@@ -25,7 +25,6 @@ namespace Server.Gumps
             }
             else
             {
-                return;
             }
         }
     }

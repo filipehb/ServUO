@@ -1,6 +1,8 @@
 #region References
-using Server.Network;
+
 using System;
+using Server.Network;
+
 #endregion
 
 namespace Server.Spells.Chivalry
@@ -47,11 +49,12 @@ namespace Server.Spells.Chivalry
                 // You must have at least ~1_TITHE_REQUIREMENT~ Tithing Points to use this ability,
                 return false;
             }
-            else if (Caster.Mana < mana)
+
+            if (Caster.Mana < mana)
             {
-                Caster.SendLocalizedMessage(1060174, mana.ToString());
-                // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
-                return false;
+	            Caster.SendLocalizedMessage(1060174, mana.ToString());
+	            // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
+	            return false;
             }
 
             return true;
@@ -74,11 +77,12 @@ namespace Server.Spells.Chivalry
                 // You must have at least ~1_TITHE_REQUIREMENT~ Tithing Points to use this ability,
                 return false;
             }
-            else if (Caster.Mana < mana)
+
+            if (Caster.Mana < mana)
             {
-                Caster.SendLocalizedMessage(1060174, mana.ToString());
-                // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
-                return false;
+	            Caster.SendLocalizedMessage(1060174, mana.ToString());
+	            // You must have at least ~1_MANA_REQUIREMENT~ Mana to use this ability.
+	            return false;
             }
 
             Caster.TithingPoints -= requiredTithing;

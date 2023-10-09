@@ -1,6 +1,9 @@
 #region References
-using Server.Items;
+
+using System.Collections.Generic;
 using System.IO;
+using Server.Items;
+
 #endregion
 
 namespace Server.Network
@@ -10,7 +13,7 @@ namespace Server.Network
         public CorpseEquip(Mobile beholder, Corpse beheld)
             : base(0x89)
         {
-            System.Collections.Generic.List<Item> list = beheld.EquipItems;
+            List<Item> list = beheld.EquipItems;
 
             int count = list.Count;
             if (beheld.Hair != null && beheld.Hair.ItemID > 0)
@@ -58,7 +61,7 @@ namespace Server.Network
         public CorpseContent(Mobile beholder, Corpse beheld)
             : base(0x3C)
         {
-            System.Collections.Generic.List<Item> items = beheld.EquipItems;
+            List<Item> items = beheld.EquipItems;
             int count = items.Count;
 
             if (beheld.Hair != null && beheld.Hair.ItemID > 0)

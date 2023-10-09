@@ -56,20 +56,23 @@ namespace Server.Gumps
                         m_Mobile.SendLocalizedMessage(1080455); // You can not resize your house at this time. Please remove all items fom the moving crate and try again.
                         return;
                     }
-                    else if (m_House.HasRentedVendors && m_House.VendorInventories.Count > 0)
+
+                    if (m_House.HasRentedVendors && m_House.VendorInventories.Count > 0)
                     {
-                        m_Mobile.SendLocalizedMessage(1062679); // You cannot do that that while you still have contract vendors or unclaimed contract vendor inventory in your house.
-                        return;
+	                    m_Mobile.SendLocalizedMessage(1062679); // You cannot do that that while you still have contract vendors or unclaimed contract vendor inventory in your house.
+	                    return;
                     }
-                    else if (m_House.HasRentedVendors)
+
+                    if (m_House.HasRentedVendors)
                     {
-                        m_Mobile.SendLocalizedMessage(1062680); // You cannot do that that while you still have contract vendors in your house.
-                        return;
+	                    m_Mobile.SendLocalizedMessage(1062680); // You cannot do that that while you still have contract vendors in your house.
+	                    return;
                     }
-                    else if (m_House.VendorInventories.Count > 0)
+
+                    if (m_House.VendorInventories.Count > 0)
                     {
-                        m_Mobile.SendLocalizedMessage(1062681); // You cannot do that that while you still have unclaimed contract vendor inventory in your house.
-                        return;
+	                    m_Mobile.SendLocalizedMessage(1062681); // You cannot do that that while you still have unclaimed contract vendor inventory in your house.
+	                    return;
                     }
 
                     if (m_Mobile.AccessLevel >= AccessLevel.GameMaster)
@@ -89,7 +92,6 @@ namespace Server.Gumps
                         Timer.DelayCall(m_House.RestrictedPlacingTime, region.Unregister);
 
                         m_House.Delete();
-                        return;
                     }
                 }
                 else

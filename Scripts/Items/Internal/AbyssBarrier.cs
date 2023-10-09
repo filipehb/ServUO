@@ -18,22 +18,20 @@ namespace Server.Items
 
             if (m.IsStaff())
                 return true;
-            else if (mobile != null)
+            if (mobile != null)
             {
 
-                if (mobile.AbyssEntry == false)
-                {
-                    m.SendLocalizedMessage(1112226);
-                    return false;
-                }
-                else
-                {
-                    m.SendLocalizedMessage(1113708);
-                    return true;
-                }
+	            if (mobile.AbyssEntry == false)
+	            {
+		            m.SendLocalizedMessage(1112226);
+		            return false;
+	            }
+
+	            m.SendLocalizedMessage(1113708);
+	            return true;
             }
-            else
-                return false;
+
+            return false;
         }
 
         public AbyssBarrier(Serial serial) : base(serial)

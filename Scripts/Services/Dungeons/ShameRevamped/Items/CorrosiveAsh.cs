@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class CorrosiveAsh : Item
@@ -32,8 +30,8 @@ namespace Server.Items
                 from.SendLocalizedMessage(1151813, "#1151810"); // You do not have a required component: ~1_val~
             else
             {
-                from.Backpack.ConsumeTotal(new Type[] { typeof(CursedOilstone), typeof(QuartzGrit) },
-                                           new int[] { 1, 1 });
+                from.Backpack.ConsumeTotal(new[] { typeof(CursedOilstone), typeof(QuartzGrit) },
+                                           new[] { 1, 1 });
 
                 Consume();
 

@@ -1,13 +1,12 @@
-using Server.Engines.Craft;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
 
 namespace Server.Engines.BulkOrders
 {
     public class SmallFletchingBOD : SmallBOD
     {
-        public static double[] m_FletchingMaterialChances = new double[]
-        {
+        public static double[] m_FletchingMaterialChances = {
             0.513718750, // None
             0.292968750, // Oak
             0.117187500, // Ash

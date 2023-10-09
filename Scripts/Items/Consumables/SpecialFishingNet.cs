@@ -1,15 +1,14 @@
+using System;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Spells;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
     public class SpecialFishingNet : Item
     {
-        private static readonly int[] m_Hues = new int[]
-        {
+        private static readonly int[] m_Hues = {
             0x09B,
             0x0CD,
             0x0D3,
@@ -25,13 +24,11 @@ namespace Server.Items
             0x4B5,
             0x8AA
         };
-        private static readonly int[] m_WaterTiles = new int[]
-        {
+        private static readonly int[] m_WaterTiles = {
             0x00A8, 0x00AB,
             0x0136, 0x0137
         };
-        private static readonly int[] m_UndeepWaterTiles = new int[]
-        {
+        private static readonly int[] m_UndeepWaterTiles = {
             0x1797, 0x179C
         };
 

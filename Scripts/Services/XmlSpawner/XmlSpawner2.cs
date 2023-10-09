@@ -1,16 +1,18 @@
-using Server.Accounting;
-using Server.Commands;
-using Server.Commands.Generic;
-using Server.ContextMenus;
-using Server.Items;
-using Server.Network;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Xml;
+using Server.Accounting;
+using Server.Commands;
+using Server.Commands.Generic;
+using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Mobiles
 {
@@ -61,7 +63,7 @@ namespace Server.Mobiles
         public static string XmlSpawnDir = "XmlSpawner";            // default directory for saving/loading .xml files with [xmlload [xmlsave
         private const int MaxSmartSectorListSize = 1024;        // maximum sector list size for use in smart spawning. This gives a 512x512 tile range.
 
-        private static string defwaypointname = null;            // default waypoint name will get assigned in Initialize
+        private static string defwaypointname;            // default waypoint name will get assigned in Initialize
         private const string XmlTableName = "Properties";
         private const string XmlDataSetName = "XmlSpawner";
         public static AccessLevel DiskAccessLevel = AccessLevel.Administrator; // minimum access level required by commands that can access the disk such as XmlLoad, XmlSave, and the Save function of XmlEdit
@@ -84,8 +86,8 @@ namespace Server.Mobiles
         private static TimeSpan defTODEnd = TimeSpan.FromMinutes(0);
         private static TimeSpan defDuration = TimeSpan.FromMinutes(0);
         private static TimeSpan defDespawnTime = TimeSpan.FromHours(0);
-        private static bool defIsGroup = false;
-        private static int defTeam = 0;
+        private static bool defIsGroup;
+        private static int defTeam;
         private static int defProximityTriggerSound = defaultTriggerSound;
         private static int defAmount = 1;
         private static bool defRelativeHome = true;
@@ -97,7 +99,7 @@ namespace Server.Mobiles
         private static TODModeType defTODMode = TODModeType.Realtime;
 
         private static Timer m_GlobalSectorTimer;
-        private static bool SmartSpawningSystemEnabled = false;
+        private static bool SmartSpawningSystemEnabled;
 
         private static WarnTimer2 m_WarnTimer;
 
@@ -115,8 +117,8 @@ namespace Server.Mobiles
 
         private string m_Name = string.Empty;
         private string m_UniqueId = string.Empty;
-        private bool m_PlayerCreated = false;
-        private bool m_HomeRangeIsRelative = false;
+        private bool m_PlayerCreated;
+        private bool m_HomeRangeIsRelative;
         private int m_Team;
         private int m_HomeRange;
         // added a amount parameter for stacked item spawns
@@ -174,9 +176,9 @@ namespace Server.Mobiles
         private Mobile m_mob_who_triggered;
         private Item m_SetPropertyItem;
 
-        private bool m_skipped = false;
+        private bool m_skipped;
         private int m_KillReset = defKillReset;      // number of spawn ticks that pass without kills before killcount gets reset to zero
-        private int m_spawncheck = 0;
+        private int m_spawncheck;
         private TODModeType m_TODMode = TODModeType.Realtime;
         private string m_GumpState;
         private bool m_ExternalTriggering;
@@ -190,12 +192,12 @@ namespace Server.Mobiles
         public List<XmlTextEntryBook> m_TextEntryBook;
         private XmlSpawnerGump m_SpawnerGump;
 
-        private bool m_AllowGhostTriggering = false;
-        private bool m_AllowNPCTriggering = false;
+        private bool m_AllowGhostTriggering;
+        private bool m_AllowNPCTriggering;
         private string m_ConfigFile;
-        private bool m_OnHold = false;
-        private bool m_HoldSequence = false;
-        private bool m_SpawnOnTrigger = false;
+        private bool m_OnHold;
+        private bool m_HoldSequence;
+        private bool m_SpawnOnTrigger;
 
         private List<MovementInfo> m_MovementList;
         private MovementTimer m_MovementTimer;
@@ -208,23 +210,23 @@ namespace Server.Mobiles
 
         private string m_SkillTrigger;
         private SkillName m_skill_that_triggered;
-        private bool m_FreeRun = false;     // override for all other triggering modes
+        private bool m_FreeRun;     // override for all other triggering modes
 
         private Map currentmap;
 
-        public bool m_IsInactivated = false;
-        private bool m_SmartSpawning = false;
+        public bool m_IsInactivated;
+        private bool m_SmartSpawning;
         private SectorTimer m_SectorTimer;
 
         private List<Static> m_ShowBoundsItems = new List<Static>();
 
         public List<BaseXmlSpawner.TypeInfo> PropertyInfoList = null;   // used to optimize property info lookup used by set and get property methods.
 
-        private Dictionary<string, List<Item>> spawnPositionWayTable = null;  // used to optimize #waypoint lookup
+        private Dictionary<string, List<Item>> spawnPositionWayTable;  // used to optimize #waypoint lookup
 
-        private bool inrespawn = false;
+        private bool inrespawn;
 
-        private List<Sector> sectorList = null;
+        private List<Sector> sectorList;
 
         private bool m_DisableGlobalAutoReset;
 
@@ -247,9 +249,9 @@ namespace Server.Mobiles
 
         public bool DebugThis { get; set; } = false;
 
-        public int MovingPlayerCount { get; set; } = 0;
+        public int MovingPlayerCount { get; set; }
 
-        public int FastestPlayerSpeed { get; set; } = 0;
+        public int FastestPlayerSpeed { get; set; }
 
         public int NearbyPlayerCount
         {
@@ -322,7 +324,7 @@ namespace Server.Mobiles
         }
 
         private readonly bool sectorIsActive = false;
-        private bool UseSectorActivate = false;
+        private bool UseSectorActivate;
 
         public bool SingleSector => UseSectorActivate;
 
@@ -400,7 +402,7 @@ namespace Server.Mobiles
             }
         }
 
-        private static int totalSectorsMonitored = 0;
+        private static int totalSectorsMonitored;
 
         public bool HasActiveSectors
         {
@@ -530,7 +532,7 @@ namespace Server.Mobiles
                                     }
                                     catch (Exception e)
                                     {
-                                        Diagnostics.ExceptionLogging.LogException(e);
+                                        ExceptionLogging.LogException(e);
                                     }
 
                                     return true;
@@ -660,15 +662,14 @@ namespace Server.Mobiles
         {
             get
             {
-                // allow free spawning if proximity sensing is off and if all of the potential free-spawning triggers are disabled
+	            // allow free spawning if proximity sensing is off and if all of the potential free-spawning triggers are disabled
                 if (Running && m_ProximityRange == -1 &&
                     string.IsNullOrEmpty(m_ObjectPropertyName) &&
                     (string.IsNullOrEmpty(m_MobPropertyName) ||
                     m_MobTriggerName == null || m_MobTriggerName.Length == 0) &&
                     !m_ExternalTriggering)
                     return true;
-                else
-                    return false;
+                return false;
             }
         }
 
@@ -747,16 +748,14 @@ namespace Server.Mobiles
 
                 if (m_Group)
                 {
-                    if (TotalSpawnedObjects <= 0)
+	                if (TotalSpawnedObjects <= 0)
                         return true;
-                    else
-                        return false;
+	                return false;
                 }
 
                 if (IsFull)
                     return false;
-                else
-                    return true;
+                return true;
             }
         }
 
@@ -1229,10 +1228,9 @@ namespace Server.Mobiles
         {
             get
             {
-                if (m_refractActivated)
+	            if (m_refractActivated)
                     return m_RefractEnd - DateTime.UtcNow;
-                else
-                    return TimeSpan.FromSeconds(0);
+	            return TimeSpan.FromSeconds(0);
             }
             set
             {
@@ -1374,16 +1372,14 @@ namespace Server.Mobiles
 
                 if (TOD_start > TOD_end)
                 {
-                    if (now > TOD_start || now < TOD_end)
+	                if (now > TOD_start || now < TOD_end)
                         return true;
-                    else
-                        return false;
+	                return false;
                 }
 
                 if (now > TOD_start && now < TOD_end)
                     return true;
-                else
-                    return false;
+                return false;
 
             }
         }
@@ -1410,10 +1406,9 @@ namespace Server.Mobiles
         {
             get
             {
-                if (m_durActivated)
+	            if (m_durActivated)
                     return m_DurEnd - DateTime.UtcNow;
-                else
-                    return TimeSpan.FromSeconds(0);
+	            return TimeSpan.FromSeconds(0);
             }
             set
             {
@@ -1485,10 +1480,9 @@ namespace Server.Mobiles
         {
             get
             {
-                if (m_Running)
+	            if (m_Running)
                     return m_End - DateTime.UtcNow;
-                else
-                    return TimeSpan.FromSeconds(0);
+	            return TimeSpan.FromSeconds(0);
             }
             set
             {
@@ -1530,10 +1524,9 @@ namespace Server.Mobiles
         {
             get
             {
-                if (m_Running && ((m_SeqEnd - DateTime.UtcNow) > TimeSpan.Zero))
+	            if (m_Running && ((m_SeqEnd - DateTime.UtcNow) > TimeSpan.Zero))
                     return m_SeqEnd - DateTime.UtcNow;
-                else
-                    return TimeSpan.FromSeconds(0);
+	            return TimeSpan.FromSeconds(0);
             }
             set
             {
@@ -1821,7 +1814,7 @@ namespace Server.Mobiles
                 m_ShowContainerStatic.Delete();
         }
 
-        static bool IgnoreLocationChange = false;
+        static bool IgnoreLocationChange;
         public override void OnLocationChange(Point3D oldLocation)
         {
             if (IgnoreLocationChange)
@@ -1984,7 +1977,7 @@ namespace Server.Mobiles
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }
@@ -2036,7 +2029,7 @@ namespace Server.Mobiles
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (fs == null)
@@ -2372,7 +2365,7 @@ namespace Server.Mobiles
                                 }
                                 catch (Exception e)
                                 {
-                                    Diagnostics.ExceptionLogging.LogException(e);
+                                    ExceptionLogging.LogException(e);
                                 }
                             }
 
@@ -2939,7 +2932,7 @@ namespace Server.Mobiles
                                                             }
                                                             catch (Exception ex)
                                                             {
-                                                                Diagnostics.ExceptionLogging.LogException(ex);
+                                                                ExceptionLogging.LogException(ex);
                                                             }
                                                             impl.Register(b);
                                                         }
@@ -3022,7 +3015,7 @@ namespace Server.Mobiles
                         {
                             Console.WriteLine("Config error '{0}'='{1}'", argname, value);
                             Console.WriteLine("Error: {0}", e.Message);
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                 }
@@ -3426,88 +3419,88 @@ namespace Server.Mobiles
             try { defProximityRange = int.Parse(node["defProximityRange"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defTriggerProbability = double.Parse(node["defTriggerProbability"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defProximityTriggerSound = int.Parse(node["defProximityTriggerSound"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defMinRefractory = TimeSpan.Parse(node["defMinRefractory"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defMaxRefractory = TimeSpan.Parse(node["defMaxRefractory"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defTODStart = TimeSpan.Parse(node["defTODStart"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defTODEnd = TimeSpan.Parse(node["defTODEnd"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defAmount = int.Parse(node["defStackAmount"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defDuration = TimeSpan.Parse(node["defDuration"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defIsGroup = bool.Parse(node["defIsGroup"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defTeam = int.Parse(node["defTeam"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defRelativeHome = bool.Parse(node["defRelativeHome"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defSpawnRange = int.Parse(node["defSpawnRange"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defHomeRange = int.Parse(node["defHomeRange"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defMinDelay = TimeSpan.Parse(node["defMinDelay"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             try { defMaxDelay = TimeSpan.Parse(node["defMaxDelay"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             int todmode = 0;
             try { todmode = int.Parse(node["defTODMode"].InnerText); }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             switch (todmode)
             {
@@ -3889,7 +3882,7 @@ namespace Server.Mobiles
                 {
                     SmartSpawnAccessLevel = (AccessLevel)Enum.Parse(typeof(AccessLevel), e.Arguments[1], true);
                 }
-                catch (Exception ex) { Diagnostics.ExceptionLogging.LogException(ex); }
+                catch (Exception ex) { ExceptionLogging.LogException(ex); }
             }
             // handle the
             // number of spawners
@@ -3971,7 +3964,7 @@ namespace Server.Mobiles
                 }
                 catch (Exception ex)
                 {
-                    Diagnostics.ExceptionLogging.LogException(ex);
+                    ExceptionLogging.LogException(ex);
                 }
             }
             int count = 0;
@@ -7810,8 +7803,7 @@ namespace Server.Mobiles
             // if couldnt find one larger, then it is time to wraparound
             if (largergroup < 0 && sgroup >= 0)
                 return (NextSequentialIndex(-1));
-            else
-                return (largergroup);
+            return (largergroup);
         }
 
         // returns the spawn index of a spawn entry in the current sequential subgroup
@@ -7997,7 +7989,7 @@ namespace Server.Mobiles
 
         #region Spawn methods
 
-        int killcount_held = 0;
+        int killcount_held;
 
         public void OnTick()
         {
@@ -9401,10 +9393,9 @@ namespace Server.Mobiles
 
         public bool HasRegionPoints(Region r)
         {
-            if (r != null && r.Area.Length > 0)
+	        if (r != null && r.Area.Length > 0)
                 return true;
-            else
-                return false;
+	        return false;
         }
 
         public Rectangle2D SpawnerBounds => new Rectangle2D(m_X, m_Y, m_Width + 1, m_Height + 1);
@@ -11540,7 +11531,7 @@ namespace Server.Mobiles
 
         internal string GetSerializedObjectList()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             foreach (SpawnObject so in m_SpawnObjects)
             {
@@ -11555,7 +11546,7 @@ namespace Server.Mobiles
 
         internal string GetSerializedObjectList2()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             foreach (SpawnObject so in m_SpawnObjects)
             {
@@ -11613,11 +11604,11 @@ namespace Server.Mobiles
             public int SpawnsPerTick { get; set; } = 1;
             public int SequentialResetTo { get; set; }
             public int KillsNeeded { get; set; }
-            public bool RestrictKillsToSubgroup { get; set; } = false;
+            public bool RestrictKillsToSubgroup { get; set; }
             public bool ClearOnAdvance { get; set; } = true;
             public double MinDelay { get; set; } = -1;
             public double MaxDelay { get; set; } = -1;
-            public bool Disabled { get; set; } = false;
+            public bool Disabled { get; set; }
             public bool Ignore { get; set; } = false;
             public int PackRange { get; set; } = -1;
 

@@ -104,10 +104,11 @@ namespace Server.Engines.Harvest
                 from.SendLocalizedMessage(500446); // That is too far away.
                 return;
             }
-            else if (!item.IsChildOf(from.Backpack) && !item.Movable)
+
+            if (!item.IsChildOf(from.Backpack) && !item.Movable)
             {
-                from.SendLocalizedMessage(500462); // You can't destroy that while it is here.
-                return;
+	            from.SendLocalizedMessage(500462); // You can't destroy that while it is here.
+	            return;
             }
 
             from.SendLocalizedMessage(500461); // You destroy the item.

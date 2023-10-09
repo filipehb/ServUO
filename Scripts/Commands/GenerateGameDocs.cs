@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Commands
 {
@@ -22,7 +25,7 @@ namespace Server.Commands
             csv = new CsvFile();
             AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(t => t.GetTypes())
-                .Where(t => t.IsClass && t.Namespace == "Server.Mobiles" && typeof(Mobiles.BaseCreature).IsAssignableFrom(t))
+                .Where(t => t.IsClass && t.Namespace == "Server.Mobiles" && typeof(BaseCreature).IsAssignableFrom(t))
                 .ToList()
                 .ForEach(t => ConsumeType(t, HandleBaseCreature));
             csv.Write("Creatures.csv");
@@ -30,7 +33,7 @@ namespace Server.Commands
             csv = new CsvFile();
             AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(t => t.GetTypes())
-                .Where(t => t.IsClass && t.Namespace == "Server.Items" && typeof(Items.BaseWeapon).IsAssignableFrom(t))
+                .Where(t => t.IsClass && t.Namespace == "Server.Items" && typeof(BaseWeapon).IsAssignableFrom(t))
                 .ToList()
                 .ForEach(t => ConsumeType(t, HandleBaseWeapon));
             csv.Write("Weapons.csv");
@@ -38,7 +41,7 @@ namespace Server.Commands
             csv = new CsvFile();
             AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(t => t.GetTypes())
-                .Where(t => t.IsClass && t.Namespace == "Server.Items" && typeof(Items.BaseArmor).IsAssignableFrom(t))
+                .Where(t => t.IsClass && t.Namespace == "Server.Items" && typeof(BaseArmor).IsAssignableFrom(t))
                 .ToList()
                 .ForEach(t => ConsumeType(t, HandleBaseArmor));
             csv.Write("Armor.csv");
@@ -46,7 +49,7 @@ namespace Server.Commands
 
         private static void HandleBaseArmor(object obj)
         {
-            Items.BaseArmor arm = obj as Items.BaseArmor;
+            BaseArmor arm = obj as BaseArmor;
             if (arm == null)
                 return;
 
@@ -65,7 +68,7 @@ namespace Server.Commands
 
         private static void HandleBaseWeapon(object obj)
         {
-            Items.BaseWeapon wep = obj as Items.BaseWeapon;
+            BaseWeapon wep = obj as BaseWeapon;
             if (wep == null)
                 return;
 
@@ -85,11 +88,11 @@ namespace Server.Commands
 
         private static void HandleBaseCreature(object obj)
         {
-            Mobiles.BaseCreature creature = obj as Mobiles.BaseCreature;
+            BaseCreature creature = obj as BaseCreature;
             if (creature == null)
                 return;
 
-            Items.BambooFlute flute = new Items.BambooFlute();
+            BambooFlute flute = new BambooFlute();
 
             csv.AddRow();
             csv.AddValue("Type", creature.GetType().Name);
@@ -130,7 +133,7 @@ namespace Server.Commands
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             if (obj != null)
@@ -142,7 +145,7 @@ namespace Server.Commands
         private class CsvFile
         {
             private readonly List<Dictionary<string, string>> rows = new List<Dictionary<string, string>>();
-            private Dictionary<string, string> currentRow = null;
+            private Dictionary<string, string> currentRow;
             private readonly HashSet<string> headerSet = new HashSet<string>();
             private readonly List<string> allHeaders = new List<string>();
 
@@ -161,7 +164,7 @@ namespace Server.Commands
                 if (value != null)
                     v = value.ToString();
 
-                currentRow.Add(name, v.ToString());
+                currentRow.Add(name, v);
                 if (headerSet.Contains(name))
                     return;
                 headerSet.Add(name);
@@ -178,12 +181,12 @@ namespace Server.Commands
                 {
                     if (first)
                     {
-                        outf.Write(string.Format("\"{0}\"", header));
+                        outf.Write("\"{0}\"", header);
                         first = false;
                     }
                     else
                     {
-                        outf.Write(string.Format(",\"{0}\"", header));
+                        outf.Write(",\"{0}\"", header);
                     }
                 }
                 outf.WriteLine("");
@@ -197,12 +200,12 @@ namespace Server.Commands
                         row.TryGetValue(header, out value);
                         if (first)
                         {
-                            outf.Write(string.Format("\"{0}\"", value));
+                            outf.Write("\"{0}\"", value);
                             first = false;
                         }
                         else
                         {
-                            outf.Write(string.Format(",\"{0}\"", value));
+                            outf.Write(",\"{0}\"", value);
                         }
                     }
                     outf.WriteLine("");

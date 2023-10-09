@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests.Hag
 {
@@ -76,8 +76,7 @@ namespace Server.Engines.Quests.Hag
 
             if (index >= 0 && index < m_Table.Length)
                 return m_Table[index];
-            else
-                return m_Table[0];
+            return m_Table[0];
         }
 
         public static Ingredient RandomIngredient(Ingredient[] oldIngredients)

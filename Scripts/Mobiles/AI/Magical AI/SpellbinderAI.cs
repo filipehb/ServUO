@@ -1,4 +1,7 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Spells;
 using Server.Spells.Fifth;
 using Server.Spells.First;
@@ -9,7 +12,7 @@ using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.Mobiles
@@ -506,8 +509,8 @@ namespace Server.Mobiles
 
             if (activeOnly)
             {
-                System.Collections.Generic.List<AggressorInfo> aggressed = m_Mobile.Aggressed;
-                System.Collections.Generic.List<AggressorInfo> aggressors = m_Mobile.Aggressors;
+                List<AggressorInfo> aggressed = m_Mobile.Aggressed;
+                List<AggressorInfo> aggressors = m_Mobile.Aggressors;
 
                 Mobile active = null;
                 double activePrio = 0.0;

@@ -10,7 +10,6 @@ namespace Server.Items
 
         [Constructable]
         public Tangle1()
-            : base()
         {
             Hue = 506;
             Attributes.BonusInt = 10;
@@ -45,7 +44,6 @@ namespace Server.Items
 
         [Constructable]
         public GargishTangle1()
-            : base()
         {
             Hue = 506;
             Attributes.BonusInt = 10;

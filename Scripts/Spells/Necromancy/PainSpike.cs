@@ -1,7 +1,7 @@
-using Server.Spells.SkillMasteries;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Spells.SkillMasteries;
+using Server.Targeting;
 
 namespace Server.Spells.Necromancy
 {

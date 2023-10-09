@@ -20,15 +20,11 @@ namespace Server
 					return new ParallelSaveStrategy(processorCount);
 				}
 #endif
-				else
-				{
-					return new DualSaveStrategy();
-				}
+
+				return new DualSaveStrategy();
 			}
-			else
-			{
-				return new StandardSaveStrategy();
-			}
+
+			return new StandardSaveStrategy();
 		}
 
 		public abstract void Save(SaveMetrics metrics, bool permitBackgroundWrite);

@@ -4,8 +4,7 @@ namespace Server.Items
 {
     public class SlayerEntry
     {
-        private static readonly int[] m_AosTitles = new int[]
-        {
+        private static readonly int[] m_AosTitles = {
             1060479, // undead slayer
             1060470, // orc slayer
             1060480, // troll slayer
@@ -79,10 +78,9 @@ namespace Server.Items
 
             if (m.SpecialSlayerMechanics)
             {
-                if (m.SlayerVulnerabilities.Contains(m_Name.ToString()))
+	            if (m.SlayerVulnerabilities.Contains(m_Name.ToString()))
                     return true;
-                else
-                    return false;
+	            return false;
             }
 
             Type t = m.GetType();

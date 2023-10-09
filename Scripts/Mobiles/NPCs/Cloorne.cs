@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class SquishyQuest : BaseQuest
     {
         public SquishyQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Slime), "slimes", 12));
 
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class BigJobQuest : BaseQuest
     {
         public BigJobQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Ogre), "ogres", 5));
             AddObjective(new SlayObjective(typeof(Ettin), "ettins", 5));
@@ -77,7 +75,6 @@ namespace Server.Engines.Quests
     public class TrollingForTrollsQuest : BaseQuest
     {
         public TrollingForTrollsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Troll), "trolls", 10));
 
@@ -111,7 +108,6 @@ namespace Server.Engines.Quests
     public class OrcSlayingQuest : BaseQuest
     {
         public OrcSlayingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Orc), "orcs", 8));
             AddObjective(new SlayObjective(typeof(OrcCaptain), "orc captains", 4));
@@ -147,7 +143,6 @@ namespace Server.Engines.Quests
     public class ColdHeartedQuest : BaseQuest
     {
         public ColdHeartedQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(IceSerpent), "giant ice serpents", 6));
             AddObjective(new SlayObjective(typeof(FrostSpider), "frost spiders", 6));
@@ -182,7 +177,6 @@ namespace Server.Engines.Quests
     public class ForkedTonguesQuest : BaseQuest
     {
         public ForkedTonguesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Lizardman), "lizardmen", 10));
 
@@ -228,7 +222,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(SquishyQuest),
                     typeof(BigJobQuest),

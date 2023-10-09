@@ -1,8 +1,9 @@
-﻿using Server.ContextMenus;
-using Server.Gumps;
-using Server.Multis;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Server.ContextMenus;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -33,7 +34,7 @@ namespace Server.Items
 
         public override void Delete()
         {
-            Mobiles.DockMaster.RemoveCrate(this);
+            DockMaster.RemoveCrate(this);
             base.Delete();
         }
 
@@ -98,7 +99,7 @@ namespace Server.Items
                 if (hold == null)
                     return;
 
-                if (m_From.InRange(m_Crate.Boat.Location, Mobiles.DockMaster.DryDockDistance))
+                if (m_From.InRange(m_Crate.Boat.Location, DockMaster.DryDockDistance))
                 {
                     List<Item> items = new List<Item>(m_Crate.Items);
                     foreach (Item item in items)

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ItsElementalQuest : BaseQuest
     {
         public ItsElementalQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(FireElemental), "fire elementals", 4));
             AddObjective(new SlayObjective(typeof(WaterElemental), "water elementals", 4));
@@ -56,7 +55,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ItsElementalQuest)
                 };

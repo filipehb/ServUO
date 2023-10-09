@@ -9,7 +9,6 @@ namespace Server.Items
 
         [Constructable]
         public DreadsRevenge()
-            : base()
         {
             Hue = 0x3A;
             SkillBonuses.SetValues(0, SkillName.Fencing, 20.0);

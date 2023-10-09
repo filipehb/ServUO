@@ -73,8 +73,8 @@ namespace Server.Items
             // TODO: This will never return "very unusual dead aquarium creature" due to the way it is killed
             if (ItemID > 0x3B0F)
                 return Dead ? 1074424 : 1074422; // A very unusual [dead/live] aquarium creature
-            else if (Hue != 0)
-                return Dead ? 1074425 : 1074423; // A [dead/live] aquarium creature of unusual color
+            if (Hue != 0)
+	            return Dead ? 1074425 : 1074423; // A [dead/live] aquarium creature of unusual color
 
             return Dead ? 1073623 : 1073622; // A [dead/live] aquarium creature
         }

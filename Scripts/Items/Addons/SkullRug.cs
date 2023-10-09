@@ -1,7 +1,7 @@
+using System;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Multis;
-using System;
 
 namespace Server.Items
 {
@@ -44,8 +44,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime NextResourceCount { get; set; }
 
-        private static readonly int[,] _EastLarge = new int[,]
-        {
+        private static readonly int[,] _EastLarge = {
               {14495, -1, -3, 0}, {14494, 0, -3, 0}, {14493, 1, -3, 0}// 1	2	3	
 			, {14496, 2, -3, 0}, {14486, 0, -1, 0}, {14487, -1, -1, 0}// 4	5	6	
 			, {14480, 2, 1, 0}, {14471, 0, 3, 0}, {14474, 0, 2, 0}// 7	8	9	

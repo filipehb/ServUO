@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class CutsBothWaysQuest : BaseQuest
     {
         public CutsBothWaysQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Broadsword), "broadswords", 12, 0xF5E));
 
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class DragonProtectionQuest : BaseQuest
     {
         public DragonProtectionQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(DragonHelm), "dragon helms", 10, 0x2645));
 
@@ -79,7 +77,6 @@ namespace Server.Engines.Quests
     public class NothingFancyQuest : BaseQuest
     {
         public NothingFancyQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Bascinet), "bascinets", 15, 0x140C));
 
@@ -116,7 +113,6 @@ namespace Server.Engines.Quests
     public class TheBulwarkQuest : BaseQuest
     {
         public TheBulwarkQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(HeaterShield), "heater shields", 10, 0x1B76));
 
@@ -165,7 +161,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CutsBothWaysQuest),
                     typeof(DragonProtectionQuest),

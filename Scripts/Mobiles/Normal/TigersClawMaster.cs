@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public TigersClawMaster()
-            : base()
         {
             Name = "Black Order Master";
             Title = "of the Serpent's Fang Sect";

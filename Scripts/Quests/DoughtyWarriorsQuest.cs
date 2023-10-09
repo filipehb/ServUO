@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -32,7 +32,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1075384;
 
         public DoughtyWarriorsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Mongbat), "Mongbats", 10));
 
@@ -80,7 +79,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1075409;
 
         public DoughtyWarriors2Quest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Imp), "Imps", 10));
 
@@ -128,7 +126,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1075415;
 
         public DoughtyWarriors3Quest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Daemon), "Daemons", 10));
 
@@ -152,7 +149,7 @@ namespace Server.Engines.Quests
 
     public class Kane : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
         {
             typeof( DoughtyWarriorsQuest )
         };

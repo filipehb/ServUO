@@ -1,5 +1,6 @@
-using Server.Network;
 using System;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.Engines.Chat
 {
@@ -75,7 +76,7 @@ namespace Server.Engines.Chat
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 

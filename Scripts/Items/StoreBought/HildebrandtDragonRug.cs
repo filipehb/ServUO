@@ -27,8 +27,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly int[,] m_SouthInfo = new int[,]
-        {
+        private static readonly int[,] m_SouthInfo = {
               {40909, -2, -2, 0}, {40908, -2, -1, 0}, {40898, -1, -1, 0}// 1	2	3	
 			, {40897, -1, 0, 0}, {40896, -1, 1, 0}, {40895, -1, 2, 0}// 4	5	6	
 			, {40887, 1, 0, 0}, {40886, 0, 1, 0}, {40885, 1, 1, 0}// 7	8	9	
@@ -40,8 +39,7 @@ namespace Server.Items
 			, {40907, -2, 0, 0}// 25	
 		};
 
-        private static readonly int[,] m_EastInfo = new int[,]
-        {
+        private static readonly int[,] m_EastInfo = {
               {40926, 2, 1, 0}, {40918, 0, 2, 0}, {40919, 1, 2, 0}// 1	2	3	
 			, {40920, -1, 2, 0}, {40910, 1, 1, 0}, {40911, 0, 1, 0}// 4	5	6	
 			, {40930, -2, 2, 0}, {40921, -1, 1, 0}, {40931, -2, 1, 0}// 7	8	9	

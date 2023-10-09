@@ -1,4 +1,5 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,13 +7,13 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-
 using Server.Accounting;
 using Server.Diagnostics;
 using Server.Gumps;
 using Server.HuePickers;
 using Server.Items;
 using Server.Menus;
+
 #endregion
 
 namespace Server.Network

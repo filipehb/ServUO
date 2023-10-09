@@ -1,4 +1,8 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Engines.PartySystem;
 using Server.Engines.Quests;
@@ -7,9 +11,7 @@ using Server.Guilds;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Items

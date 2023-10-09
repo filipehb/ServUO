@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Items
 {

@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -51,7 +51,7 @@ namespace Server.Mobiles
         }
 
         public override Type[] UniqueSAList => new Type[] { };
-        public override Type[] SharedSAList => new Type[] { typeof(StormCaller), typeof(TorcOfTheGuardians), typeof(GiantSteps), typeof(CavalrysFolly) };
+        public override Type[] SharedSAList => new[] { typeof(StormCaller), typeof(TorcOfTheGuardians), typeof(GiantSteps), typeof(CavalrysFolly) };
         public override bool AllureImmune => true;
 
         public override int GetAngerSound() { return 0x600; }

@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Misc
 {
@@ -28,67 +28,70 @@ namespace Server.Misc
                     items.Add(item);
                     continue;
                 }
-                else if (item is CommodityDeed)
+
+                if (item is CommodityDeed)
                 {
-                    CommodityDeed deed = (CommodityDeed)item;
+	                CommodityDeed deed = (CommodityDeed)item;
 
-                    if (deed.Commodity != null)
-                        validItems.Add(deed.Commodity);
+	                if (deed.Commodity != null)
+		                validItems.Add(deed.Commodity);
 
-                    continue;
+	                continue;
                 }
-                else if (item is BaseHouse)
+
+                if (item is BaseHouse)
                 {
-                    BaseHouse house = (BaseHouse)item;
+	                BaseHouse house = (BaseHouse)item;
 
-                    foreach (RelocatedEntity relEntity in house.RelocatedEntities)
-                    {
-                        if (relEntity.Entity is Item)
-                            validItems.Add((Item)relEntity.Entity);
-                    }
+	                foreach (RelocatedEntity relEntity in house.RelocatedEntities)
+	                {
+		                if (relEntity.Entity is Item)
+			                validItems.Add((Item)relEntity.Entity);
+	                }
 
-                    foreach (VendorInventory inventory in house.VendorInventories)
-                    {
-                        foreach (Item subItem in inventory.Items)
-                            validItems.Add(subItem);
-                    }
+	                foreach (VendorInventory inventory in house.VendorInventories)
+	                {
+		                foreach (Item subItem in inventory.Items)
+			                validItems.Add(subItem);
+	                }
                 }
                 else if (item is BankBox)
                 {
-                    BankBox box = (BankBox)item;
-                    Mobile owner = box.Owner;
+	                BankBox box = (BankBox)item;
+	                Mobile owner = box.Owner;
 
-                    if (owner == null)
-                    {
-                        items.Add(box);
-                        ++boxes;
-                    }
-                    else if (box.Items.Count == 0)
-                    {
-                        items.Add(box);
-                        ++boxes;
-                    }
+	                if (owner == null)
+	                {
+		                items.Add(box);
+		                ++boxes;
+	                }
+	                else if (box.Items.Count == 0)
+	                {
+		                items.Add(box);
+		                ++boxes;
+	                }
 
-                    continue;
+	                continue;
                 }
                 else if ((item.Layer == Layer.Hair || item.Layer == Layer.FacialHair))
                 {
-                    object rootParent = item.RootParent;
+	                object rootParent = item.RootParent;
 
-                    if (rootParent is Mobile)
-                    {
-                        Mobile rootMobile = (Mobile)rootParent;
-                        if (item.Parent != rootMobile && rootMobile.IsPlayer())
-                        {
-                            items.Add(item);
-                            continue;
-                        }
-                        else if (item.Parent == rootMobile)
-                        {
-                            hairCleanup.Add(rootMobile);
-                            continue;
-                        }
-                    }
+	                if (rootParent is Mobile)
+	                {
+		                Mobile rootMobile = (Mobile)rootParent;
+		                if (item.Parent != rootMobile && rootMobile.IsPlayer())
+		                {
+			                items.Add(item);
+			                continue;
+		                }
+
+		                if (item.Parent == rootMobile)
+		                {
+			                hairCleanup.Add(rootMobile);
+			                continue;
+		                }
+	                }
                 }
 
                 if (item.Parent != null || item.Map != Map.Internal || item.HeldBy != null)

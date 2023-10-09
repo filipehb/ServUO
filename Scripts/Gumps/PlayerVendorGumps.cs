@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Server.Diagnostics;
 using Server.HuePickers;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Server.Gumps
 {
@@ -394,7 +395,7 @@ namespace Server.Gumps
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 return i;
@@ -423,9 +424,8 @@ namespace Server.Gumps
             public int LocNumber { get; }
         }
 
-        private static readonly CustomCategory[] Categories = new CustomCategory[]
-        {
-            new CustomCategory(Layer.InnerTorso, 1011357, true, new CustomItem[]
+        private static readonly CustomCategory[] Categories = {
+            new CustomCategory(Layer.InnerTorso, 1011357, true, new[]
             { // Upper Torso
                 new CustomItem(typeof(Shirt), 1011359, 5399),
                 new CustomItem(typeof(FancyShirt),  1011360, 7933),
@@ -433,7 +433,7 @@ namespace Server.Gumps
                 new CustomItem(typeof(FancyDress),  1011364, 7935),
                 new CustomItem(typeof(Robe), 1011365, 7939)
             }),
-            new CustomCategory(Layer.MiddleTorso, 1011371, true, new CustomItem[]
+            new CustomCategory(Layer.MiddleTorso, 1011371, true, new[]
             { //Over chest
                 new CustomItem(typeof(Doublet), 1011358, 8059),
                 new CustomItem(typeof(Tunic), 1011361, 8097),
@@ -443,14 +443,14 @@ namespace Server.Gumps
                 new CustomItem(typeof(HalfApron),   1011373, 5435),
                 new CustomItem(typeof(FullApron),   1011374, 5437),
             }),
-            new CustomCategory(Layer.Shoes, 1011388, true, new CustomItem[]
+            new CustomCategory(Layer.Shoes, 1011388, true, new[]
             { //Footwear
                 new CustomItem(typeof(Sandals), 1011389, 5901),
                 new CustomItem(typeof(Shoes), 1011390, 5904),
                 new CustomItem(typeof(Boots), 1011391, 5899),
                 new CustomItem(typeof(ThighBoots),  1011392, 5906),
             }),
-            new CustomCategory(Layer.Helm, 1011375, true, new CustomItem[]
+            new CustomCategory(Layer.Helm, 1011375, true, new[]
             { //Hats
                 new CustomItem(typeof(SkullCap), 1011376, 5444),
                 new CustomItem(typeof(Bandana), 1011377, 5440),
@@ -459,7 +459,7 @@ namespace Server.Gumps
                 new CustomItem(typeof(Cap), 1011380, 5909),
                 new CustomItem(typeof(TallStrawHat),    1011382, 5910)
             }),
-            new CustomCategory(Layer.Helm, 1015319, true, new CustomItem[]
+            new CustomCategory(Layer.Helm, 1015319, true, new[]
             { //More Hats
                 new CustomItem(typeof(StrawHat), 1011382, 5911),
                 new CustomItem(typeof(WizardsHat), 1011383, 5912),
@@ -468,17 +468,17 @@ namespace Server.Gumps
                 new CustomItem(typeof(TricorneHat), 1011386, 5915),
                 new CustomItem(typeof(JesterHat),   1011387, 5916)
             }),
-            new CustomCategory(Layer.Pants, 1011367, true, new CustomItem[]
+            new CustomCategory(Layer.Pants, 1011367, true, new[]
             { //Lower Torso
                 new CustomItem(typeof(LongPants),   1011368, 5433),
                 new CustomItem(typeof(Kilt), 1011369, 5431),
                 new CustomItem(typeof(Skirt), 1011370, 5398),
             }),
-            new CustomCategory(Layer.Cloak, 1011393, true, new CustomItem[]
+            new CustomCategory(Layer.Cloak, 1011393, true, new[]
             { // Back
                 new CustomItem(typeof(Cloak), 1011394, 5397)
             }),
-            new CustomCategory(Layer.Hair, 1011395, true, new CustomItem[]
+            new CustomCategory(Layer.Hair, 1011395, true, new[]
             { // Hair
                 new CustomItem(0x203B, 1011052),
                 new CustomItem(0x203C, 1011053),
@@ -490,7 +490,7 @@ namespace Server.Gumps
                 new CustomItem(0x2048, 1011048),
                 new CustomItem(0x2049, 1011049),
             }),
-            new CustomCategory(Layer.FacialHair, 1015320, true, new CustomItem[]
+            new CustomCategory(Layer.FacialHair, 1015320, true, new[]
             { //Facial Hair
                 new CustomItem(0x2041, 1011062),
                 new CustomItem(0x203F, 1011060),
@@ -500,7 +500,7 @@ namespace Server.Gumps
                 new CustomItem(0x2040, 1015323),
                 new CustomItem(0x204D, 1011401),
             }),
-            new CustomCategory(Layer.FirstValid, 1011397, false, new CustomItem[]
+            new CustomCategory(Layer.FirstValid, 1011397, false, new[]
             { //Held items
                 new CustomItem(typeof(FishingPole), 1011406, 3520),
                 new CustomItem(typeof(Pickaxe), 1011407, 3717),
@@ -512,7 +512,7 @@ namespace Server.Gumps
                 new CustomItem(typeof(Longsword),   1011412, 3936),
                 new CustomItem(typeof(GnarledStaff), 1011413, 5113)
             }),
-            new CustomCategory(Layer.FirstValid, 1015325, false, new CustomItem[]
+            new CustomCategory(Layer.FirstValid, 1015325, false, new[]
             { //More held items
                 new CustomItem(typeof(Crossbow), 1011414, 3920),
                 new CustomItem(typeof(WarMace), 1011415, 5126),
@@ -844,8 +844,7 @@ namespace Server.Gumps
         }
 
         #region Mondain's Legacy
-        private static readonly HairOrBeard[] m_FemaleElfHairStyles = new HairOrBeard[]
-        {
+        private static readonly HairOrBeard[] m_FemaleElfHairStyles = {
             new HairOrBeard(0x2FCC, 1074389), // Flower
             new HairOrBeard(0x2FC0, 1074386), // Long Feather
             new HairOrBeard(0x2FC1, 1074387), // Short
@@ -856,8 +855,7 @@ namespace Server.Gumps
             new HairOrBeard(0x2FD1, 1074394)// Spiked
         };
 
-        private static readonly HairOrBeard[] m_MaleElfHairStyles = new HairOrBeard[]
-        {
+        private static readonly HairOrBeard[] m_MaleElfHairStyles = {
             new HairOrBeard(0x2FBF, 1074385), // Mid Long
             new HairOrBeard(0x2FC0, 1074386), // Long Feather
             new HairOrBeard(0x2FC1, 1074387), // Short
@@ -869,8 +867,7 @@ namespace Server.Gumps
         };
         #endregion
 
-        private static readonly HairOrBeard[] m_HairStyles = new HairOrBeard[]
-        {
+        private static readonly HairOrBeard[] m_HairStyles = {
             new HairOrBeard(0x203B, 1011052), // Short
             new HairOrBeard(0x203C, 1011053), // Long
             new HairOrBeard(0x203D, 1011054), // Ponytail
@@ -882,8 +879,7 @@ namespace Server.Gumps
             new HairOrBeard(0x2049, 1011049)// 2-tails
         };
 
-        private static readonly HairOrBeard[] m_BeardStyles = new HairOrBeard[]
-        {
+        private static readonly HairOrBeard[] m_BeardStyles = {
             new HairOrBeard(0x2041, 1011062), // Mustache
             new HairOrBeard(0x203F, 1011060), // Short beard
             new HairOrBeard(0x204B, 1015321), // Short Beard & Moustache
@@ -1126,8 +1122,8 @@ namespace Server.Gumps
 
                             if (index >= m_HairStyles.Length && m_Vendor.Race == Race.Human)
                                 return;
-                            else if (index >= m_FemaleElfHairStyles.Length && m_Vendor.Race == Race.Elf)
-                                return;
+                            if (index >= m_FemaleElfHairStyles.Length && m_Vendor.Race == Race.Elf)
+	                            return;
 
                             HairOrBeard hairStyle = m_HairStyles[index];
 

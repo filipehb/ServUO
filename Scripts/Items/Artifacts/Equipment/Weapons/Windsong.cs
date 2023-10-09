@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public Windsong()
-            : base()
         {
             Hue = 172;
             Attributes.WeaponDamage = 35;

@@ -1,4 +1,8 @@
+using Server.Engines.CityLoyalty;
+using Server.Engines.NewMagincia;
+using Server.Engines.VvV;
 using Server.Items;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
@@ -92,36 +96,40 @@ namespace Server.Spells.Fourth
                     map = m_AuctionMap.GetMap();
                 }
 
-                Effect(loc, map, true, false);
+                Effect(loc, map, true);
             }
         }
 
         public override bool CheckCast()
         {
-            if (Engines.VvV.VvVSigil.ExistsOn(Caster))
+            if (VvVSigil.ExistsOn(Caster))
             {
                 Caster.SendLocalizedMessage(1061632); // You can't do that while carrying the sigil.
                 return false;
             }
-            else if (Engines.CityLoyalty.CityTradeSystem.HasTrade(Caster))
+
+            if (CityTradeSystem.HasTrade(Caster))
             {
-                Caster.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
-                return false;
+	            Caster.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
+	            return false;
             }
-            else if (Caster.Criminal)
+
+            if (Caster.Criminal)
             {
-                Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
-                return false;
+	            Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
+	            return false;
             }
-            else if (SpellHelper.CheckCombat(Caster))
+
+            if (SpellHelper.CheckCombat(Caster))
             {
-                Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
+	            Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+	            return false;
             }
-            else if (Misc.WeightOverloading.IsOverloaded(Caster))
+
+            if (WeightOverloading.IsOverloaded(Caster))
             {
-                Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
-                return false;
+	            Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
+	            return false;
             }
 
             return SpellHelper.CheckTravel(Caster, TravelCheckType.RecallFrom);
@@ -149,7 +157,7 @@ namespace Server.Spells.Fourth
 
         public void Effect(Point3D loc, Map map, bool checkMulti, bool isboatkey = false)
         {
-            if (Engines.VvV.VvVSigil.ExistsOn(Caster))
+            if (VvVSigil.ExistsOn(Caster))
             {
                 Caster.SendLocalizedMessage(1061632); // You can't do that while carrying the sigil.
             }
@@ -179,7 +187,7 @@ namespace Server.Spells.Fourth
             {
                 Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
             }
-            else if (Misc.WeightOverloading.IsOverloaded(Caster))
+            else if (WeightOverloading.IsOverloaded(Caster))
             {
                 Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
             }
@@ -199,7 +207,7 @@ namespace Server.Spells.Fourth
             {
                 Caster.SendLocalizedMessage(1071955); // You cannot teleport while dragging an object.
             }
-            else if (Engines.CityLoyalty.CityTradeSystem.HasTrade(Caster))
+            else if (CityTradeSystem.HasTrade(Caster))
             {
                 Caster.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
             }
@@ -287,9 +295,9 @@ namespace Server.Spells.Fourth
                     else
                         from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 502357, from.Name, "")); // I can not recall from that object.
                 }
-                else if (o is Engines.NewMagincia.WritOfLease)
+                else if (o is WritOfLease)
                 {
-                    Engines.NewMagincia.WritOfLease lease = (Engines.NewMagincia.WritOfLease)o;
+                    WritOfLease lease = (WritOfLease)o;
 
                     if (lease.RecallLoc != Point3D.Zero && lease.Facet != null && lease.Facet != Map.Internal)
                         m_Owner.Effect(lease.RecallLoc, lease.Facet, false);

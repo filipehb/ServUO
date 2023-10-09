@@ -1,14 +1,14 @@
-using Server.Gumps;
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Gumps;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class TheQuestionsQuest : BaseQuest
     {
-        public TheQuestionsQuest() : base()
+        public TheQuestionsQuest()
         {
             AddObjective(new QuestionAndAnswerObjective(4, m_EntryTable));
         }
@@ -149,7 +149,7 @@ namespace Server.Engines.Quests
 
     public class CommunityServiceMuseumQuest : BaseQuest
     {
-        public CommunityServiceMuseumQuest() : base()
+        public CommunityServiceMuseumQuest()
         {
             AddObjective(new CollectionsObtainObjective(typeof(ShepherdsCrookOfHumility), "Shepherd's Crook of Humility", 1));
         }
@@ -192,7 +192,6 @@ namespace Server.Engines.Quests
     public class CommunityServiceZooQuest : BaseQuest
     {
         public CommunityServiceZooQuest()
-            : base()
         {
             AddObjective(new CollectionsObtainObjective(typeof(ForTheLifeOfBritanniaSash), "Life of Britannia Sash", 1));
         }
@@ -235,7 +234,6 @@ namespace Server.Engines.Quests
     public class CommunityServiceLibraryQuest : BaseQuest
     {
         public CommunityServiceLibraryQuest()
-            : base()
         {
             AddObjective(new CollectionsObtainObjective(typeof(SpecialPrintingOfVirtue), "Special Printing of 'Virtue' Book", 1));
         }
@@ -287,7 +285,6 @@ namespace Server.Engines.Quests
         public override bool CanRefuseReward => true;
 
         public WhosMostHumbleQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(IronChain), "Iron Chain", 1));
             AddReward(new BaseReward(typeof(GoldShield), "A Gold Shield"));

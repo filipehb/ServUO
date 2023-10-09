@@ -1,5 +1,7 @@
 #region References
+
 using System;
+
 #endregion
 
 namespace Server
@@ -72,7 +74,8 @@ namespace Server
 			{
 				return CompareTo((Serial)other);
 			}
-			else if (other == null)
+
+			if (other == null)
 			{
 				return -1;
 			}

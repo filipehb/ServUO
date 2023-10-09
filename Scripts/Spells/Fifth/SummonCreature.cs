@@ -1,5 +1,6 @@
-using Server.Mobiles;
 using System;
+using Server.Diagnostics;
+using Server.Mobiles;
 
 namespace Server.Spells.Fifth
 {
@@ -13,8 +14,7 @@ namespace Server.Spells.Fifth
             Reagent.MandrakeRoot,
             Reagent.SpidersSilk);
         // NOTE: Creature list based on 1hr of summon/release on OSI.
-        private static readonly Type[] m_Types = new Type[]
-        {
+        private static readonly Type[] m_Types = {
             typeof(PolarBear),
             typeof(GrizzlyBear),
             typeof(BlackBear),
@@ -70,7 +70,7 @@ namespace Server.Spells.Fifth
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 

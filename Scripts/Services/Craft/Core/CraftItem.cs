@@ -1,11 +1,17 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Commands;
+using Server.Diagnostics;
+using Server.Engines.Khaldun;
 using Server.Engines.Plants;
 using Server.Engines.Quests;
 using Server.Items;
+using Server.Misc;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Engines.Craft
@@ -230,7 +236,7 @@ namespace Server.Engines.Craft
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
 
                     if (item != null)
@@ -257,10 +263,8 @@ namespace Server.Engines.Craft
                 message = "You lack the required hit points to make that.";
                 return false;
             }
-            else
-            {
-                consumHits = consume;
-            }
+
+            consumHits = consume;
 
             if (Mana > 0)
             {
@@ -288,10 +292,8 @@ namespace Server.Engines.Craft
                     message = "You lack the required mana to make that.";
                     return false;
                 }
-                else
-                {
-                    consumMana = consume;
-                }
+
+                consumMana = consume;
             }
 
 
@@ -300,10 +302,8 @@ namespace Server.Engines.Craft
                 message = "You lack the required stamina to make that.";
                 return false;
             }
-            else
-            {
-                consumStam = consume;
-            }
+
+            consumStam = consume;
 
             if (consumMana)
             {
@@ -446,7 +446,7 @@ namespace Server.Engines.Craft
             typeof(Food)
         };
 
-        private static readonly Dictionary<Type, Type> m_ResourceConversionTable = new Dictionary<Type, Type>()
+        private static readonly Dictionary<Type, Type> m_ResourceConversionTable = new Dictionary<Type, Type>
         {
             { typeof(Board), typeof(Log) },
             { typeof(HeartwoodBoard), typeof(HeartwoodLog) },
@@ -461,7 +461,7 @@ namespace Server.Engines.Craft
             { typeof(BarbedLeather), typeof(BarbedHides) },
         };
 
-        private static readonly Type[] m_NeverColorTable = new[] { typeof(OrcHelm) };
+        private static readonly Type[] m_NeverColorTable = { typeof(OrcHelm) };
         #endregion
 
         public bool IsMarkable(Type type)
@@ -634,10 +634,10 @@ namespace Server.Engines.Craft
 
                 for (int j = 0; j < check.Length; ++j)
                 {
-                    if (typeof(IPlantHue).IsAssignableFrom(check[j]))
+	                if (typeof(IPlantHue).IsAssignableFrom(check[j]))
                         return true;
-                    else if (typeof(IPigmentHue).IsAssignableFrom(check[j]))
-                        return true;
+	                if (typeof(IPigmentHue).IsAssignableFrom(check[j]))
+		                return true;
                 }
             }
 
@@ -668,8 +668,8 @@ namespace Server.Engines.Craft
 
                     if (plantHue != null && plantHue.PlantHue != context.RequiredPlantHue)
                         continue;
-                    else if (pigmentHue != null && pigmentHue.PigmentHue != context.RequiredPigmentHue)
-                        continue;
+                    if (pigmentHue != null && pigmentHue.PigmentHue != context.RequiredPigmentHue)
+	                    continue;
 
                     totals[i] += items[i][j].Amount;
                 }
@@ -692,8 +692,8 @@ namespace Server.Engines.Craft
 
                     if (ph != null && ph.PlantHue != context.RequiredPlantHue)
                         continue;
-                    else if (pigh != null && pigh.PigmentHue != context.RequiredPigmentHue)
-                        continue;
+                    if (pigh != null && pigh.PigmentHue != context.RequiredPigmentHue)
+	                    continue;
 
                     if (theirAmount < need)
                     {
@@ -846,8 +846,8 @@ namespace Server.Engines.Craft
 
                 if (context == null || (ph != null && ph.PlantHue != context.RequiredPlantHue))
                     continue;
-                else if (context == null || (pigh != null && pigh.PigmentHue != context.RequiredPigmentHue))
-                    continue;
+                if (context == null || (pigh != null && pigh.PigmentHue != context.RequiredPigmentHue))
+	                continue;
 
                 amount += items[i].Amount;
             }
@@ -1174,24 +1174,24 @@ namespace Server.Engines.Craft
 
                 return true;
             }
-            else
+
             {
-                CraftRes res = Resources.GetAt(index);
+	            CraftRes res = Resources.GetAt(index);
 
-                if (res.MessageNumber > 0)
-                {
-                    message = res.MessageNumber;
-                }
-                else if (res.MessageString != null && res.MessageString != string.Empty)
-                {
-                    message = res.MessageString;
-                }
-                else
-                {
-                    message = 502925; // You don't have the resources required to make that item.
-                }
+	            if (res.MessageNumber > 0)
+	            {
+		            message = res.MessageNumber;
+	            }
+	            else if (res.MessageString != null && res.MessageString != string.Empty)
+	            {
+		            message = res.MessageString;
+	            }
+	            else
+	            {
+		            message = 502925; // You don't have the resources required to make that item.
+	            }
 
-                return false;
+	            return false;
             }
         }
 
@@ -1236,7 +1236,7 @@ namespace Server.Engines.Craft
                 m_ResAmount = amount;
             }
 
-            if (CaddelliteCraft && (!item.HasSocket<Caddellite>() || !Khaldun.TreasuresOfKhaldunEvent.Instance.Running))
+            if (CaddelliteCraft && (!item.HasSocket<Caddellite>() || !TreasuresOfKhaldunEvent.Instance.Running))
             {
                 CaddelliteCraft = false;
             }
@@ -1450,7 +1450,7 @@ namespace Server.Engines.Craft
             {
                 CraftSkill craftSkill = Skills.GetAt(i);
 
-                Misc.SkillCheck.CheckSkill(from, craftSkill.SkillToMake, craftSkill.MinSkill - MinSkillOffset, craftSkill.MaxSkill, amount);
+                SkillCheck.CheckSkill(from, craftSkill.SkillToMake, craftSkill.MinSkill - MinSkillOffset, craftSkill.MaxSkill, amount);
             }
         }
 
@@ -1507,11 +1507,9 @@ namespace Server.Engines.Craft
                                                 new InternalTimer(from, craftSystem, this, typeRes, tool, iRandom).Start();
                                                 return;
                                             }
-                                            else
-                                            {
-                                                from.EndAction(typeof(CraftSystem));
-                                                from.SendGump(new CraftGump(from, craftSystem, tool, message));
-                                            }
+
+                                            from.EndAction(typeof(CraftSystem));
+                                            from.SendGump(new CraftGump(from, craftSystem, tool, message));
                                         }
                                         else
                                         {
@@ -1634,24 +1632,25 @@ namespace Server.Engines.Craft
 
                 return;
             }
-            else if (!ConsumeAttributes(from, ref checkMessage, false))
+
+            if (!ConsumeAttributes(from, ref checkMessage, false))
             {
-                if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
-                {
-                    from.SendGump(new CraftGump(from, craftSystem, tool, checkMessage));
-                }
-                else if (checkMessage is int && (int)checkMessage > 0)
-                {
-                    from.SendLocalizedMessage((int)checkMessage);
-                }
-                else if (checkMessage is string)
-                {
-                    from.SendMessage((string)checkMessage);
-                }
+	            if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
+	            {
+		            from.SendGump(new CraftGump(from, craftSystem, tool, checkMessage));
+	            }
+	            else if (checkMessage is int && (int)checkMessage > 0)
+	            {
+		            from.SendLocalizedMessage((int)checkMessage);
+	            }
+	            else if (checkMessage is string)
+	            {
+		            from.SendMessage((string)checkMessage);
+	            }
 
-                AutoCraftTimer.EndTimer(from);
+	            AutoCraftTimer.EndTimer(from);
 
-                return;
+	            return;
             }
 
             bool toolBroken = false;
@@ -1689,24 +1688,25 @@ namespace Server.Engines.Craft
 
                     return;
                 }
-                else if (!ConsumeAttributes(from, ref message, true))
+
+                if (!ConsumeAttributes(from, ref message, true))
                 {
-                    if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
-                    {
-                        from.SendGump(new CraftGump(from, craftSystem, tool, message));
-                    }
-                    else if (message is int && (int)message > 0)
-                    {
-                        from.SendLocalizedMessage((int)message);
-                    }
-                    else if (message is string)
-                    {
-                        from.SendMessage((string)message);
-                    }
+	                if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
+	                {
+		                from.SendGump(new CraftGump(from, craftSystem, tool, message));
+	                }
+	                else if (message is int && (int)message > 0)
+	                {
+		                from.SendLocalizedMessage((int)message);
+	                }
+	                else if (message is string)
+	                {
+		                from.SendMessage((string)message);
+	                }
 
-                    AutoCraftTimer.EndTimer(from);
+	                AutoCraftTimer.EndTimer(from);
 
-                    return;
+	                return;
                 }
 
                 if (UseAllRes && maxAmount > 0)
@@ -2095,12 +2095,12 @@ namespace Server.Engines.Craft
                         {
                             cc =
                                 Activator.CreateInstance(
-                                    m_CraftItem.ItemType, new object[] { m_From, m_CraftItem, m_CraftSystem, ItemTypeRes, m_Tool, quality }) as
+                                    m_CraftItem.ItemType, m_From, m_CraftItem, m_CraftSystem, ItemTypeRes, m_Tool, quality) as
                                 CustomCraft;
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         if (cc != null)
@@ -2184,10 +2184,10 @@ namespace Server.Engines.Craft
 
                         foreach (Item item in items)
                         {
-                            if (item is IPlantHue && ((IPlantHue) item).PlantHue != hue)
+	                        if (item is IPlantHue && ((IPlantHue) item).PlantHue != hue)
                                 return true;
-                            else if (item is IPigmentHue && ((IPigmentHue) item).PigmentHue != phue)
-                                return true;
+	                        if (item is IPigmentHue && ((IPigmentHue) item).PigmentHue != phue)
+		                        return true;
                         }
 
                         if (hue != PlantHue.None)
@@ -2201,7 +2201,7 @@ namespace Server.Engines.Craft
             return false;
         }
 
-        public class ChooseResTarget : Targeting.Target
+        public class ChooseResTarget : Target
         {
             private readonly CraftItem m_CraftItem;
             private readonly CraftSystem m_CraftSystem;
@@ -2209,7 +2209,7 @@ namespace Server.Engines.Craft
             private readonly ITool m_Tool;
 
             public ChooseResTarget(Mobile from, CraftItem craftitem, CraftSystem craftSystem, Type typeRes, ITool tool)
-                : base(-1, false, Targeting.TargetFlags.None)
+                : base(-1, false, TargetFlags.None)
             {
                 m_CraftItem = craftitem;
                 m_CraftSystem = craftSystem;
@@ -2232,7 +2232,7 @@ namespace Server.Engines.Craft
                 m_CraftItem.Craft(from, m_CraftSystem, ItemTypeRes, m_Tool);
             }
 
-            protected override void OnTargetCancel(Mobile from, Targeting.TargetCancelType cancelType)
+            protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
             {
                 from.EndAction(typeof(CraftSystem));
                 from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, null));

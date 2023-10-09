@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -47,7 +47,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1077626;
 
         public DefyingTheArcaneQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.MagicResist, 50, "Old Haven Training", 1077494, 1077588));
 
@@ -60,15 +59,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.MagicResist.Base < 50;
+
+            return Owner.Skills.MagicResist.Base < 50;
         }
 
         public override void OnCompleted()
@@ -94,7 +93,7 @@ namespace Server.Engines.Quests
 
     public class Alefian : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(DefyingTheArcaneQuest)
                 };

@@ -1,8 +1,12 @@
 #region References
-using Server.Items;
-using Server.Targeting;
+
 using System;
 using System.Linq;
+using System.Reflection;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Commands
@@ -176,7 +180,7 @@ namespace Server.Commands
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                     m.SendMessage("Error");
                     return;
                 }
@@ -258,7 +262,7 @@ namespace Server.Commands
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return null;
             }
         }
@@ -332,16 +336,16 @@ namespace Server.Commands
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }
 
         public static void CopyProperties(object src, object dest)
         {
-            System.Reflection.PropertyInfo[] props = src.GetType().GetProperties();
+            PropertyInfo[] props = src.GetType().GetProperties();
 
-            foreach (System.Reflection.PropertyInfo p in props)
+            foreach (PropertyInfo p in props)
             {
                 try
                 {
@@ -352,7 +356,7 @@ namespace Server.Commands
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

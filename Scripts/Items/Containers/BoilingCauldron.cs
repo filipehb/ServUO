@@ -39,7 +39,6 @@ namespace Server.Items
     {
         [Constructable]
         public BoilingCauldronDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

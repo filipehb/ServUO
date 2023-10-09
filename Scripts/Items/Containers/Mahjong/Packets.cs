@@ -1,3 +1,4 @@
+using System.IO;
 using Server.Network;
 
 namespace Server.Engines.Mahjong
@@ -79,7 +80,7 @@ namespace Server.Engines.Mahjong
 
             if (n != players.Seats)
             {
-                m_Stream.Seek(10, System.IO.SeekOrigin.Begin);
+                m_Stream.Seek(10, SeekOrigin.Begin);
                 m_Stream.Write((byte)n);
             }
         }

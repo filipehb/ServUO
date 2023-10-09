@@ -1,6 +1,6 @@
+using System.Linq;
 using Server.Gumps;
 using Server.Mobiles;
-using System.Linq;
 
 namespace Server.Items
 {

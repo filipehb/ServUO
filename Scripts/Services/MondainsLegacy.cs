@@ -1,13 +1,15 @@
+using System;
+using System.IO;
+using System.Xml;
 using Server.Commands;
+using Server.Diagnostics;
 using Server.Engines.InstancedPeerless;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.IO;
-using System.Xml;
+using Server.Targeting;
 
 namespace Server
 {
@@ -19,8 +21,7 @@ namespace Server
     public static class MondainsLegacy
     {
         public static Type[] Artifacts => m_Artifacts;
-        private static readonly Type[] m_Artifacts = new Type[]
-        {
+        private static readonly Type[] m_Artifacts = {
             typeof(AegisOfGrace), typeof(BladeDance), typeof(BloodwoodSpirit), typeof(Bonesmasher),
             typeof(Boomstick), typeof(BrightsightLenses), typeof(FeyLeggings), typeof(FleshRipper),
             typeof(HelmOfSwiftness), typeof(PadsOfTheCuSidhe), typeof(QuiverOfRage), typeof(QuiverOfElements),
@@ -259,7 +260,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             if (!FindItem(new Point3D(1431, 1696, 0), Map.Trammel, 0x307F))
@@ -311,7 +312,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -643,7 +644,7 @@ namespace Server
             Mobile m = e.Mobile;
             m.SendMessage("Target a player to view their quests.");
 
-            m.BeginTarget(-1, false, Targeting.TargetFlags.None, delegate (Mobile from, object targeted)
+            m.BeginTarget(-1, false, TargetFlags.None, delegate (Mobile from, object targeted)
             {
                 if (targeted is PlayerMobile)
                     m.SendGump(new MondainQuestGump((PlayerMobile)targeted));

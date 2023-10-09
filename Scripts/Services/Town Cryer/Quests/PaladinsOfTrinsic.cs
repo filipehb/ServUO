@@ -1,7 +1,7 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Services.TownCryer;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -118,7 +118,7 @@ namespace Server.Engines.Quests
 
     public class Morz : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(PaladinsOfTrinsic) };
+        public override Type[] Quests => new[] { typeof(PaladinsOfTrinsic) };
 
         public static Morz TramInstance { get; set; }
         public static Morz FelInstance { get; set; }

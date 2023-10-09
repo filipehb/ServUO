@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public ObiBearingTheCrestOfBlackthorn1()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.BonusInt = 10;

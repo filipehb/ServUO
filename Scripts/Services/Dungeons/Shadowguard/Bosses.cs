@@ -1,9 +1,10 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.Shadowguard
 {
@@ -23,8 +24,7 @@ namespace Server.Engines.Shadowguard
 
         public virtual bool CanSummon => Hits <= HitsMax - (HitsMax / 4);
 
-        private readonly Type[] _ArtifactTypes = new Type[]
-        {
+        private readonly Type[] _ArtifactTypes = {
             typeof(AnonsBoots),                 typeof(AnonsSpellbook),         typeof(BalakaisShamanStaff),
             typeof(EnchantressCameo),           typeof(GrugorsShield),          typeof(WamapsBoneEarrings),
             typeof(HalawasHuntingBow),          typeof(HawkwindsRobe),          typeof(JumusSacredHide),
@@ -252,9 +252,9 @@ namespace Server.Engines.Shadowguard
                     spawn.Team = Team;
                     spawn.SummonMaster = this;
 
-                    Timer.DelayCall(TimeSpan.FromSeconds(1), (o) =>
+                    Timer.DelayCall(TimeSpan.FromSeconds(1), o =>
                     {
-                        BaseCreature s = o as BaseCreature;
+                        BaseCreature s = o;
 
                         if (s != null && s.Combatant != null)
                         {
@@ -345,7 +345,7 @@ namespace Server.Engines.Shadowguard
     public class Anon : ShadowguardBoss
     {
         public override Type[] SummonTypes => _SummonTypes;
-        private readonly Type[] _SummonTypes = new Type[] { typeof(ElderGazer), typeof(EvilMage), typeof(Wisp) };
+        private readonly Type[] _SummonTypes = { typeof(ElderGazer), typeof(EvilMage), typeof(Wisp) };
 
         private DateTime _LastChange;
         private Form _Form;
@@ -640,7 +640,7 @@ namespace Server.Engines.Shadowguard
     public class Juonar : ShadowguardBoss
     {
         public override Type[] SummonTypes => _SummonTypes;
-        private readonly Type[] _SummonTypes = new Type[] { typeof(SkeletalDragon), typeof(LichLord), typeof(WailingBanshee), typeof(FleshGolem) };
+        private readonly Type[] _SummonTypes = { typeof(SkeletalDragon), typeof(LichLord), typeof(WailingBanshee), typeof(FleshGolem) };
 
         public override bool CanDiscord => true;
         public override bool PlayInstrumentSound => false;
@@ -738,7 +738,7 @@ namespace Server.Engines.Shadowguard
     public class Virtuebane : ShadowguardBoss
     {
         public override Type[] SummonTypes => _SummonTypes;
-        private readonly Type[] _SummonTypes = new Type[] { typeof(MinotaurCaptain), typeof(Daemon), typeof(Titan) };
+        private readonly Type[] _SummonTypes = { typeof(MinotaurCaptain), typeof(Daemon), typeof(Titan) };
 
         public override bool BardImmune => true;
 
@@ -827,7 +827,7 @@ namespace Server.Engines.Shadowguard
             //Flame Columns
             for (int i = 0; i < 2; i++)
             {
-                Misc.Geometry.Circle2D(Location, Map, i, (pnt, map) =>
+                Geometry.Circle2D(Location, Map, i, (pnt, map) =>
                     {
                         Effects.SendLocationParticles(EffectItem.Create(pnt, map, EffectItem.DefaultDuration), 0x3709, 10, 30, 5052);
                     });
@@ -851,7 +851,7 @@ namespace Server.Engines.Shadowguard
 
                         for (int i = 0; i < range; i++)
                         {
-                            Misc.Geometry.Circle2D(Location, Map, i, (pnt, map) =>
+                            Geometry.Circle2D(Location, Map, i, (pnt, map) =>
                             {
                                 Effects.SendLocationEffect(pnt, map, 14000, 14, 10, Utility.RandomMinMax(2497, 2499), 2);
                             });
@@ -958,7 +958,7 @@ namespace Server.Engines.Shadowguard
     public class Ozymandias : ShadowguardBoss
     {
         public override Type[] SummonTypes => _SummonTypes;
-        private readonly Type[] _SummonTypes = new Type[] { typeof(LesserHiryu), typeof(EliteNinja), typeof(TsukiWolf) };
+        private readonly Type[] _SummonTypes = { typeof(LesserHiryu), typeof(EliteNinja), typeof(TsukiWolf) };
 
         public override double WeaponAbilityChance => 0.4;
 

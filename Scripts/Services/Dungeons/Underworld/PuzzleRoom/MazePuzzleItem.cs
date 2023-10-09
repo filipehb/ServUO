@@ -1,7 +1,8 @@
-using Server.Gumps;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -112,8 +113,8 @@ namespace Server.Items
                 m.FixedParticles(0x3818, 1, 11, 0x13A8, 0, 0, EffectLayer.Head);
                 m.PlaySound(0x1DC);
 
-                m.LocalOverheadMessage(Network.MessageType.Regular, 0x21, 1114443); // * Your body convulses from electric shock *
-                m.NonlocalOverheadMessage(Network.MessageType.Regular, 0x21, 1114443, m.Name); //  * ~1_NAME~ spasms from electric shock *
+                m.LocalOverheadMessage(MessageType.Regular, 0x21, 1114443); // * Your body convulses from electric shock *
+                m.NonlocalOverheadMessage(MessageType.Regular, 0x21, 1114443, m.Name); //  * ~1_NAME~ spasms from electric shock *
             }
         }
 

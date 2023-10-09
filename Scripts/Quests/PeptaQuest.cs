@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -7,7 +7,6 @@ namespace Server.Engines.Quests
     public class PeptaQuest : BaseQuest
     {
         public PeptaQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FreshGinger), "Fresh Ginger", 1, 0x2BE3));
             AddObjective(new ObtainObjective(typeof(TribalBerry), "Tribal Berries", 2, 0x9D0));
@@ -57,7 +56,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(PeptaQuest)
                 };

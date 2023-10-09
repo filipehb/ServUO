@@ -1,5 +1,5 @@
-using Server.Engines.Quests;
 using System;
+using Server.Engines.Quests;
 
 namespace Server.Mobiles
 {
@@ -76,11 +76,11 @@ namespace Server.Mobiles
                 Say(m_Vocabulary[Utility.Random(m_Vocabulary.Length)]);
 
                 if (to != null && Utility.RandomBool())
-                    Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(5, 8)), delegate () { to.Talk(); });
+                    Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(5, 8)), delegate { to.Talk(); });
 
                 m_CanTalk = false;
 
-                Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(20, 30)), delegate () { m_CanTalk = true; });
+                Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(20, 30)), delegate { m_CanTalk = true; });
             }
         }
 

@@ -1,8 +1,8 @@
+using System;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -35,8 +35,7 @@ namespace Server.Items
 
             if (ItemID == 0x2375)
                 return BaseAddon.IsWall(p.X, p.Y - 1, p.Z, map); // North wall
-            else
-                return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // West wall
+            return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // West wall
         }
 
         public override void Serialize(GenericWriter writer)
@@ -87,21 +86,17 @@ namespace Server.Items
 
             if (house != null && house.IsCoOwner(from))
             {
-                if (from.InRange(GetWorldLocation(), 1))
+	            if (from.InRange(GetWorldLocation(), 1))
                 {
                     Hue = sender.DyedHue;
                     return true;
                 }
-                else
-                {
-                    from.SendLocalizedMessage(500295); // You are too far away to do that.
-                    return false;
-                }
+
+	            from.SendLocalizedMessage(500295); // You are too far away to do that.
+	            return false;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         private void FixMovingCrate()

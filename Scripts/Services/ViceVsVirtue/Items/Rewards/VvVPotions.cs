@@ -1,6 +1,8 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Misc;
+using Server.Spells;
 
 namespace Server.Engines.VvV
 {
@@ -424,7 +426,7 @@ namespace Server.Engines.VvV
                     {
                         Timer.DelayCall(TimeSpan.FromMilliseconds(i * 170), index =>
                             {
-                                Misc.Geometry.Circle2D(m.Location, m.Map, index, (pnt, map) =>
+                                Geometry.Circle2D(m.Location, m.Map, index, (pnt, map) =>
                                 {
                                     Effects.SendLocationEffect(pnt, map, 0x3709, 30, 10, 1458, 5);
                                 });
@@ -438,7 +440,7 @@ namespace Server.Engines.VvV
 
                     foreach (Mobile mob in eable)
                     {
-                        if (mob != m && Spells.SpellHelper.ValidIndirectTarget(m, mob) && m.CanBeHarmful(mob, false))
+                        if (mob != m && SpellHelper.ValidIndirectTarget(m, mob) && m.CanBeHarmful(mob, false))
                         {
                             m.DoHarmful(mob);
                             AOS.Damage(mob, m, Utility.RandomMinMax(40, 60), 0, 100, 0, 0, 0);

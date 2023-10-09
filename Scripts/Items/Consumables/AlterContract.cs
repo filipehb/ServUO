@@ -49,30 +49,28 @@ namespace Server.Items
 
         public string GetTitle()
         {
-            if (m_Type == RepairSkillType.Smithing)
+	        if (m_Type == RepairSkillType.Smithing)
                 return "Blacksmithing";
-            else if (m_Type == RepairSkillType.Carpentry)
-                return "Carpentry";
-            else if (m_Type == RepairSkillType.Tailoring)
-                return "Tailoring";
-            else if (m_Type == RepairSkillType.Tinkering)
-                return "Tinkering";
-            else
-                return null;
+	        if (m_Type == RepairSkillType.Carpentry)
+		        return "Carpentry";
+	        if (m_Type == RepairSkillType.Tailoring)
+		        return "Tailoring";
+	        if (m_Type == RepairSkillType.Tinkering)
+		        return "Tinkering";
+	        return null;
         }
 
         public CraftSystem GetCraftSystem()
         {
-            if (m_Type == RepairSkillType.Smithing)
+	        if (m_Type == RepairSkillType.Smithing)
                 return DefBlacksmithy.CraftSystem;
-            else if (m_Type == RepairSkillType.Carpentry)
-                return DefCarpentry.CraftSystem;
-            else if (m_Type == RepairSkillType.Tailoring)
-                return DefTailoring.CraftSystem;
-            else if (m_Type == RepairSkillType.Tinkering)
-                return DefTinkering.CraftSystem;
-            else
-                return null;
+	        if (m_Type == RepairSkillType.Carpentry)
+		        return DefCarpentry.CraftSystem;
+	        if (m_Type == RepairSkillType.Tailoring)
+		        return DefTailoring.CraftSystem;
+	        if (m_Type == RepairSkillType.Tinkering)
+		        return DefTinkering.CraftSystem;
+	        return null;
         }
 
         public override void GetProperties(ObjectPropertyList list)

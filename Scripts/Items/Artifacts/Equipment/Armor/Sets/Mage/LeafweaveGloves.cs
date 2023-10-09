@@ -6,7 +6,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public LeafweaveGloves()
-            : base()
         {
             SetHue = 0x47E;
 

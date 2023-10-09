@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -16,7 +16,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1095065;
 
-        public ScrapingtheBottom() : base()
+        public ScrapingtheBottom()
         {
             AddObjective(new ObtainObjective(typeof(MudPuppy), "Mud Puppy", 1, 0x9cc));
 
@@ -40,14 +40,13 @@ namespace Server.Engines.Quests
 
     public class Xenrr : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
             {
                 typeof( ScrapingtheBottom )
             };
 
         [Constructable]
         public Xenrr()
-            : base()
         {
             Name = "Xenrr";
         }

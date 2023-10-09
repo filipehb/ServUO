@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Network;
@@ -5,8 +7,6 @@ using Server.Regions;
 using Server.Spells;
 using Server.Spells.Ninjitsu;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -100,7 +100,7 @@ namespace Server.Items
         public string PetName => m_PetName;
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            list.Add(1054131, m_Charges.ToString() + (m_PetName.Length == 0 ? "\t " : "\t" + m_PetName)); // a crystal ball of pet summoning: [charges: ~1_charges~] : [linked pet: ~2_petName~]
+            list.Add(1054131, m_Charges + (m_PetName.Length == 0 ? "\t " : "\t" + m_PetName)); // a crystal ball of pet summoning: [charges: ~1_charges~] : [linked pet: ~2_petName~]
         }
 
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)

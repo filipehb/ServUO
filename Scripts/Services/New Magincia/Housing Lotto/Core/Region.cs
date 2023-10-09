@@ -1,6 +1,6 @@
-using Server.Regions;
 using System.Collections.Generic;
 using System.Xml;
+using Server.Regions;
 
 namespace Server.Engines.NewMagincia
 {

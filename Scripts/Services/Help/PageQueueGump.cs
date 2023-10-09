@@ -1,8 +1,9 @@
-using Server.Gumps;
-using Server.Network;
 using System;
 using System.Collections;
 using System.IO;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Engines.Help
 {
@@ -210,7 +211,7 @@ namespace Server.Engines.Help
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -244,14 +245,14 @@ namespace Server.Engines.Help
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 
@@ -497,8 +498,7 @@ namespace Server.Engines.Help
 
     public class PageEntryGump : Gump
     {
-        private static readonly int[] m_AccessLevelHues = new int[]
-        {
+        private static readonly int[] m_AccessLevelHues = {
                 2100, //Player
                 2122, //VIP
                 2122, //Counselor
@@ -632,7 +632,7 @@ namespace Server.Engines.Help
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 

@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.Mobiles;
 using Server.Network;
 using Server.Regions;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {

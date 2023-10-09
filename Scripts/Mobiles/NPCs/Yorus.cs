@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class GuileIrkAndSpiteQuest : BaseQuest
     {
         public GuileIrkAndSpiteQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Guile), "guile", 1));
             AddObjective(new SlayObjective(typeof(Irk), "irk", 1));
@@ -61,7 +60,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(BullfightingSortOfQuest),
                     typeof(ForcedMigrationQuest),

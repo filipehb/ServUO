@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Engines.BulkOrders
 {
@@ -26,8 +26,7 @@ namespace Server.Engines.BulkOrders
             }
         }
 
-        public static double[] m_BlackTinkerMaterialChances = new double[]
-        {
+        public static double[] m_BlackTinkerMaterialChances = {
             0.501953125, // None
             0.250000000, // Dull Copper
             0.125000000, // Shadow Iron

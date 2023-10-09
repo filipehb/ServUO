@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -7,7 +7,7 @@ namespace Server.Items
     {
         public override int LabelNumber => 1158780;  // Mystical Polymorph Totem
 
-        private int m_Body = 0;
+        private int m_Body;
         private int m_Hue = -1;
 
         [CommandProperty(AccessLevel.GameMaster)]

@@ -1,13 +1,18 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Commands;
+using Server.Diagnostics;
 using Server.Engines.Craft;
+using Server.Engines.VvV;
 using Server.Multis;
 using Server.Network;
 using Server.Spells;
 using Server.Spells.Mysticism;
+using Server.Spells.SkillMasteries;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Items
@@ -35,39 +40,34 @@ namespace Server.Items
     {
         private static readonly Dictionary<Mobile, List<Spellbook>> m_Table = new Dictionary<Mobile, List<Spellbook>>();
 
-        private static readonly int[] m_LegendPropertyCounts = new[]
-        {
+        private static readonly int[] m_LegendPropertyCounts = {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 properties : 21/52 : 40%
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 1 property   : 15/52 : 29%
 			2, 2, 2, 2, 2, 2, 2, 2, 2, 2, // 2 properties : 10/52 : 19%
 			3, 3, 3, 3, 3, 3 // 3 properties :  6/52 : 12%
 		};
 
-        private static readonly int[] m_ElderPropertyCounts = new[]
-        {
+        private static readonly int[] m_ElderPropertyCounts = {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 properties : 15/34 : 44%
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 1 property   : 10/34 : 29%
 			2, 2, 2, 2, 2, 2, // 2 properties :  6/34 : 18%
 			3, 3, 3 // 3 properties :  3/34 :  9%
 		};
 
-        private static readonly int[] m_GrandPropertyCounts = new[]
-        {
+        private static readonly int[] m_GrandPropertyCounts = {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 properties : 10/20 : 50%
 			1, 1, 1, 1, 1, 1, // 1 property   :  6/20 : 30%
 			2, 2, 2, // 2 properties :  3/20 : 15%
 			3 // 3 properties :  1/20 :  5%
 		};
 
-        private static readonly int[] m_MasterPropertyCounts = new[]
-        {
+        private static readonly int[] m_MasterPropertyCounts = {
             0, 0, 0, 0, 0, 0, // 0 properties : 6/10 : 60%
 			1, 1, 1, // 1 property   : 3/10 : 30%
 			2 // 2 properties : 1/10 : 10%
 		};
 
-        private static readonly int[] m_AdeptPropertyCounts = new[]
-        {
+        private static readonly int[] m_AdeptPropertyCounts = {
             0, 0, 0, // 0 properties : 3/4 : 75%
 			1 // 1 property   : 1/4 : 25%
 		};
@@ -351,7 +351,7 @@ namespace Server.Items
                         Item toI = World.FindItem(e.Target.Serial);
                         Spell spell = SpellRegistry.NewSpell(spellID, from, null);
 
-                        if (spell != null && !Spells.SkillMasteries.MasteryInfo.IsPassiveMastery(spellID))
+                        if (spell != null && !MasteryInfo.IsPassiveMastery(spellID))
                         {
                             if (to != null)
                             {
@@ -373,7 +373,7 @@ namespace Server.Items
             }
             catch (Exception ex)
             {
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
         #endregion
@@ -384,33 +384,40 @@ namespace Server.Items
             {
                 return SpellbookType.Regular;
             }
-            else if (spellID >= 100 && spellID < 117)
+
+            if (spellID >= 100 && spellID < 117)
             {
-                return SpellbookType.Necromancer;
+	            return SpellbookType.Necromancer;
             }
-            else if (spellID >= 200 && spellID < 210)
+
+            if (spellID >= 200 && spellID < 210)
             {
-                return SpellbookType.Paladin;
+	            return SpellbookType.Paladin;
             }
-            else if (spellID >= 400 && spellID < 406)
+
+            if (spellID >= 400 && spellID < 406)
             {
-                return SpellbookType.Samurai;
+	            return SpellbookType.Samurai;
             }
-            else if (spellID >= 500 && spellID < 508)
+
+            if (spellID >= 500 && spellID < 508)
             {
-                return SpellbookType.Ninja;
+	            return SpellbookType.Ninja;
             }
-            else if (spellID >= 600 && spellID < 617)
+
+            if (spellID >= 600 && spellID < 617)
             {
-                return SpellbookType.Arcanist;
+	            return SpellbookType.Arcanist;
             }
-            else if (spellID >= 677 && spellID < 693)
+
+            if (spellID >= 677 && spellID < 693)
             {
-                return SpellbookType.Mystic;
+	            return SpellbookType.Mystic;
             }
-            else if (spellID >= 700 && spellID < 746)
+
+            if (spellID >= 700 && spellID < 746)
             {
-                return SpellbookType.SkillMasteries;
+	            return SpellbookType.SkillMasteries;
             }
 
             return SpellbookType.Invalid;
@@ -568,15 +575,17 @@ namespace Server.Items
             {
                 return false;
             }
-            else if (_Owner != null && _Owner != from)
+
+            if (_Owner != null && _Owner != from)
             {
-                from.SendLocalizedMessage(501023); // You must be the owner to use this item.
-                return false;
+	            from.SendLocalizedMessage(501023); // You must be the owner to use this item.
+	            return false;
             }
-            else if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(from))
+
+            if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(from))
             {
-                from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
-                return false;
+	            from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
+	            return false;
             }
 
             return base.CanEquip(from);
@@ -599,36 +608,33 @@ namespace Server.Items
                 {
                     return false;
                 }
-                else if (HasSpell(scroll.SpellID))
+
+                if (HasSpell(scroll.SpellID))
                 {
-                    from.SendLocalizedMessage(500179); // That spell is already present in that spellbook.
-                    return false;
+	                from.SendLocalizedMessage(500179); // That spell is already present in that spellbook.
+	                return false;
                 }
-                else
+
+                int val = scroll.SpellID - BookOffset;
+
+                if (val >= 0 && val < BookCount)
                 {
-                    int val = scroll.SpellID - BookOffset;
+	                from.Send(new PlaySound(0x249, GetWorldLocation()));
 
-                    if (val >= 0 && val < BookCount)
-                    {
-                        from.Send(new PlaySound(0x249, GetWorldLocation()));
+	                m_Content |= (ulong)1 << val;
+	                ++m_Count;
 
-                        m_Content |= (ulong)1 << val;
-                        ++m_Count;
+	                if (dropped.Amount > 1)
+	                {
+		                dropped.Amount--;
+		                return base.OnDragDrop(from, dropped);
+	                }
 
-                        if (dropped.Amount > 1)
-                        {
-                            dropped.Amount--;
-                            return base.OnDragDrop(from, dropped);
-                        }
-                        else
-                        {
-                            InvalidateProperties();
-                            scroll.Delete();
-                            return true;
-                        }
-                    }
-                    return false;
+	                InvalidateProperties();
+	                scroll.Delete();
+	                return true;
                 }
+                return false;
             }
             return false;
         }
@@ -1292,7 +1298,7 @@ namespace Server.Items
                     {
                         spell.Cast();
                     }
-                    else if (!Spells.SkillMasteries.MasteryInfo.IsPassiveMastery(spellID))
+                    else if (!MasteryInfo.IsPassiveMastery(spellID))
                     {
                         from.SendLocalizedMessage(502345); // This spell has been temporarily disabled.
                     }

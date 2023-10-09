@@ -1,6 +1,7 @@
-using Server.Engines.CityLoyalty;
 using System;
 using System.Collections.Generic;
+using Server.Engines.CityLoyalty;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -44,7 +45,7 @@ namespace Server.Items
                     from.SendLocalizedMessage(1152264); // You must wait a moment before taking another rope.
             }
             else
-                from.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045, from.NetState); // I can't reach that.
+                from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1019045, from.NetState); // I can't reach that.
         }
 
         public static Dictionary<Mobile, DateTime> _Cooldown { get; set; }

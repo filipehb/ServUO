@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class CircleOfLifeQuest : BaseQuest
     {
         public CircleOfLifeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(BogThing), "bog things", 8));
 
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class DustToDustQuest : BaseQuest
     {
         public DustToDustQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(EarthElemental), "earth elementals", 12));
 
@@ -78,7 +76,6 @@ namespace Server.Engines.Quests
     public class ArchSupportQuest : BaseQuest
     {
         public ArchSupportQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FootStool), "foot stools", 10, 0xB5E));
 
@@ -127,7 +124,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(GlassyFoeQuest),
                     typeof(CircleOfLifeQuest),

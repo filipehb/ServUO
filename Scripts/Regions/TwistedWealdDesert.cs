@@ -1,7 +1,7 @@
+using System.Xml;
 using Server.Network;
 using Server.Spells;
 using Server.Spells.Ninjitsu;
-using System.Xml;
 
 namespace Server.Regions
 {

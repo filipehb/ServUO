@@ -8,7 +8,6 @@ namespace Server.Items
 
         [Constructable]
         public NictitatingLens()
-            : base()
         {
             Hue = 1916;
             Weight = 2.0;
@@ -62,7 +61,6 @@ namespace Server.Items
 
         [Constructable]
         public GargishNictitatingLens()
-            : base()
         {
             Hue = 1916;
             Weight = 2.0;

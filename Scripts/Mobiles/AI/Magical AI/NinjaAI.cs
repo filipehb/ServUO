@@ -1,9 +1,11 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Spells;
 using Server.Spells.Ninjitsu;
-using System;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Mobiles

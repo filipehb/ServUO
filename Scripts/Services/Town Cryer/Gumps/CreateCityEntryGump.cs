@@ -1,7 +1,7 @@
+using System;
 using Server.Engines.CityLoyalty;
 using Server.Gumps;
 using Server.Mobiles;
-using System;
 
 namespace Server.Services.TownCryer
 {

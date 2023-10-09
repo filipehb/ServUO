@@ -1,7 +1,7 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
@@ -76,7 +76,7 @@ namespace Server.Engines.Quests
 
                 if (chain != null && chain.Quester != null && chain.Quester.IsAssignableFrom(GetType()))
                 {
-                    BaseQuest quest = QuestHelper.RandomQuest(player, new Type[] { chain.CurrentQuest }, this);
+                    BaseQuest quest = QuestHelper.RandomQuest(player, new[] { chain.CurrentQuest }, this);
 
                     if (quest != null)
                     {

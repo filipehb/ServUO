@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Tangle()
-            : base()
         {
             Name = "Tangle";
             Hue = 0x21;

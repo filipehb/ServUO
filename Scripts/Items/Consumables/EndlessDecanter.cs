@@ -1,13 +1,13 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
     public class EndlessDecanter : Pitcher
     {
-        private bool m_Linked = false;
+        private bool m_Linked;
         private Point3D m_LinkLocation;
         private Map m_LinkMap;
 

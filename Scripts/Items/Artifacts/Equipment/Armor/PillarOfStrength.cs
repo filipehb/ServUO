@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public PillarOfStrength()
-            : base()
         {
             Attributes.BonusStr = 10;
             Attributes.BonusHits = 10;

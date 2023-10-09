@@ -1,9 +1,10 @@
-using Server.Commands;
-using Server.Mobiles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -641,7 +642,7 @@ namespace Server.Items
                 if (Items.Count > 0)
                 {
                     from.SendLocalizedMessage(500848); // Couldn't pour it there.  It was already full.
-                    beverage.PrivateOverheadMessage(Network.MessageType.Regular, 0, 500841, from.NetState); // that has somethign in it.
+                    beverage.PrivateOverheadMessage(MessageType.Regular, 0, 500841, from.NetState); // that has somethign in it.
                 }
                 else
                 {
@@ -820,12 +821,12 @@ namespace Server.Items
         protected Type[] m_Types;
         protected int m_Weight;
         public FillableEntry(Type type)
-            : this(1, new Type[] { type })
+            : this(1, new[] { type })
         {
         }
 
         public FillableEntry(int weight, Type type)
-            : this(weight, new Type[] { type })
+            : this(weight, new[] { type })
         {
         }
 
@@ -916,11 +917,11 @@ namespace Server.Items
     {
         public static FillableContent Alchemist = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Alchemist)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(typeof(NightSightPotion)),
                 new FillableEntry(typeof(LesserCurePotion)),
@@ -934,11 +935,11 @@ namespace Server.Items
             });
         public static FillableContent Armorer = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Armorer)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(2, typeof(ChainCoif)),
                 new FillableEntry(1, typeof(PlateGorget)),
@@ -954,7 +955,7 @@ namespace Server.Items
             new Type[]
             {
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(PaintsAndBrush)),
                 new FillableEntry(1, typeof(SledgeHammer)),
@@ -979,11 +980,11 @@ namespace Server.Items
             });
         public static FillableContent Baker = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Baker),
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(RollingPin)),
                 new FillableEntry(2, typeof(SackFlour)),
@@ -992,12 +993,12 @@ namespace Server.Items
             });
         public static FillableContent Bard = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Bard),
                 typeof(BardGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(LapHarp)),
                 new FillableEntry(2, typeof(Lute)),
@@ -1007,12 +1008,12 @@ namespace Server.Items
             });
         public static FillableContent Blacksmith = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Blacksmith),
                 typeof(BlacksmithGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(8, typeof(SmithHammer)),
                 new FillableEntry(8, typeof(Tongs)),
@@ -1027,11 +1028,11 @@ namespace Server.Items
             });
         public static FillableContent Bowyer = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Bowyer)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(2, typeof(Bow)),
                 new FillableEntry(2, typeof(Crossbow)),
@@ -1039,11 +1040,11 @@ namespace Server.Items
             });
         public static FillableContent Butcher = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Butcher),
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(2, typeof(Cleaver)),
                 new FillableEntry(2, typeof(SlabOfBacon)),
@@ -1063,13 +1064,13 @@ namespace Server.Items
             });
         public static FillableContent Carpenter = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Carpenter),
                 typeof(Architect),
                 typeof(RealEstateBroker)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(ChiselsNorth)),
                 new FillableEntry(1, typeof(ChiselsWest)),
@@ -1088,13 +1089,13 @@ namespace Server.Items
             });
         public static FillableContent Clothier = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Tailor),
                 typeof(Weaver),
                 typeof(TailorGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Cotton)),
                 new FillableEntry(1, typeof(Wool)),
@@ -1107,11 +1108,11 @@ namespace Server.Items
             });
         public static FillableContent Cobbler = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Cobbler)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Boots)),
                 new FillableEntry(2, typeof(Shoes)),
@@ -1120,12 +1121,12 @@ namespace Server.Items
             });
         public static FillableContent Docks = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Fisherman),
                 typeof(FisherGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(FishingPole)),
                 // Two different types
@@ -1135,12 +1136,12 @@ namespace Server.Items
             });
         public static FillableContent Farm = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Farmer),
                 typeof(Rancher)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Shirt)),
                 new FillableEntry(1, typeof(ShortPants)),
@@ -1163,11 +1164,11 @@ namespace Server.Items
             });
         public static FillableContent FighterGuild = new FillableContent(
             3,
-            new Type[]
+            new[]
             {
                 typeof(WarriorGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(12, Loot.ArmorTypes),
                 new FillableEntry(8, Loot.WeaponTypes),
@@ -1179,7 +1180,7 @@ namespace Server.Items
             new Type[]
             {
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(12, Loot.ArmorTypes),
                 new FillableEntry(8, Loot.WeaponTypes),
@@ -1188,12 +1189,12 @@ namespace Server.Items
             });
         public static FillableContent Healer = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Healer),
                 typeof(HealerGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Bandage)),
                 new FillableEntry(1, typeof(MortarPestle)),
@@ -1201,11 +1202,11 @@ namespace Server.Items
             });
         public static FillableContent Herbalist = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Herbalist)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(10, typeof(Garlic)),
                 new FillableEntry(10, typeof(Ginseng)),
@@ -1220,7 +1221,7 @@ namespace Server.Items
             new Type[]
             {
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Candle)),
                 new FillableEntry(1, typeof(Torch)),
@@ -1228,11 +1229,11 @@ namespace Server.Items
             });
         public static FillableContent Jeweler = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Jeweler)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(GoldRing)),
                 new FillableEntry(1, typeof(GoldBracelet)),
@@ -1245,11 +1246,11 @@ namespace Server.Items
             });
         public static FillableContent Library = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Scribe)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(8, Loot.LibraryBookTypes),
                 new FillableEntry(1, typeof(RedBook)),
@@ -1257,13 +1258,13 @@ namespace Server.Items
             });
         public static FillableContent Mage = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Mage),
                 typeof(HolyMage),
                 typeof(MageGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(16, typeof(BlankScroll)),
                 new FillableEntry(14, typeof(Spellbook)),
@@ -1278,11 +1279,11 @@ namespace Server.Items
             });
         public static FillableContent Merchant = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(MerchantGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(CheeseWheel)),
                 new FillableEntry(1, typeof(CheeseWedge)),
@@ -1338,17 +1339,17 @@ namespace Server.Items
             new Type[]
             {
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(SackFlour))
             });
         public static FillableContent Mine = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Miner)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(2, typeof(Pickaxe)),
                 new FillableEntry(2, typeof(Shovel)),
@@ -1360,7 +1361,7 @@ namespace Server.Items
             new Type[]
             {
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(2, typeof(Sextant)),
                 new FillableEntry(2, typeof(Clock)),
@@ -1371,18 +1372,18 @@ namespace Server.Items
             new Type[]
             {
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(PaintsAndBrush)),
                 new FillableEntry(2, typeof(PenAndInk))
             });
         public static FillableContent Provisioner = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Provisioner)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(CheeseWheel)),
                 new FillableEntry(1, typeof(CheeseWedge)),
@@ -1435,12 +1436,12 @@ namespace Server.Items
             });
         public static FillableContent Ranger = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Ranger),
                 typeof(RangerGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(2, typeof(StuddedChest)),
                 new FillableEntry(2, typeof(StuddedLegs)),
@@ -1468,25 +1469,25 @@ namespace Server.Items
             });
         public static FillableContent Stables = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(AnimalTrainer),
                 typeof(GypsyAnimalTrainer)
             },
-            new FillableEntry[]
+            new[]
             {
                 //new FillableEntry( 1, typeof( Wheat ) ),
                 new FillableEntry(1, typeof(Carrot))
             });
         public static FillableContent Tanner = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Tanner),
                 typeof(LeatherWorker),
                 typeof(Furtrader)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(FeatheredHat)),
                 new FillableEntry(1, typeof(LeatherArms)),
@@ -1498,7 +1499,7 @@ namespace Server.Items
             });
         public static FillableContent Tavern = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(TavernKeeper),
                 typeof(Barkeeper),
@@ -1514,12 +1515,12 @@ namespace Server.Items
             });
         public static FillableContent ThiefGuild = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Thief),
                 typeof(ThiefGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Lockpick)),
                 new FillableEntry(1, typeof(BearMask)),
@@ -1530,12 +1531,12 @@ namespace Server.Items
             });
         public static FillableContent Tinker = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Tinker),
                 typeof(TinkerGuildmaster)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Lockpick)),
                 new FillableEntry(2, typeof(Clock)),
@@ -1553,11 +1554,11 @@ namespace Server.Items
             });
         public static FillableContent Veterinarian = new FillableContent(
             1,
-            new Type[]
+            new[]
             {
                 typeof(Veterinarian)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(1, typeof(Bandage)),
                 new FillableEntry(1, typeof(MortarPestle)),
@@ -1566,17 +1567,16 @@ namespace Server.Items
             });
         public static FillableContent Weaponsmith = new FillableContent(
             2,
-            new Type[]
+            new[]
             {
                 typeof(Weaponsmith)
             },
-            new FillableEntry[]
+            new[]
             {
                 new FillableEntry(8, Loot.WeaponTypes),
                 new FillableEntry(1, typeof(Arrow))
             });
-        private static readonly FillableContent[] m_ContentTypes = new FillableContent[]
-        {
+        private static readonly FillableContent[] m_ContentTypes = {
             Weaponsmith, Provisioner, Mage,
             Alchemist, Armorer, ArtisanGuild,
             Baker, Bard, Blacksmith,

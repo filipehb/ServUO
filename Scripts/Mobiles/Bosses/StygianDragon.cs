@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Network;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -310,10 +310,9 @@ namespace Server.Mobiles
 
             private static int GetItemID(bool south)
             {
-                if (south)
+	            if (south)
                     return 0x398C;
-                else
-                    return 0x3996;
+	            return 0x3996;
             }
 
             public override void OnAfterDelete()

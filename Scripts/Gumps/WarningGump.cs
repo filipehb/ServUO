@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Gumps
 {
     public delegate void WarningGumpCallback(Mobile from, bool okay, object state);
@@ -63,7 +65,7 @@ namespace Server.Gumps
             }
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             if (info.ButtonID == 1 && m_Callback != null)
                 m_Callback(sender.Mobile, true, m_State);

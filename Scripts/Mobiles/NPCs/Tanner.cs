@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -32,7 +33,7 @@ namespace Server.Mobiles
 
         public override bool ValidateBought(Mobile buyer, Item item)
         {
-            if (item is Items.TaxidermyKit && buyer.Skills[SkillName.Carpentry].Value < 90.1)
+            if (item is TaxidermyKit && buyer.Skills[SkillName.Carpentry].Value < 90.1)
             {
                 SayTo(buyer, 1042603, 0x3B2); // You would not understand how to use the kit.
                 return false;

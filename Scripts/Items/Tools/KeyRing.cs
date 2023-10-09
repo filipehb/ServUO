@@ -1,7 +1,7 @@
-using Server.Engines.Craft;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -55,17 +55,16 @@ namespace Server.Items
                 from.SendLocalizedMessage(501689); // Only non-blank keys can be put on a keyring.
                 return false;
             }
-            else if (Keys.Count >= MaxKeys)
+
+            if (Keys.Count >= MaxKeys)
             {
-                from.SendLocalizedMessage(1008138); // This keyring is full.
-                return false;
+	            from.SendLocalizedMessage(1008138); // This keyring is full.
+	            return false;
             }
-            else
-            {
-                Add(key);
-                from.SendLocalizedMessage(501691); // You put the key on the keyring.
-                return true;
-            }
+
+            Add(key);
+            from.SendLocalizedMessage(501691); // You put the key on the keyring.
+            return true;
         }
 
         public override void OnDoubleClick(Mobile from)

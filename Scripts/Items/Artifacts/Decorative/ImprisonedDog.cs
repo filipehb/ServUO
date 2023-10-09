@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -44,7 +44,6 @@ namespace Server.Mobiles
         private DateTime m_NextAttempt;
         [Constructable]
         public TravestyDog()
-            : base()
         {
             Hue = 2301;
 

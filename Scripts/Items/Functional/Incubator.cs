@@ -1,7 +1,8 @@
+using System;
 using Server.Commands;
 using Server.Gumps;
 using Server.Multis;
-using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -113,7 +114,7 @@ namespace Server.Items
         public static void IncreaseStage_OnCommand(CommandEventArgs e)
         {
             e.Mobile.SendMessage("Target the egg.");
-            e.Mobile.BeginTarget(12, false, Targeting.TargetFlags.None, IncreaseStage_OnTarget);
+            e.Mobile.BeginTarget(12, false, TargetFlags.None, IncreaseStage_OnTarget);
         }
 
         public static void IncreaseStage_OnTarget(Mobile from, object targeted)

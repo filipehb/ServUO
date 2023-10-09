@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -14,13 +14,12 @@ namespace Server.Engines.Quests
         public static Point3D HomeLocation => new Point3D(1569, 1041, -7);
         public static int HomeRange => 5;
 
-        public override Type[] Quests => new Type[] { typeof(ResponsibilityQuest) };
+        public override Type[] Quests => new[] { typeof(ResponsibilityQuest) };
 
         public static List<Lissbet> Instances { get; set; }
 
         [Constructable]
         public Lissbet()
-            : base()
         {
             Name = "Lissbet";
             Title = "The Flower Girl";

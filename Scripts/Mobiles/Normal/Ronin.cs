@@ -1,5 +1,6 @@
-using Server.Items;
 using System;
+using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -118,7 +119,7 @@ namespace Server.Mobiles
             if (item == null)
                 item = FindItemOnLayer(Layer.TwoHanded);
 
-            System.Collections.Generic.List<BaseWeapon> weapons = new System.Collections.Generic.List<BaseWeapon>();
+            List<BaseWeapon> weapons = new List<BaseWeapon>();
 
             foreach (Item i in Backpack.Items)
             {

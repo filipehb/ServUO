@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -53,7 +53,7 @@ namespace Server.Items
             else
             {
                 Z += -22;
-                Timer.DelayCall(TimeSpan.FromSeconds(15.0), delegate ()
+                Timer.DelayCall(TimeSpan.FromSeconds(15.0), delegate
                 {
                     Z += 22;
                 });

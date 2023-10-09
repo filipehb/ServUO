@@ -8,7 +8,6 @@ namespace Server.Items
 
         [Constructable]
         public CanvassRobe()
-            : base()
         {
             Hue = 2720;
             LootType = LootType.Blessed;

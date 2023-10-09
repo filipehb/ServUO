@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public AppleTrunkAddon()
-            : base()
         {
             AddComponent(new LocalizedAddonComponent(0xD98, 1076785), 0, 0, 0);
         }
@@ -34,7 +33,6 @@ namespace Server.Items
     {
         [Constructable]
         public AppleTrunkDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

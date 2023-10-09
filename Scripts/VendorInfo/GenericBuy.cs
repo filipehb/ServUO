@@ -1,7 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -339,8 +339,8 @@ namespace Server.Mobiles
         {
             if (obj is Item)
                 return ((Item)obj).Deleted;
-            else if (obj is Mobile)
-                return ((Mobile)obj).Deleted;
+            if (obj is Mobile)
+	            return ((Mobile)obj).Deleted;
 
             return false;
         }

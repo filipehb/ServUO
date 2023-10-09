@@ -5,8 +5,7 @@ namespace Server.Mobiles
     [CorpseName("an ophidian corpse")]
     public class OphidianKnight : BaseCreature
     {
-        private static readonly string[] m_Names = new string[]
-        {
+        private static readonly string[] m_Names = {
             "an ophidian knight-errant",
             "an ophidian avenger"
         };

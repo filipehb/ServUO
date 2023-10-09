@@ -1,6 +1,6 @@
+using System;
 using Server.Gumps;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -70,11 +70,9 @@ namespace Server.Items
                 Delete();
                 return true;
             }
-            else
-            {
-                PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1150177, m.NetState); // Incorrect Code Sequence. Access Denied.
-                return false;
-            }
+
+            PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1150177, m.NetState); // Incorrect Code Sequence. Access Denied.
+            return false;
         }
 
         private readonly Type[] m_Rewards =

@@ -1,11 +1,11 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests
 {
@@ -157,12 +157,12 @@ namespace Server.Engines.Quests
 
         public virtual void StartTimer()
         {
-            TimerRegistry.Register<QuestSystem>(_TimerID, this, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.5), false, q => q.Slice());
+            TimerRegistry.Register(_TimerID, this, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.5), false, q => q.Slice());
         }
 
         public virtual void StopTimer()
         {
-            TimerRegistry.RemoveFromRegistry<QuestSystem>(_TimerID, this);
+            TimerRegistry.RemoveFromRegistry(_TimerID, this);
         }
 
         public virtual void Slice()

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class BadCompany : BaseQuest
     {
         public BadCompany()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GreenGoblin), "GreenGoblin", 10));
 

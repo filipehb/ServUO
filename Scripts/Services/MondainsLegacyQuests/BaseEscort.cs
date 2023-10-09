@@ -1,9 +1,10 @@
-using Server.ContextMenus;
-using Server.Mobiles;
-using Server.Services.Virtues;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Services.Virtues;
 
 namespace Server.Engines.Quests
 {
@@ -21,7 +22,6 @@ namespace Server.Engines.Quests
         public bool IsDeleting { get { return TimerRegistry.HasTimer(m_TimerID, this); } }
 
         public BaseEscort()
-            : base()
         {
             AI = AIType.AI_Melee;
             FightMode = FightMode.Aggressor;
@@ -179,36 +179,41 @@ namespace Server.Engines.Quests
             {
                 return false;
             }
-            else if (IsDeleting)
-            {
-                Say(500898); // I am sorry, but I do not wish to go anywhere.
-                return false;
-            }
-            else if (Controlled)
-            {
-                if (m == ControlMaster)
-                    m.SendGump(new MondainQuestGump(Quest, MondainQuestGump.Section.InProgress, false));
-                else
-                    Say(500897); // I am already being led!
 
-                return false;
-            }
-            else if (!m.InRange(Location, 5))
+            if (IsDeleting)
             {
-                Say(500348); // I am too far away to do that.
-                return false;
+	            Say(500898); // I am sorry, but I do not wish to go anywhere.
+	            return false;
             }
-            else if (m_EscortTable.ContainsKey(m))
-            {
-                Say(500896); // I see you already have an escort.
-                return false;
-            }
-            else if (m is PlayerMobile && (((PlayerMobile)m).LastEscortTime + m_EscortDelay) >= DateTime.UtcNow)
-            {
-                int minutes = (int)Math.Ceiling(((((PlayerMobile)m).LastEscortTime + m_EscortDelay) - DateTime.UtcNow).TotalMinutes);
 
-                Say("You must rest {0} minute{1} before we set out on this journey.", minutes, minutes == 1 ? "" : "s");
-                return false;
+            if (Controlled)
+            {
+	            if (m == ControlMaster)
+		            m.SendGump(new MondainQuestGump(Quest, MondainQuestGump.Section.InProgress, false));
+	            else
+		            Say(500897); // I am already being led!
+
+	            return false;
+            }
+
+            if (!m.InRange(Location, 5))
+            {
+	            Say(500348); // I am too far away to do that.
+	            return false;
+            }
+
+            if (m_EscortTable.ContainsKey(m))
+            {
+	            Say(500896); // I see you already have an escort.
+	            return false;
+            }
+
+            if (m is PlayerMobile && (((PlayerMobile)m).LastEscortTime + m_EscortDelay) >= DateTime.UtcNow)
+            {
+	            int minutes = (int)Math.Ceiling(((((PlayerMobile)m).LastEscortTime + m_EscortDelay) - DateTime.UtcNow).TotalMinutes);
+
+	            Say("You must rest {0} minute{1} before we set out on this journey.", minutes, minutes == 1 ? "" : "s");
+	            return false;
             }
 
             return true;
@@ -238,42 +243,41 @@ namespace Server.Engines.Quests
             {
                 return master;
             }
-            else if (master.Map != Map || !master.InRange(Location, 30) || !master.Alive)
+
+            if (master.Map != Map || !master.InRange(Location, 30) || !master.Alive)
             {
-                TimeSpan lastSeenDelay = DateTime.UtcNow - LastSeenEscorter;
+	            TimeSpan lastSeenDelay = DateTime.UtcNow - LastSeenEscorter;
 
-                if (lastSeenDelay >= TimeSpan.FromMinutes(2.0))
-                {
-                    EscortObjective escort = GetObjective();
+	            if (lastSeenDelay >= TimeSpan.FromMinutes(2.0))
+	            {
+		            EscortObjective escort = GetObjective();
 
-                    if (escort != null)
-                    {
-                        master.SendLocalizedMessage(1071194); // You have failed your escort quest…
-                        master.PlaySound(0x5B3);
-                        escort.Fail();
-                    }
+		            if (escort != null)
+		            {
+			            master.SendLocalizedMessage(1071194); // You have failed your escort quest…
+			            master.PlaySound(0x5B3);
+			            escort.Fail();
+		            }
 
-                    master.SendLocalizedMessage(1042473); // You have lost the person you were escorting.
-                    Say(1005653); // Hmmm.  I seem to have lost my master.
+		            master.SendLocalizedMessage(1042473); // You have lost the person you were escorting.
+		            Say(1005653); // Hmmm.  I seem to have lost my master.
 
-                    StopFollow();
-                    m_EscortTable.Remove(master);
+		            StopFollow();
+		            m_EscortTable.Remove(master);
 
-                    TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(5.0), e => e.Delete());
+		            TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(5.0), e => e.Delete());
 
-                    return null;
-                }
-                else
-                {
-                    ControlOrder = OrderType.Stay;
-                }
+		            return null;
+	            }
+
+	            ControlOrder = OrderType.Stay;
             }
             else
             {
-                if (ControlOrder != OrderType.Follow)
-                    StartFollow(master);
+	            if (ControlOrder != OrderType.Follow)
+		            StartFollow(master);
 
-                LastSeenEscorter = DateTime.UtcNow;
+	            LastSeenEscorter = DateTime.UtcNow;
             }
 
             return master;
@@ -321,7 +325,7 @@ namespace Server.Engines.Quests
                         TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(5), e => e.Delete());
 
                         // fame
-                        Misc.Titles.AwardFame(escorter, escort.Fame, true);
+                        Titles.AwardFame(escorter, escort.Fame, true);
 
                         // compassion
                         bool gainedPath = false;

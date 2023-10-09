@@ -33,9 +33,10 @@ namespace Server
                     AddBerserk(victim);
                     return;
                 }
-                else if (!_Table[victim].Running)
+
+                if (!_Table[victim].Running)
                 {
-                    return;
+	                return;
                 }
 
                 int absorb = (equipped * _Table[victim].Level) + 2;

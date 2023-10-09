@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class FriendsOfTheLibraryQuest : BaseQuest
     {
         public FriendsOfTheLibraryQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(LibraryApplication), "friends of the library application", 1, typeof(Sarakki), "Sarakki (Britain)"));
 
@@ -51,7 +50,6 @@ namespace Server.Engines.Quests
     public class BureaucraticDelayQuest : BaseQuest
     {
         public BureaucraticDelayQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(SealingWaxOrder), "sealing wax order", 1, typeof(Petrus), "Petrus (Ilshenar)"));
 
@@ -95,7 +93,6 @@ namespace Server.Engines.Quests
     public class TheSecretIngredientQuest : BaseQuest
     {
         public TheSecretIngredientQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SpeckledPoisonSac), "speckled poison sacs", 5, 0x23A, 3600));
 
@@ -140,7 +137,6 @@ namespace Server.Engines.Quests
     public class SpecialDeliveryQuest : BaseQuest
     {
         public SpecialDeliveryQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(OfficialSealingWax), "sealing wax", 1, typeof(Sarakki), "Sarakki (Britain)"));
 
@@ -182,7 +178,6 @@ namespace Server.Engines.Quests
     public class AccessToTheStacksQuest : BaseQuest
     {
         public AccessToTheStacksQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(NotarizedApplication), "notarized application", 1, typeof(Verity), "Verity (Britain)"));
 

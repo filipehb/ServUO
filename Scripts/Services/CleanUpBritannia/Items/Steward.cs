@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
@@ -7,9 +10,6 @@ using Server.Network;
 using Server.Prompts;
 using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Mobiles
 {
@@ -842,12 +842,11 @@ namespace Server.Mobiles
 
         public static AddonFitResult CouldFit(Point3D p, Map map, Mobile from, ref BaseHouse house)
         {
-            if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
+	        if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
                 return AddonFitResult.Blocked;
-            else if (!BaseAddon.CheckHouse(from, p, map, 20, ref house))
-                return AddonFitResult.NotInHouse;
-            else
-                return CheckDoors(p, 20, house);
+	        if (!BaseAddon.CheckHouse(from, p, map, 20, ref house))
+		        return AddonFitResult.NotInHouse;
+	        return CheckDoors(p, 20, house);
         }
 
         public static AddonFitResult CheckDoors(Point3D p, int height, BaseHouse house)

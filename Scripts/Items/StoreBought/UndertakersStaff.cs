@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -126,10 +127,11 @@ namespace Server.Items
                 m.SendLocalizedMessage(1071510); // You are a criminal and cannot use this item...
                 return false;
             }
-            else if (Spells.SpellHelper.CheckCombat(m))
+
+            if (SpellHelper.CheckCombat(m))
             {
-                m.SendLocalizedMessage(1071514); // You cannot use this item during the heat of battle.
-                return false;
+	            m.SendLocalizedMessage(1071514); // You cannot use this item during the heat of battle.
+	            return false;
             }
 
             return true;

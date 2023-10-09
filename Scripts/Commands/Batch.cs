@@ -1,9 +1,10 @@
-using Server.Commands.Generic;
-using Server.Gumps;
-using Server.Network;
 using System;
 using System.Collections;
 using System.Reflection;
+using Server.Commands.Generic;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Commands
 {
@@ -14,7 +15,7 @@ namespace Server.Commands
         private string m_Condition;
         public Batch()
         {
-            Commands = new string[] { "Batch" };
+            Commands = new[] { "Batch" };
             ListOptimized = true;
 
             m_BatchCommands = new ArrayList();
@@ -90,14 +91,16 @@ namespace Server.Commands
                         e.Mobile.SendMessage("That is either an invalid command name or one that does not support this modifier: {0}.", commandString);
                         return;
                     }
-                    else if (e.Mobile.AccessLevel < command.AccessLevel)
+
+                    if (e.Mobile.AccessLevel < command.AccessLevel)
                     {
-                        e.Mobile.SendMessage("You do not have access to that command: {0}.", commandString);
-                        return;
+	                    e.Mobile.SendMessage("You do not have access to that command: {0}.", commandString);
+	                    return;
                     }
-                    else if (!command.ValidateArgs(m_Scope, eventArgs[i]))
+
+                    if (!command.ValidateArgs(m_Scope, eventArgs[i]))
                     {
-                        return;
+	                    return;
                     }
                 }
 
@@ -154,7 +157,7 @@ namespace Server.Commands
                             }
                             catch (Exception ex)
                             {
-                                Diagnostics.ExceptionLogging.LogException(ex);
+                                ExceptionLogging.LogException(ex);
                             }
                         }
                     }
@@ -170,7 +173,7 @@ namespace Server.Commands
             catch (Exception ex)
             {
                 e.Mobile.SendMessage(ex.Message);
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
 
@@ -181,15 +184,17 @@ namespace Server.Commands
                 from.SendMessage("You must select the batch command scope.");
                 return false;
             }
-            else if (m_Condition.Length > 0 && !m_Scope.SupportsConditionals)
+
+            if (m_Condition.Length > 0 && !m_Scope.SupportsConditionals)
             {
-                from.SendMessage("This command scope does not support conditionals.");
-                return false;
+	            from.SendMessage("This command scope does not support conditionals.");
+	            return false;
             }
-            else if (m_Condition.Length > 0 && !Utility.InsensitiveStartsWith(m_Condition, "where"))
+
+            if (m_Condition.Length > 0 && !Utility.InsensitiveStartsWith(m_Condition, "where"))
             {
-                from.SendMessage("The condition field must start with \"where\".");
-                return false;
+	            from.SendMessage("The condition field must start with \"where\".");
+	            return false;
             }
 
             string[] args = CommandSystem.Split(m_Condition);

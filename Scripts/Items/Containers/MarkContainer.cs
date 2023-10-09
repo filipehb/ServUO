@@ -1,5 +1,6 @@
-using Server.Commands;
 using System;
+using Server.Commands;
+using Server.Engines;
 
 namespace Server.Items
 {
@@ -159,7 +160,7 @@ namespace Server.Items
 
             e.Mobile.SendMessage("Secret mark containers have been created.");
 
-            Engines.GenerateForgottenPyramid.Generate(e.Mobile);
+            GenerateForgottenPyramid.Generate(e.Mobile);
         }
 
         public void StopTimer()
@@ -192,10 +193,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public override bool OnDragDropInto(Mobile from, Item dropped, Point3D p)
@@ -208,10 +207,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public override void Serialize(GenericWriter writer)

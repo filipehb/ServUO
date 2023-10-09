@@ -1,8 +1,9 @@
-using Server.Engines.Points;
-using Server.Multis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Points;
+using Server.Multis;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -119,7 +120,7 @@ namespace Server.Items
 
             if (items.Count > 0)
             {
-                PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, message, "");
+                PublicOverheadMessage(MessageType.Regular, 0x3B2, message, "");
 
                 for (int i = items.Count - 1; i >= 0; --i)
                 {

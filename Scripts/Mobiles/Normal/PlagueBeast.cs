@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Network;
-using System;
 
 namespace Server.Mobiles
 {
@@ -9,7 +9,7 @@ namespace Server.Mobiles
     {
         private int m_DevourTotal;
         private int m_DevourGoal;
-        private bool m_HasMetalChest = false;
+        private bool m_HasMetalChest;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int TotalDevoured

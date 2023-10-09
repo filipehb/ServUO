@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Server.Regions;
 
 namespace Server.Gumps
 {
@@ -10,7 +11,7 @@ namespace Server.Gumps
             : base(100, 100)
         {
             m_From = from;
-            List<Point2D> pointList = Regions.MazeOfDeathRegion.Path;
+            List<Point2D> pointList = MazeOfDeathRegion.Path;
 
             Point2D cur = new Point2D(m_From.Location.X, m_From.Location.Y);
             Point2D northLoc = new Point2D(cur.X, cur.Y - 1);

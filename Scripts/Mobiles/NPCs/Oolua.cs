@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class PixieDustToDustQuest : BaseQuest
     {
         public PixieDustToDustQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Pixie), "pixies", 10));
 
@@ -52,7 +51,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ParoxysmusSuccubiQuest),
                     typeof(ParoxysmusMolochQuest),

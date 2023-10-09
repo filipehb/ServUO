@@ -1,6 +1,9 @@
 #region References
+
 using Server.Spells;
 using Server.Spells.Mysticism;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Mobiles
@@ -146,7 +149,7 @@ namespace Server.Mobiles
 
         protected override bool ProcessTarget()
         {
-            Targeting.Target t = m_Mobile.Target;
+            Target t = m_Mobile.Target;
 
             if (t == null)
                 return false;

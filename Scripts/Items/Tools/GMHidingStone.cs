@@ -6,6 +6,7 @@ Public Release: 01/01/09
 Updated Release: 01/01/09
 Purpose: A stone that allows for multiple hide/appear effects for GM and above.
 */
+
 using System;
 
 namespace Server.Items

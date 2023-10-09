@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Network;
 using Server.Services.Community_Collections;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {

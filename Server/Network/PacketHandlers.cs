@@ -1,15 +1,14 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
-
 using Server.ContextMenus;
 using Server.Diagnostics;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-
 using CV = Server.ClientVersion;
 #endregion
 
@@ -185,11 +184,9 @@ namespace Server.Network
 			{
 				return m_ExtendedHandlersLow[packetID];
 			}
-			else
-			{
-				m_ExtendedHandlersHigh.TryGetValue(packetID, out var handler);
-				return handler;
-			}
+
+			m_ExtendedHandlersHigh.TryGetValue(packetID, out var handler);
+			return handler;
 		}
 
 		public static void RemoveExtendedHandler(int packetID)
@@ -222,11 +219,9 @@ namespace Server.Network
 			{
 				return m_EncodedHandlersLow[packetID];
 			}
-			else
-			{
-				m_EncodedHandlersHigh.TryGetValue(packetID, out var handler);
-				return handler;
-			}
+
+			m_EncodedHandlersHigh.TryGetValue(packetID, out var handler);
+			return handler;
 		}
 
 		public static void RemoveEncodedHandler(int packetID)
@@ -414,7 +409,8 @@ namespace Server.Network
 			{
 				return;
 			}
-			else if (vendor.Deleted || !Utility.RangeCheck(vendor.Location, state.Mobile.Location, 10))
+
+			if (vendor.Deleted || !Utility.RangeCheck(vendor.Location, state.Mobile.Location, 10))
 			{
 				state.Send(new EndVendorBuy(vendor));
 				return;
@@ -464,7 +460,8 @@ namespace Server.Network
 			{
 				return;
 			}
-			else if (vendor.Deleted || !Utility.RangeCheck(vendor.Location, state.Mobile.Location, 10))
+
+			if (vendor.Deleted || !Utility.RangeCheck(vendor.Location, state.Mobile.Location, 10))
 			{
 				state.Send(new EndVendorSell(vendor));
 				return;
@@ -763,10 +760,8 @@ namespace Server.Network
 				state.Dispose();
 				return false;
 			}
-			else
-			{
-				return true;
-			}
+
+			return true;
 		}
 
 		public static void TextCommand(NetState state, PacketReader pvSrc)
@@ -1193,7 +1188,6 @@ namespace Server.Network
 					else if (Target.TargetIDValidation && t.TargetID != targetID)
 					{
 						// Prevent fake target, reported by AssistUO Team!
-						return;
 					}
 					else
 					{

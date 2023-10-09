@@ -1,8 +1,8 @@
+using System.Linq;
 using Server.Engines.Quests;
+using Server.Engines.SeasonalEvents;
 using Server.Items;
 using Server.Mobiles;
-using Server.Engines.SeasonalEvents;
-using System.Linq;
 
 namespace Server.Engines.Fellowship
 {
@@ -385,7 +385,7 @@ namespace Server.Engines.Fellowship
 
             if (map.FindItem<Static>(new Point3D(1719, 1554, 49)) == null)
             {
-                Candelabra st = new Candelabra()
+                Candelabra st = new Candelabra
                 {
                     Hue = 1105
                 };
@@ -395,7 +395,7 @@ namespace Server.Engines.Fellowship
 
             if (map.FindItem<Static>(new Point3D(1722, 1554, 49)) == null)
             {
-                Candelabra st = new Candelabra()
+                Candelabra st = new Candelabra
                 {
                     Hue = 1105
                 };
@@ -449,8 +449,7 @@ namespace Server.Engines.Fellowship
         }
         #endregion
 
-        private static readonly Point3D[] blocker = new Point3D[]
-        {
+        private static readonly Point3D[] blocker = {
             new Point3D(6408, 2667, 0), new Point3D(6409, 2667, 0), new Point3D(6410, 2667, 0), new Point3D(6411, 2667, 0),
             new Point3D(6412, 2667, 0), new Point3D(6396, 2677, 0), new Point3D(6396, 2678, 0), new Point3D(6396, 2679, 0),
             new Point3D(6396, 2680, 0), new Point3D(6396, 2681, 0), new Point3D(6407, 2692, 0), new Point3D(6408, 2692, 0),
@@ -467,14 +466,12 @@ namespace Server.Engines.Fellowship
             new Point3D(6434, 2710, 0), new Point3D(6434, 2711, 0)
         };
 
-        private static readonly Point3D[] Workers = new Point3D[]
-        {
+        private static readonly Point3D[] Workers = {
             new Point3D(6406, 2680, 0), new Point3D(6386, 2621, 0), new Point3D(6444, 2738, 0), new Point3D(6371, 2742, 0),
             new Point3D(6332, 2650, 0), new Point3D(6299, 2679, 0), new Point3D(6428, 2709, 0), new Point3D(6409, 2787, 0)
         };
 
-        private static readonly Point3D[,] Teleporters = new Point3D[,]
-        {
+        private static readonly Point3D[,] Teleporters = {
             {new Point3D(6405, 2679, 0), new Point3D(6387, 2620, 0)},
             {new Point3D(6387, 2620, 0), new Point3D(6405, 2679, 0)},
             {new Point3D(6385, 2620, 0), new Point3D(6445, 2737, 0)},
@@ -543,7 +540,7 @@ namespace Server.Engines.Fellowship
                     }
                     else
                     {
-                        bl = new BlackthornDungeonTeleporter()
+                        bl = new BlackthornDungeonTeleporter
                         {
                             Dest = Teleporters[t, 1]
                         };

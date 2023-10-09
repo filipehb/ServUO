@@ -1,7 +1,7 @@
-using Server.Commands;
-using Server.Items;
 using System;
 using System.Linq;
+using Server.Commands;
+using Server.Items;
 
 namespace Server.Engines.CityLoyalty
 {

@@ -1,8 +1,9 @@
+using System;
+using System.Collections;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections;
 
 namespace Server.Spells.Necromancy
 {
@@ -54,8 +55,7 @@ namespace Server.Spells.Necromancy
             FinishSequence();
         }
 
-        private static readonly SummonFamiliarEntry[] m_Entries = new SummonFamiliarEntry[]
-        {
+        private static readonly SummonFamiliarEntry[] m_Entries = {
             new SummonFamiliarEntry(typeof(HordeMinionFamiliar), 1060146, 30.0, 30.0), // Horde Minion
             new SummonFamiliarEntry(typeof(ShadowWispFamiliar), 1060142, 50.0, 50.0), // Shadow Wisp
             new SummonFamiliarEntry(typeof(DarkWolfFamiliar), 1060143, 60.0, 60.0), // Dark Wolf
@@ -192,7 +192,7 @@ namespace Server.Spells.Necromancy
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
             }

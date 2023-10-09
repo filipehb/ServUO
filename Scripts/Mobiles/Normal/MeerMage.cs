@@ -1,6 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections;
+using Server.Items;
+using Server.Network;
 
 namespace Server.Mobiles
 {
@@ -75,7 +76,7 @@ namespace Server.Mobiles
             if (t != null)
             {
                 if (message)
-                    m.PublicOverheadMessage(Network.MessageType.Emote, m.SpeechHue, true, "* The open flame begins to scatter the swarm of insects *");
+                    m.PublicOverheadMessage(MessageType.Emote, m.SpeechHue, true, "* The open flame begins to scatter the swarm of insects *");
 
                 t.Stop();
                 m_Table.Remove(m);
@@ -124,7 +125,7 @@ namespace Server.Mobiles
                     {
                         int[][] coord =
                         {
-                            new int[] { -4, -6 }, new int[] { 4, -6 }, new int[] { 0, -8 }, new int[] { -5, 5 }, new int[] { 5, 5 }
+                            new[] { -4, -6 }, new[] { 4, -6 }, new[] { 0, -8 }, new[] { -5, 5 }, new[] { 5, 5 }
                         };
 
                         BaseCreature rabid;
@@ -197,8 +198,8 @@ namespace Server.Mobiles
                 {
                     if ((count % 4) == 0)
                     {
-                        m.LocalOverheadMessage(Network.MessageType.Emote, m.SpeechHue, true, "* The swarm of insects bites and stings your flesh! *");
-                        m.NonlocalOverheadMessage(Network.MessageType.Emote, m.SpeechHue, true, string.Format("* {0} is stung by a swarm of insects *", m.Name));
+                        m.LocalOverheadMessage(MessageType.Emote, m.SpeechHue, true, "* The swarm of insects bites and stings your flesh! *");
+                        m.NonlocalOverheadMessage(MessageType.Emote, m.SpeechHue, true, string.Format("* {0} is stung by a swarm of insects *", m.Name));
                     }
 
                     m.FixedParticles(0x91C, 10, 180, 9539, EffectLayer.Waist);

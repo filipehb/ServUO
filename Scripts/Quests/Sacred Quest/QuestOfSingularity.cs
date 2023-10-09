@@ -1,10 +1,11 @@
 using Server.Gumps;
 using Server.Items;
+
 namespace Server.Engines.Quests
 {
     public class QuestOfSingularity : BaseQuest
     {
-        public QuestOfSingularity() : base()
+        public QuestOfSingularity()
         {
             AddObjective(new QuestionAndAnswerObjective(4, m_EntryTable));
         }

@@ -1,10 +1,11 @@
-using Server.Engines.Points;
-using Server.Engines.Quests;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Points;
+using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.VoidPool
 {
@@ -182,7 +183,7 @@ namespace Server.Engines.VoidPool
         public override void OnDoubleClick(Mobile from)
         {
             if (from.AccessLevel >= AccessLevel.GameMaster)
-                from.SendGump(new Gumps.PropertiesGump(from, this));
+                from.SendGump(new PropertiesGump(from, this));
         }
 
         private void OnTick()
@@ -590,13 +591,12 @@ namespace Server.Engines.VoidPool
             return (int)score[m];
         }
 
-        public static Type[][] SpawnTable = new Type[][]
-        {
-            new Type[] { typeof(DaemonMongbat),         typeof(GargoyleAssassin),   typeof(CovetousDoppleganger),   typeof(LesserOni),       typeof(CovetousFireDaemon) },
-            new Type[] { typeof(LizardmanWitchdoctor),  typeof(OrcFootSoldier),     typeof(RatmanAssassin),         typeof(OgreBoneCrusher), typeof(TitanRockHunter) },
-            new Type[] { typeof(AngeredSpirit),         typeof(BoneSwordSlinger),   typeof(VileCadaver),            typeof(DiseasedLich),    typeof(CovetousRevenant) },
-            new Type[] { typeof(WarAlligator),          typeof(MagmaLizard),        typeof(ViciousDrake),           typeof(CorruptedWyvern), typeof(CovetousWyrm) },
-            new Type[] { typeof(CovetousEarthElemental),typeof(CovetousWaterElemental), typeof(VortexElemental),    typeof(SearingElemental),typeof(VenomElemental) },
+        public static Type[][] SpawnTable = {
+            new[] { typeof(DaemonMongbat),         typeof(GargoyleAssassin),   typeof(CovetousDoppleganger),   typeof(LesserOni),       typeof(CovetousFireDaemon) },
+            new[] { typeof(LizardmanWitchdoctor),  typeof(OrcFootSoldier),     typeof(RatmanAssassin),         typeof(OgreBoneCrusher), typeof(TitanRockHunter) },
+            new[] { typeof(AngeredSpirit),         typeof(BoneSwordSlinger),   typeof(VileCadaver),            typeof(DiseasedLich),    typeof(CovetousRevenant) },
+            new[] { typeof(WarAlligator),          typeof(MagmaLizard),        typeof(ViciousDrake),           typeof(CorruptedWyvern), typeof(CovetousWyrm) },
+            new[] { typeof(CovetousEarthElemental),typeof(CovetousWaterElemental), typeof(VortexElemental),    typeof(SearingElemental),typeof(VenomElemental) },
         };
 
         public override void Delete()

@@ -1,6 +1,6 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
 
 namespace Server.Engines.TombOfKings
 {
@@ -16,8 +16,7 @@ namespace Server.Engines.TombOfKings
 
         private static readonly string _TimerID = "ChamberSpawner";
 
-        private static readonly Point3D[] m_Positions = new Point3D[]
-        {
+        private static readonly Point3D[] m_Positions = {
             new Point3D( 9, 199, -9 ),
             new Point3D( 9, 183, -9 ),
             new Point3D( 9, 167, -9 ),
@@ -33,8 +32,7 @@ namespace Server.Engines.TombOfKings
             new Point3D( 60, 119, -9 ),
         };
 
-        private static readonly Type[] m_CreatureTypes = new Type[]
-        {
+        private static readonly Type[] m_CreatureTypes = {
             typeof( SilverSerpent ),
             typeof( UndeadGuardian ),
             typeof( PutridUndeadGuardian )

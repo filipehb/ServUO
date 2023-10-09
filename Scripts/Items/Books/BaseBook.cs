@@ -1,11 +1,11 @@
-using Server.ContextMenus;
-using Server.Gumps;
-using Server.Multis;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Server.ContextMenus;
+using Server.Gumps;
+using Server.Multis;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -186,25 +186,23 @@ namespace Server.Items
 
                 for (int i = 0; i < 8; ++i)
                 {
-                    if (content.Length - pos < cpl)
+	                if (content.Length - pos < cpl)
                     {
                         lines.Add(content.Substring(pos));
                         pos = content.Length;
                         break;
                     }
-                    else
-                    {
-                        if ((nextpos = content.LastIndexOfAny(" /|\\.!@#$%^&*()_+=-".ToCharArray(), pos + cpl, cpl)) > 0)
-                        {
-                            lines.Add(content.Substring(pos, (nextpos - pos) + 1));
-                            pos = nextpos + 1;
-                        }
-                        else
-                        {
-                            lines.Add(content.Substring(pos, cpl));
-                            pos += cpl;
-                        }
-                    }
+
+	                if ((nextpos = content.LastIndexOfAny(" /|\\.!@#$%^&*()_+=-".ToCharArray(), pos + cpl, cpl)) > 0)
+	                {
+		                lines.Add(content.Substring(pos, (nextpos - pos) + 1));
+		                pos = nextpos + 1;
+	                }
+	                else
+	                {
+		                lines.Add(content.Substring(pos, cpl));
+		                pos += cpl;
+	                }
                 }
 
                 newpages.Add(lines.ToArray());
@@ -376,7 +374,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (m_Title == null && m_Author == null && m_Writable == true)
+            if (m_Title == null && m_Author == null && m_Writable)
             {
                 Title = "a book";
                 Author = from.Name;
@@ -445,10 +443,6 @@ namespace Server.Items
                             return;
 
                     m_Pages[index].Lines = lines;
-                }
-                else
-                {
-                    return;
                 }
             }
         }
@@ -542,13 +536,8 @@ namespace Server.Items
                 }
                 else
                 {
-                    return;
                 }
             }
-            else
-            {
-                return;
-            }           
         }
 
         #region ISecurable Members

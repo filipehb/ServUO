@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
+using Server.Engines.VvV;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Spells;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -132,7 +133,7 @@ namespace Server.Items
                 {
                     User.SendLocalizedMessage(1019004); // You are not allowed to travel there.
                 }
-                else if (Engines.VvV.VvVSigil.ExistsOn(User))
+                else if (VvVSigil.ExistsOn(User))
                 {
                     User.SendLocalizedMessage(1019004); // You are not allowed to travel there.
                 }

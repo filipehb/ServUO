@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Engines.Auction;
 using Server.Engines.NewMagincia;
+using Server.Engines.Plants;
 using Server.Guilds;
 using Server.Gumps;
 using Server.Items;
@@ -10,9 +14,6 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Regions;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Multis
 {
@@ -202,16 +203,16 @@ namespace Server.Multis
 
             if (percent >= 1000) // 100.0%
                 return (HasRentedVendors || VendorInventories.Count > 0) ? DecayLevel.DemolitionPending : DecayLevel.Collapsed;
-            else if (percent >= 950) // 95.0% - 99.9%
-                return DecayLevel.IDOC;
-            else if (percent >= 750) // 75.0% - 94.9%
-                return DecayLevel.Greatly;
-            else if (percent >= 500) // 50.0% - 74.9%
-                return DecayLevel.Fairly;
-            else if (percent >= 250) // 25.0% - 49.9%
-                return DecayLevel.Somewhat;
-            else if (percent >= 005) // 00.5% - 24.9%
-                return DecayLevel.Slightly;
+            if (percent >= 950) // 95.0% - 99.9%
+	            return DecayLevel.IDOC;
+            if (percent >= 750) // 75.0% - 94.9%
+	            return DecayLevel.Greatly;
+            if (percent >= 500) // 50.0% - 74.9%
+	            return DecayLevel.Fairly;
+            if (percent >= 250) // 25.0% - 49.9%
+	            return DecayLevel.Somewhat;
+            if (percent >= 005) // 00.5% - 24.9%
+	            return DecayLevel.Slightly;
 
             return DecayLevel.LikeNew;
         }
@@ -350,18 +351,16 @@ namespace Server.Multis
             return (int)(hpe.Lockdowns * BonusStorageScalar);
         }
 
-        private readonly Type[] _NoItemCountTable = new Type[]
-        {
-            typeof(Engines.Plants.SeedBox), typeof(GardenShedAddon),
+        private readonly Type[] _NoItemCountTable = {
+            typeof(SeedBox), typeof(GardenShedAddon),
             typeof(GardenShedBarrel),       typeof(BaseSpecialScrollBook),
             typeof(JewelryBox)
         };
 
-        private readonly Type[] _NoDecayItems = new Type[]
-        {
+        private readonly Type[] _NoDecayItems = {
             typeof(BaseBoard),              typeof(Aquarium),
             typeof(FishBowl),               typeof(BaseSpecialScrollBook),
-            typeof(Engines.Plants.SeedBox), typeof(JewelryBox),
+            typeof(SeedBox), typeof(JewelryBox),
             typeof(FermentationBarrel)
         };
 
@@ -1130,9 +1129,10 @@ namespace Server.Multis
             {
                 return FindHouseAt((Item)e);
             }
-            else if (e is Mobile)
+
+            if (e is Mobile)
             {
-                return FindHouseAt((Mobile)e);
+	            return FindHouseAt((Mobile)e);
             }
 
             return FindHouseAt(e.Location, e.Map, 16);
@@ -1875,10 +1875,9 @@ namespace Server.Multis
 
         public BaseDoor MakeDoor(bool wood, DoorFacing facing)
         {
-            if (wood)
+	        if (wood)
                 return new DarkWoodHouseDoor(facing);
-            else
-                return new MetalHouseDoor(facing);
+	        return new MetalHouseDoor(facing);
         }
 
         public void AddDoor(BaseDoor door, int xoff, int yoff, int zoff)
@@ -2137,8 +2136,8 @@ namespace Server.Multis
             {
                 if (!base.AllowSecureTrade(from, to, newOwner, accepted))
                     return false;
-                else if (!accepted)
-                    return true;
+                if (!accepted)
+	                return true;
 
                 if (Deleted || m_House == null || m_House.Deleted || !m_House.IsOwner(from) || !from.CheckAlive() || !to.CheckAlive())
                     return false;
@@ -2427,14 +2426,13 @@ namespace Server.Multis
 
                 return false;
             }
-            else if (IsSecure(item))
+
+            if (IsSecure(item))
             {
-                return ReleaseSecure(m, item);
+	            return ReleaseSecure(m, item);
             }
-            else
-            {
-                m.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1010416); // This is not locked down or secured.
-            }
+
+            m.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1010416); // This is not locked down or secured.
 
             return false;
         }
@@ -2633,10 +2631,8 @@ namespace Server.Multis
 
                     return true;
                 }
-                else
-                {
-                    m.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1010418); // You did not lock this down, and you are not able to release this.
-                }
+
+                m.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1010418); // You did not lock this down, and you are not able to release this.
 
                 return false;
             }
@@ -3686,10 +3682,10 @@ namespace Server.Multis
 
                         if (info.Item.Deleted)
                             continue;
-                        else if (info.Item is StrongBox)
-                            count += 1;
+                        if (info.Item is StrongBox)
+	                        count += 1;
                         else
-                            count += 125;
+	                        count += 125;
                     }
                 }
 
@@ -3711,8 +3707,8 @@ namespace Server.Multis
 
                         if (info.Item.Deleted)
                             continue;
-                        else if (!(info.Item is StrongBox))
-                            count += 1;
+                        if (!(info.Item is StrongBox))
+	                        count += 1;
                     }
                 }
 
@@ -4389,7 +4385,6 @@ namespace Server.Multis
             }
             else if (targeted is StaticTarget)
             {
-                return;
             }
             else
             {
@@ -4680,7 +4675,7 @@ namespace Server.Multis
                     isOwned = house.IsLockedDown(item);
 
                 if (!isOwned)
-                    isOwned = item is BaseAddon || item is JewelryBox || item is Engines.Plants.SeedBox;
+                    isOwned = item is BaseAddon || item is JewelryBox || item is SeedBox;
 
                 if (isOwned)
                     sec = (ISecurable)item;
@@ -4756,12 +4751,11 @@ namespace Server.Multis
 
         public static AddonFitResult CouldFit(Point3D p, Map map, Mobile from, ref BaseHouse house)
         {
-            if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
+	        if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
                 return AddonFitResult.Blocked;
-            else if (!BaseAddon.CheckHouse(from, p, map, 20, ref house))
-                return AddonFitResult.NotInHouse;
-            else
-                return CheckDoors(p, 20, house);
+	        if (!BaseAddon.CheckHouse(from, p, map, 20, ref house))
+		        return AddonFitResult.NotInHouse;
+	        return CheckDoors(p, 20, house);
         }
 
         public static AddonFitResult CheckDoors(Point3D p, int height, BaseHouse house)

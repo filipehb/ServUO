@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.CityLoyalty
 {

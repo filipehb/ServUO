@@ -1,13 +1,16 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Commands;
 using Server.Commands.Generic;
+using Server.Engines.Points;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Guilds
@@ -1150,7 +1153,7 @@ namespace Server.Guilds
                 }
 
                 m.Guild = null;
-                Engines.Points.PointsSystem.ViceVsVirtue.OnResign(m, true);
+                PointsSystem.ViceVsVirtue.OnResign(m, true);
             }
 
             Members.Clear();
@@ -1520,7 +1523,7 @@ namespace Server.Guilds
                     guild.InvalidateWarNotoriety();
                 }
 
-                Engines.Points.PointsSystem.ViceVsVirtue.OnResign(m, message == 1063411);
+                PointsSystem.ViceVsVirtue.OnResign(m, message == 1063411);
 
                 m.Delta(MobileDelta.Noto);
             }

@@ -1,6 +1,7 @@
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Spells.Mysticism;
+using Server.Targeting;
 
 namespace Server.Spells.First
 {
@@ -61,7 +62,7 @@ namespace Server.Spells.First
                 SpellHelper.Turn(Caster, m);
                 SpellHelper.CheckReflect(this, Caster, ref m);
 
-                if (Mysticism.StoneFormSpell.CheckImmunity(m))
+                if (StoneFormSpell.CheckImmunity(m))
                 {
                     Caster.SendLocalizedMessage(1080192); // Your target resists your ability reduction magic.
                     return;

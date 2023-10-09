@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
-using System.Collections.Generic;
 
 namespace Server.Engines.Despise
 {
@@ -155,7 +155,7 @@ namespace Server.Engines.Despise
             m_Creature.NextReacquireTime = Core.TickCount + (int)m_Creature.ReacquireDelay.TotalMilliseconds;
 
             int range = m_Creature.RangePerception;
-            IPoint3D p = m_Creature.Orb.Anchor as IPoint3D;
+            IPoint3D p = m_Creature.Orb.Anchor;
 
             if (p == null)
                 p = m_Creature;
@@ -217,10 +217,8 @@ namespace Server.Engines.Despise
                 {
                     return false;
                 }
-                else
-                {
-                    return base.WalkMobileRange(p, iSteps, bRun, range, range);
-                }
+
+                return base.WalkMobileRange(p, iSteps, bRun, range, range);
             }
 
             return base.WalkMobileRange(p, iSteps, bRun, iWantDistMin, iWantDistMax);
@@ -387,7 +385,7 @@ namespace Server.Engines.Despise
             m_Creature.NextReacquireTime = Core.TickCount + (int)m_Creature.ReacquireDelay.TotalMilliseconds;
 
             int range = m_Creature.RangePerception;
-            IPoint3D p = m_Creature.Orb.Anchor as IPoint3D;
+            IPoint3D p = m_Creature.Orb.Anchor;
 
             if (p == null)
                 p = m_Creature;
@@ -449,10 +447,8 @@ namespace Server.Engines.Despise
                 {
                     return false;
                 }
-                else
-                {
-                    return base.WalkMobileRange(p, iSteps, bRun, range, range);
-                }
+
+                return base.WalkMobileRange(p, iSteps, bRun, range, range);
             }
 
             return base.WalkMobileRange(p, iSteps, bRun, iWantDistMin, iWantDistMax);

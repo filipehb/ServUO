@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.HuntsmasterChallenge;
 using Server.Multis;
-using System;
 
 namespace Server.Items
 {

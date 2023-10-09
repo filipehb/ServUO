@@ -1,8 +1,5 @@
 #region References
-using Server.Commands.Generic;
-using Server.Engines.BulkOrders;
-using Server.Items;
-using Server.Network;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +7,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Server.Commands.Generic;
+using Server.Diagnostics;
+using Server.Engines.BulkOrders;
+using Server.Items;
+using Server.Network;
+
 #endregion
 
 namespace Server.Commands
@@ -453,7 +456,7 @@ namespace Server.Commands
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return false;
             }
 

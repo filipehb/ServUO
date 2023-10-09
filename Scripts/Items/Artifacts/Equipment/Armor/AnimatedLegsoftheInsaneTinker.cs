@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public AnimatedLegsoftheInsaneTinker()
-            : base()
         {
             Hue = 2310;
             Attributes.BonusDex = 5;

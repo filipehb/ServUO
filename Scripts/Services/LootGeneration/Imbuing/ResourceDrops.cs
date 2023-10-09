@@ -1,6 +1,6 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -183,16 +183,18 @@ namespace Server.Items
                         {
                             continue;
                         }
-                        else if (reg == "Abyss" && (c.Map != Map.TerMur || c.X < 235 || c.X > 1155 || c.Y < 40 || c.Y > 1040))
-                        {
-                            continue;
-                        }
-                        else if (reg != "TerMur" && reg != "Abyss")
-                        {
-                            Region r = Server.Region.Find(c.Location, c.Map);
 
-                            if (r == null || !r.IsPartOf(entry.Region))
-                                continue;
+                        if (reg == "Abyss" && (c.Map != Map.TerMur || c.X < 235 || c.X > 1155 || c.Y < 40 || c.Y > 1040))
+                        {
+	                        continue;
+                        }
+
+                        if (reg != "TerMur" && reg != "Abyss")
+                        {
+	                        Region r = Server.Region.Find(c.Location, c.Map);
+
+	                        if (r == null || !r.IsPartOf(entry.Region))
+		                        continue;
                         }
                     }
 

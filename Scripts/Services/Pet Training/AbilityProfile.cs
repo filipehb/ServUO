@@ -1,7 +1,8 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -50,7 +51,7 @@ namespace Server.Mobiles
         {
             if (Creature.ControlMaster is PlayerMobile)
             {
-                Engines.Quests.TamingPetQuest.CheckTame((PlayerMobile)Creature.ControlMaster);
+                TamingPetQuest.CheckTame((PlayerMobile)Creature.ControlMaster);
             }
 
             if (Creature.Map == Map.Tokuno)
@@ -87,7 +88,7 @@ namespace Server.Mobiles
         {
             if (SpecialAbilities == null)
             {
-                SpecialAbilities = new SpecialAbility[] { ability };
+                SpecialAbilities = new[] { ability };
             }
             else if (!SpecialAbilities.Any(a => a == ability))
             {
@@ -110,7 +111,7 @@ namespace Server.Mobiles
         {
             if (AreaEffects == null)
             {
-                AreaEffects = new AreaEffect[] { ability };
+                AreaEffects = new[] { ability };
             }
             else if (!AreaEffects.Any(a => a == ability))
             {
@@ -133,7 +134,7 @@ namespace Server.Mobiles
         {
             if (WeaponAbilities == null)
             {
-                WeaponAbilities = new WeaponAbility[] { ability };
+                WeaponAbilities = new[] { ability };
             }
             else if (!WeaponAbilities.Any(a => a == ability))
             {

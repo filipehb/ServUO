@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-
+using Server.Diagnostics;
 using Server.Guilds;
 using Server.Network;
 
@@ -367,7 +367,7 @@ namespace Server
 							}
 							catch (Exception ex)
 							{
-								Diagnostics.ExceptionLogging.LogException(ex);
+								ExceptionLogging.LogException(ex);
 							}
 
 							if (m != null)
@@ -429,7 +429,7 @@ namespace Server
 							}
 							catch (Exception e)
 							{
-								Diagnostics.ExceptionLogging.LogException(e);
+								ExceptionLogging.LogException(e);
 							}
 
 							if (item != null)
@@ -795,7 +795,7 @@ namespace Server
 			}
 			catch (Exception ex)
 			{
-				Diagnostics.ExceptionLogging.LogException(ex);
+				ExceptionLogging.LogException(ex);
 			}
 		}
 
@@ -957,7 +957,8 @@ namespace Server
 			{
 				return FindItem(serial);
 			}
-			else if (serial.IsMobile)
+
+			if (serial.IsMobile)
 			{
 				return FindMobile(serial);
 			}

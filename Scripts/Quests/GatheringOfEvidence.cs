@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -7,7 +7,7 @@ namespace Server.Engines.Quests
     {
         public override bool DoneOnce => true;
 
-        public GatheringOfEvidence() : base()
+        public GatheringOfEvidence()
         {
             AddObjective(new ObtainObjective(typeof(VoidCrystalOfCorruptedArcaneEssence), "Void Crystal of Corrupted Arcane Essence", 1));
             AddObjective(new ObtainObjective(typeof(VoidCrystalOfCorruptedSpiritualEssence), "Void Crystal of Corrupted Spiritual Essence", 1));
@@ -57,7 +57,6 @@ namespace Server.Engines.Quests
         public override bool DoneOnce => true;
 
         public GatheringProof()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(VoidCrystalOfCorruptedArcaneEssence), "Void Crystal of Corrupted Arcane Essence", 1));
             AddObjective(new ObtainObjective(typeof(VoidCrystalOfCorruptedSpiritualEssence), "Void Crystal of Corrupted Spiritual Essence", 1));
@@ -115,7 +114,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(GatheringOfEvidence)
                 };
@@ -170,7 +169,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(GatheringProof)
                 };

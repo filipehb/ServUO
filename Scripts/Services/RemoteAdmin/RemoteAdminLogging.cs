@@ -1,7 +1,9 @@
-using Server.Accounting;
-using Server.Network;
 using System;
 using System.IO;
+using Server.Accounting;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.RemoteAdmin
 {
@@ -9,7 +11,7 @@ namespace Server.RemoteAdmin
     {
         private static StreamWriter m_Output;
         private static bool m_Enabled = true;
-        private static bool Initialized = false;
+        private static bool Initialized;
         const string LogBaseDirectory = "Logs";
         const string LogSubDirectory = "RemoteAdmin";
         public static bool Enabled
@@ -52,14 +54,14 @@ namespace Server.RemoteAdmin
             catch (Exception e)
             {
                 Console.WriteLine("RemoteAdminLogging: Failed to initialize LogWriter.");
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 m_Enabled = false;
             }
         }
 
         public static object Format(object o)
         {
-            o = Commands.CommandLogging.Format(o);
+            o = CommandLogging.Format(o);
             if (o == null)
                 return "(null)";
 
@@ -69,7 +71,7 @@ namespace Server.RemoteAdmin
         public static void WriteLine(NetState state, string format, params object[] args)
         {
             for (int i = 0; i < args.Length; i++)
-                args[i] = Commands.CommandLogging.Format(args[i]);
+                args[i] = CommandLogging.Format(args[i]);
 
             WriteLine(state, string.Format(format, args));
         }
@@ -92,9 +94,9 @@ namespace Server.RemoteAdmin
 
                 string path = Core.BaseDirectory;
 
-                Commands.CommandLogging.AppendPath(ref path, LogBaseDirectory);
-                Commands.CommandLogging.AppendPath(ref path, LogSubDirectory);
-                Commands.CommandLogging.AppendPath(ref path, accesslevel);
+                CommandLogging.AppendPath(ref path, LogBaseDirectory);
+                CommandLogging.AppendPath(ref path, LogSubDirectory);
+                CommandLogging.AppendPath(ref path, accesslevel);
                 path = Path.Combine(path, string.Format("{0}.log", name));
 
                 using (StreamWriter sw = new StreamWriter(path, true))
@@ -102,7 +104,7 @@ namespace Server.RemoteAdmin
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
     }

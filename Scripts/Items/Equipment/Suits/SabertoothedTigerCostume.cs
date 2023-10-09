@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public SabreToothedTigerCostume()
-            : base()
         {
             CostumeBody = 0x588;
         }

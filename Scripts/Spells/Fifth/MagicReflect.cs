@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Server.Spells.Mysticism;
-using Server.Spells.Spellweaving;
 using Server.Spells.Necromancy;
 using Server.Spells.SkillMasteries;
+using Server.Spells.Spellweaving;
 
 namespace Server.Spells.Fifth
 {

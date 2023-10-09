@@ -1,9 +1,10 @@
-﻿using Server.Engines.Astronomy;
+﻿using System;
+using Server.Engines.Astronomy;
 using Server.Engines.Craft;
+using Server.Guilds;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -118,7 +119,7 @@ namespace Server.Items
             public StarChart Chart { get; set; }
 
             public InternalGump(PlayerMobile pm, StarChart chart)
-                : base(pm, 50, 50)
+                : base(pm)
             {
                 pm.CloseGump(typeof(InternalGump));
 
@@ -166,7 +167,7 @@ namespace Server.Items
                     {
                         string text = relay.Text;
 
-                        if (Guilds.BaseGuildGump.CheckProfanity(text) &&
+                        if (BaseGuildGump.CheckProfanity(text) &&
                             !AstronomySystem.CheckNameExists(text) &&
                             text.Length > 0 &&
                             text.Length < 37)

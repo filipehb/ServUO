@@ -1,6 +1,7 @@
-using Server.Engines.Points;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Points;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -52,7 +53,7 @@ namespace Server.Items
                 }
             }
 
-            PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, Utility.Random(1042891, 8));
+            PublicOverheadMessage(MessageType.Regular, 0x3B2, Utility.Random(1042891, 8));
             Empty();
 
             return true;
@@ -72,7 +73,7 @@ namespace Server.Items
                 }
             }
 
-            PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, Utility.Random(1042891, 8));
+            PublicOverheadMessage(MessageType.Regular, 0x3B2, Utility.Random(1042891, 8));
             Empty();
 
             return true;

@@ -1,10 +1,11 @@
-using Server.Commands;
-using Server.Gumps;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using Server.Commands;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Engines.CannedEvil
 {
@@ -403,7 +404,7 @@ namespace Server.Engines.CannedEvil
                 }
             }
 
-            public override void OnResponse(Network.NetState sender, RelayInfo info)
+            public override void OnResponse(NetState sender, RelayInfo info)
             {
                 ChampionSpawn spawn;
                 int idx;

@@ -1,4 +1,5 @@
 using Server.Engines.Despise;
+using Server.Engines.Points;
 
 namespace Server.Items
 {
@@ -26,7 +27,7 @@ namespace Server.Items
             if (!Deleted && DespiseController.Instance != null)
             {
                 //DespiseController.Instance.AddDespisePoints(from, this);
-                Engines.Points.PointsSystem.DespiseCrystals.AwardPoints(from, Amount);
+                PointsSystem.DespiseCrystals.AwardPoints(from, Amount);
                 Delete();
             }
         }

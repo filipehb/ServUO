@@ -1,8 +1,10 @@
+using System;
+using Server.Commands;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 using Server.Spells.SkillMasteries;
-using System;
 
 namespace Server.Engines.Quests.TimeLord
 {
@@ -82,7 +84,7 @@ namespace Server.Engines.Quests.TimeLord
 
             TargetOfTheDay = _Targets[Utility.Random(_Targets.Length)];
 
-            Commands.CommandSystem.Register("NewTargetOfTheDay", AccessLevel.GameMaster, e =>
+            CommandSystem.Register("NewTargetOfTheDay", AccessLevel.GameMaster, e =>
                 {
                     TargetOfTheDay = _Targets[Utility.Random(_Targets.Length)];
 
@@ -163,7 +165,7 @@ namespace Server.Engines.Quests.TimeLord
             }
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             if (info.ButtonID == 0 && User.Quest != null && User.Quest is TimeForLegendsQuest)
                 User.Quest.Cancel();

@@ -1,9 +1,9 @@
+using System;
+using System.Linq;
 using Server.Engines.Craft;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -122,8 +122,7 @@ namespace Server.Items
             return m_SnakeTypes.Any(t => t == bc.GetType());
         }
 
-        private static readonly Type[] m_SnakeTypes = new Type[]
-        {
+        private static readonly Type[] m_SnakeTypes = {
             typeof(LavaSnake),    typeof(Snake),
             typeof(CoralSnake),   typeof(GiantSerpent),
             typeof(SilverSerpent)

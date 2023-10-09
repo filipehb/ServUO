@@ -1,7 +1,7 @@
+using System;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {

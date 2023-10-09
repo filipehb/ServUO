@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Server.Engines.ArenaSystem;
+using Server.Engines.CannedEvil;
 using Server.Engines.PartySystem;
 using Server.Guilds;
 using Server.Items;
@@ -8,13 +13,13 @@ using Server.Regions;
 using Server.Services.Virtues;
 using Server.Spells.Fifth;
 using Server.Spells.Fourth;
+using Server.Spells.Mysticism;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Spells.Seventh;
+using Server.Spells.SkillMasteries;
+using Server.Spells.Spellweaving;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Spells
 {
@@ -85,14 +90,12 @@ namespace Server.Spells
 
         public static int PvPSpellDamageCap(Mobile m, SkillName castskill)
         {
-            if (HasSpellFocus(m, castskill))
+	        if (HasSpellFocus(m, castskill))
             {
                 return 25;
             }
-            else
-            {
-                return 20;
-            }
+
+	        return 20;
         }
 
         public static int GetSpellDamageBonus(Mobile caster, IDamageable damageable, SkillName skill, bool playerVsPlayer)
@@ -316,8 +319,8 @@ namespace Server.Spells
         {
             if (offset > 0)
                 return AddStatBonus(m, m, type, offset, duration);
-            else if (offset < 0)
-                return AddStatCurse(m, m, type, -offset, duration);
+            if (offset < 0)
+	            return AddStatCurse(m, m, type, -offset, duration);
 
             return true;
         }
@@ -389,7 +392,7 @@ namespace Server.Spells
         {
             int span = (((6 * caster.Skills.EvalInt.Fixed) / 50) + 1);
 
-            if (caster.Spell is CurseSpell && SkillMasteries.ResilienceSpell.UnderEffects(target))
+            if (caster.Spell is CurseSpell && ResilienceSpell.UnderEffects(target))
                 span /= 2;
 
             return TimeSpan.FromSeconds(span);
@@ -478,7 +481,7 @@ namespace Server.Spells
                 return true;
             }
 
-            if (to.Hidden && to.AccessLevel > from.AccessLevel || Engines.ArenaSystem.PVPArenaSystem.IsFriendly(from, to))
+            if (to.Hidden && to.AccessLevel > from.AccessLevel || PVPArenaSystem.IsFriendly(from, to))
             {
                 return false;
             }
@@ -641,8 +644,7 @@ namespace Server.Spells
             eable.Free();
         }
 
-        private static readonly int[] m_Offsets = new int[]
-        {
+        private static readonly int[] m_Offsets = {
             -1, -1,
             -1, 0,
             -1, 1,
@@ -723,15 +725,13 @@ namespace Server.Spells
                     p = new Point3D(x, y, p.Z);
                     return true;
                 }
-                else
-                {
-                    int z = map.GetAverageZ(x, y);
 
-                    if (map.CanSpawnMobile(x, y, z))
-                    {
-                        p = new Point3D(x, y, z);
-                        return true;
-                    }
+                int z = map.GetAverageZ(x, y);
+
+                if (map.CanSpawnMobile(x, y, z))
+                {
+	                p = new Point3D(x, y, z);
+	                return true;
                 }
             }
 
@@ -742,8 +742,7 @@ namespace Server.Spells
 
         private delegate bool TravelValidator(Map map, Point3D loc);
 
-        private static readonly TravelValidator[] m_Validators = new TravelValidator[]
-        {
+        private static readonly TravelValidator[] m_Validators = {
             IsFeluccaT2A,
             IsKhaldun,
             IsIlshenar,
@@ -768,8 +767,7 @@ namespace Server.Spells
             IsEodon,
         };
 
-        private static readonly bool[,] m_Rules = new bool[,]
-        {
+        private static readonly bool[,] m_Rules = {
 					/*T2A(Fel),	Khaldun,	Ilshenar,	Wind(Tram),	Wind(Fel),	Dungeons(Fel),	Solen(Tram),	Solen(Fel),	Gauntlet(Malas),	Gauntlet(Ferry),	SafeZone,	ChampionSpawn,	Dungeons(Tokuno[Malas]),	LampRoom(Doom),	GuardianRoom(Doom),	Heartwood,	MLDungeons, SA Dungeons		Tomb of Kings	Maze of Death	SA Entrance,    Eodon*/
 /* Recall From */	{ false, false,      true,       true,       false,      false,          true,           false,      false,              false,              true,       false,          true,                       false,          false,              false,      false,      true,           true,           false,          false,          true} ,
 /* Recall To */		{ false,    false,      false,      false,      false,      false,          false,          false,      false,              false,              false,      false,          false,                      false,          false,              false,      false,      false,          false,          false,          false,          false },
@@ -817,16 +815,17 @@ namespace Server.Spells
             {
                 if (caster.IsPlayer())
                 {
-                    // Jail region
+	                // Jail region
                     if (caster.Region.IsPartOf<Jail>())
                     {
                         caster.SendLocalizedMessage(1114345); // You'll need a better jailbreak plan than that!
                         return false;
                     }
-                    else if (caster.Region is GreenAcres)
+
+                    if (caster.Region is GreenAcres)
                     {
-                        caster.SendLocalizedMessage(502360); // You cannot teleport into that area.
-                        return false;
+	                    caster.SendLocalizedMessage(502360); // You cannot teleport into that area.
+	                    return false;
                     }
                 }
 
@@ -892,15 +891,17 @@ namespace Server.Spells
                 m.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
                 return false;
             }
-            else if (CheckCombat(m))
+
+            if (CheckCombat(m))
             {
-                m.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
+	            m.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+	            return false;
             }
-            else if (WeightOverloading.IsOverloaded(m))
+
+            if (WeightOverloading.IsOverloaded(m))
             {
-                m.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
-                return false;
+	            m.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
+	            return false;
             }
 
             return true;
@@ -970,7 +971,7 @@ namespace Server.Spells
 
         public static bool IsChampionSpawn(Map map, Point3D loc)
         {
-            return (Region.Find(loc, map).IsPartOf<Engines.CannedEvil.ChampionSpawnRegion>());
+            return (Region.Find(loc, map).IsPartOf<ChampionSpawnRegion>());
         }
 
         public static bool IsDoomFerry(Map map, Point3D loc)
@@ -1144,8 +1145,8 @@ namespace Server.Spells
         //magic reflection
         public static bool CheckReflect(Spell spell, Mobile caster, ref Mobile target)
         {
-            IDamageable c = caster as IDamageable;
-            IDamageable t = target as IDamageable;
+            IDamageable c = caster;
+            IDamageable t = target;
 
             bool reflect = CheckReflect(spell, ref c, ref t);
 
@@ -1160,7 +1161,7 @@ namespace Server.Spells
 
         public static bool CheckReflect(Spell spell, IDamageable caster, ref Mobile target)
         {
-            IDamageable t = target as IDamageable;
+            IDamageable t = target;
 
             bool reflect = CheckReflect(spell, ref caster, ref t);
 
@@ -1172,7 +1173,7 @@ namespace Server.Spells
 
         public static bool CheckReflect(Spell spell, Mobile caster, ref IDamageable target)
         {
-            IDamageable c = caster as IDamageable;
+            IDamageable c = caster;
 
             bool reflect = CheckReflect(spell, ref c, ref target);
 
@@ -1184,7 +1185,7 @@ namespace Server.Spells
 
         public static bool CheckReflect(Spell spell, ref Mobile caster, ref IDamageable target)
         {
-            IDamageable c = caster as IDamageable;
+            IDamageable c = caster;
 
             bool reflect = CheckReflect(spell, ref c, ref target);
 
@@ -1373,7 +1374,7 @@ namespace Server.Spells
                 int damageGiven = AOS.Damage(damageable, from, iDamage, phys, fire, cold, pois, nrgy, chaos, direct, dtype);
 
                 if (target != null)
-                    Mysticism.SpellPlagueSpell.OnMobileDamaged(target);
+                    SpellPlagueSpell.OnMobileDamaged(target);
 
                 if (target != null && target.DFA != DFAlgorithm.Standard)
                 {
@@ -1406,7 +1407,7 @@ namespace Server.Spells
 
         public static void Heal(int amount, Mobile target, Mobile from, bool message)
         {
-            Spellweaving.ArcaneEmpowermentSpell.AddHealBonus(from, ref amount);
+            ArcaneEmpowermentSpell.AddHealBonus(from, ref amount);
 
             if (amount > 0 && target != from && from is PlayerMobile && target is PlayerMobile)
             {
@@ -1534,7 +1535,7 @@ namespace Server.Spells
                 }
 
                 if (target != null)
-                    Mysticism.SpellPlagueSpell.OnMobileDamaged(target);
+                    SpellPlagueSpell.OnMobileDamaged(target);
 
                 if (m_Spell != null)
                     m_Spell.RemoveDelayedDamageContext(m_Target);
@@ -1636,15 +1637,17 @@ namespace Server.Spells
                 caster.SendLocalizedMessage(1061628); // You can't do that while polymorphed.
                 return false;
             }
-            else if (AnimalForm.UnderTransformation(caster))
+
+            if (AnimalForm.UnderTransformation(caster))
             {
-                caster.SendLocalizedMessage(1061091); // You cannot cast that spell in this form.
-                return false;
+	            caster.SendLocalizedMessage(1061091); // You cannot cast that spell in this form.
+	            return false;
             }
-            else if (caster.Flying && !(spell is VampiricEmbraceSpell))
+
+            if (caster.Flying && !(spell is VampiricEmbraceSpell))
             {
-                caster.SendLocalizedMessage(1112567); // You are flying.
-                return false;
+	            caster.SendLocalizedMessage(1112567); // You are flying.
+	            return false;
             }
 
             return true;

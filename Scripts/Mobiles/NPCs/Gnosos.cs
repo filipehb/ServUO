@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class GoneNativeQuest : BaseQuest
     {
         public GoneNativeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(MasterTheophilus), "master theophilus", 1));
 
@@ -27,7 +26,7 @@ namespace Server.Engines.Quests
         public override object Refuse => 1074857;
         /* You had better get going.  Master Theophilus isn't likely to kill himself just to save me this embarrassment. */
         public override object Uncomplete => 1074858;
-        /* You look a bit worse for wear!  He put up a good fight did he?  Hah!  That's the spirit … a Master 
+        /* You look a bit worse for wear!  He put up a good fight did he?  Hah!  That's the spirit â€¦ a Master 
         of Bedlam is a match for most. */
         public override object Complete => 1074859;
         public override bool CanOffer()
@@ -72,7 +71,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CommonBrigandsQuest),
                     typeof(GoneNativeQuest),

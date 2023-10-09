@@ -18,7 +18,7 @@ namespace Server.Items
         public override int InitMaxHits => 125;
 
         [Constructable]
-        public VirtuososCollar() : base()
+        public VirtuososCollar()
         {
             Hue = 1374;
             Weight = 1;

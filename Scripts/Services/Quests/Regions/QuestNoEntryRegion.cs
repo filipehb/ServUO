@@ -1,7 +1,7 @@
-using Server.Mobiles;
-using Server.Regions;
 using System;
 using System.Xml;
+using Server.Mobiles;
+using Server.Regions;
 
 namespace Server.Engines.Quests
 {
@@ -53,13 +53,11 @@ namespace Server.Engines.Quests
             {
                 return true;
             }
-            else
-            {
-                if (m_Message != 0)
-                    m.SendLocalizedMessage(m_Message);
 
-                return false;
-            }
+            if (m_Message != 0)
+	            m.SendLocalizedMessage(m_Message);
+
+            return false;
         }
     }
 }

@@ -34,8 +34,7 @@ namespace Server.Engines.Quests.Ambitious
 
             if (redSolen)
                 return from is RedSolenQueen;
-            else
-                return from is BlackSolenQueen;
+            return from is BlackSolenQueen;
         }
 
         public override void OnKill(BaseCreature creature, Container corpse)

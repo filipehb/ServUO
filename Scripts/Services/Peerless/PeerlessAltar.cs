@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.PartySystem;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -51,7 +51,7 @@ namespace Server.Items
         public bool ResetPeerless
         {
             get { return false; }
-            set { if (value == true) FinishSequence(); }
+            set { if (value) FinishSequence(); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -88,8 +88,7 @@ namespace Server.Items
         {
             if (from.AccessLevel > AccessLevel.Player)
                 return base.CheckLift(from, item, ref reject);
-            else
-                reject = LRReason.CannotLift;
+            reject = LRReason.CannotLift;
 
             return false;
         }
@@ -556,8 +555,9 @@ namespace Server.Items
 
                             continue;
                         }
-                        else if (mount.Rider != null)
-                            continue;
+
+                        if (mount.Rider != null)
+	                        continue;
                     }
 
                     pet.FixedParticles(0x376A, 9, 32, 0x13AF, EffectLayer.Waist);

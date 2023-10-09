@@ -1,7 +1,8 @@
-using Server.Spells.First;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Spells.First;
+using Server.Spells.Mysticism;
+using Server.Targeting;
 
 namespace Server.Spells.Fourth
 {
@@ -93,7 +94,7 @@ namespace Server.Spells.Fourth
 
         public static bool DoCurse(Mobile caster, Mobile m, bool masscurse)
         {
-            if (Mysticism.StoneFormSpell.CheckImmunity(m))
+            if (StoneFormSpell.CheckImmunity(m))
             {
                 caster.SendLocalizedMessage(1080192); // Your target resists your ability reduction magic.
                 return true;
@@ -129,7 +130,7 @@ namespace Server.Spells.Fourth
             else
             {
                 args = string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", percentage, percentage, percentage, 10, 10, 10, 10);
-                BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Curse, 1075835, 1075836, length, m, args.ToString()));
+                BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Curse, 1075835, 1075836, length, m, args));
             }
 
             AddEffect(m, SpellHelper.GetDuration(caster, m), oldStr, oldDex, oldInt);

@@ -1,8 +1,10 @@
 #region References
-using Server.Gumps;
-using Server.Network;
+
 using System;
 using System.Collections.Generic;
+using Server.Gumps;
+using Server.Network;
+
 #endregion References
 
 namespace Server.Misc

@@ -26,14 +26,15 @@ namespace Server.Items
         {
             if (from.Weapon is BaseWeapon weapon)
             {
-                if (weapon.PrimaryAbility == this)
+	            if (weapon.PrimaryAbility == this)
                 {
                     return 30.0;
                 }
-                else if (weapon.SecondaryAbility == this)
-                {
-                    return 50.0;
-                }
+
+	            if (weapon.SecondaryAbility == this)
+	            {
+		            return 50.0;
+	            }
             }
 
             return 200.0;
@@ -53,13 +54,10 @@ namespace Server.Items
         {
             if (base.Validate(from))
             {
-                if (from.Mounted)
+	            if (from.Mounted)
                     return true;
-                else
-                {
-                    from.SendLocalizedMessage(1070770); // You can only execute this attack while mounted!
-                    ClearCurrentAbility(from);
-                }
+	            from.SendLocalizedMessage(1070770); // You can only execute this attack while mounted!
+	            ClearCurrentAbility(from);
             }
 
             return false;

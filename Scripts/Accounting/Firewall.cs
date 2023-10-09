@@ -36,16 +36,17 @@ namespace Server
                 {
                     return obj.Equals(m_Address);
                 }
-                else if (obj is string)
-                {
-                    IPAddress otherAddress;
 
-                    if (IPAddress.TryParse((string)obj, out otherAddress))
-                        return otherAddress.Equals(m_Address);
+                if (obj is string)
+                {
+	                IPAddress otherAddress;
+
+	                if (IPAddress.TryParse((string)obj, out otherAddress))
+		                return otherAddress.Equals(m_Address);
                 }
                 else if (obj is IPFirewallEntry)
                 {
-                    return m_Address.Equals(((IPFirewallEntry)obj).m_Address);
+	                return m_Address.Equals(((IPFirewallEntry)obj).m_Address);
                 }
 
                 return false;
@@ -136,15 +137,15 @@ namespace Server
 
             public override string ToString()
             {
-                return m_Entry.ToString();
+                return m_Entry;
             }
 
             public override bool Equals(object obj)
             {
                 if (obj is string)
                     return obj.Equals(m_Entry);
-                else if (obj is WildcardIPFirewallEntry)
-                    return m_Entry.Equals(((WildcardIPFirewallEntry)obj).m_Entry);
+                if (obj is WildcardIPFirewallEntry)
+	                return m_Entry.Equals(((WildcardIPFirewallEntry)obj).m_Entry);
 
                 return false;
             }
@@ -198,10 +199,10 @@ namespace Server
         {
             if (entry is IFirewallEntry)
                 return (IFirewallEntry)entry;
-            else if (entry is IPAddress)
-                return new IPFirewallEntry((IPAddress)entry);
-            else if (entry is string)
-                return ToFirewallEntry((string)entry);
+            if (entry is IPAddress)
+	            return new IPFirewallEntry((IPAddress)entry);
+            if (entry is string)
+	            return ToFirewallEntry((string)entry);
 
             return null;
         }

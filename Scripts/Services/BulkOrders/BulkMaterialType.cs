@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.Craft;
 using Server.Items;
-using System;
 
 namespace Server.Engines.BulkOrders
 {
@@ -45,24 +45,25 @@ namespace Server.Engines.BulkOrders
 
                 return BulkGenericType.Cloth;
             }
-            else if (deedType == BODType.Tinkering && itemType != null)
+
+            if (deedType == BODType.Tinkering && itemType != null)
             {
-                if (itemType == typeof(Clock) || itemType.IsSubclassOf(typeof(Clock)))
-                    return BulkGenericType.Wood;
+	            if (itemType == typeof(Clock) || itemType.IsSubclassOf(typeof(Clock)))
+		            return BulkGenericType.Wood;
 
-                CraftItem item = DefTinkering.CraftSystem.CraftItems.SearchFor(itemType);
+	            CraftItem item = DefTinkering.CraftSystem.CraftItems.SearchFor(itemType);
 
-                if (item != null)
-                {
-                    Type typeRes = item.Resources.GetAt(0).ItemType;
+	            if (item != null)
+	            {
+		            Type typeRes = item.Resources.GetAt(0).ItemType;
 
-                    if (typeRes == typeof(Board) || typeRes == typeof(Log))
-                        return BulkGenericType.Wood;
-                }
+		            if (typeRes == typeof(Board) || typeRes == typeof(Log))
+			            return BulkGenericType.Wood;
+	            }
             }
             else if (deedType == BODType.Fletching || deedType == BODType.Carpentry)
             {
-                return BulkGenericType.Wood;
+	            return BulkGenericType.Wood;
             }
 
             return BulkGenericType.Iron;

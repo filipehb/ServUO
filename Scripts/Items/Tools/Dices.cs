@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -53,9 +53,9 @@ namespace Server.Items
             int two = Utility.Random(1, 6);
 
             SendLocalizedMessage(MessageType.Emote, 1042713, AffixType.Prepend, from.Name + " ", ""); // The first die rolls to a stop and shows:
-            SendLocalizedMessage(MessageType.Regular, 1042714, AffixType.Append, " " + one.ToString(), ""); // The first die rolls to a stop and shows:
-            SendLocalizedMessage(MessageType.Regular, 1042715, AffixType.Append, " " + two.ToString(), ""); // The second die stops and shows:
-            SendLocalizedMessage(MessageType.Regular, 1042716, AffixType.Append, " " + (one + two).ToString(), ""); // Total for this roll:
+            SendLocalizedMessage(MessageType.Regular, 1042714, AffixType.Append, " " + one, ""); // The first die rolls to a stop and shows:
+            SendLocalizedMessage(MessageType.Regular, 1042715, AffixType.Append, " " + two, ""); // The second die stops and shows:
+            SendLocalizedMessage(MessageType.Regular, 1042716, AffixType.Append, " " + (one + two), ""); // Total for this roll:
         }
 
         public override void Serialize(GenericWriter writer)

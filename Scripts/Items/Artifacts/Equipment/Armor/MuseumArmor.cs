@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public MinaxsArmor()
-            : base()
         {
             Hue = 0x453;
             Attributes.RegenMana = 2;
@@ -45,7 +44,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public KeeoneansChainMail()
-            : base()
         {
             Hue = 0x84E;
             Attributes.RegenHits = 3;
@@ -86,7 +84,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public VesperOrderShield()
-            : base()
         {
             Hue = 0x835;
             Attributes.SpellChanneling = 1;
@@ -125,7 +122,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public VesperChaosShield()
-            : base()
         {
             Hue = 0xFA;
             Attributes.SpellChanneling = 1;

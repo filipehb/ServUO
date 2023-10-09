@@ -1,5 +1,6 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
+using Server.Spells.Ninjitsu;
 
 namespace Server.Items
 {
@@ -25,7 +26,7 @@ namespace Server.Items
 
             IMount mount = defender.Mount;
 
-            if ((defender.Mounted || defender.Flying || Spells.Ninjitsu.AnimalForm.UnderTransformation(defender)) && !attacker.Mounted && !attacker.Flying && !(defender is ChaosDragoon) && !(defender is ChaosDragoonElite))
+            if ((defender.Mounted || defender.Flying || AnimalForm.UnderTransformation(defender)) && !attacker.Mounted && !attacker.Flying && !(defender is ChaosDragoon) && !(defender is ChaosDragoonElite))
             {
                 defender.PlaySound(0x140);
                 defender.FixedParticles(0x3728, 10, 15, 9955, EffectLayer.Waist);

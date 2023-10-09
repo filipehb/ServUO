@@ -5,7 +5,6 @@
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalGuardInvestigatorsCloak()
-            : base()
         {
             Hue = 1163;
             SkillBonuses.SetValues(0, SkillName.Stealth, 20.0);

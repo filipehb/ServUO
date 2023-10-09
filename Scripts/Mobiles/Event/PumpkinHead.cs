@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -59,7 +59,7 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.LootItem<WrappedCandy>(true));
-            AddLoot(LootPack.RandomLootItem(new Type[] { typeof(CarvablePlainPumpkin), typeof(CarvablePumpkinTall), typeof(CarvableGordPumpkinTall) }, 20.0, 1));
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(CarvablePlainPumpkin), typeof(CarvablePumpkinTall), typeof(CarvableGordPumpkinTall) }, 20.0, 1));
             AddLoot(LootPack.UltraRich, 2);
         }
 

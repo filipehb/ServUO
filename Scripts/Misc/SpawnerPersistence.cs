@@ -1,20 +1,22 @@
-using Server.Commands;
-using Server.Engines.Quests;
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
-using Server.Multis;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Engines;
+using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Multis;
 using Server.Regions;
 
 /* This script has a purpose, and please adhere to the advice before adding versions.
  * This is used for modifying, removing, adding existing spawners, etc for existing shards,
  * used for modifying, removing, adding existing spawners, etc for existing shards.
- * As this is a collaborative effort for ServUO, it's important that any modifications to 
+ * As this is a collaborative effort for ServUO, it's important that any modifications to
  * existing shards be handled for new shards.  For example, if your swapping out some spawners,
  * common practice will be to edit the spawner files for fresh-loaded servers. Please refer to
  * ServUO.com community with any questions or concerns.
@@ -506,7 +508,7 @@ namespace Server
         #region Version 11
         public static void AddSphinx()
         {
-            Engines.GenerateForgottenPyramid.Generate(null);
+            GenerateForgottenPyramid.Generate(null);
             ToConsole("Generated Fortune Sphinx.");
         }
         #endregion
@@ -1146,7 +1148,7 @@ namespace Server
             foreach (Item item in list)
                 item.Delete();
 
-            ToConsole(string.Format("Deleted {0} Spawners in {1}.", list.Count, map.ToString()));
+            ToConsole(string.Format("Deleted {0} Spawners in {1}.", list.Count, map));
 
             ColUtility.Free(list);
             eable.Free();
@@ -1175,7 +1177,7 @@ namespace Server
         {
             string filename = "Spawns";
 
-            if (Directory.Exists(filename) == true)
+            if (Directory.Exists(filename))
             {
                 List<string> files = null;
                 string[] dirs = null;
@@ -1187,7 +1189,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (dirs != null && dirs.Length > 0)
@@ -1201,7 +1203,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                 }
@@ -1224,7 +1226,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         if (fs == null)
@@ -1260,7 +1262,7 @@ namespace Server
                                     }
                                     catch (Exception e)
                                     {
-                                        Diagnostics.ExceptionLogging.LogException(e);
+                                        ExceptionLogging.LogException(e);
                                     }
 
                                     bool convert = id != null && ConvertSpawner(id, dr);
@@ -1277,7 +1279,7 @@ namespace Server
                                         }
                                         catch (Exception e)
                                         {
-                                            Diagnostics.ExceptionLogging.LogException(e);
+                                            ExceptionLogging.LogException(e);
                                         }
 
                                         if (loc != Point3D.Zero && spawnMap != null && spawnMap != Map.Internal)
@@ -1304,7 +1306,7 @@ namespace Server
                     }
 
                     if (converted > 0)
-                        ToConsole(string.Format("Converted {0} XmlSpawners to standard spawners.", converted), ConsoleColor.Green);
+                        ToConsole(string.Format("Converted {0} XmlSpawners to standard spawners.", converted));
 
                     if (failed > 0)
                         ToConsole(string.Format("Failed to convert {0} XmlSpawners to standard spawners. {1} kept due to XmlSpawner Functionality", failed, keep), ConsoleColor.Red);
@@ -1416,7 +1418,7 @@ namespace Server
         {
             string filename = "Spawns";
 
-            if (Directory.Exists(filename) == true)
+            if (Directory.Exists(filename))
             {
                 List<string> files = null;
                 string[] dirs = null;
@@ -1428,7 +1430,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (dirs != null && dirs.Length > 0)
@@ -1442,7 +1444,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                 }
@@ -1466,7 +1468,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         if (fs == null)
@@ -1502,7 +1504,7 @@ namespace Server
                                     }
                                     catch (Exception e)
                                     {
-                                        Diagnostics.ExceptionLogging.LogException(e);
+                                        ExceptionLogging.LogException(e);
                                     }
 
                                     if (DeleteSpawner(id))
@@ -1538,7 +1540,7 @@ namespace Server
         /// <param name="filename"></param>
         public static void RemoveSpawnsFromXmlFile(string directory, string filename)
         {
-            if (Directory.Exists(directory) == true)
+            if (Directory.Exists(directory))
             {
                 List<string> files = null;
 
@@ -1548,7 +1550,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 ToConsole(string.Format("Found {0} Xmlspawner files for removal.", files == null ? "0" : files.Count.ToString()), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
@@ -1568,7 +1570,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         if (fs == null)
@@ -1604,7 +1606,7 @@ namespace Server
                                     }
                                     catch (Exception e)
                                     {
-                                        Diagnostics.ExceptionLogging.LogException(e);
+                                        ExceptionLogging.LogException(e);
                                     }
 
                                     if (DeleteSpawner(id))
@@ -1636,7 +1638,7 @@ namespace Server
         {
             string filename = "Spawns";
 
-            if (Directory.Exists(filename) == true)
+            if (Directory.Exists(filename))
             {
                 List<string> files = null;
                 string[] dirs = null;
@@ -1648,7 +1650,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (dirs != null && dirs.Length > 0)
@@ -1662,7 +1664,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                 }
@@ -1686,7 +1688,7 @@ namespace Server
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         if (fs == null)
@@ -1722,7 +1724,7 @@ namespace Server
                                     }
                                     catch (Exception e)
                                     {
-                                        Diagnostics.ExceptionLogging.LogException(e);
+                                        ExceptionLogging.LogException(e);
                                     }
 
                                     if (DeleteSpawner(id))
@@ -1759,7 +1761,7 @@ namespace Server
                                         }
                                         catch (Exception e)
                                         {
-                                            Diagnostics.ExceptionLogging.LogException(e);
+                                            ExceptionLogging.LogException(e);
                                         }
 
                                         if (!deleted)

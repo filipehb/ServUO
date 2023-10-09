@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public PaladinGloves()
-            : base()
         {
             SetHue = 0x47E;
 

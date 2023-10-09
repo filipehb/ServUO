@@ -1,8 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -65,7 +67,7 @@ namespace Server.Spells.SkillMasteries
             }
             else
             {
-                Caster.BeginTarget(8, false, Targeting.TargetFlags.None, (m, o) =>
+                Caster.BeginTarget(8, false, TargetFlags.None, (m, o) =>
                     {
                         if (!Caster.CanSee(o))
                         {
@@ -304,7 +306,7 @@ namespace Server.Spells.SkillMasteries
             AddImageTiled(0, 0, 1, 217, 9155);
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             if (info.ButtonID == 2)
             {

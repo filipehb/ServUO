@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 /*The wrestler attempts to land three hits in rapid succession to the next target that damages you within a 2 tile radius. 
   If successful the third hit will deal direct damage based on the wrestler's mastery level. The duration of this ability 

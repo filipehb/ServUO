@@ -1,8 +1,9 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Targeting;
 using System;
 using System.Text;
+using Server.Items;
+using Server.Mobiles;
+using Server.Services.Virtues;
+using Server.Targeting;
 
 namespace Server.SkillHandlers
 {
@@ -149,7 +150,7 @@ namespace Server.SkillHandlers
                     if (honestySocket != null)
                     {
                         if (honestySocket.HonestyOwner == null)
-                            Services.Virtues.HonestyVirtue.AssignOwner(honestySocket);
+                            HonestyVirtue.AssignOwner(honestySocket);
 
                         if (from.CheckTargetSkill(SkillName.Forensics, target, 41.0, 100.0))
                         {

@@ -1,5 +1,5 @@
-using Server.Network;
 using System;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -26,8 +26,7 @@ namespace Server.Items
 
                 if (m != null)
                     return ((m.Skills[SkillName.Parry].Value * ar) / 200.0) + 1.0;
-                else
-                    return ar;
+                return ar;
             }
         }
 
@@ -133,19 +132,17 @@ namespace Server.Items
 
         public override int GetLuckBonus()
         {
-            if (CraftResources.GetType(Resource) != CraftResourceType.Wood)
+	        if (CraftResources.GetType(Resource) != CraftResourceType.Wood)
             {
                 return base.GetLuckBonus();
             }
-            else
-            {
-                CraftAttributeInfo attrInfo = GetResourceAttrs(Resource);
 
-                if (attrInfo == null)
-                    return 0;
+	        CraftAttributeInfo attrInfo = GetResourceAttrs(Resource);
 
-                return attrInfo.ShieldLuck;
-            }
+	        if (attrInfo == null)
+		        return 0;
+
+	        return attrInfo.ShieldLuck;
         }
 
         public override void DistributeExceptionalBonuses(Mobile from, bool runic)

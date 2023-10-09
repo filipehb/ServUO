@@ -1,4 +1,6 @@
 using Server.Engines.CityLoyalty;
+using Server.Multis;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -20,7 +22,7 @@ namespace Server.Items
             City = city;
         }
 
-        public override bool CanPostGreeting(Multis.BaseHouse house, Mobile m)
+        public override bool CanPostGreeting(BaseHouse house, Mobile m)
         {
             CityLoyaltySystem sys = CitySystem;
 
@@ -32,7 +34,7 @@ namespace Server.Items
             if (!CityLoyaltySystem.Enabled || CitySystem == null)
                 return;
 
-            if (CitySystem.IsCitizen(from, true))
+            if (CitySystem.IsCitizen(from))
             {
                 if (from.InRange(Location, 3))
                 {
@@ -40,7 +42,7 @@ namespace Server.Items
                 }
                 else
                 {
-                    from.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045, from.NetState);
+                    from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1019045, from.NetState);
                 }
             }
             else

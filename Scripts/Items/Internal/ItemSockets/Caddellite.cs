@@ -32,39 +32,40 @@ namespace Server.Items
 
                 return false;
             }
-            else if (from.Player)
+
+            if (from.Player)
             {
-                Item damager;
+	            Item damager;
 
-                switch (type)
-                {
-                    case Server.DamageType.Melee:
-                    case Server.DamageType.Ranged:
-                        damager = from.FindItemOnLayer(Layer.OneHanded);
+	            switch (type)
+	            {
+		            case Server.DamageType.Melee:
+		            case Server.DamageType.Ranged:
+			            damager = from.FindItemOnLayer(Layer.OneHanded);
 
-                        if (damager == null || !damager.HasSocket<Caddellite>())
-                        {
-                            damager = from.FindItemOnLayer(Layer.TwoHanded);
-                        }
+			            if (damager == null || !damager.HasSocket<Caddellite>())
+			            {
+				            damager = from.FindItemOnLayer(Layer.TwoHanded);
+			            }
 
-                        return damager != null && damager.HasSocket<Caddellite>() && damager is BaseWeapon;
-                    default:
-                        damager = from.FindItemOnLayer(Layer.OneHanded);
+			            return damager != null && damager.HasSocket<Caddellite>() && damager is BaseWeapon;
+		            default:
+			            damager = from.FindItemOnLayer(Layer.OneHanded);
 
-                        if (damager != null && damager.HasSocket<Caddellite>() && damager is Spellbook)
-                        {
-                            return true;
-                        }
+			            if (damager != null && damager.HasSocket<Caddellite>() && damager is Spellbook)
+			            {
+				            return true;
+			            }
 
-                        damager = from.FindItemOnLayer(Layer.Neck);
+			            damager = from.FindItemOnLayer(Layer.Neck);
 
-                        if (damager == null || !damager.HasSocket<Caddellite>())
-                        {
-                            damager = from.FindItemOnLayer(Layer.Helm);
-                        }
+			            if (damager == null || !damager.HasSocket<Caddellite>())
+			            {
+				            damager = from.FindItemOnLayer(Layer.Helm);
+			            }
 
-                        return damager != null && damager.HasSocket<Caddellite>();
-                }
+			            return damager != null && damager.HasSocket<Caddellite>();
+	            }
             }
 
             return false;

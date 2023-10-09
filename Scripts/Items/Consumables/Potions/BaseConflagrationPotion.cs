@@ -1,8 +1,8 @@
-using Server.Spells;
-using Server.Targeting;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Spells;
+using Server.Targeting;
 
 namespace Server.Items
 {

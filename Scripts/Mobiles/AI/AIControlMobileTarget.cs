@@ -1,9 +1,11 @@
 #region References
+
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Targets

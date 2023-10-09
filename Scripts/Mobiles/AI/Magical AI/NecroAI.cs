@@ -1,6 +1,8 @@
 #region References
+
 using Server.Spells;
 using Server.Spells.Necromancy;
+
 #endregion
 
 namespace Server.Mobiles

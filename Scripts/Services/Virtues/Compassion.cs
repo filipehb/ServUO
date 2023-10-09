@@ -1,6 +1,9 @@
 #region References
-using Server.Mobiles;
+
 using System;
+using Server.Diagnostics;
+using Server.Mobiles;
+
 #endregion
 
 namespace Server.Services.Virtues
@@ -40,7 +43,7 @@ namespace Server.Services.Virtues
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
     }

@@ -1,6 +1,10 @@
+using System;
+using Server.Engines.VvV;
+using Server.Items;
 using Server.Multis;
 using Server.Network;
-using System;
+using Server.Spells.Sixth;
+using Server.Targeting;
 
 namespace Server.SkillHandlers
 {
@@ -31,14 +35,14 @@ namespace Server.SkillHandlers
                 return TimeSpan.FromSeconds(1.0);
             }
 
-            if (Engines.VvV.ManaSpike.UnderEffects(m))
+            if (ManaSpike.UnderEffects(m))
             {
                 return TimeSpan.FromSeconds(1.0);
             }
 
             if (m.Target != null)
             {
-                Targeting.Target.Cancel(m);
+                Target.Cancel(m);
             }
 
             double bonus = 0.0;
@@ -92,8 +96,8 @@ namespace Server.SkillHandlers
             {
                 m.Hidden = true;
                 m.Warmode = false;
-                Spells.Sixth.InvisibilitySpell.RemoveTimer(m);
-                Items.InvisibilityPotion.RemoveTimer(m);
+                InvisibilitySpell.RemoveTimer(m);
+                InvisibilityPotion.RemoveTimer(m);
                 m.LocalOverheadMessage(MessageType.Regular, 0x1F4, 501240); // You have hidden yourself well.
             }
             else

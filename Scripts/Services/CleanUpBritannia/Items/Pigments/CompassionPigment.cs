@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -58,8 +58,7 @@ namespace Server.Items
             return m_Table[v];
         }
 
-        private static readonly CompassionPigmentInfo[] m_Table = new CompassionPigmentInfo[]
-        {
+        private static readonly CompassionPigmentInfo[] m_Table = {
             new CompassionPigmentInfo( CompassionPigmentType.PhoenixRed, 1964, 1151651 ), // Phoenix Red Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.AuraOfAmber, 1967, 1152308 ), // Aura of Amber Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.DeepViolet, 1929, 1151912 ), // Deep Violet Pigment

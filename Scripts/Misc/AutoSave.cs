@@ -1,13 +1,13 @@
-using Server.Commands;
 using System;
 using System.IO;
+using Server.Commands;
+using Server.Diagnostics;
 
 namespace Server.Misc
 {
     public static class AutoSave
     {
-        private static readonly string[] m_Backups = new[]
-        {
+        private static readonly string[] m_Backups = {
             "Third Backup",
             "Second Backup",
             "Most Recent"
@@ -72,7 +72,7 @@ namespace Server.Misc
             catch (Exception e)
             {
                 Console.WriteLine("WARNING: Automatic backup FAILED:\n{0}", e);
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             World.Save(true, permitBackgroundWrite);
@@ -136,7 +136,7 @@ namespace Server.Misc
 
                         anySuccess = true;
                     }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                    catch (Exception e) { ExceptionLogging.LogException(e); }
                 }
                 else
                 {
@@ -148,12 +148,12 @@ namespace Server.Misc
 
                         delete = !ArchivedSaves.Process(tempRoot);
                     }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                    catch (Exception e) { ExceptionLogging.LogException(e); }
 
                     if (delete)
                     {
                         try { dir.Delete(true); }
-                        catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                        catch (Exception e) { ExceptionLogging.LogException(e); }
                     }
                 }
             }

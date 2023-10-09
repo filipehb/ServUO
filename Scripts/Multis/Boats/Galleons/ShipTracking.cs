@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Multis
 {
@@ -228,11 +228,12 @@ namespace Server.Multis
                 Stop();
                 return;
             }
-            else if (m_From.NetState == null || m_From.Deleted || m_Target.Deleted || m_From.Map != m_Target.Map || !m_From.InRange(m_Target, m_Range))
+
+            if (m_From.NetState == null || m_From.Deleted || m_Target.Deleted || m_From.Map != m_Target.Map || !m_From.InRange(m_Target, m_Range))
             {
-                m_Arrow.Stop();
-                Stop();
-                return;
+	            m_Arrow.Stop();
+	            Stop();
+	            return;
             }
 
             if (m_LastX != m_Target.X || m_LastY != m_Target.Y)

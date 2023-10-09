@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Items
 {
     public class AncientParchment : Item
@@ -23,7 +25,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                m.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1155628, m.NetState); // *The parchment appears heavily worn and in need of restoration by a skilled Scribe...*
+                m.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1155628, m.NetState); // *The parchment appears heavily worn and in need of restoration by a skilled Scribe...*
             }
         }
 

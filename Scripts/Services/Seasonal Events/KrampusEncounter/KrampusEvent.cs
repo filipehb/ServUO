@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Server.Diagnostics;
 using Server.Engines.CityLoyalty;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Server.Engines.SeasonalEvents
 {
@@ -87,24 +88,22 @@ namespace Server.Engines.SeasonalEvents
             {
                 return _WetSpawnTypes;
             }
-            else
+
+            int wave = Math.Max(1, (int)Math.Min(6, TotalTradesComplete / 4.1)); // TODO: Is this right?
+
+            if (wave == 6)
             {
-                int wave = Math.Max(1, (int)Math.Min(6, TotalTradesComplete / 4.1)); // TODO: Is this right?
+	            if ((m.Map == Map.Trammel || (Siege.SiegeShard && m.Map == Map.Felucca)) && !SpellHelper.IsAnyT2A(m.Map, m.Location))
+	            {
+		            SpawnKrampus(m);
 
-                if (wave == 6)
-                {
-                    if ((m.Map == Map.Trammel || (Siege.SiegeShard && m.Map == Map.Felucca)) && !SpellHelper.IsAnyT2A(m.Map, m.Location))
-                    {
-                        SpawnKrampus(m);
+		            return null;
+	            }
 
-                        return null;
-                    }
-
-                    return _SpawnTypes[4];
-                }
-
-                return _SpawnTypes[wave - 1];
+	            return _SpawnTypes[4];
             }
+
+            return _SpawnTypes[wave - 1];
         }
 
         private void SpawnKrampus(Mobile m)
@@ -192,12 +191,12 @@ namespace Server.Engines.SeasonalEvents
 
         private readonly Type[][] _SpawnTypes =
         {
-            new Type[] { typeof(FrostOoze), typeof(FrostSpider) },
-            new Type[] { typeof(SnowElemental), typeof(IceElemental) },
-            new Type[] { typeof(IceSerpent), typeof(FrostTroll) },
-            new Type[] { typeof(IceFiend), typeof(WhiteWyrm) },
-            new Type[] { typeof(KrampusMinion) },
-            new Type[] { typeof(Krampus) }
+            new[] { typeof(FrostOoze), typeof(FrostSpider) },
+            new[] { typeof(SnowElemental), typeof(IceElemental) },
+            new[] { typeof(IceSerpent), typeof(FrostTroll) },
+            new[] { typeof(IceFiend), typeof(WhiteWyrm) },
+            new[] { typeof(KrampusMinion) },
+            new[] { typeof(Krampus) }
         };
 
         private readonly Type[] _WetSpawnTypes =
@@ -293,7 +292,7 @@ namespace Server.Engines.SeasonalEvents
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         });
                     }
@@ -306,7 +305,7 @@ namespace Server.Engines.SeasonalEvents
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     });
                 });

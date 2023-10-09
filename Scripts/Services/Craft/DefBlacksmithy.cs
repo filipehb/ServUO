@@ -1,6 +1,8 @@
 #region References
-using Server.Items;
+
 using System;
+using Server.Items;
+
 #endregion
 
 namespace Server.Engines.Craft
@@ -187,9 +189,9 @@ namespace Server.Engines.Craft
                 return 1048146; // If you have a tool equipped, you must use that tool.
             }
 
-            else if (!tool.CheckAccessible(from, ref num))
+            if (!tool.CheckAccessible(from, ref num))
             {
-                return num; // The tool must be on your person to use.
+	            return num; // The tool must be on your person to use.
             }
 
             if (tool is AddonToolComponent && from.InRange(((AddonToolComponent)tool).GetWorldLocation(), 2))

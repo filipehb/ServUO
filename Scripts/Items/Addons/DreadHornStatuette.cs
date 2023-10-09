@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class DreadHornStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0xA8, 0xA9, 0xAA, 0xAB, 0xAC
         };
         [Constructable]

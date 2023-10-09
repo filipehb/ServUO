@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class DisciplineQuest : BaseQuest
     {
         public DisciplineQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Rat), "rats", 50, "Sanctuary"));
 
@@ -50,7 +49,6 @@ namespace Server.Engines.Quests
     public class NeedsOfTheManySanctuaryQuest : BaseQuest
     {
         public NeedsOfTheManySanctuaryQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Cotton), "bale of cotton", 10, 0xDF9));
 
@@ -94,7 +92,6 @@ namespace Server.Engines.Quests
     public class MakingContributionSanctuaryQuest : BaseQuest
     {
         public MakingContributionSanctuaryQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Board), "boards", 250, 0x1BD7));
 
@@ -137,7 +134,6 @@ namespace Server.Engines.Quests
     public class SuppliesForSanctuaryQuest : BaseQuest
     {
         public SuppliesForSanctuaryQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SackFlour), "sack of flour", 1, 0x1039));
             AddObjective(new ObtainObjective(typeof(JarHoney), "jar of honey", 10, 0x9EC));
@@ -185,7 +181,6 @@ namespace Server.Engines.Quests
     public class TheHumanBlightQuest : BaseQuest
     {
         public TheHumanBlightQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SeveredHumanEars), "severed human ears", 30, 0x312F));
 

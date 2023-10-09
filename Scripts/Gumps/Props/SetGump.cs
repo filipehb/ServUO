@@ -1,10 +1,12 @@
 #region References
-using Server.Commands;
-using Server.HuePickers;
-using Server.Network;
+
 using System;
 using System.Collections;
 using System.Reflection;
+using Server.Commands;
+using Server.HuePickers;
+using Server.Network;
+
 #endregion
 
 namespace Server.Gumps

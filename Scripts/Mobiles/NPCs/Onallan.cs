@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ProofOfTheDeedQuest : BaseQuest
     {
         public ProofOfTheDeedQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SeveredHumanEars), "severed human ears", 20, 0x312F));
 
@@ -53,7 +52,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(MaraudersQuest),
                     typeof(ProofOfTheDeedQuest)

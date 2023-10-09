@@ -1,9 +1,10 @@
-using Server.Engines.CannedEvil;
-using Server.Items;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.CannedEvil;
+using Server.Items;
+using Server.Misc;
+using Server.Network;
 
 namespace Server.Mobiles
 {
@@ -176,7 +177,6 @@ namespace Server.Mobiles
                 else if (Spawn.Creatures.OfType<KhalAnkurWarriors>().Where(x => x._Type == KhalAnkurWarriors.WarriorType.General && !x.Deleted).Count() <= 0)
                 {
                     Blessed = false;
-                    return;
                 }
             }
         }
@@ -253,7 +253,7 @@ namespace Server.Mobiles
 
             List<Point3D> points = new List<Point3D>();
 
-            Misc.Geometry.Circle2D(loc, pmmap, 7, (pnt, map) =>
+            Geometry.Circle2D(loc, pmmap, 7, (pnt, map) =>
             {
                 if (map.CanFit(pnt, 0) && InLOS(pnt))
                     points.Add(pnt);
@@ -261,7 +261,7 @@ namespace Server.Mobiles
 
             if (pmmap != Map.Internal && pmmap != null)
             {
-                Misc.Geometry.Circle2D(loc, pmmap, 6, (pnt, map) =>
+                Geometry.Circle2D(loc, pmmap, 6, (pnt, map) =>
                 {
                     if (map.CanFit(pnt, 0) && InLOS(pnt) && Utility.RandomBool())
                     {
@@ -270,7 +270,7 @@ namespace Server.Mobiles
                     }
                 });
 
-                Misc.Geometry.Circle2D(loc, pmmap, 7, (pnt, map) =>
+                Geometry.Circle2D(loc, pmmap, 7, (pnt, map) =>
                 {
                     if (map.CanFit(pnt, 0) && InLOS(pnt) && Utility.RandomBool())
                     {

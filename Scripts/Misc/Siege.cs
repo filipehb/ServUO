@@ -1,13 +1,15 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Server.Commands;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 #endregion
 
 namespace Server
@@ -180,7 +182,7 @@ namespace Server
 
                                 string nextg = next < DateTime.Now
                                     ? "now"
-                                    : "in " + ((int)(next - DateTime.Now).TotalMinutes).ToString() + " minutes";
+                                    : "in " + ((int)(next - DateTime.Now).TotalMinutes) + " minutes";
 
                                 Console.WriteLine(
                                     "   {0}: last gained {1}, can gain {2} (every {3} minutes)",
@@ -241,7 +243,7 @@ namespace Server
                     ((PlayerMobile)from).BlessedItem = null;
                     item.LootType = LootType.Regular;
 
-                    from.SendLocalizedMessage(1075292, item.Name != null ? item.Name : "#" + item.LabelNumber.ToString()); // ~1_NAME~ has been unblessed.
+                    from.SendLocalizedMessage(1075292, item.Name != null ? item.Name : "#" + item.LabelNumber); // ~1_NAME~ has been unblessed.
                 }
             }
         }

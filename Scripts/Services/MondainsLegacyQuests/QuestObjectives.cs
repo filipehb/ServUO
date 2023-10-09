@@ -1,8 +1,8 @@
-using Server.Mobiles;
-using Server.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Mobiles;
+using Server.Regions;
 
 namespace Server.Engines.Quests
 {
@@ -175,22 +175,22 @@ namespace Server.Engines.Quests
     public class SlayObjective : BaseObjective
     {
         public SlayObjective(Type creature, string name, int amount)
-            : this(new Type[] { creature }, name, amount, 0, null, 0)
+            : this(new[] { creature }, name, amount, 0, null, 0)
         {
         }
 
         public SlayObjective(Type creature, string name, int amount, int label, string region)
-            : this(new Type[] { creature }, name, amount, label, region, 0)
+            : this(new[] { creature }, name, amount, label, region, 0)
         {
         }
 
         public SlayObjective(Type creature, string name, int amount, string region)
-            : this(new Type[] { creature }, name, amount, 0, region, 0)
+            : this(new[] { creature }, name, amount, 0, region, 0)
         {
         }
 
         public SlayObjective(Type creature, string name, int amount, int seconds)
-            : this(new Type[] { creature }, name, amount, 0, null, seconds)
+            : this(new[] { creature }, name, amount, 0, null, seconds)
         {
         }
 
@@ -221,7 +221,7 @@ namespace Server.Engines.Quests
                 Region = QuestHelper.ValidateRegion(region) ? region : null;
 
                 if (Region == null)
-                    Console.WriteLine(string.Format("Invalid region name ('{0}') in '{1}' objective!", region, GetType()));
+                    Console.WriteLine("Invalid region name ('{0}') in '{1}' objective!", region, GetType());
             }
         }
 
@@ -533,8 +533,8 @@ namespace Server.Engines.Quests
 
                     break;
                 }
-                else
-                    item.QuestItem = true;
+
+                item.QuestItem = true;
 
                 amount -= 1;
             }
@@ -560,23 +560,24 @@ namespace Server.Engines.Quests
 
             if (obj is BaseVendor)
             {
-                if (Quest.StartingItem != null)
+	            if (Quest.StartingItem != null)
                 {
                     Complete();
                     return true;
                 }
-                else if (m_Destination.IsAssignableFrom(obj.GetType()))
-                {
-                    if (MaxProgress < QuestHelper.CountQuestItems(Quest.Owner, Delivery))
-                    {
-                        Quest.Owner.SendLocalizedMessage(1074813);  // You have failed to complete your delivery.						
-                        Fail();
-                    }
-                    else
-                        Complete();
 
-                    return true;
-                }
+	            if (m_Destination.IsAssignableFrom(obj.GetType()))
+	            {
+		            if (MaxProgress < QuestHelper.CountQuestItems(Quest.Owner, Delivery))
+		            {
+			            Quest.Owner.SendLocalizedMessage(1074813);  // You have failed to complete your delivery.						
+			            Fail();
+		            }
+		            else
+			            Complete();
+
+		            return true;
+	            }
             }
 
             return false;
@@ -637,7 +638,7 @@ namespace Server.Engines.Quests
                 Region = QuestHelper.ValidateRegion(region) ? region : null;
 
                 if (Region == null)
-                    Console.WriteLine(string.Format("Invalid region name ('{0}') in '{1}' objective!", region, GetType()));
+                    Console.WriteLine("Invalid region name ('{0}') in '{1}' objective!", region, GetType());
             }
 
             Fame = fame;
@@ -694,7 +695,7 @@ namespace Server.Engines.Quests
                 m_Leave = leaveRegion;
 
                 if (m_Region == null)
-                    Console.WriteLine(string.Format("Invalid region name ('{0}') in '{1}' objective!", region, GetType()));
+                    Console.WriteLine("Invalid region name ('{0}') in '{1}' objective!", region, GetType());
             }
         }
 

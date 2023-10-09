@@ -12,7 +12,6 @@ namespace Server.Engines.JollyRoger
 
         [Constructable]
         public HawkwindSpeak()
-            : base()
         {
             Name = "Hawkwind";
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Server.Diagnostics;
 
 namespace Server.Spells
 {
@@ -81,7 +82,7 @@ namespace Server.Spells
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
 
                 if (spm != null)
@@ -122,15 +123,14 @@ namespace Server.Spells
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 
             return null;
         }
 
-        private static readonly string[] m_CircleNames = new string[]
-        {
+        private static readonly string[] m_CircleNames = {
             "First",
             "Second",
             "Third",
@@ -169,7 +169,7 @@ namespace Server.Spells
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
             }

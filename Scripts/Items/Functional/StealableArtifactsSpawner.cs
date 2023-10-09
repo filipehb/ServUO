@@ -1,13 +1,12 @@
-using Server.Commands;
 using System;
 using System.Collections;
+using Server.Commands;
 
 namespace Server.Items
 {
     public class StealableArtifactsSpawner : Item
     {
-        private static readonly StealableEntry[] m_Entries = new StealableEntry[]
-        {            
+        private static readonly StealableEntry[] m_Entries = {            
             // Doom - Artifact rarity 1
             new StealableEntry(Map.Malas, new Point3D(317, 56, -1), 72, 108, typeof(RockArtifact)),
             new StealableEntry(Map.Malas, new Point3D(360, 31, 8), 72, 108, typeof(SkullCandleArtifact)),
@@ -223,7 +222,7 @@ namespace Server.Items
             new StealableEntry(Map.Malas, new Point3D(85, 1644, 20), 9216, 13824, typeof(AcademicBooksArtifact)),
         };
 
-        private static Type[] m_TypesOfEntries = null;
+        private static Type[] m_TypesOfEntries;
         private static StealableArtifactsSpawner m_Instance;
         private Timer m_RespawnTimer;
         private StealableInstance[] m_Artifacts;

@@ -1,12 +1,16 @@
-using Server.Commands;
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Commands;
+using Server.Engines.CannedEvil;
+using Server.Engines.CityLoyalty;
+using Server.Engines.NewMagincia;
+using Server.Engines.TreasuresOfKotlCity;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Commands
 {
@@ -51,7 +55,7 @@ namespace Server.Commands
             }
         }
 
-        public static List<CommandEntry> Commands = new List<CommandEntry>(new CommandEntry[]
+        public static List<CommandEntry> Commands = new List<CommandEntry>(new[]
         {
             new CommandEntry("Moongates",           "Moongen",          "MoonGenDelete",        Category.Decoration,      101),
             new CommandEntry("Doors",               "DoorGen",          "DoorGenDelete",        Category.Decoration,      102),
@@ -251,19 +255,17 @@ namespace Server.Commands
 
             if (entry.Category == Category.RevampedDungeon)
             {
-                if (CreateWorldData.HasGenerated(116))
+	            if (CreateWorldData.HasGenerated(116))
                 {
                     return true;
                 }
-                else
-                {
-                    string er = string.Format("<br>- Cannot generate {0}. You need to generate Spawners first.", entry.Name);
-                    Console.WriteLine(er);
 
-                    error += er;
+	            string er = string.Format("<br>- Cannot generate {0}. You need to generate Spawners first.", entry.Name);
+	            Console.WriteLine(er);
 
-                    return false;
-                }
+	            error += er;
+
+	            return false;
             }
 
             return true;
@@ -358,7 +360,7 @@ namespace Server.Gumps
         public bool UncheckAll { get; set; }
 
         public NewCreateWorldGump(PlayerMobile pm, CreateWorld.GumpType type)
-            : base(pm, 50, 50)
+            : base(pm)
         {
             GumpType = type;
         }
@@ -514,11 +516,11 @@ namespace Server.Gumps
                 case 119:
                     return WeakEntityCollection.HasCollection("newshame");
                 case 120:
-                    return Engines.NewMagincia.MaginciaBazaar.Instance != null;
+                    return MaginciaBazaar.Instance != null;
                 case 121:
                     return WeakEntityCollection.HasCollection("highseas") || CharydbisSpawner.SpawnInstance != null;
                 case 122:
-                    return Engines.CityLoyalty.CityLoyaltySystem.Cities != null && Engines.CityLoyalty.CityLoyaltySystem.Cities.Count > 0 && Engines.CityLoyalty.CityLoyaltySystem.Cities[0].Stone != null;
+                    return CityLoyaltySystem.Cities != null && CityLoyaltySystem.Cities.Count > 0 && CityLoyaltySystem.Cities[0].Stone != null;
                 case 123:
                     return HasItem(typeof(DungeonHitchingPost), new Point3D(6428, 2677, 0), Map.Trammel) &&
                            HasItem(typeof(DungeonHitchingPost), new Point3D(6428, 2677, 0), Map.Felucca);
@@ -527,9 +529,9 @@ namespace Server.Gumps
                 case 125:
                     return BedrollSpawner.Instances != null && BedrollSpawner.Instances.Count > 0;
                 case 126:
-                    return Engines.TreasuresOfKotlCity.KotlBattleSimulator.Instance != null;
+                    return KotlBattleSimulator.Instance != null;
                 case 128:
-                    return Engines.CannedEvil.ChampionSystem.AllSpawns.Count > 0;
+                    return ChampionSystem.AllSpawns.Count > 0;
             }
 
             return false;

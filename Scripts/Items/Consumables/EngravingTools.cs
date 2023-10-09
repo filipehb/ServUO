@@ -1,10 +1,10 @@
+using System;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -112,8 +112,7 @@ namespace Server.Items
 
                 if (tool != null && !tool.DeletedItem && tool.UsesRemaining <= 0)
                     return tool;
-                else
-                    return null;
+                return null;
             }
 
             return null;
@@ -161,14 +160,15 @@ namespace Server.Items
 
                 if (m.InRange(item.GetWorldLocation(), 3))
                 {
-                    if (item.Movable && !item.IsLockedDown && !item.IsSecure && (item.RootParent == null || item.RootParent == m))
+	                if (item.Movable && !item.IsLockedDown && !item.IsSecure && (item.RootParent == null || item.RootParent == m))
                     {
                         return true;
                     }
-                    else if (house != null && house.IsFriend(m))
-                    {
-                        return true;
-                    }
+
+	                if (house != null && house.IsFriend(m))
+	                {
+		                return true;
+	                }
                 }
             }
             else if (entity is BaseCreature)
@@ -426,62 +426,61 @@ namespace Server.Items
 
                 if (info.ButtonID == 1)
                 {
-                    if (!m_Tool.IsChildOf(from.Backpack))
+	                if (!m_Tool.IsChildOf(from.Backpack))
                     {
                         from.SendLocalizedMessage(1062334); // This item must be in your backpack to be used.
                         return;
                     }
-                    else if (!m_Tool.IsValid(m_Target, from))
-                    {
-                        from.SendLocalizedMessage(1072311); // The engraving failed.
-                        return;
-                    }
-                    else
-                    {
-                        TextRelay relay = info.GetTextEntry(15);
 
-                        IEngravable item = (IEngravable)m_Target;
+	                if (!m_Tool.IsValid(m_Target, from))
+	                {
+		                from.SendLocalizedMessage(1072311); // The engraving failed.
+		                return;
+	                }
 
-                        if (relay != null)
-                        {
-                            if (relay.Text == null || relay.Text.Equals(""))
-                            {
-                                if (item.EngravedText != null)
-                                {
-                                    item.EngravedText = null;
-                                    from.SendLocalizedMessage(m_Tool.RemoveMessage);
-                                }
-                                else
-                                {
-                                    from.SendLocalizedMessage(m_Tool.ObjectWasNotMessage);
-                                }
-                            }
-                            else
-                            {
-                                string text;
+	                TextRelay relay = info.GetTextEntry(15);
 
-                                if (relay.Text.Length > 40)
-                                    text = relay.Text.Substring(0, 40);
-                                else
-                                    text = relay.Text;
+	                IEngravable item = (IEngravable)m_Target;
 
-                                item.EngravedText = text;
+	                if (relay != null)
+	                {
+		                if (relay.Text == null || relay.Text.Equals(""))
+		                {
+			                if (item.EngravedText != null)
+			                {
+				                item.EngravedText = null;
+				                from.SendLocalizedMessage(m_Tool.RemoveMessage);
+			                }
+			                else
+			                {
+				                from.SendLocalizedMessage(m_Tool.ObjectWasNotMessage);
+			                }
+		                }
+		                else
+		                {
+			                string text;
 
-                                from.SendLocalizedMessage(m_Tool.SuccessMessage);
+			                if (relay.Text.Length > 40)
+				                text = relay.Text.Substring(0, 40);
+			                else
+				                text = relay.Text;
 
-                                m_Tool.UsesRemaining--;
+			                item.EngravedText = text;
 
-                                if (m_Tool.UsesRemaining < 1)
-                                {
-                                    if (m_Tool.DeletedItem)
-                                    {
-                                        m_Tool.Delete();
-                                        from.SendLocalizedMessage(1044038); // You have worn out your tool!
-                                    }
-                                }
-                            }
-                        }
-                    }
+			                from.SendLocalizedMessage(m_Tool.SuccessMessage);
+
+			                m_Tool.UsesRemaining--;
+
+			                if (m_Tool.UsesRemaining < 1)
+			                {
+				                if (m_Tool.DeletedItem)
+				                {
+					                m_Tool.Delete();
+					                from.SendLocalizedMessage(1044038); // You have worn out your tool!
+				                }
+			                }
+		                }
+	                }
                 }
             }
         }
@@ -501,7 +500,7 @@ namespace Server.Items
         }
 
         public override int LabelNumber => 1072152;// leather container engraving tool
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(Pouch), typeof(Backpack), typeof(Bag)
                 };
@@ -533,7 +532,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(WoodenBox), typeof(LargeCrate), typeof(MediumCrate),
                     typeof(SmallCrate), typeof(WoodenChest), typeof(EmptyBookcase),
@@ -573,7 +572,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(ParagonChest), typeof(MetalChest), typeof(MetalGoldenChest), typeof(MetalBox)
                 };
@@ -605,7 +604,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(Cake), typeof(CheesePizza), typeof(SausagePizza),
                     typeof(Cookies)
@@ -638,7 +637,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(Spellbook)
                 };
@@ -671,7 +670,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(MonsterStatuette)
                 };
@@ -706,7 +705,7 @@ namespace Server.Items
 
         public override int GumpTitle => 1071163;  // <center>Armor Engraving Tool</center>
 
-        public override Type[] Engraves => new Type[] { typeof(BaseArmor) };
+        public override Type[] Engraves => new[] { typeof(BaseArmor) };
 
         public override bool CheckType(IEntity entity)
         {
@@ -753,7 +752,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(BaseShield)
                 };

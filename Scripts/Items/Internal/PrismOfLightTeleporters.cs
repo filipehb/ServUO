@@ -1,4 +1,5 @@
 using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -109,20 +110,20 @@ namespace Server.Items
 
         public override bool OnMoveOver(Mobile m)
         {
-            if (m.Player)
+	        if (m.Player)
             {
                 if (Utility.RandomBool())
                 {
                     Point3D p = new Point3D(6523, 71, -10);
-                    Mobiles.BaseCreature.TeleportPets(m, p, m.Map);
+                    BaseCreature.TeleportPets(m, p, m.Map);
                     m.MoveToWorld(p, m.Map);
                 }
 
                 Delete();
                 return false;
             }
-            else
-                return true;
+
+	        return true;
         }
 
         public override void Serialize(GenericWriter writer)

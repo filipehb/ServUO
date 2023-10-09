@@ -6,8 +6,7 @@ namespace Server.Items
 {
     public class BedrollSpawner : Item
     {
-        public static Point3D[] m_RoomDestinations = new Point3D[]
-        {
+        public static Point3D[] m_RoomDestinations = {
             new Point3D(5651, 555, 20),
             new Point3D(5658, 562, 20),
             new Point3D(5666, 558, 20),
@@ -25,8 +24,7 @@ namespace Server.Items
             new Point3D(5868, 554 ,15)
         };
 
-        public static Point3D[] m_OutsideTunnels = new Point3D[]
-        {
+        public static Point3D[] m_OutsideTunnels = {
             new Point3D(5670, 550, 22),
             new Point3D(5721, 550, 20),
             new Point3D(5670, 535, 0),
@@ -34,8 +32,7 @@ namespace Server.Items
             new Point3D(5782, 536, 10)
         };
 
-        private static readonly BedrollEntry[] m_Entries = new BedrollEntry[]
-        {
+        private static readonly BedrollEntry[] m_Entries = {
             // Upper Floor Room 1
             new BedrollEntry(new Point3D(5653, 565, 20), typeof(WrongBedrollEast)),
             new BedrollEntry(new Point3D(5651, 564, 20), typeof(WrongBedrollEast)),

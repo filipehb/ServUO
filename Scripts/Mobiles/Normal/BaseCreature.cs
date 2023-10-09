@@ -1,5 +1,11 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Server.ContextMenus;
+using Server.Engines.Fellowship;
 using Server.Engines.PartySystem;
 using Server.Engines.Quests.Doom;
 using Server.Engines.VvV;
@@ -18,10 +24,7 @@ using Server.Spells.Sixth;
 using Server.Spells.SkillMasteries;
 using Server.Spells.Spellweaving;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 #endregion
 
 namespace Server.Mobiles
@@ -538,14 +541,12 @@ namespace Server.Mobiles
 
         public virtual WeaponAbility TryGetWeaponAbility()
         {
-            if (_Profile != null && _Profile.WeaponAbilities != null && _Profile.WeaponAbilities.Length > 0)
+	        if (_Profile != null && _Profile.WeaponAbilities != null && _Profile.WeaponAbilities.Length > 0)
             {
                 return _Profile.WeaponAbilities[Utility.Random(_Profile.WeaponAbilities.Length)];
             }
-            else
-            {
-                return GetWeaponAbility();
-            }
+
+	        return GetWeaponAbility();
         }
 
         public virtual TrainingDefinition TrainingDefinition => null;
@@ -660,11 +661,9 @@ namespace Server.Mobiles
                 ControlSlotsMax = slots;
                 return;
             }
-            else
-            {
-                ControlSlotsMin = def.ControlSlotsMin;
-                ControlSlotsMax = def.ControlSlotsMax;
-            }
+
+            ControlSlotsMin = def.ControlSlotsMin;
+            ControlSlotsMax = def.ControlSlotsMax;
 
             if (_InitAverage == null)
                 return;
@@ -793,7 +792,7 @@ namespace Server.Mobiles
             }
         }
 
-        public static bool IsSoulboundEnemies => Engines.Fellowship.ForsakenFoesEvent.Instance.Running;
+        public static bool IsSoulboundEnemies => ForsakenFoesEvent.Instance.Running;
 
         public static Type[] _SoulboundCreatures =
         {
@@ -902,13 +901,14 @@ namespace Server.Mobiles
                 {
                     return;
                 }
-                else if (value)
+
+                if (value)
                 {
-                    Paragon.Convert(this);
+	                Paragon.Convert(this);
                 }
                 else
                 {
-                    Paragon.UnConvert(this);
+	                Paragon.UnConvert(this);
                 }
 
                 m_Paragon = value;
@@ -1321,14 +1321,12 @@ namespace Server.Mobiles
             {
                 return true;
             }
-            else
-            {
-                Mobile master = c.GetMaster();
 
-                if (master != null && !(master is BaseCreature))
-                {
-                    return true;
-                }
+            Mobile master = c.GetMaster();
+
+            if (master != null && !(master is BaseCreature))
+            {
+	            return true;
             }
 
             BaseCreature t = this;
@@ -1476,8 +1474,7 @@ namespace Server.Mobiles
             return true;
         }
 
-        private static readonly Type[] m_AnimateDeadTypes = new[]
-        {
+        private static readonly Type[] m_AnimateDeadTypes = {
             typeof(MoundOfMaggots), typeof(HellSteed), typeof(SkeletalMount), typeof(WailingBanshee), typeof(Wraith),
             typeof(SkeletalDragon), typeof(LichLord), typeof(FleshGolem), typeof(Lich), typeof(SkeletalKnight),
             typeof(BoneKnight), typeof(Mummy), typeof(SkeletalMage), typeof(BoneMagi), typeof(PatchworkSkeleton)
@@ -1821,7 +1818,7 @@ namespace Server.Mobiles
 
             if (from is PlayerMobile)
             {
-                Timer.DelayCall(TimeSpan.FromSeconds(10), ((PlayerMobile)@from).RecoverAmmo);
+                Timer.DelayCall(TimeSpan.FromSeconds(10), ((PlayerMobile)from).RecoverAmmo);
             }
 
             base.OnDamage(amount, from, willKill);
@@ -1881,8 +1878,8 @@ namespace Server.Mobiles
         #endregion
 
         #region SA / High Seas Tasty Treats/Vial of Armor Essense
-        private int m_TempDamageBonus = 0;
-        private int m_TempDamageAbsorb = 0;
+        private int m_TempDamageBonus;
+        private int m_TempDamageAbsorb;
 
         public int TempDamageBonus { get { return m_TempDamageBonus; } set { m_TempDamageBonus = value; } }
         public int TempDamageAbsorb { get { return m_TempDamageAbsorb; } set { m_TempDamageAbsorb = value; } }
@@ -2394,9 +2391,9 @@ namespace Server.Mobiles
             writer.Write(m_CurrentTameSkill);
         }
 
-        private static readonly double[] m_StandardActiveSpeeds = new[] { 0.175, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8 };
+        private static readonly double[] m_StandardActiveSpeeds = { 0.175, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8 };
 
-        private static readonly double[] m_StandardPassiveSpeeds = new[] { 0.350, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.2, 1.6, 2.0 };
+        private static readonly double[] m_StandardPassiveSpeeds = { 0.350, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.2, 1.6, 2.0 };
 
         public override void Deserialize(GenericReader reader)
         {
@@ -2511,7 +2508,7 @@ namespace Server.Mobiles
                 if (m_bSummoned)
                 {
                     m_SummonEnd = reader.ReadDeltaTime();
-                    TimerRegistry.Register<BaseCreature>("UnsummonTimer", this, m_SummonEnd - DateTime.UtcNow, c => c.Delete()); 
+                    TimerRegistry.Register("UnsummonTimer", this, m_SummonEnd - DateTime.UtcNow, c => c.Delete()); 
                 }
 
                 m_iControlSlots = reader.ReadInt();
@@ -2820,14 +2817,13 @@ namespace Server.Mobiles
         public override bool ShouldCheckStatTimers => false;
 
         #region Food
-        private static readonly Type[] m_Eggs = new[] { typeof(FriedEggs), typeof(Eggs) };
+        private static readonly Type[] m_Eggs = { typeof(FriedEggs), typeof(Eggs) };
 
-        private static readonly Type[] m_Fish = new[] { typeof(FishSteak), typeof(RawFishSteak) };
+        private static readonly Type[] m_Fish = { typeof(FishSteak), typeof(RawFishSteak) };
 
-        private static readonly Type[] m_GrainsAndHay = new[] { typeof(BreadLoaf), typeof(FrenchBread), typeof(SheafOfHay) };
+        private static readonly Type[] m_GrainsAndHay = { typeof(BreadLoaf), typeof(FrenchBread), typeof(SheafOfHay) };
 
-        private static readonly Type[] m_Meat = new[]
-        {
+        private static readonly Type[] m_Meat = {
 			/* Cooked */
 			typeof(Bacon), typeof(CookedBird), typeof(Sausage), typeof(Ham), typeof(Ribs), typeof(LambLeg), typeof(ChickenLeg),
 			/* Uncooked */
@@ -2835,21 +2831,18 @@ namespace Server.Mobiles
 			typeof(Head), typeof(LeftArm), typeof(LeftLeg), typeof(Torso), typeof(RightArm), typeof(RightLeg)
         };
 
-        private static readonly Type[] m_FruitsAndVegies = new[]
-        {
+        private static readonly Type[] m_FruitsAndVegies = {
             typeof(HoneydewMelon), typeof(YellowGourd), typeof(GreenGourd), typeof(Banana), typeof(Bananas), typeof(Lemon),
             typeof(Lime), typeof(Dates), typeof(Grapes), typeof(Peach), typeof(Pear), typeof(Apple), typeof(Watermelon),
             typeof(Squash), typeof(Cantaloupe), typeof(Carrot), typeof(Cabbage), typeof(Onion), typeof(Lettuce), typeof(Pumpkin)
         };
 
-        private static readonly Type[] m_Gold = new[]
-        {
+        private static readonly Type[] m_Gold = {
 			// white wyrms eat gold..
 			typeof(Gold)
         };
 
-        private static readonly Type[] m_Metal = new[]
-        {
+        private static readonly Type[] m_Metal = {
 			// Some Stygian Abyss Monsters eat Metal..
 			typeof(IronIngot), typeof(DullCopperIngot), typeof(ShadowIronIngot), typeof(CopperIngot), typeof(BronzeIngot),
             typeof(GoldIngot), typeof(AgapiteIngot), typeof(VeriteIngot), typeof(ValoriteIngot)
@@ -3738,7 +3731,7 @@ namespace Server.Mobiles
 
         public virtual double GetFightModeRanking(Mobile m, FightMode acqType, bool bPlayerOnly)
         {
-            if ((bPlayerOnly && m.Player) || !bPlayerOnly)
+	        if ((bPlayerOnly && m.Player) || !bPlayerOnly)
             {
                 switch (acqType)
                 {
@@ -3752,10 +3745,8 @@ namespace Server.Mobiles
                         return -GetDistanceToSqrt(m); // returns closest mobile
                 }
             }
-            else
-            {
-                return double.MinValue;
-            }
+
+	        return double.MinValue;
         }
 
         // Turn, - for left, + for right
@@ -4634,32 +4625,28 @@ namespace Server.Mobiles
 
         public Spell GetAttackSpellRandom()
         {
-            if (m_arSpellAttack.Count > 0)
+	        if (m_arSpellAttack.Count > 0)
             {
                 Type type = m_arSpellAttack[Utility.Random(m_arSpellAttack.Count)];
 
                 object[] args = { this, null };
                 return Activator.CreateInstance(type, args) as Spell;
             }
-            else
-            {
-                return null;
-            }
+
+	        return null;
         }
 
         public Spell GetDefenseSpellRandom()
         {
-            if (m_arSpellDefense.Count > 0)
+	        if (m_arSpellDefense.Count > 0)
             {
                 Type type = m_arSpellDefense[Utility.Random(m_arSpellDefense.Count)];
 
                 object[] args = { this, null };
                 return Activator.CreateInstance(type, args) as Spell;
             }
-            else
-            {
-                return null;
-            }
+
+	        return null;
         }
 
         public Spell GetSpellSpecific(Type type)
@@ -5567,9 +5554,10 @@ namespace Server.Mobiles
             {
                 return ControlMaster;
             }
-            else if (Summoned && SummonMaster != null)
+
+            if (Summoned && SummonMaster != null)
             {
-                return SummonMaster;
+	            return SummonMaster;
             }
 
             return null;
@@ -6303,7 +6291,7 @@ namespace Server.Mobiles
                 (int)Math.Floor(creature.HitsMax * (1 + ArcaneEmpowermentSpell.GetSpellBonus(caster, false) / 100.0)));
 
             creature.m_SummonEnd = DateTime.UtcNow + duration;
-            TimerRegistry.Register<BaseCreature>("UnsummonTimer", creature, duration, c => c.Delete());
+            TimerRegistry.Register("UnsummonTimer", creature, duration, c => c.Delete());
 
             creature.MoveToWorld(p, caster.Map);
 
@@ -6357,12 +6345,13 @@ namespace Server.Mobiles
 
                     return true;
                 }
-                else if (tc >= m_NextHealTime && CanBeBeneficial(this) && (Hits < .78 * HitsMax || Poisoned))
-                {
-                    HealStart(this);
-                    m_NextHealTime = tc + (int)TimeSpan.FromSeconds(1.0).TotalMilliseconds;
 
-                    return true;
+                if (tc >= m_NextHealTime && CanBeBeneficial(this) && (Hits < .78 * HitsMax || Poisoned))
+                {
+	                HealStart(this);
+	                m_NextHealTime = tc + (int)TimeSpan.FromSeconds(1.0).TotalMilliseconds;
+
+	                return true;
                 }
             }
 
@@ -6615,10 +6604,8 @@ namespace Server.Mobiles
             {
                 return false;
             }
-            else
-            {
-                Mana -= 25;
-            }
+
+            Mana -= 25;
 
             if (Spell != null)
                 Spell = null;
@@ -6805,8 +6792,7 @@ namespace Server.Mobiles
 
         public virtual bool TeleportsPets => false;
 
-        private static readonly int[] m_Offsets = new int[]
-            {
+        private static readonly int[] m_Offsets = {
                 -1, -1,
                 -1,  0,
                 -1,  1,
@@ -6842,15 +6828,13 @@ namespace Server.Mobiles
                             to = new Point3D(x, y, Z);
                             break;
                         }
-                        else
-                        {
-                            int z = Map.GetAverageZ(x, y);
 
-                            if (Map.CanSpawnMobile(x, y, z))
-                            {
-                                to = new Point3D(x, y, z);
-                                break;
-                            }
+                        int z = Map.GetAverageZ(x, y);
+
+                        if (Map.CanSpawnMobile(x, y, z))
+                        {
+	                        to = new Point3D(x, y, z);
+	                        break;
                         }
                     }
 
@@ -7115,13 +7099,15 @@ namespace Server.Mobiles
             {
                 return m_bBardMaster;
             }
-            else if (m_bControlled && m_ControlMaster != null)
+
+            if (m_bControlled && m_ControlMaster != null)
             {
-                return m_ControlMaster;
+	            return m_ControlMaster;
             }
-            else if (m_bSummoned && m_SummonMaster != null)
+
+            if (m_bSummoned && m_SummonMaster != null)
             {
-                return m_SummonMaster;
+	            return m_SummonMaster;
             }
 
             return base.GetDamageMaster(damagee);

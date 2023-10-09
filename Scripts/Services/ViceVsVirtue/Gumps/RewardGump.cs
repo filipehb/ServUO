@@ -1,8 +1,8 @@
+using System;
 using Server.Engines.Points;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.VvV
 {

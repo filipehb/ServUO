@@ -8,8 +8,7 @@ namespace Server.Items
         public override int InitMinHits => 255;
         public override int InitMaxHits => 255;
 		
-        private static readonly SkillName[] m_PossibleBonusSkills = new SkillName[]
-        {
+        private static readonly SkillName[] m_PossibleBonusSkills = {
             SkillName.Archery,
             SkillName.Healing,
             SkillName.MagicResist,

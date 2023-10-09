@@ -5,7 +5,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public BrigandCannibal()
-            : base()
         {
             Title = "the brigand cannibal";
             Hue = 33782;

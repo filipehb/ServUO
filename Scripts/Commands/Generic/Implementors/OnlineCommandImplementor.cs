@@ -1,7 +1,8 @@
-using Server.Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.Commands.Generic
 {
@@ -9,7 +10,7 @@ namespace Server.Commands.Generic
     {
         public OnlineCommandImplementor()
         {
-            Accessors = new string[] { "Online" };
+            Accessors = new[] { "Online" };
             SupportRequirement = CommandSupport.Online;
             SupportsConditionals = true;
             AccessLevel = AccessLevel.GameMaster;
@@ -60,7 +61,7 @@ namespace Server.Commands.Generic
             catch (Exception e)
             {
                 from.SendMessage(e.Message);
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
     }

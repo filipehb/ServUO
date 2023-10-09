@@ -43,94 +43,93 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!from.InRange(GetWorldLocation(), 1))
+	        if (!from.InRange(GetWorldLocation(), 1))
             {
                 from.SendLocalizedMessage(502138); // That is too far away for you to use
                 return;
             }
-            else if (from != m_Caster)
-            {
-            }
-            else if (!BasePotion.HasFreeHand(from))
-            {
-                from.SendLocalizedMessage(1080116); // You must have a free hand to use a Healing Stone.
-            }
-            else if (from.Hits >= from.HitsMax && !from.Poisoned)
-            {
-                from.SendLocalizedMessage(1049547); //You are already at full health.
-            }
-            else if (from.CanBeginAction(typeof(HealingStone)))
-            {
-                from.BeginAction(typeof(HealingStone));
 
-                if (m_MaxHeal > m_LifeForce)
-                {
-                    m_MaxHeal = m_LifeForce;
-                }
+	        if (from != m_Caster)
+	        {
+	        }
+	        else if (!BasePotion.HasFreeHand(from))
+	        {
+		        from.SendLocalizedMessage(1080116); // You must have a free hand to use a Healing Stone.
+	        }
+	        else if (from.Hits >= from.HitsMax && !from.Poisoned)
+	        {
+		        from.SendLocalizedMessage(1049547); //You are already at full health.
+	        }
+	        else if (from.CanBeginAction(typeof(HealingStone)))
+	        {
+		        from.BeginAction(typeof(HealingStone));
 
-                Timer.DelayCall(TimeSpan.FromSeconds(2), m => m.EndAction(typeof(HealingStone)), from);
+		        if (m_MaxHeal > m_LifeForce)
+		        {
+			        m_MaxHeal = m_LifeForce;
+		        }
 
-                if (from.Poisoned)
-                {
-                    int toUse = Math.Min(120, from.Poison.RealLevel * 25);
+		        Timer.DelayCall(TimeSpan.FromSeconds(2), m => m.EndAction(typeof(HealingStone)), from);
 
-                    if (m_MaxLifeForce < toUse)
-                    {
-                        from.SendLocalizedMessage(1115265); //Your Mysticism, Focus, or Imbuing Skills are not enough to use the heal stone to cure yourself.
-                    }
-                    else if (m_LifeForce < toUse)
-                    {
-                        from.SendLocalizedMessage(1115264); //Your healing stone does not have enough energy to remove the poison.
-                        LifeForce -= toUse / 3;
-                    }
-                    else
-                    {
-                        from.CurePoison(from);
+		        if (from.Poisoned)
+		        {
+			        int toUse = Math.Min(120, from.Poison.RealLevel * 25);
 
-                        from.SendLocalizedMessage(500231); // You feel cured of poison!
+			        if (m_MaxLifeForce < toUse)
+			        {
+				        from.SendLocalizedMessage(1115265); //Your Mysticism, Focus, or Imbuing Skills are not enough to use the heal stone to cure yourself.
+			        }
+			        else if (m_LifeForce < toUse)
+			        {
+				        from.SendLocalizedMessage(1115264); //Your healing stone does not have enough energy to remove the poison.
+				        LifeForce -= toUse / 3;
+			        }
+			        else
+			        {
+				        from.CurePoison(from);
 
-                        from.FixedEffect(0x373A, 10, 15);
-                        from.PlaySound(0x1E0);
+				        from.SendLocalizedMessage(500231); // You feel cured of poison!
 
-                        LifeForce -= toUse;
-                    }
+				        from.FixedEffect(0x373A, 10, 15);
+				        from.PlaySound(0x1E0);
 
-                    if (m_LifeForce <= 0)
-                    {
-                        Consume();
-                    }
+				        LifeForce -= toUse;
+			        }
 
-                    return;
-                }
-                else
-                {
-                    int toHeal = Math.Min(m_MaxHeal, from.HitsMax - from.Hits);
-                    from.Heal(toHeal);
+			        if (m_LifeForce <= 0)
+			        {
+				        Consume();
+			        }
 
-                    from.FixedParticles(0x376A, 9, 32, 5030, EffectLayer.Waist);
-                    from.PlaySound(0x202);
+			        return;
+		        }
 
-                    LifeForce -= toHeal;
-                    m_MaxHeal = 1;
-                }
+		        int toHeal = Math.Min(m_MaxHeal, from.HitsMax - from.Hits);
+		        from.Heal(toHeal);
 
-                if (m_LifeForce <= 0)
-                {
-                    from.SendLocalizedMessage(1115266); //The healing stone has used up all its energy and has been destroyed.
-                    Consume();
-                }
-                else
-                {
-                    if (m_Timer != null)
-                        m_Timer.Stop();
+		        from.FixedParticles(0x376A, 9, 32, 5030, EffectLayer.Waist);
+		        from.PlaySound(0x202);
 
-                    m_Timer = new InternalTimer(this);
-                }
-            }
-            else
-            {
-                from.SendLocalizedMessage(1095172); // You must wait a few seconds before using another Healing Stone.
-            }
+		        LifeForce -= toHeal;
+		        m_MaxHeal = 1;
+
+		        if (m_LifeForce <= 0)
+		        {
+			        from.SendLocalizedMessage(1115266); //The healing stone has used up all its energy and has been destroyed.
+			        Consume();
+		        }
+		        else
+		        {
+			        if (m_Timer != null)
+				        m_Timer.Stop();
+
+			        m_Timer = new InternalTimer(this);
+		        }
+	        }
+	        else
+	        {
+		        from.SendLocalizedMessage(1095172); // You must wait a few seconds before using another Healing Stone.
+	        }
         }
 
         public void OnTick()

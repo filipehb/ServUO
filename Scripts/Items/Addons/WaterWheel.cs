@@ -100,7 +100,6 @@ namespace Server.Items
 
         [Constructable]
         public WaterWheelDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

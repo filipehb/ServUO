@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public SpeckledScorpion()
-            : base()
         {
             Name = "a speckled scorpion";
             Tamable = false;

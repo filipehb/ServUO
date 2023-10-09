@@ -1,9 +1,11 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
+
 #endregion
 
 namespace Server.Diagnostics

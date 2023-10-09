@@ -1,13 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Server.ContextMenus;
+using Server.Engines.Craft;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using Server.Engines.Craft;
-using Server.Mobiles;
-
-using System.Collections.Generic;
-using Server.ContextMenus;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -147,7 +146,6 @@ namespace Server.Items
 
         [Constructable]
         public AnvilofArtifactsAddon(bool east, int uses)
-            : base()
         {
             UsesRemaining = uses;
 
@@ -225,7 +223,6 @@ namespace Server.Items
 
         [Constructable]
         public AnvilofArtifactsDeed(int uses)
-            : base()
         {
             LootType = LootType.Blessed;
             UsesRemaining = uses;
@@ -293,7 +290,7 @@ namespace Server.Items
         private AnvilOfArtifactsEntry Entry { get; set; }
 
         public AnvilofArtifactsGump(PlayerMobile pm, AnvilofArtifactsAddon addon)
-            : base(pm, 50, 50)
+            : base(pm)
         {
             if (addon == null)
                 return;
@@ -381,7 +378,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly ResistanceType[] _ResistOrder = new ResistanceType[] { ResistanceType.Physical, ResistanceType.Fire, ResistanceType.Cold, ResistanceType.Poison, ResistanceType.Energy };
+        private static readonly ResistanceType[] _ResistOrder = { ResistanceType.Physical, ResistanceType.Fire, ResistanceType.Cold, ResistanceType.Poison, ResistanceType.Energy };
 
         public override void OnResponse(RelayInfo info)
         {

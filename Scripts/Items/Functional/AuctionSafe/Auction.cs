@@ -1,12 +1,12 @@
-using Server.Accounting;
-using Server.Engines.NewMagincia;
-using Server.Items;
-using Server.Mobiles;
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Server.Accounting;
+using Server.Diagnostics;
+using Server.Engines.NewMagincia;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Auction
 {
@@ -229,30 +229,28 @@ namespace Server.Engines.Auction
 
             if (acct != null)
             {
-                if (!acct.WithdrawGold(Buyout))
+	            if (!acct.WithdrawGold(Buyout))
                 {
                     m.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
                     return false;
                 }
-                else
-                {
-                    VaultLogging.Buyout(this, m, Buyout);
 
-                    if (HighestBid != null && HighestBid.Mobile != m)
-                    {
-                        DoOutBidMessage(HighestBid.Mobile);
+	            VaultLogging.Buyout(this, m, Buyout);
 
-                        HighestBid.Refund(this, HighestBid.CurrentBid);
-                    }
+	            if (HighestBid != null && HighestBid.Mobile != m)
+	            {
+		            DoOutBidMessage(HighestBid.Mobile);
 
-                    HighestBid = GetBidEntry(m, true);
-                    HighestBid.CurrentBid = Buyout - (int)(Buyout * .05);
-                    CurrentBid = Buyout;
+		            HighestBid.Refund(this, HighestBid.CurrentBid);
+	            }
 
-                    EndAuction(true);
-                    ClaimPrize(m);
-                    return true;
-                }
+	            HighestBid = GetBidEntry(m);
+	            HighestBid.CurrentBid = Buyout - (int)(Buyout * .05);
+	            CurrentBid = Buyout;
+
+	            EndAuction(true);
+	            ClaimPrize(m);
+	            return true;
             }
 
             return false;
@@ -495,7 +493,7 @@ namespace Server.Engines.Auction
                 BidHistory = null;
                 Viewers = null;
             }
-            catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+            catch (Exception e) { ExceptionLogging.LogException(e); }
         }
 
         public void ResendGumps(PlayerMobile player)

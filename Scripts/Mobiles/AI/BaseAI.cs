@@ -1,4 +1,9 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
@@ -6,10 +11,7 @@ using Server.Network;
 using Server.Regions;
 using Server.Spells;
 using Server.Targets;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 #endregion
 
 namespace Server.Mobiles

@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.BulkOrders;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests
 {
@@ -75,19 +75,17 @@ namespace Server.Engines.Quests
 			SetWearable(new FemaleGargishClothArms(), 0x711, 1);
         }
 
-        private static readonly Type[][] m_PileTypes = new Type[][]
-            {
-                new Type[] {typeof(DullCopperIngot),  typeof(PileofInspectedDullCopperIngots) },
-                new Type[] {typeof(ShadowIronIngot),  typeof(PileofInspectedShadowIronIngots) },
-                new Type[] {typeof(BronzeIngot),      typeof(PileofInspectedBronzeIngots) },
-                new Type[] {typeof(GoldIngot),        typeof(PileofInspectedGoldIngots) },
-                new Type[] {typeof(AgapiteIngot),     typeof(PileofInspectedAgapiteIngots) },
-                new Type[] {typeof(VeriteIngot),      typeof(PileofInspectedVeriteIngots) },
-                new Type[] {typeof(ValoriteIngot),    typeof(PileofInspectedValoriteIngots) }
+        private static readonly Type[][] m_PileTypes = {
+                new[] {typeof(DullCopperIngot),  typeof(PileofInspectedDullCopperIngots) },
+                new[] {typeof(ShadowIronIngot),  typeof(PileofInspectedShadowIronIngots) },
+                new[] {typeof(BronzeIngot),      typeof(PileofInspectedBronzeIngots) },
+                new[] {typeof(GoldIngot),        typeof(PileofInspectedGoldIngots) },
+                new[] {typeof(AgapiteIngot),     typeof(PileofInspectedAgapiteIngots) },
+                new[] {typeof(VeriteIngot),      typeof(PileofInspectedVeriteIngots) },
+                new[] {typeof(ValoriteIngot),    typeof(PileofInspectedValoriteIngots) }
             };
 
-        private static readonly object[][] m_KegTypes = new object[][]
-            {
+        private static readonly object[][] m_KegTypes = {
                 new object[] {PotionEffect.RefreshTotal,  typeof(InspectedKegofTotalRefreshment) },
                 new object[] {PotionEffect.PoisonGreater, typeof(InspectedKegofGreaterPoison) }
             };

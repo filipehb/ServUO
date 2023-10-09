@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -135,7 +135,7 @@ namespace Server.Spells.SkillMasteries
             if (Target == null)
                 return 1.0;
 
-            ISlayer slayer = Instrument as ISlayer;
+            ISlayer slayer = Instrument;
 
             if (slayer != null)
             {

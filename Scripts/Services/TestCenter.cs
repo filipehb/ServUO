@@ -1,16 +1,17 @@
+using System;
+using System.Text;
+using Server.Accounting;
 using Server.Commands;
+using Server.Diagnostics;
+using Server.Engines.Craft;
+using Server.Engines.Plants;
+using Server.Engines.Points;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Text;
-using Server.Engines.Points;
 using Server.SkillHandlers;
 using Server.Spells.SkillMasteries;
-using Server.Engines.Craft;
-using Server.Engines.Plants;
-using Server.Accounting;
 
 namespace Server.Misc
 {
@@ -57,7 +58,7 @@ namespace Server.Misc
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                 }
@@ -787,7 +788,7 @@ namespace Server.Misc
             {
                 account.AddTag("TCGold", "Gold Given");
 
-                Banker.Deposit(m, 30000000, false);
+                Banker.Deposit(m, 30000000);
             }
             #endregion
 
@@ -795,7 +796,7 @@ namespace Server.Misc
             bank.DropItem(new Robe(443));
             bank.DropItem(new Dagger());
             bank.DropItem(new Candle());
-            bank.DropItem(new FireworksWand() { Name = "Mininova Fireworks Wand" });
+            bank.DropItem(new FireworksWand { Name = "Mininova Fireworks Wand" });
             #endregion
 
             Container cont;
@@ -841,7 +842,7 @@ namespace Server.Misc
                 Name = "Magery Items"
             };
 
-            PlaceItemIn(cont, 78, 88, new CrimsonCincture() { Hue = 232 });
+            PlaceItemIn(cont, 78, 88, new CrimsonCincture { Hue = 232 });
             PlaceItemIn(cont, 102, 90, new CrystallineRing());
 
             var brac = new GoldBracelet

@@ -60,10 +60,9 @@ namespace Server.Engines.Quests.Naturalist
 
         public static NestArea GetByID(int id)
         {
-            if (id >= 0 && id < m_Areas.Length)
+	        if (id >= 0 && id < m_Areas.Length)
                 return m_Areas[id];
-            else
-                return null;
+	        return null;
         }
 
         public bool Contains(IPoint2D p)

@@ -1,8 +1,9 @@
-using Server.Commands;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -540,7 +541,7 @@ namespace Server.Items
 
             if (0.033 > Utility.RandomDouble())
             {
-                from.PrivateOverheadMessage(Network.MessageType.Regular, 0x23, 1156855, from.NetState); // *Arcing energy from the generator zaps you!*
+                from.PrivateOverheadMessage(MessageType.Regular, 0x23, 1156855, from.NetState); // *Arcing energy from the generator zaps you!*
                 AOS.Damage(from, Utility.RandomMinMax(50, 100), 0, 0, 0, 0, 100);
                 from.FixedParticles(0x3818, 1, 11, 0x13A8, 0, 0, EffectLayer.Waist);
                 Effects.PlaySound(Location, Map, 0x1DC);

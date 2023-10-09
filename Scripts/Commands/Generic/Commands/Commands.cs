@@ -1,5 +1,10 @@
 #region References
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Server.Accounting;
+using Server.Diagnostics;
 using Server.Engines.Help;
 using Server.Gumps;
 using Server.Items;
@@ -7,9 +12,7 @@ using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Spells;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Commands.Generic
@@ -108,7 +111,7 @@ namespace Server.Commands.Generic
             catch (Exception ex)
             {
                 e.Mobile.SendMessage(ex.Message);
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
     }

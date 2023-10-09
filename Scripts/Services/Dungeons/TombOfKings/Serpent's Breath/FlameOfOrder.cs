@@ -117,8 +117,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly Point3D[] m_BarrierLocations = new Point3D[]
-        {
+        private static readonly Point3D[] m_BarrierLocations = {
             new Point3D( 33, 205, 0 ),
             new Point3D( 34, 205, 0 ),
             new Point3D( 35, 205, 0 ),
@@ -126,8 +125,7 @@ namespace Server.Items
             new Point3D( 37, 205, 0 ),
         };
 
-        private static readonly Point3D[] m_MsgTriggerLocations = new Point3D[]
-        {
+        private static readonly Point3D[] m_MsgTriggerLocations = {
             new Point3D( 33, 203, 0 ),
             new Point3D( 34, 203, 0 ),
             new Point3D( 35, 203, 0 ),

@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -22,7 +22,7 @@ namespace Server.Engines.Quests
         work. */
         public override object Description => 1077744;
 
-        /* I’m disappointed that you aren’t interested in learning more about Tinkering. It’s really such a useful skill!<br><br>
+        /* Iâ€™m disappointed that you arenâ€™t interested in learning more about Tinkering. Itâ€™s really such a useful skill!<br><br>
         *Amelia smiles*<br><br>At least you know where to find me if you change your mind, since I rarely spend time outside 
         of this shop. */
         public override object Refuse => 1077745;
@@ -42,12 +42,11 @@ namespace Server.Engines.Quests
         public override object Complete => 1077748;
 
         public TheRightToolForTheJobQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.Tinkering, 50, "Springs And Things Workshop", 1077742, 1077743));
 
-            // 1077742 By tinkering inside of Amelia’s workshop, she is able to give you advice. This helps you hone your Tinkering skill faster than normal.
-            // 1077743 Since you’ve left Amelia’s workshop, she cannot give you advice. Your Tinkering learning potential is no longer enhanced.
+            // 1077742 By tinkering inside of Ameliaâ€™s workshop, she is able to give you advice. This helps you hone your Tinkering skill faster than normal.
+            // 1077743 Since youâ€™ve left Ameliaâ€™s workshop, she cannot give you advice. Your Tinkering learning potential is no longer enhanced.
 
             AddReward(new BaseReward(typeof(AmeliasToolbox), 1077749));
         }
@@ -55,15 +54,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.Tinkering.Base < 50;
+
+            return Owner.Skills.Tinkering.Base < 50;
         }
 
         public override void OnCompleted()
@@ -89,7 +88,7 @@ namespace Server.Engines.Quests
 
     public class Amelia : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(TheRightToolForTheJobQuest)
                 };

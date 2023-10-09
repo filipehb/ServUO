@@ -1,4 +1,8 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.ArenaSystem;
 using Server.Engines.PartySystem;
 using Server.Engines.VvV;
@@ -8,9 +12,7 @@ using Server.Mobiles;
 using Server.Multis;
 using Server.SkillHandlers;
 using Server.Spells.Chivalry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Misc
@@ -399,14 +401,15 @@ namespace Server.Misc
 
             if (bc != null)
             {
-                if (bc.AlwaysInnocent)
+	            if (bc.AlwaysInnocent)
                 {
                     return Notoriety.Innocent;
                 }
-                else if (bc.Controlled && bc.ControlOrder == OrderType.Guard && bc.ControlTarget == source)
-                {
-                    return Notoriety.CanBeAttacked;
-                }
+
+	            if (bc.Controlled && bc.ControlOrder == OrderType.Guard && bc.ControlTarget == source)
+	            {
+		            return Notoriety.CanBeAttacked;
+	            }
             }
 
             if (source is BaseCreature)

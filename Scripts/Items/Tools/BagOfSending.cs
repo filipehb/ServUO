@@ -1,8 +1,11 @@
-using Server.ContextMenus;
-using Server.Network;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.ContextMenus;
+using Server.Engines.Quests;
+using Server.Network;
+using Server.Regions;
+using Server.Spells;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -145,7 +148,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (from.Region.IsPartOf<Regions.Jail>())
+            if (from.Region.IsPartOf<Jail>())
             {
                 from.SendMessage("You may not do that in jail.");
             }
@@ -235,7 +238,7 @@ namespace Server.Items
                 if (m_Bag.Deleted)
                     return;
 
-                if (from.Region.IsPartOf<Regions.Jail>())
+                if (from.Region.IsPartOf<Jail>())
                 {
                     from.SendMessage("You may not do that in jail.");
                 }
@@ -265,11 +268,11 @@ namespace Server.Items
                     {
                         MessageHelper.SendLocalizedMessageTo(m_Bag, from, 1054108, 0x59); // The bag of sending rejects the cursed item.
                     }
-                    else if (!item.VerifyMove(from) || item is Engines.Quests.QuestItem || item.QuestItem)
+                    else if (!item.VerifyMove(from) || item is QuestItem || item.QuestItem)
                     {
                         MessageHelper.SendLocalizedMessageTo(m_Bag, from, 1054109, 0x59); // The bag of sending rejects that item.
                     }
-                    else if (Spells.SpellHelper.IsDoomGauntlet(from.Map, from.Location))
+                    else if (SpellHelper.IsDoomGauntlet(from.Map, from.Location))
                     {
                         from.SendLocalizedMessage(1062089); // You cannot use that here.
                     }

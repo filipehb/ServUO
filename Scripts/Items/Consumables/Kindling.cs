@@ -1,6 +1,6 @@
+using System.Collections;
 using Server.Network;
 using Server.Regions;
-using System.Collections;
 
 namespace Server.Items
 {

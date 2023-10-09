@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -403,33 +403,30 @@ namespace Server.Mobiles
 
             if (stones >= 5)
                 return;
-            else
+            BaseCreature stone = GetRandomStoneMonster();
+
+            bool validLocation = false;
+            Point3D loc = Location;
+
+            for (int j = 0; !validLocation && j < 10; ++j)
             {
-                BaseCreature stone = GetRandomStoneMonster();
+	            int x = X + Utility.Random(10) - 1;
+	            int y = Y + Utility.Random(10) - 1;
+	            int z = map.GetAverageZ(x, y);
 
-                bool validLocation = false;
-                Point3D loc = Location;
-
-                for (int j = 0; !validLocation && j < 10; ++j)
-                {
-                    int x = X + Utility.Random(10) - 1;
-                    int y = Y + Utility.Random(10) - 1;
-                    int z = map.GetAverageZ(x, y);
-
-                    if (validLocation = map.CanFit(x, y, Z, 16, false, false))
-                        loc = new Point3D(x, y, Z);
-                    else if (validLocation = map.CanFit(x, y, z, 16, false, false))
-                        loc = new Point3D(x, y, z);
-                }
-
-                Summon(stone, false, this, loc, 0, TimeSpan.FromMinutes(90));
-                //stone.MoveToWorld(loc, map);
-                stone.Frozen = stone.Blessed = true;
-                stone.SolidHueOverride = 761;
-                stone.Combatant = null;
-
-                m_Helpers.Add(stone);
+	            if (validLocation = map.CanFit(x, y, Z, 16, false, false))
+		            loc = new Point3D(x, y, Z);
+	            else if (validLocation = map.CanFit(x, y, z, 16, false, false))
+		            loc = new Point3D(x, y, z);
             }
+
+            Summon(stone, false, this, loc, 0, TimeSpan.FromMinutes(90));
+            //stone.MoveToWorld(loc, map);
+            stone.Frozen = stone.Blessed = true;
+            stone.SolidHueOverride = 761;
+            stone.Combatant = null;
+
+            m_Helpers.Add(stone);
 
             m_StoneDelay = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 150));
         }

@@ -1,8 +1,11 @@
 #region References
-using Server.Mobiles;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Server.Diagnostics;
+using Server.Mobiles;
+
 #endregion
 
 namespace Server.Engines.Quests
@@ -55,7 +58,7 @@ namespace Server.Engines.Quests
                     catch (Exception e)
                     {
                         Console.WriteLine("Quest Load Failure: {0}", Utility.FormatDelegate(deserializer));
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
 
                         return false;
                     }

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class KingOfBearsQuest : BaseQuest
     {
         public KingOfBearsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GrizzlyBear), "grizzly bears", 10));
 
@@ -43,7 +42,6 @@ namespace Server.Engines.Quests
     public class SpecimensQuest : BaseQuest
     {
         public SpecimensQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(RedSolenWorker), "red solen workers", 12));
             AddObjective(new SlayObjective(typeof(BlackSolenWorker), "black solen workers", 12));
@@ -81,7 +79,6 @@ namespace Server.Engines.Quests
     public class DeadManWalkingQuest : BaseQuest
     {
         public DeadManWalkingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Zombie), "zombies", 5));
             AddObjective(new SlayObjective(typeof(Skeleton), "skeletons", 5));
@@ -117,7 +114,6 @@ namespace Server.Engines.Quests
     public class SpiritsQuest : BaseQuest
     {
         public SpiritsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Spectre), "spectres", 15));
             AddObjective(new SlayObjective(typeof(Shade), "shades", 15));
@@ -155,7 +151,6 @@ namespace Server.Engines.Quests
     public class RollTheBonesQuest : BaseQuest
     {
         public RollTheBonesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(PatchworkSkeleton), "patchwork skeletons", 8));
 
@@ -190,7 +185,6 @@ namespace Server.Engines.Quests
     public class ItsGhastlyJobQuest : BaseQuest
     {
         public ItsGhastlyJobQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Ghoul), "ghouls", 12));
 
@@ -224,7 +218,6 @@ namespace Server.Engines.Quests
     public class TroglodytesQuest : BaseQuest
     {
         public TroglodytesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Troglodyte), "troglodytes", 12));
 
@@ -264,7 +257,6 @@ namespace Server.Engines.Quests
     public class UnholyKnightsQuest : BaseQuest
     {
         public UnholyKnightsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(BoneKnight), "bone knights", 16));
             AddObjective(new SlayObjective(typeof(SkeletalKnight), "skeletal knights", 16));
@@ -301,7 +293,6 @@ namespace Server.Engines.Quests
     public class FeatherInYerCapQuest : BaseQuest
     {
         public FeatherInYerCapQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SalivasFeather), "saliva's feather", 1));
 
@@ -346,7 +337,6 @@ namespace Server.Engines.Quests
     public class TaleOfTailQuest : BaseQuest
     {
         public TaleOfTailQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(AbscessTail), "abscess' tail", 1));
 
@@ -390,7 +380,6 @@ namespace Server.Engines.Quests
     public class TrogAndHisDogQuest : BaseQuest
     {
         public TrogAndHisDogQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Lurg), "lurg", 1));
             AddObjective(new SlayObjective(typeof(Grobu), "grobu", 1));
@@ -444,7 +433,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(KingOfBearsQuest),
                     typeof(SpecimensQuest),

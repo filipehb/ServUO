@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests.Collector
 {
@@ -312,14 +312,12 @@ namespace Server.Engines.Quests.Collector
                     {
                         return CaptureResponse.AlreadyDone;
                     }
-                    else
-                    {
-                        m_Done[i] = true;
 
-                        CheckCompletionStatus();
+                    m_Done[i] = true;
 
-                        return CaptureResponse.Valid;
-                    }
+                    CheckCompletionStatus();
+
+                    return CaptureResponse.Valid;
                 }
             }
 

@@ -6,8 +6,7 @@ namespace Server.Items
 {
     public class ParrotItem : Item
     {
-        private static readonly int[] m_Hues = new int[]
-        {
+        private static readonly int[] m_Hues = {
             0x3, 0xD, 0x13, 0x1C, 0x21, 0x30, 0x3F, 0x44, 0x59, 0x62, 0x71
         };
         [Constructable]

@@ -1,5 +1,6 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
+
 namespace Server.Engines.Quests
 {
     public class CollectionsObtainObjective : ObtainObjective

@@ -1,7 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Multis
 {
@@ -27,7 +27,7 @@ namespace Server.Multis
             {
                 MultiComponentList mcl = Components;
 
-                return new Rectangle2D[] { new Rectangle2D(mcl.Min.X, mcl.Min.Y, mcl.Width, mcl.Height) };
+                return new[] { new Rectangle2D(mcl.Min.X, mcl.Min.Y, mcl.Width, mcl.Height) };
             }
         }
 
@@ -254,8 +254,7 @@ namespace Server.Multis
 
     public class TrinsicKeep : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-11, -11, 23, 23), new Rectangle2D(-10, 13, 6, 1),
             new Rectangle2D(-2, 13, 6, 1), new Rectangle2D(6, 13, 7, 1)
         };
@@ -290,8 +289,7 @@ namespace Server.Multis
     {
         public override Rectangle2D[] Area => AreaArray;
 
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-15, -15, 31, 31),
             new Rectangle2D(-14, 16, 11, 1),
             new Rectangle2D(-2, 16, 6, 1),
@@ -402,8 +400,7 @@ namespace Server.Multis
 
     public class FeudalCastle : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-15, -15, 31, 31),
             new Rectangle2D(5, 16, 1, 1),
             new Rectangle2D(7, 16, 4, 1),
@@ -464,8 +461,7 @@ namespace Server.Multis
 
     public class TraditionalKeep : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-11, -11, 23, 23),
             new Rectangle2D(-10, 13, 6, 1),
             new Rectangle2D(-2, 13, 6, 1),
@@ -684,8 +680,7 @@ namespace Server.Multis
 
     public class OkinawaSweetDreamCastle : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-15, -15, 31, 31),
             new Rectangle2D(-14, 16, 6, 1),
             new Rectangle2D(-7, 16, 8, 1),
@@ -746,8 +741,7 @@ namespace Server.Multis
 
     public class GrimswindSisters : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-15, -15, 31, 31),
             new Rectangle2D(-14, 16, 9, 1),
             new Rectangle2D(-3, 16, 8, 1),
@@ -834,8 +828,7 @@ namespace Server.Multis
 
     public class KeepIncarcerated : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-11, -11, 23, 23), new Rectangle2D(-10, 13, 4, 1),
             new Rectangle2D(-3, 13, 9, 1), new Rectangle2D(9, 13, 4, 1)
         };
@@ -894,8 +887,7 @@ namespace Server.Multis
 
     public class DesertRose : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-11, -11, 23, 23), new Rectangle2D(-7, 13, 11, 1),
         };
 
@@ -927,8 +919,7 @@ namespace Server.Multis
 
     public class TheCloversKeep : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-11, -11, 23, 23), new Rectangle2D(-8, 13, 2, 1),
             new Rectangle2D(-4, 13, 10, 1), new Rectangle2D(8, 13, 2, 1)
         };
@@ -1013,8 +1004,7 @@ namespace Server.Multis
 
     public class TheHouseBuiltOnTheRuins : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-15, -15, 31, 31),
             new Rectangle2D(-13, 16, 3, 1),
             new Rectangle2D(-7, 16, 3, 1),
@@ -1102,8 +1092,7 @@ namespace Server.Multis
 
     public class TheTerraceGardens : BaseContestHouse
     {
-        private static readonly Rectangle2D[] AreaArray = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] AreaArray = {
             new Rectangle2D(-15, -15, 31, 31),
             new Rectangle2D(-11, 16, 4, 1),
             new Rectangle2D(-3, 16, 8, 1),

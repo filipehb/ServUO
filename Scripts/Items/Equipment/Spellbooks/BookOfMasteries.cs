@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Spells.SkillMasteries;
 using Server.Spells.Spellweaving;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {

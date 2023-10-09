@@ -1,9 +1,9 @@
+using System;
 using Server.Engines.Harvest;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -48,7 +48,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1156462;      /* Ahh, King Blackthorn sent you did he? */
 
-        public TimeIsOfTheEssenceQuest() : base()
+        public TimeIsOfTheEssenceQuest()
         {
             AddObjective(new DeliverObjective(typeof(KingBlackthornOrders), "Orders from King Blackthorn to Sir Geoffrey", 1, typeof(SirGeoffery), "Sir Geoffery", 360));
 
@@ -129,7 +129,7 @@ namespace Server.Engines.Quests
 																		to quell the Myrmidex threat!  It will likely take some time before our troops and the
 																		Tribes are ready.  I will send word when the time to attack comes!*/
 
-        public UnitingTheTribesQuest() : base()
+        public UnitingTheTribesQuest()
         {
             AddObjective(new ObtainObjective(typeof(MosaicOfHeluzz), "Trust of the Sakkhra Tribe", 1));
             AddObjective(new ObtainObjective(typeof(TotemOfFabozz), "Trust of the Urali Tribe", 1));
@@ -172,7 +172,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1156557;      /* Ahh-Ooo! Ahh-Ooo!  Britainnian kill big dino! Show courage and strength!  Sakkrah trust you now! */
 
-        public TheGreatHuntQuest() : base()
+        public TheGreatHuntQuest()
         {
             AddObjective(new SlayObjective(typeof(TRex), "Slay the Tyrannosaurus Rex", 1));
             AddReward(new BaseReward(typeof(MosaicOfHeluzz), 1, 1156551)); // Trust of the Sakkhra Tribe
@@ -228,7 +228,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1156537;          /* Ahhh-OOO! Ahhh-OOO!  Dragon Turtle dig-dig and swim-swim! You good to Urali! Urali trust you! */
 
-        public EmptyNestQuest() : base()
+        public EmptyNestQuest()
         {
             AddObjective(new InternalObjective());
             AddReward(new BaseReward(typeof(TotemOfFabozz), 1, 1156552)); // Trust of the Urali Tribe
@@ -333,7 +333,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1156541;          /* OOO!  You bring Jukari lava rock, mean Volcano no like your taste HA HA! Jukari help you! */
 
-        public TheGreatVolcanoQuest() : base()
+        public TheGreatVolcanoQuest()
         {
             //AddObjective( new ObtainObjective( typeof(LavaStone), "Recover 5 lava rocks from the Caldera of the Great Volcano", 5 ) );
             AddObjective(new InternalObjective());
@@ -515,7 +515,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1156546;      /* You save tiger cubs! Kurak thank you and help you! */
 
-        public PrideOfTheAmbushQuest() : base()
+        public PrideOfTheAmbushQuest()
         {
             AddObjective(new InternalObjective());
             AddReward(new BaseReward(typeof(SkullOfMotazz), 1, 1156554));  // Trust of the Kurak Tribe
@@ -624,7 +624,7 @@ namespace Server.Engines.Quests
 
         public override object Complete => 1156549;          /* *Thumps chest* You battle Great Ape and win! You strong and Barako respect and trust you! */
 
-        public TheGreatApeQuest() : base()
+        public TheGreatApeQuest()
         {
             AddObjective(new SlayObjective(typeof(GreatApe), "Defeat the Great Ape", 1)); // Defeat the Great Ape    
             AddReward(new BaseReward(typeof(SkullOfAphazz), 1, 1156555)); // Trust of the Barako Tribe

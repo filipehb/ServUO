@@ -6,7 +6,6 @@ namespace Server.Items
     {
         [Constructable]
         public RewardBox()
-            : base()
         {
             Hue = Reward.StrongboxHue();
 

@@ -1,5 +1,6 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
+using Server.Spells.Ninjitsu;
 
 namespace Server.Items
 {
@@ -25,7 +26,7 @@ namespace Server.Items
 
         public override void OnHit(Mobile attacker, Mobile defender, int damage)
         {
-            if (!defender.Mounted && !defender.Flying && !Spells.Ninjitsu.AnimalForm.UnderTransformation(defender))
+            if (!defender.Mounted && !defender.Flying && !AnimalForm.UnderTransformation(defender))
             {
                 attacker.SendLocalizedMessage(1060848); // This attack only works on mounted targets
                 ClearCurrentAbility(attacker);

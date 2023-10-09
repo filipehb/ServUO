@@ -1,5 +1,8 @@
-using Server.Items;
 using System.Collections.Generic;
+using Server.Engines.Mahjong;
+using Server.Engines.Plants;
+using Server.Items;
+using Server.Multis;
 
 namespace Server.Mobiles
 {
@@ -15,7 +18,7 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
-                Add(new GenericBuyInfo("1060834", typeof(Engines.Plants.PlantBowl), 2, 20, 0x15FD, 0));
+                Add(new GenericBuyInfo("1060834", typeof(PlantBowl), 2, 20, 0x15FD, 0));
 
                 Add(new GenericBuyInfo(typeof(Arrow), 2, 20, 0xF3F, 0, true));
                 Add(new GenericBuyInfo(typeof(Bolt), 5, 20, 0x1BFB, 0, true));
@@ -72,12 +75,12 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Bedroll), 5, 20, 0xA59, 0));
                 Add(new GenericBuyInfo(typeof(Kindling), 2, 20, 0xDE1, 0, true));
 
-                Add(new GenericBuyInfo("1041205", typeof(Multis.SmallBoatDeed), 10177, 20, 0x14F2, 0));
+                Add(new GenericBuyInfo("1041205", typeof(SmallBoatDeed), 10177, 20, 0x14F2, 0));
                 Add(new GenericBuyInfo("1041060", typeof(HairDye), 60, 20, 0xEFF, 0));
                 Add(new GenericBuyInfo("1016450", typeof(Chessboard), 2, 20, 0xFA6, 0));
                 Add(new GenericBuyInfo("1016449", typeof(CheckerBoard), 2, 20, 0xFA6, 0));
                 Add(new GenericBuyInfo(typeof(Backgammon), 2, 20, 0xE1C, 0));
-                Add(new GenericBuyInfo(typeof(Engines.Mahjong.MahjongGame), 6, 20, 0xFAA, 0));
+                Add(new GenericBuyInfo(typeof(MahjongGame), 6, 20, 0xFAA, 0));
                 Add(new GenericBuyInfo(typeof(Dices), 2, 20, 0xFA7, 0));
                 Add(new GenericBuyInfo(typeof(SmallBagBall), 3, 20, 0x2256, 0));
                 Add(new GenericBuyInfo(typeof(LargeBagBall), 3, 20, 0x2257, 0));

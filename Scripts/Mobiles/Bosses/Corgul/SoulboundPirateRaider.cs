@@ -1,5 +1,6 @@
 using System;
 using Server.Items;
+using Server.Regions;
 
 namespace Server.Mobiles
 {
@@ -17,10 +18,9 @@ namespace Server.Mobiles
 
             if (weapon is BaseWeapon)
             {
-                if (Utility.RandomBool())
+	            if (Utility.RandomBool())
                     return ((BaseWeapon)weapon).PrimaryAbility;
-                else
-                    return ((BaseWeapon)weapon).SecondaryAbility;
+	            return ((BaseWeapon)weapon).SecondaryAbility;
             }
             return null;
         }
@@ -68,8 +68,7 @@ namespace Server.Mobiles
 			SetWearable((Item)Activator.CreateInstance(Utility.RandomList(_WeaponsList)), dropChance: 1);
         }
 
-		private static readonly Type[] _WeaponsList = new Type[]
-		{
+		private static readonly Type[] _WeaponsList = {
 			typeof(CompositeBow), typeof(Crossbow), typeof(Bow), typeof(HeavyCrossbow)
 		};
 
@@ -82,7 +81,7 @@ namespace Server.Mobiles
 
         public override bool OnBeforeDeath()
         {
-            if (Region.IsPartOf<Regions.CorgulRegion>())
+            if (Region.IsPartOf<CorgulRegion>())
             {
                 CorgulTheSoulBinder.CheckDropSOT(this);
             }

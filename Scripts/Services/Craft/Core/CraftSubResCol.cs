@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 
 namespace Server.Engines.Craft
 {
-    public class CraftSubResCol : System.Collections.CollectionBase
+    public class CraftSubResCol : CollectionBase
     {
         private Type m_Type;
         private string m_NameString;

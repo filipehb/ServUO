@@ -1,5 +1,5 @@
-using Server.Multis;
 using System;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -44,8 +44,7 @@ namespace Server.Items
         {
         }
 
-        private readonly Type[] m_Potions = new Type[]
-        {
+        private readonly Type[] m_Potions = {
             typeof(ShatterPotion),
             typeof(FearEssence),
             typeof(InvisibilityPotion),

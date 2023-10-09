@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class RedDeathStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0xE5, 0xE6, 0xE7, 0xE8, 0xE9
         };
         [Constructable]

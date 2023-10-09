@@ -1,9 +1,10 @@
+using System;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Events.Halloween;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Events
 {
@@ -79,7 +80,7 @@ namespace Server.Engines.Events
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                                 continue;
                             }
 
@@ -196,8 +197,6 @@ namespace Server.Engines.Events
                                     case 2:
                                         m_Begged.Say(1076778);
                                         break; /* Here you go! Enjoy! */
-                                    default:
-                                        break;
                                 }
 
                                 if (Utility.RandomDouble() <= .01 && from.Skills.Begging.Value >= 100)

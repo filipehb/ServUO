@@ -1,3 +1,4 @@
+using Server.Engines.Help;
 using Server.Network;
 
 namespace Server.Misc
@@ -27,7 +28,7 @@ namespace Server.Misc
 
             if (m.IsStaff())
             {
-                Engines.Help.PageQueue.Pages_OnCalled(m);
+                PageQueue.Pages_OnCalled(m);
             }
         }
     }

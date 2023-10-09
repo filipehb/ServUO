@@ -1,7 +1,7 @@
-using Server.Engines.Quests;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Quests;
+using Server.Mobiles;
 
 namespace Server.Engines.Points
 {
@@ -47,11 +47,11 @@ namespace Server.Engines.Points
 
             if (bc.GetHighestDamager() == damager)
             {
-                AwardPoints(damager, Entries[type].Item1, false);
+                AwardPoints(damager, Entries[type].Item1);
             }
             else
             {
-                AwardPoints(damager, Entries[type].Item2, false);
+                AwardPoints(damager, Entries[type].Item2);
             }
         }
 

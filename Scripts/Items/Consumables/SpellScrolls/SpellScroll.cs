@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
+using Server.Multis;
 using Server.Spells;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -69,7 +70,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!Multis.DesignContext.Check(from))
+            if (!DesignContext.Check(from))
                 return; // They are customizing
 
             if (!IsChildOf(from.Backpack))
@@ -79,10 +80,11 @@ namespace Server.Items
             }
 
             #region SA
-            else if (from.Flying && from is PlayerMobile && BaseMount.OnFlightPath(from))
+
+            if (from.Flying && from is PlayerMobile && BaseMount.OnFlightPath(from))
             {
-                from.SendLocalizedMessage(1113749); // You may not use that while flying over such precarious terrain.
-                return;
+	            from.SendLocalizedMessage(1113749); // You may not use that while flying over such precarious terrain.
+	            return;
             }
             #endregion
 

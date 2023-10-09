@@ -1,4 +1,5 @@
 using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -35,7 +36,7 @@ namespace Server.Items
 
             if (parent is Mobile && Burning)
             {
-                Mobiles.MeerMage.StopEffect((Mobile)parent, true);
+                MeerMage.StopEffect((Mobile)parent, true);
                 SwarmContext.CheckRemove((Mobile)parent);
             }
         }
@@ -46,7 +47,7 @@ namespace Server.Items
 
             if (Parent is Mobile && Burning)
             {
-                Mobiles.MeerMage.StopEffect((Mobile)Parent, true);
+                MeerMage.StopEffect((Mobile)Parent, true);
                 SwarmContext.CheckRemove((Mobile)Parent);
             }
         }

@@ -1,5 +1,5 @@
-using Server.Engines.HuntsmasterChallenge;
 using System.Collections.Generic;
+using Server.Engines.HuntsmasterChallenge;
 
 namespace Server.Items
 {

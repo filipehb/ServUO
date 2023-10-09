@@ -1,10 +1,10 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Server.Items;
+using Server.Mobiles;
+using Server.Regions;
 
 namespace Server.Engines.Doom
 {
@@ -27,7 +27,7 @@ namespace Server.Engines.Doom
 
         public bool CanActivate => NextActivate < DateTime.UtcNow;
 
-        private static readonly Rectangle2D[] RegionBounds = new Rectangle2D[] { new Rectangle2D(355, 5, 20, 20) };
+        private static readonly Rectangle2D[] RegionBounds = { new Rectangle2D(355, 5, 20, 20) };
         private static Rectangle2D PentagramBounds = new Rectangle2D(364, 14, 2, 2);
         private static Point3D DoorOneLoc = new Point3D(355, 14, -1);
         private static Point3D DoorTwoLoc = new Point3D(355, 15, -1);

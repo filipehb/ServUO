@@ -1,6 +1,6 @@
+using System;
 using Server.Gumps;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -75,8 +75,7 @@ namespace Server.Items
 
             if (index >= 0 && index < table.Length)
                 return table[index].Name.ToLower();
-            else
-                return "???";
+            return "???";
         }
 
         public virtual bool CanUse(Mobile from)

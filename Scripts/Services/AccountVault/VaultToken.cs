@@ -1,7 +1,7 @@
 
 using Server.AccountVault;
-using Server.Mobiles;
 using Server.Engines.UOStore;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -48,7 +48,7 @@ namespace Server.Items
                         }
                         else
                         {
-                            var storeProf = UltimaStore.GetProfile(pm, true);
+                            var storeProf = UltimaStore.GetProfile(pm);
 
                             if (storeProf.VaultTokens >= SystemSettings.MaxTokenBalance)
                             {

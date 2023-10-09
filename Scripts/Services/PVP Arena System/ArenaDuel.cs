@@ -1,10 +1,12 @@
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Gumps;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Spells;
+using Server.Targeting;
 
 namespace Server.Engines.ArenaSystem
 {
@@ -254,10 +256,11 @@ namespace Server.Engines.ArenaSystem
                 TeamChaos.AddParticipant(pm);
                 return true;
             }
-            else if (TeamChaos.RemoveParticipant(pm))
+
+            if (TeamChaos.RemoveParticipant(pm))
             {
-                TeamOrder.AddParticipant(pm);
-                return true;
+	            TeamOrder.AddParticipant(pm);
+	            return true;
             }
 
             return false;
@@ -379,7 +382,7 @@ namespace Server.Engines.ArenaSystem
                 ((Spell)pm.Spell).Disturb(DisturbType.Hurt);
             }
 
-            Targeting.Target.Cancel(pm);
+            Target.Cancel(pm);
 
             bool allin = true;
 
@@ -589,7 +592,7 @@ namespace Server.Engines.ArenaSystem
                 {
                     Timer.DelayCall(TimeSpan.FromMilliseconds(i * 100), index =>
                         {
-                            Misc.Geometry.Circle2D(loc, pmmap, index, (pnt, map) =>
+                            Geometry.Circle2D(loc, pmmap, index, (pnt, map) =>
                             {
                                 Effects.SendLocationEffect(pnt, map, 0x3709, 0x1E, 0x14, 0x5DE, 0x4);
                             });
@@ -598,7 +601,7 @@ namespace Server.Engines.ArenaSystem
             }
         }
 
-        private readonly int[] _EffectZs = new int[] { 10, 20, 30, 40, 50 };
+        private readonly int[] _EffectZs = { 10, 20, 30, 40, 50 };
 
         public void DoGateEffect()
         {

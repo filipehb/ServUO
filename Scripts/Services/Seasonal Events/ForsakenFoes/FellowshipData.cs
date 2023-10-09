@@ -1,4 +1,5 @@
 using Server.Engines.Points;
+using Server.Engines.SeasonalEvents;
 using Server.Mobiles;
 
 namespace Server.Engines.Fellowship
@@ -39,7 +40,7 @@ namespace Server.Engines.Fellowship
 
                         Timer.DelayCall(() =>
                         {
-                            var jolly = SeasonalEvents.SeasonalEventSystem.GetEvent<ForsakenFoesEvent>();
+                            var jolly = SeasonalEventSystem.GetEvent<ForsakenFoesEvent>();
 
                             if (jolly != null)
                             {

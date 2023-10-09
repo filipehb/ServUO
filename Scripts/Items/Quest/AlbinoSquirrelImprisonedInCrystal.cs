@@ -41,7 +41,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public AlbinoSquirrel()
-            : base()
         {
             Hue = 0x482;
         }

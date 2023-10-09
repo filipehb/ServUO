@@ -54,7 +54,6 @@ namespace Server.Items
 
         [Constructable]
         public StoneAnkh(bool east)
-            : base()
         {
             if (east)
             {
@@ -101,7 +100,6 @@ namespace Server.Items
         public override void OnChop(Mobile from)
         {
             from.SendLocalizedMessage(500489); // You can't use an axe on that.
-            return;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -156,7 +154,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public StoneAnkhDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

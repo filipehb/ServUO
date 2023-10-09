@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.Points;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Server.Network;
 
 namespace Server.Engines.VoidPool
 {
@@ -76,14 +77,13 @@ namespace Server.Engines.VoidPool
             AddHtmlLocalized(10, 375, 380, 175, 1152534, Orange, true, true);
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             VoidPoolStats stats = VoidPoolStats.GetStats(Controller);
 
             switch (info.ButtonID)
             {
-                default: break;
-                case 1:
+	            case 1:
                     User.SendGump(new ScoresGump(Controller, User, ScoreType.Current));
                     break;
                 case 2:

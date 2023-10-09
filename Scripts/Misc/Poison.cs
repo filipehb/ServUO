@@ -1,4 +1,6 @@
 #region References
+
+using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
@@ -6,7 +8,7 @@ using Server.Services.Virtues;
 using Server.Spells;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
-using System;
+
 #endregion
 
 namespace Server

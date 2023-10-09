@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.VeteranRewards
 {
@@ -187,8 +187,7 @@ namespace Server.Engines.VeteranRewards
             return false;
         }
 
-        private static readonly Type[] GraniteType = new Type[]
-        {
+        private static readonly Type[] GraniteType = {
             typeof(Granite),        typeof(DullCopperGranite),  typeof(ShadowIronGranite),
             typeof(CopperGranite),  typeof(BronzeGranite),      typeof(GoldGranite),
             typeof(AgapiteGranite), typeof(VeriteGranite),      typeof(ValoriteGranite)
@@ -303,7 +302,6 @@ namespace Server.Engines.VeteranRewards
 
         [Constructable]
         public EnchantedGraniteCartAddonDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

@@ -1,8 +1,8 @@
+using System;
 using Server.Engines.CannedEvil;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -51,8 +51,7 @@ namespace Server.Items
 
         private class HerdingTarget : Target
         {
-            private static readonly Type[] m_ChampTamables = new Type[]
-            {
+            private static readonly Type[] m_ChampTamables = {
                 typeof(StrongMongbat), typeof(Imp), typeof(Scorpion), typeof(GiantSpider),
                 typeof(Snake), typeof(LavaLizard), typeof(Drake), typeof(Dragon),
                 typeof(Kirin), typeof(Unicorn), typeof(GiantRat), typeof(Slime),

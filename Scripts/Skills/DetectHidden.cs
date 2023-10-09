@@ -1,12 +1,13 @@
+using System;
+using System.Linq;
+using Server.Engines.Khaldun;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using Server.Targeting;
 using Server.Spells;
-
-using System;
-using System.Linq;
+using Server.Spells.SkillMasteries;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -81,7 +82,7 @@ namespace Server.SkillHandlers
                         {
                             double ss = srcSkill + Utility.Random(21) - 10;
                             double ts = trg.Skills[SkillName.Hiding].Value + Utility.Random(21) - 10;
-                            double shadow = Spells.SkillMasteries.ShadowSpell.GetDifficultyFactor(trg);
+                            double shadow = ShadowSpell.GetDifficultyFactor(trg);
                             bool houseCheck = inHouse && house.IsInside(trg);
 
                             if (src.AccessLevel >= trg.AccessLevel && (ss >= ts || houseCheck) && Utility.RandomDouble() > shadow)
@@ -104,7 +105,7 @@ namespace Server.SkillHandlers
 
                     foreach (Item item in itemsInRange)
                     {
-                        if (item is LibraryBookcase && Engines.Khaldun.GoingGumshoeQuest3.CheckBookcase(src, item))
+                        if (item is LibraryBookcase && GoingGumshoeQuest3.CheckBookcase(src, item))
                         {
                             foundAnyone = true;
                         }

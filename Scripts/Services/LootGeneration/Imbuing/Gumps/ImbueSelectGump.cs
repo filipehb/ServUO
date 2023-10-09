@@ -10,7 +10,7 @@ namespace Server.Gumps
         private const int LabelColor = 0x7FFF;
 
         public ImbueSelectGump(PlayerMobile pm, Item item)
-            : base(pm, 50, 50)
+            : base(pm)
         {
             pm.CloseGump(typeof(ImbuingGump));
             pm.CloseGump(typeof(ImbueGump));

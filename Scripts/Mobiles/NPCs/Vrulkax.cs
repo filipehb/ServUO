@@ -1,7 +1,7 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
@@ -26,11 +26,11 @@ namespace Server.Engines.Quests
 
         private readonly Type[][] _Table =
         {
-            new Type[] { typeof(BritchesOfWarding), typeof(GargishBritchesOfWarding) },
-            new Type[] { typeof(GlovesOfFeudalGrip), typeof(GargishKiltOfFeudalVise) },
-            new Type[] { typeof(CuffsOfTheArchmage), typeof(GargishCuffsOfTheArchmage) },
-            new Type[] { typeof(BritchesOfWarding), typeof(GargishBritchesOfWarding) },
-            new Type[] { typeof(BowOfTheInfiniteSwarm), typeof(GlaiveOfTheInfiniteSwarm) }
+            new[] { typeof(BritchesOfWarding), typeof(GargishBritchesOfWarding) },
+            new[] { typeof(GlovesOfFeudalGrip), typeof(GargishKiltOfFeudalVise) },
+            new[] { typeof(CuffsOfTheArchmage), typeof(GargishCuffsOfTheArchmage) },
+            new[] { typeof(BritchesOfWarding), typeof(GargishBritchesOfWarding) },
+            new[] { typeof(BowOfTheInfiniteSwarm), typeof(GlaiveOfTheInfiniteSwarm) }
         };
 
         public override bool OnDragDrop(Mobile from, Item dropped)

@@ -1,4 +1,5 @@
 #region References
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
-
+using Server.Diagnostics;
 using Server.Guilds;
+
 #endregion
 
 namespace Server
@@ -390,7 +392,7 @@ namespace Server
 					d = TimeSpan.MaxValue;
 				}
 
-				Diagnostics.ExceptionLogging.LogException(ex);
+				ExceptionLogging.LogException(ex);
 			}
 
 			Write(d);
@@ -1104,10 +1106,8 @@ namespace Server
 			{
 				return m_File.ReadString();
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
 		}
 
 		public override DateTime ReadDeltaTime()
@@ -1119,7 +1119,8 @@ namespace Server
 			{
 				return DateTime.MaxValue;
 			}
-			else if (ticks < 0 && (ticks + now) < 0)
+
+			if (ticks < 0 && (ticks + now) < 0)
 			{
 				return DateTime.MinValue;
 			}
@@ -1130,16 +1131,14 @@ namespace Server
 			}
 			catch (Exception e)
 			{
-				Diagnostics.ExceptionLogging.LogException(e);
+				ExceptionLogging.LogException(e);
 
 				if (ticks > 0)
 				{
 					return DateTime.MaxValue;
 				}
-				else
-				{
-					return DateTime.MinValue;
-				}
+
+				return DateTime.MinValue;
 			}
 		}
 
@@ -1340,10 +1339,8 @@ namespace Server
 
 				return list;
 			}
-			else
-			{
-				return new ArrayList();
-			}
+
+			return new ArrayList();
 		}
 
 		public override ArrayList ReadMobileList()
@@ -1366,10 +1363,8 @@ namespace Server
 
 				return list;
 			}
-			else
-			{
-				return new ArrayList();
-			}
+
+			return new ArrayList();
 		}
 
 		public override ArrayList ReadGuildList()
@@ -1392,10 +1387,8 @@ namespace Server
 
 				return list;
 			}
-			else
-			{
-				return new ArrayList();
-			}
+
+			return new ArrayList();
 		}
 
 		public override List<Item> ReadStrongItemList()
@@ -1423,10 +1416,8 @@ namespace Server
 
 				return list;
 			}
-			else
-			{
-				return new List<T>();
-			}
+
+			return new List<T>();
 		}
 
 		public override HashSet<Item> ReadItemSet()
@@ -1454,10 +1445,8 @@ namespace Server
 
 				return set;
 			}
-			else
-			{
-				return new HashSet<T>();
-			}
+
+			return new HashSet<T>();
 		}
 
 		public override List<Mobile> ReadStrongMobileList()
@@ -1485,10 +1474,8 @@ namespace Server
 
 				return list;
 			}
-			else
-			{
-				return new List<T>();
-			}
+
+			return new List<T>();
 		}
 
 		public override HashSet<Mobile> ReadMobileSet()
@@ -1516,10 +1503,8 @@ namespace Server
 
 				return set;
 			}
-			else
-			{
-				return new HashSet<T>();
-			}
+
+			return new HashSet<T>();
 		}
 
 		public override List<BaseGuild> ReadStrongGuildList()
@@ -1547,10 +1532,8 @@ namespace Server
 
 				return list;
 			}
-			else
-			{
-				return new List<T>();
-			}
+
+			return new List<T>();
 		}
 
 		public override HashSet<BaseGuild> ReadGuildSet()
@@ -1578,10 +1561,8 @@ namespace Server
 
 				return set;
 			}
-			else
-			{
-				return new HashSet<T>();
-			}
+
+			return new HashSet<T>();
 		}
 
 		public override Race ReadRace()
@@ -1780,7 +1761,7 @@ namespace Server
 					d = TimeSpan.MaxValue;
 				}
 
-				Diagnostics.ExceptionLogging.LogException(ex);
+				ExceptionLogging.LogException(ex);
 			}
 
 			Write(d);

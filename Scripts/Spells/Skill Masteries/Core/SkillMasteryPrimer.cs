@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Server.Mobiles;
 using Server.Spells.SkillMasteries;
-using System.Collections.Generic;
 
 namespace Server.Items
 {

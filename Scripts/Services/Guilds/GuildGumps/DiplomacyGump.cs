@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Guilds
 {

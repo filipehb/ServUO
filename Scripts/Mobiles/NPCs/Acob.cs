@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class OverpopulationQuest : BaseQuest
     {
         public OverpopulationQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Hind), "hinds", 10));
 
@@ -44,7 +43,6 @@ namespace Server.Engines.Quests
     public class WildBoarCullQuest : BaseQuest
     {
         public WildBoarCullQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Boar), "boars", 10));
 
@@ -80,7 +78,6 @@ namespace Server.Engines.Quests
     public class NewLeadershipQuest : BaseQuest
     {
         public NewLeadershipQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(SerpentsFangHighExecutioner), "serpent's fang high executioner", 1, "TheCitadel"));
             AddObjective(new SlayObjective(typeof(TigersClawThief), "tiger's claw thief", 1, "TheCitadel"));
@@ -125,7 +122,6 @@ namespace Server.Engines.Quests
     public class ExAssassinsQuest : BaseQuest
     {
         public ExAssassinsQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 
@@ -182,7 +178,6 @@ namespace Server.Engines.Quests
     public class ExtinguishingTheFlameQuest : BaseQuest
     {
         public ExtinguishingTheFlameQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 
@@ -240,7 +235,6 @@ namespace Server.Engines.Quests
     public class DeathToTheNinjaQuest : BaseQuest
     {
         public DeathToTheNinjaQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(EliteNinja), "elite ninjas", 10, "TheCitadel"));
 
@@ -281,7 +275,6 @@ namespace Server.Engines.Quests
     public class CrimeAndPunishmentQuest : BaseQuest
     {
         public CrimeAndPunishmentQuest()
-            : base()
         {
             AddObjective(new InternalObjective());
 
@@ -350,7 +343,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(OverpopulationQuest),
                     typeof(WildBoarCullQuest),

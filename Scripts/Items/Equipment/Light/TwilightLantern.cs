@@ -4,7 +4,6 @@
     {
         [Constructable]
         public TwilightLantern()
-            : base()
         {
             Hue = Utility.RandomBool() ? 142 : 947;
         }

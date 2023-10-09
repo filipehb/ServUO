@@ -1,9 +1,10 @@
+using System;
+using System.Collections;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections;
 
 namespace Server.Engines.BulkOrders
 {
@@ -270,11 +271,12 @@ namespace Server.Engines.BulkOrders
 
                 return CheckFilter(e.Material, e.AmountMax, true, e.RequireExceptional, e.DeedType, (e.Entries.Length > 0 ? e.Entries[0].ItemType : null));
             }
-            else if (obj is BOBSmallEntry)
-            {
-                BOBSmallEntry e = (BOBSmallEntry)obj;
 
-                return CheckFilter(e.Material, e.AmountMax, false, e.RequireExceptional, e.DeedType, e.ItemType);
+            if (obj is BOBSmallEntry)
+            {
+	            BOBSmallEntry e = (BOBSmallEntry)obj;
+
+	            return CheckFilter(e.Material, e.AmountMax, false, e.RequireExceptional, e.DeedType, e.ItemType);
             }
 
             return false;
@@ -289,20 +291,20 @@ namespace Server.Engines.BulkOrders
 
             if (f.Quality == 1 && reqExc)
                 return false;
-            else if (f.Quality == 2 && !reqExc)
-                return false;
+            if (f.Quality == 2 && !reqExc)
+	            return false;
 
             if (f.Quantity == 1 && amountMax != 10)
                 return false;
-            else if (f.Quantity == 2 && amountMax != 15)
-                return false;
-            else if (f.Quantity == 3 && amountMax != 20)
-                return false;
+            if (f.Quantity == 2 && amountMax != 15)
+	            return false;
+            if (f.Quantity == 3 && amountMax != 20)
+	            return false;
 
             if (f.Type == 1 && isLarge)
                 return false;
-            else if (f.Type == 2 && !isLarge)
-                return false;
+            if (f.Type == 2 && !isLarge)
+	            return false;
 
             if (BulkOrderSystem.NewSystemEnabled)
             {
@@ -407,31 +409,29 @@ namespace Server.Engines.BulkOrders
                         return (mat == BulkMaterialType.Frostwood && deedType == BODType.Fletching);
                 }
             }
-            else
+
+            switch (f.Material)
             {
-                switch (f.Material)
-                {
-                    default:
-                    case 0: return true;
-                    case 1: return (deedType == BODType.Smith);
-                    case 2: return (deedType == BODType.Tailor);
+	            default:
+	            case 0: return true;
+	            case 1: return (deedType == BODType.Smith);
+	            case 2: return (deedType == BODType.Tailor);
 
-                    case 3: return (mat == BulkMaterialType.None && BGTClassifier.Classify(deedType, itemType) == BulkGenericType.Iron);
-                    case 4: return (mat == BulkMaterialType.DullCopper);
-                    case 5: return (mat == BulkMaterialType.ShadowIron);
-                    case 6: return (mat == BulkMaterialType.Copper);
-                    case 7: return (mat == BulkMaterialType.Bronze);
-                    case 8: return (mat == BulkMaterialType.Gold);
-                    case 9: return (mat == BulkMaterialType.Agapite);
-                    case 10: return (mat == BulkMaterialType.Verite);
-                    case 11: return (mat == BulkMaterialType.Valorite);
+	            case 3: return (mat == BulkMaterialType.None && BGTClassifier.Classify(deedType, itemType) == BulkGenericType.Iron);
+	            case 4: return (mat == BulkMaterialType.DullCopper);
+	            case 5: return (mat == BulkMaterialType.ShadowIron);
+	            case 6: return (mat == BulkMaterialType.Copper);
+	            case 7: return (mat == BulkMaterialType.Bronze);
+	            case 8: return (mat == BulkMaterialType.Gold);
+	            case 9: return (mat == BulkMaterialType.Agapite);
+	            case 10: return (mat == BulkMaterialType.Verite);
+	            case 11: return (mat == BulkMaterialType.Valorite);
 
-                    case 12: return (mat == BulkMaterialType.None && BGTClassifier.Classify(deedType, itemType) == BulkGenericType.Cloth);
-                    case 13: return (mat == BulkMaterialType.None && BGTClassifier.Classify(deedType, itemType) == BulkGenericType.Leather);
-                    case 14: return (mat == BulkMaterialType.Spined);
-                    case 15: return (mat == BulkMaterialType.Horned);
-                    case 16: return (mat == BulkMaterialType.Barbed);
-                }
+	            case 12: return (mat == BulkMaterialType.None && BGTClassifier.Classify(deedType, itemType) == BulkGenericType.Cloth);
+	            case 13: return (mat == BulkMaterialType.None && BGTClassifier.Classify(deedType, itemType) == BulkGenericType.Leather);
+	            case 14: return (mat == BulkMaterialType.Spined);
+	            case 15: return (mat == BulkMaterialType.Horned);
+	            case 16: return (mat == BulkMaterialType.Barbed);
             }
         }
 
@@ -547,29 +547,27 @@ namespace Server.Engines.BulkOrders
                         {
                             return 1079435;
                         }
-                        else
+
+                        switch (mat)
                         {
-                            switch (mat)
-                            {
-                                case BulkMaterialType.None:
-                                    return 1062226;
-                                case BulkMaterialType.DullCopper:
-                                    return 1018332;
-                                case BulkMaterialType.ShadowIron:
-                                    return 1018333;
-                                case BulkMaterialType.Copper:
-                                    return 1018334;
-                                case BulkMaterialType.Bronze:
-                                    return 1018335;
-                                case BulkMaterialType.Gold:
-                                    return 1018336;
-                                case BulkMaterialType.Agapite:
-                                    return 1018337;
-                                case BulkMaterialType.Verite:
-                                    return 1018338;
-                                case BulkMaterialType.Valorite:
-                                    return 1018339;
-                            }
+	                        case BulkMaterialType.None:
+		                        return 1062226;
+	                        case BulkMaterialType.DullCopper:
+		                        return 1018332;
+	                        case BulkMaterialType.ShadowIron:
+		                        return 1018333;
+	                        case BulkMaterialType.Copper:
+		                        return 1018334;
+	                        case BulkMaterialType.Bronze:
+		                        return 1018335;
+	                        case BulkMaterialType.Gold:
+		                        return 1018336;
+	                        case BulkMaterialType.Agapite:
+		                        return 1018337;
+	                        case BulkMaterialType.Verite:
+		                        return 1018338;
+	                        case BulkMaterialType.Valorite:
+		                        return 1018339;
                         }
 
                         break;
@@ -617,7 +615,7 @@ namespace Server.Engines.BulkOrders
             return "";
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             int index = info.ButtonID;
 

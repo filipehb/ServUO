@@ -1,6 +1,8 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Plants;
+using Server.Mobiles;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -41,7 +43,7 @@ namespace Server.Items
             if (IsChildOf(from.Backpack))
             {
                 from.SendLocalizedMessage(1112348); // Which item do you wish to scour?
-                from.BeginTarget(-1, false, Targeting.TargetFlags.None, OnTarget);
+                from.BeginTarget(-1, false, TargetFlags.None, OnTarget);
             }
         }
 
@@ -74,7 +76,7 @@ namespace Server.Items
                         DryReeds reed1 = (DryReeds)targeted;
                         Container cont = from.Backpack;
 
-                        Engines.Plants.PlantHue hue = reed1.PlantHue;
+                        PlantHue hue = reed1.PlantHue;
 
                         if (!reed1.IsChildOf(from.Backpack))
                             from.SendLocalizedMessage(1116249); //That must be in your backpack for you to use it.

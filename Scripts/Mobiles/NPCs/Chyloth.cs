@@ -1,16 +1,15 @@
+using System;
 using Server.Engines.PartySystem;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Engines.Quests.Doom
 {
     public class Chyloth : BaseQuester
     {
-        private static readonly int[] m_Offsets = new int[]
-        {
+        private static readonly int[] m_Offsets = {
             -1, -1,
             -1, 0,
             -1, 1,
@@ -165,16 +164,14 @@ namespace Server.Engines.Quests.Doom
                     foundLoc = true;
                     break;
                 }
-                else
-                {
-                    int z = map.GetAverageZ(x, y);
 
-                    if (map.CanSpawnMobile(x, y, z))
-                    {
-                        dragon.MoveToWorld(new Point3D(x, y, z), map);
-                        foundLoc = true;
-                        break;
-                    }
+                int z = map.GetAverageZ(x, y);
+
+                if (map.CanSpawnMobile(x, y, z))
+                {
+	                dragon.MoveToWorld(new Point3D(x, y, z), map);
+	                foundLoc = true;
+	                break;
                 }
             }
 

@@ -1,4 +1,5 @@
 using System;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -124,7 +125,7 @@ namespace Server.Items
             {
                 CheckTimer();
 
-                Spells.SpellHelper.Damage(TimeSpan.FromTicks(1), m, m, Utility.RandomMinMax(1, 30));
+                SpellHelper.Damage(TimeSpan.FromTicks(1), m, m, Utility.RandomMinMax(1, 30));
                 m.PlaySound(m.Female ? 0x327 : 0x437);
             }
 
@@ -142,7 +143,7 @@ namespace Server.Items
             {
                 CheckTimer();
 
-                Spells.SpellHelper.Damage(TimeSpan.FromTicks(1), m, m, Utility.RandomMinMax(1, 10));
+                SpellHelper.Damage(TimeSpan.FromTicks(1), m, m, Utility.RandomMinMax(1, 10));
                 m.PlaySound(m.Female ? 0x327 : 0x437);
 
                 if (m.Body.IsHuman)

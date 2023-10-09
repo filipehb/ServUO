@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Server.Diagnostics;
 
 namespace Server
 {
@@ -35,7 +36,7 @@ namespace Server
             catch (Exception e)
             {
                 Console.WriteLine("Warning: Exception caught loading name lists:");
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -97,7 +98,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

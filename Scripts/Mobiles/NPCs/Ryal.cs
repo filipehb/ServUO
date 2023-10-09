@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class DaemonicPrismQuest : BaseQuest
     {
         public DaemonicPrismQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(CrystalDaemon), "crystal daemons", 3, "Prism of Light"));
 
@@ -50,7 +49,6 @@ namespace Server.Engines.Quests
     public class HowManyHeadsQuest : BaseQuest
     {
         public HowManyHeadsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(CrystalHydra), "crystal hydras", 3, "Prism of Light"));
 
@@ -93,7 +91,6 @@ namespace Server.Engines.Quests
     public class GlassyFoeQuest : BaseQuest
     {
         public GlassyFoeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(CrystalLatticeSeeker), "crystal lattice seekers", 5, "Prism of Light"));
 
@@ -136,7 +133,6 @@ namespace Server.Engines.Quests
     public class HailstormQuest : BaseQuest
     {
         public HailstormQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(CrystalVortex), "crystal vortices", 8, "Prism of Light"));
 
@@ -191,7 +187,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(DaemonicPrismQuest),
                     typeof(HowManyHeadsQuest),

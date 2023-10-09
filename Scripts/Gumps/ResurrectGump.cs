@@ -1,9 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
 using Server.Services.Virtues;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Gumps
 {
@@ -253,7 +254,7 @@ namespace Server.Gumps
                 {
                     int amount = from.Fame / 10;
 
-                    Misc.Titles.AwardFame(from, -amount, true);
+                    Titles.AwardFame(from, -amount, true);
                 }
 
                 if (from.Alive && m_HitsScalar > 0)

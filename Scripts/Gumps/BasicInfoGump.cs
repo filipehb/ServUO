@@ -1,4 +1,5 @@
 using System;
+using Server.Network;
 
 namespace Server.Gumps
 {
@@ -74,7 +75,7 @@ namespace Server.Gumps
                 AddHtml(10, 10, width - 20, height - 50, string.Format("<BASEFONT COLOR=#FFFFFF>{0}</BASEFONT>", warning.String), false, true);
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             Mobile m = sender.Mobile;
 

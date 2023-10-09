@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public MischiefMaker()
-            : base()
         {
             Hue = 0x8AB;
             Balanced = true;

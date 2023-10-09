@@ -1,6 +1,6 @@
-using Server.Services.Virtues;
 using System;
 using System.Collections.Generic;
+using Server.Services.Virtues;
 
 namespace Server.Spells.Spellweaving
 {
@@ -63,15 +63,17 @@ namespace Server.Spells.Spellweaving
                 Caster.SendLocalizedMessage(501775); // This spell is already in effect.
                 return false;
             }
-            else if (!Caster.CanBeginAction(typeof(AttuneWeaponSpell)))
+
+            if (!Caster.CanBeginAction(typeof(AttuneWeaponSpell)))
             {
-                Caster.SendLocalizedMessage(1075124); // You must wait before casting that spell again.
-                return false;
+	            Caster.SendLocalizedMessage(1075124); // You must wait before casting that spell again.
+	            return false;
             }
-            else if (SpiritualityVirtue.IsEmbracee(Caster))
+
+            if (SpiritualityVirtue.IsEmbracee(Caster))
             {
-                Caster.SendLocalizedMessage(1156040); // You may not cast Attunement whilst a Spirituality Shield is active!
-                return false;
+	            Caster.SendLocalizedMessage(1156040); // You may not cast Attunement whilst a Spirituality Shield is active!
+	            return false;
             }
 
             return base.CheckCast();

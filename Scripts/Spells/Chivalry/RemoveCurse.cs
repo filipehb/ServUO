@@ -1,10 +1,10 @@
+using System;
 using Server.Items;
 using Server.Spells.First;
 using Server.Spells.Fourth;
 using Server.Spells.Mysticism;
 using Server.Spells.Necromancy;
 using Server.Targeting;
-using System;
 
 namespace Server.Spells.Chivalry
 {

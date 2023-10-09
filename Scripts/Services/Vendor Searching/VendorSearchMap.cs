@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Auction;
 using Server.Engines.VendorSearching;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {

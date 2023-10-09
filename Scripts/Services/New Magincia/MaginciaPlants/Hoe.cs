@@ -1,7 +1,7 @@
+using System;
 using Server.Engines.Plants;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -67,35 +67,36 @@ namespace Server.Items
                     {
                         if (MaginciaPlantSystem.CanAddPlant(from, lt.Location))
                         {
-                            if (!MaginciaPlantSystem.CheckDelay(from))
+	                        if (!MaginciaPlantSystem.CheckDelay(from))
                             {
                                 return;
                             }
-                            else if (from.Mounted || from.Flying)
-                            {
-                                from.SendLocalizedMessage(501864); // You can't mine while riding.
-                            }
-                            else if (from.IsBodyMod && !from.Body.IsHuman)
-                            {
-                                from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
-                            }
-                            else
-                            {
-                                m_Hoe.UsesRemaining--;
 
-                                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1150492); // You till a small area to plant.                                
-                                from.Animate(AnimationType.Attack, 3);
+	                        if (from.Mounted || from.Flying)
+	                        {
+		                        from.SendLocalizedMessage(501864); // You can't mine while riding.
+	                        }
+	                        else if (from.IsBodyMod && !from.Body.IsHuman)
+	                        {
+		                        from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
+	                        }
+	                        else
+	                        {
+		                        m_Hoe.UsesRemaining--;
 
-                                MaginciaPlantItem dirt = new MaginciaPlantItem
-                                {
-                                    Owner = from
-                                };
-                                dirt.StartTimer();
+		                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1150492); // You till a small area to plant.                                
+		                        from.Animate(AnimationType.Attack, 3);
 
-                                MaginciaPlantSystem.OnPlantPlanted(from, from.Map);
+		                        MaginciaPlantItem dirt = new MaginciaPlantItem
+		                        {
+			                        Owner = from
+		                        };
+		                        dirt.StartTimer();
 
-                                Timer.DelayCall(TimeSpan.FromSeconds(.7), new TimerStateCallback(MoveItem_Callback), new object[] { dirt, lt.Location, map });
-                            }
+		                        MaginciaPlantSystem.OnPlantPlanted(from, from.Map);
+
+		                        Timer.DelayCall(TimeSpan.FromSeconds(.7), new TimerStateCallback(MoveItem_Callback), new object[] { dirt, lt.Location, map });
+	                        }
                         }
                     }
                     else

@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Craft;
 using Server.Gumps;
 using Server.Multis;
-using System;
 
 namespace Server.Items
 {
@@ -11,9 +12,9 @@ namespace Server.Items
         public static readonly bool Burnout = false;
         private Timer m_Timer;
         private DateTime m_End;
-        private bool m_BurntOut = false;
-        private bool m_Burning = false;
-        private bool m_Protected = false;
+        private bool m_BurntOut;
+        private bool m_Burning;
+        private bool m_Protected;
         private TimeSpan m_Duration = TimeSpan.Zero;
         private CraftResource _Resource;
         private Mobile _Crafter;
@@ -95,12 +96,12 @@ namespace Server.Items
         {
             get
             {
-                if (m_Duration != TimeSpan.Zero && m_Burning)
+	            if (m_Duration != TimeSpan.Zero && m_Burning)
                 {
                     return m_End - DateTime.UtcNow;
                 }
-                else
-                    return m_Duration;
+
+	            return m_Duration;
             }
 
             set
@@ -236,7 +237,7 @@ namespace Server.Items
             return quality;
         }
 
-        public override void GetContextMenuEntries(Mobile from, System.Collections.Generic.List<ContextMenuEntry> list)
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
             SetSecureLevelEntry.AddTo(from, this, list);

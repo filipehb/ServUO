@@ -1,8 +1,9 @@
 #region References
+
 using System.Collections.Generic;
 using System.Text;
-
 using Server.Network;
+
 #endregion
 
 namespace Server.Gumps

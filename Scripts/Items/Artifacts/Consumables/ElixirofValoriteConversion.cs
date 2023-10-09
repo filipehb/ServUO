@@ -25,7 +25,7 @@ namespace Server.Items
 
             if (item1 != null)
             {
-                BaseIngot m_Ore1 = item1 as BaseIngot;
+                BaseIngot m_Ore1 = item1;
 
                 int toConsume = m_Ore1.Amount;
 

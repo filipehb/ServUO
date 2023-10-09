@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class MisplacedQuest : BaseQuest
     {
         public MisplacedQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(DisintegratingThesisNotes), "disintegrating thesis notes", 5, 0xEF5));
 
@@ -60,7 +59,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(MisplacedQuest)
                 };

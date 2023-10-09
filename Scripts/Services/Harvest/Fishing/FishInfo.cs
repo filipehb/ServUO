@@ -1,10 +1,9 @@
-using Server.Mobiles;
-using Server.Regions;
-using Server.Spells;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Mobiles;
+using Server.Regions;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -443,8 +442,7 @@ namespace Server.Items
         }
 
         public static Type[] SOSArtifacts => m_SOSArtifacts;
-        private static readonly Type[] m_SOSArtifacts = new Type[]
-        {
+        private static readonly Type[] m_SOSArtifacts = {
             typeof(AntiqueWeddingDress), typeof(GrapeVine),
             typeof(KelpWovenLeggings),   typeof(LargeFishingNet),
             typeof(RunedDriftwoodBow),   typeof(ValkyrieArmor)

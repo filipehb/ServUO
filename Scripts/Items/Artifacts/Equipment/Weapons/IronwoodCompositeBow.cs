@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public IronwoodCompositeBow()
-            : base()
         {
             Hue = 1410;
             Slayer = SlayerName.Fey;

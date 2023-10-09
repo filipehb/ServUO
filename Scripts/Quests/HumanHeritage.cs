@@ -6,7 +6,6 @@ namespace Server.Engines.Quests
     public class IngenuityQuest : BaseQuest
     {
         public IngenuityQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(PowerCrystal), "power crystals", 10, 0x1F1C));
 
@@ -52,7 +51,6 @@ namespace Server.Engines.Quests
     public class HeaveHoQuest : BaseQuest
     {
         public HeaveHoQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(CrateForSledge), "crates for Sledge", 5, typeof(Sledge), "Sledge (Buc's Den)", 3600));
 
@@ -98,7 +96,6 @@ namespace Server.Engines.Quests
     public class ResponsibilityQuest : BaseQuest
     {
         public ResponsibilityQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Sheep Farm"));
 
@@ -142,7 +139,6 @@ namespace Server.Engines.Quests
     public class AllSeasonAdventurerQuest : BaseQuest
     {
         public AllSeasonAdventurerQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Efreet), "efreets", 5, "Fire"));
             AddObjective(new SlayObjective(typeof(IceFiend), "ice fiends", 5, "Ice"));

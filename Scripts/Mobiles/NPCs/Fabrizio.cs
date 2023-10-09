@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -9,7 +9,6 @@ namespace Server.Engines.Quests
         public Dagger Dagger { get; set; }
 
         public GentleBladeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Aminia), "warewolf", 1, 10800));
 
@@ -99,7 +98,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(GentleBladeQuest)
                 };

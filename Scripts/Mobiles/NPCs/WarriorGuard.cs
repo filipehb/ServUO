@@ -1,6 +1,8 @@
 #region References
-using Server.Items;
+
 using System;
+using Server.Items;
+
 #endregion
 
 namespace Server.Mobiles
@@ -297,11 +299,12 @@ namespace Server.Mobiles
                     Stop();
                     return;
                 }
-                else if (m_Owner.Weapon is Fists)
+
+                if (m_Owner.Weapon is Fists)
                 {
-                    m_Owner.Kill();
-                    Stop();
-                    return;
+	                m_Owner.Kill();
+	                Stop();
+	                return;
                 }
 
                 if (target != null && m_Owner.Combatant != target)

@@ -1,7 +1,8 @@
+using System;
 using Server.Network;
 using Server.Regions;
+using Server.Spells;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -49,7 +50,7 @@ namespace Server.Items
             from.SendSound(0x22B);
             from.SendLocalizedMessage(1095157); // You stepped onto a goblin trap!
 
-            Spells.SpellHelper.Damage(TimeSpan.FromSeconds(0.30), from, from, Utility.RandomMinMax(50, 75), 100, 0, 0, 0, 0);
+            SpellHelper.Damage(TimeSpan.FromSeconds(0.30), from, from, Utility.RandomMinMax(50, 75), 100, 0, 0, 0, 0);
 
             if (m_Owner != null)
                 from.DoHarmful(m_Owner);

@@ -1,6 +1,6 @@
-﻿using Server.Mobiles;
+﻿using System;
+using Server.Mobiles;
 using Server.Spells;
-using System;
 
 namespace Server.Items
 {

@@ -18,6 +18,7 @@
  *
  ***************************************************************************/
 
+using System;
 using Server.Network;
 
 namespace Server.Gumps
@@ -52,10 +53,10 @@ namespace Server.Gumps
 
 		public override string Compile()
 		{
-			if (System.String.IsNullOrEmpty(m_Args))
-				return System.String.Format("{{ tooltip {0} }}", m_Number);
+			if (String.IsNullOrEmpty(m_Args))
+				return String.Format("{{ tooltip {0} }}", m_Number);
 
-			return System.String.Format("{{ tooltip {0} @{1}@ }}", m_Number, m_Args);
+			return String.Format("{{ tooltip {0} @{1}@ }}", m_Number, m_Args);
 		}
 
 		private static readonly byte[] m_LayoutName = Gump.StringToBuffer("tooltip");
@@ -65,7 +66,7 @@ namespace Server.Gumps
 			disp.AppendLayout(m_LayoutName);
 			disp.AppendLayout(m_Number);
 
-			if (!System.String.IsNullOrEmpty(m_Args))
+			if (!String.IsNullOrEmpty(m_Args))
 				disp.AppendLayout(m_Args);
 		}
 	}

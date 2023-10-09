@@ -14,14 +14,12 @@ namespace Server.Engines.Mahjong
 
         public static OnMahjongPacketReceive GetSubCommandDelegate(int cmd)
         {
-            if (cmd >= 0 && cmd < 0x100)
+	        if (cmd >= 0 && cmd < 0x100)
             {
                 return m_SubCommandDelegates[cmd];
             }
-            else
-            {
-                return null;
-            }
+
+	        return null;
         }
 
         public static void Initialize()

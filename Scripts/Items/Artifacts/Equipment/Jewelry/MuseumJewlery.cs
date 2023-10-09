@@ -4,7 +4,6 @@ namespace Server.Items
     {
         public override bool IsArtifact => true;
         public VesperCollectionRing()
-            : base()
         {
         }
 
@@ -33,7 +32,6 @@ namespace Server.Items
     {
         public override bool IsArtifact => true;
         public VesperCollectionNecklace()
-            : base()
         {
         }
 
@@ -62,7 +60,6 @@ namespace Server.Items
     {
         public override bool IsArtifact => true;
         public VesperCollectionBracelet()
-            : base()
         {
         }
 
@@ -91,7 +88,6 @@ namespace Server.Items
     {
         public override bool IsArtifact => true;
         public VesperCollectionEarrings()
-            : base()
         {
         }
 

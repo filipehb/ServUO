@@ -1,8 +1,9 @@
-using Server.Engines.CannedEvil;
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.CannedEvil;
+using Server.Items;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -181,7 +182,7 @@ namespace Server.Mobiles
                             Movement.Movement.Offset(d, ref x, ref y);
 
                         IPoint3D p = new Point3D(x, y, Map.GetAverageZ(x, y));
-                        Spells.SpellHelper.GetSurfaceTop(ref p);
+                        SpellHelper.GetSurfaceTop(ref p);
 
                         var newLoc = new Point3D(p);
 

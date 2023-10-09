@@ -50,8 +50,7 @@ namespace Server.Items
 
             if (wresValue > incrValue)
                 return wresValue;
-            else
-                return incrValue;
+            return incrValue;
         }
 
         public override void Serialize(GenericWriter writer)

@@ -1,8 +1,9 @@
-using Server.Accounting;
-using Server.Commands;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using Server.Accounting;
+using Server.Commands;
 
 namespace Server.Items
 {
@@ -26,13 +27,12 @@ namespace Server.Items
                     {
                         foreach (KeyValuePair<string, long> kvp in table.OrderBy(k => -k.Value))
                         {
-                            op.WriteLine(
-                                string.Format("{0} currency: {1}", kvp.Key, kvp.Value.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
+                            op.WriteLine("{0} currency: {1}", kvp.Key, kvp.Value.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
                         }
 
                         op.WriteLine("");
                         op.WriteLine("Total Accounts: {0}", table.Count);
-                        op.WriteLine("Total Shard Gold: {0}", (currency * Account.CurrencyThreshold).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+                        op.WriteLine("Total Shard Gold: {0}", (currency * Account.CurrencyThreshold).ToString("N0", CultureInfo.GetCultureInfo("en-US")));
                     }
                 });
         }

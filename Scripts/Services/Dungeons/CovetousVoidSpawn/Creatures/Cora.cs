@@ -1,6 +1,9 @@
+using System;
+using Server.Engines.Despise;
 using Server.Engines.VoidPool;
 using Server.Items;
-using System;
+using Server.Services.TownCryer;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -65,7 +68,7 @@ namespace Server.Mobiles
 
         public void AuraEffect(Mobile m)
         {
-            if (m is PlayerMobile && Services.TownCryer.TownCryerSystem.UnderMysteriousPotionEffects((PlayerMobile)m, true))
+            if (m is PlayerMobile && TownCryerSystem.UnderMysteriousPotionEffects((PlayerMobile)m, true))
             {
                 m.SayTo(m, 1158288, 1154); // *You resist Cora's attack!*
             }
@@ -154,7 +157,7 @@ namespace Server.Mobiles
                 z = Map.GetAverageZ(x, y);
                 Point3D p = new Point3D(x, y, z);
 
-                if (Spells.SpellHelper.AdjustField(ref p, Map, 12, false))
+                if (SpellHelper.AdjustField(ref p, Map, 12, false))
                 {
                     MovementPath path = new MovementPath(this, p);
 
@@ -178,7 +181,7 @@ namespace Server.Mobiles
             for (int i = 0; i < path.Directions.Length; ++i)
             {
                 Movement.Movement.Offset(path.Directions[i], ref x, ref y);
-                IPoint3D p = new Point3D(x, y, Map.GetAverageZ(x, y)) as IPoint3D;
+                IPoint3D p = new Point3D(x, y, Map.GetAverageZ(x, y));
 
                 Timer.DelayCall(TimeSpan.FromMilliseconds(time), new TimerStateCallback(ManaDrainEffects_Callback), new object[] { p, Map });
 
@@ -193,7 +196,7 @@ namespace Server.Mobiles
             Map map = objs[1] as Map;
 
             ManaDrainItem item = new ManaDrainItem(Utility.RandomList(6913, 6915, 6917, 6919), this);
-            Spells.SpellHelper.GetSurfaceTop(ref p);
+            SpellHelper.GetSurfaceTop(ref p);
 
             item.MoveToWorld(new Point3D(p), Map);
         }
@@ -247,7 +250,7 @@ namespace Server.Mobiles
             {
                 if ((m is PlayerMobile || (m is BaseCreature && !((BaseCreature)m).IsMonster)) && m.CanBeHarmful(Owner, false))
                 {
-                    if (m is PlayerMobile && Services.TownCryer.TownCryerSystem.UnderMysteriousPotionEffects((PlayerMobile)m, true))
+                    if (m is PlayerMobile && TownCryerSystem.UnderMysteriousPotionEffects((PlayerMobile)m, true))
                     {
                         m.SayTo(m, 1158288, 1154); // *You resist Cora's attack!*
                     }
@@ -319,11 +322,11 @@ namespace Server.Mobiles
 
             if (Siege.SiegeShard && mob is PlayerMobile)
             {
-                int chance = Engines.Despise.DespiseBoss.ArtifactChance + Math.Min(10, ((PlayerMobile)mob).Luck / 180);
+                int chance = DespiseBoss.ArtifactChance + Math.Min(10, ((PlayerMobile)mob).Luck / 180);
 
                 if (chance >= Utility.Random(100))
                 {
-                    Type t = Engines.Despise.DespiseBoss.Artifacts[Utility.Random(Engines.Despise.DespiseBoss.Artifacts.Length)];
+                    Type t = DespiseBoss.Artifacts[Utility.Random(DespiseBoss.Artifacts.Length)];
 
                     if (t != null)
                     {

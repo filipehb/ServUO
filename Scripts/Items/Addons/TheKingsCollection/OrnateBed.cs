@@ -57,7 +57,6 @@ namespace Server.Items
 
         [Constructable]
         public OrnateBedDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

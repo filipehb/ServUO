@@ -1,9 +1,10 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells;
-using Server.Spells.Necromancy;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
+using Server.Spells;
+using Server.Spells.Necromancy;
 
 namespace Server.Engines.VvV
 {
@@ -131,7 +132,7 @@ namespace Server.Engines.VvV
                 int skill = (int)m.Skills[SkillName.DetectHidden].Value;
 
                 if (skill >= 80 && Utility.Random(600) < skill)
-                    PrivateOverheadMessage(Network.MessageType.Regular, 0x21, 500813, m.NetState); // [trapped]
+                    PrivateOverheadMessage(MessageType.Regular, 0x21, 500813, m.NetState); // [trapped]
             }
 
             return false;
@@ -432,7 +433,7 @@ namespace Server.Engines.VvV
                 return;
 
             m.SendLocalizedMessage(1060160); // You are bleeding!
-            BleedAttack.BeginBleed(m, Owner, false);
+            BleedAttack.BeginBleed(m, Owner);
 
             base.Detonate(m);
         }

@@ -1,5 +1,6 @@
-using Server.Mobiles;
 using System;
+using Server.Diagnostics;
+using Server.Mobiles;
 
 namespace Server.Spells.Spellweaving
 {
@@ -42,7 +43,7 @@ namespace Server.Spells.Spellweaving
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                         break;
                     }
 

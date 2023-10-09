@@ -1,7 +1,8 @@
+using System;
+using Server.Engines.Plants;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Multis;
-using System;
 
 namespace Server.Items
 {
@@ -156,7 +157,7 @@ namespace Server.Items
                 {
                     Container cont = from.Backpack;
 
-                    Engines.Plants.Seed seed = new Engines.Plants.Seed();
+                    Seed seed = new Seed();
 
                     if (cont == null || !cont.TryDropItem(from, seed, false))
                     {

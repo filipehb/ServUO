@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public ScrollBox3()
-            : base()
         {
             Movable = true;
             Hue = 1159;

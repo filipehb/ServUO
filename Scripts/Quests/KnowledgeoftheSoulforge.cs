@@ -5,7 +5,6 @@ namespace Server.Engines.Quests
     public class KnowledgeoftheSoulforge : BaseQuest
     {
         public KnowledgeoftheSoulforge()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(EnchantedEssence), "Enchanted Essence", 50, 0x2DB2));
 

@@ -1,7 +1,7 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.VvV
 {
@@ -131,10 +131,10 @@ namespace Server.Engines.VvV
 
         private readonly Type[][] _Table =
         {
-            new Type[] { typeof(CrimsonCincture), typeof(GargishCrimsonCincture) },
-            new Type[] { typeof(MaceAndShieldGlasses), typeof(GargishMaceAndShieldGlasses) },
-            new Type[] { typeof(WizardsCrystalGlasses), typeof(GargishWizardsCrystalGlasses) },
-            new Type[] { typeof(FoldedSteelGlasses), typeof(GargishFoldedSteelGlasses) },
+            new[] { typeof(CrimsonCincture), typeof(GargishCrimsonCincture) },
+            new[] { typeof(MaceAndShieldGlasses), typeof(GargishMaceAndShieldGlasses) },
+            new[] { typeof(WizardsCrystalGlasses), typeof(GargishWizardsCrystalGlasses) },
+            new[] { typeof(FoldedSteelGlasses), typeof(GargishFoldedSteelGlasses) },
         };
 
         public override bool OnDragDrop(Mobile from, Item dropped)

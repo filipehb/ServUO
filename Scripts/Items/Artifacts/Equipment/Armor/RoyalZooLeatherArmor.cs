@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooLeatherLegs()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusMana = 3;
@@ -47,7 +46,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooLeatherGloves()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusMana = 3;
@@ -89,7 +87,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooLeatherGorget()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusMana = 3;
@@ -131,7 +128,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooLeatherArms()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusMana = 3;
@@ -173,7 +169,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooLeatherChest()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusMana = 3;
@@ -215,7 +210,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public RoyalZooLeatherFemaleChest()
-            : base()
         {
             Hue = 0x109;
             Attributes.BonusMana = 3;

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Server.Diagnostics;
 
 namespace Server
 {
@@ -76,7 +77,7 @@ namespace Server
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
             }

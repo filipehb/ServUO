@@ -1,10 +1,12 @@
 #region References
+
+using System;
 using Server.Accounting;
 using Server.Commands;
 using Server.Gumps;
 using Server.Network;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server

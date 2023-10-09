@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public PetrifiedSnake()
-            : base()
         {
             Hue = 460;
             AbsorptionAttributes.EaterPoison = 20;

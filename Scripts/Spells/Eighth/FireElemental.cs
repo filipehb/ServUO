@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Spells.Eighth
 {

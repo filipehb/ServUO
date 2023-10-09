@@ -1,8 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -134,7 +136,7 @@ namespace Server.Items
 
         public override bool OnMoveOver(Mobile from)
         {
-            if (IsOpen)
+	        if (IsOpen)
             {
                 if (from.Player && Boat != null && !Boat.Contains(from) && Locked) // If the plank is locked, no one can enter the ship from the outside.
                     return false;
@@ -168,7 +170,7 @@ namespace Server.Items
                     {
                         z = from.Z + j;
 
-                        if (map.CanFit(x, y, z, 16, false, false) && !Spells.SpellHelper.CheckMulti(new Point3D(x, y, z), map))
+                        if (map.CanFit(x, y, z, 16, false, false) && !SpellHelper.CheckMulti(new Point3D(x, y, z), map))
                         {
                             if (i == 1 && j >= -2 && j <= 2)
                                 return true;
@@ -180,7 +182,7 @@ namespace Server.Items
 
                     z = map.GetAverageZ(x, y);
 
-                    if (map.CanFit(x, y, z, 16, false, false) && !Spells.SpellHelper.CheckMulti(new Point3D(x, y, z), map))
+                    if (map.CanFit(x, y, z, 16, false, false) && !SpellHelper.CheckMulti(new Point3D(x, y, z), map))
                     {
                         if (i == 1)
                             return true;
@@ -192,10 +194,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+	        return false;
         }
 
         public bool CanClose()
@@ -300,12 +300,12 @@ namespace Server.Items
                         }
                         else if (from.AccessLevel >= AccessLevel.GameMaster)
                         {
-                            from.LocalOverheadMessage(Network.MessageType.Regular, 0x00, 502502); // That is locked but your godly powers allow access
+                            from.LocalOverheadMessage(MessageType.Regular, 0x00, 502502); // That is locked but your godly powers allow access
                             Open();
                         }
                         else
                         {
-                            from.LocalOverheadMessage(Network.MessageType.Regular, 0x00, 502503); // That is locked.
+                            from.LocalOverheadMessage(MessageType.Regular, 0x00, 502503); // That is locked.
                         }
                     }
                     else if (!Locked)
@@ -317,7 +317,7 @@ namespace Server.Items
                     }
                     else if (from.AccessLevel >= AccessLevel.GameMaster)
                     {
-                        from.LocalOverheadMessage(Network.MessageType.Regular, 0x00, 502502); // That is locked but your godly powers allow access
+                        from.LocalOverheadMessage(MessageType.Regular, 0x00, 502502); // That is locked but your godly powers allow access
 
                         Point3D p = new Point3D(X, Y, Z + 3);
 
@@ -326,7 +326,7 @@ namespace Server.Items
                     }
                     else
                     {
-                        from.LocalOverheadMessage(Network.MessageType.Regular, 0x00, 502503); // That is locked.
+                        from.LocalOverheadMessage(MessageType.Regular, 0x00, 502503); // That is locked.
                     }
                 }
             }

@@ -1,11 +1,13 @@
 #region References
+
 using Server.Spells;
 using Server.Spells.First;
 using Server.Spells.Fourth;
 using Server.Spells.Necromancy;
 using Server.Spells.Second;
-using Server.Targeting;
 using Server.Spells.SkillMasteries;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Mobiles

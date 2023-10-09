@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Accounting;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.NewMagincia
 {
@@ -45,7 +45,7 @@ namespace Server.Engines.NewMagincia
             get { return false; }
             set
             {
-                if (value == true)
+                if (value)
                 {
                     foreach (MaginciaHousingPlot plot in m_Plots)
                     {
@@ -250,8 +250,7 @@ namespace Server.Engines.NewMagincia
         }
 
         public static Rectangle2D[] MagHousingZones => m_MagHousingZones;
-        private static readonly Rectangle2D[] m_MagHousingZones = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_MagHousingZones = {
             new Rectangle2D(3686, 2125, 18, 18), // C1
             new Rectangle2D(3686, 2086, 18, 18), // C2 / Prime
             new Rectangle2D(3686, 2063, 18, 18), // C3 / Prime
@@ -280,8 +279,7 @@ namespace Server.Engines.NewMagincia
             new Rectangle2D(3715, 2090, 18, 18), // E7 / Prime            
         };
 
-        private static readonly Point3D[] m_StoneLocs = new Point3D[]
-        {
+        private static readonly Point3D[] m_StoneLocs = {
             new Point3D(3683, 2134, 20),
             new Point3D(3704, 2092, 5),
             new Point3D(3704, 2069, 5),
@@ -310,8 +308,7 @@ namespace Server.Engines.NewMagincia
             new Point3D(3711, 2087, 5)
         };
 
-        private static readonly string[] m_Identifiers = new string[]
-        {
+        private static readonly string[] m_Identifiers = {
             "C-1",
             "C-2",
             "C-3",

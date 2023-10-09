@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Server.Spells.SkillMasteries;
 
 namespace Server.Spells.Bushido
 {
@@ -43,7 +44,7 @@ namespace Server.Spells.Bushido
             double bushido = m.Skills[SkillName.Bushido].Value;
             BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Confidence, 1060596, 1153809, TimeSpan.FromSeconds(4), m, string.Format("{0}\t{1}\t{2}", ((int)(bushido / 12)).ToString(), ((int)(bushido / 5)).ToString(), "100"))); // Successful parry will heal for 1-~1_HEAL~ hit points and refresh for 1-~2_STAM~ stamina points.<br>+~3_HP~ hit point regeneration (4 second duration).
 
-            int anticipateHitBonus = SkillMasteries.MasteryInfo.AnticipateHitBonus(m);
+            int anticipateHitBonus = MasteryInfo.AnticipateHitBonus(m);
 
             if (anticipateHitBonus > 0)
                 BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.AnticipateHit, 1155905, 1156057, TimeSpan.FromSeconds(4), m, string.Format("{0}\t{1}", anticipateHitBonus.ToString(), "75"))); // ~1_CHANCE~% chance to reduce Confidence heal by ~2_REDUCE~% when hit. 
@@ -87,7 +88,7 @@ namespace Server.Spells.Bushido
         public static void StopRegenerating(Mobile m)
         {
             Timer t;
-            int anticipateHitBonus = SkillMasteries.MasteryInfo.AnticipateHitBonus(m);
+            int anticipateHitBonus = MasteryInfo.AnticipateHitBonus(m);
 
             if (anticipateHitBonus >= Utility.Random(100) && m_RegenTable.TryGetValue(m, out t))
             {

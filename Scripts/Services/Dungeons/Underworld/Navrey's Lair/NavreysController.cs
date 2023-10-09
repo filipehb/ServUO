@@ -1,7 +1,8 @@
+using System;
 using Server.Commands;
+using Server.Diagnostics;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -84,7 +85,7 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

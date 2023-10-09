@@ -1,14 +1,14 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells.SkillMasteries;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests
 {
     public class WieldingTheSonicBladeQuest : BaseQuest
     {
-        public WieldingTheSonicBladeQuest() : base()
+        public WieldingTheSonicBladeQuest()
         {
             AddObjective(new DiscordObjective());
 
@@ -139,7 +139,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(WieldingTheSonicBladeQuest),
                 };

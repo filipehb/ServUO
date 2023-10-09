@@ -9,7 +9,6 @@ namespace Server.Items
 
         [Constructable]
         public KeypunchReader()
-            : base()
         {
             Weight = 0.0;
             Hue = 2500;

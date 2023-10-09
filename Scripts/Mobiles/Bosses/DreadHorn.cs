@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Items;
 using Server.Spells;
-using System;
-using System.Linq;
 
 namespace Server.Mobiles
 {
@@ -129,7 +130,7 @@ namespace Server.Mobiles
 
         private void Teleport()
         {
-            System.Collections.Generic.List<PlayerMobile> toTele = SpellHelper.AcquireIndirectTargets(this, Location, Map, StrikingRange).OfType<PlayerMobile>().ToList();
+            List<PlayerMobile> toTele = SpellHelper.AcquireIndirectTargets(this, Location, Map, StrikingRange).OfType<PlayerMobile>().ToList();
 
             if (toTele.Count > 0)
             {

@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ClockworkPuzzleQuest : BaseQuest
     {
         public ClockworkPuzzleQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(ClockParts), "clock parts", 5, 0x104F));
 
@@ -55,7 +54,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ClockworkPuzzleQuest)
                 };
@@ -101,7 +100,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public TinkersSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

@@ -1,10 +1,15 @@
 #region References
+
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using Server.Diagnostics;
+using Server.Network;
+
 #endregion
 
 namespace Server.Misc
@@ -72,7 +77,7 @@ namespace Server.Misc
         {
             try
             {
-                Network.NetState ns = e.State;
+                NetState ns = e.State;
                 Socket s = ns.Socket;
 
                 IPEndPoint ipep = (IPEndPoint)s.LocalEndPoint;
@@ -150,14 +155,14 @@ namespace Server.Misc
             }
             catch(Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
         private static bool HasPublicIPAddress()
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-            System.Collections.Generic.IEnumerable<IPAddress> uips = adapters.Select(a => a.GetIPProperties())
+            IEnumerable<IPAddress> uips = adapters.Select(a => a.GetIPProperties())
                                .SelectMany(p => p.UnicastAddresses.Cast<IPAddressInformation>(), (p, u) => u.Address);
 
             return

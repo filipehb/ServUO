@@ -1,5 +1,6 @@
-using Server.Items;
 using System;
+using Server.Items;
+using Server.Multis;
 
 namespace Server
 {
@@ -13,7 +14,7 @@ namespace Server
 
                 if (parent == null)
                 {
-                    Multis.BaseHouse house = Multis.BaseHouse.FindHouseAt(oldItem);
+                    BaseHouse house = BaseHouse.FindHouseAt(oldItem);
 
                     newItem.MoveToWorld(oldItem.Location, oldItem.Map);
 

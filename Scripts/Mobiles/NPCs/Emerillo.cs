@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class CulinaryCrisisQuest : BaseQuest
     {
         public CulinaryCrisisQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Dates), "bunch of dates", 20, 0x1727));
             AddObjective(new ObtainObjective(typeof(CheeseWheel), "wheels of cheese", 5, 0x97E));
@@ -61,7 +60,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CulinaryCrisisQuest)
                 };

@@ -30,7 +30,6 @@ namespace Server.Items
 
         [Constructable]
         public JacobsPickaxe()
-            : base()
         {
             LootType = LootType.Blessed;
             SkillBonuses.SetValues(0, SkillName.Mining, 10.0);

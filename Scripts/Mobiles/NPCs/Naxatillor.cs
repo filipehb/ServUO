@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class TheArisenQuest : BaseQuest
     {
         public TheArisenQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GargoyleShade), "Gargoyle Shade", 10));
             AddObjective(new SlayObjective(typeof(EffetePutridGargoyle), "Effete Putrid Gargoyle", 10));
@@ -70,7 +69,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
         {
             typeof(TheArisenQuest)
         };

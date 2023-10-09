@@ -1,5 +1,6 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
+using Server.Spells.Ninjitsu;
 
 namespace Server.Items
 {
@@ -45,7 +46,7 @@ namespace Server.Items
 
             IMount mount = defender.Mount;
 
-            if (mount == null && !defender.Flying && !Spells.Ninjitsu.AnimalForm.UnderTransformation(defender))
+            if (mount == null && !defender.Flying && !AnimalForm.UnderTransformation(defender))
             {
                 attacker.SendLocalizedMessage(1060848); // This attack only works on mounted or flying targets
                 return;
@@ -80,7 +81,7 @@ namespace Server.Items
 
             if (defender is PlayerMobile)
             {
-                if (Spells.Ninjitsu.AnimalForm.UnderTransformation(defender))
+                if (AnimalForm.UnderTransformation(defender))
                 {
                     defender.SendLocalizedMessage(1114066, attacker.Name); // ~1_NAME~ knocked you out of animal form!
                 }

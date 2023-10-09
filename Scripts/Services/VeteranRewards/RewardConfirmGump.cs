@@ -1,4 +1,6 @@
+using Server.Engines.Auction;
 using Server.Gumps;
+using Server.Items;
 using Server.Network;
 
 namespace Server.Engines.VeteranRewards
@@ -49,16 +51,16 @@ namespace Server.Engines.VeteranRewards
 
                 if (item != null)
                 {
-                    if (item is Items.RedSoulstone)
-                        ((Items.RedSoulstone)item).Account = m_From.Account.Username;
+                    if (item is RedSoulstone)
+                        ((RedSoulstone)item).Account = m_From.Account.Username;
 
-                    if (item is Items.LighthouseAddonDeed)
-                        ((Items.LighthouseAddonDeed)item).Account = m_From.Account.Username;
+                    if (item is LighthouseAddonDeed)
+                        ((LighthouseAddonDeed)item).Account = m_From.Account.Username;
 
                     if (RewardSystem.ConsumeRewardPoint(m_From))
                     {
                         #region TOL
-                        if (item is Auction.AuctionSafeDeed)
+                        if (item is AuctionSafeDeed)
                         {
                             for (int i = 0; i < 2; i++)
                             {

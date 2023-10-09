@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Engines.VeteranRewards;
@@ -7,8 +9,6 @@ using Server.Multis;
 using Server.Network;
 using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -49,7 +49,6 @@ namespace Server.Mobiles
         private int m_Animation;
         private int m_Frames;
         public CharacterStatue(Mobile from, StatueType type)
-            : base()
         {
             m_Type = type;
             m_Pose = StatuePose.Ready;
@@ -282,13 +281,11 @@ namespace Server.Mobiles
 
                 return true;
             }
-            else
-            {
-                by.SendLocalizedMessage(500720); // You don't have enough room in your backpack!
-                deed.Delete();
 
-                return false;
-            }
+            by.SendLocalizedMessage(500720); // You don't have enough room in your backpack!
+            deed.Delete();
+
+            return false;
         }
 
         public void Restore(CharacterStatue from)
@@ -625,12 +622,11 @@ namespace Server.Mobiles
 
         public static AddonFitResult CouldFit(Point3D p, Map map, Mobile from, ref BaseHouse house)
         {
-            if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
+	        if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
                 return AddonFitResult.Blocked;
-            else if (!BaseAddon.CheckHouse(from, p, map, 20, ref house))
-                return AddonFitResult.NotInHouse;
-            else
-                return CheckDoors(p, 20, house);
+	        if (!BaseAddon.CheckHouse(from, p, map, 20, ref house))
+		        return AddonFitResult.NotInHouse;
+	        return CheckDoors(p, 20, house);
         }
 
         public static AddonFitResult CheckDoors(Point3D p, int height, BaseHouse house)
@@ -670,10 +666,11 @@ namespace Server.Mobiles
                     from.SendLocalizedMessage(1076191); // Statues can only be placed in houses.
                     return;
                 }
-                else if (from.IsBodyMod)
+
+                if (from.IsBodyMod)
                 {
-                    from.SendLocalizedMessage(1073648); // You may only proceed while in your original state...
-                    return;
+	                from.SendLocalizedMessage(1073648); // You may only proceed while in your original state...
+	                return;
                 }
 
                 AddonFitResult result = CouldFit(loc, map, from, ref house);

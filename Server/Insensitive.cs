@@ -1,5 +1,7 @@
 #region References
+
 using System.Collections;
+
 #endregion
 
 namespace Server
@@ -21,7 +23,8 @@ namespace Server
 			{
 				return true;
 			}
-			else if (a == null || b == null || a.Length != b.Length)
+
+			if (a == null || b == null || a.Length != b.Length)
 			{
 				return false;
 			}

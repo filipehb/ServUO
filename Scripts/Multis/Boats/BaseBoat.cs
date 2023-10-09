@@ -1,12 +1,15 @@
-using Server.ContextMenus;
-using Server.Items;
-using Server.Mobiles;
-using Server.Network;
-using Server.Regions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Engines.Quests;
+using Server.Guilds;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
+using Server.Regions;
 
 namespace Server.Multis
 {
@@ -30,15 +33,15 @@ namespace Server.Multis
     {
         #region Statics
 
-        private static readonly Rectangle2D[] m_BritWrap = new Rectangle2D[]{ new Rectangle2D( 16, 16, 5120 - 32, 4096 - 32 ), new Rectangle2D( 5136, 2320, 992, 1760 ),
+        private static readonly Rectangle2D[] m_BritWrap = { new Rectangle2D( 16, 16, 5120 - 32, 4096 - 32 ), new Rectangle2D( 5136, 2320, 992, 1760 ),
                                                                      new Rectangle2D(6272, 1088, 319, 319)};
-        private static readonly Rectangle2D[] m_IlshWrap = new Rectangle2D[] { new Rectangle2D(16, 16, 2304 - 32, 1600 - 32) };
-        private static readonly Rectangle2D[] m_TokunoWrap = new Rectangle2D[] { new Rectangle2D(16, 16, 1448 - 32, 1448 - 32) };
+        private static readonly Rectangle2D[] m_IlshWrap = { new Rectangle2D(16, 16, 2304 - 32, 1600 - 32) };
+        private static readonly Rectangle2D[] m_TokunoWrap = { new Rectangle2D(16, 16, 1448 - 32, 1448 - 32) };
 
-        private static readonly Type[] WoodTypes = new Type[] { typeof(Board),  typeof(OakBoard), typeof(AshBoard), typeof(YewBoard), typeof(HeartwoodBoard), typeof(BloodwoodBoard), typeof(FrostwoodBoard),
+        private static readonly Type[] WoodTypes = { typeof(Board),  typeof(OakBoard), typeof(AshBoard), typeof(YewBoard), typeof(HeartwoodBoard), typeof(BloodwoodBoard), typeof(FrostwoodBoard),
                                                 typeof(Log), typeof(OakLog), typeof(AshLog), typeof(YewLog), typeof(HeartwoodLog), typeof(BloodwoodLog), typeof(FrostwoodLog), };
 
-        private static readonly Type[] ClothTypes = new Type[] { typeof(Cloth), typeof(UncutCloth) };
+        private static readonly Type[] ClothTypes = { typeof(Cloth), typeof(UncutCloth) };
 
         private static readonly int SlowSpeed = 1;
         private static readonly int FastSpeed = 1;
@@ -169,12 +172,11 @@ namespace Server.Multis
 
         public static Rectangle2D[] GetWrapFor(Map m)
         {
-            if (m == Map.Ilshenar)
+	        if (m == Map.Ilshenar)
                 return m_IlshWrap;
-            else if (m == Map.Tokuno)
-                return m_TokunoWrap;
-            else
-                return m_BritWrap;
+	        if (m == Map.Tokuno)
+		        return m_TokunoWrap;
+	        return m_BritWrap;
         }
 
         public static bool IsDriving(Mobile from)
@@ -908,9 +910,9 @@ namespace Server.Multis
                         SPlank = reader.ReadItem() as Plank;
 
                         if (!IsClassicBoat && !IsRowBoat)
-                            TillerMan = reader.ReadMobile() as object;
+                            TillerMan = reader.ReadMobile();
                         else
-                            TillerMan = reader.ReadItem() as object;
+                            TillerMan = reader.ReadItem();
 
                         Hold = reader.ReadItem() as Hold;
                         Anchored = reader.ReadBool();
@@ -1047,8 +1049,8 @@ namespace Server.Multis
             if (Owner == null)
                 return false;
 
-            Accounting.Account acct1 = from.Account as Accounting.Account;
-            Accounting.Account acct2 = Owner.Account as Accounting.Account;
+            Account acct1 = from.Account as Account;
+            Account acct2 = Owner.Account as Account;
 
             return acct1 != null && acct2 != null && acct1 == acct2;
         }
@@ -1304,19 +1306,21 @@ namespace Server.Multis
 
                 return false;
             }
-            else if (Map != BoatCourse.Map)
-            {
-                if (message && TillerMan != null)
-                    TillerManSay(502514); // The map is too far away from me, sir.
 
-                return false;
+            if (Map != BoatCourse.Map)
+            {
+	            if (message && TillerMan != null)
+		            TillerManSay(502514); // The map is too far away from me, sir.
+
+	            return false;
             }
-            else if ((Map != Map.Trammel && Map != Map.Felucca && Map != Map.Tokuno) || NextNavPoint < 0 || NextNavPoint >= BoatCourse.Waypoints.Count)
-            {
-                if (message && TillerMan != null)
-                    TillerManSay(1042551); // I don't see that navpoint, sir.
 
-                return false;
+            if ((Map != Map.Trammel && Map != Map.Felucca && Map != Map.Tokuno) || NextNavPoint < 0 || NextNavPoint >= BoatCourse.Waypoints.Count)
+            {
+	            if (message && TillerMan != null)
+		            TillerManSay(1042551); // I don't see that navpoint, sir.
+
+	            return false;
             }
 
             Speed = Owner is BaseShipCaptain ? SlowSpeed : FastSpeed;
@@ -1384,10 +1388,11 @@ namespace Server.Multis
 
                     break;
                 }
-                else if (o is Mobile && Contains((Mobile)o) && ((Mobile)o).AccessLevel == AccessLevel.Player)
+
+                if (o is Mobile && Contains((Mobile)o) && ((Mobile)o).AccessLevel == AccessLevel.Player)
                 {
-                    res = DryDockResult.Mobiles;
-                    break;
+	                res = DryDockResult.Mobiles;
+	                break;
                 }
             }
 
@@ -1962,12 +1967,13 @@ namespace Server.Multis
 
                 return;
             }
-            else if (!e.Mobile.Alive)
-            {
-                if (TillerMan != null)
-                    TillerManSay(502582); // You appear to be dead.
 
-                return;
+            if (!e.Mobile.Alive)
+            {
+	            if (TillerMan != null)
+		            TillerManSay(502582); // You appear to be dead.
+
+	            return;
             }
 
             if (e.Speech.Length > 8)
@@ -2021,12 +2027,13 @@ namespace Server.Multis
 
                 return;
             }
-            else if (!m.Alive)
-            {
-                if (TillerMan != null)
-                    TillerManSay(502582); // You appear to be dead.
 
-                return;
+            if (!m.Alive)
+            {
+	            if (TillerMan != null)
+		            TillerManSay(502582); // You appear to be dead.
+
+	            return;
             }
 
             if (m_ShipName == null)
@@ -2085,17 +2092,18 @@ namespace Server.Multis
 
                 return;
             }
-            else if (!from.Alive)
-            {
-                if (TillerMan != null)
-                    TillerManSay(502582); // You appear to be dead.
 
-                return;
+            if (!from.Alive)
+            {
+	            if (TillerMan != null)
+		            TillerManSay(502582); // You appear to be dead.
+
+	            return;
             }
 
             newName = newName.Trim();
 
-            if (!Guilds.BaseGuildGump.CheckProfanity(newName))
+            if (!BaseGuildGump.CheckProfanity(newName))
             {
                 from.SendMessage("That name is unacceptable.");
                 return;
@@ -2237,16 +2245,14 @@ namespace Server.Multis
 
         public virtual TimeSpan GetMovementInterval(bool fast, out int clientSpeed)
         {
-            if (fast)
+	        if (fast)
             {
                 clientSpeed = 0x4;
                 return FastInt;
             }
-            else
-            {
-                clientSpeed = 0x3;
-                return NormalInt;
-            }
+
+	        clientSpeed = 0x3;
+	        return NormalInt;
         }
 
         public bool CanFit(Point3D p, Map map, int itemID)
@@ -2427,18 +2433,16 @@ namespace Server.Multis
 
                         return false;
                     }
-                    else
-                    {
-                        NextNavPoint = -1;
 
-                        if (message && Order == BoatOrder.CourseFull && TillerMan != null)
-                            TillerManSay(502515); // The course is completed, sir.
+                    NextNavPoint = -1;
 
-                        if (Owner is BaseShipCaptain)
-                            Engines.Quests.BountyQuestSpawner.ResetNavPoints(this);
+                    if (message && Order == BoatOrder.CourseFull && TillerMan != null)
+	                    TillerManSay(502515); // The course is completed, sir.
 
-                        return false;
-                    }
+                    if (Owner is BaseShipCaptain)
+	                    BountyQuestSpawner.ResetNavPoints(this);
+
+                    return false;
                 }
 
                 // TODO: Throw this logic in a new Turn method overload, not this methods job to do it
@@ -2462,8 +2466,6 @@ namespace Server.Multis
                     case 4:
                     case -4:
                         return Turn(4, true, true, (Facing + 4) & Direction.Mask, true);
-                    default:
-                        break;
                 }
 
                 speed = Math.Min(Speed, maxSpeed);

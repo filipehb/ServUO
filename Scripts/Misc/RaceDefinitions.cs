@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-
 using Server.Items;
+using Server.Network;
 
 namespace Server.Misc
 {
@@ -494,7 +494,7 @@ namespace Server.Misc
                 {
                     if (message)
                     {
-                        from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1111708); // Gargoyles can't wear this.
+                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1111708); // Gargoyles can't wear this.
                     }
                 }
                 else
@@ -517,7 +517,7 @@ namespace Server.Misc
                     {
                         if (message)
                         {
-                            from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1111707); // Only gargoyles can wear this.
+                            from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1111707); // Only gargoyles can wear this.
                         }
                     }
                     else if (required != Race.Human)

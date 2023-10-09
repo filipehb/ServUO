@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -40,7 +40,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1077665;
 
         public TheWayOfTheBladeQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.Swords, 50, "Old Haven Training", 1077659, 1077660));
 
@@ -53,15 +52,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.Swords.Base < 50;
+
+            return Owner.Skills.Swords.Base < 50;
         }
 
         public override void OnCompleted()
@@ -87,7 +86,7 @@ namespace Server.Engines.Quests
 
     public class Jockles : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(TheWayOfTheBladeQuest)
                 };

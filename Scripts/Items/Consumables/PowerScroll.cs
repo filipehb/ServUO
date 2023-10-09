@@ -4,8 +4,7 @@ namespace Server.Items
 {
     public class PowerScroll : SpecialScroll
     {
-        private static readonly SkillName[] m_Skills = new SkillName[]
-        {
+        private static readonly SkillName[] m_Skills = {
             SkillName.Blacksmith,
             SkillName.Tailoring,
             SkillName.Swords,

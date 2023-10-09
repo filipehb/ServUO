@@ -18,6 +18,7 @@
  *
  ***************************************************************************/
 
+using System;
 using Server.Network;
 
 namespace Server.Gumps
@@ -39,7 +40,7 @@ namespace Server.Gumps
 
 		public override string Compile()
 		{
-			return System.String.Format("{{ page {0} }}", m_Page);
+			return String.Format("{{ page {0} }}", m_Page);
 		}
 
 		private static readonly byte[] m_LayoutName = Gump.StringToBuffer("page");

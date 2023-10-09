@@ -1,9 +1,9 @@
+using System;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Services.TownCryer;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -435,7 +435,7 @@ namespace Server.Engines.Quests
                 {
                     if (!TownCryerSystem.UnderMysteriousPotionEffects(pm))
                     {
-                        pm.SendGump(new ConfirmCallbackGump(pm, 1158286, 1158287, null, null, confirm: (mob, o) =>
+                        pm.SendGump(new ConfirmCallbackGump(pm, 1158286, 1158287, null, confirm: (mob, o) =>
                             {
                                 TownCryerSystem.AddMysteriousPotionEffects(mob);
 

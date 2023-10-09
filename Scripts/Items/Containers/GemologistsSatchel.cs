@@ -1,4 +1,5 @@
 using System;
+using Server.SkillHandlers;
 
 namespace Server.Items
 {
@@ -23,7 +24,7 @@ namespace Server.Items
 
             for (int i = 0; i < 5; i++)
             {
-                Type type = SkillHandlers.Imbuing.IngredTypes[Utility.Random(SkillHandlers.Imbuing.IngredTypes.Length)];
+                Type type = Imbuing.IngredTypes[Utility.Random(Imbuing.IngredTypes.Length)];
 
                 if (type != null)
                 {

@@ -36,7 +36,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public BloodyPentagramAddon()
-            : base()
         {
             AddComponent(new BloodyPentagramComponent(0x1CF9), 0, 1, 0);
             AddComponent(new BloodyPentagramComponent(0x1CF8), 0, 2, 0);
@@ -133,7 +132,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public BloodyPentagramDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

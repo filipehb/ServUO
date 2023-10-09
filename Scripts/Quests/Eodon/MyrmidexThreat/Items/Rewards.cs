@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System.Collections.Generic;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -210,7 +211,7 @@ namespace Server.Items
                 {
                     User.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
                 }
-                else if (Spells.SpellHelper.CheckCombat(User))
+                else if (SpellHelper.CheckCombat(User))
                 {
                     User.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
                 }

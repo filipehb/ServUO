@@ -1,14 +1,14 @@
 
+using System;
 using Server.Items;
 using Server.Network;
-using System;
 
 namespace Server.Mobiles
 {
     [CorpseName("A Drelgor The Impaler Corpse")]
     public class Drelgor : BaseCreature
     {
-        private bool init = false; //Don't change this.
+        private bool init; //Don't change this.
         private readonly double msgevery = 1.0; //Recurring message. Change to 0 to disable.
         private DateTime m_NextMsgTime;
 
@@ -51,7 +51,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.LootItem<Scimitar>());
             AddLoot(LootPack.LootItem<WoodenShield>());
-            AddLoot(LootPack.RandomLootItem(new Type[] { typeof(BoneArms), typeof(BoneChest), typeof(BoneGloves), typeof(BoneLegs), typeof(BoneHelm) }));
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(BoneArms), typeof(BoneChest), typeof(BoneGloves), typeof(BoneLegs), typeof(BoneHelm) }));
         }
 
         public override bool BleedImmune => true;

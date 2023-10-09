@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
@@ -149,7 +149,7 @@ namespace Server.Engines.Quests
             Say(Utility.RandomBool() ? 1094959 : 1094969); // Keep an eye pealed, traveler, thieves be afoot!
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ThievesBeAfootQuest)
                 };

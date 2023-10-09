@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -97,7 +97,7 @@ namespace Server.Items
                     Mobile targ = (Mobile)target;
                     Container pack = targ.Backpack;
 
-                    if (pack != null && pack.FindItemByType(new Type[] { typeof(SnowPile), typeof(PileOfGlacialSnow) }) != null)
+                    if (pack != null && pack.FindItemByType(new[] { typeof(SnowPile), typeof(PileOfGlacialSnow) }) != null)
                     {
                         if (from.BeginAction(typeof(SnowPile)))
                         {

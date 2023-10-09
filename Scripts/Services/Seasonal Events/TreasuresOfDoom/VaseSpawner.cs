@@ -1,7 +1,7 @@
-using Server.ContextMenus;
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.ContextMenus;
+using Server.Items;
 
 namespace Server.Engines.TreasuresOfDoom
 {

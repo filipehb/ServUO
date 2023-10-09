@@ -1,4 +1,5 @@
 using System;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -99,7 +100,7 @@ namespace Server.Items
 
         private void Replace()
         {
-            Multis.BaseHouse house = Multis.BaseHouse.FindHouseAt(this);
+            BaseHouse house = BaseHouse.FindHouseAt(this);
 
             if (house != null)
             {
@@ -157,7 +158,7 @@ namespace Server.Items
             }
             else if (Parent == null)
             {
-                Multis.BaseHouse house = Multis.BaseHouse.FindHouseAt(this);
+                BaseHouse house = BaseHouse.FindHouseAt(this);
 
                 ElvenDresserDeedEast deed = new ElvenDresserDeedEast();
                 deed.MoveToWorld(Location, Map);

@@ -1,5 +1,7 @@
-using Server.Commands;
 using System;
+using Server.Commands;
+using Server.Engines.CityLoyalty;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -100,7 +102,7 @@ namespace Server.Items
             if (!m_Active || m_TeleDest == null || m_TeleDest.Deleted || m_TeleDest.Map == Map.Internal)
                 return;
 
-            if (Engines.CityLoyalty.CityTradeSystem.HasTrade(m))
+            if (CityTradeSystem.HasTrade(m))
             {
                 m.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
                 return;
@@ -111,7 +113,7 @@ namespace Server.Items
                 Map map = m_TeleDest.Map;
                 Point3D p = m_TeleDest.TelePoint;
 
-                Mobiles.BaseCreature.TeleportPets(m, p, map);
+                BaseCreature.TeleportPets(m, p, map);
 
                 m.MoveToWorld(p, map);
             }

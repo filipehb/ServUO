@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.Points;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.ShameRevamped
 {

@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ComfortableSeatingQuest : BaseQuest
     {
         public ComfortableSeatingQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BambooChair), "straw chair", 1, 0xB5B));
 
@@ -54,7 +53,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ComfortableSeatingQuest)
                 };
@@ -99,7 +98,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public CarpentersSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

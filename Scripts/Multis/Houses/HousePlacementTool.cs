@@ -1,12 +1,16 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using Server.Diagnostics;
+using Server.Engines.Points;
 using Server.Gumps;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Regions;
 using Server.Targeting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -40,7 +44,7 @@ namespace Server.Items
 
     public class HousePlacementTool : Item
     {
-        public virtual bool UseCustomHousePlots => Misc.TestCenter.Enabled;
+        public virtual bool UseCustomHousePlots => TestCenter.Enabled;
 
         [Constructable]
         public HousePlacementTool()
@@ -67,7 +71,7 @@ namespace Server.Items
         {
             if (IsChildOf(from.Backpack))
             {
-                if (from.Map == Map.TerMur && !Engines.Points.PointsSystem.QueensLoyalty.IsNoble(from))
+                if (from.Map == Map.TerMur && !PointsSystem.QueensLoyalty.IsNoble(from))
                 {
                     from.SendLocalizedMessage(1113713); // You must rise to the rank of noble in the eyes of the Gargoyle Queen before her majesty will allow you to build a house in her lands.
                     return;
@@ -226,7 +230,7 @@ namespace Server.Items
             AddAlphaRegion(10, 370, 500, 20);
 
             AddHtmlLocalized(10, 370, 250, 20, 1060645, LabelColor, false, false); // Bank Balance:
-            AddLabel(250, 370, LabelHue, Banker.GetBalance(from).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+            AddLabel(250, 370, LabelHue, Banker.GetBalance(from).ToString("N0", CultureInfo.GetCultureInfo("en-US")));
 
             AddImageTiled(10, 400, 500, 20, 2624);
             AddAlphaRegion(10, 400, 500, 20);
@@ -268,7 +272,7 @@ namespace Server.Items
                 AddHtmlLocalized(50, y, 225, 20, entry.Description, LabelColor, false, false);
                 AddLabel(275, y, LabelHue, storage.ToString());
                 AddLabel(350, y, LabelHue, lockdowns.ToString());
-                AddLabel(425, y, LabelHue, entry.Cost.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+                AddLabel(425, y, LabelHue, entry.Cost.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
             }
         }
 
@@ -448,14 +452,12 @@ namespace Server.Items
             new HousePlacementEntry(typeof(TheQueensRetreatKeep),       1159416,    2625,   1312,   3019,   1509,   52, 27641250, 0, 11,    0,  0x149E),
         };
 
-        private static readonly HousePlacementEntry[] m_CustomHouseContest = new HousePlacementEntry[]
-        {
+        private static readonly HousePlacementEntry[] m_CustomHouseContest = {
             new HousePlacementEntry(typeof(HouseFoundation), 1158538,   2625,   1312,   3019,   1509,   78, 525000, 0,  10, 0,  0x147C), // 23x23 3-Story Customizable Keep
             new HousePlacementEntry(typeof(HouseFoundation), 1158539,   4076,   2038,   4688,   2344,   78, 525000, 0,  10, 0,  0x147D),  // 32x32 3-Story Customizable Castle
         };
 
-        private static readonly HousePlacementEntry[] m_TwoStoryFoundations = new HousePlacementEntry[]
-        {
+        private static readonly HousePlacementEntry[] m_TwoStoryFoundations = {
             new HousePlacementEntry(typeof(HouseFoundation), 1060241,   425,    212,    489,    244,    10, 33000, 0,   4,  0,  0x13EC), // 7x7 2-Story Customizable House
             new HousePlacementEntry(typeof(HouseFoundation), 1060242,   580,    290,    667,    333,    14, 37000, 0,   5,  0,  0x13ED), // 7x8 2-Story Customizable House
             new HousePlacementEntry(typeof(HouseFoundation), 1060243,   650,    325,    748,    374,    16, 41000, 0,   5,  0,  0x13EE), // 7x9 2-Story Customizable House
@@ -505,8 +507,7 @@ namespace Server.Items
             new HousePlacementEntry(typeof(HouseFoundation), 1060319,   1300,   650,    1495,   747,    28, 102000, 0,  7,  0,  0x143A)// 13x13 2-Story Customizable House
         };
 
-        private static readonly HousePlacementEntry[] m_ThreeStoryFoundations = new HousePlacementEntry[]
-        {
+        private static readonly HousePlacementEntry[] m_ThreeStoryFoundations = {
             new HousePlacementEntry(typeof(HouseFoundation), 1060272,   1150,   575,    1323,   661,    24, 77000, 0,   8,  0,  0x140B), // 9x14 3-Story Customizable House
             new HousePlacementEntry(typeof(HouseFoundation), 1060284,   1200,   600,    1380,   690,    26, 85000, 0,   8,  0,  0x1417), // 10x14 3-Story Customizable House
             new HousePlacementEntry(typeof(HouseFoundation), 1060285,   1250,   625,    1438,   719,    26, 90500, 0,   8,  0,  0x1418), // 10x15 3-Story Customizable House
@@ -625,26 +626,27 @@ namespace Server.Items
             {
                 return ((HousePlacementEntry)obj);
             }
-            else if (obj is ArrayList)
+
+            if (obj is ArrayList)
             {
-                ArrayList list = (ArrayList)obj;
+	            ArrayList list = (ArrayList)obj;
 
-                for (int i = 0; i < list.Count; ++i)
-                {
-                    HousePlacementEntry e = (HousePlacementEntry)list[i];
+	            for (int i = 0; i < list.Count; ++i)
+	            {
+		            HousePlacementEntry e = (HousePlacementEntry)list[i];
 
-                    if (e.m_MultiID == house.ItemID)
-                        return e;
-                }
+		            if (e.m_MultiID == house.ItemID)
+			            return e;
+	            }
             }
             else if (obj is Hashtable)
             {
-                Hashtable table = (Hashtable)obj;
+	            Hashtable table = (Hashtable)obj;
 
-                obj = table[house.ItemID];
+	            obj = table[house.ItemID];
 
-                if (obj is HousePlacementEntry)
-                    return (HousePlacementEntry)obj;
+	            if (obj is HousePlacementEntry)
+		            return (HousePlacementEntry)obj;
             }
 
             return null;
@@ -667,7 +669,7 @@ namespace Server.Items
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             return null;
@@ -955,7 +957,7 @@ namespace Server.Items
         private readonly BaseHouse m_House;
 
         public HouseSwapGump(Mobile from, BaseHouse house, HousePlacementEntry[] entries)
-            : base((PlayerMobile)from, 50, 50)
+            : base((PlayerMobile)from)
         {
             m_From = from;
             m_Entries = entries;
@@ -992,7 +994,7 @@ namespace Server.Items
             AddAlphaRegion(10, 370, 500, 20);
 
             AddHtmlLocalized(10, 370, 250, 20, 1060645, LabelColor, false, false); // Bank Balance:
-            AddLabel(250, 370, LabelHue, Banker.GetBalance(m_From).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+            AddLabel(250, 370, LabelHue, Banker.GetBalance(m_From).ToString("N0", CultureInfo.GetCultureInfo("en-US")));
 
             AddImageTiled(10, 400, 500, 20, 2624);
             AddAlphaRegion(10, 400, 500, 20);
@@ -1032,7 +1034,7 @@ namespace Server.Items
                 AddHtmlLocalized(50, y, 225, 20, entry.Description, LabelColor, false, false);
                 AddLabel(275, y, LabelHue, storage.ToString());
                 AddLabel(350, y, LabelHue, lockdowns.ToString());
-                AddLabel(425, y, LabelHue, entry.Cost.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+                AddLabel(425, y, LabelHue, entry.Cost.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
             }
         }
 
@@ -1134,7 +1136,6 @@ namespace Server.Items
                             * Any barkeepers have been converted into deeds.
                             */
                             m_From.SendGump(new NoticeGump(1060637, 30720, 1060012, 32512, 420, 280, null, null));
-                            return;
                         }
                     }
                 }

@@ -1,15 +1,14 @@
+using System;
+using System.Collections.Generic;
 using Server.Events.Halloween;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Events
 {
     public class HalloweenHauntings
     {
-        private static readonly Rectangle2D[] m_Cemetaries = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_Cemetaries = {
             new Rectangle2D(1272,3712,30,20), // Jhelom
             new Rectangle2D(1337,1444,48,52), // Britain
             new Rectangle2D(2424,1098,20,28), // Trinsic
@@ -167,8 +166,6 @@ namespace Server.Engines.Events
                 case 2:
                     Hue = 0xa47;
                     break;
-                default:
-                    break;
             }
         }
 
@@ -259,8 +256,6 @@ namespace Server.Engines.Events
                     {
                         PackItem(new PlayerBones(m_DeadPlayer.Name));
                     }
-                    break;
-                default:
                     break;
             }
         }

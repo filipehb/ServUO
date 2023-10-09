@@ -68,8 +68,7 @@ namespace Server.Items
             return Loot.Construct(_AncientAquariumFish[Utility.Random(amount)]) as BaseFish;
         }
 
-        private Type[] _AncientAquariumFish = new[]
-        {
+        private Type[] _AncientAquariumFish = {
             // Common
             typeof(ArrowCrab), typeof(RockBeauty), typeof(SpottedParrotfish), typeof(BlackDurgeon), typeof(SeaUrchin),
             typeof(Squirrelfish), typeof(FrenchAngelfish), typeof(SergeantMajor), typeof(HumpbackGrouper), typeof(Spadefish),

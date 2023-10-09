@@ -1,7 +1,8 @@
+using System.Globalization;
+using Server.Engines.Quests;
 using Server.Guilds;
 using Server.Gumps;
 using Server.Mobiles;
-using System.Globalization;
 
 namespace Server.Engines.VvV
 {
@@ -9,7 +10,7 @@ namespace Server.Engines.VvV
     {
         public VvVBattle Battle { get; set; }
 
-        public static readonly int Color16 = Quests.BaseQuestGump.C32216(0xB22222);
+        public static readonly int Color16 = BaseQuestGump.C32216(0xB22222);
 
         public BattleStatsGump(PlayerMobile pm, VvVBattle battle)
             : base(50, 50)

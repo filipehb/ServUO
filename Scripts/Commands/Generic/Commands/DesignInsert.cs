@@ -1,9 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Multis;
 using Server.Targeting;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Commands.Generic
 {
@@ -18,7 +18,7 @@ namespace Server.Commands.Generic
         {
             AccessLevel = AccessLevel.GameMaster;
             Supports = CommandSupport.Single | CommandSupport.Area;
-            Commands = new string[] { "DesignInsert" };
+            Commands = new[] { "DesignInsert" };
             ObjectTypes = ObjectTypes.Items;
             Usage = "DesignInsert [allItems=false]";
             Description = "Inserts multiple targeted items into a customizable house's design.";

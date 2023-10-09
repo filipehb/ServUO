@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.Craft;
 using Server.Multis;
-using System;
 
 namespace Server.Items
 {
@@ -39,29 +39,29 @@ namespace Server.Items
     {
         public static int[][] IDs =
         {
-            new int[] { 1155794, 464, 465, 466, 463 },      // RoughWindowless
-			new int[] { 1155797, 467, 468 },                // RoughWindow
-			new int[] { 1155799, 469, 470, 471, 472, 473 }, // RoughArch
-			new int[] { 1155804, 474, },                    // RoughPillar
-			new int[] { 1155805, 475, 476, 477, 478, 479 }, // RoughRoundedArch
-			new int[] { 1155810, 480, 481, 482, 484 },      // RoughSmallArch
-			new int[] { 1155814, 486, 487 },                // RoughAngledPillar
-			new int[] { 1155816, 488, 489, 490, 491 },      // ShortRough
-			new int[] { 1155821, 1928 },                    // RoughBlock
-			new int[] { 1155822, 1929, 1930, 1931, 1932 },  // RoughSteps
-			new int[] { 1155826, 1934, 1933, 1935, 1936 },  // RoughCornerSteps
-			new int[] { 1155830, 1938, 1940, 1937, 1939 },  // RoughRoundedCornerSeps
-			new int[] { 1155834, 1941, 1942, 1943, 1944 },  // RoughInsetSteps
-			new int[] { 1155838, 1945, 1946, 1947, 1948 },  // RoughRoundedIsetSteps
-			new int[] { 1155878, 1305 },                    // LightPaver
-			new int[] { 1155879, 1309 },                    // Medium Paver
-			new int[] { 1155880, 1313 },                    // DarkPaver
-            new int[] { 1155850, 2969, 2970 },              // LightWoodenSIgnHanger
-            new int[] { 1155849, 2967, 2968 },              // DarkWoodenSIgnHanger
-			new int[] { 1155851, 2971, 2972 },              // CurledMetalSIgnHanger
-			new int[] { 1155852, 2973, 2974 },              // FlourishedCurledSignHanger
-			new int[] { 1155853, 2975, 2976 },              // InwardCurledCurledMetalSIgnHanger
-			new int[] { 1155854, 2977, 2978 },              // EndCurledMetalSignHanger
+            new[] { 1155794, 464, 465, 466, 463 },      // RoughWindowless
+			new[] { 1155797, 467, 468 },                // RoughWindow
+			new[] { 1155799, 469, 470, 471, 472, 473 }, // RoughArch
+			new[] { 1155804, 474, },                    // RoughPillar
+			new[] { 1155805, 475, 476, 477, 478, 479 }, // RoughRoundedArch
+			new[] { 1155810, 480, 481, 482, 484 },      // RoughSmallArch
+			new[] { 1155814, 486, 487 },                // RoughAngledPillar
+			new[] { 1155816, 488, 489, 490, 491 },      // ShortRough
+			new[] { 1155821, 1928 },                    // RoughBlock
+			new[] { 1155822, 1929, 1930, 1931, 1932 },  // RoughSteps
+			new[] { 1155826, 1934, 1933, 1935, 1936 },  // RoughCornerSteps
+			new[] { 1155830, 1938, 1940, 1937, 1939 },  // RoughRoundedCornerSeps
+			new[] { 1155834, 1941, 1942, 1943, 1944 },  // RoughInsetSteps
+			new[] { 1155838, 1945, 1946, 1947, 1948 },  // RoughRoundedIsetSteps
+			new[] { 1155878, 1305 },                    // LightPaver
+			new[] { 1155879, 1309 },                    // Medium Paver
+			new[] { 1155880, 1313 },                    // DarkPaver
+            new[] { 1155850, 2969, 2970 },              // LightWoodenSIgnHanger
+            new[] { 1155849, 2967, 2968 },              // DarkWoodenSIgnHanger
+			new[] { 1155851, 2971, 2972 },              // CurledMetalSIgnHanger
+			new[] { 1155852, 2973, 2974 },              // FlourishedCurledSignHanger
+			new[] { 1155853, 2975, 2976 },              // InwardCurledCurledMetalSIgnHanger
+			new[] { 1155854, 2977, 2978 },              // EndCurledMetalSignHanger
 		};
 
         private CraftableItemType _Type;
@@ -139,16 +139,14 @@ namespace Server.Items
 
                     if (ItemID == id)
                     {
-                        if (i >= list.Length - 1)
+	                    if (i >= list.Length - 1)
                         {
                             ItemID = list[1];
                             break;
                         }
-                        else
-                        {
-                            ItemID = list[i + 1];
-                            break;
-                        }
+
+	                    ItemID = list[i + 1];
+	                    break;
                     }
                 }
             }

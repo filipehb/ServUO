@@ -1,9 +1,9 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.BulkOrders
 {
@@ -181,11 +181,12 @@ namespace Server.Engines.BulkOrders
 
                         return true;
                     }
-                    else if (entry.CachedDeeds > 0)
-                    {
-                        entry.CachedDeeds--;
 
-                        return true;
+                    if (entry.CachedDeeds > 0)
+                    {
+	                    entry.CachedDeeds--;
+
+	                    return true;
                     }
                 }
             }
@@ -199,21 +200,22 @@ namespace Server.Engines.BulkOrders
 
             if (context != null)
             {
-                if (NewSystemEnabled)
+	            if (NewSystemEnabled)
                 {
                     DateTime last = context.Entries[type].LastBulkOrder;
 
                     return (last + TimeSpan.FromHours(Delay)) - DateTime.UtcNow;
                 }
-                else if (context.Entries.ContainsKey(type))
-                {
-                    DateTime dt = context.Entries[type].NextBulkOrder;
 
-                    if (dt < DateTime.UtcNow)
-                        return TimeSpan.Zero;
+	            if (context.Entries.ContainsKey(type))
+	            {
+		            DateTime dt = context.Entries[type].NextBulkOrder;
 
-                    return DateTime.UtcNow - dt;
-                }
+		            if (dt < DateTime.UtcNow)
+			            return TimeSpan.Zero;
+
+		            return DateTime.UtcNow - dt;
+	            }
             }
 
             return TimeSpan.MaxValue;
@@ -259,28 +261,28 @@ namespace Server.Engines.BulkOrders
                 {
                     case BODType.Smith:
                         if (doLarge) return new LargeSmithBOD();
-                        else return SmallSmithBOD.CreateRandomFor(pm);
+                        return SmallSmithBOD.CreateRandomFor(pm);
                     case BODType.Tailor:
                         if (doLarge) return new LargeTailorBOD();
-                        else return SmallTailorBOD.CreateRandomFor(pm);
+                        return SmallTailorBOD.CreateRandomFor(pm);
                     case BODType.Alchemy:
                         if (doLarge) return new LargeAlchemyBOD();
-                        else return SmallAlchemyBOD.CreateRandomFor(pm);
+                        return SmallAlchemyBOD.CreateRandomFor(pm);
                     case BODType.Inscription:
                         if (doLarge) return new LargeInscriptionBOD();
-                        else return SmallInscriptionBOD.CreateRandomFor(pm);
+                        return SmallInscriptionBOD.CreateRandomFor(pm);
                     case BODType.Tinkering:
                         if (doLarge) return new LargeTinkerBOD();
-                        else return SmallTinkerBOD.CreateRandomFor(pm);
+                        return SmallTinkerBOD.CreateRandomFor(pm);
                     case BODType.Cooking:
                         if (doLarge) return new LargeCookingBOD();
-                        else return SmallCookingBOD.CreateRandomFor(pm);
+                        return SmallCookingBOD.CreateRandomFor(pm);
                     case BODType.Fletching:
                         if (doLarge) return new LargeFletchingBOD();
-                        else return SmallFletchingBOD.CreateRandomFor(pm);
+                        return SmallFletchingBOD.CreateRandomFor(pm);
                     case BODType.Carpentry:
                         if (doLarge) return new LargeCarpentryBOD();
-                        else return SmallCarpentryBOD.CreateRandomFor(pm);
+                        return SmallCarpentryBOD.CreateRandomFor(pm);
                 }
             }
 

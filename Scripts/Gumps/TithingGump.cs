@@ -1,6 +1,6 @@
+using System.Globalization;
 using Server.Mobiles;
 using Server.Network;
-using System.Globalization;
 
 namespace Server.Gumps
 {

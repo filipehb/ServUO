@@ -1,9 +1,12 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Server.Diagnostics;
+
 #endregion
 
 namespace Server
@@ -273,10 +276,8 @@ namespace Server
 
 				return m_TilesList.ToArray();
 			}
-			else
-			{
-				return tiles[x & 0x7][y & 0x7];
-			}
+
+			return tiles[x & 0x7][y & 0x7];
 		}
 
 		[MethodImpl(MethodImplOptions.Synchronized)]
@@ -386,68 +387,66 @@ namespace Server
 				{
 					return m_EmptyStaticBlock;
 				}
-				else
+
+				var count = length / 7;
+
+				m_Statics.Seek(lookup, SeekOrigin.Begin);
+
+				if (m_TileBuffer.Length < count)
 				{
-					var count = length / 7;
+					m_TileBuffer = new StaticTile[count];
+				}
 
-					m_Statics.Seek(lookup, SeekOrigin.Begin);
+				var staTiles = m_TileBuffer; //new StaticTile[tileCount];
 
-					if (m_TileBuffer.Length < count)
+				fixed (StaticTile* pTiles = staTiles)
+				{
+					NativeReader.Read(m_Statics, pTiles, length);
+
+					if (m_Lists == null)
 					{
-						m_TileBuffer = new StaticTile[count];
-					}
-
-					var staTiles = m_TileBuffer; //new StaticTile[tileCount];
-
-					fixed (StaticTile* pTiles = staTiles)
-					{
-						NativeReader.Read(m_Statics, pTiles, length);
-
-						if (m_Lists == null)
-						{
-							m_Lists = new TileList[8][];
-
-							for (var i = 0; i < 8; ++i)
-							{
-								m_Lists[i] = new TileList[8];
-
-								for (var j = 0; j < 8; ++j)
-								{
-									m_Lists[i][j] = new TileList();
-								}
-							}
-						}
-
-						var lists = m_Lists;
-
-						StaticTile* pCur = pTiles, pEnd = pTiles + count;
-
-						while (pCur < pEnd)
-						{
-							lists[pCur->m_X & 0x7][pCur->m_Y & 0x7].Add(pCur->m_ID, pCur->m_Z);
-
-							pCur = pCur + 1;
-						}
-
-						var tiles = new StaticTile[8][][];
+						m_Lists = new TileList[8][];
 
 						for (var i = 0; i < 8; ++i)
 						{
-							tiles[i] = new StaticTile[8][];
+							m_Lists[i] = new TileList[8];
 
 							for (var j = 0; j < 8; ++j)
 							{
-								tiles[i][j] = lists[i][j].ToArray();
+								m_Lists[i][j] = new TileList();
 							}
 						}
-
-						return tiles;
 					}
+
+					var lists = m_Lists;
+
+					StaticTile* pCur = pTiles, pEnd = pTiles + count;
+
+					while (pCur < pEnd)
+					{
+						lists[pCur->m_X & 0x7][pCur->m_Y & 0x7].Add(pCur->m_ID, pCur->m_Z);
+
+						pCur = pCur + 1;
+					}
+
+					var tiles = new StaticTile[8][][];
+
+					for (var i = 0; i < 8; ++i)
+					{
+						tiles[i] = new StaticTile[8][];
+
+						for (var j = 0; j < 8; ++j)
+						{
+							tiles[i][j] = lists[i][j].ToArray();
+						}
+					}
+
+					return tiles;
 				}
 			}
 			catch (EndOfStreamException ex)
 			{
-				Diagnostics.ExceptionLogging.LogException(ex);
+				ExceptionLogging.LogException(ex);
 
 				if (DateTime.UtcNow >= m_NextStaticWarning)
 				{
@@ -495,7 +494,7 @@ namespace Server
 			}
 			catch (Exception ex)
 			{
-				Diagnostics.ExceptionLogging.LogException(ex);
+				ExceptionLogging.LogException(ex);
 
 				if (DateTime.UtcNow >= m_NextLandWarning)
 				{

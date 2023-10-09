@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ThinningTheHerdQuest : BaseQuest
     {
         public ThinningTheHerdQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Goat), "goats", 10));
 
@@ -55,7 +54,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CreepyCrawliesQuest),
                     typeof(MongbatMenaceQuest),

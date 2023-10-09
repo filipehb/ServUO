@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -102,21 +102,17 @@ namespace Server.Mobiles
 
         public static Item SpawnGears(IEntity e)
         {
-            if (!(e is BaseCreature) || !((BaseCreature)e).IsParagon)
-            {
-                if (0.75 > Utility.RandomDouble())
+	        if (!(e is BaseCreature) || !((BaseCreature)e).IsParagon)
+	        {
+		        if (0.75 > Utility.RandomDouble())
                 {
                     return DawnsMusicGear.RandomCommon;
                 }
-                else
-                {
-                    return DawnsMusicGear.RandomUncommon;
-                }
-            }
-            else
-            {
-                return DawnsMusicGear.RandomRare;
-            }
+
+		        return DawnsMusicGear.RandomUncommon;
+	        }
+
+	        return DawnsMusicGear.RandomRare;
         }
 
         public Golem(Serial serial)

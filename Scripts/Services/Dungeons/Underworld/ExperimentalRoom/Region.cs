@@ -1,6 +1,6 @@
+using System.Xml;
 using Server.Items;
 using Server.Mobiles;
-using System.Xml;
 
 namespace Server.Regions
 {
@@ -70,8 +70,7 @@ namespace Server.Regions
             Effects.SendLocationParticles(EffectItem.Create(p, from.Map, EffectItem.DefaultDuration), 0x3728, 10, 10, 5023);
         }
 
-        private static readonly Rectangle2D[] m_RoomRecs = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_RoomRecs = {
             new Rectangle2D(977, 1104, 15, 10), //RoomOne
             new Rectangle2D(977, 1092, 15, 9), //RoomTwo
             new Rectangle2D(977, 1074, 15, 10), //RoomThree

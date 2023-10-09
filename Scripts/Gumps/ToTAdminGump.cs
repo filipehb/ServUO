@@ -1,7 +1,8 @@
+using System;
 using Server.Commands;
+using Server.Engines.SeasonalEvents;
 using Server.Misc;
 using Server.Network;
-using System;
 
 namespace Server.Gumps
 {
@@ -113,7 +114,7 @@ namespace Server.Gumps
                 TreasuresOfTokuno.DropEra = TreasuresOfTokunoEra.None;
                 from.SendMessage("Treasures of Tokuno Drops have been deactivated");
 
-                Engines.SeasonalEvents.SeasonalEventSystem.OnToTDeactivated(from);
+                SeasonalEventSystem.OnToTDeactivated(from);
             }
             else if (button >= 2)
             {

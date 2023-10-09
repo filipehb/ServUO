@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public LifeSyphon()
-            : base()
         {
             Hue = 1172;
             WeaponAttributes.BloodDrinker = 1;

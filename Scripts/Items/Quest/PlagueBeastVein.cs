@@ -1,5 +1,5 @@
-using Server.Network;
 using System;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -23,14 +23,14 @@ namespace Server.Items
         {
             if (IsAccessibleTo(from))
             {
-                if (!m_Cut && m_Timer == null)
+	            if (!m_Cut && m_Timer == null)
                 {
                     m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(3), CuttingDone, from);
                     scissors.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1071899); // You begin cutting through the vein.
                     return true;
                 }
-                else
-                    scissors.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1071900); // // This vein has already been cut.
+
+	            scissors.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1071900); // // This vein has already been cut.
             }
 
             return false;

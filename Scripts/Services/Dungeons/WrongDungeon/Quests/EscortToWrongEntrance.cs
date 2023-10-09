@@ -5,7 +5,6 @@ namespace Server.Engines.Quests
     public class EscortToWrongEntrance : BaseQuest
     {
         public EscortToWrongEntrance()
-            : base()
         {
             AddObjective(new EscortObjective("Wrong Entrance"));
 

@@ -131,16 +131,12 @@ namespace Server.Engines.Quests.Ambitious
                                     fungi.Delete();
                                     return true;
                                 }
-                                else
-                                {
-                                    return false;
-                                }
-                            }
-                            else
-                            {
-                                SayTo(player, 1054072); // Our arrangement was for 50 of the zoogi fungus. Please return to me when you have that amount.
+
                                 return false;
                             }
+
+                            SayTo(player, 1054072); // Our arrangement was for 50 of the zoogi fungus. Please return to me when you have that amount.
+                            return false;
                         }
                     }
                 }

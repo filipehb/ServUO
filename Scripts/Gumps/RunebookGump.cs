@@ -1,11 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.Items;
+using Server.Multis;
 using Server.Network;
 using Server.Prompts;
 using Server.Spells.Chivalry;
 using Server.Spells.Fourth;
 using Server.Spells.Seventh;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Gumps
 {
@@ -55,16 +56,16 @@ namespace Server.Gumps
         {
             if (map == Map.Trammel)
                 return 10;
-            else if (map == Map.Felucca)
-                return 81;
-            else if (map == Map.Ilshenar)
-                return 1102;
-            else if (map == Map.Malas)
-                return 1102;
-            else if (map == Map.Tokuno)
-                return 1154;
-            else if (map == Map.TerMur)
-                return 1645;
+            if (map == Map.Felucca)
+	            return 81;
+            if (map == Map.Ilshenar)
+	            return 1102;
+            if (map == Map.Malas)
+	            return 1102;
+            if (map == Map.Tokuno)
+	            return 1154;
+            if (map == Map.TerMur)
+	            return 1645;
 
             return 0;
         }
@@ -324,7 +325,7 @@ namespace Server.Gumps
         {
             Mobile from = state.Mobile;
 
-            if (Book.Deleted || !from.InRange(Book.GetWorldLocation(), 3) || !Multis.DesignContext.Check(from))
+            if (Book.Deleted || !from.InRange(Book.GetWorldLocation(), 3) || !DesignContext.Check(from))
             {
                 Book.Openers.Remove(from);
                 return;
@@ -338,7 +339,7 @@ namespace Server.Gumps
             }
             else if (buttonID == 1) // Rename book
             {
-                if (Book.CheckAccess(from) && Book.Movable != false)
+                if (Book.CheckAccess(from) && Book.Movable)
                 {
                     from.Prompt = new InternalPrompt(Book);
                 }
@@ -389,7 +390,7 @@ namespace Server.Gumps
                                 }
                             case 8: // Drop rune
                                 {
-                                    if (Book.CheckAccess(from) && Book.Movable != false)
+                                    if (Book.CheckAccess(from) && Book.Movable)
                                     {
                                         Book.DropRune(from, e, index);
 
@@ -479,9 +480,6 @@ namespace Server.Gumps
 
                                     break;
                                 }
-
-                            default:
-                                break;
                         }
                     }
                     else

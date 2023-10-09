@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Network;
-using System;
 
 namespace Server.Gumps
 {
@@ -26,7 +26,7 @@ namespace Server.Gumps
 
         public override void OnResponse(NetState sender, RelayInfo info)
         {
-            Mobile from = sender.Mobile as Mobile;
+            Mobile from = sender.Mobile;
 
             switch (info.ButtonID)
             {
@@ -123,7 +123,7 @@ namespace Server.Gumps
 
         private readonly object _Altar;
 
-        public ConfirmExitGump(object altar) : base()
+        public ConfirmExitGump(object altar)
         {
             _Altar = altar;
         }

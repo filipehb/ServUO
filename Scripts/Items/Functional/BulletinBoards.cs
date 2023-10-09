@@ -1,6 +1,7 @@
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -90,10 +91,9 @@ namespace Server.Items
 
             if (minutes != 0 && seconds != 0)
                 return string.Format("{0} minute{1} and {2} second{3}", minutes, minutes == 1 ? "" : "s", seconds, seconds == 1 ? "" : "s");
-            else if (minutes != 0)
-                return string.Format("{0} minute{1}", minutes, minutes == 1 ? "" : "s");
-            else
-                return string.Format("{0} second{1}", seconds, seconds == 1 ? "" : "s");
+            if (minutes != 0)
+	            return string.Format("{0} minute{1}", minutes, minutes == 1 ? "" : "s");
+            return string.Format("{0} second{1}", seconds, seconds == 1 ? "" : "s");
         }
 
         public static void Initialize()
@@ -405,7 +405,7 @@ namespace Server.Items
             return m_Time.ToString("MMM dd, yyyy");
         }
 
-        public override bool CheckTarget(Mobile from, Targeting.Target targ, object targeted)
+        public override bool CheckTarget(Mobile from, Target targ, object targeted)
         {
             return false;
         }

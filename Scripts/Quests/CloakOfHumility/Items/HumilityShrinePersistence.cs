@@ -1,5 +1,6 @@
 using Server.Items;
 using Server.Mobiles;
+
 namespace Server.Engines.Quests
 {
     public class HumilityShrinePersistence : Item

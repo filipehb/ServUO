@@ -4,7 +4,7 @@ namespace Server.Items
     public class BarreraaksRing : GoldRing
     {
         public override bool IsArtifact => true;
-        public override int LabelNumber => 1095049;  // Barreraak’s Old Beat Up Ring
+        public override int LabelNumber => 1095049;  // Barreraakâ€™s Old Beat Up Ring
 
         [Constructable]
         public BarreraaksRing()
@@ -19,20 +19,23 @@ namespace Server.Items
             {
                 return false;
             }
-            else if (from.Mounted)
+
+            if (from.Mounted)
             {
-                from.SendLocalizedMessage(1010097); // You cannot use this while mounted.
-                return false;
+	            from.SendLocalizedMessage(1010097); // You cannot use this while mounted.
+	            return false;
             }
-            else if (from.Flying)
+
+            if (from.Flying)
             {
-                from.SendLocalizedMessage(1113414); // You can't use this while flying!
-                return false;
+	            from.SendLocalizedMessage(1113414); // You can't use this while flying!
+	            return false;
             }
-            else if (from.IsBodyMod)
+
+            if (from.IsBodyMod)
             {
-                from.SendLocalizedMessage(1111896); // You may only change forms while in your original body.
-                return false;
+	            from.SendLocalizedMessage(1111896); // You may only change forms while in your original body.
+	            return false;
             }
 
             return true;

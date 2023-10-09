@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class AllThatGlitters : BaseQuest, ITierQuest
     {
         public AllThatGlitters()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(CongealedSlugAcid), "Congealed Slug Acid", 5, 0x5742));
             AddObjective(new ObtainObjective(typeof(PileofInspectedGoldIngots), "Pile of Inspected Gold Ingots", 1, 0x1BEA));
@@ -55,7 +54,6 @@ namespace Server.Engines.Quests
     public class TastyTreats : BaseQuest, ITierQuest
     {
         public TastyTreats()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BouraSkin), "BouraSkin", 5, 0x11f4));
             AddObjective(new ObtainObjective(typeof(Dough), "Dough", 1, 0x103D));
@@ -101,7 +99,6 @@ namespace Server.Engines.Quests
     public class MetalHead : BaseQuest, ITierQuest
     {
         public MetalHead()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(UndamagedIronBeetleScale), "Undamaged IronBeetle Scale", 10, 0x5742));
             AddObjective(new ObtainObjective(typeof(PileofInspectedDullCopperIngots), "Pile of Inspected DullCopper Ingots", 1, 0x1BEA));
@@ -150,7 +147,6 @@ namespace Server.Engines.Quests
     public class PinkistheNewBlack : BaseQuest, ITierQuest
     {
         public PinkistheNewBlack()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SearedFireAntGoo), "Seared Fire Ant Goo", 5, 0x0976));
             AddObjective(new ObtainObjective(typeof(PileofInspectedAgapiteIngots), "Pile of Inspected Agapite Ingots", 1, 0x1BEA));

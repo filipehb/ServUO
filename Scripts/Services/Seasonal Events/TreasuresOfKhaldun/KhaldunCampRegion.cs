@@ -1,11 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Regions;
 using Server.Spells;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.Khaldun
 {
@@ -29,33 +29,33 @@ namespace Server.Engines.Khaldun
 
         private readonly Point3D[][] _BlockerLocs =
         {
-            new Point3D[]
+            new[]
             {
                 new Point3D(5995, 3727, 19), new Point3D(5995, 3726, 18), new Point3D(5996, 3726, 20), new Point3D(5996, 3725, 17), new Point3D(5997, 3725, 19),
                 new Point3D(5997, 3724, 19), new Point3D(5998, 3724, 19), new Point3D(5998, 3723, 20), new Point3D(5999, 3723, 20), new Point3D(5999, 3722, 20),
             },
 
-            new Point3D[]
+            new[]
             {
                 new Point3D(6023, 3710, 0), new Point3D(6024, 3710, 1), new Point3D(6025, 3710, 2), new Point3D(6026, 3710, 1), new Point3D(6027, 3710, -2),
                 new Point3D(6028, 3710, -2), new Point3D(6029, 3710, -1), new Point3D(6030, 3710, -1), new Point3D(6031, 3710, 0),
             },
-            new Point3D[]
+            new[]
             {
                 new Point3D(6036, 3748, 2), new Point3D(6037, 3748, 1), new Point3D(6038, 3748, 0), new Point3D(6039, 3748, 0), new Point3D(6040, 3748, 1), new Point3D(6041, 3748, -2),
             },
 
-            new Point3D[]
+            new[]
             {
                 new Point3D(6025, 3782, 22), new Point3D(6026, 3782, 22), new Point3D(6026, 3781, 22), new Point3D(6027, 3781, 19), new Point3D(6027, 3780, 22), new Point3D(6027, 3779, 18),
             },
 
-            new Point3D[]
+            new[]
             {
                 new Point3D(5991, 3755, 4), new Point3D(5991, 3754, 9), new Point3D(5991, 3753, 8), new Point3D(5991, 3752, 8), new Point3D(5991, 3751, 8), new Point3D(5991, 3750, 7), new Point3D(5991, 3749, 5),
             },
 
-            new Point3D[]
+            new[]
             {
                 new Point3D(5992, 3749, 9), new Point3D(5993, 3749, 10), new Point3D(5994, 3749, 10), new Point3D(5995, 3749, 10)
             }

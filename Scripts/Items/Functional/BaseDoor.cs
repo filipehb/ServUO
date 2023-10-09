@@ -1,16 +1,15 @@
+using System;
+using System.Collections.Generic;
 using Server.Commands;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
     public abstract class BaseDoor : Item, ILockable, ITelekinesisable
     {
         private static readonly string m_TimerID = "CloseDoorTimer";
-        private static readonly Point3D[] m_Offsets = new Point3D[]
-        {
+        private static readonly Point3D[] m_Offsets = {
             new Point3D(-1, 1, 0),
             new Point3D(1, 1, 0),
             new Point3D(-1, 0, 0),

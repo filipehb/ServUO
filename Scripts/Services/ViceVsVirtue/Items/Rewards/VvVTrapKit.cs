@@ -1,8 +1,9 @@
-using Server.ContextMenus;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Engines.VvV
 {
@@ -119,10 +120,8 @@ namespace Server.Engines.VvV
                                 m.SendLocalizedMessage(1042261); // You cannot place the trap there.
                                 return;
                             }
-                            else
-                            {
-                                m.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1155411, m.NetState); // *You successfully lay the tripwire*
-                            }
+
+                            m.PrivateOverheadMessage(MessageType.Regular, 1154, 1155411, m.NetState); // *You successfully lay the tripwire*
                         }
                     }
                     else
@@ -133,7 +132,7 @@ namespace Server.Engines.VvV
             }
             else
             {
-                m.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1155412, m.NetState); // *You successfully set the trap*
+                m.PrivateOverheadMessage(MessageType.Regular, 1154, 1155412, m.NetState); // *You successfully set the trap*
                 trap = ConstructTrap(m);
             }
 
@@ -221,7 +220,7 @@ namespace Server.Engines.VvV
 
                 Deed.InvalidateProperties();
 
-                Clicker.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1155515, Clicker.NetState); // *You adjust the deployment mechanism*
+                Clicker.PrivateOverheadMessage(MessageType.Regular, 1154, 1155515, Clicker.NetState); // *You adjust the deployment mechanism*
             }
         }
 

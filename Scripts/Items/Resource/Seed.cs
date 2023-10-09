@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 using Server.Targeting;
 
 namespace Server.Engines.Plants
@@ -115,30 +116,24 @@ namespace Server.Engines.Plants
 
             if (Amount == 1)
             {
-                if (m_ShowType)
+	            if (m_ShowType)
                 {
                     args = string.Format("#{0}\t#{1}", title, typeInfo.Name);
                     return typeInfo.GetSeedLabel(hueInfo);
                 }
-                else
-                {
-                    args = string.Format("#{0}", title);
-                    return hueInfo.IsBright() ? 1060839 : 1060838; // [bright] ~1_val~ seed
-                }
+
+	            args = string.Format("#{0}", title);
+	            return hueInfo.IsBright() ? 1060839 : 1060838; // [bright] ~1_val~ seed
             }
-            else
+
+            if (m_ShowType)
             {
-                if (m_ShowType)
-                {
-                    args = string.Format("{0}\t#{1}\t#{2}", Amount, title, typeInfo.Name);
-                    return typeInfo.GetSeedLabelPlural(hueInfo);
-                }
-                else
-                {
-                    args = string.Format("{0}\t#{1}", Amount, title);
-                    return hueInfo.IsBright() ? 1113491 : 1113490; // ~1_amount~ [bright] ~2_val~ seeds
-                }
+	            args = string.Format("{0}\t#{1}\t#{2}", Amount, title, typeInfo.Name);
+	            return typeInfo.GetSeedLabelPlural(hueInfo);
             }
+
+            args = string.Format("{0}\t#{1}", Amount, title);
+            return hueInfo.IsBright() ? 1113491 : 1113490; // ~1_amount~ [bright] ~2_val~ seeds
         }
 
         public override void AddNameProperty(ObjectPropertyList list)
@@ -216,7 +211,7 @@ namespace Server.Engines.Plants
                         from.SendLocalizedMessage(1150367); // This plot already has a plant!
                     else
                     {
-                        Multis.BaseHouse house = Multis.BaseHouse.FindHouseAt(addon);
+                        BaseHouse house = BaseHouse.FindHouseAt(addon);
 
                         if (house != null)
                         {

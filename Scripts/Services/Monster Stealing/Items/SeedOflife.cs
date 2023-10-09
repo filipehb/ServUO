@@ -1,6 +1,6 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -55,17 +55,14 @@ namespace Server.Items
 
         private bool CheckUse(PlayerMobile pm)
         {
-            if (SeedUsageList.ContainsKey(pm))
-            {
-                if (SeedUsageList[pm] + Cooldown >= DateTime.Now)
+	        if (SeedUsageList.ContainsKey(pm))
+	        {
+		        if (SeedUsageList[pm] + Cooldown >= DateTime.Now)
                     return false;
-                else
-                    return true;
-            }
-            else
-            {
-                return true;
-            }
+		        return true;
+	        }
+
+	        return true;
         }
 
         private void OnUsed(PlayerMobile by)

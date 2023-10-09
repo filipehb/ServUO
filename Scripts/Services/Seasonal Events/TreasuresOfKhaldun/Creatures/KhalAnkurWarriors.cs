@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -132,13 +132,13 @@ namespace Server.Mobiles
             {
                 case 0:
                     {
-                        SetWearable(Loot.Construct(new Type[] { typeof(Spear), typeof(QuarterStaff), typeof(BlackStaff), typeof(Tessen), typeof(Cleaver), typeof(Lajatang) }));
+                        SetWearable(Loot.Construct(new[] { typeof(Spear), typeof(QuarterStaff), typeof(BlackStaff), typeof(Tessen), typeof(Cleaver), typeof(Lajatang) }));
 
                         break;
                     }
                 case 1:
                     {
-                        SetWearable(Loot.Construct(new Type[] { typeof(Yumi), typeof(Crossbow), typeof(RepeatingCrossbow), typeof(HeavyCrossbow) }));
+                        SetWearable(Loot.Construct(new[] { typeof(Yumi), typeof(Crossbow), typeof(RepeatingCrossbow), typeof(HeavyCrossbow) }));
 
                         RangeFight = 7;
                         AI = AIType.AI_Archer;

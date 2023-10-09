@@ -1,6 +1,7 @@
+using System;
 using Server.Engines.Craft;
 using Server.Gumps;
-using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -123,11 +124,11 @@ namespace Server.Items
                 from.SendLocalizedMessage(1112594); //You cannot place gorgon lenses on this.
         }
 
-        private class InternalTarget : Targeting.Target
+        private class InternalTarget : Target
         {
             private readonly GorgonLense m_Lense;
 
-            public InternalTarget(GorgonLense lense) : base(-1, false, Targeting.TargetFlags.None)
+            public InternalTarget(GorgonLense lense) : base(-1, false, TargetFlags.None)
             {
                 m_Lense = lense;
             }

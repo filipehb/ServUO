@@ -1,11 +1,12 @@
 #region References
+
+using System;
+using System.Reflection;
 using Server.Commands;
 using Server.Commands.Generic;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Reflection;
 using CPA = Server.CommandPropertyAttribute;
 #endregion
 
@@ -31,11 +32,10 @@ namespace Server.Commands
         private static readonly Type _TypeOfTimeSpan = typeof(TimeSpan);
         private static readonly Type _TypeOfParsable = typeof(ParsableAttribute);
 
-        private static readonly Type[] _ParseTypes = new[] { typeof(string) };
+        private static readonly Type[] _ParseTypes = { typeof(string) };
         private static readonly object[] _ParseParams = new object[1];
 
-        private static readonly Type[] _NumericTypes = new[]
-        {
+        private static readonly Type[] _NumericTypes = {
             typeof(byte), typeof(sbyte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long),
             typeof(ulong)
         };
@@ -722,14 +722,14 @@ namespace Server
     public sealed class NotYetBoundException : BindingException
     {
         public NotYetBoundException(Property property)
-            : base(property, string.Format("Property has not yet been bound."))
+            : base(property, "Property has not yet been bound.")
         { }
     }
 
     public sealed class AlreadyBoundException : BindingException
     {
         public AlreadyBoundException(Property property)
-            : base(property, string.Format("Property has already been bound."))
+            : base(property, "Property has already been bound.")
         { }
     }
 

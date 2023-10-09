@@ -1,3 +1,4 @@
+using Server.Engines.Craft;
 using Server.Network;
 using Server.Targeting;
 
@@ -84,7 +85,7 @@ namespace Server.Items
 
         public virtual void DisplayDurabilityTo(Mobile m)
         {
-            LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString()); // Durability
+            LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining); // Durability
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -118,7 +119,7 @@ namespace Server.Items
                     bool noGo = false;
                     int antique = 0;
 
-                    if (!Engines.Craft.Repair.AllowsRepair(item, null) || (item is BaseJewel && !CanPOFJewelry))
+                    if (!Repair.AllowsRepair(item, null) || (item is BaseJewel && !CanPOFJewelry))
                     {
                         from.SendLocalizedMessage(1049083); // You cannot use the powder on that item.
                         return;

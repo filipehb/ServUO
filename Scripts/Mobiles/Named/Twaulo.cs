@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.CannedEvil;
 using Server.Items;
-using System;
 
 namespace Server.Mobiles
 {
@@ -55,13 +55,13 @@ namespace Server.Mobiles
 
         public override ChampionSkullType SkullType => ChampionSkullType.Pain;
 
-        public override Type[] UniqueList => new Type[] { typeof(Quell) };
+        public override Type[] UniqueList => new[] { typeof(Quell) };
 
-        public override Type[] SharedList => new Type[] { typeof(TheMostKnowledgePerson), typeof(OblivionsNeedle), typeof(BraveKnightOfTheBritannia) };
+        public override Type[] SharedList => new[] { typeof(TheMostKnowledgePerson), typeof(OblivionsNeedle), typeof(BraveKnightOfTheBritannia) };
 
-        public override Type[] DecorativeList => new Type[] { typeof(Pier), typeof(MonsterStatuette) };
+        public override Type[] DecorativeList => new[] { typeof(Pier), typeof(MonsterStatuette) };
 
-        public override MonsterStatuetteType[] StatueTypes => new MonsterStatuetteType[] { MonsterStatuetteType.DreadHorn };
+        public override MonsterStatuetteType[] StatueTypes => new[] { MonsterStatuetteType.DreadHorn };
 
         public override bool Unprovokable => true;
 

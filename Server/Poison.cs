@@ -1,6 +1,8 @@
 #region References
+
 using System;
 using System.Collections.Generic;
+
 #endregion
 
 namespace Server
@@ -31,7 +33,8 @@ namespace Server
 				{
 					throw new Exception("A poison with that level already exists.");
 				}
-				else if (regName == m_Poisons[i].Name.ToLower())
+
+				if (regName == m_Poisons[i].Name.ToLower())
 				{
 					throw new Exception("A poison with that name already exists.");
 				}

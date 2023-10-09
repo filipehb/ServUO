@@ -4,13 +4,9 @@ namespace Server.Gumps
 {
 	public class ECHandleInput : GumpEntry
 	{
-		public ECHandleInput()
-		{
-		}
-
 		public override string Compile()
 		{
-			return System.String.Format("{{ echandleinput }}");
+			return "{ echandleinput }";
 		}
 
 		private static readonly byte[] m_LayoutName = Gump.StringToBuffer("echandleinput");

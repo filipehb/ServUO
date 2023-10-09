@@ -1,7 +1,7 @@
-﻿using Server.Engines.Quests;
+﻿using System;
+using Server.Engines.Quests;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {

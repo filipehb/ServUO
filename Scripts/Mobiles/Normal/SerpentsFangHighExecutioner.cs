@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public SerpentsFangHighExecutioner()
-            : base()
         {
             Name = "Black Order High Executioner";
             Title = "of the Serpent's Fang Sect";

@@ -1,5 +1,6 @@
-using Server.Items;
 using System;
+using Server.Items;
+using Server.Misc;
 
 namespace Server.SkillHandlers
 {
@@ -45,7 +46,7 @@ namespace Server.SkillHandlers
                 return TimeSpan.FromSeconds(10.0);
             }
 
-            if (Misc.RegenRates.GetArmorOffset(m) > 0)
+            if (RegenRates.GetArmorOffset(m) > 0)
             {
                 m.SendLocalizedMessage(500135); // Regenative forces cannot penetrate your armor!
 

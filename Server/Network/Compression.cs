@@ -1,6 +1,8 @@
 #region References
+
 using System;
 using System.Runtime.InteropServices;
+
 #endregion
 
 namespace Server.Network
@@ -67,15 +69,18 @@ namespace Server.Network
 			{
 				throw new ArgumentNullException("input");
 			}
-			else if (offset < 0 || offset >= input.Length)
+
+			if (offset < 0 || offset >= input.Length)
 			{
 				throw new ArgumentOutOfRangeException("offset");
 			}
-			else if (count < 0 || count > input.Length)
+
+			if (count < 0 || count > input.Length)
 			{
 				throw new ArgumentOutOfRangeException("count");
 			}
-			else if ((input.Length - offset) < count)
+
+			if ((input.Length - offset) < count)
 			{
 				throw new ArgumentException();
 			}
@@ -158,7 +163,6 @@ namespace Server.Network
 						}
 
 						length = (int)(pOutput - pOutputBuffer);
-						return;
 					}
 				}
 			}

@@ -1,8 +1,8 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -127,10 +127,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                m.SendLocalizedMessage(1158718); // You are already under the effect of the Potion of Glorious Fortune.
-            }
+
+            m.SendLocalizedMessage(1158718); // You are already under the effect of the Potion of Glorious Fortune.
 
             return false;
         }

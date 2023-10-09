@@ -82,7 +82,6 @@ namespace Server.Items
 
         [Constructable]
         public WoodStoveDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

@@ -18,6 +18,7 @@
  *
  ***************************************************************************/
 
+using System;
 using Server.Network;
 
 namespace Server.Gumps
@@ -71,7 +72,7 @@ namespace Server.Gumps
 
 		public override string Compile()
 		{
-			return System.String.Format("{{ text {0} {1} {2} {3} }}", m_X, m_Y, m_Hue, m_Text == null ? m_TextID : Parent.Intern(m_Text));
+			return String.Format("{{ text {0} {1} {2} {3} }}", m_X, m_Y, m_Hue, m_Text == null ? m_TextID : Parent.Intern(m_Text));
 		}
 
 		private static readonly byte[] m_LayoutName = Gump.StringToBuffer("text");

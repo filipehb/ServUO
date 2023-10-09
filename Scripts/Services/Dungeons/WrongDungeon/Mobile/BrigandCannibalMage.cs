@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public BrigandCannibalMage()
-            : base()
         {
             Title = "the brigand cannibal mage";
 

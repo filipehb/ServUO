@@ -1,7 +1,7 @@
-using Server.Accounting;
-using Server.Network;
 using System;
 using System.Collections;
+using Server.Accounting;
+using Server.Network;
 
 namespace Server.RemoteAdmin
 {
@@ -29,16 +29,14 @@ namespace Server.RemoteAdmin
 
         public static bool Handle(byte command, NetState state, PacketReader pvSrc)
         {
-            if (m_Handlers[command] == null)
+	        if (m_Handlers[command] == null)
             {
                 Console.WriteLine("ADMIN: Invalid packet 0x{0:X2} from {1}, disconnecting", command, state);
                 return false;
             }
-            else
-            {
-                m_Handlers[command](state, pvSrc);
-                return true;
-            }
+
+	        m_Handlers[command](state, pvSrc);
+	        return true;
         }
 
         private static void ServerInfoRequest(NetState state, PacketReader pvSrc)
@@ -56,10 +54,8 @@ namespace Server.RemoteAdmin
                 state.Send(new MessageBoxMessage("Invalid search term.\nThe IP sent was not valid.", "Invalid IP"));
                 return;
             }
-            else
-            {
-                term = term.ToUpper();
-            }
+
+            term = term.ToUpper();
 
             ArrayList list = new ArrayList();
 

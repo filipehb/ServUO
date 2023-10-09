@@ -16,8 +16,7 @@ namespace Server.Items
         * 
         */
         public override bool IsArtifact => true;
-        private static readonly int[] m_itemids = new int[]
-        {
+        private static readonly int[] m_itemids = {
             0x3486, 0x348b, 0x3ae
         };
         [Constructable]

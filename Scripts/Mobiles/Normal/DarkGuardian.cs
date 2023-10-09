@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -58,7 +59,7 @@ namespace Server.Mobiles
 
         private Item DropTreasureMap(IEntity e)
         {
-            return new TreasureMap(Utility.RandomList(0, 0, 0, 1), e.Map, Spells.SpellHelper.IsEodon(e.Map, e.Location));
+            return new TreasureMap(Utility.RandomList(0, 0, 0, 1), e.Map, SpellHelper.IsEodon(e.Map, e.Location));
         }
 
         public override bool BleedImmune => true;

@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 255;
 
         [Constructable]
-        public KnightsPlateGloves() : base()
+        public KnightsPlateGloves()
         {
             Hue = 1150;
             Weight = 2;

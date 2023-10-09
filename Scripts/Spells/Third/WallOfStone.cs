@@ -1,7 +1,7 @@
+using System;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
 
 namespace Server.Spells.Third
 {

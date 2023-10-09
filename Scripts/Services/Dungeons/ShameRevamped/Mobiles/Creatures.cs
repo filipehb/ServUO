@@ -1,7 +1,7 @@
-using Server.Engines.ShameRevamped;
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Engines.ShameRevamped;
+using Server.Items;
 
 namespace Server.Mobiles
 {

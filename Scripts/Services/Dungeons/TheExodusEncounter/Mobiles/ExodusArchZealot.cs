@@ -1,12 +1,13 @@
 #region Header
 //Exodus Encounter by Redmoon
 #endregion Header
+
+using System.Collections.Generic;
 using Server.Commands;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {

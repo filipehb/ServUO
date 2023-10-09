@@ -1,12 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.Plants
 {
@@ -106,15 +106,13 @@ namespace Server.Engines.Plants
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (dropped is Seed)
+	        if (dropped is Seed)
             {
                 return TryAddSeed(from, (Seed)dropped);
             }
-            else
-            {
-                from.SendLocalizedMessage(1151838); // This item cannot be stored in the seed box.
-                return false;
-            }
+
+	        from.SendLocalizedMessage(1151838); // This item cannot be stored in the seed box.
+	        return false;
         }
 
         public override bool OnDragDropInto(Mobile from, Item item, Point3D p)
@@ -128,80 +126,82 @@ namespace Server.Engines.Plants
             {
                 return false;
             }
-            else if (!from.InRange(GetWorldLocation(), 3) || from.Map != Map)
+
+            if (!from.InRange(GetWorldLocation(), 3) || from.Map != Map)
             {
-                return false;
+	            return false;
             }
-            else if (TotalCount + seed.Amount <= MaxSeeds)
+
+            if (TotalCount + seed.Amount <= MaxSeeds)
             {
-                SeedEntry entry = GetExisting(seed);
-                int oldcount = UniqueCount;
+	            SeedEntry entry = GetExisting(seed);
+	            int oldcount = UniqueCount;
 
-                if (entry != null)
-                {
-                    entry.Seed.Amount += seed.Amount;
-                    seed.Delete();
-                }
-                else if (UniqueCount < MaxUnique)
-                {
-                    entry = new SeedEntry(seed);
-                    DropItem(seed);
+	            if (entry != null)
+	            {
+		            entry.Seed.Amount += seed.Amount;
+		            seed.Delete();
+	            }
+	            else if (UniqueCount < MaxUnique)
+	            {
+		            entry = new SeedEntry(seed);
+		            DropItem(seed);
 
-                    seed.Movable = false;
-                }
-                else
-                {
-                    from.SendLocalizedMessage(1151839); // There is not enough room in the box.
-                }
+		            seed.Movable = false;
+	            }
+	            else
+	            {
+		            from.SendLocalizedMessage(1151839); // There is not enough room in the box.
+	            }
 
-                if (entry != null)
-                {
-                    InvalidateProperties();
+	            if (entry != null)
+	            {
+		            InvalidateProperties();
 
-                    if (Entries.Contains(entry))
-                    {
-                        if (index > -1 && index < Entries.Count - 1)
-                        {
-                            Entries.Remove(entry);
-                            AddEntry(entry, index);
-                        }
-                    }
-                    else
-                    {
-                        if (index > -1 && index < Entries.Count)
-                        {
-                            AddEntry(entry, index);
-                        }
-                        else
-                            AddEntry(entry);
-                    }
+		            if (Entries.Contains(entry))
+		            {
+			            if (index > -1 && index < Entries.Count - 1)
+			            {
+				            Entries.Remove(entry);
+				            AddEntry(entry, index);
+			            }
+		            }
+		            else
+		            {
+			            if (index > -1 && index < Entries.Count)
+			            {
+				            AddEntry(entry, index);
+			            }
+			            else
+				            AddEntry(entry);
+		            }
 
-                    from.SendLocalizedMessage(1151846); // You put the seed in the seedbox.
+		            from.SendLocalizedMessage(1151846); // You put the seed in the seedbox.
 
-                    if (from is PlayerMobile)
-                    {
-                        var gump = from.FindGump<SeedBoxGump>();
+		            if (from is PlayerMobile)
+		            {
+			            var gump = from.FindGump<SeedBoxGump>();
 
-                        if (gump != null)
-                        {
-                            gump.CheckPage(entry);
-                            gump.Refresh();
-                        }
-                        else
-                        {
-                            gump = new SeedBoxGump((PlayerMobile)from, this);
-                            gump.CheckPage(entry);
+			            if (gump != null)
+			            {
+				            gump.CheckPage(entry);
+				            gump.Refresh();
+			            }
+			            else
+			            {
+				            gump = new SeedBoxGump((PlayerMobile)from, this);
+				            gump.CheckPage(entry);
 
-                            BaseGump.SendGump(gump);
-                        }
-                    }
+				            BaseGump.SendGump(gump);
+			            }
+		            }
 
-                    return true;
-                }
+		            return true;
+	            }
             }
             else
             {
-                from.SendLocalizedMessage(1151839); // There is not enough room in the box.
+	            from.SendLocalizedMessage(1151839); // There is not enough room in the box.
             }
 
             return false;

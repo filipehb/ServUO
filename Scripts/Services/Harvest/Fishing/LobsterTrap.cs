@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.PartySystem;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -52,7 +52,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Owner { get { return m_Owner; } set { m_Owner = value; InvalidateProperties(); } }
 
-        public override int LabelNumber { get { if (m_Owner == null) return 1096487; else return 0; } }
+        public override int LabelNumber { get
+        {
+	        if (m_Owner == null) return 1096487;
+	        return 0;
+        } }
         public override bool DisplaysContent => false;
 
         [Constructable]
@@ -414,8 +418,7 @@ namespace Server.Items
         }
 
         public virtual int[] UseableTiles => m_WaterTiles;
-        private readonly int[] m_WaterTiles = new int[]
-        {
+        private readonly int[] m_WaterTiles = {
             //Deep Water
             0x00AA, 0x00A9,
             0x00A8, 0x00AB,

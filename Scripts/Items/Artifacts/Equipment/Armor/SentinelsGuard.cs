@@ -15,7 +15,6 @@ namespace Server.Items
 
         [Constructable]
         public SentinelsGuard()
-            : base()
         {
             Hue = 0x21;
         }

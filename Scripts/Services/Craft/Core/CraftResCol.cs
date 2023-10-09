@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace Server.Engines.Craft
 {
-    public class CraftResCol : System.Collections.CollectionBase
+    public class CraftResCol : CollectionBase
     {
         public void Add(CraftRes craftRes)
         {

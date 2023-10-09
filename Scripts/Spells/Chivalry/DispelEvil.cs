@@ -1,8 +1,8 @@
+using System;
+using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells.Necromancy;
-using System;
-using System.Linq;
 
 namespace Server.Spells.Chivalry
 {

@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -8,7 +8,7 @@ namespace Server.Items
         public override int KeyCount => 3;
         public override MasterKey MasterKey => new TwistedWealdKey();
 
-        public override Type[] Keys => new Type[]
+        public override Type[] Keys => new[]
 {
             typeof( BlightedCotton ), typeof( GnawsFang ), typeof( IrksBrain ),
             typeof( LissithsSilk ), typeof( SabrixsEye ), typeof( ThornyBriar )
@@ -26,8 +26,7 @@ namespace Server.Items
 
         public override Rectangle2D[] BossBounds => m_Bounds;
 
-        private readonly Rectangle2D[] m_Bounds = new Rectangle2D[]
-        {
+        private readonly Rectangle2D[] m_Bounds = {
             new Rectangle2D(2126, 1237, 33, 38),
         };
 

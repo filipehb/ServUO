@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System.Collections.Generic;
+using Server.Targeting;
 
 namespace Server.Engines.BulkOrders
 {
@@ -117,19 +118,19 @@ namespace Server.Engines.BulkOrders
         {
             if (material >= BulkMaterialType.DullCopper && material <= BulkMaterialType.Valorite)
                 return 1045142 + (material - BulkMaterialType.DullCopper);
-            else if (material >= BulkMaterialType.Spined && material <= BulkMaterialType.Barbed)
-                return 1049348 + (material - BulkMaterialType.Spined);
-            else if (material >= BulkMaterialType.OakWood && material <= BulkMaterialType.Frostwood)
+            if (material >= BulkMaterialType.Spined && material <= BulkMaterialType.Barbed)
+	            return 1049348 + (material - BulkMaterialType.Spined);
+            if (material >= BulkMaterialType.OakWood && material <= BulkMaterialType.Frostwood)
             {
-                switch (material)
-                {
-                    case BulkMaterialType.OakWood: return 1071428;
-                    case BulkMaterialType.AshWood: return 1071429;
-                    case BulkMaterialType.YewWood: return 1071430;
-                    case BulkMaterialType.Heartwood: return 1071432;
-                    case BulkMaterialType.Bloodwood: return 1071431;
-                    case BulkMaterialType.Frostwood: return 1071433;
-                }
+	            switch (material)
+	            {
+		            case BulkMaterialType.OakWood: return 1071428;
+		            case BulkMaterialType.AshWood: return 1071429;
+		            case BulkMaterialType.YewWood: return 1071430;
+		            case BulkMaterialType.Heartwood: return 1071432;
+		            case BulkMaterialType.Bloodwood: return 1071431;
+		            case BulkMaterialType.Frostwood: return 1071433;
+	            }
             }
             return 0;
         }
@@ -166,7 +167,7 @@ namespace Server.Engines.BulkOrders
                     }
                 case 4: // combine from container
                     {
-                        m_From.BeginTarget(-1, false, Targeting.TargetFlags.None, (m, targeted) =>
+                        m_From.BeginTarget(-1, false, TargetFlags.None, (m, targeted) =>
                             {
                                 if (!m_Deed.Deleted && targeted is Container)
                                 {

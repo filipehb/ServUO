@@ -59,7 +59,7 @@ namespace Server.Items
         {
             if (parent is Mobile)
             {
-                Mobile m = (Mobile)parent as Mobile;
+                Mobile m = (Mobile)parent;
 
                 if (SpiderWebbing.IsTrapped(m))
                 {

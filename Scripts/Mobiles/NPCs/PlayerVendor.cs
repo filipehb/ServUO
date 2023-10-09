@@ -1,16 +1,17 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
+using Server.Engines.BulkOrders;
 using Server.Gumps;
 using Server.Items;
 using Server.Misc;
 using Server.Multis;
 using Server.Prompts;
 using Server.Targeting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Server.Mobiles
 {
@@ -122,7 +123,7 @@ namespace Server.Mobiles
             if (!base.CheckItemUse(from, item))
                 return false;
 
-            if (item is Container || item is Engines.BulkOrders.BulkOrderBook || item is RecipeBook)
+            if (item is Container || item is BulkOrderBook || item is RecipeBook)
                 return true;
 
             from.SendLocalizedMessage(500447); // That is not accessible.
@@ -532,10 +533,8 @@ namespace Server.Mobiles
             {
                 return House.IsOwner(m);
             }
-            else
-            {
-                return m == Owner;
-            }
+
+            return m == Owner;
         }
 
         public virtual void Destroy(bool toBackpack)
@@ -721,7 +720,7 @@ namespace Server.Mobiles
 
             if (item is Gold)
             {
-                if (HoldGold < 1000000)
+	            if (HoldGold < 1000000)
                 {
                     SayTo(from, 503210); // I'll take that to fund my services.
 
@@ -730,35 +729,29 @@ namespace Server.Mobiles
 
                     return true;
                 }
-                else
-                {
-                    from.SendLocalizedMessage(1062493); // Your vendor has sufficient funds for operation and cannot accept this gold.
 
-                    return false;
-                }                        
+	            from.SendLocalizedMessage(1062493); // Your vendor has sufficient funds for operation and cannot accept this gold.
+
+	            return false;
             }
-            else
+
+            bool newItem = (GetVendorItem(item) == null);
+
+            if (Backpack != null && Backpack.TryDropItem(from, item, false))
             {
-                bool newItem = (GetVendorItem(item) == null);
+	            if (newItem)
+		            OnItemGiven(from, item);
 
-                if (Backpack != null && Backpack.TryDropItem(from, item, false))
-                {
-                    if (newItem)
-                        OnItemGiven(from, item);
-
-                    return true;
-                }
-                else
-                {
-                    SayTo(from, 503211); // I can't carry any more.
-                    return false;
-                }
+	            return true;
             }
+
+            SayTo(from, 503211); // I can't carry any more.
+            return false;
         }
 
         public override bool CheckNonlocalDrop(Mobile from, Item item, Item target)
         {
-            if (IsOwner(from))
+	        if (IsOwner(from))
             {
                 if (item is SecretChest && ((SecretChest)item).Locked)
                 {
@@ -774,11 +767,9 @@ namespace Server.Mobiles
 
                 return true;
             }
-            else
-            {
-                SayTo(from, 503209); // I can only take item from the shop owner.
-                return false;
-            }
+
+	        SayTo(from, 503209); // I can only take item from the shop owner.
+	        return false;
         }
 
         public override bool AllowEquipFrom(Mobile from)
@@ -793,19 +784,18 @@ namespace Server.Mobiles
         {
             if (item.IsChildOf(Backpack))
             {
-                if (IsOwner(from))
+	            if (IsOwner(from))
                 {
                     return true;
                 }
-                else
-                {
-                    SayTo(from, 503223); // If you'd like to purchase an item, just ask.
-                    return false;
-                }
+
+	            SayTo(from, 503223); // If you'd like to purchase an item, just ask.
+	            return false;
             }
-            else if (IsOwner(from))
+
+            if (IsOwner(from))
             {
-                return true;
+	            return true;
             }
 
             return base.CheckNonlocalLift(from, item);
@@ -1174,7 +1164,7 @@ namespace Server.Mobiles
         {
             for (int i = 0; i < Items.Count; ++i)
             {
-                Item item = Items[i] as Item;
+                Item item = Items[i];
 
                 if (item is BaseHat)
                     item.Layer = Layer.Helm;
@@ -1273,7 +1263,7 @@ namespace Server.Mobiles
                 if (!string.IsNullOrEmpty(item.Name))
                     name = item.Name;
                 else
-                    name = "#" + item.LabelNumber.ToString();
+                    name = "#" + item.LabelNumber;
 
                 from.SendLocalizedMessage(1043303, name); // Type in a price and description for ~1_ITEM~ (ESC=not for sale)
                 from.Prompt = new VendorPricePrompt(this, vi);
@@ -1335,7 +1325,7 @@ namespace Server.Mobiles
 
                 string firstWord;
 
-                int sep = text.IndexOfAny(new char[] { ' ', ',' });
+                int sep = text.IndexOfAny(new[] { ' ', ',' });
                 if (sep >= 0)
                     firstWord = text.Substring(0, sep);
                 else
@@ -1387,7 +1377,7 @@ namespace Server.Mobiles
                         else
                             setPrice = true;
                     }
-                    else if (item is BaseBook || item is Engines.BulkOrders.BulkOrderBook || item is RecipeBook)
+                    else if (item is BaseBook || item is BulkOrderBook || item is RecipeBook)
                     {
                         setPrice = true;
                     }

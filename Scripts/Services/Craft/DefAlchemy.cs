@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Craft
 {
@@ -48,8 +48,8 @@ namespace Server.Engines.Craft
 
             if (tool == null || tool.Deleted || tool.UsesRemaining <= 0)
                 return 1044038; // You have worn out your tool!
-            else if (!tool.CheckAccessible(from, ref num))
-                return num; // The tool must be on your person to use.
+            if (!tool.CheckAccessible(from, ref num))
+	            return num; // The tool must be on your person to use.
 
             return 0;
         }
@@ -73,32 +73,25 @@ namespace Server.Engines.Craft
 
             if (failed)
             {
-                if (IsPotion(item.ItemType))
+	            if (IsPotion(item.ItemType))
                 {
                     from.AddToBackpack(new Bottle());
                     return 500287; // You fail to create a useful potion.
                 }
-                else
-                {
-                    return 1044043; // You failed to create the item, and some of your materials are lost.
-                }
-            }
-            else
-            {
-                from.PlaySound(0x240); // Sound of a filling bottle
 
-                if (IsPotion(item.ItemType))
-                {
-                    if (quality == -1)
-                        return 1048136; // You create the potion and pour it into a keg.
-                    else
-                        return 500279; // You pour the potion into a bottle...
-                }
-                else
-                {
-                    return 1044154; // You create the item.
-                }
+	            return 1044043; // You failed to create the item, and some of your materials are lost.
             }
+
+            from.PlaySound(0x240); // Sound of a filling bottle
+
+            if (IsPotion(item.ItemType))
+            {
+	            if (quality == -1)
+		            return 1048136; // You create the potion and pour it into a keg.
+	            return 500279; // You pour the potion into a bottle...
+            }
+
+            return 1044154; // You create the item.
         }
 
         public override void InitCraftList()

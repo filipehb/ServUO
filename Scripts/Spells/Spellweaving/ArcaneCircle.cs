@@ -1,9 +1,9 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells.SkillMasteries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells.SkillMasteries;
 
 namespace Server.Spells.Spellweaving
 {
@@ -98,8 +98,8 @@ namespace Server.Spells.Spellweaving
 
                 if (t.Z + id.CalcHeight != location.Z)
                     continue;
-                else if (IsValidTile(tand))
-                    return true;
+                if (IsValidTile(tand))
+	                return true;
             }
 
             IPooledEnumerable eable = map.GetItemsInRange(location, 0);      // Added  Tiles
@@ -110,10 +110,10 @@ namespace Server.Spells.Spellweaving
 
                 if (item == null || item.Z + id.CalcHeight != location.Z)
                     continue;
-                else if (IsValidTile(item.ItemID))
+                if (IsValidTile(item.ItemID))
                 {
-                    eable.Free();
-                    return true;
+	                eable.Free();
+	                return true;
                 }
             }
 

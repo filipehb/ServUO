@@ -54,21 +54,17 @@ namespace Server.Items
 
             if (house != null && house.IsCoOwner(from))
             {
-                if (from.InRange(GetWorldLocation(), 1))
+	            if (from.InRange(GetWorldLocation(), 1))
                 {
                     Hue = sender.DyedHue;
                     return true;
                 }
-                else
-                {
-                    from.SendLocalizedMessage(500295); // You are too far away to do that.
-                    return false;
-                }
+
+	            from.SendLocalizedMessage(500295); // You are too far away to do that.
+	            return false;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
     }
 }

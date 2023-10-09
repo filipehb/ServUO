@@ -1,5 +1,6 @@
 using Server.Gumps;
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.ArenaSystem
 {
@@ -39,7 +40,7 @@ namespace Server.Engines.ArenaSystem
         {
             if (!from.InRange(Location, 3) || !from.InLOS(this) || !from.CanSee(this))
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
             else if (Arena != null)
             {

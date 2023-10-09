@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class WarriorCasteQuest : BaseQuest
     {
         public WarriorCasteQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(TerathanWarrior), "terathan warriors", 10));
 
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class BigWormsQuest : BaseQuest
     {
         public BigWormsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(IceSerpent), "giant ice serpents", 10));
 
@@ -77,7 +75,6 @@ namespace Server.Engines.Quests
     public class OrcishEliteQuest : BaseQuest
     {
         public OrcishEliteQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(OrcBomber), "orc bombers", 6));
             AddObjective(new SlayObjective(typeof(OrcCaptain), "orc captain", 4));
@@ -125,7 +122,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(WarriorCasteQuest),
                     typeof(BigWormsQuest),

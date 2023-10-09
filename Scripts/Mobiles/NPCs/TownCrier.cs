@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using Server.Commands;
 using Server.ContextMenus;
 using Server.Gumps;
@@ -5,10 +9,6 @@ using Server.Items;
 using Server.Network;
 using Server.Prompts;
 using Server.Services.TownCryer;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace Server.Mobiles
 {

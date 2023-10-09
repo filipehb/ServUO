@@ -1,7 +1,8 @@
-using Server.Commands;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Commands;
+using Server.Mobiles;
+using Server.Targeting;
 
 namespace Server.Engines.Craft
 {
@@ -78,7 +79,7 @@ namespace Server.Engines.Craft
             Mobile m = e.Mobile;
             m.SendMessage("Target a player to teach them all of the recipies.");
 
-            m.BeginTarget(-1, false, Targeting.TargetFlags.None, delegate (Mobile from, object targeted)
+            m.BeginTarget(-1, false, TargetFlags.None, delegate (Mobile from, object targeted)
             {
                 if (targeted is PlayerMobile)
                 {
@@ -101,7 +102,7 @@ namespace Server.Engines.Craft
             Mobile m = e.Mobile;
             m.SendMessage("Target a player to have them forget all of the recipies they've learned.");
 
-            m.BeginTarget(-1, false, Targeting.TargetFlags.None, delegate (Mobile from, object targeted)
+            m.BeginTarget(-1, false, TargetFlags.None, delegate (Mobile from, object targeted)
             {
                 if (targeted is PlayerMobile)
                 {

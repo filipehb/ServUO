@@ -1,3 +1,5 @@
+using Server.Targeting;
+
 namespace Server.Items
 {
     [Flipable(0x13B2, 0x13B1)]
@@ -43,7 +45,7 @@ namespace Server.Items
             }
             else
             {
-                from.BeginTarget(2, false, Targeting.TargetFlags.None, OnTargetGears);
+                from.BeginTarget(2, false, TargetFlags.None, OnTargetGears);
                 from.SendMessage("Select the gears you wish to use.");
             }
         }

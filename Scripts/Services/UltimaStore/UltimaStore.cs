@@ -1,4 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Server.AccountVault;
 using Server.Commands;
+using Server.Diagnostics;
 using Server.Engines.Points;
 using Server.Engines.VendorSearching;
 using Server.Gumps;
@@ -6,10 +12,6 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Server.Engines.UOStore
 {
@@ -327,7 +329,7 @@ namespace Server.Engines.UOStore
             Register<SoulstoneToken>(1158868, 1158405, 0x32F4, 0, 1150, 1000, cat, ConstructSoulstone);
             Register<SoulstoneToken>(1158867, 1158405, 0x32F4, 0, 1106, 1000, cat, ConstructSoulstone);
 
-            if (AccountVault.SystemSettings.UseTokens)
+            if (SystemSettings.UseTokens)
             {
                 Register<VaultToken>(1158315, 1158316, 0x9FE8, 0, 0, 300, cat);
             }
@@ -716,7 +718,7 @@ namespace Server.Engines.UOStore
         {
             if (forcedEntry != null)
             {
-                return new List<StoreEntry>() { forcedEntry };
+                return new List<StoreEntry> { forcedEntry };
             }
 
             return Entries.Where(e => e.Category == cat).ToList();
@@ -846,7 +848,7 @@ namespace Server.Engines.UOStore
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
                         else

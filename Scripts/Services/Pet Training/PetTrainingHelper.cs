@@ -1,9 +1,11 @@
-using Server.Engines.VvV;
-using Server.Items;
-using Server.SkillHandlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Engines.VvV;
+using Server.Items;
+using Server.Network;
+using Server.SkillHandlers;
 
 namespace Server.Mobiles
 {
@@ -420,155 +422,155 @@ namespace Server.Mobiles
             #region Special Ability Packages
             SpecialAbilityNone = new SpecialAbility[] { };
 
-            SpecialAbilityMagical1 = new SpecialAbility[]
+            SpecialAbilityMagical1 = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath
             };
 
-            SpecialAbilityMagical2 = new SpecialAbility[]
+            SpecialAbilityMagical2 = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.StealLife
             };
 
-            SpecialAbilityMagical3 = new SpecialAbility[]
+            SpecialAbilityMagical3 = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath
             };
 
-            SpecialAbilityMagical4 = new SpecialAbility[]
+            SpecialAbilityMagical4 = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.DragonBreath, SpecialAbility.Inferno, SpecialAbility.RagingBreath
             };
 
-            SpecialAbilityNecroMagical = new SpecialAbility[]
+            SpecialAbilityNecroMagical = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.LifeLeech
             };
 
-            SpecialAbilityBites = new SpecialAbility[]
+            SpecialAbilityBites = new[]
             {
                 SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityAnimalStandard = new SpecialAbility[]
+            SpecialAbilityAnimalStandard = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds
             };
 
-            SpecialAbilityBitingAnimal = new SpecialAbility[]
+            SpecialAbilityBitingAnimal = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityClawed = new SpecialAbility[]
+            SpecialAbilityClawed = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw
             };
 
-            SpecialAbilityTailed = new SpecialAbility[]
+            SpecialAbilityTailed = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.TailSwipe
             };
 
-            SpecialAbilityClawedAndTailed = new SpecialAbility[]
+            SpecialAbilityClawedAndTailed = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw, SpecialAbility.TailSwipe
             };
 
-            SpecialAbilityInsectoid = new SpecialAbility[]
+            SpecialAbilityInsectoid = new[]
             {
                  SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.RuneCorruption
             };
 
-            SpecialAbilityMagicalInsectoid = new SpecialAbility[]
+            SpecialAbilityMagicalInsectoid = new[]
             {
                  SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.RuneCorruption,
                  SpecialAbility.AngryFire, SpecialAbility.DragonBreath, SpecialAbility.Inferno, SpecialAbility.RagingBreath
             };
 
-            SpecialAbilityStickySkin = new SpecialAbility[]
+            SpecialAbilityStickySkin = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds,
                 SpecialAbility.StickySkin
             };
 
-            SpecialAbilityBitingStickySkin = new SpecialAbility[]
+            SpecialAbilityBitingStickySkin = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds,
                 SpecialAbility.StickySkin, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityTailedAndStickySkin = new SpecialAbility[]
+            SpecialAbilityTailedAndStickySkin = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.TailSwipe,
                 SpecialAbility.StickySkin, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityBitingTailed = new SpecialAbility[]
+            SpecialAbilityBitingTailed = new[]
             {
                 SpecialAbility.VenomousBite, SpecialAbility.ViciousBite, SpecialAbility.TailSwipe
             };
 
-            SpecialAbilityBitingClawedAndTailed = new SpecialAbility[]
+            SpecialAbilityBitingClawedAndTailed = new[]
             {
                 SpecialAbility.VenomousBite, SpecialAbility.ViciousBite,
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw,
                 SpecialAbility.TailSwipe
             };
 
-            SpecialAbilityClawedAndNecromantic = new SpecialAbility[]
+            SpecialAbilityClawedAndNecromantic = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw,
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.LifeLeech
             };
 
-            SpecialAbilityClawedTailedAndMagical1 = new SpecialAbility[]
+            SpecialAbilityClawedTailedAndMagical1 = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw, SpecialAbility.TailSwipe,
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath
             };
 
-            SpecialAbilityClawedTailedAndMagical2 = new SpecialAbility[]
+            SpecialAbilityClawedTailedAndMagical2 = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw, SpecialAbility.TailSwipe,
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.StealLife
             };
 
-            SpecialAbilityBaneDragon = new SpecialAbility[]
+            SpecialAbilityBaneDragon = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw, SpecialAbility.TailSwipe,
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityDreadSpider = new SpecialAbility[]
+            SpecialAbilityDreadSpider = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.LifeLeech,
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityUnicorn = new SpecialAbility[]
+            SpecialAbilityUnicorn = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.ManaDrain, SpecialAbility.RagingBreath,
                 SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.StealLife
             };
 
-            SpecialAbilityFireBeetle = new SpecialAbility[]
+            SpecialAbilityFireBeetle = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.RuneCorruption,
                 SpecialAbility.AngryFire, SpecialAbility.DragonBreath, SpecialAbility.Inferno, SpecialAbility.RagingBreath
             };
 
-            SpecialAbilityImp = new SpecialAbility[]
+            SpecialAbilityImp = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.LifeLeech,
@@ -576,14 +578,14 @@ namespace Server.Mobiles
                 SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityTsukiWolf = new SpecialAbility[]
+            SpecialAbilityTsukiWolf = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.RagingBreath, SpecialAbility.LifeLeech,
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw, SpecialAbility.TailSwipe
             };
 
-            SpecialAbilityTriton = new SpecialAbility[]
+            SpecialAbilityTriton = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.ManaDrain, SpecialAbility.RagingBreath, SpecialAbility.Repel,
@@ -591,37 +593,37 @@ namespace Server.Mobiles
                 SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilitySabreTri = new SpecialAbility[]
+            SpecialAbilitySabreTri = new[]
             {
                 SpecialAbility.SearingWounds, SpecialAbility.TailSwipe
             };
 
-            RuleBreakers = new SpecialAbility[]
+            RuleBreakers = new[]
             {
                 SpecialAbility.SearingWounds, SpecialAbility.TailSwipe, SpecialAbility.DragonBreath, SpecialAbility.LifeLeech, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityGrizzledMare = new SpecialAbility[]
+            SpecialAbilityGrizzledMare = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LifeLeech, SpecialAbility.LightningForce, SpecialAbility.ManaDrain, SpecialAbility.RagingBreath,
                 SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.StealLife, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilitySkeletalCat = new SpecialAbility[]
+            SpecialAbilitySkeletalCat = new[]
             {
                 SpecialAbility.ManaDrain, SpecialAbility.Repel, SpecialAbility.SearingWounds, SpecialAbility.GraspingClaw,
                 SpecialAbility.TailSwipe, SpecialAbility.ViciousBite, SpecialAbility.VenomousBite, SpecialAbility.LifeLeech
             };
 
-            SpecialAbilityCoconutCrab = new SpecialAbility[]
+            SpecialAbilityCoconutCrab = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.Inferno,
                 SpecialAbility.LightningForce, SpecialAbility.ManaDrain, SpecialAbility.RagingBreath, SpecialAbility.Repel,
                 SpecialAbility.SearingWounds, SpecialAbility.VenomousBite, SpecialAbility.ViciousBite
             };
 
-            SpecialAbilityPhoenix = new SpecialAbility[]
+            SpecialAbilityPhoenix = new[]
             {
                 SpecialAbility.AngryFire, SpecialAbility.ConductiveBlast, SpecialAbility.DragonBreath, SpecialAbility.GraspingClaw,
                 SpecialAbility.Inferno, SpecialAbility.LightningForce, SpecialAbility.ManaDrain, SpecialAbility.RagingBreath,
@@ -632,52 +634,52 @@ namespace Server.Mobiles
             #region Area Effect Packages
             AreaEffectNone = new AreaEffect[] { };
 
-            AreaEffectExplosiveGoo = new AreaEffect[]
+            AreaEffectExplosiveGoo = new[]
             {
                 AreaEffect.ExplosiveGoo
             };
 
-            AreaEffectEarthen = new AreaEffect[]
+            AreaEffectEarthen = new[]
             {
                 AreaEffect.EssenceOfEarth, AreaEffect.ExplosiveGoo
             };
 
-            AreaEffectDisease = new AreaEffect[]
+            AreaEffectDisease = new[]
             {
                 AreaEffect.AuraOfNausea, AreaEffect.EssenceOfDisease
             };
 
-            AreaEffectArea1 = new AreaEffect[]
+            AreaEffectArea1 = new[]
             {
                 AreaEffect.EssenceOfEarth, AreaEffect.ExplosiveGoo, AreaEffect.AuraOfEnergy
             };
 
-            AreaEffectArea2 = new AreaEffect[]
+            AreaEffectArea2 = new[]
             {
                 AreaEffect.EssenceOfEarth, AreaEffect.ExplosiveGoo, AreaEffect.AuraOfEnergy,
                 AreaEffect.AuraOfNausea, AreaEffect.EssenceOfDisease,
                 AreaEffect.PoisonBreath
             };
 
-            AreaEffectArea3 = new AreaEffect[]
+            AreaEffectArea3 = new[]
             {
                 AreaEffect.AuraOfNausea, AreaEffect.EssenceOfDisease, AreaEffect.PoisonBreath,
             };
 
-            AreaEffectArea4 = new AreaEffect[]
+            AreaEffectArea4 = new[]
             {
                 AreaEffect.AuraOfEnergy, AreaEffect.ExplosiveGoo, AreaEffect.AuraOfNausea,
                 AreaEffect.PoisonBreath, AreaEffect.EssenceOfDisease,
             };
 
-            AreaEffectArea5 = new AreaEffect[]
+            AreaEffectArea5 = new[]
             {
                 AreaEffect.ExplosiveGoo, AreaEffect.AuraOfNausea,  AreaEffect.PoisonBreath, AreaEffect.EssenceOfDisease
             };
             #endregion
 
             #region Creature Training Defs
-            Definitions = new TrainingDefinition[]
+            Definitions = new[]
             {
                 new TrainingDefinition(typeof(Alligator), Class.ClawedAndTailed, MagicalAbility.StandardClawedOrTailed, SpecialAbilityClawedAndTailed, WepAbility1, AreaEffectNone, 1, 4),
                 new TrainingDefinition(typeof(BakeKitsune), Class.ClawedTailedAndTokuno, MagicalAbility.Tokuno1, SpecialAbilityClawedTailedAndMagical2, WepAbility2, AreaEffectArea1, 3, 5),
@@ -694,7 +696,7 @@ namespace Server.Mobiles
                 new TrainingDefinition(typeof(Chicken), Class.Clawed, MagicalAbility.None, SpecialAbilityClawed, WepAbilityNone, AreaEffectNone, 1, 2),
                 new TrainingDefinition(typeof(ChickenLizard), Class.Untrainable, MagicalAbility.None, SpecialAbilityNone, WepAbilityNone, AreaEffectNone, 1, 1),
                 new TrainingDefinition(typeof(LeatherWolf), Class.None, MagicalAbility.None, SpecialAbilityNone, WepAbilityNone, AreaEffectNone, 1, 1),
-                new TrainingDefinition(typeof(ColdDrake), Class.None, MagicalAbility.ColdDrake, SpecialAbilityNone, WepAbility2, new AreaEffect[] { AreaEffect.AuraOfEnergy, AreaEffect.ExplosiveGoo, AreaEffect.EssenceOfEarth }, 3, 5),
+                new TrainingDefinition(typeof(ColdDrake), Class.None, MagicalAbility.ColdDrake, SpecialAbilityNone, WepAbility2, new[] { AreaEffect.AuraOfEnergy, AreaEffect.ExplosiveGoo, AreaEffect.EssenceOfEarth }, 3, 5),
                 new TrainingDefinition(typeof(CorrosiveSlime), Class.StickySkin, MagicalAbility.None, SpecialAbilityNone, WepAbilityNone, AreaEffectNone, 1, 3),
                 new TrainingDefinition(typeof(Cougar), Class.ClawedAndTailed, MagicalAbility.StandardClawedOrTailed, SpecialAbilityClawedAndTailed, WepAbility1, AreaEffectNone, 1, 3),
                 new TrainingDefinition(typeof(Cow), Class.None, MagicalAbility.StandardClawedOrTailed, SpecialAbilityAnimalStandard, WepAbility1, AreaEffectNone, 1, 3),
@@ -711,7 +713,7 @@ namespace Server.Mobiles
                 new TrainingDefinition(typeof(DragonWolf), Class.None, MagicalAbility.DragonWolf, SpecialAbilityNone, WepAbility1, AreaEffectNone, 4, 5),
                 new TrainingDefinition(typeof(Drake), Class.MagicalAndTailed, MagicalAbility.None, SpecialAbilityNone, WepAbilityNone, AreaEffectNone, 2, 5),
                 new TrainingDefinition(typeof(DreadSpider), Class.MagicalNecromanticAndTokuno, MagicalAbility.DreadSpider, SpecialAbilityDreadSpider, WepAbility2, AreaEffectArea2, 3, 5),
-                new TrainingDefinition(typeof(DreadWarhorse), Class.MagicalAndNecromantic, MagicalAbility.DreadWarhorse, new SpecialAbility[] { SpecialAbility.DragonBreath }, WepAbility2, AreaEffectArea2, 3, 5),
+                new TrainingDefinition(typeof(DreadWarhorse), Class.MagicalAndNecromantic, MagicalAbility.DreadWarhorse, new[] { SpecialAbility.DragonBreath }, WepAbility2, AreaEffectArea2, 3, 5),
                 new TrainingDefinition(typeof(Eagle), Class.Clawed, MagicalAbility.StandardClawedOrTailed, SpecialAbilityClawed, WepAbility1, AreaEffectNone, 1, 3),
                 new TrainingDefinition(typeof(Ferret), Class.Clawed, MagicalAbility.StandardClawedOrTailed, SpecialAbilityClawed, WepAbility1, AreaEffectNone, 1, 2),
                 new TrainingDefinition(typeof(FireBeetle), Class.MagicalAndInsectoid, MagicalAbility.StandardClawedOrTailed, SpecialAbilityMagicalInsectoid, WepAbility1, AreaEffectArea5, 1 ,5),
@@ -758,7 +760,7 @@ namespace Server.Mobiles
                 new TrainingDefinition(typeof(MountainGoat), Class.None, MagicalAbility.StandardClawedOrTailed, SpecialAbilityAnimalStandard, WepAbility1, AreaEffectNone, 1, 3),
                 new TrainingDefinition(typeof(Najasaurus), Class.StickySkinAndTailed, MagicalAbility.Variety1, SpecialAbilityTailedAndStickySkin, WepAbility1, AreaEffectArea3, 2, 5),
                 new TrainingDefinition(typeof(Nightmare), Class.MagicalAndNecromantic, MagicalAbility.Variety2, SpecialAbilityNone, WepAbility2, AreaEffectArea1, 3, 5),
-                new TrainingDefinition(typeof(OsseinRam), Class.None, MagicalAbility.Variety3, new SpecialAbility[] { SpecialAbility.LifeLeech }, WepAbility12, AreaEffectArea2, 2, 5),
+                new TrainingDefinition(typeof(OsseinRam), Class.None, MagicalAbility.Variety3, new[] { SpecialAbility.LifeLeech }, WepAbility12, AreaEffectArea2, 2, 5),
                 new TrainingDefinition(typeof(PackHorse), Class.None, MagicalAbility.StandardClawedOrTailed, SpecialAbilityAnimalStandard, WepAbility1, AreaEffectNone, 1, 3),
                 new TrainingDefinition(typeof(PackLlama), Class.None, MagicalAbility.StandardClawedOrTailed, SpecialAbilityAnimalStandard, WepAbility1, AreaEffectNone, 1, 3),
                 new TrainingDefinition(typeof(Palomino), Class.None, MagicalAbility.StandardClawedOrTailed, SpecialAbilityAnimalStandard, WepAbility1, AreaEffectNone, 1, 3),
@@ -1085,31 +1087,31 @@ namespace Server.Mobiles
         private static readonly int[][] _DamageTable =
         {
             // slot 1 => 2
-            new int[] { 0, 1 },
-            new int[] { 2, 3 },
-            new int[] { 3, 4 },
-            new int[] { 4, 6 },
-            new int[] { 5, 7 },
-            new int[] { 6, 9 },
-            new int[] { 7, 10 },
-            new int[] { 9, 12 },
+            new[] { 0, 1 },
+            new[] { 2, 3 },
+            new[] { 3, 4 },
+            new[] { 4, 6 },
+            new[] { 5, 7 },
+            new[] { 6, 9 },
+            new[] { 7, 10 },
+            new[] { 9, 12 },
             // slot 2 => 3
-            new int[] { 9, 13 },
-            new int[] { 11, 15 },
-            new int[] { 12, 16 },
-            new int[] { 13, 18 },
-            new int[] { 14, 19 },
+            new[] { 9, 13 },
+            new[] { 11, 15 },
+            new[] { 12, 16 },
+            new[] { 13, 18 },
+            new[] { 14, 19 },
             // slot 3 => 4
-            new int[] { 15, 21 },
-            new int[] { 16, 22 },
-            new int[] { 18, 24 },
-            new int[] { 18, 25 },
+            new[] { 15, 21 },
+            new[] { 16, 22 },
+            new[] { 18, 24 },
+            new[] { 18, 25 },
             // slot 4 => 5
-            new int[] { 19, 26 },
-            new int[] { 20, 28 },
-            new int[] { 21, 29 },
-            new int[] { 23, 31 },
-            new int[] { 24, 33 },
+            new[] { 19, 26 },
+            new[] { 20, 28 },
+            new[] { 21, 29 },
+            new[] { 23, 31 },
+            new[] { 24, 33 },
         };
 
         public static void GetStartValue(TrainingPoint tp, BaseCreature bc, ref int value)
@@ -1252,65 +1254,66 @@ namespace Server.Mobiles
 
                 return true;
             }
-            else if (trainingPoint.TrainPoint is MagicalAbility)
-            {
-                MagicalAbility ability = (MagicalAbility)trainingPoint.TrainPoint;
 
-                if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
-                {
-                    return true;
-                }
+            if (trainingPoint.TrainPoint is MagicalAbility)
+            {
+	            MagicalAbility ability = (MagicalAbility)trainingPoint.TrainPoint;
+
+	            if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
+	            {
+		            return true;
+	            }
             }
             else if (trainingPoint.TrainPoint is SpecialAbility)
             {
-                SpecialAbility ability = trainingPoint.TrainPoint as SpecialAbility;
+	            SpecialAbility ability = trainingPoint.TrainPoint as SpecialAbility;
 
-                if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
-                {
-                    return true;
-                }
+	            if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
+	            {
+		            return true;
+	            }
             }
             else if (trainingPoint.TrainPoint is AreaEffect)
             {
-                AreaEffect ability = trainingPoint.TrainPoint as AreaEffect;
+	            AreaEffect ability = trainingPoint.TrainPoint as AreaEffect;
 
-                if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
-                {
-                    return true;
-                }
+	            if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
+	            {
+		            return true;
+	            }
             }
             else if (trainingPoint.TrainPoint is WeaponAbility)
             {
-                WeaponAbility ability = trainingPoint.TrainPoint as WeaponAbility;
+	            WeaponAbility ability = trainingPoint.TrainPoint as WeaponAbility;
 
-                if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
-                {
-                    return true;
-                }
+	            if (ValidateTrainingPoint(bc, ability) && profile.AddAbility(ability))
+	            {
+		            return true;
+	            }
             }
             else if (trainingPoint.TrainPoint is SkillName)
             {
-                SkillName skill = (SkillName)trainingPoint.TrainPoint;
+	            SkillName skill = (SkillName)trainingPoint.TrainPoint;
 
-                if (ValidateTrainingPoint(bc, skill) && profile.AddAbility(skill))
-                {
-                    bc.Skills[skill].Cap = 100 + (value / 10);
+	            if (ValidateTrainingPoint(bc, skill) && profile.AddAbility(skill))
+	            {
+		            bc.Skills[skill].Cap = 100 + (value / 10);
 
-                    return true;
-                }
+		            return true;
+	            }
             }
             else if (trainingPoint.TrainPoint is ResistanceType)
             {
-                switch ((ResistanceType)trainingPoint.TrainPoint)
-                {
-                    case ResistanceType.Physical: bc.PhysicalResistanceSeed = value; break;
-                    case ResistanceType.Fire: bc.FireResistSeed = value; break;
-                    case ResistanceType.Cold: bc.ColdResistSeed = value; break;
-                    case ResistanceType.Poison: bc.PoisonResistSeed = value; break;
-                    case ResistanceType.Energy: bc.EnergyResistSeed = value; break;
-                }
+	            switch ((ResistanceType)trainingPoint.TrainPoint)
+	            {
+		            case ResistanceType.Physical: bc.PhysicalResistanceSeed = value; break;
+		            case ResistanceType.Fire: bc.FireResistSeed = value; break;
+		            case ResistanceType.Cold: bc.ColdResistSeed = value; break;
+		            case ResistanceType.Poison: bc.PoisonResistSeed = value; break;
+		            case ResistanceType.Energy: bc.EnergyResistSeed = value; break;
+	            }
 
-                return true;
+	            return true;
             }
 
             return false;
@@ -1552,7 +1555,7 @@ namespace Server.Mobiles
 
             if (tp != null)
             {
-                return new TextDefinition[] { tp.Name, tp.Description };
+                return new[] { tp.Name, tp.Description };
             }
 
             if (o is MagicalAbility)
@@ -1651,7 +1654,7 @@ namespace Server.Mobiles
 
             if (tp != null)
             {
-                return new TextDefinition[] { tp.Name, tp.Description };
+                return new[] { tp.Name, tp.Description };
             }
 
             return new TextDefinition[] { SkillInfo.Table[(int)skill].Name, 1157522 };
@@ -1709,7 +1712,7 @@ namespace Server.Mobiles
         public static void Initialize()
         {
             // Syntax: [PetTrainTest <PetType>
-            Commands.CommandSystem.Register("PetTrainTest", AccessLevel.GameMaster, e =>
+            CommandSystem.Register("PetTrainTest", AccessLevel.GameMaster, e =>
             {
                 Mobile m = e.Mobile;
 
@@ -1751,7 +1754,7 @@ namespace Server.Mobiles
 
                                 Timer.DelayCall(TimeSpan.FromSeconds(.25), () =>
                                 {
-                                    bc.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 502799, m.NetState);
+                                    bc.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799, m.NetState);
                                     // It seems to accept you as master.
                                     bc.OnAfterTame(m);
 
@@ -1764,9 +1767,6 @@ namespace Server.Mobiles
                                 });
                             }
                         }
-                    }
-                    else
-                    {
                     }
                 }
                 else

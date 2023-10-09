@@ -1,10 +1,12 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.Quests;
 using Server.Engines.Quests.Collector;
 using Server.Items;
 using Server.Mobiles;
+using Server.Multis;
+using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Harvest
 {
@@ -64,9 +66,9 @@ namespace Server.Engines.Harvest
                 ConsumedPerFeluccaHarvest = 1,
 
                 // The fishing
-                EffectActions = new int[] { 6 },
+                EffectActions = new[] { 6 },
                 EffectSounds = new int[0],
-                EffectCounts = new int[] { 1 },
+                EffectCounts = new[] { 1 },
                 EffectDelay = TimeSpan.Zero,
                 EffectSoundDelay = TimeSpan.FromSeconds(8.0),
 
@@ -78,12 +80,12 @@ namespace Server.Engines.Harvest
                 ToolBrokeMessage = 503174 // You broke your fishing pole.
             };
 
-            res = new HarvestResource[]
+            res = new[]
             {
                 new HarvestResource(00.0, 00.0, 120.0, 1043297, typeof(Fish))
             };
 
-            veins = new HarvestVein[]
+            veins = new[]
             {
                 new HarvestVein(100.0, 0.0, res[0], null)
             };
@@ -91,7 +93,7 @@ namespace Server.Engines.Harvest
             fish.Resources = res;
             fish.Veins = veins;
 
-            fish.BonusResources = new BonusHarvestResource[]
+            fish.BonusResources = new[]
             {
                 new BonusHarvestResource(0, 97.0, null, null), //set to same chance as mining ml gems
 			    new BonusHarvestResource(80.0, 2.0, 1113764, typeof(DelicateScales)),
@@ -124,8 +126,7 @@ namespace Server.Engines.Harvest
             }
         }
 
-        private static readonly MutateEntry[] m_MutateTable = new MutateEntry[]
-        {
+        private static readonly MutateEntry[] m_MutateTable = {
             new MutateEntry( 80.0,  80.0,  1865.0,  true, typeof( SpecialFishingNet ) ),
             new MutateEntry( 90.0,  80.0,  1875.0,  true, typeof( TreasureMap ) ),
             new MutateEntry( 100.0,  80.0,  750.0,  true, typeof( MessageInABottle ) ),
@@ -136,8 +137,7 @@ namespace Server.Engines.Harvest
             new MutateEntry( 0.0, 200.0,  -200.0, false, new Type[1]{ null } )
         };
 
-        private static readonly MutateEntry[] m_SiegeMutateTable = new MutateEntry[]
-        {
+        private static readonly MutateEntry[] m_SiegeMutateTable = {
             new MutateEntry( 80.0,  80.0,  1865.0,  true, typeof( SpecialFishingNet ) ),
             new MutateEntry( 0.0, 200.0,  -200.0, false, new Type[1]{ null } ),
             new MutateEntry( 100.0,  80.0,  1865.0,  true, typeof( MessageInABottle ) ),
@@ -148,8 +148,7 @@ namespace Server.Engines.Harvest
             new MutateEntry( 0.0, 200.0,  -200.0, false, new Type[1]{ null } )
         };
 
-        private static readonly MutateEntry[] m_LavaMutateTable = new MutateEntry[]
-        {
+        private static readonly MutateEntry[] m_LavaMutateTable = {
             new MutateEntry( 0.0,  80.0, 333, false, typeof(StoneFootwear)),
             new MutateEntry( 80.0, 80.0, 333, false, typeof(CrackedLavaRockEast), typeof(CrackedLavaRockSouth)),
             new MutateEntry( 85.0, 80.0, 333, false, typeof(StonePaver)),
@@ -223,18 +222,19 @@ namespace Server.Engines.Harvest
 
                         else if (pole.BaitType == typeof(Charydbis) && from.Skills[SkillName.Fishing].Value >= 100)
                         {
-                            if (sp.Charydbis == null && !sp.HasSpawned && sp.CurrentLocation.Contains(loc))
+	                        if (sp.Charydbis == null && !sp.HasSpawned && sp.CurrentLocation.Contains(loc))
                             {
-                                Multis.BaseBoat boat = Multis.BaseBoat.FindBoatAt(from, from.Map);
+                                BaseBoat boat = BaseBoat.FindBoatAt(from, from.Map);
                                 sp.SpawnCharydbis(from, loc, sp.Map, boat);
                                 sp.HasSpawned = true;
                                 pole.OnFishedHarvest(from, true);
                                 return true;
                             }
-                            else if (sp.LastLocation.Contains(loc))
-                            {
-                                from.SendLocalizedMessage(1150862); //The charybdis has moved on from this location, consult Oracle Of The Seas again.
-                            }
+
+	                        if (sp.LastLocation.Contains(loc))
+	                        {
+		                        from.SendLocalizedMessage(1150862); //The charybdis has moved on from this location, consult Oracle Of The Seas again.
+	                        }
                         }
                         else
                             from.SendLocalizedMessage(1150858); //You see a few bubbles, but no charybdis.
@@ -320,13 +320,15 @@ namespace Server.Engines.Harvest
             {
                 return new TreasureMap(0, from.Map == Map.Felucca ? Map.Felucca : Map.Trammel);
             }
-            else if (type == typeof(MessageInABottle))
+
+            if (type == typeof(MessageInABottle))
             {
-                return new MessageInABottle(from.Map == Map.Felucca ? Map.Felucca : Map.Trammel);
+	            return new MessageInABottle(from.Map == Map.Felucca ? Map.Felucca : Map.Trammel);
             }
-            else if (type == typeof(WhitePearl))
+
+            if (type == typeof(WhitePearl))
             {
-                return new WhitePearl();
+	            return new WhitePearl();
             }
 
             Container pack = from.Backpack;
@@ -349,8 +351,7 @@ namespace Server.Engines.Harvest
                             case 0: // Body parts
                             case 1:
                                 {
-                                    int[] list = new int[]
-                                    {
+                                    int[] list = {
                                         0x1CDD, 0x1CE5, // arm
                                         0x1CE0, 0x1CE8, // torso
                                         0x1CE1, 0x1CE9, // head
@@ -363,8 +364,7 @@ namespace Server.Engines.Harvest
                             case 2: // Bone parts
                             case 3:
                                 {
-                                    int[] list = new int[]
-                                    {
+                                    int[] list = {
                                         0x1AE0, 0x1AE1, 0x1AE2, 0x1AE3, 0x1AE4, // skulls
                                         0x1B09, 0x1B0A, 0x1B0B, 0x1B0C, 0x1B0D, 0x1B0E, 0x1B0F, 0x1B10, // bone piles
                                         0x1B15, 0x1B16 // pelvis bones
@@ -404,8 +404,7 @@ namespace Server.Engines.Harvest
                             case 12: // Misc
                             case 13:
                                 {
-                                    int[] list = new int[]
-                                    {
+                                    int[] list = {
                                         0x1EB5, // unfinished barrel
                                         0xA2A, // stool
                                         0xC1F, // broken clock
@@ -423,8 +422,7 @@ namespace Server.Engines.Harvest
                             #region High Seas
                             case 14:
                                 {
-                                    int[] list = new int[]
-                                    {
+                                    int[] list = {
                                         0x1E19, 0x1E1A, 0x1E1B, //Fish heads
                                         0x1E2A, 0x1E2B,         //Oars
                                         0x1E71, 0x1E7A,         //Unfinished drawers
@@ -530,7 +528,7 @@ namespace Server.Engines.Harvest
 
                     LandTile t = map.Tiles.GetLandTile(tx, ty);
 
-                    if (t.Z == -5 && ((t.ID >= 0xA8 && t.ID <= 0xAB) || (t.ID >= 0x136 && t.ID <= 0x137)) && !Spells.SpellHelper.CheckMulti(new Point3D(tx, ty, -5), map))
+                    if (t.Z == -5 && ((t.ID >= 0xA8 && t.ID <= 0xAB) || (t.ID >= 0x136 && t.ID <= 0x137)) && !SpellHelper.CheckMulti(new Point3D(tx, ty, -5), map))
                     {
                         x = tx;
                         y = ty;
@@ -763,8 +761,7 @@ namespace Server.Engines.Harvest
             return true;
         }
 
-        private static readonly int[] m_WaterTiles = new int[]
-        {
+        private static readonly int[] m_WaterTiles = {
             0x00A8, 0x00AB,
             0x0136, 0x0137,
             0x5797, 0x579C,
@@ -775,8 +772,7 @@ namespace Server.Engines.Harvest
 
         #region HighSeas
         public static int[] LavaTiles => m_LavaTiles;
-        private static readonly int[] m_LavaTiles = new int[]
-        {
+        private static readonly int[] m_LavaTiles = {
             0x1F4, 0x1F5,
             0x1F6, 0x1F7,
 
@@ -932,18 +928,19 @@ namespace Server.Engines.Harvest
                     OnBadHarvestTarget(from, tool, toHarvest);
                     return;
                 }
-                else if (!def.Validate(tileID) && !def.ValidateSpecial(tileID))
+
+                if (!def.Validate(tileID) && !def.ValidateSpecial(tileID))
                 {
-                    OnBadHarvestTarget(from, tool, toHarvest);
-                    return;
+	                OnBadHarvestTarget(from, tool, toHarvest);
+	                return;
                 }
 
                 if (!CheckRange(from, tool, def, map, loc, true))
                     return;
-                else if (!CheckResources(from, tool, def, map, loc, true))
-                    return;
-                else if (!CheckHarvest(from, tool, def, toHarvest))
-                    return;
+                if (!CheckResources(from, tool, def, map, loc, true))
+	                return;
+                if (!CheckHarvest(from, tool, def, toHarvest))
+	                return;
 
                 HarvestBank bank = def.GetBank(map, loc.X, loc.Y);
 

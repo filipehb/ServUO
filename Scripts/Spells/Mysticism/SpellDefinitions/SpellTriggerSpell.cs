@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Spells.Mysticism
 {
@@ -143,8 +143,7 @@ namespace Server.Spells.Mysticism
             }
         }
 
-        private static readonly SpellTriggerDef[] m_Definitions = new SpellTriggerDef[]
-            {
+        private static readonly SpellTriggerDef[] m_Definitions = {
                 new SpellTriggerDef( 677, "Nether Bolt",        1, 1031678, 1095193, 0x2D9E ),
                 new SpellTriggerDef( 678, "Healing Stone",      1, 1031679, 1095194, 0x2D9F ),
                 new SpellTriggerDef( 679, "Purge Magic",        2, 1031680, 1095195, 0x2DA0 ),

@@ -1,7 +1,9 @@
 #region References
+
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
+
 #endregion
 
 namespace Server.Gumps
@@ -84,11 +86,11 @@ namespace Server.Gumps
                         return;
                     }
 
-                    else if (m_House.HasActiveAuction)
+                    if (m_House.HasActiveAuction)
                     {
-                        m_Mobile.SendLocalizedMessage(1156453);
-                        // You cannot currently take this action because you have auction safes locked down in your home. You must remove them first.
-                        return;
+	                    m_Mobile.SendLocalizedMessage(1156453);
+	                    // You cannot currently take this action because you have auction safes locked down in your home. You must remove them first.
+	                    return;
                     }
 
                     if (m_Mobile.AccessLevel >= AccessLevel.GameMaster)
@@ -104,7 +106,6 @@ namespace Server.Gumps
                         Timer.DelayCall(m_House.RestrictedPlacingTime, region.Unregister);
 
                         m_House.Delete();
-                        return;
                     }
                 }
                 else

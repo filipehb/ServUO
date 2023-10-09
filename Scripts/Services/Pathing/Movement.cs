@@ -1,7 +1,7 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Movement
 {
@@ -62,14 +62,12 @@ namespace Server.Movement
                 {
                     if (ignoreDoors && ((flags & TileFlag.Door) != 0 || itemID == 0x692 || itemID == 0x846 || itemID == 0x873 || (itemID >= 0x6F5 && itemID <= 0x6F6)))
                     {
-                        if (item is BaseHouseDoor && m != null && !((BaseHouseDoor)item).CheckAccess(m))
+	                    if (item is BaseHouseDoor && m != null && !((BaseHouseDoor)item).CheckAccess(m))
                         {
                             return false;
                         }
-                        else
-                        {
-                            continue;
-                        }
+
+	                    continue;
                     }
 
                     if (ignoreSpellFields && (itemID == 0x82 || itemID == 0x3946 || itemID == 0x3956))
@@ -149,25 +147,26 @@ namespace Server.Movement
                     newZ = tile.Z;
                     return true;
                 }
-                else if (m is StygianDragon && map == Map.TerMur)
+
+                if (m is StygianDragon && map == Map.TerMur)
                 {
-                    if (x >= 307 && x <= 354 && y >= 126 && y <= 192)
-                    {
-                        if (tile.Z > newZ)
-                            newZ = tile.Z;
+	                if (x >= 307 && x <= 354 && y >= 126 && y <= 192)
+	                {
+		                if (tile.Z > newZ)
+			                newZ = tile.Z;
 
-                        moveIsOk = true;
-                    }
-                    else if (x >= 42 && x <= 89)
-                    {
-                        if ((y >= 333 && y <= 399) || (y >= 531 && y <= 597) || (y >= 739 && y <= 805))
-                        {
-                            if (tile.Z > newZ)
-                                newZ = tile.Z;
+		                moveIsOk = true;
+	                }
+	                else if (x >= 42 && x <= 89)
+	                {
+		                if ((y >= 333 && y <= 399) || (y >= 531 && y <= 597) || (y >= 739 && y <= 805))
+		                {
+			                if (tile.Z > newZ)
+				                newZ = tile.Z;
 
-                            moveIsOk = true;
-                        }
-                    }
+			                moveIsOk = true;
+		                }
+	                }
                 }
                 #endregion
 

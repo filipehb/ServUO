@@ -4,7 +4,7 @@
     {
         public override double DefaultWeight => 2.0;
 
-        private static readonly int[] m_Types = new int[] { 0x8E2, 0x8E0, 0x8E6, 0x8E5, 0x8E3 };
+        private static readonly int[] m_Types = { 0x8E2, 0x8E0, 0x8E6, 0x8E5, 0x8E3 };
 
         [Constructable]
         public SnowPileDeco()

@@ -1,6 +1,8 @@
 #region References
+
 using Server.Gumps;
 using Server.Network;
+
 #endregion
 
 namespace Server.Services.Virtues

@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 255;
 
         [Constructable]
-        public ScoutSmallPlateJingasa() : base()
+        public ScoutSmallPlateJingasa()
         {
             Hue = 1148;
             Weight = 5;

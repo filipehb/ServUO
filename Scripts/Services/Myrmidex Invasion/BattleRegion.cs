@@ -1,8 +1,8 @@
+using System;
+using System.Xml;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
-using System;
-using System.Xml;
 
 namespace Server.Engines.MyrmidexInvasion
 {

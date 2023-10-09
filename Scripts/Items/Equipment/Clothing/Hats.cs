@@ -1,7 +1,8 @@
-using Server.Engines.Craft;
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
+using Server.Misc;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -1004,7 +1005,7 @@ namespace Server.Items
             base.OnAdded(parent);
 
             if (parent is Mobile)
-                Misc.Titles.AwardKarma((Mobile)parent, -20, true);
+                Titles.AwardKarma((Mobile)parent, -20, true);
         }
 
         public OrcishKinMask(Serial serial)

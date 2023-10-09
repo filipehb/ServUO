@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public PrismaticAmber()
-            : base()
         {
             LootType = LootType.Blessed;
             Stackable = false;

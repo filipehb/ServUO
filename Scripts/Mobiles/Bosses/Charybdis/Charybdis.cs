@@ -1,8 +1,9 @@
-using Server.Items;
-using Server.Multis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Multis;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -26,9 +27,9 @@ namespace Server.Mobiles
         public override double TreasureMapChance => .50;
         public override int TreasureMapLevel => 7;
 
-        public override Type[] UniqueList => new Type[] { typeof(FishermansHat), typeof(FishermansVest), typeof(FishermansEelskinGloves), typeof(FishermansTrousers) };
-        public override Type[] SharedList => new Type[] { typeof(HelmOfVengence), typeof(RingOfTheSoulbinder), typeof(RuneEngravedPegLeg), typeof(CullingBlade) };
-        public override Type[] DecorativeList => new Type[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
+        public override Type[] UniqueList => new[] { typeof(FishermansHat), typeof(FishermansVest), typeof(FishermansEelskinGloves), typeof(FishermansTrousers) };
+        public override Type[] SharedList => new[] { typeof(HelmOfVengence), typeof(RingOfTheSoulbinder), typeof(RuneEngravedPegLeg), typeof(CullingBlade) };
+        public override Type[] DecorativeList => new[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int Tentacles => m_Tentacles.Count;
@@ -163,7 +164,7 @@ namespace Server.Mobiles
 
                 LandTile t = map.Tiles.GetLandTile(newLoc.X, newLoc.Y);
 
-                if (!Spells.SpellHelper.CheckMulti(new Point3D(newLoc.X, newLoc.Y, newLoc.Z), map) && IsSeaTile(t))
+                if (!SpellHelper.CheckMulti(new Point3D(newLoc.X, newLoc.Y, newLoc.Z), map) && IsSeaTile(t))
                     break;
             }
 
@@ -334,7 +335,7 @@ namespace Server.Mobiles
                     else
                         p = ep;
 
-                    if (Spells.SpellHelper.CheckMulti(p, Map))
+                    if (SpellHelper.CheckMulti(p, Map))
                     {
                         BaseBoat boat = BaseBoat.FindBoatAt(p, Map);
 
@@ -507,7 +508,7 @@ namespace Server.Mobiles
                         spawnLoc = new Point3D(x, y, z);
                     }
 
-                    if (Spells.SpellHelper.CheckMulti(spawnLoc, map))
+                    if (SpellHelper.CheckMulti(spawnLoc, map))
                         continue;
 
                     LandTile t = map.Tiles.GetLandTile(spawnLoc.X, spawnLoc.Y);

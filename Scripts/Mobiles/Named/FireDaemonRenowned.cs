@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -54,7 +54,7 @@ namespace Server.Mobiles
         {
         }
 
-        public override Type[] UniqueSAList => new Type[] { typeof(ResonantStaffofEnlightenment), typeof(MantleOfTheFallen) };
+        public override Type[] UniqueSAList => new[] { typeof(ResonantStaffofEnlightenment), typeof(MantleOfTheFallen) };
         public override Type[] SharedSAList => new Type[] { };
 
         public override void GenerateLoot()

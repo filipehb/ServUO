@@ -1,14 +1,13 @@
+using System;
 using Server.Commands;
 using Server.Items;
 using Server.Network;
-using System;
 
 namespace Server.Gumps
 {
     public class AddDoorGump : Gump
     {
-        public static DoorInfo[] m_Types = new DoorInfo[]
-        {
+        public static DoorInfo[] m_Types = {
             new DoorInfo(typeof(MetalDoor), 0x675),
             new DoorInfo(typeof(RattanDoor), 0x695),
             new DoorInfo(typeof(DarkWoodDoor), 0x6A5),

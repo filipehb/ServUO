@@ -1,11 +1,13 @@
+using System;
+using System.Collections.Generic;
+using Server.Engines.CityLoyalty;
 using Server.Engines.Despise;
+using Server.Engines.VvV;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Services.Virtues;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -244,10 +246,8 @@ namespace Server.Items
             {
                 return SkillName.Veterinary;
             }
-            else
-            {
-                return SkillName.Healing;
-            }
+
+            return SkillName.Healing;
         }
 
         public static SkillName GetSecondarySkill(Mobile healer, Mobile m)
@@ -261,10 +261,8 @@ namespace Server.Items
             {
                 return SkillName.AnimalLore;
             }
-            else
-            {
-                return SkillName.Anatomy;
-            }
+
+            return SkillName.Anatomy;
         }
 
         public void CheckPoisonOrBleed()
@@ -337,7 +335,7 @@ namespace Server.Items
                 double chance = ((healing - 68.0) / 50.0) - (m_Slips * 0.02);
 
                 if (((checkSkills = (healing >= 80.0 && anatomy >= 80.0)) && chance > Utility.RandomDouble()) ||
-                    (Engines.VvV.ViceVsVirtueSystem.Enabled && petPatient is Engines.VvV.VvVMount && petPatient.ControlMaster == m_Healer))
+                    (ViceVsVirtueSystem.Enabled && petPatient is VvVMount && petPatient.ControlMaster == m_Healer))
                 {
                     if (m_Patient.Map == null || !m_Patient.Map.CanFit(m_Patient.Location, 16, false, false))
                     {
@@ -510,7 +508,7 @@ namespace Server.Items
 
                     toHeal -= toHeal * m_Slips * 0.35; // TODO: Verify algorithm
 
-                    if (Engines.CityLoyalty.CityLoyaltySystem.HasTradeDeal(m_Healer, Engines.CityLoyalty.TradeDeal.GuildOfHealers))
+                    if (CityLoyaltySystem.HasTradeDeal(m_Healer, TradeDeal.GuildOfHealers))
                         toHeal += (int)Math.Ceiling(toHeal * 0.05);
 
                     if (m_HealedPoisonOrBleed > 0)

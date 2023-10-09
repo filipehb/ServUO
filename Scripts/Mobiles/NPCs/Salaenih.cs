@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ShakingThingsUpQuest : BaseQuest
     {
         public ShakingThingsUpQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(RedSolenWarrior), "red solen warriors", 10));
             AddObjective(new SlayObjective(typeof(BlackSolenWarrior), "black solen warriors", 10));
@@ -44,7 +43,6 @@ namespace Server.Engines.Quests
     public class ArachnophobiaQuest : BaseQuest
     {
         public ArachnophobiaQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GiantBlackWidow), "giant black widows", 12));
 
@@ -79,7 +77,6 @@ namespace Server.Engines.Quests
     public class MiniSwampThingQuest : BaseQuest
     {
         public MiniSwampThingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Bogling), "boglings", 20));
 
@@ -125,7 +122,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(WarriorCasteQuest),
                     typeof(ShakingThingsUpQuest),

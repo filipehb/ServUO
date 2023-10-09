@@ -113,13 +113,11 @@ namespace Server.Items
                 m.SendMessage("That name is unacceptable.");
                 return;
             }
-            else
-            {
-                m.RawName = newName;
-                m.SendMessage("Your name has been changed!");
-                m.SendMessage(string.Format("You are now known as {0}", newName));
-                m_Sender.Delete();
-            }
+
+            m.RawName = newName;
+            m.SendMessage("Your name has been changed!");
+            m.SendMessage(string.Format("You are now known as {0}", newName));
+            m_Sender.Delete();
         }
     }
 }

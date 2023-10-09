@@ -1,4 +1,5 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,8 +11,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Server.Diagnostics;
 using Server.Network;
+
 #endregion
 
 namespace Server
@@ -235,7 +237,7 @@ namespace Server
 				}
 				catch (Exception ex)
 				{
-					Diagnostics.ExceptionLogging.LogException(ex);
+					ExceptionLogging.LogException(ex);
 				}
 
 				if (CrashedHandler != null)
@@ -247,7 +249,7 @@ namespace Server
 					}
 					catch (Exception ex)
 					{
-						Diagnostics.ExceptionLogging.LogException(ex);
+						ExceptionLogging.LogException(ex);
 					}
 				}
 
@@ -480,7 +482,7 @@ namespace Server
 			}
 			catch (Exception e)
 			{
-				Diagnostics.ExceptionLogging.LogException(e);
+				ExceptionLogging.LogException(e);
 			}
 
 			Thread = Thread.CurrentThread;

@@ -1,5 +1,5 @@
-using Server.Gumps;
 using System;
+using Server.Gumps;
 
 namespace Server.Items
 {
@@ -212,25 +212,23 @@ namespace Server.Items
                         HouseRaffleStone.FormatLocation(deed.PlotLocation, deed.PlotFacet, false),
                         deed.PlotFacet);
                 }
-                else
-                {
-                    int daysLeft = (int)Math.Ceiling((deed.Stone.Started + deed.Stone.Duration + HouseRaffleStone.ExpirationTime - DateTime.UtcNow).TotalDays);
 
-                    return string.Format(
-                                         "<bodytextblack>" +
-                                         "This deed entitles the bearer to build a house on the plot of land " +
-                                         "located at {0} on the {1} facet.<br><br>" +
-                                         "The deed will expire after {2} more day{3} have passed, and at that time the right to place " +
-                                         "a house reverts to normal house construction rules.<br><br>" +
-                                         "This deed functions as a recall rune marked for the location of the plot it represents.<br><br>" +
-                                         "To place a house on the deeded plot, you must simply have this deed in your backpack " +
-                                         "or bank box when using a House Placement Tool there." +
-                                         "</bodytextblack>",
-                        HouseRaffleStone.FormatLocation(deed.PlotLocation, deed.PlotFacet, false),
-                        deed.PlotFacet,
-                        daysLeft,
-                        (daysLeft == 1) ? "" : "s");
-                }
+                int daysLeft = (int)Math.Ceiling((deed.Stone.Started + deed.Stone.Duration + HouseRaffleStone.ExpirationTime - DateTime.UtcNow).TotalDays);
+
+                return string.Format(
+	                "<bodytextblack>" +
+	                "This deed entitles the bearer to build a house on the plot of land " +
+	                "located at {0} on the {1} facet.<br><br>" +
+	                "The deed will expire after {2} more day{3} have passed, and at that time the right to place " +
+	                "a house reverts to normal house construction rules.<br><br>" +
+	                "This deed functions as a recall rune marked for the location of the plot it represents.<br><br>" +
+	                "To place a house on the deeded plot, you must simply have this deed in your backpack " +
+	                "or bank box when using a House Placement Tool there." +
+	                "</bodytextblack>",
+	                HouseRaffleStone.FormatLocation(deed.PlotLocation, deed.PlotFacet, false),
+	                deed.PlotFacet,
+	                daysLeft,
+	                (daysLeft == 1) ? "" : "s");
             }
         }
     }

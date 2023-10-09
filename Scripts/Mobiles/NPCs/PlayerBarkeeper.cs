@@ -1,12 +1,14 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Mobiles
@@ -640,8 +642,7 @@ namespace Server.Mobiles
 
     public class BarkeeperTitleGump : Gump
     {
-        private static readonly Entry[] m_Entries = new[]
-        {
+        private static readonly Entry[] m_Entries = {
             new Entry("Alchemist"), new Entry("Animal Tamer"), new Entry("Apothecary"), new Entry("Artist"),
             new Entry("Baker", true), new Entry("Bard"), new Entry("Barkeep", "the barkeeper", true), new Entry("Beggar"),
             new Entry("Blacksmith"), new Entry("Bounty Hunter"), new Entry("Brigand"), new Entry("Butler"),

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Server.Spells.SkillMasteries;
 
 namespace Server.Items
 {
@@ -90,7 +91,7 @@ namespace Server.Items
             defender.FixedParticles(0x37B9, 244, 25, 9944, 31, 0, EffectLayer.Waist);
 
             // Do not reset timer if one is already in place.
-            if (Spells.SkillMasteries.ResilienceSpell.UnderEffects(defender)) //Halves time
+            if (ResilienceSpell.UnderEffects(defender)) //Halves time
                 BeginWound(defender, defender.Player ? TimeSpan.FromSeconds(3.0) : TimeSpan.FromSeconds(6));
             else
                 BeginWound(defender, defender.Player ? PlayerDuration : NPCDuration);

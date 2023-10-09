@@ -5,7 +5,6 @@ namespace Server.Items
     public class BaseCraftsmanSatchel : Backpack
     {
         public BaseCraftsmanSatchel()
-            : base()
         {
             Hue = Reward.SatchelHue();
 
@@ -67,7 +66,6 @@ namespace Server.Items
     {
         [Constructable]
         public AlchemistCraftsmanSatchel()
-            : base()
         {
             if (Items.Count < 2)
             {
@@ -109,7 +107,6 @@ namespace Server.Items
     {
         [Constructable]
         public FletcherCraftsmanSatchel()
-            : base()
         {
             if (Items.Count < 2)
             {
@@ -158,7 +155,6 @@ namespace Server.Items
     {
         [Constructable]
         public TailorsCraftsmanSatchel()
-            : base()
         {
             if (Items.Count < 2)
             {
@@ -200,7 +196,6 @@ namespace Server.Items
     {
         [Constructable]
         public SmithsCraftsmanSatchel()
-            : base()
         {
             if (Items.Count < 2)
             {
@@ -242,7 +237,6 @@ namespace Server.Items
     {
         [Constructable]
         public TinkersCraftsmanSatchel()
-            : base()
         {
             if (Items.Count < 2)
             {
@@ -284,7 +278,6 @@ namespace Server.Items
     {
         [Constructable]
         public CarpentersCraftsmanSatchel()
-            : base()
         {
             if (Items.Count < 2)
             {

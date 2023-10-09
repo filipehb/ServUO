@@ -1,6 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Multis;
-using System;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -111,7 +112,7 @@ namespace Server.Items
         {
             if (!m.InRange(GetWorldLocation(), 3))
             {
-                m.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
             else if (!IsLockedDown)
             {
@@ -127,7 +128,7 @@ namespace Server.Items
 
                         if (i != null)
                         {
-                            m.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1158330); // *You collect a plant from the wheelbarrow*
+                            m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1158330); // *You collect a plant from the wheelbarrow*
                             m.AddToBackpack(i);
                             Harvest = false;
                             NextHarvest = DateTime.UtcNow + TimeSpan.FromDays(7);

@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class MoreOrePleaseQuest : BaseQuest
     {
         public MoreOrePleaseQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(IronOre), "iron ore", 5, 0x19B9));
 
@@ -22,7 +21,7 @@ namespace Server.Engines.Quests
         public override object Description => 1075529;
         /* Not feeling strong enough today? Its alright, I didn't need a bucket of rocks anyway. */
         public override object Refuse => 1075531;
-        /* Hmmm… we need some more Ore. Try finding a mountain or cave, and give it a whack. */
+        /* Hmmmâ€¦ we need some more Ore. Try finding a mountain or cave, and give it a whack. */
         public override object Uncomplete => 1075532;
         /* I see you found a good vien! Great!  This will help get this order out on time. Good work! */
         public override object Complete => 1075533;
@@ -54,7 +53,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(MoreOrePleaseQuest)
                 };
@@ -103,7 +102,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public MinersQuestSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

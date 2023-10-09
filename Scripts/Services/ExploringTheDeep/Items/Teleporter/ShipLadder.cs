@@ -1,4 +1,6 @@
-﻿namespace Server.Items
+﻿using Server.Mobiles;
+
+namespace Server.Items
 {
     public class ShipLadder : Item
     {
@@ -24,7 +26,7 @@
         {
             if (from.InRange(Location, 2))
             {
-                Mobiles.BaseCreature.TeleportPets(from, m_PointDest, from.Map);
+                BaseCreature.TeleportPets(from, m_PointDest, from.Map);
                 from.MoveToWorld(m_PointDest, m_Map);
             }
         }
@@ -36,7 +38,7 @@
 
             if (from.InRange(Location, 2))
             {
-                Mobiles.BaseCreature.TeleportPets(from, m_PointDest, from.Map);
+                BaseCreature.TeleportPets(from, m_PointDest, from.Map);
                 from.MoveToWorld(m_PointDest, m_Map);
             }
         }

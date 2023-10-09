@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Items
 {
     #region Basket1Artifact
@@ -1594,7 +1596,7 @@ namespace Server.Items
             }
             else
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
         }
 

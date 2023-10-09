@@ -1,13 +1,12 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
     [CorpseName("a leviathan corpse")]
     public class Leviathan : BaseCreature
     {
-        private static readonly Type[] m_Artifacts = new Type[]
-        {
+        private static readonly Type[] m_Artifacts = {
             // Decorations
             typeof(CandelabraOfSouls),
             typeof(GhostShipAnchor),

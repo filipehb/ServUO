@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Engines.CityLoyalty;
 using Server.Gumps;
@@ -5,10 +8,6 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Targeting;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Multis
 {
@@ -370,40 +369,47 @@ namespace Server.Multis
                 from.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
                 return false;
             }
-            else if (SpellHelper.CheckCombat(from))
+
+            if (SpellHelper.CheckCombat(from))
             {
-                from.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
+	            from.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+	            return false;
             }
-            else if (destMap == Map.Felucca && from is PlayerMobile && ((PlayerMobile)from).Young)
+
+            if (destMap == Map.Felucca && from is PlayerMobile && ((PlayerMobile)from).Young)
             {
-                from.SendLocalizedMessage(1049543); // You decide against traveling to Felucca while you are still young.
-                return false;
+	            from.SendLocalizedMessage(1049543); // You decide against traveling to Felucca while you are still young.
+	            return false;
             }
-            else if (SpellHelper.RestrictRedTravel && from.Murderer && destMap.Rules != MapRules.FeluccaRules && !Siege.SiegeShard)
+
+            if (SpellHelper.RestrictRedTravel && from.Murderer && destMap.Rules != MapRules.FeluccaRules && !Siege.SiegeShard)
             {
-                from.SendLocalizedMessage(1019004); // You are not allowed to travel there.
-                return false;
+	            from.SendLocalizedMessage(1019004); // You are not allowed to travel there.
+	            return false;
             }
-            else if (Region.FindRegions(dest, destMap).Any(r => r.Name == "Abyss") && from is PlayerMobile && !((PlayerMobile)from).AbyssEntry)
+
+            if (Region.FindRegions(dest, destMap).Any(r => r.Name == "Abyss") && from is PlayerMobile && !((PlayerMobile)from).AbyssEntry)
             {
-                from.SendLocalizedMessage(1112226); // Thou must be on a Sacred Quest to pass through.
-                return false;
+	            from.SendLocalizedMessage(1112226); // Thou must be on a Sacred Quest to pass through.
+	            return false;
             }
-            else if (CityTradeSystem.HasTrade(from))
+
+            if (CityTradeSystem.HasTrade(from))
             {
-                from.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
-                return false;
+	            from.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
+	            return false;
             }
-            else if (from.Holding != null)
+
+            if (from.Holding != null)
             {
-                from.SendLocalizedMessage(1071955); // You cannot teleport while dragging an object.
-                return false;
+	            from.SendLocalizedMessage(1071955); // You cannot teleport while dragging an object.
+	            return false;
             }
-            else if (from.Target != null)
+
+            if (from.Target != null)
             {
-                from.SendLocalizedMessage(500310); // You are too busy with something else.
-                return false;
+	            from.SendLocalizedMessage(500310); // You are too busy with something else.
+	            return false;
             }
 
             return true;

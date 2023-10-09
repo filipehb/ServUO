@@ -1,8 +1,8 @@
+using System.Linq;
 using Server.Engines.Exodus;
 using Server.Engines.PartySystem;
 using Server.Mobiles;
 using Server.Targeting;
-using System.Linq;
 
 namespace Server.Items
 {

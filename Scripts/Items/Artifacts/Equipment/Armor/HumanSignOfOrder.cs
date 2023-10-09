@@ -5,7 +5,6 @@
         public override bool IsArtifact => true;
         [Constructable]
         public HumanSignOfOrder()
-            : base()
         {
             SkillBonuses.SetValues(0, SkillName.Chivalry, 10.0);
             Attributes.AttackChance = 5;

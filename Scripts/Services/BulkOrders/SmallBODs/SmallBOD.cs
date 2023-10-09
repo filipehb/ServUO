@@ -1,7 +1,7 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.BulkOrders
 {
@@ -336,16 +336,14 @@ namespace Server.Engines.BulkOrders
                         {
                             if (item.Amount > 1)
                             {
-                                if (AmountCur + item.Amount > AmountMax)
+	                            if (AmountCur + item.Amount > AmountMax)
                                 {
                                     from.SendLocalizedMessage(1157222); // You have provided more than which has been requested by this deed.
                                     return;
                                 }
-                                else
-                                {
-                                    AmountCur += item.Amount;
-                                    item.Delete();
-                                }
+
+	                            AmountCur += item.Amount;
+	                            item.Delete();
                             }
                             else
                             {

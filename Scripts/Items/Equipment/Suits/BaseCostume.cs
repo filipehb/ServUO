@@ -1,10 +1,10 @@
 namespace Server.Items
 {
     [Flipable(0x19BC, 0x19BD)]
-    public partial class BaseCostume : BaseShield
+    public class BaseCostume : BaseShield
     {
         public bool m_Transformed;
-        private int m_Body = 0;
+        private int m_Body;
         private int m_Hue = -1;
         private int m_SaveHueMod = -1;
 
@@ -81,8 +81,8 @@ namespace Server.Items
             if (Deleted)
                 return false;
 
-            else if (RootParent is Mobile && from != RootParent)
-                return false;
+            if (RootParent is Mobile && from != RootParent)
+	            return false;
 
             Hue = sender.DyedHue;
             return true;

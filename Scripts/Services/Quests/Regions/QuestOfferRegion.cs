@@ -1,7 +1,8 @@
-using Server.Mobiles;
-using Server.Regions;
 using System;
 using System.Xml;
+using Server.Diagnostics;
+using Server.Mobiles;
+using Server.Regions;
 
 namespace Server.Engines.Quests
 {
@@ -28,13 +29,13 @@ namespace Server.Engines.Quests
             {
                 try
                 {
-                    QuestSystem qs = (QuestSystem)Activator.CreateInstance(m_Quest, new object[] { player });
+                    QuestSystem qs = (QuestSystem)Activator.CreateInstance(m_Quest, player);
                     qs.SendOffer();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error creating quest {0}: {1}", m_Quest, ex);
-                    Diagnostics.ExceptionLogging.LogException(ex);
+                    ExceptionLogging.LogException(ex);
                 }
             }
         }

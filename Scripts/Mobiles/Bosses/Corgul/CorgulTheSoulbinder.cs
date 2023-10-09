@@ -1,10 +1,10 @@
-using Server.Items;
-using Server.Misc;
-using Server.Regions;
-using Server.Engines.CannedEvil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.CannedEvil;
+using Server.Items;
+using Server.Misc;
+using Server.Regions;
 
 namespace Server.Mobiles
 {
@@ -29,9 +29,9 @@ namespace Server.Mobiles
         public override double TeleportProb => 1.0;
         public override bool TeleportsPets => true;
 
-        public override Type[] UniqueList => new Type[] { typeof(CorgulsEnchantedSash), typeof(CorgulsHandbookOnMysticism), typeof(CorgulsHandbookOnTheUndead) };
-        public override Type[] SharedList => new Type[] { typeof(HelmOfVengence), typeof(RingOfTheSoulbinder), typeof(RuneEngravedPegLeg), typeof(CullingBlade) };
-        public override Type[] DecorativeList => new Type[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
+        public override Type[] UniqueList => new[] { typeof(CorgulsEnchantedSash), typeof(CorgulsHandbookOnMysticism), typeof(CorgulsHandbookOnTheUndead) };
+        public override Type[] SharedList => new[] { typeof(HelmOfVengence), typeof(RingOfTheSoulbinder), typeof(RuneEngravedPegLeg), typeof(CullingBlade) };
+        public override Type[] DecorativeList => new[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
 
         public override bool NoGoodies => true;
         public override bool RestrictedToFelucca => false;
@@ -137,8 +137,8 @@ namespace Server.Mobiles
 
             if (SharedChance >= random)
                 return CreateArtifact(SharedList);
-            else if (DecorativeChance >= random)
-                return CreateArtifact(DecorativeList);
+            if (DecorativeChance >= random)
+	            return CreateArtifact(DecorativeList);
             return null;
         }
 

@@ -1,8 +1,8 @@
+using System;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Khaldun
 {
@@ -62,7 +62,7 @@ namespace Server.Engines.Khaldun
                 {
                     quest.GiveRewards();
 
-                    BaseQuest newquest = QuestHelper.RandomQuest((PlayerMobile)m, new Type[] { typeof(GoingGumshoeQuest2) }, this);
+                    BaseQuest newquest = QuestHelper.RandomQuest((PlayerMobile)m, new[] { typeof(GoingGumshoeQuest2) }, this);
 
                     if (newquest != null)
                         m.SendGump(new MondainQuestGump(newquest));
@@ -78,7 +78,7 @@ namespace Server.Engines.Khaldun
                             quest2.Objectives[0].CurProgress++;
                             quest2.GiveRewards(); // TODO: Does this quest end here?
 
-                            BaseQuest newquest = QuestHelper.RandomQuest((PlayerMobile)m, new Type[] { typeof(GoingGumshoeQuest3) }, this);
+                            BaseQuest newquest = QuestHelper.RandomQuest((PlayerMobile)m, new[] { typeof(GoingGumshoeQuest3) }, this);
 
                             if (newquest != null)
                                 m.SendGump(new MondainQuestGump(newquest));
@@ -100,7 +100,7 @@ namespace Server.Engines.Khaldun
                                 quest3.Objectives[0].CurProgress++;
                                 quest3.GiveRewards(); // TODO: Does this quest end here?
 
-                                BaseQuest newquest = QuestHelper.RandomQuest((PlayerMobile)m, new Type[] { typeof(GoingGumshoeQuest4) }, this);
+                                BaseQuest newquest = QuestHelper.RandomQuest((PlayerMobile)m, new[] { typeof(GoingGumshoeQuest4) }, this);
 
                                 if (newquest != null)
                                     m.SendGump(new MondainQuestGump(newquest));

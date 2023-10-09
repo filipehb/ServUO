@@ -1,13 +1,14 @@
+using System;
+using System.Collections;
 using Server.Engines.Craft;
 using Server.Engines.Plants;
 using Server.Engines.Quests;
 using Server.Engines.Quests.Hag;
 using Server.Engines.Quests.Matriarch;
 using Server.Mobiles;
+using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections;
 
 namespace Server.Items
 {
@@ -359,8 +360,8 @@ namespace Server.Items
         {
             if (ItemID >= 0x995 && ItemID <= 0x999)
                 return ItemID;
-            else if (ItemID == 0x9CA)
-                return ItemID;
+            if (ItemID == 0x9CA)
+	            return ItemID;
 
             return 0x995;
         }
@@ -885,12 +886,11 @@ namespace Server.Items
 
             if (perc <= 0)
                 return 1042975; // It's empty.
-            else if (perc <= 33)
-                return 1042974; // It's nearly empty.
-            else if (perc <= 66)
-                return 1042973; // It's half full.
-            else
-                return 1042972; // It's full.
+            if (perc <= 33)
+	            return 1042974; // It's nearly empty.
+            if (perc <= 66)
+	            return 1042973; // It's half full.
+            return 1042972; // It's full.
         }
 
         public virtual void QuantityChanged()
@@ -957,7 +957,7 @@ namespace Server.Items
 
             if (!Movable && !Fillable)
             {
-                Multis.BaseHouse house = Multis.BaseHouse.FindHouseAt(this);
+                BaseHouse house = BaseHouse.FindHouseAt(this);
 
                 if (house == null || !house.IsLockedDown(this))
                 {
@@ -1121,8 +1121,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly int[] m_SwampTiles = new int[]
-        {
+        private static readonly int[] m_SwampTiles = {
             0x9C4, 0x9EB,
             0x3D65, 0x3D65,
             0x3DC0, 0x3DD9,

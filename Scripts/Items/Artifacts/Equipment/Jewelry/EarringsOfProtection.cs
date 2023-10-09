@@ -5,7 +5,6 @@
         public override bool IsArtifact => true;
         [Constructable]
         public EarringBoxSet()
-            : base()
         {
             DropItem(new EarringsOfProtection(AosElementAttribute.Physical));
             DropItem(new EarringsOfProtection(AosElementAttribute.Fire));

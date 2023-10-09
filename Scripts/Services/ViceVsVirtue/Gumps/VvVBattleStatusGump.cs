@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Guilds;
 using Server.Gumps;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.VvV
 {
@@ -15,7 +15,7 @@ namespace Server.Engines.VvV
             return 0xF3ECC;
         }
 
-        public VvVBattleStatusGump(PlayerMobile pm, VvVBattle battle) : base(pm, 50, 50)
+        public VvVBattleStatusGump(PlayerMobile pm, VvVBattle battle) : base(pm)
         {
             Battle = battle;
         }

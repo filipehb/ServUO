@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public QuiverOfRage()
-            : base()
         {
             Hue = 0x24C;
             WeightReduction = 25;

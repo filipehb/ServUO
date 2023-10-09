@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 /*Target Hit Chance reduced by up to 33%, Spell Damaged reduced by 33%, Damage 
  Taken can trigger additional damage between 20-60% of the damage taken as 

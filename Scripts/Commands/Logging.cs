@@ -1,12 +1,14 @@
-using Server.Accounting;
 using System;
 using System.IO;
+using System.Text;
+using Server.Accounting;
+using Server.Diagnostics;
 
 namespace Server.Commands
 {
     public class CommandLogging
     {
-        private static readonly char[] m_NotSafe = new char[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|' };
+        private static readonly char[] m_NotSafe = { '\\', '/', ':', '*', '?', '"', '<', '>', '|' };
         private static StreamWriter m_Output;
         private static bool m_Enabled = true;
         public static bool Enabled
@@ -46,7 +48,7 @@ namespace Server.Commands
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -58,14 +60,14 @@ namespace Server.Commands
 
                 if (m.Account == null)
                     return string.Format("{0} (no account)", m);
-                else
-                    return string.Format("{0} ('{1}')", m, m.Account.Username);
+                return string.Format("{0} ('{1}')", m, m.Account.Username);
             }
-            else if (o is Item)
-            {
-                Item item = (Item)o;
 
-                return string.Format("0x{0:X} ({1})", item.Serial.Value, item.GetType().Name);
+            if (o is Item)
+            {
+	            Item item = (Item)o;
+
+	            return string.Format("0x{0:X} ({1})", item.Serial.Value, item.GetType().Name);
             }
 
             return o;
@@ -107,7 +109,7 @@ namespace Server.Commands
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -137,7 +139,7 @@ namespace Server.Commands
             if (isSafe)
                 return ip;
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder(ip);
+            StringBuilder sb = new StringBuilder(ip);
 
             for (int i = 0; i < m_NotSafe.Length; ++i)
                 sb.Replace(m_NotSafe[i], '_');

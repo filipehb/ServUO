@@ -1,14 +1,13 @@
+using System;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class EscortToYewQuest : BaseQuest
     {
         public EscortToYewQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Yew"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -41,7 +40,6 @@ namespace Server.Engines.Quests
     public class EscortToVesperQuest : BaseQuest
     {
         public EscortToVesperQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Vesper"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -74,7 +72,6 @@ namespace Server.Engines.Quests
     public class EscortToTrinsicQuest : BaseQuest
     {
         public EscortToTrinsicQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Trinsic"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -107,7 +104,6 @@ namespace Server.Engines.Quests
     public class EscortToSkaraQuest : BaseQuest
     {
         public EscortToSkaraQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Skara Brae"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -140,7 +136,6 @@ namespace Server.Engines.Quests
     public class EscortToSerpentsHoldQuest : BaseQuest
     {
         public EscortToSerpentsHoldQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Serpent's Hold"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -173,7 +168,6 @@ namespace Server.Engines.Quests
     public class EscortToNujelmQuest : BaseQuest
     {
         public EscortToNujelmQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Nujel'm"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -206,7 +200,6 @@ namespace Server.Engines.Quests
     public class EscortToMoonglowQuest : BaseQuest
     {
         public EscortToMoonglowQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Moonglow"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -239,7 +232,6 @@ namespace Server.Engines.Quests
     public class EscortToMinocQuest : BaseQuest
     {
         public EscortToMinocQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Minoc"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -272,7 +264,6 @@ namespace Server.Engines.Quests
     public class EscortToMaginciaQuest : BaseQuest
     {
         public EscortToMaginciaQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Magincia"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -305,7 +296,6 @@ namespace Server.Engines.Quests
     public class EscortToJhelomQuest : BaseQuest
     {
         public EscortToJhelomQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Jhelom"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -338,7 +328,6 @@ namespace Server.Engines.Quests
     public class EscortToCoveQuest : BaseQuest
     {
         public EscortToCoveQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Cove"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -371,7 +360,6 @@ namespace Server.Engines.Quests
     public class EscortToBritainQuest : BaseQuest
     {
         public EscortToBritainQuest()
-            : base()
         {
             AddObjective(new EscortObjective("Britain"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -438,7 +426,6 @@ namespace Server.Engines.Quests
         private int m_Quest;
 
         public TownEscortable()
-            : base()
         {
             m_Quest = Utility.Random(m_Quests.Length);
         }
@@ -471,7 +458,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[] { m_Quests[m_Quest] };
+        public override Type[] Quests => new[] { m_Quests[m_Quest] };
         public override void Advertise()
         {
             Say(Utility.RandomMinMax(1072301, 1072303));
@@ -883,7 +870,6 @@ namespace Server.Engines.Quests
         private DateTime m_NextResurrect;
         [Constructable]
         public EscortableHealer()
-            : base()
         {
             Title = "the wandering healer";
 

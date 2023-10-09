@@ -1,9 +1,12 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using Server.Engines.Khaldun;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.SkillHandlers
@@ -115,9 +118,9 @@ namespace Server.SkillHandlers
                         break;
                     }
 
-                    if (objs is Engines.Khaldun.SageHumbolt)
+                    if (objs is SageHumbolt)
                     {
-                        if (((Engines.Khaldun.SageHumbolt)objs).OnSpiritSpeak(Caster))
+                        if (((SageHumbolt)objs).OnSpiritSpeak(Caster))
                         {
                             eable.Free();
                             Remove(Caster);

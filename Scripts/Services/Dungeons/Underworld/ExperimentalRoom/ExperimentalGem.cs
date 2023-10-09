@@ -1,7 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -568,36 +568,32 @@ namespace Server.Items
             return false;
         }
 
-        public int[] RegularHues = new int[]
-        {
+        public int[] RegularHues = {
             White,
             Pink,
             LightGreen,
             Orange,
         };
 
-        private readonly int[] ExtremeHues = new int[]
-        {
+        private readonly int[] ExtremeHues = {
             Red,
             Blue,
             Brown,
             DarkGreen
         };
 
-        private static readonly int[][] m_RoomHues = new int[][]
-        {
+        private static readonly int[][] m_RoomHues = {
             //Room One
-            new int[] { White, Pink, Red, Blue },
+            new[] { White, Pink, Red, Blue },
 
             //Room Two
-            new int[] { Pink, Blue, Red, Orange, LightGreen, White },
+            new[] { Pink, Blue, Red, Orange, LightGreen, White },
 
             //Room Three
-            new int[] { Blue, Pink, DarkGreen, Orange, Brown, LightGreen, Red, White },
+            new[] { Blue, Pink, DarkGreen, Orange, Brown, LightGreen, Red, White },
         };
 
-        private static readonly Rectangle2D[] m_FloorRecs = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_FloorRecs = {
             //Room One
             new Rectangle2D(977, 1104, 5, 5),   // White, opposite of pink
             new Rectangle2D(987, 1104, 5, 5),   // Pink, opposite of white
@@ -623,8 +619,7 @@ namespace Server.Items
             new Rectangle2D(989, 1079, 3, 5),   //Pink, opposite of White
         };
 
-        private static readonly int[] m_FloorHues = new int[]
-        {
+        private static readonly int[] m_FloorHues = {
             //Room One
             White,
             Pink,
@@ -650,8 +645,7 @@ namespace Server.Items
             Pink
         };
 
-        private static readonly Rectangle2D[] m_RoomRecs = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_RoomRecs = {
             new Rectangle2D(977, 1104, 15, 10), //RoomOne
             new Rectangle2D(977, 1092, 15, 9), //RoomTwo
             new Rectangle2D(977, 1074, 15, 10), //RoomThree

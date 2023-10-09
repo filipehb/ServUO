@@ -1,7 +1,9 @@
+using System;
+using System.Collections.Generic;
+using Server.ContextMenus;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Mobiles
 {
@@ -142,14 +144,12 @@ namespace Server.Engines.Despise
         {
             get
             {
-                if (!Controlled || m_Orb == null || m_Orb.Aggression == Aggression.Defensive)
+	            if (!Controlled || m_Orb == null || m_Orb.Aggression == Aggression.Defensive)
                 {
                     return TimeSpan.FromSeconds(10.0);
                 }
-                else
-                {
-                    return TimeSpan.FromSeconds(Utility.RandomMinMax(4, 6));
-                }
+
+	            return TimeSpan.FromSeconds(Utility.RandomMinMax(4, 6));
             }
         }
 
@@ -221,7 +221,7 @@ namespace Server.Engines.Despise
             return false;
         }
 
-        public override void GetContextMenuEntries(Mobile from, System.Collections.Generic.List<ContextMenus.ContextMenuEntry> list)
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
         }
 

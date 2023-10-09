@@ -177,7 +177,7 @@ namespace Server.Items
             BrightDaemonBlood,
             MightyMandrake,
             BurlyBone
-        };
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SorcerersPlateController Controller => m_Controller;

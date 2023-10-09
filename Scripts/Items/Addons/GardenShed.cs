@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -250,7 +250,7 @@ namespace Server.Items
         private bool m_East;
 
         [Constructable]
-        public GardenShedDeed() : base()
+        public GardenShedDeed()
         {
             LootType = LootType.Blessed;
         }

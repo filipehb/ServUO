@@ -1,8 +1,17 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using Server.Diagnostics;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
+using Server.Multis;
 using Server.Network;
+using Server.SkillHandlers;
 using Server.Spells.Bushido;
 using Server.Spells.Chivalry;
 using Server.Spells.First;
@@ -12,10 +21,7 @@ using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Spells.Second;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+
 #endregion
 
 namespace Server.Spells
@@ -201,14 +207,12 @@ namespace Server.Spells
 
         public virtual int GetNewAosDamage(int bonus, int dice, int sides, IDamageable singleTarget)
         {
-            if (singleTarget != null)
+	        if (singleTarget != null)
             {
                 return GetNewAosDamage(bonus, dice, sides, (Caster.Player && singleTarget is PlayerMobile), GetDamageScalar(singleTarget as Mobile), singleTarget);
             }
-            else
-            {
-                return GetNewAosDamage(bonus, dice, sides, false, null);
-            }
+
+	        return GetNewAosDamage(bonus, dice, sides, false, null);
         }
 
         public virtual int GetNewAosDamage(int bonus, int dice, int sides, bool playerVsPlayer, IDamageable damageable)
@@ -621,7 +625,7 @@ namespace Server.Spells
         public virtual bool CheckCast()
         {
             #region High Seas
-            if (Multis.BaseBoat.IsDriving(m_Caster) && m_Caster.AccessLevel == AccessLevel.Player)
+            if (BaseBoat.IsDriving(m_Caster) && m_Caster.AccessLevel == AccessLevel.Player)
             {
                 m_Caster.SendLocalizedMessage(1049616); // You are too busy to do that at the moment.
                 return false;
@@ -677,110 +681,107 @@ namespace Server.Spells
             {
                 return false;
             }
-            else if (m_Caster is PlayerMobile && ((PlayerMobile)m_Caster).Peaced)
+
+            if (m_Caster is PlayerMobile && ((PlayerMobile)m_Caster).Peaced)
             {
-                m_Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
+	            m_Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
             }
             else if (m_Scroll is BaseWand && m_Caster.Spell != null && m_Caster.Spell.IsCasting)
             {
-                m_Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
+	            m_Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
             }
-            else if (SkillHandlers.SpiritSpeak.IsInSpiritSpeak(m_Caster) || (m_Caster.Spell != null && m_Caster.Spell.IsCasting))
+            else if (SpiritSpeak.IsInSpiritSpeak(m_Caster) || (m_Caster.Spell != null && m_Caster.Spell.IsCasting))
             {
-                m_Caster.SendLocalizedMessage(502642); // You are already casting a spell.
+	            m_Caster.SendLocalizedMessage(502642); // You are already casting a spell.
             }
             else if (BlockedByHorrificBeast && TransformationSpellHelper.UnderTransformation(m_Caster, typeof(HorrificBeastSpell)) ||
                      (BlockedByAnimalForm && AnimalForm.UnderTransformation(m_Caster)))
             {
-                m_Caster.SendLocalizedMessage(1061091); // You cannot cast that spell in this form.
+	            m_Caster.SendLocalizedMessage(1061091); // You cannot cast that spell in this form.
             }
             else if (!(m_Scroll is BaseWand) && (m_Caster.Paralyzed || m_Caster.Frozen))
             {
-                m_Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
+	            m_Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
             }
             else if (CheckNextSpellTime && Core.TickCount - m_Caster.NextSpellTime < 0)
             {
-                m_Caster.SendLocalizedMessage(502644); // You have not yet recovered from casting a spell.
+	            m_Caster.SendLocalizedMessage(502644); // You have not yet recovered from casting a spell.
             }
             else if (!CheckManaBeforeCast || m_Caster.Mana >= ScaleMana(GetMana()))
             {
-                #region Stygian Abyss
-                if (m_Caster.Race == Race.Gargoyle && m_Caster.Flying)
-                {
-                    if (BaseMount.OnFlightPath(m_Caster))
-                    {
-                        if (m_Caster.IsPlayer())
-                        {
-                            m_Caster.SendLocalizedMessage(1113750); // You may not cast spells while flying over such precarious terrain.
-                            return false;
-                        }
-                        else
-                        {
-                            m_Caster.SendMessage("Your staff level allows you to cast while flying over precarious terrain.");
-                        }
-                    }
-                }
-                #endregion
+	            #region Stygian Abyss
+	            if (m_Caster.Race == Race.Gargoyle && m_Caster.Flying)
+	            {
+		            if (BaseMount.OnFlightPath(m_Caster))
+		            {
+			            if (m_Caster.IsPlayer())
+			            {
+				            m_Caster.SendLocalizedMessage(1113750); // You may not cast spells while flying over such precarious terrain.
+				            return false;
+			            }
 
-                if (m_Caster.Spell == null && m_Caster.CheckSpellCast(this) && CheckCast() &&
-                    m_Caster.Region.OnBeginSpellCast(m_Caster, this))
-                {
-                    m_State = SpellState.Casting;
-                    m_Caster.Spell = this;
+			            m_Caster.SendMessage("Your staff level allows you to cast while flying over precarious terrain.");
+		            }
+	            }
+	            #endregion
 
-                    Caster.Delta(MobileDelta.Flags);
+	            if (m_Caster.Spell == null && m_Caster.CheckSpellCast(this) && CheckCast() &&
+	                m_Caster.Region.OnBeginSpellCast(m_Caster, this))
+	            {
+		            m_State = SpellState.Casting;
+		            m_Caster.Spell = this;
 
-                    if (!(m_Scroll is BaseWand) && RevealOnCast)
-                    {
-                        m_Caster.RevealingAction();
-                    }
+		            Caster.Delta(MobileDelta.Flags);
 
-                    SayMantra();
+		            if (!(m_Scroll is BaseWand) && RevealOnCast)
+		            {
+			            m_Caster.RevealingAction();
+		            }
 
-                    TimeSpan castDelay = GetCastDelay();
+		            SayMantra();
 
-                    if (ShowHandMovement && !(m_Scroll is SpellStone) && (m_Caster.Body.IsHuman || (m_Caster.Player && m_Caster.Body.IsMonster)))
-                    {
-                        int count = (int)Math.Ceiling(castDelay.TotalSeconds / AnimateDelay.TotalSeconds);
+		            TimeSpan castDelay = GetCastDelay();
 
-                        if (count != 0)
-                        {
-                            m_AnimTimer = new AnimTimer(this, count);
-                            m_AnimTimer.Start();
-                        }
+		            if (ShowHandMovement && !(m_Scroll is SpellStone) && (m_Caster.Body.IsHuman || (m_Caster.Player && m_Caster.Body.IsMonster)))
+		            {
+			            int count = (int)Math.Ceiling(castDelay.TotalSeconds / AnimateDelay.TotalSeconds);
 
-                        if (m_Info.LeftHandEffect > 0)
-                        {
-                            Caster.FixedParticles(0, 10, 5, m_Info.LeftHandEffect, EffectLayer.LeftHand);
-                        }
+			            if (count != 0)
+			            {
+				            m_AnimTimer = new AnimTimer(this, count);
+				            m_AnimTimer.Start();
+			            }
 
-                        if (m_Info.RightHandEffect > 0)
-                        {
-                            Caster.FixedParticles(0, 10, 5, m_Info.RightHandEffect, EffectLayer.RightHand);
-                        }
-                    }
+			            if (m_Info.LeftHandEffect > 0)
+			            {
+				            Caster.FixedParticles(0, 10, 5, m_Info.LeftHandEffect, EffectLayer.LeftHand);
+			            }
 
-                    if (ClearHandsOnCast)
-                    {
-                        m_Caster.ClearHands();
-                    }
+			            if (m_Info.RightHandEffect > 0)
+			            {
+				            Caster.FixedParticles(0, 10, 5, m_Info.RightHandEffect, EffectLayer.RightHand);
+			            }
+		            }
 
-                    WeaponAbility.ClearCurrentAbility(m_Caster);
-                    m_CastTime = Core.TickCount + (long)castDelay.TotalMilliseconds;
+		            if (ClearHandsOnCast)
+		            {
+			            m_Caster.ClearHands();
+		            }
 
-                    CastTimer.AddTimer(this);
-                    OnBeginCast();
+		            WeaponAbility.ClearCurrentAbility(m_Caster);
+		            m_CastTime = Core.TickCount + (long)castDelay.TotalMilliseconds;
 
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+		            CastTimer.AddTimer(this);
+		            OnBeginCast();
+
+		            return true;
+	            }
+
+	            return false;
             }
             else
             {
-                m_Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, ScaleMana(GetMana()).ToString()); // Insufficient mana. You must have at least ~1_MANA_REQUIREMENT~ Mana to use this spell.
+	            m_Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, ScaleMana(GetMana()).ToString()); // Insufficient mana. You must have at least ~1_MANA_REQUIREMENT~ Mana to use this spell.
             }
 
             return false;
@@ -1149,42 +1150,40 @@ namespace Server.Spells
 
         public bool CheckBSequence(Mobile target, bool allowDead)
         {
-            if (!target.Alive && !allowDead)
+	        if (!target.Alive && !allowDead)
             {
                 m_Caster.SendLocalizedMessage(501857); // This spell won't work on that!
                 return false;
             }
-            else if (Caster.CanBeBeneficial(target, true, allowDead) && CheckSequence())
-            {
-                if (ValidateBeneficial(target))
-                {
-                    Caster.DoBeneficial(target);
-                }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+	        if (Caster.CanBeBeneficial(target, true, allowDead) && CheckSequence())
+	        {
+		        if (ValidateBeneficial(target))
+		        {
+			        Caster.DoBeneficial(target);
+		        }
+
+		        return true;
+	        }
+
+	        return false;
         }
 
         public bool CheckHSequence(IDamageable target)
         {
-            if (!target.Alive || (target is IDamageableItem && !((IDamageableItem)target).CanDamage))
+	        if (!target.Alive || (target is IDamageableItem && !((IDamageableItem)target).CanDamage))
             {
                 m_Caster.SendLocalizedMessage(501857); // This spell won't work on that!
                 return false;
             }
-            else if (Caster.CanBeHarmful(target) && CheckSequence())
-            {
-                Caster.DoHarmful(target);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+	        if (Caster.CanBeHarmful(target) && CheckSequence())
+	        {
+		        Caster.DoHarmful(target);
+		        return true;
+	        }
+
+	        return false;
         }
 
         public bool ValidateBeneficial(Mobile target)
@@ -1308,7 +1307,7 @@ namespace Server.Spells
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e, string.Format("Count: {0}; Index: {1}", registry.Count, i));
+                            ExceptionLogging.LogException(e, string.Format("Count: {0}; Index: {1}", registry.Count, i));
                         }
                     }
 
@@ -1320,7 +1319,7 @@ namespace Server.Spells
         {
             try
             {
-                using (System.IO.StreamWriter op = new System.IO.StreamWriter("InstantTargetErr.log", true))
+                using (StreamWriter op = new StreamWriter("InstantTargetErr.log", true))
                 {
                     op.WriteLine("# {0}", DateTime.UtcNow);
                     op.WriteLine("Target with bad contructor args:");
@@ -1330,7 +1329,7 @@ namespace Server.Spells
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
     }

@@ -1,8 +1,10 @@
 #region References
+
+using System;
 using Server.Commands;
 using Server.Items;
 using Server.Network;
-using System;
+
 #endregion
 
 namespace Server

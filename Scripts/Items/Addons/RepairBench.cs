@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Engines.Craft;
 using Server.Engines.VeteranRewards;
@@ -5,9 +8,6 @@ using Server.Gumps;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -49,8 +49,7 @@ namespace Server.Items
     {
         public List<RepairBenchDefinition> Tools;
 
-        public static RepairBenchDefinition[] Definitions = new RepairBenchDefinition[]
-        {
+        public static RepairBenchDefinition[] Definitions = {
             new RepairBenchDefinition(DefTinkering.CraftSystem, RepairSkillType.Tinkering, 1044097, 0, 0),
             new RepairBenchDefinition(DefBlacksmithy.CraftSystem, RepairSkillType.Smithing, 1044067, 0, 0),
             new RepairBenchDefinition(DefCarpentry.CraftSystem, RepairSkillType.Carpentry, 1044071, 0, 0),
@@ -309,7 +308,6 @@ namespace Server.Items
 
         [Constructable]
         public RepairBenchDeed(List<RepairBenchDefinition> tools)
-            : base()
         {
             Tools = tools;
             LootType = LootType.Blessed;

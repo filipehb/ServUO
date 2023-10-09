@@ -1,6 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Points;
+using Server.Items;
 
 namespace Server.Engines.TreasuresOfKotlCity
 {
@@ -62,7 +63,7 @@ namespace Server.Engines.TreasuresOfKotlCity
                 DropItem(new InoperativeAutomatonHead());
             }
 
-            if (0.1 > Utility.RandomDouble() && Points.PointsSystem.TreasuresOfKotlCity.Enabled)
+            if (0.1 > Utility.RandomDouble() && PointsSystem.TreasuresOfKotlCity.Enabled)
             {
                 Item item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(LootPackEntry.IsInTokuno(this), LootPackEntry.IsMondain(this), LootPackEntry.IsStygian(this));
 
@@ -70,7 +71,7 @@ namespace Server.Engines.TreasuresOfKotlCity
                 {
                     int min, max;
 
-                    TreasureMapChest.GetRandomItemStat(out min, out max, 1.0);
+                    TreasureMapChest.GetRandomItemStat(out min, out max);
 
                     RunicReforging.GenerateRandomItem(item, null, Utility.RandomMinMax(min, max), 0, ReforgedPrefix.None, ReforgedSuffix.Kotl, Map);
 

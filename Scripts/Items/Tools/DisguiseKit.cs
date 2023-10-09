@@ -1,4 +1,7 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
@@ -6,8 +9,7 @@ using Server.SkillHandlers;
 using Server.Spells;
 using Server.Spells.Fifth;
 using Server.Spells.Seventh;
-using System;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Items

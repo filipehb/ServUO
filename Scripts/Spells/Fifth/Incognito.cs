@@ -1,8 +1,8 @@
+using System;
+using System.Collections;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells.Seventh;
-using System;
-using System.Collections;
 
 namespace Server.Spells.Fifth
 {
@@ -16,15 +16,13 @@ namespace Server.Spells.Fifth
             Reagent.Garlic,
             Reagent.Nightshade);
         private static readonly Hashtable m_Timers = new Hashtable();
-        private static readonly int[] m_HairIDs = new int[]
-        {
+        private static readonly int[] m_HairIDs = {
             0x2044, 0x2045, 0x2046,
             0x203C, 0x203B, 0x203D,
             0x2047, 0x2048, 0x2049,
             0x204A, 0x0000
         };
-        private static readonly int[] m_BeardIDs = new int[]
-        {
+        private static readonly int[] m_BeardIDs = {
             0x203E, 0x203F, 0x2040,
             0x2041, 0x204B, 0x204C,
             0x204D, 0x0000
@@ -56,10 +54,11 @@ namespace Server.Spells.Fifth
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
                 return false;
             }
-            else if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
+
+            if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
             {
-                Caster.SendLocalizedMessage(1042402); // You cannot use incognito while wearing body paint
-                return false;
+	            Caster.SendLocalizedMessage(1042402); // You cannot use incognito while wearing body paint
+	            return false;
             }
 
             return true;

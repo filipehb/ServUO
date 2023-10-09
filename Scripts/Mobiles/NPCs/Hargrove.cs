@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ChopChopOnTheDoubleQuest : BaseQuest
     {
         public ChopChopOnTheDoubleQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Log), "log", 60, 0x1BDD));
 
@@ -54,7 +53,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ChopChopOnTheDoubleQuest)
                 };
@@ -101,7 +100,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public LumberjacksSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

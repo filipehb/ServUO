@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
+using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -139,7 +140,7 @@ namespace Server.Engines.CityLoyalty
                             if (targeted is IPoint3D)
                             {
                                 IPoint3D p = targeted as IPoint3D;
-                                Spells.SpellHelper.GetSurfaceTop(ref p);
+                                SpellHelper.GetSurfaceTop(ref p);
                                 BallotBox box = new BallotBox();
 
                                 if (CheckLocation(m, box, p))

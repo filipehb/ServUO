@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public CrimsonSwordBelt()
-            : base()
         {
             Attributes.BonusDex = 5;
             Attributes.BonusHits = 10;

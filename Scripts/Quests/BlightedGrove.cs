@@ -1,12 +1,12 @@
-using Server.Items;
 using System;
+using Server.Engines.Craft;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class VilePoisonQuest : BaseQuest
     {
         public VilePoisonQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(TaintedTreeSample), "tainted tree sample", 1, typeof(Ioseph), "Ioseph (Jhelom)"));
 
@@ -53,7 +53,6 @@ namespace Server.Engines.Quests
     public class RockAndHardPlaceQuest : BaseQuest
     {
         public RockAndHardPlaceQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Granite), "rocks", 4, 0x1779));
             AddObjective(new ObtainObjective(typeof(BlueDiamond), "blue diamonds", 2, 0x3198));
@@ -99,7 +98,6 @@ namespace Server.Engines.Quests
     public class SympatheticMagicQuest : BaseQuest
     {
         public SympatheticMagicQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BarkFragment), "bark", 10, 0x318F));
 
@@ -111,7 +109,7 @@ namespace Server.Engines.Quests
         /* Sympathetic Magic */
         public override object Title => 1074952;
         /* This is some nasty stuff, that's for certain.  I don't even want to think about what sort of blight 
-        caused this venomous reaction from that old tree.  Let's get to work … we'll need to try something really 
+        caused this venomous reaction from that old tree.  Let's get to work â€¦ we'll need to try something really 
         hard but still workable as our base material.  Nothing's harder than stone and diamond.  Let's try them first. */
         public override object Description => 1074957;
         /* Sure, no problem.  I thought you were interested in figuring this out. */
@@ -143,7 +141,6 @@ namespace Server.Engines.Quests
     public class AlreadyDeadQuest : BaseQuest
     {
         public AlreadyDeadQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Bone), "workable samples", 10));
 
@@ -187,7 +184,6 @@ namespace Server.Engines.Quests
     public class EurekaQuest : BaseQuest
     {
         public EurekaQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(SealedNotesForJamal), "sealed notes for jamal", 1, typeof(Jamal), "Jamal (near Blighted Grove)"));
 
@@ -217,7 +213,7 @@ namespace Server.Engines.Quests
         {
             if (Owner.Skills.Blacksmith.Value >= 45.0)
             {
-                Owner.AcquireRecipe((int)Craft.SmithRecipes.BoneMachete);
+                Owner.AcquireRecipe((int)SmithRecipes.BoneMachete);
                 Owner.SendLocalizedMessage(1075006); // You have learned how to smith a bone handled machete!
             }
             else
@@ -242,7 +238,6 @@ namespace Server.Engines.Quests
     public class SubContractingQuest : BaseQuest
     {
         public SubContractingQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SamplesOfCorruptedWater), "samples of corrupted water", 3));
 
@@ -254,7 +249,7 @@ namespace Server.Engines.Quests
         public override object Title => 1074955;
         /* Wonderful!  Now we can both get in there!  Let me show you these instructions for making this machete.  
         If you're not skilled in smithing, I'm not sure how much sense it will make though.  Listen, if you're 
-        heading in there anyway … maybe you'd do me one more favor?  I'm ah ... buried in work out here ... so if 
+        heading in there anyway â€¦ maybe you'd do me one more favor?  I'm ah ... buried in work out here ... so if 
         you'd go in and get me a few water samples, I'd be obliged. */
         public override object Description => 1074961;
         /* Oh.  Right, I guess you're really ... ah ... busy too. */

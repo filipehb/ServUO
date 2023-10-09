@@ -1,7 +1,7 @@
-using Server.Gumps;
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -298,7 +298,7 @@ namespace Server.Items
         public override string DefaultName => null;
         public override bool CheckLocked(Mobile from)
         {
-            if (Locked)
+	        if (Locked)
             {
                 PuzzleChestSolution solution = GetLastGuess(from);
                 if (solution != null)
@@ -312,10 +312,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+	        return false;
         }
 
         public PuzzleChestSolutionAndTime GetLastGuess(Mobile m)

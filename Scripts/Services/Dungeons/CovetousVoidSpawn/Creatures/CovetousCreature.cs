@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -68,8 +68,7 @@ namespace Server.Mobiles
 
             switch (ai)
             {
-                default: break;
-                case AIType.AI_Mage:
+	            case AIType.AI_Mage:
                     SetSkill(SkillName.Magery, SkillStart);
                     SetSkill(SkillName.EvalInt, SkillStart);
                     SetSkill(SkillName.Meditation, SkillStart);

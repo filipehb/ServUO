@@ -1,6 +1,7 @@
+using System;
 using Server.Items;
 using Server.Multis;
-using System;
+using Server.Network;
 
 namespace Server.Mobiles
 {
@@ -87,7 +88,7 @@ namespace Server.Mobiles
                 if (house != null && house.IsCoOwner(from) && from.AccessLevel == AccessLevel.Player)
                     from.SendLocalizedMessage(1072625); // As the house owner, you may rename this Parrot.
 
-                from.Send(new Network.MobileStatus(from, this));
+                from.Send(new MobileStatus(from, this));
             }
         }
 
@@ -112,8 +113,7 @@ namespace Server.Mobiles
 
             if (house != null && house.IsCoOwner(from))
                 return true;
-            else
-                return false;
+            return false;
         }
 
         public override void OnSpeech(SpeechEventArgs e)
@@ -129,7 +129,7 @@ namespace Server.Mobiles
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (dropped is ParrotWafer)
+	        if (dropped is ParrotWafer)
             {
                 dropped.Delete();
 
@@ -160,8 +160,8 @@ namespace Server.Mobiles
 
                 return true;
             }
-            else
-                return false;
+
+	        return false;
         }
 
         public override void Serialize(GenericWriter writer)

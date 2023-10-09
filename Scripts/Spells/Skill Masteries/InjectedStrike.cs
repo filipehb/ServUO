@@ -1,7 +1,7 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -44,7 +44,7 @@ namespace Server.Spells.SkillMasteries
 
             if (CheckWeapon())
             {
-                if (weapon.Poison == null || weapon.PoisonCharges == 0)
+	            if (weapon.Poison == null || weapon.PoisonCharges == 0)
                 {
                     BasePoisonPotion poison = GetLastPotion(Caster);
 
@@ -53,24 +53,25 @@ namespace Server.Spells.SkillMasteries
 
                     return;
                 }
-                else if (!HasSpell(Caster, GetType()))
-                {
-                    if (CheckSequence())
-                    {
-                        BeginTimer();
-                        Caster.SendLocalizedMessage(1156138); // You ready your weapon to unleash an injected strike!
 
-                        int bonus = 30;
+	            if (!HasSpell(Caster, GetType()))
+	            {
+		            if (CheckSequence())
+		            {
+			            BeginTimer();
+			            Caster.SendLocalizedMessage(1156138); // You ready your weapon to unleash an injected strike!
 
-                        // Your next successful attack will poison your target and reduce its poison resist by:<br>~1_VAL~% PvM<br>~2_VAL~% PvP
-                        BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.InjectedStrike, 1155927, 1156163, string.Format("{0}\t{1}", bonus.ToString(), (bonus / 2).ToString())));
-                        Caster.FixedParticles(0x3728, 0x1, 0xA, 0x251E, 0x4F7, 7, (EffectLayer)2, 0);
+			            int bonus = 30;
 
-                        weapon.InvalidateProperties();
-                    }
-                }
-                else
-                    Caster.SendLocalizedMessage(501775); // This spell is already in effect.
+			            // Your next successful attack will poison your target and reduce its poison resist by:<br>~1_VAL~% PvM<br>~2_VAL~% PvP
+			            BuffInfo.AddBuff(Caster, new BuffInfo(BuffIcon.InjectedStrike, 1155927, 1156163, string.Format("{0}\t{1}", bonus.ToString(), (bonus / 2).ToString())));
+			            Caster.FixedParticles(0x3728, 0x1, 0xA, 0x251E, 0x4F7, 7, (EffectLayer)2, 0);
+
+			            weapon.InvalidateProperties();
+		            }
+	            }
+	            else
+		            Caster.SendLocalizedMessage(501775); // This spell is already in effect.
             }
             else
                 Caster.SendLocalizedMessage(1060179); //You must be wielding a weapon to use this ability!
@@ -93,15 +94,13 @@ namespace Server.Spells.SkillMasteries
                 }
                 else if (CheckSequence())
                 {
-                    if (Caster.CheckTargetSkill(CastSkill, potion, potion.MinPoisoningSkill, potion.MaxPoisoningSkill))
+	                if (Caster.CheckTargetSkill(CastSkill, potion, potion.MinPoisoningSkill, potion.MaxPoisoningSkill))
                     {
                         ApplyPoison(weapon, potion);
                         return;
                     }
-                    else
-                    {
-                        Caster.SendLocalizedMessage(1010518); // You fail to apply a sufficient dose of poison
-                    }
+
+	                Caster.SendLocalizedMessage(1010518); // You fail to apply a sufficient dose of poison
                 }
             }
             else if (o is BaseWeapon && weapon != null && (BaseWeapon)o == weapon && potion != null)
@@ -110,15 +109,13 @@ namespace Server.Spells.SkillMasteries
                 {
                     if (potion != null)
                     {
-                        if (Caster.CheckTargetSkill(CastSkill, potion, potion.MinPoisoningSkill, potion.MaxPoisoningSkill))
+	                    if (Caster.CheckTargetSkill(CastSkill, potion, potion.MinPoisoningSkill, potion.MaxPoisoningSkill))
                         {
                             ApplyPoison(weapon, potion);
                             return;
                         }
-                        else
-                        {
-                            Caster.SendLocalizedMessage(1010518); // You fail to apply a sufficient dose of poison
-                        }
+
+	                    Caster.SendLocalizedMessage(1010518); // You fail to apply a sufficient dose of poison
                     }
                 }
             }

@@ -1,13 +1,12 @@
+using System;
 using Server.Network;
 using Server.Spells;
-using System;
 
 namespace Server.Items
 {
     public class IronMaidenAddon : BaseAddon
     {
         public IronMaidenAddon()
-            : base()
         {
             AddComponent(new LocalizedAddonComponent(0x1249, 1076288), 0, 0, 0);
         }
@@ -108,7 +107,6 @@ namespace Server.Items
     {
         [Constructable]
         public IronMaidenDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

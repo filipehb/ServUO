@@ -102,12 +102,11 @@ namespace Server.Items
 
             if (rand < 0.12)
                 return 0x19B7;
-            else if (rand < 0.18)
-                return 0x19B8;
-            else if (rand < 0.25)
-                return 0x19BA;
-            else
-                return 0x19B9;
+            if (rand < 0.18)
+	            return 0x19B8;
+            if (rand < 0.25)
+	            return 0x19BA;
+            return 0x19B9;
         }
 
         public BaseOre(CraftResource resource)
@@ -232,16 +231,18 @@ namespace Server.Items
                     {
                         return;
                     }
-                    else if (m_Ore == ore)
+
+                    if (m_Ore == ore)
                     {
-                        from.SendLocalizedMessage(501972); // Select another pile or ore with which to combine 
-                        from.Target = new InternalTarget(ore);
-                        return;
+	                    from.SendLocalizedMessage(501972); // Select another pile or ore with which to combine 
+	                    from.Target = new InternalTarget(ore);
+	                    return;
                     }
-                    else if (ore.Resource != m_Ore.Resource)
+
+                    if (ore.Resource != m_Ore.Resource)
                     {
-                        from.SendLocalizedMessage(501979); // You cannot combine ores of different metals.
-                        return;
+	                    from.SendLocalizedMessage(501979); // You cannot combine ores of different metals.
+	                    return;
                     }
 
                     int worth = ore.Amount;
@@ -289,10 +290,11 @@ namespace Server.Items
                         from.SendLocalizedMessage(1062844); // There is too much ore to combine.
                         return;
                     }
-                    else if (ore.RootParent is Mobile && (plusWeight + ((Mobile)ore.RootParent).Backpack.TotalWeight) > ((Mobile)ore.RootParent).Backpack.MaxWeight)
+
+                    if (ore.RootParent is Mobile && (plusWeight + ((Mobile)ore.RootParent).Backpack.TotalWeight) > ((Mobile)ore.RootParent).Backpack.MaxWeight)
                     {
-                        from.SendLocalizedMessage(501978); // The weight is too great to combine in a container.
-                        return;
+	                    from.SendLocalizedMessage(501978); // The weight is too great to combine in a container.
+	                    return;
                     }
 
                     ore.ItemID = newID;

@@ -1,10 +1,12 @@
 #region References
+
+using System;
 using Server.Engines.VeteranRewards;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
 using Server.Spells;
-using System;
+
 #endregion
 
 namespace Server.Mobiles

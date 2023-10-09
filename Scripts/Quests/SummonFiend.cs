@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class FiendishFriendsQuest : BaseQuest
     {
         public FiendishFriendsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Imp), "imps", 50));
 
@@ -49,7 +48,6 @@ namespace Server.Engines.Quests
     public class CrackingTheWhipQuest : BaseQuest
     {
         public CrackingTheWhipQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(StoutWhip), "stout whip", 1, 0x166F));
 
@@ -92,7 +90,6 @@ namespace Server.Engines.Quests
     public class IronWillQuest : BaseQuest
     {
         public IronWillQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(ArcaneDaemon), "arcane daemon", 1));
 

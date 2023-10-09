@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -33,12 +33,10 @@ namespace Server.Items
                 from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
                 return;
             }
-            else
+
+            if (messagecheck)
             {
-                if (messagecheck)
-                {
-                    from.BeginTarget(2, false, TargetFlags.None, OnTarget);
-                }
+	            from.BeginTarget(2, false, TargetFlags.None, OnTarget);
             }
         }
 

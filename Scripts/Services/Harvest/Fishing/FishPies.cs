@@ -1,7 +1,7 @@
-using Server.Engines.Craft;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -159,8 +159,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-                from.SendLocalizedMessage(502173); // You are already under a similar effect.
+
+            from.SendLocalizedMessage(502173); // You are already under a similar effect.
             return false;
         }
 

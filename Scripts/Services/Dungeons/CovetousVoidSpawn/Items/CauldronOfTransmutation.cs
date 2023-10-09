@@ -1,6 +1,6 @@
+using System;
 using Server.Multis;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -131,7 +131,7 @@ namespace Server.Items
                         if (info != null && info.ResourceTypes.Length > 0)
                         {
                             int toDrop = Math.Min(Charges * 3, dropped.Amount);
-                            CraftResource newRes = (CraftResource)res + 1;
+                            CraftResource newRes = res + 1;
 
                             while (toDrop % 3 != 0)
                                 toDrop--;
@@ -223,10 +223,10 @@ namespace Server.Items
                 list.Add(1072517, left.ToString()); // Lifespan: ~1_val~ seconds
 
                 CraftResource res = Addon.Resource;
-                CraftResource res2 = (CraftResource)res + 1;
+                CraftResource res2 = res + 1;
 
                 list.Add(1152630, string.Format("#{0}\t#{1}", CraftResources.GetLocalizationNumber(Addon.Resource), CraftResources.GetLocalizationNumber(res2))); // transmutes ~1_SOURCE~ to ~2_DEST~
-                list.Add(1152631, string.Format("3\t1")); // ratio ~1_INPUT~ to ~2_OUTPUT~
+                list.Add(1152631, "3\t1"); // ratio ~1_INPUT~ to ~2_OUTPUT~
                 list.Add(1060584, ((CauldronOfTransmutation)Addon).Charges.ToString()); // uses remaining: ~1_val~
 
             }

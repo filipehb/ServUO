@@ -1,6 +1,8 @@
 #region References
+
 using Server.Accounting;
 using Server.Services.TownCryer;
+
 #endregion
 
 namespace Server

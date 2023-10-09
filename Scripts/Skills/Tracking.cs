@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Network;
 using Server.Spells;
 using Server.Spells.Necromancy;
-using System;
-using System.Collections.Generic;
 
 namespace Server.SkillHandlers
 {

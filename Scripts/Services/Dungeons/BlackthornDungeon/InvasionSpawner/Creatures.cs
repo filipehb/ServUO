@@ -1,10 +1,11 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells;
-using Server.Spells.Necromancy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Spells;
+using Server.Spells.Necromancy;
 
 namespace Server.Engines.Blackthorn
 {
@@ -319,7 +320,7 @@ namespace Server.Engines.Blackthorn
 
         private void PaladinEquip()
         {
-            SetWearable(Loot.Construct(new Type[] { typeof(Bascinet), typeof(Helmet), typeof(PlateHelm) }), 1153);
+            SetWearable(Loot.Construct(new[] { typeof(Bascinet), typeof(Helmet), typeof(PlateHelm) }), 1153);
 
             SetWearable(new PlateChest());
             SetWearable(new PlateLegs());
@@ -333,7 +334,7 @@ namespace Server.Engines.Blackthorn
 
         private void StandardMeleeEquip()
         {
-            SetWearable(Loot.Construct(new Type[] { typeof(Bascinet), typeof(Helmet), typeof(LeatherCap), typeof(RoyalCirclet) }));
+            SetWearable(Loot.Construct(new[] { typeof(Bascinet), typeof(Helmet), typeof(LeatherCap), typeof(RoyalCirclet) }));
 
             SetWearable(new ChainChest());
             SetWearable(new ChainLegs());
@@ -368,50 +369,50 @@ namespace Server.Engines.Blackthorn
         public Item RandomSwordWeapon()
         {
             if (Race == Race.Elf)
-                return Loot.Construct(new Type[] { typeof(ElvenMachete), typeof(RadiantScimitar) });
+                return Loot.Construct(new[] { typeof(ElvenMachete), typeof(RadiantScimitar) });
 
-            return Loot.Construct(new Type[] { typeof(Broadsword), typeof(Longsword), typeof(Katana), typeof(Halberd), typeof(Bardiche), typeof(VikingSword) });
+            return Loot.Construct(new[] { typeof(Broadsword), typeof(Longsword), typeof(Katana), typeof(Halberd), typeof(Bardiche), typeof(VikingSword) });
         }
 
         public Item RandomFencingWeapon()
         {
             if (Race == Race.Elf)
-                return Loot.Construct(new Type[] { typeof(Leafblade), typeof(WarCleaver), typeof(AssassinSpike) });
+                return Loot.Construct(new[] { typeof(Leafblade), typeof(WarCleaver), typeof(AssassinSpike) });
 
-            return Loot.Construct(new Type[] { typeof(Kryss), typeof(Spear), typeof(ShortSpear), typeof(Lance), typeof(Pike) });
+            return Loot.Construct(new[] { typeof(Kryss), typeof(Spear), typeof(ShortSpear), typeof(Lance), typeof(Pike) });
         }
 
         public Item RandomMaceWeapon()
         {
-            return Loot.Construct(new Type[] { typeof(Mace), typeof(WarHammer), typeof(WarAxe), typeof(BlackStaff), typeof(QuarterStaff), typeof(WarMace), typeof(DiamondMace), typeof(Scepter) });
+            return Loot.Construct(new[] { typeof(Mace), typeof(WarHammer), typeof(WarAxe), typeof(BlackStaff), typeof(QuarterStaff), typeof(WarMace), typeof(DiamondMace), typeof(Scepter) });
         }
 
         public Item RandomArhceryWeapon()
         {
             if (Race == Race.Elf)
-                return Loot.Construct(new Type[] { typeof(MagicalShortbow), typeof(ElvenCompositeLongbow) });
+                return Loot.Construct(new[] { typeof(MagicalShortbow), typeof(ElvenCompositeLongbow) });
 
-            return Loot.Construct(new Type[] { typeof(Bow), typeof(Crossbow), typeof(HeavyCrossbow), typeof(CompositeBow), typeof(RepeatingCrossbow) });
+            return Loot.Construct(new[] { typeof(Bow), typeof(Crossbow), typeof(HeavyCrossbow), typeof(CompositeBow), typeof(RepeatingCrossbow) });
         }
 
         public Item RandomMageWeapon()
         {
-            return Loot.Construct(new Type[] { typeof(Spellbook), typeof(GnarledStaff), typeof(BlackStaff), typeof(QuarterStaff), typeof(WildStaff) });
+            return Loot.Construct(new[] { typeof(Spellbook), typeof(GnarledStaff), typeof(BlackStaff), typeof(QuarterStaff), typeof(WildStaff) });
         }
 
         public Item RandomSamuraiWeapon()
         {
-            return Loot.Construct(new Type[] { typeof(Lajatang), typeof(Wakizashi), typeof(NoDachi) });
+            return Loot.Construct(new[] { typeof(Lajatang), typeof(Wakizashi), typeof(NoDachi) });
         }
 
         public Item RandomNinjaWeapon()
         {
-            return Loot.Construct(new Type[] { typeof(Wakizashi), typeof(Tessen), typeof(Nunchaku), typeof(Daisho), typeof(Sai), typeof(Tekagi), typeof(Kama), typeof(Katana) });
+            return Loot.Construct(new[] { typeof(Wakizashi), typeof(Tessen), typeof(Nunchaku), typeof(Daisho), typeof(Sai), typeof(Tekagi), typeof(Kama), typeof(Katana) });
         }
 
         public Item RandomAssassinWeapon()
         {
-            return Loot.Construct(new Type[] { typeof(Cleaver), typeof(ButcherKnife), typeof(Kryss), typeof(Dagger) });
+            return Loot.Construct(new[] { typeof(Cleaver), typeof(ButcherKnife), typeof(Kryss), typeof(Dagger) });
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -460,7 +461,7 @@ namespace Server.Engines.Blackthorn
             {
                 Timer.DelayCall(TimeSpan.FromMilliseconds(i * 50), o =>
                 {
-                    Misc.Geometry.Circle2D(Location, m, o, (pnt, map) =>
+                    Geometry.Circle2D(Location, m, o, (pnt, map) =>
                     {
                         Effects.SendLocationEffect(pnt, map, Utility.RandomBool() ? 14000 : 14013, 14, 20, 2018, 0);
                     });

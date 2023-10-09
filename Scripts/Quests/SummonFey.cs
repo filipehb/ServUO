@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class FirendOfTheFeyQuest : BaseQuest
     {
         public FirendOfTheFeyQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Beads), "beads", 1, 0x108B));
             AddObjective(new ObtainObjective(typeof(JarHoney), "jar of honey", 1, 0x9EC));
@@ -53,7 +52,6 @@ namespace Server.Engines.Quests
     public class TokenOfFriendshipQuest : BaseQuest
     {
         public TokenOfFriendshipQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(GiftForArielle), "gift for Arielle", 1, typeof(Arielle), "Arielle"));
 
@@ -97,7 +95,6 @@ namespace Server.Engines.Quests
     public class AllianceQuest : BaseQuest
     {
         public AllianceQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Reaper), "reapers", 20));
 

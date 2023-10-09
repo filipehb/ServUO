@@ -1,6 +1,6 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -125,14 +125,12 @@ namespace Server.Items
 
         public static bool CanUse(PlayerMobile pm, BaseThieveConsumable consum)
         {
-            if (CheckThieveConsumable(pm) != ThieveConsumableEffect.None)
+	        if (CheckThieveConsumable(pm) != ThieveConsumableEffect.None)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+	        return true;
         }
 
         public static bool IsUnderThieveConsumableEffect(PlayerMobile pm, ThieveConsumableEffect eff)
@@ -147,14 +145,12 @@ namespace Server.Items
 
         public static ThieveConsumableEffect CheckThieveConsumable(PlayerMobile pm)
         {
-            if (EffectTable.ContainsKey(pm))
+	        if (EffectTable.ContainsKey(pm))
             {
                 return EffectTable[pm].Effect;
             }
-            else
-            {
-                return ThieveConsumableEffect.None;
-            }
+
+	        return ThieveConsumableEffect.None;
         }
 
         public BaseThieveConsumable(Serial serial)

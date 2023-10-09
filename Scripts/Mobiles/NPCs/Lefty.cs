@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class WondersOfTheNaturalWorldQuest : BaseQuest
     {
         public WondersOfTheNaturalWorldQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Gold), "gold coins", 10000, 0xEED));
 
@@ -56,7 +55,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(WondersOfTheNaturalWorldQuest)
                 };

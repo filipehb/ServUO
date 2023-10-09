@@ -5,7 +5,6 @@ namespace Server.Engines.Quests
     public class SecretsoftheSoulforge : BaseQuest
     {
         public SecretsoftheSoulforge()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(MagicalResidue), "Magical Residue", 50, 0x2DB1));
 

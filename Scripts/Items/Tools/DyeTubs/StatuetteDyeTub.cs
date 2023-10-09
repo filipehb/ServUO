@@ -1,8 +1,9 @@
 using System;
+using Server.Engines.VeteranRewards;
 
 namespace Server.Items
 {
-    public class StatuetteDyeTub : DyeTub, Engines.VeteranRewards.IRewardItem
+    public class StatuetteDyeTub : DyeTub, IRewardItem
     {
         private bool m_IsRewardItem;
         [Constructable]
@@ -23,8 +24,7 @@ namespace Server.Items
         public override int LabelNumber => 1049741;// Reward Statuette Dye Tub
         public override CustomHuePicker CustomHuePicker => CustomHuePicker.LeatherDyeTub;
 
-        private static Type[] _Dyables = new[]
-{
+        private static Type[] _Dyables = {
             typeof(MongbatDartboard), typeof(FelineBlessedStatue)
         };
 
@@ -44,7 +44,7 @@ namespace Server.Items
         }
         public override void OnDoubleClick(Mobile from)
         {
-            if (m_IsRewardItem && !Engines.VeteranRewards.RewardSystem.CheckIsUsableBy(from, this, null))
+            if (m_IsRewardItem && !RewardSystem.CheckIsUsableBy(from, this, null))
                 return;
 
             base.OnDoubleClick(from);

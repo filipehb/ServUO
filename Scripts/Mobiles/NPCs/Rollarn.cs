@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class BrotherlyLoveQuest : BaseQuest
     {
         public BrotherlyLoveQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(PersonalLetterAhie), "letter", 1, typeof(Ahie), "Ahie (The Heartwood)", 1800));
 
@@ -53,7 +52,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(DaemonicPrismQuest),
                     typeof(HowManyHeadsQuest),

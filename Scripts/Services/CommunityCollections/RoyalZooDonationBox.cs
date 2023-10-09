@@ -1,7 +1,7 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -45,8 +45,7 @@ namespace Server.Items
             Donations.Add(new CollectionItem(typeof(Drake), 0x20D6, 1073119, 0x0, 400.0));
             Donations.Add(new CollectionItem(typeof(Reptalon), 0x2D95, 1073121, 0x0, 550.0));
 
-            int[] hues = new int[]
-            {
+            int[] hues = {
                 0x555, 0xAE, 0x94, 0x278, 0x32, 0x28, 0x327, 0x41A
             };
 
@@ -68,7 +67,7 @@ namespace Server.Items
             Rewards.Add(new CollectionItem(typeof(SnakeStatue), 0x25C2, 1073194, 0x0, 200000.0));
             Rewards.Add(new CollectionTitle(1073202, 1073627, 200000.0)); // Distinguished Britannia Zoo Contributor
 
-            hues = new int[]
+            hues = new[]
             {
                 0x34, 0x1C2, 0x2A3
             };
@@ -126,9 +125,9 @@ namespace Server.Items
 
         private static readonly Type[][] _PetGroups =
         {
-            new Type[] { typeof(Dragon), typeof(Drake) },
-            new Type[] { typeof(Kirin), typeof(Nightmare), typeof(Unicorn) },
-            new Type[] { typeof(FireBeetle), typeof(Beetle), typeof(RuneBeetle) },
+            new[] { typeof(Dragon), typeof(Drake) },
+            new[] { typeof(Kirin), typeof(Nightmare), typeof(Unicorn) },
+            new[] { typeof(FireBeetle), typeof(Beetle), typeof(RuneBeetle) },
         };
 
         public override void IncreaseTier()

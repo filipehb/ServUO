@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class PointyEarsQuest : BaseQuest
     {
         public PointyEarsQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(SeveredElfEars), "severed elf ears", 20, 0x312D));
 
@@ -54,7 +53,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CommonBrigandsQuest),
                     typeof(ForkedTongueQuest),

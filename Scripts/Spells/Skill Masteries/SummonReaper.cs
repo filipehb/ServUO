@@ -1,8 +1,9 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells.Spellweaving;
 using System;
 using System.Linq;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Spells.Spellweaving;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -41,10 +42,11 @@ namespace Server.Spells.SkillMasteries
                 Caster.SendLocalizedMessage(1073220); // You must have completed the epic arcanist quest to use this ability.
                 return false;
             }
-            else if (Caster.Followers + 5 > Caster.FollowersMax)
+
+            if (Caster.Followers + 5 > Caster.FollowersMax)
             {
-                Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
-                return false;
+	            Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
+	            return false;
             }
 
             return true;
@@ -52,7 +54,7 @@ namespace Server.Spells.SkillMasteries
 
         public override void OnCast()
         {
-            Caster.Target = new MasteryTarget(this, 10, true, Targeting.TargetFlags.None);
+            Caster.Target = new MasteryTarget(this, 10, true);
         }
 
         protected override void OnTarget(object o)
@@ -175,12 +177,12 @@ namespace Server.Spells.SkillMasteries
 
         private void DoEffects()
         {
-            Misc.Geometry.Circle2D(Location, Map, 4, (pnt, map) =>
+            Geometry.Circle2D(Location, Map, 4, (pnt, map) =>
             {
                 Effects.SendLocationEffect(pnt, map, 0x3709, 0x14, 0x1, 0x8AF, 4);
             });
 
-            Misc.Geometry.Circle2D(Location, Map, 5, (pnt, map) =>
+            Geometry.Circle2D(Location, Map, 5, (pnt, map) =>
             {
                 Effects.SendLocationEffect(pnt, map, 0x3709, 0x14, 0x1, 0x8AF, 4);
             });

@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class StitchInTimeQuest : BaseQuest
     {
         public StitchInTimeQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FancyDress), "fancy dress", 1, 0x1EFF));
 
@@ -58,7 +57,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(StitchInTimeQuest)
                 };
@@ -101,7 +100,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public OldRing()
-            : base()
         {
             Hue = 0x222;
         }
@@ -131,7 +129,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public OldNecklace()
-            : base()
         {
             Hue = 0x222;
         }

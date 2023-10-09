@@ -1,6 +1,6 @@
-﻿using Server.Mobiles;
+﻿using System;
+using Server.Mobiles;
 using Server.Spells.Ninjitsu;
-using System;
 
 namespace Server.Items
 {
@@ -33,12 +33,12 @@ namespace Server.Items
         {
             if (type == typeof(Squirrel))
                 return m.Talisman is SquirrelFormTalisman;
-            else if (type == typeof(Ferret))
-                return m.Talisman is FerretFormTalisman;
-            else if (type == typeof(CuSidhe))
-                return m.Talisman is CuSidheFormTalisman;
-            else if (type == typeof(Reptalon))
-                return m.Talisman is ReptalonFormTalisman;
+            if (type == typeof(Ferret))
+	            return m.Talisman is FerretFormTalisman;
+            if (type == typeof(CuSidhe))
+	            return m.Talisman is CuSidheFormTalisman;
+            if (type == typeof(Reptalon))
+	            return m.Talisman is ReptalonFormTalisman;
 
             return true;
         }
@@ -79,7 +79,6 @@ namespace Server.Items
 
         [Constructable]
         public FerretFormTalisman()
-            : base()
         {
         }
 
@@ -107,7 +106,6 @@ namespace Server.Items
 
         [Constructable]
         public SquirrelFormTalisman()
-            : base()
         {
         }
 
@@ -135,7 +133,6 @@ namespace Server.Items
 
         [Constructable]
         public CuSidheFormTalisman()
-            : base()
         {
         }
 
@@ -163,7 +160,6 @@ namespace Server.Items
 
         [Constructable]
         public ReptalonFormTalisman()
-            : base()
         {
         }
 

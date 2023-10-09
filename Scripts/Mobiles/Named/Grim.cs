@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Grim()
-            : base()
         {
             Name = "Grim";
             Hue = 1744;

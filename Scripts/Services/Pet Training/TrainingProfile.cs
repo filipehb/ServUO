@@ -1,7 +1,8 @@
-using Server.Gumps;
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Network;
 
 namespace Server.Mobiles
 {
@@ -186,32 +187,26 @@ namespace Server.Mobiles
 
         public int GetRequirementIncrease(bool slotIncreased)
         {
-            if (slotIncreased)
-            {
-                // First level
+	        if (slotIncreased)
+	        {
+		        // First level
                 if (ControlSlotsMin + 1 == ControlSlots)
                 {
                     return 21;
                 }
                 // subsequent trains of that level
-                else
-                {
-                    return 22;
-                }
-            }
-            else
-            {
-                // First train of that level (after level increase, so actually 2nd train)
-                if (TrainedThisLevel == 1)
-                {
-                    return 3;
-                }
-                // subsequent trains of that level
-                else
-                {
-                    return 2;
-                }
-            }
+
+                return 22;
+	        }
+
+	        // First train of that level (after level increase, so actually 2nd train)
+	        if (TrainedThisLevel == 1)
+	        {
+		        return 3;
+	        }
+	        // subsequent trains of that level
+
+	        return 2;
         }
 
         public void EndTraining()
@@ -233,11 +228,9 @@ namespace Server.Mobiles
                 {
                     return false;
                 }
-                else
-                {
-                    _ProgressTable[bc]++;
-                    return true;
-                }
+
+                _ProgressTable[bc]++;
+                return true;
             }
 
             _ProgressTable[bc] = 1;
@@ -322,7 +315,7 @@ namespace Server.Mobiles
                         {
                             Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, 1157543, master.NetState); // *The creature surges with battle experience and is ready to train!*
 
-                            Engines.Quests.LeadingIntoBattleQuest.CheckComplete((PlayerMobile)master);
+                            LeadingIntoBattleQuest.CheckComplete((PlayerMobile)master);
                         }
                     }
                     else

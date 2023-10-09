@@ -1,5 +1,5 @@
-using Server.Engines.Craft;
 using System;
+using Server.Engines.Craft;
 
 namespace Server.Items
 {
@@ -8,7 +8,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public ScrappersCompendium()
-            : base()
         {
             Hue = 0x494;
             Attributes.SpellDamage = 25;

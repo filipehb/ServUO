@@ -1,13 +1,14 @@
-using Server.Accounting;
-using Server.Commands;
-using Server.Engines.Help;
-using Server.Network;
-using Server.Regions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using Server.Accounting;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Engines.Help;
+using Server.Network;
+using Server.Regions;
 
 namespace Server.Misc
 {
@@ -30,8 +31,7 @@ namespace Server.Misc
         private static readonly bool RestrictDeletion = Config.Get("Accounts.RestrictDeletion", !TestCenter.Enabled);
         private static readonly TimeSpan DeleteDelay = Config.Get("Accounts.DeleteDelay", TimeSpan.FromDays(7.0));
 
-        private static readonly CityInfo[] StartingCities = new CityInfo[]
-        {
+        private static readonly CityInfo[] StartingCities = {
             new CityInfo("New Haven",   "New Haven Bank",   1150168, 3503,  2574,   14),
             new CityInfo("Yew", "The Empath Abbey", 1075072, 633,   858,    0),
             new CityInfo("Minoc", "The Barnacle", 1075073, 2476,    413,    15),
@@ -44,16 +44,14 @@ namespace Server.Misc
             new CityInfo("Royal City", "Royal City Inn", 1150169, 738, 3486, -19, Map.TerMur)
         };
 
-        private static readonly CityInfo[] SiegeStartingCities = new CityInfo[]
-        {
+        private static readonly CityInfo[] SiegeStartingCities = {
             new CityInfo("Britain", "The Wayfarer's Inn",   1075074, 1602,  1591,   20, Map.Felucca),
             new CityInfo("Royal City", "Royal City Inn", 1150169, 738, 3486, -19, Map.TerMur)
         };
 
         private static readonly bool PasswordCommandEnabled = Config.Get("Accounts.PasswordCommandEnabled", false);
 
-        private static readonly char[] m_ForbiddenChars = new char[]
-        {
+        private static readonly char[] m_ForbiddenChars = {
             '<', '>', ':', '"', '/', '\\', '|', '?', '*', ' '
         };
 
@@ -133,11 +131,12 @@ namespace Server.Misc
                 from.SendMessage("You must specify the new password.");
                 return;
             }
-            else if (e.Length == 1)
+
+            if (e.Length == 1)
             {
-                from.SendMessage("To prevent potential typing mistakes, you must type the password twice. Use the format:");
-                from.SendMessage("Password \"(newPassword)\" \"(repeated)\"");
-                return;
+	            from.SendMessage("To prevent potential typing mistakes, you must type the password twice. Use the format:");
+	            from.SendMessage("Password \"(newPassword)\" \"(repeated)\"");
+	            return;
             }
 
             string pass = e.GetString(0);
@@ -194,7 +193,7 @@ namespace Server.Misc
             }
             catch (Exception ex)
             {
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
 

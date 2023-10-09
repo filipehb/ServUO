@@ -1,6 +1,6 @@
-using Server.Multis;
 using System;
 using System.Collections.Generic;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -43,10 +43,9 @@ namespace Server.Items
         {
             get
             {
-                if (m_House != null && m_Owner != null && !m_Owner.Deleted)
+	            if (m_House != null && m_Owner != null && !m_Owner.Deleted)
                     return !m_House.IsCoOwner(m_Owner);
-                else
-                    return true;
+	            return true;
             }
         }
         public override TimeSpan DecayTime => TimeSpan.FromMinutes(30.0);

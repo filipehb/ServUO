@@ -63,7 +63,7 @@ namespace Server.Items
             {
                 BaseCreature t = (BaseCreature)target;
 
-                if (t.IsBonded == true)
+                if (t.IsBonded)
                 {
                     from.SendLocalizedMessage(1152925); // That pet is already bonded to you.
                 }

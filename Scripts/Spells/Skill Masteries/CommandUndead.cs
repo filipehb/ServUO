@@ -1,6 +1,8 @@
+using System;
+using Server.Engines.Quests.Doom;
+using Server.Engines.Shadowguard;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -91,7 +93,7 @@ namespace Server.Spells.SkillMasteries
 
                             if (bc is SkeletalDragon)
                             {
-                                Engines.Quests.Doom.BellOfTheDead.TryRemoveDragon((SkeletalDragon)bc);
+                                BellOfTheDead.TryRemoveDragon((SkeletalDragon)bc);
                             }
 
                             Caster.PlaySound(0x5C4);
@@ -134,7 +136,7 @@ namespace Server.Spells.SkillMasteries
 
         public static bool ValidateTarget(BaseCreature bc)
         {
-            if (bc is BaseRenowned || bc is BaseChampion || bc is Engines.Shadowguard.ShadowguardBoss)
+            if (bc is BaseRenowned || bc is BaseChampion || bc is ShadowguardBoss)
                 return false;
 
             foreach (Type t in _CommandTypes)

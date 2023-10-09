@@ -1,9 +1,10 @@
+using System;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.NewMagincia
 {
@@ -511,7 +512,7 @@ namespace Server.Engines.NewMagincia
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         from.SendGump(new StallBidGump(from, m_Plot));
@@ -1138,7 +1139,7 @@ namespace Server.Engines.NewMagincia
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
                     break;

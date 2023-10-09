@@ -1,5 +1,5 @@
-using Server.Engines.CityLoyalty;
 using System;
+using Server.Engines.CityLoyalty;
 
 namespace Server.Services.TownCryer
 {

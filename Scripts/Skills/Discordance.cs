@@ -1,12 +1,15 @@
 #region References
-using Server.Engines.Quests;
-using Server.Items;
-using Server.Mobiles;
-using Server.Targeting;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells.SkillMasteries;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.SkillHandlers
@@ -182,7 +185,7 @@ namespace Server.SkillHandlers
 
                         if (from is PlayerMobile)
                         {
-                            masteryBonus = Spells.SkillMasteries.BardSpell.GetMasteryBonus((PlayerMobile)from, SkillName.Discordance);
+                            masteryBonus = BardSpell.GetMasteryBonus((PlayerMobile)from, SkillName.Discordance);
                         }
 
                         if (masteryBonus > 0)

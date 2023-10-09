@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.VeteranRewards
 {
@@ -190,7 +190,7 @@ namespace Server.Engines.VeteranRewards
             public override bool OnDragDrop(Mobile from, Item dropped)
             {
                 if (Addon is DaviesLockerAddon && (dropped is SOS || dropped is TreasureMap))
-                    ((DaviesLockerAddon)Addon).TryAddEntry(dropped as Item, from);
+                    ((DaviesLockerAddon)Addon).TryAddEntry(dropped, from);
 
                 return false;
             }
@@ -686,18 +686,17 @@ namespace Server.Engines.VeteranRewards
 
             if (map == Map.Felucca)
                 return 1012001; // Felucca
-            else if (map == Map.Trammel)
-                return 1012000; // Trammel
-            else if (map == Map.Ilshenar)
-                return 1012002; // Ilshenar
-            else if (map == Map.Malas)
-                return 1060643; // Malas
-            else if (map == Map.Tokuno)
-                return 1063258; // Tokuno Islands
-            else if (map == Map.TerMur)
-                return 1112178; // Ter Mur
-            else
-                return 1074235; // Unknown
+            if (map == Map.Trammel)
+	            return 1012000; // Trammel
+            if (map == Map.Ilshenar)
+	            return 1012002; // Ilshenar
+            if (map == Map.Malas)
+	            return 1060643; // Malas
+            if (map == Map.Tokuno)
+	            return 1063258; // Tokuno Islands
+            if (map == Map.TerMur)
+	            return 1112178; // Ter Mur
+            return 1074235; // Unknown
         }
 
         private void ConstructEntry(Mobile from, DaviesLockerEntry entry)
@@ -744,17 +743,15 @@ namespace Server.Engines.VeteranRewards
                 sos.TargetLocation = entry.Location;
                 return sos;
             }
+
+            MessageInABottle mib;
+
+            if (entry.QuestItem)
+	            mib = new SaltySeaMIB(entry.Map, entry.Level);
             else
-            {
-                MessageInABottle mib;
+	            mib = new MessageInABottle(entry.Map, entry.Level);
 
-                if (entry.QuestItem)
-                    mib = new SaltySeaMIB(entry.Map, entry.Level);
-                else
-                    mib = new MessageInABottle(entry.Map, entry.Level);
-
-                return mib;
-            }
+            return mib;
         }
 
         private TreasureMap Construct(TreasureMapEntry entry)
@@ -815,8 +812,8 @@ namespace Server.Engines.VeteranRewards
         {
             if (entry is SOSEntry)
                 return 1153568; // S-O-S
-            else if (entry is TreasureMapEntry)
-                return 1153572 + entry.Level;
+            if (entry is TreasureMapEntry)
+	            return 1153572 + entry.Level;
 
             return 1153569; // Unknown
         }
@@ -833,14 +830,14 @@ namespace Server.Engines.VeteranRewards
 
                 return 1153571; // Opened
             }
-            else if (entry is TreasureMapEntry mapEntry)
+
+            if (entry is TreasureMapEntry mapEntry)
             {
-                if (mapEntry.Completed)
-                    return 1153582; // Completed
-                else if (mapEntry.Decoder != null)
-                    return 1153581; // Decoded
-                else
-                    return 1153580; // Not Decoded
+	            if (mapEntry.Completed)
+		            return 1153582; // Completed
+	            if (mapEntry.Decoder != null)
+		            return 1153581; // Decoded
+	            return 1153580; // Not Decoded
             }
 
             return 1153569; // Unknown

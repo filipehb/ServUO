@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Misc;
-using System;
 
 namespace Server.Mobiles
 {
@@ -16,10 +16,9 @@ namespace Server.Mobiles
 
             if (weapon is BaseWeapon)
             {
-                if (Utility.RandomBool())
+	            if (Utility.RandomBool())
                     return ((BaseWeapon)weapon).PrimaryAbility;
-                else
-                    return ((BaseWeapon)weapon).SecondaryAbility;
+	            return ((BaseWeapon)weapon).SecondaryAbility;
             }
             return null;
         }

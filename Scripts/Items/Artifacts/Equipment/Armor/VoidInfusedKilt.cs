@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public VoidInfusedKilt()
-            : base()
         {
             Hue = 2124;
             Attributes.AttackChance = 5;

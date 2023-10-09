@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class MistakenIdentityQuest : BaseQuest
     {
         public MistakenIdentityQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(TuitionReimbursementForm), "tuition reimbursement form", 1, typeof(Gorrow), "Gorrow (Luna)"));
 
@@ -53,7 +52,6 @@ namespace Server.Engines.Quests
     public class YouScratchMyBackQuest : BaseQuest
     {
         public YouScratchMyBackQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(UnicornRibs), "unicorn ribs", 1));
             AddObjective(new ObtainObjective(typeof(KirinBrains), "ki-rin brains", 2));
@@ -102,7 +100,6 @@ namespace Server.Engines.Quests
     public class FoolingAernyaQuest : BaseQuest
     {
         public FoolingAernyaQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(SignedTuitionReimbursementForm), "signed tuition reimbursement form", 1, typeof(Aernya), "Aernya (Umbra)"));
 
@@ -145,7 +142,6 @@ namespace Server.Engines.Quests
     public class NotQuiteThatEasyQuest : BaseQuest
     {
         public NotQuiteThatEasyQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(SignedTuitionReimbursementForm), "signed tuition reimbursement form", 1, typeof(Gnosos), "Master Gnosos (Bedlam)"));
 
@@ -197,7 +193,6 @@ namespace Server.Engines.Quests
     public class ConvinceMeQuest : BaseQuest
     {
         public ConvinceMeQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(RedDeath), "red death", 1, "Bedlam"));
             AddObjective(new SlayObjective(typeof(GoreFiend), "gore fiends", 10, "Bedlam"));
@@ -242,7 +237,6 @@ namespace Server.Engines.Quests
     public class TuitionReimbursementQuest : BaseQuest
     {
         public TuitionReimbursementQuest()
-            : base()
         {
             AddObjective(new DeliverObjective(typeof(CompletedTuitionReimbursementForm), "completed tuition reimbursement form", 1, typeof(Aernya), "Aernya (Umbra)"));
 

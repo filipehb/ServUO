@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System.Collections.Generic;
 
 namespace Server.Engines.TreasuresOfDoom
 {

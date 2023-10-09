@@ -45,7 +45,7 @@ namespace Server.Items
             {
                 if (targeted is NexusComponent)
                 {
-                    NexusComponent addon = ((NexusComponent)targeted) as NexusComponent;
+                    NexusComponent addon = (NexusComponent)targeted;
 
                     if (addon.Addon is ExodusNexus)
                     {

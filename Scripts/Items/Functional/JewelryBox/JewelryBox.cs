@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -106,31 +106,32 @@ namespace Server.Items
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (!IsLockedDown && !IsSecure)
+	        if (!IsLockedDown && !IsSecure)
             {
                 from.SendLocalizedMessage(1157727); // The jewelry box must be secured before you can use it.
                 return false;
             }
-            else if (!CheckAccessible(from, this))
-            {
-                PrivateOverheadMessage(MessageType.Regular, 946, 1010563, from.NetState); // This container is secure.
-                return false;
-            }
-            else if (!IsAccept(dropped))
-            {
-                from.SendLocalizedMessage(1157724); // This is not a ring, bracelet, necklace, earring, or talisman.
-                return false;
-            }
-            else if (IsFull)
-            {
-                from.SendLocalizedMessage(1157723); // The jewelry box is full.
-                return false;
-            }
-            else
-            {
-                Timer.DelayCall(TimeSpan.FromSeconds(1), () => from.SendGump(new JewelryBoxGump(from, this)));
-                return base.OnDragDrop(from, dropped);
-            }
+
+	        if (!CheckAccessible(from, this))
+	        {
+		        PrivateOverheadMessage(MessageType.Regular, 946, 1010563, from.NetState); // This container is secure.
+		        return false;
+	        }
+
+	        if (!IsAccept(dropped))
+	        {
+		        from.SendLocalizedMessage(1157724); // This is not a ring, bracelet, necklace, earring, or talisman.
+		        return false;
+	        }
+
+	        if (IsFull)
+	        {
+		        from.SendLocalizedMessage(1157723); // The jewelry box is full.
+		        return false;
+	        }
+
+	        Timer.DelayCall(TimeSpan.FromSeconds(1), () => from.SendGump(new JewelryBoxGump(from, this)));
+	        return base.OnDragDrop(from, dropped);
         }
 
         public override bool DisplaysContent => false;

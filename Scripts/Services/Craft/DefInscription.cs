@@ -1,5 +1,7 @@
-using Server.Items;
 using System;
+using System.Collections.Generic;
+using Server.Engines.BulkOrders;
+using Server.Items;
 
 namespace Server.Engines.Craft
 {
@@ -43,8 +45,8 @@ namespace Server.Engines.Craft
 
             if (tool == null || tool.Deleted || tool.UsesRemaining <= 0)
                 return 1044038; // You have worn out your tool!
-            else if (!tool.CheckAccessible(from, ref num))
-                return num; // The tool must be on your person to use.
+            if (!tool.CheckAccessible(from, ref num))
+	            return num; // The tool must be on your person to use.
 
             if (typeItem != null && typeItem.IsSubclassOf(typeof(SpellScroll)))
             {
@@ -75,7 +77,7 @@ namespace Server.Engines.Craft
             return 0;
         }
 
-        private readonly System.Collections.Generic.Dictionary<Type, int> _Buffer = new System.Collections.Generic.Dictionary<Type, int>();
+        private readonly Dictionary<Type, int> _Buffer = new Dictionary<Type, int>();
 
         public override void PlayCraftEffect(Mobile from)
         {
@@ -91,40 +93,32 @@ namespace Server.Engines.Craft
 
             if (!typeofSpellScroll.IsAssignableFrom(item.ItemType)) //  not a scroll
             {
-                if (failed)
-                {
-                    if (lostMaterial)
+	            if (failed)
+	            {
+		            if (lostMaterial)
                         return 1044043; // You failed to create the item, and some of your materials are lost.
-                    else
-                        return 1044157; // You failed to create the item, but no materials were lost.
-                }
-                else
-                {
-                    if (quality == 0)
-                        return 502785; // You were barely able to make this item.  It's quality is below average.
-                    else if (makersMark && quality == 2)
-                        return 1044156; // You create an exceptional quality item and affix your maker's mark.
-                    else if (quality == 2)
-                        return 1044155; // You create an exceptional quality item.
-                    else
-                        return 1044154; // You create the item.
-                }
+		            return 1044157; // You failed to create the item, but no materials were lost.
+	            }
+
+	            if (quality == 0)
+		            return 502785; // You were barely able to make this item.  It's quality is below average.
+	            if (makersMark && quality == 2)
+		            return 1044156; // You create an exceptional quality item and affix your maker's mark.
+	            if (quality == 2)
+		            return 1044155; // You create an exceptional quality item.
+	            return 1044154; // You create the item.
             }
-            else
-            {
-                if (failed)
-                    return 501630; // You fail to inscribe the scroll, and the scroll is ruined.
-                else
-                    return 501629; // You inscribe the spell and put the scroll in your backpack.
-            }
+
+            if (failed)
+	            return 501630; // You fail to inscribe the scroll, and the scroll is ruined.
+            return 501629; // You inscribe the spell and put the scroll in your backpack.
         }
 
         private int m_Circle, m_Mana;
 
         private enum Reg { BlackPearl, Bloodmoss, Garlic, Ginseng, MandrakeRoot, Nightshade, SulfurousAsh, SpidersSilk, BatWing, GraveDust, DaemonBlood, NoxCrystal, PigIron, Bone, DragonBlood, FertileDirt, DaemonBone }
 
-        private readonly Type[] m_RegTypes = new Type[]
-        {
+        private readonly Type[] m_RegTypes = {
             typeof( BlackPearl ),
             typeof( Bloodmoss ),
             typeof( Garlic ),
@@ -359,7 +353,7 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(RecallScroll), 1044445, 1, 1044253);
             AddRes(index, typeof(GateTravelScroll), 1044446, 1, 1044253);            
 
-            AddCraft(typeof(BulkOrders.BulkOrderBook), 1044294, 1028793, 65.0, 115.0, typeof(BlankScroll), 1044377, 10, 1044378);
+            AddCraft(typeof(BulkOrderBook), 1044294, 1028793, 65.0, 115.0, typeof(BlankScroll), 1044377, 10, 1044378);
 
             AddCraft(typeof(Spellbook), 1044294, 1023834, 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 

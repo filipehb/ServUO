@@ -19,7 +19,7 @@ namespace Server.Items
         public override int InitMaxHits => 125;
 
         [Constructable]
-        public BestialLegs() : base()
+        public BestialLegs()
         {
             Hue = 2010;
             Weight = 4;

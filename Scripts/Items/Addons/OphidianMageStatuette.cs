@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class OphidianMageStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0x280, 0x281, 0x282, 0x283, 0x284
         };
         [Constructable]

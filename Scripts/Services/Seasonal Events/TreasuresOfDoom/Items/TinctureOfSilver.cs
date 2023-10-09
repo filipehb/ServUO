@@ -1,4 +1,5 @@
 using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -19,7 +20,7 @@ namespace Server.Items
             if (IsChildOf(m.Backpack))
             {
                 m.SendLocalizedMessage(1155613); // Target the weapon, spellbook, or instrument you wish to apply this to...
-                m.BeginTarget(-1, false, Targeting.TargetFlags.None, (from, targeted) =>
+                m.BeginTarget(-1, false, TargetFlags.None, (from, targeted) =>
                 {
                     if (targeted is Item && targeted is ISlayer)
                     {

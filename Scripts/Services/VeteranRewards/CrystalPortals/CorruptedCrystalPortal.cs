@@ -1,12 +1,16 @@
 #region References
+
+using System.Collections.Generic;
 using Server.ContextMenus;
+using Server.Engines.CityLoyalty;
+using Server.Engines.VvV;
 using Server.Gumps;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Spells;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Items
@@ -71,7 +75,7 @@ namespace Server.Items
                 return false;
             }
 
-            if (Engines.VvV.VvVSigil.ExistsOn(m))
+            if (VvVSigil.ExistsOn(m))
             {
                 if (message)
                 {
@@ -121,7 +125,7 @@ namespace Server.Items
                 return false;
             }
 
-            if (Engines.CityLoyalty.CityTradeSystem.HasTrade(m))
+            if (CityTradeSystem.HasTrade(m))
             {
                 if (message)
                 {

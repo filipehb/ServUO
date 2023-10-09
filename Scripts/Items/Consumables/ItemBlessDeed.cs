@@ -22,7 +22,7 @@ namespace Server.Items
 
                 if (item.RootParent != from) // Make sure its in their pack or they are wearing it
                     from.SendLocalizedMessage(500508); // You may only bless objects that you are carrying.
-                else if (item.Stackable == true)
+                else if (item.Stackable)
                 {
                     from.SendLocalizedMessage(500509); // You cannot bless that object
                 }

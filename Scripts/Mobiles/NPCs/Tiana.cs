@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ChillInTheAirQuest : BaseQuest
     {
         public ChillInTheAirQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(IceElemental), "ice elementals", 15));
 
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class IndustriousAsAnAntLionQuest : BaseQuest
     {
         public IndustriousAsAnAntLionQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(AntLion), "ant lions", 12));
 
@@ -77,7 +75,6 @@ namespace Server.Engines.Quests
     public class ThePerilsOfFarmingQuest : BaseQuest
     {
         public ThePerilsOfFarmingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(WhippingVine), "whipping vines", 15));
 
@@ -112,7 +109,6 @@ namespace Server.Engines.Quests
     public class CommonBrigandsQuest : BaseQuest
     {
         public CommonBrigandsQuest()
-            : base()
         {
             AddObjective(new SlayObjective("common brigands", 20, typeof(Brigand)));
 
@@ -147,7 +143,6 @@ namespace Server.Engines.Quests
     public class ArchEnemiesQuest : BaseQuest
     {
         public ArchEnemiesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(RatmanArcher), "ratman archers", 10));
 
@@ -182,7 +177,6 @@ namespace Server.Engines.Quests
     public class VerminQuest : BaseQuest
     {
         public VerminQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Ratman), "ratmen", 12));
 
@@ -226,7 +220,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(MaraudersQuest),
                     typeof(ChillInTheAirQuest),

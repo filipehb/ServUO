@@ -1,7 +1,8 @@
-using Server.Gumps;
-using Server.Mobiles;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Targeting;
 
 namespace Server.Engines.ArenaSystem
 {
@@ -743,7 +744,7 @@ namespace Server.Engines.ArenaSystem
                                 }
                                 else
                                 {
-                                    Duel.RemovePlayer((PlayerMobile)from, false);
+                                    Duel.RemovePlayer((PlayerMobile)from);
                                 }
                             }
                         }, confirmLoc: 1115821, closeLoc: 1115822));
@@ -781,13 +782,13 @@ namespace Server.Engines.ArenaSystem
             }
         }
 
-        private class InternalTarget : Targeting.Target
+        private class InternalTarget : Target
         {
             public PVPArena Arena { get; private set; }
             public ArenaDuel Duel { get; private set; }
 
             public InternalTarget(PVPArena arena, ArenaDuel duel)
-                : base(10, false, Targeting.TargetFlags.None)
+                : base(10, false, TargetFlags.None)
             {
                 Arena = arena;
                 Duel = duel;

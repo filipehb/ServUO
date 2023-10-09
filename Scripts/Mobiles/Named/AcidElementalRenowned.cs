@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -48,8 +48,8 @@ namespace Server.Mobiles
         {
         }
 
-        public override Type[] UniqueSAList => new Type[] { typeof(BreastplateOfTheBerserker), typeof(TerathanWarriorCostume) };
-        public override Type[] SharedSAList => new Type[] { typeof(MysticsGarb) };
+        public override Type[] UniqueSAList => new[] { typeof(BreastplateOfTheBerserker), typeof(TerathanWarriorCostume) };
+        public override Type[] SharedSAList => new[] { typeof(MysticsGarb) };
         public override bool BleedImmune => true;
         public override Poison PoisonImmune => Poison.Lethal;
         public override void GenerateLoot()

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-
 using Server.Items;
 
 namespace Server.Mobiles
@@ -50,8 +49,7 @@ namespace Server.Mobiles
         public override int Hides => 8;
         public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
 
-        private static readonly Type[] _FeedTypes = new[]
-        {
+        private static readonly Type[] _FeedTypes = {
             typeof(Backpack), typeof(BaseShoes), typeof(Bag)
         };
 

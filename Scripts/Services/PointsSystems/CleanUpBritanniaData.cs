@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Server.Accounting;
 using Server.Engines.Craft;
 using Server.Engines.Quests.Doom;
@@ -5,8 +7,6 @@ using Server.Items;
 using Server.Mobiles;
 using Server.SkillHandlers;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Points
 {
@@ -55,103 +55,101 @@ namespace Server.Engines.Points
 
                 return points;
             }
-            else
+
+            if (item is RunicHammer)
             {
-                if (item is RunicHammer)
-                {
-                    RunicHammer hammer = (RunicHammer)item;
+	            RunicHammer hammer = (RunicHammer)item;
 
-                    if (hammer.Resource == CraftResource.DullCopper)
-                        points = 5 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.ShadowIron)
-                        points = 10 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.Copper)
-                        points = 25 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.Bronze)
-                        points = 100 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.Gold)
-                        points = 250 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.Agapite)
-                        points = 1000 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.Verite)
-                        points = 4000 * hammer.UsesRemaining;
-                    else if (hammer.Resource == CraftResource.Valorite)
-                        points = 8000 * hammer.UsesRemaining;
-                }
-                else if (item is RunicSewingKit)
-                {
-                    RunicSewingKit sewing = (RunicSewingKit)item;
-
-                    if (sewing.Resource == CraftResource.SpinedLeather)
-                        points = 10 * sewing.UsesRemaining;
-                    else if (sewing.Resource == CraftResource.HornedLeather)
-                        points = 100 * sewing.UsesRemaining;
-                    else if (sewing.Resource == CraftResource.BarbedLeather)
-                        points = 400 * sewing.UsesRemaining;
-                }
-                else if (item is PowerScroll)
-                {
-                    PowerScroll ps = (PowerScroll)item;
-
-                    if (ps.Value == 105)
-                        points = 50;
-                    else if (ps.Value == 110)
-                        points = 100;
-                    else if (ps.Value == 115)
-                        points = 500;
-                    else if (ps.Value == 120)
-                        points = 2500;
-                }
-                else if (item is ScrollOfTranscendence)
-                {
-                    SpecialScroll sot = (SpecialScroll)item;
-
-                    points = sot.Value / 0.1 * 2;
-                }
-                else if (item is Bait)
-                {
-                    Bait bait = (Bait)item;
-
-                    points = 10 * bait.UsesRemaining;
-                }
-                else if (item is TreasureMap)
-                {
-                    TreasureMap tmap = (TreasureMap)item;
-
-                    switch (tmap.Level)
-                    {
-                        default:
-                        case 0: return 50;
-                        case 1: return 100;
-                        case 2: return 250;
-                        case 3: return 750;
-                        case 4: return 1000;
-                    }
-                }
-                else if (item is MonsterStatuette)
-                {
-                    MonsterStatuette ms = (MonsterStatuette)item;
-
-                    if (ms.Type == MonsterStatuetteType.Slime)
-                        points = 5000;
-                }
-                else if (item is PigmentsOfTokuno || item is LesserPigmentsOfTokuno)
-                {
-                    BasePigmentsOfTokuno pigments = (BasePigmentsOfTokuno)item;
-                    points = 500 * pigments.UsesRemaining;
-                }
-                else if (item is ICombatEquipment)
-                {
-                    points = GetPointsForEquipment(item);
-                }
-
-                if (item.LootType != LootType.Blessed && points < 100 && item is IShipwreckedItem && ((IShipwreckedItem)item).IsShipwreckedItem)
-                {
-                    points = 100;
-                }
-
-                return points;
+	            if (hammer.Resource == CraftResource.DullCopper)
+		            points = 5 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.ShadowIron)
+		            points = 10 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.Copper)
+		            points = 25 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.Bronze)
+		            points = 100 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.Gold)
+		            points = 250 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.Agapite)
+		            points = 1000 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.Verite)
+		            points = 4000 * hammer.UsesRemaining;
+	            else if (hammer.Resource == CraftResource.Valorite)
+		            points = 8000 * hammer.UsesRemaining;
             }
+            else if (item is RunicSewingKit)
+            {
+	            RunicSewingKit sewing = (RunicSewingKit)item;
+
+	            if (sewing.Resource == CraftResource.SpinedLeather)
+		            points = 10 * sewing.UsesRemaining;
+	            else if (sewing.Resource == CraftResource.HornedLeather)
+		            points = 100 * sewing.UsesRemaining;
+	            else if (sewing.Resource == CraftResource.BarbedLeather)
+		            points = 400 * sewing.UsesRemaining;
+            }
+            else if (item is PowerScroll)
+            {
+	            PowerScroll ps = (PowerScroll)item;
+
+	            if (ps.Value == 105)
+		            points = 50;
+	            else if (ps.Value == 110)
+		            points = 100;
+	            else if (ps.Value == 115)
+		            points = 500;
+	            else if (ps.Value == 120)
+		            points = 2500;
+            }
+            else if (item is ScrollOfTranscendence)
+            {
+	            SpecialScroll sot = (SpecialScroll)item;
+
+	            points = sot.Value / 0.1 * 2;
+            }
+            else if (item is Bait)
+            {
+	            Bait bait = (Bait)item;
+
+	            points = 10 * bait.UsesRemaining;
+            }
+            else if (item is TreasureMap)
+            {
+	            TreasureMap tmap = (TreasureMap)item;
+
+	            switch (tmap.Level)
+	            {
+		            default:
+		            case 0: return 50;
+		            case 1: return 100;
+		            case 2: return 250;
+		            case 3: return 750;
+		            case 4: return 1000;
+	            }
+            }
+            else if (item is MonsterStatuette)
+            {
+	            MonsterStatuette ms = (MonsterStatuette)item;
+
+	            if (ms.Type == MonsterStatuetteType.Slime)
+		            points = 5000;
+            }
+            else if (item is PigmentsOfTokuno || item is LesserPigmentsOfTokuno)
+            {
+	            BasePigmentsOfTokuno pigments = (BasePigmentsOfTokuno)item;
+	            points = 500 * pigments.UsesRemaining;
+            }
+            else if (item is ICombatEquipment)
+            {
+	            points = GetPointsForEquipment(item);
+            }
+
+            if (item.LootType != LootType.Blessed && points < 100 && item is IShipwreckedItem && ((IShipwreckedItem)item).IsShipwreckedItem)
+            {
+	            points = 100;
+            }
+
+            return points;
         }
 
         public override void SendMessage(PlayerMobile from, double old, double points, bool quest)

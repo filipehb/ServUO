@@ -1,4 +1,5 @@
-﻿using Server.Multis;
+﻿using System.IO;
+using Server.Multis;
 
 namespace Server.Network
 {
@@ -10,7 +11,7 @@ namespace Server.Network
             EnsureCapacity(length);
 
             length = (short)(((length & 0xff) << 8) | ((length >> 8) & 0xff));
-            m_Stream.Seek(1, System.IO.SeekOrigin.Begin);
+            m_Stream.Seek(1, SeekOrigin.Begin);
             m_Stream.Write(length);
 
             m_Stream.Write((short)0x19);

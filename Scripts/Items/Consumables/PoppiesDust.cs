@@ -105,27 +105,28 @@ namespace Server.Items
                     from.SendLocalizedMessage(1042664); // You must have the object in your backpack to use it.
                     return;
                 }
-                else if (targeted is PoppiesDust && m_Dust != targeted)
-                {
-                    PoppiesDust pd = targeted as PoppiesDust;
-                    pd.UsesRemaining += m_Dust.UsesRemaining;
-                    m_Dust.Delete();
 
-                    from.SendLocalizedMessage(1158448); // You combine the charges on the items.
+                if (targeted is PoppiesDust && m_Dust != targeted)
+                {
+	                PoppiesDust pd = targeted as PoppiesDust;
+	                pd.UsesRemaining += m_Dust.UsesRemaining;
+	                m_Dust.Delete();
+
+	                from.SendLocalizedMessage(1158448); // You combine the charges on the items.
                 }
                 else if (targeted is Seed)
                 {
-                    Seed m_Seed = (Seed)targeted;
+	                Seed m_Seed = (Seed)targeted;
 
-                    if (m_Seed.ShowType)
-                    {
-                        from.SendLocalizedMessage(1114369, "", 946); // This seed has already been identified.
-                        return;
-                    }
+	                if (m_Seed.ShowType)
+	                {
+		                from.SendLocalizedMessage(1114369, "", 946); // This seed has already been identified.
+		                return;
+	                }
 
-                    m_Seed.ShowType = true;
+	                m_Seed.ShowType = true;
 
-                    --m_Dust.UsesRemaining;
+	                --m_Dust.UsesRemaining;
                 }
             }
         }

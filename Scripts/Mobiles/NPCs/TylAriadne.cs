@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -37,7 +37,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1077711;
 
         public ThouAndThineShieldQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.Parry, 50, "Old Haven Training", 1077705, 1077706));
 
@@ -50,15 +49,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.Parry.Base < 50;
+
+            return Owner.Skills.Parry.Base < 50;
         }
 
         public override void OnCompleted()
@@ -84,7 +83,7 @@ namespace Server.Engines.Quests
 
     public class TylAriadne : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ThouAndThineShieldQuest)
                 };

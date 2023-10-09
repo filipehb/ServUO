@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -131,7 +131,7 @@ namespace Server.Engines.CityLoyalty
                     Item item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(false, false, true);
 
                     int min, max;
-                    TreasureMapChest.GetRandomItemStat(out min, out max, 1.0);
+                    TreasureMapChest.GetRandomItemStat(out min, out max);
 
                     RunicReforging.GenerateRandomItem(item, 0, min, max, Map);
                     return item;

@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class BatteredBucklersQuest : BaseQuest
     {
         public BatteredBucklersQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Buckler), "buckler", 10, 0x1B73));
 
@@ -56,7 +55,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(BatteredBucklersQuest)
                 };
@@ -103,7 +102,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public SmithsSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

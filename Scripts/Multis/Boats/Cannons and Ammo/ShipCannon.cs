@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -369,14 +369,15 @@ namespace Server.Items
 
                 return false;
             }
-            else if (Items.Count == 3)
-            {
-                if (message)
-                {
-                    m.SendLocalizedMessage(1080017); // That container cannot hold more items.
-                }
 
-                return false;
+            if (Items.Count == 3)
+            {
+	            if (message)
+	            {
+		            m.SendLocalizedMessage(1080017); // That container cannot hold more items.
+	            }
+
+	            return false;
             }
 
             return base.CheckHold(m, item, message, checkItems, plusItems, plusWeight);
@@ -495,10 +496,11 @@ namespace Server.Items
                 LightFuse(from);
                 return;
             }
-            else if (i != null && i is Torch && ((Torch)i).Burning)
+
+            if (i != null && i is Torch && ((Torch)i).Burning)
             {
-                LightFuse(from);
-                return;
+	            LightFuse(from);
+	            return;
             }
 
             AddAction(from, 1149669); // Need a lighted fire source.
@@ -1113,7 +1115,7 @@ namespace Server.Items
             base.GetProperties(list);
 
             list.Add(1116026, Charged == CannonAction.Finish ? "#1116031" : "#1116032"); // Charged: ~1_VALUE~
-            list.Add(1116027, string.Format("{0}", AmmoInfo.GetAmmoName(this).ToString())); // Ammo: ~1_VALUE~
+            list.Add(1116027, string.Format("{0}", AmmoInfo.GetAmmoName(this))); // Ammo: ~1_VALUE~
             list.Add(1116028, Primed == CannonAction.Finish ? "#1116031" : "#1116032"); //Primed: ~1_VALUE~
             list.Add(1116580 + (int)DamageState);
             list.Add(1072241, "{0}\t{1}\t{2}\t{3}", TotalItems, MaxItems, TotalWeight, MaxWeight);

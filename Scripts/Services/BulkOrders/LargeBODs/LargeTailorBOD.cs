@@ -6,8 +6,7 @@ namespace Server.Engines.BulkOrders
     {
         public override BODType BODType => BODType.Tailor;
 
-        public static double[] m_TailoringMaterialChances = new double[]
-        {
+        public static double[] m_TailoringMaterialChances = {
             0.857421875, // None
             0.125000000, // Spined
             0.015625000, // Horned

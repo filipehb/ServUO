@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests.Hag
 {
@@ -315,7 +315,7 @@ namespace Server.Engines.Quests.Hag
         {
             get
             {
-                if (!m_BlackheartMet)
+	            if (!m_BlackheartMet)
                 {
                     switch (Step)
                     {
@@ -336,15 +336,18 @@ namespace Server.Engines.Quests.Hag
                             return 1055045;
                     }
                 }
-                else
-                {
-                    /* You are still attempting to obtain a jug of Captain Blackheart's
-                    * Whiskey, but the drunkard Captain refuses to share his unique brew.
-                    * You must prove your worthiness as a pirate to Blackheart before he'll
-                    * offer you a jug.
-                    */
-                    return 1055055;
-                }
+
+	            /* You are still attempting to obtain a jug of Captain Blackheart's
+	             * Whiskey, but the drunkard Captain refuses to share his unique brew.
+	             * You must prove your worthiness as a pirate to Blackheart before he'll
+	             * offer you a jug.
+	             */
+	            /* You are still attempting to obtain a jug of Captain Blackheart's
+	             * Whiskey, but the drunkard Captain refuses to share his unique brew.
+	             * You must prove your worthiness as a pirate to Blackheart before he'll
+	             * offer you a jug.
+	             */
+	            return 1055055;
             }
         }
         public override int MaxProgress

@@ -74,7 +74,7 @@ namespace Server.Items
             if (ItemID == 0x1950 || ItemID == 0x1953)
             {
                 ++ItemID;
-                Timer.DelayCall(TimeSpan.FromSeconds(1), new TimerCallback(AnimateMongbat));
+                Timer.DelayCall(TimeSpan.FromSeconds(1), AnimateMongbat);
             }
             else if (ItemID == 0x1951 || ItemID == 0x1954)
             {
@@ -90,7 +90,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

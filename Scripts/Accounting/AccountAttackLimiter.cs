@@ -1,8 +1,9 @@
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.Accounting
 {
@@ -80,7 +81,7 @@ namespace Server.Accounting
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

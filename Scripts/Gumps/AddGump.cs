@@ -1,9 +1,9 @@
-using Server.Commands;
-using Server.Network;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Server.Commands;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Gumps
 {
@@ -236,7 +236,7 @@ namespace Server.Gumps
                     else if (p is Mobile)
                         p = ((Mobile)p).Location;
 
-                    Commands.Add.Invoke(from, new Point3D(p), new Point3D(p), new string[] { m_Type.Name });
+                    Commands.Add.Invoke(from, new Point3D(p), new Point3D(p), new[] { m_Type.Name });
 
                     from.Target = new InternalTarget(m_Type, m_SearchResults, m_SearchString, m_Page);
                 }

@@ -15,7 +15,6 @@ namespace Server.Items
 
         [Constructable]
         public LordBlackthornsExemplar()
-            : base()
         {
             Hue = 0x501;
         }

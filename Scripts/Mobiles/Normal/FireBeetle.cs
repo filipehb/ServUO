@@ -1,9 +1,10 @@
+using Server.Engines.Craft;
 using Server.Items;
 
 namespace Server.Mobiles
 {
     [CorpseName("a fire beetle corpse")]
-    [Engines.Craft.Forge]
+    [Forge]
     public class FireBeetle : BaseMount
     {
         [Constructable]

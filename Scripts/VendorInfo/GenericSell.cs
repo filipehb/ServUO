@@ -1,7 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -125,10 +125,9 @@ namespace Server.Mobiles
 
         public string GetNameFor(Item item)
         {
-            if (item.Name != null)
+	        if (item.Name != null)
                 return item.Name;
-            else
-                return item.LabelNumber.ToString();
+	        return item.LabelNumber.ToString();
         }
 
         public bool IsSellable(Item item)

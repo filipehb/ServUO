@@ -1,7 +1,6 @@
+using System.Collections.Generic;
 using Server.Items;
 using Server.Misc;
-
-using System.Collections.Generic;
 
 namespace Server.Mobiles.MannequinProperty
 {

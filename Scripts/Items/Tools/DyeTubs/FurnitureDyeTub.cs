@@ -1,8 +1,9 @@
 using System;
+using Server.Engines.VeteranRewards;
 
 namespace Server.Items
 {
-    public class FurnitureDyeTub : DyeTub, Engines.VeteranRewards.IRewardItem
+    public class FurnitureDyeTub : DyeTub, IRewardItem
     {
         private bool m_IsRewardItem;
         [Constructable]
@@ -22,8 +23,7 @@ namespace Server.Items
         public override int FailMessage => 501021;// That is not a piece of furniture.
         public override int LabelNumber => 1041246;// Furniture Dye Tub
 
-        private static Type[] _Dyables = new[]
-        {
+        private static Type[] _Dyables = {
             typeof(PotionKeg), typeof(CustomizableSquaredDoorMatDeed), typeof(OrnateBedDeed),
             typeof(FourPostBedDeed), typeof(FormalDiningTableDeed)
         };
@@ -44,7 +44,7 @@ namespace Server.Items
         }
         public override void OnDoubleClick(Mobile from)
         {
-            if (m_IsRewardItem && !Engines.VeteranRewards.RewardSystem.CheckIsUsableBy(from, this, null))
+            if (m_IsRewardItem && !RewardSystem.CheckIsUsableBy(from, this, null))
                 return;
 
             base.OnDoubleClick(from);

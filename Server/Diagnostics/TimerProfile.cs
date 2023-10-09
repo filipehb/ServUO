@@ -1,6 +1,8 @@
 #region References
+
 using System.Collections.Generic;
 using System.IO;
+
 #endregion
 
 namespace Server.Diagnostics

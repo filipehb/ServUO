@@ -1,7 +1,8 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells;
 
 namespace Server.Multis
 {
@@ -162,7 +163,7 @@ namespace Server.Multis
                 //int zavg = Map.GetAverageZ(bc.X, bc.Y);
                 IPoint3D p = bc.Location; //new Point3D(bc.X, bc.Y, zavg);
 
-                Spells.SpellHelper.GetSurfaceTop(ref p);
+                SpellHelper.GetSurfaceTop(ref p);
 
                 Point3D loc = new Point3D(p);
                 bc.RangeHome = bc.IsPrisoner ? 0 : 6;

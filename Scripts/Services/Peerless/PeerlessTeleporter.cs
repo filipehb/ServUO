@@ -11,7 +11,6 @@ namespace Server.Items
         }
 
         public PeerlessTeleporter(PeerlessAltar altar)
-            : base()
         {
             Altar = altar;
         }

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ShotAnArrowIntoTheAirQuest : BaseQuest
     {
         public ShotAnArrowIntoTheAirQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Sheep), "sheep", 10));
 
@@ -53,7 +52,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ShotAnArrowIntoTheAirQuest)
                 };

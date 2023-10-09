@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class MougGuurMustDieQuest : BaseQuest
     {
         public MougGuurMustDieQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(MougGuur), "moug-guur", 1, "Sanctuary"));
 
@@ -50,7 +49,6 @@ namespace Server.Engines.Quests
     public class LeaderOfThePackQuest : BaseQuest
     {
         public LeaderOfThePackQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Chiikkaha), "chiikkaha", 1, "Sanctuary"));
 
@@ -96,7 +94,6 @@ namespace Server.Engines.Quests
     public class SayonaraSzavetraQuest : BaseQuest
     {
         public SayonaraSzavetraQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Szavetra), "szavetra", 1, "Sanctuary"));
 

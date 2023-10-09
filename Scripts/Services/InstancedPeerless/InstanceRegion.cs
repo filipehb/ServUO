@@ -1,6 +1,6 @@
+using System;
 using Server.Spells.Chivalry;
 using Server.Spells.Fourth;
-using System;
 
 namespace Server.Engines.InstancedPeerless
 {

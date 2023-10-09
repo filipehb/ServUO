@@ -1,4 +1,5 @@
 using System;
+using Server.Diagnostics;
 
 namespace Server.Misc
 {
@@ -18,7 +19,7 @@ namespace Server.Misc
             }
             catch (Exception ex)
             {
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
 
@@ -30,7 +31,7 @@ namespace Server.Misc
             }
             catch (Exception ex)
             {
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
     }

@@ -1,10 +1,11 @@
-using Server.Commands;
-using Server.Items;
-using Server.Mobiles;
-using Server.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Mobiles;
+using Server.Regions;
 
 namespace Server.Engines.Doom
 {
@@ -818,7 +819,7 @@ namespace Server.Engines.Doom
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 

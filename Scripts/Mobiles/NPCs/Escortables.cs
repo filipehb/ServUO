@@ -1,14 +1,13 @@
+using System;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class NewHavenAlchemistEscortQuest : BaseQuest
     {
         public NewHavenAlchemistEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Alchemist"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -42,7 +41,6 @@ namespace Server.Engines.Quests
     public class NewHavenBardEscortQuest : BaseQuest
     {
         public NewHavenBardEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Bard"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -77,7 +75,6 @@ namespace Server.Engines.Quests
     public class NewHavenWarriorEscortQuest : BaseQuest
     {
         public NewHavenWarriorEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Warrior"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -111,7 +108,6 @@ namespace Server.Engines.Quests
     public class NewHavenTailorEscortQuest : BaseQuest
     {
         public NewHavenTailorEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Tailor"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -145,7 +141,6 @@ namespace Server.Engines.Quests
     public class NewHavenCarpenterEscortQuest : BaseQuest
     {
         public NewHavenCarpenterEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Carpenter"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -179,7 +174,6 @@ namespace Server.Engines.Quests
     public class NewHavenMapmakerEscortQuest : BaseQuest
     {
         public NewHavenMapmakerEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Mapmaker"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -214,7 +208,6 @@ namespace Server.Engines.Quests
     public class NewHavenMageEscortQuest : BaseQuest
     {
         public NewHavenMageEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Mage"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -249,7 +242,6 @@ namespace Server.Engines.Quests
     public class NewHavenInnEscortQuest : BaseQuest
     {
         public NewHavenInnEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Inn"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -283,7 +275,6 @@ namespace Server.Engines.Quests
     public class NewHavenFarmEscortQuest : BaseQuest
     {
         public NewHavenFarmEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Farm"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -317,7 +308,6 @@ namespace Server.Engines.Quests
     public class NewHavenDocksEscortQuest : BaseQuest
     {
         public NewHavenDocksEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Docks"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -351,7 +341,6 @@ namespace Server.Engines.Quests
     public class NewHavenBowyerEscortQuest : BaseQuest
     {
         public NewHavenBowyerEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Bowyer"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -385,7 +374,6 @@ namespace Server.Engines.Quests
     public class NewHavenBankEscortQuest : BaseQuest
     {
         public NewHavenBankEscortQuest()
-            : base()
         {
             AddObjective(new EscortObjective("the New Haven Bank"));
             AddReward(new BaseReward(typeof(Gold), 500, 1062577));
@@ -418,8 +406,7 @@ namespace Server.Engines.Quests
 
     public class NewHavenEscortable : BaseEscort
     {
-        private static readonly Type[] m_Quests = new Type[]
-        {
+        private static readonly Type[] m_Quests = {
             typeof(NewHavenAlchemistEscortQuest),
             typeof(NewHavenBardEscortQuest),
             typeof(NewHavenWarriorEscortQuest),
@@ -434,8 +421,7 @@ namespace Server.Engines.Quests
             typeof(NewHavenBankEscortQuest)
         };
 
-        private static readonly string[] m_Destinations = new string[]
-        {
+        private static readonly string[] m_Destinations = {
             "the New Haven Alchemist",
             "the New Haven Bard",
             "the New Haven Warrior",
@@ -467,7 +453,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[] { m_Quests[m_Quest] };
+        public override Type[] Quests => new[] { m_Quests[m_Quest] };
 
         public override void Advertise()
         {
@@ -889,7 +875,6 @@ namespace Server.Engines.Quests
         private DateTime m_NextResurrect;
         [Constructable]
         public NewHavenHealer()
-            : base()
         {
             Title = "the wandering healer";
 
@@ -966,10 +951,11 @@ namespace Server.Engines.Quests
                 Say(501222); // Thou art a criminal.  I shall not resurrect thee.
                 return false;
             }
-            else if (m.Murderer)
+
+            if (m.Murderer)
             {
-                Say(501223); // Thou'rt not a decent and good person. I shall not resurrect thee.
-                return false;
+	            Say(501223); // Thou'rt not a decent and good person. I shall not resurrect thee.
+	            return false;
             }
 
             return true;

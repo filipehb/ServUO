@@ -1,6 +1,6 @@
-using Server.Gumps;
 using System;
 using System.Collections.Generic;
+using Server.Gumps;
 
 namespace Server.Items
 {
@@ -16,7 +16,6 @@ namespace Server.Items
 
         [Constructable]
         public WoodworkersBench(bool east)
-            : base()
         {
             if (east)
             {
@@ -181,7 +180,6 @@ namespace Server.Items
 
         [Constructable]
         public WoodworkersBenchDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

@@ -1,7 +1,7 @@
+using System;
 using Server.Engines.VeteranRewards;
 using Server.Multis;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -17,7 +17,6 @@ namespace Server.Items
 
         [Constructable]
         public SheepStatue(int itemID)
-            : base()
         {
             AddComponent(new InternalAddonComponent(itemID), 0, 0, 0);
             NextResourceCount = DateTime.UtcNow + TimeSpan.FromDays(1);
@@ -226,7 +225,6 @@ namespace Server.Items
 
         [Constructable]
         public SheepStatueDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

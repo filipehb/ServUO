@@ -1,10 +1,11 @@
-using Server.Engines.Points;
-using Server.Gumps;
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Points;
+using Server.Engines.SeasonalEvents;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.JollyRoger
 {
@@ -244,7 +245,7 @@ namespace Server.Engines.JollyRoger
 
                         Timer.DelayCall(() =>
                         {
-                            var jolly = SeasonalEvents.SeasonalEventSystem.GetEvent<JollyRogerEvent>();
+                            var jolly = SeasonalEventSystem.GetEvent<JollyRogerEvent>();
 
                             if (jolly != null)
                             {

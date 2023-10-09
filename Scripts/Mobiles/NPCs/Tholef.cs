@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class TheSongOfTheWindQuest : BaseQuest
     {
         public TheSongOfTheWindQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(FancyWindChimes), "fancy wind chimes", 10, 0x2833));
 
@@ -43,7 +42,6 @@ namespace Server.Engines.Quests
     public class BeerGogglesQuest : BaseQuest
     {
         public BeerGogglesQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(BarrelTap), "barrel tap", 25, 0x1004));
 
@@ -80,7 +78,6 @@ namespace Server.Engines.Quests
     public class MessageInBottleQuest : BaseQuest
     {
         public MessageInBottleQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Bottle), "empty bottles", 50, 0xF0E));
 
@@ -128,7 +125,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(TheSongOfTheWindQuest),
                     typeof(BeerGogglesQuest),

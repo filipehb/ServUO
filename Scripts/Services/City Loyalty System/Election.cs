@@ -1,9 +1,10 @@
-using Server.Accounting;
-using Server.Gumps;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Accounting;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -111,7 +112,7 @@ namespace Server.Engines.CityLoyalty
                 }
 
                 Candidates.Add(new BallotEntry(pm, pentry.Love, pentry.Hate));
-                pm.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1153905, pm.NetState); // *You etch your name into the stone* 
+                pm.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1153905, pm.NetState); // *You etch your name into the stone* 
                 pm.SendLocalizedMessage(1154087); // You have 24 hours to get your nomination endorsed. If you do not get an endorsement within that period you will need to re-nominate yourself.
 
                 return true;
@@ -163,7 +164,7 @@ namespace Server.Engines.CityLoyalty
                     {
                         BallotEntry e = o as BallotEntry;
                         e.Endorsements.Add(m as PlayerMobile);
-                        m.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1153913, m.NetState); // *You etch your endorsement for the nominee into the stone*
+                        m.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1153913, m.NetState); // *You etch your endorsement for the nominee into the stone*
 
                     }));
 
@@ -208,7 +209,7 @@ namespace Server.Engines.CityLoyalty
                     {
                         BallotEntry e = o as BallotEntry;
                         e.Votes.Add(voter);
-                        m.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1153923, voter.NetState); // *You etch your vote into the stone* 
+                        m.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1153923, voter.NetState); // *You etch your vote into the stone* 
                     }));
                 }
             }
@@ -230,7 +231,7 @@ namespace Server.Engines.CityLoyalty
                     if (Candidates.Contains(e))
                     {
                         Candidates.Remove(e);
-                        m.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, 1153911, m.NetState); // *You smudge your name off the stone* 
+                        m.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1153911, m.NetState); // *You smudge your name off the stone* 
                     }
 
                 }));
@@ -581,17 +582,13 @@ namespace Server.Engines.CityLoyalty
 
             if (Votes.Count > entry.Votes.Count)
                 return 1;
-            else if (Votes.Count < entry.Votes.Count)
-                return -1;
-            else
-            {
-                if (Love > entry.Love || Hate < entry.Hate)
-                    return 1;
-                else if (Love == entry.Love && Hate == entry.Hate && Utility.RandomBool())
-                    return 1;
-                else
-                    return -1;
-            }
+            if (Votes.Count < entry.Votes.Count)
+	            return -1;
+            if (Love > entry.Love || Hate < entry.Hate)
+	            return 1;
+            if (Love == entry.Love && Hate == entry.Hate && Utility.RandomBool())
+	            return 1;
+            return -1;
         }
 
         public void Serialize(GenericWriter writer)

@@ -1,7 +1,8 @@
+using System;
 using Server.Engines.Craft;
 using Server.Multis;
+using Server.Spells;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -170,7 +171,7 @@ namespace Server.Items
                 {
                     BaseAddon addon = m_Deed.Addon;
 
-                    Spells.SpellHelper.GetSurfaceTop(ref p);
+                    SpellHelper.GetSurfaceTop(ref p);
 
                     BaseHouse house = null;
                     BaseGalleon galleon = CheckGalleonPlacement(from, addon, new Point3D(p), map);

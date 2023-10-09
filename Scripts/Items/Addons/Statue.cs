@@ -7,7 +7,6 @@ namespace Server.Items
     {
         [Constructable]
         public StoneStatueAddon(bool east)
-            : base()
         {
             if (east) // east
             {
@@ -49,7 +48,6 @@ namespace Server.Items
         private bool m_East;
         [Constructable]
         public StoneStatueDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

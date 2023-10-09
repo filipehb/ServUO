@@ -1,13 +1,15 @@
-using Server.Items;
-using Server.Engines.SeasonalEvents;
-using Server.Engines.CityLoyalty;
-using Server.Mobiles;
-using Server.Network;
-using Server.Services.TownCryer;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.CityLoyalty;
+using Server.Engines.SeasonalEvents;
+using Server.Engines.VvV;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Network;
+using Server.Services.TownCryer;
+using Server.Spells;
 
 namespace Server.Engines.ArtisanFestival
 {
@@ -23,12 +25,11 @@ namespace Server.Engines.ArtisanFestival
         public static readonly int _DefaultCityGold = 0; // Per EA, default is 1,000,000
         public static readonly int _StageDuration = 4;
         public static readonly int _ClaimDuration = 3;
-        public static readonly double[] _TreeGrowthPoints = new double[] { 1000, 2500, 7500, 15000 };
+        public static readonly double[] _TreeGrowthPoints = { 1000, 2500, 7500, 15000 };
 
         public static ArtisanFestivalEvent Instance { get; set; }
 
-        private static readonly City[] Cities = new[]
-        {
+        private static readonly City[] Cities = {
             City.Britain, City.Jhelom, City.Minoc, City.Moonglow, City.NewMagincia, City.SkaraBrae, City.Trinsic, City.Vesper, City.Yew
         };
 
@@ -225,9 +226,7 @@ namespace Server.Engines.ArtisanFestival
 
             switch (Cycle)
             {
-                default:
-                    break;
-                case CycleMethod.Reverse:
+	            case CycleMethod.Reverse:
                     list.Reverse();
                     break;
                 case CycleMethod.Random:
@@ -265,7 +264,7 @@ namespace Server.Engines.ArtisanFestival
             {
                 var cityInstance = CityLoyaltySystem.GetCityInstance(CityOrder[newStage]);
 
-                if (cityInstance != null && cityInstance.Treasury >= (long)_DefaultCityGold)
+                if (cityInstance != null && cityInstance.Treasury >= _DefaultCityGold)
                 {
                     Stage++;
                     AddCurrentTCMessage();
@@ -421,7 +420,7 @@ namespace Server.Engines.ArtisanFestival
                         case TreeStage.Four: perc = .5; break;
                     }
 
-                    int count = (int)Math.Max(1, (double)PointTable.Count * perc);
+                    int count = (int)Math.Max(1, PointTable.Count * perc);
 
                     for (int i = 0; i < count; i++)
                     {
@@ -459,7 +458,7 @@ namespace Server.Engines.ArtisanFestival
                     }
                     else
                     {
-                        Spells.SpellHelper.AdjustField(ref temp, map, 20, false);
+                        SpellHelper.AdjustField(ref temp, map, 20, false);
 
                         spawnPoint = temp;
                     }
@@ -541,9 +540,9 @@ namespace Server.Engines.ArtisanFestival
             {
                 Timer.DelayCall(TimeSpan.FromMilliseconds((i - 2) * 600), o =>
                 {
-                    Misc.Geometry.Circle2D(e.Location, e.Map, o, (pnt, map) =>
+                    Geometry.Circle2D(e.Location, e.Map, o, (pnt, map) =>
                     {
-                        VvV.VvVAltar.LaunchFireworks(pnt, map);
+                        VvVAltar.LaunchFireworks(pnt, map);
                     });
                 }, i);
             }
@@ -731,8 +730,7 @@ namespace Server.Engines.ArtisanFestival
             }
         }
 
-        private static Point3D[] _CityLocations = new Point3D[]
-        {
+        private static Point3D[] _CityLocations = {
             new Point3D(1628, 1639, 35), // brit
             new Point3D(1454, 3991, 0), // Jhelom
             new Point3D(2436, 492, 15), // Minoc

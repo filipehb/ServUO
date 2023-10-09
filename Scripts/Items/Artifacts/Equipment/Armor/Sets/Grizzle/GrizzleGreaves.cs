@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public GrizzleGreaves()
-            : base()
         {
             SetHue = 0x278;
 

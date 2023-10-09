@@ -88,8 +88,7 @@ namespace Server.Items
     {
         public static MonsterStatuetteInfo[] Table => m_Table;
 
-        private static readonly MonsterStatuetteInfo[] m_Table = new MonsterStatuetteInfo[]
-        {
+        private static readonly MonsterStatuetteInfo[] m_Table = {
             /* Crocodile */			new MonsterStatuetteInfo(1041249, 0x20DA, 660),
             /* Daemon */			new MonsterStatuetteInfo(1041250, 0x20D3, 357),
             /* Dragon */			new MonsterStatuetteInfo(1041251, 0x20D6, 362),
@@ -115,7 +114,7 @@ namespace Server.Items
             /* Wolf */			    new MonsterStatuetteInfo(1049770, 0x2122, 229),
             /* Phillip's Steed */	new MonsterStatuetteInfo(1063488, 0x3FFE, 168),
             /* Seahorse */			new MonsterStatuetteInfo(1070819, 0x25BA, 138),
-            /* Harrower */			new MonsterStatuetteInfo(1080520, 0x25BB, new int[] { 0x289, 0x28A, 0x28B }),
+            /* Harrower */			new MonsterStatuetteInfo(1080520, 0x25BB, new[] { 0x289, 0x28A, 0x28B }),
             /* Efreet */			new MonsterStatuetteInfo(1080521, 0x2590, 0x300),
             /* Slime */			    new MonsterStatuetteInfo(1015246, 0x20E8, 456),
             /* PlagueBeast */		new MonsterStatuetteInfo(1029747, 0x2613, 0x1BF),
@@ -137,30 +136,30 @@ namespace Server.Items
             /* Abyssal Infernal */  new MonsterStatuetteInfo(1113628, 0x4287, 1492), 
             /* ArchDemon */         new MonsterStatuetteInfo(1112411, 0x20D3, 357), 
             /* FireAnt */           new MonsterStatuetteInfo(1113801, 0x42A7, 1006),
-            /* Navrey Night-Eyes */ new MonsterStatuetteInfo(1153593, 0x4C07, new int[] { 0x61B, 0x61C, 0x61D, 0x61E }),
+            /* Navrey Night-Eyes */ new MonsterStatuetteInfo(1153593, 0x4C07, new[] { 0x61B, 0x61C, 0x61D, 0x61E }),
             /* Dragon Turtle */     new MonsterStatuetteInfo(1156367, 0x9848, 362),
             /* Tiger Cub     */     new MonsterStatuetteInfo(1156517, 0x9CA7, 0x69),
             /* SakkhranBirdOfPrey */new MonsterStatuetteInfo(1156699, 0x276A, 0x4FE),
-            /* Exodus */            new MonsterStatuetteInfo(1153594, 0x4C08, new int[] { 0x301, 0x302, 0x303, 0x304 }),
+            /* Exodus */            new MonsterStatuetteInfo(1153594, 0x4C08, new[] { 0x301, 0x302, 0x303, 0x304 }),
             /* Terathan Matriarch */new MonsterStatuetteInfo(1113800, 0x212C, 599),
-            /* Flesh Renderer */    new MonsterStatuetteInfo(1155746, 0x262F, new int[] { 0x34C, 0x354 }),
+            /* Flesh Renderer */    new MonsterStatuetteInfo(1155746, 0x262F, new[] { 0x34C, 0x354 }),
             /* Crystal Elemental */ new MonsterStatuetteInfo(1155747, 0x2620, 278),
             /* Dark Father */       new MonsterStatuetteInfo(1155748, 0x2632, 0x165),
-            /* Platinum Dragon */   new MonsterStatuetteInfo(1155745, 0x2635, new int[] { 0x2C1, 0x2C3 }),
+            /* Platinum Dragon */   new MonsterStatuetteInfo(1155745, 0x2635, new[] { 0x2C1, 0x2C3 }),
             /* TRex */              new MonsterStatuetteInfo(1157078, 0x9DED, 278),
             /* Zipactriotl */       new MonsterStatuetteInfo(1157079, 0x9DE4, 609),
             /* Myrmidex Queen */    new MonsterStatuetteInfo(1157080, 0x9DB6, 959),
             /* Virtuebane */        new MonsterStatuetteInfo(1153592, 0x4C06, 357),
             /* Grey Goblin */       new MonsterStatuetteInfo(1125135, 0xA095, 0x45A),
             /* Green Goblin */      new MonsterStatuetteInfo(1125133, 0xA097, 0x45A),
-            /* Pyros */             new MonsterStatuetteInfo(1157993, 0x9F4D, new int[] { 0x112, 0x113, 0x114, 0x115, 0x116 }),
-            /* Lithos */            new MonsterStatuetteInfo(1157994, 0x9FA1, new int[] { 0x10D, 0x10E, 0x10F, 0x110, 0x111 }),
-            /* Hydros */            new MonsterStatuetteInfo(1157992, 0x9F49, new int[] { 0x117, 0x118, 0x1119, 0x11A, 0x11B }),
-            /* Stratos */           new MonsterStatuetteInfo(1157991, 0x9F4C, new int[] { 0x108, 0x109, 0x10A, 0x10B, 0x10C }),
-            /* Santa */             new MonsterStatuetteInfo(1097968, 0x4A9A, new int[] { 1641 }),
-            /* Krampus */           new MonsterStatuetteInfo(1158875, 0xA270, new int[] { 0x586, 0x587, 0x588, 0x589, 0x58A }),
-            /* Khal Ankur */        new MonsterStatuetteInfo(1158877, 0xA1C6, new int[] { 0x301, 0x302, 0x303, 0x304, 0x305 }),
-            /* Krampus Minion */    new MonsterStatuetteInfo(1158876, 0xA271, new int[] { 0X1C8, 0X1C9, 0X1CA, 0X1CB, 0X1CC }),
+            /* Pyros */             new MonsterStatuetteInfo(1157993, 0x9F4D, new[] { 0x112, 0x113, 0x114, 0x115, 0x116 }),
+            /* Lithos */            new MonsterStatuetteInfo(1157994, 0x9FA1, new[] { 0x10D, 0x10E, 0x10F, 0x110, 0x111 }),
+            /* Hydros */            new MonsterStatuetteInfo(1157992, 0x9F49, new[] { 0x117, 0x118, 0x1119, 0x11A, 0x11B }),
+            /* Stratos */           new MonsterStatuetteInfo(1157991, 0x9F4C, new[] { 0x108, 0x109, 0x10A, 0x10B, 0x10C }),
+            /* Santa */             new MonsterStatuetteInfo(1097968, 0x4A9A, new[] { 1641 }),
+            /* Krampus */           new MonsterStatuetteInfo(1158875, 0xA270, new[] { 0x586, 0x587, 0x588, 0x589, 0x58A }),
+            /* Khal Ankur */        new MonsterStatuetteInfo(1158877, 0xA1C6, new[] { 0x301, 0x302, 0x303, 0x304, 0x305 }),
+            /* Krampus Minion */    new MonsterStatuetteInfo(1158876, 0xA271, new[] { 0X1C8, 0X1C9, 0X1CA, 0X1CB, 0X1CC }),
             /* Horse */             new MonsterStatuetteInfo(1018263, 0xA511, 0x0A9),
             /* Pig */               new MonsterStatuetteInfo(1159417, 0x2101, 0x0C5),
             /* Goat */              new MonsterStatuetteInfo(1159418, 0x2580, 0x09A),
@@ -171,7 +170,7 @@ namespace Server.Items
         {
             LabelNumber = labelNumber;
             ItemID = itemID;
-            Sounds = new int[] { baseSoundID, baseSoundID + 1, baseSoundID + 2, baseSoundID + 3, baseSoundID + 4 };
+            Sounds = new[] { baseSoundID, baseSoundID + 1, baseSoundID + 2, baseSoundID + 3, baseSoundID + 4 };
         }
 
         public MonsterStatuetteInfo(int labelNumber, int itemID, int[] sounds)

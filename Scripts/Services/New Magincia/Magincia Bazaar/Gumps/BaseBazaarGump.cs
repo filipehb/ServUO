@@ -1,3 +1,4 @@
+using System.Globalization;
 using Server.Gumps;
 
 namespace Server.Engines.NewMagincia
@@ -44,7 +45,7 @@ namespace Server.Engines.NewMagincia
 
         protected string FormatAmt(int amount)
         {
-            return amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"));
+            return amount.ToString("N0", CultureInfo.GetCultureInfo("en-US"));
         }
 
         protected string FormatStallName(string str)

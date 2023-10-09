@@ -1,21 +1,22 @@
-using Server.Commands;
-using Server.Commands.Generic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Server.Commands;
+using Server.Commands.Generic;
+using Server.Diagnostics;
 
 /*
-** Sno's distro spawner importer/exporter
-**
-** [exportspawner filename - Saves distro spawners to XML to 'Saves/Spawners/filename'
-**
-** [importspawner filename - Restores distro spawners from 'Saves/Spawners/filename'.  Note, this command does not check for
-** duplication, so if you run it more than once you will end up with multiple spawners.
-**
-** These spawns can also be imported back in as XmlSpawners by using the '[xmlimportspawners Saves/Spawners/filename' command.
-*/
+ ** Sno's distro spawner importer/exporter
+ **
+ ** [exportspawner filename - Saves distro spawners to XML to 'Saves/Spawners/filename'
+ **
+ ** [importspawner filename - Restores distro spawners from 'Saves/Spawners/filename'.  Note, this command does not check for
+ ** duplication, so if you run it more than once you will end up with multiple spawners.
+ **
+ ** These spawns can also be imported back in as XmlSpawners by using the '[xmlimportspawners Saves/Spawners/filename' command.
+ */
 
 namespace Server.Mobiles
 {
@@ -191,7 +192,7 @@ namespace Server.Mobiles
                         catch (Exception ex)
                         {
                             failures++;
-                            Diagnostics.ExceptionLogging.LogException(ex);
+                            ExceptionLogging.LogException(ex);
                         }
                     }
 

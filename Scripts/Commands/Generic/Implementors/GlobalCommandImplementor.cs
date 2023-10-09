@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Diagnostics;
 
 namespace Server.Commands.Generic
 {
@@ -7,7 +8,7 @@ namespace Server.Commands.Generic
     {
         public GlobalCommandImplementor()
         {
-            Accessors = new string[] { "Global" };
+            Accessors = new[] { "Global" };
             SupportRequirement = CommandSupport.Global;
             SupportsConditionals = true;
             AccessLevel = AccessLevel.Administrator;
@@ -53,7 +54,7 @@ namespace Server.Commands.Generic
             catch (Exception e)
             {
                 from.SendMessage(e.Message);
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
     }

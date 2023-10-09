@@ -1,7 +1,7 @@
+using System;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
-using System;
 
 namespace Server.Engines.Plants
 {
@@ -14,10 +14,9 @@ namespace Server.Engines.Plants
         {
             get
             {
-                if (PlantStatus <= PlantStatus.Stage3)
+	            if (PlantStatus <= PlantStatus.Stage3)
                     return 0xC7E;
-                else
-                    return 0xC62;
+	            return 0xC62;
             }
         }
 

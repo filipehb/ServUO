@@ -38,10 +38,7 @@ namespace Server.Items
                     PlayDrinkEffect(from);
                     Consume();
                 }
-                else
-                {
-                    // TODO: Message?
-                }
+                // TODO: Message?
             }
             else
             {

@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class SplitEndsQuest : BaseQuest
     {
         public SplitEndsQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Arrow), "arrow", 20, 0xF3F));
 
@@ -55,7 +54,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(SplitEndsQuest)
                 };
@@ -102,7 +101,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public FletchersSatchel()
-            : base()
         {
             Hue = BaseReward.SatchelHue();
 

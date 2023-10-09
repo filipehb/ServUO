@@ -1,8 +1,8 @@
+using System.Linq;
 using Server.Engines.PartySystem;
 using Server.Engines.Quests;
 using Server.Mobiles;
 using Server.Network;
-using System.Linq;
 
 namespace Server
 {

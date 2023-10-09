@@ -4,13 +4,11 @@ namespace Server.Misc
 {
     public class NameVerification
     {
-        public static readonly char[] SpaceDashPeriodQuote = new[]
-        {
+        public static readonly char[] SpaceDashPeriodQuote = {
             ' ', '-', '.', '\''
         };
         public static readonly char[] Empty = new char[0];
-        private static readonly string[] m_StartDisallowed = new[]
-        {
+        private static readonly string[] m_StartDisallowed = {
             "seer",
             "counselor",
             "gm",
@@ -18,8 +16,7 @@ namespace Server.Misc
             "lady",
             "lord"
         };
-        private static readonly string[] m_Disallowed = new[]
-        {
+        private static readonly string[] m_Disallowed = {
             "jigaboo",
             "chigaboo",
             "wop",

@@ -1,8 +1,8 @@
+using System;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Services.TownCryer;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -298,7 +298,7 @@ namespace Server.Engines.Quests
 
     public class LegendaryCartographer : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(ToolsOfTheTradeQuest) };
+        public override Type[] Quests => new[] { typeof(ToolsOfTheTradeQuest) };
 
         public static LegendaryCartographer TramInstance { get; set; }
         public static LegendaryCartographer FelInstance { get; set; }
@@ -405,7 +405,7 @@ namespace Server.Engines.Quests
 
     public class MasterProvisioner : MondainQuester
     {
-        public override Type[] Quests => new Type[] { typeof(TheTreasureChaseQuest) };
+        public override Type[] Quests => new[] { typeof(TheTreasureChaseQuest) };
 
         public static MasterProvisioner TramInstance { get; set; }
         public static MasterProvisioner FelInstance { get; set; }

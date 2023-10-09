@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 255;
 
         [Constructable]
-        public SorcererSkirt() : base()
+        public SorcererSkirt()
         {
             Hue = 1165;
             Weight = 1;

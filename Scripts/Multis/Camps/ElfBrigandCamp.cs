@@ -6,7 +6,6 @@ namespace Server.Multis
     {
         [Constructable]
         public ElfBrigandCamp()
-            : base()
         {
         }
 

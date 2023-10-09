@@ -16,7 +16,7 @@ namespace Server.Engines.Quests.Matriarch
         {
             get
             {
-                if (m_Friend)
+	            if (m_Friend)
                 {
                     /* <I>The Solen Matriarch smiles as you greet her.</I><BR><BR>
                     * 
@@ -27,18 +27,24 @@ namespace Server.Engines.Quests.Matriarch
                     */
                     return 1054081;
                 }
-                else
-                {
-                    /* <I>The Solen Matriarch smiles as she eats the seed you offered.</I><BR><BR>
-                    * 
-                    * Thank you for that seed. It was quite delicious.  <BR><BR>
-                    * 
-                    * I would offer to make you a friend of my colony, but you seem to be busy with
-                    * another task at the moment. Perhaps you should finish whatever is occupying
-                    * your attention at the moment and return to me once you're done.
-                    */
-                    return 1054079;
-                }
+
+	            /* <I>The Solen Matriarch smiles as she eats the seed you offered.</I><BR><BR>
+	             *
+	             * Thank you for that seed. It was quite delicious.  <BR><BR>
+	             *
+	             * I would offer to make you a friend of my colony, but you seem to be busy with
+	             * another task at the moment. Perhaps you should finish whatever is occupying
+	             * your attention at the moment and return to me once you're done.
+	             */
+	            /* <I>The Solen Matriarch smiles as she eats the seed you offered.</I><BR><BR>
+	             *
+	             * Thank you for that seed. It was quite delicious.  <BR><BR>
+	             *
+	             * I would offer to make you a friend of my colony, but you seem to be busy with
+	             * another task at the moment. Perhaps you should finish whatever is occupying
+	             * your attention at the moment and return to me once you're done.
+	             */
+	            return 1054079;
             }
         }
         public override bool Logged => false;
@@ -139,7 +145,7 @@ namespace Server.Engines.Quests.Matriarch
         {
             get
             {
-                if (m_Friend)
+	            if (m_Friend)
                 {
                     /* <I>The Solen Matriarch listens as you report the completion of your
                     * tasks to her.</I><BR><BR>
@@ -154,24 +160,36 @@ namespace Server.Engines.Quests.Matriarch
                     */
                     return 1054097;
                 }
-                else
-                {
-                    /* <I>The Solen Matriarch listens as you report the completion of your
-                    * tasks to her.</I><BR><BR>
-                    * 
-                    * I give you my thanks for your help, and I will gladly make you a friend of my
-                    * solen colony. My warriors, workers, and queens will not longer look at you
-                    * as an intruder and attack you when you enter our lair.<BR><BR>
-                    * 
-                    * I will also process some zoogi fungus into powder of translocation for you.
-                    * Two of the zoogi fungi are required for each measure of the powder. I will
-                    * process up to 200 zoogi fungi into 100 measures of powder of translocation.<BR><BR>
-                    * 
-                    * I will also give you some gold for assisting me and my colony, but first let's
-                    * take care of your zoogi fungus.
-                    */
-                    return 1054096;
-                }
+
+	            /* <I>The Solen Matriarch listens as you report the completion of your
+	             * tasks to her.</I><BR><BR>
+	             *
+	             * I give you my thanks for your help, and I will gladly make you a friend of my
+	             * solen colony. My warriors, workers, and queens will not longer look at you
+	             * as an intruder and attack you when you enter our lair.<BR><BR>
+	             *
+	             * I will also process some zoogi fungus into powder of translocation for you.
+	             * Two of the zoogi fungi are required for each measure of the powder. I will
+	             * process up to 200 zoogi fungi into 100 measures of powder of translocation.<BR><BR>
+	             *
+	             * I will also give you some gold for assisting me and my colony, but first let's
+	             * take care of your zoogi fungus.
+	             */
+	            /* <I>The Solen Matriarch listens as you report the completion of your
+	             * tasks to her.</I><BR><BR>
+	             *
+	             * I give you my thanks for your help, and I will gladly make you a friend of my
+	             * solen colony. My warriors, workers, and queens will not longer look at you
+	             * as an intruder and attack you when you enter our lair.<BR><BR>
+	             *
+	             * I will also process some zoogi fungus into powder of translocation for you.
+	             * Two of the zoogi fungi are required for each measure of the powder. I will
+	             * process up to 200 zoogi fungi into 100 measures of powder of translocation.<BR><BR>
+	             *
+	             * I will also give you some gold for assisting me and my colony, but first let's
+	             * take care of your zoogi fungus.
+	             */
+	            return 1054096;
             }
         }
         public override void OnRead()

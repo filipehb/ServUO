@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public EssenceBox()
-            : base()
         {
             Movable = true;
             Hue = 2306;

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class CreepyCrawliesQuest : BaseQuest
     {
         public CreepyCrawliesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GiantSpider), "giant spiders", 12));
 
@@ -41,7 +40,6 @@ namespace Server.Engines.Quests
     public class VoraciousPlantsQuest : BaseQuest
     {
         public VoraciousPlantsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Corpser), "corpsers", 8));
             AddObjective(new SlayObjective(typeof(SwampTentacle), "swamp tentacles", 2));
@@ -76,7 +74,6 @@ namespace Server.Engines.Quests
     public class GibberJabberQuest : BaseQuest
     {
         public GibberJabberQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Gibberling), "gibberlings", 10));
 
@@ -110,7 +107,6 @@ namespace Server.Engines.Quests
     public class AnimatedMonstrosityQuest : BaseQuest
     {
         public AnimatedMonstrosityQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(FleshGolem), "flesh golems", 12));
 
@@ -144,7 +140,6 @@ namespace Server.Engines.Quests
     public class BirdsOfAFeatherQuest : BaseQuest
     {
         public BirdsOfAFeatherQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Harpy), "harpies", 10));
 
@@ -178,7 +173,6 @@ namespace Server.Engines.Quests
     public class FrightmaresQuest : BaseQuest
     {
         public FrightmaresQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(PlagueSpawn), "plague spawns", 10));
 
@@ -212,7 +206,6 @@ namespace Server.Engines.Quests
     public class MoltenReptilesQuest : BaseQuest
     {
         public MoltenReptilesQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(LavaLizard), "lava lizards", 10));
 
@@ -246,7 +239,6 @@ namespace Server.Engines.Quests
     public class BloodyNuisanceQuest : BaseQuest
     {
         public BloodyNuisanceQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(GoreFiend), "gore fiends", 10));
 
@@ -280,7 +272,6 @@ namespace Server.Engines.Quests
     public class BloodSuckersQuest : BaseQuest
     {
         public BloodSuckersQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(VampireBat), "vampire bats", 10));
 
@@ -326,7 +317,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CreepyCrawliesQuest),
                     typeof(VoraciousPlantsQuest),

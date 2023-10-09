@@ -1,6 +1,7 @@
-using Server.Mobiles;
-using Server.Targeting;
 using System;
+using Server.Mobiles;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -67,7 +68,7 @@ namespace Server.Items
 
                 if (weapon.Poison == null || weapon.PoisonCharges <= 0)
                 {
-                    from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1005422); // Hmmmm... this does not need to be cleaned.
+                    from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1005422); // Hmmmm... this does not need to be cleaned.
                 }
                 else
                 {
@@ -99,7 +100,7 @@ namespace Server.Items
                 }
                 else
                 {
-                    from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1005422); // Hmmmm... this does not need to be cleaned.
+                    from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1005422); // Hmmmm... this does not need to be cleaned.
                 }
             }
             #region Firebomb

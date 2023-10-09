@@ -1,7 +1,7 @@
+using System;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -150,9 +150,8 @@ namespace Server.Items
 
     public abstract class GreenThornsEffect : Timer
     {
-        private static readonly TilesAndEffect[] m_Table = new TilesAndEffect[]
-        {
-            new TilesAndEffect(new int[]
+        private static readonly TilesAndEffect[] m_Table = {
+            new TilesAndEffect(new[]
             {
                 0x71, 0x7C,
                 0x82, 0xA7,
@@ -188,13 +187,13 @@ namespace Server.Items
                 0x7AE, 0x7B1,
             },
                 typeof(DirtGreenThornsEffect)),
-            new TilesAndEffect(new int[]
+            new TilesAndEffect(new[]
             {
                 0x9, 0x15,
                 0x150, 0x15C
             },
                 typeof(FurrowsGreenThornsEffect)),
-            new TilesAndEffect(new int[]
+            new TilesAndEffect(new[]
             {
                 0x9C4, 0x9EB,
                 0x3D65, 0x3D65,
@@ -205,7 +204,7 @@ namespace Server.Items
                 0x3FFC, 0x3FFE,
             },
                 typeof(SwampGreenThornsEffect)),
-            new TilesAndEffect(new int[]
+            new TilesAndEffect(new[]
             {
                 0x10C, 0x10F,
                 0x114, 0x117,
@@ -223,7 +222,7 @@ namespace Server.Items
                 0x76D, 0x773
             },
                 typeof(SnowGreenThornsEffect)),
-            new TilesAndEffect(new int[]
+            new TilesAndEffect(new[]
             {
                 0x16, 0x3A,
                 0x44, 0x4B,
@@ -282,7 +281,7 @@ namespace Server.Items
 
                 if (contains)
                 {
-                    GreenThornsEffect effect = (GreenThornsEffect)Activator.CreateInstance(taep.Effect, new object[] { land.Location, from.Map, from });
+                    GreenThornsEffect effect = (GreenThornsEffect)Activator.CreateInstance(taep.Effect, land.Location, from.Map, from);
                     return effect;
                 }
             }
@@ -317,10 +316,11 @@ namespace Server.Items
                     item.MoveToWorld(new Point3D(x, y, Location.Z), Map);
                     return true;
                 }
-                else if (Map.CanFit(x, y, z, 1))
+
+                if (Map.CanFit(x, y, z, 1))
                 {
-                    item.MoveToWorld(new Point3D(x, y, z), Map);
-                    return true;
+	                item.MoveToWorld(new Point3D(x, y, z), Map);
+	                return true;
                 }
             }
 
@@ -341,11 +341,12 @@ namespace Server.Items
                     creature.Combatant = From;
                     return true;
                 }
-                else if (Map.CanSpawnMobile(x, y, z))
+
+                if (Map.CanSpawnMobile(x, y, z))
                 {
-                    creature.MoveToWorld(new Point3D(x, y, z), Map);
-                    creature.Combatant = From;
-                    return true;
+	                creature.MoveToWorld(new Point3D(x, y, z), Map);
+	                creature.Combatant = From;
+	                return true;
                 }
             }
 

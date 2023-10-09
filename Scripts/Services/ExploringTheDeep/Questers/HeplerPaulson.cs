@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using Server.Commands;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -116,7 +116,7 @@ namespace Server.Mobiles
                     if (m.ExploringTheDeepQuest == ExploringTheDeepQuestChain.HeplerPaulson)
                     {
                         dropped.Delete();
-                        BaseGump.SendGump(new HeplerPaulsonCompleteGump(m as PlayerMobile));
+                        BaseGump.SendGump(new HeplerPaulsonCompleteGump(m));
                         m.ExploringTheDeepQuest = ExploringTheDeepQuestChain.HeplerPaulsonComplete;
                     }
                     else if (m.ExploringTheDeepQuest >= ExploringTheDeepQuestChain.HeplerPaulsonComplete)

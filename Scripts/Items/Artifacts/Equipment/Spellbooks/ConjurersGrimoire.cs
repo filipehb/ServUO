@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public ConjurersGrimoire()
-            : base()
         {
             Hue = 1157;
             Slayer = SlayerName.Silver;

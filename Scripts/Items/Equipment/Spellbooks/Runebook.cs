@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Craft;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -383,7 +383,7 @@ namespace Server.Items
 
                         if (rune.Marked)
                         {
-                            if (rune.Type == RecallRuneType.Ship)
+	                        if (rune.Type == RecallRuneType.Ship)
                             {
                                 RunebookEntry entry = new RunebookEntry(Point3D.Zero, null, null, null, rune.Type, rune.Galleon);
                                 m_Entries.Add(entry);
@@ -396,23 +396,24 @@ namespace Server.Items
 
                                 return true;
                             }
-                            else if (rune.TargetMap != null)
-                            {
-                                m_Entries.Add(new RunebookEntry(rune.Target, rune.TargetMap, rune.Description, rune.House, rune.Type));
 
-                                dropped.Delete();
+	                        if (rune.TargetMap != null)
+	                        {
+		                        m_Entries.Add(new RunebookEntry(rune.Target, rune.TargetMap, rune.Description, rune.House, rune.Type));
 
-                                from.Send(new PlaySound(0x42, GetWorldLocation()));
+		                        dropped.Delete();
 
-                                string desc = rune.Description;
+		                        from.Send(new PlaySound(0x42, GetWorldLocation()));
 
-                                if (desc == null || (desc = desc.Trim()).Length == 0)
-                                    desc = "(indescript)";
+		                        string desc = rune.Description;
 
-                                from.SendAsciiMessage(desc);
+		                        if (desc == null || (desc = desc.Trim()).Length == 0)
+			                        desc = "(indescript)";
 
-                                return true;
-                            }
+		                        from.SendAsciiMessage(desc);
+
+		                        return true;
+	                        }
                         }
                         else
                         {

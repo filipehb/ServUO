@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Commands;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Gumps
 {
@@ -266,8 +266,8 @@ namespace Server.Gumps
                     {
                         if (m.Murderer)
                             return EC ? 0x20 : 0x21;
-                        else if (m.Criminal)
-                            return EC ? 0x3AE : 0x3B1;
+                        if (m.Criminal)
+	                        return EC ? 0x3AE : 0x3B1;
 
                         return EC ? 0x5C : 0x58;
                     }
@@ -285,10 +285,9 @@ namespace Server.Gumps
 
                 if (x.AccessLevel > y.AccessLevel)
                     return -1;
-                else if (x.AccessLevel < y.AccessLevel)
-                    return 1;
-                else
-                    return Insensitive.Compare(x.Name, y.Name);
+                if (x.AccessLevel < y.AccessLevel)
+	                return 1;
+                return Insensitive.Compare(x.Name, y.Name);
             }
         }
     }

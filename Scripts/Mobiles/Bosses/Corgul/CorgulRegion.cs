@@ -1,9 +1,14 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Multis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Spells;
+using Server.Spells.Chivalry;
+using Server.Spells.Fourth;
+using Server.Spells.Seventh;
+using Server.Spells.Sixth;
 
 namespace Server.Regions
 {
@@ -86,15 +91,15 @@ namespace Server.Regions
         {
             if (m.AccessLevel == AccessLevel.Player)
             {
-                if (s is Spells.Sixth.MarkSpell || s is Spells.Fourth.RecallSpell || s is Spells.Seventh.GateTravelSpell
-                || s is Spells.Chivalry.SacredJourneySpell)
+                if (s is MarkSpell || s is RecallSpell || s is GateTravelSpell
+                || s is SacredJourneySpell)
                     return false;
             }
 
             return true;
         }
 
-        public override bool CheckTravel(Mobile m, Point3D newLocation, Spells.TravelCheckType travelType)
+        public override bool CheckTravel(Mobile m, Point3D newLocation, TravelCheckType travelType)
         {
             return false;
         }

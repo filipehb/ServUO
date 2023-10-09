@@ -147,8 +147,7 @@ namespace Server.Engines.Plants
             return contains;
         }
 
-        private static readonly int[] m_DirtPatchTiles = new int[]
-            {
+        private static readonly int[] m_DirtPatchTiles = {
                 0x9, 0x15,
                 0x71, 0x7C,
                 0x82, 0xA7,

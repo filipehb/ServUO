@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Diagnostics;
 
 namespace Server.Commands.Generic
 {
@@ -8,7 +9,7 @@ namespace Server.Commands.Generic
         private static AreaCommandImplementor m_Instance;
         public AreaCommandImplementor()
         {
-            Accessors = new string[] { "Area", "Group" };
+            Accessors = new[] { "Area", "Group" };
             SupportRequirement = CommandSupport.Area;
             SupportsConditionals = true;
             AccessLevel = AccessLevel.GameMaster;
@@ -72,7 +73,7 @@ namespace Server.Commands.Generic
             catch (Exception ex)
             {
                 from.SendMessage(ex.Message);
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
     }

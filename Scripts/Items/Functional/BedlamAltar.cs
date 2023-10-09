@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -8,7 +8,7 @@ namespace Server.Items
         public override int KeyCount => 3;
         public override MasterKey MasterKey => new BedlamKey();
 
-        public override Type[] Keys => new Type[]
+        public override Type[] Keys => new[]
 {
             typeof( LibrariansKey )
 };
@@ -25,8 +25,7 @@ namespace Server.Items
 
         public override Rectangle2D[] BossBounds => m_Bounds;
 
-        private readonly Rectangle2D[] m_Bounds = new Rectangle2D[]
-        {
+        private readonly Rectangle2D[] m_Bounds = {
             new Rectangle2D(99, 1609, 14, 18),
         };
 

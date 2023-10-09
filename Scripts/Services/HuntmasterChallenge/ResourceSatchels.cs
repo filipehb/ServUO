@@ -116,7 +116,7 @@ namespace Server.Items
     {
         public override int LabelNumber => 1158773;  // Miner's Satchel
 
-        public override Type[] HoldTypes => new Type[] { typeof(BaseOre), typeof(BaseIngot), typeof(BaseGranite), typeof(Saltpeter) };
+        public override Type[] HoldTypes => new[] { typeof(BaseOre), typeof(BaseIngot), typeof(BaseGranite), typeof(Saltpeter) };
 
         [Constructable]
         public MinersSatchel()
@@ -147,7 +147,7 @@ namespace Server.Items
     {
         public override int LabelNumber => 1158772;  // Lumberjack's Satchel
 
-        public override Type[] HoldTypes => new Type[] { typeof(BaseLog), typeof(Board) };
+        public override Type[] HoldTypes => new[] { typeof(BaseLog), typeof(Board) };
 
         [Constructable]
         public LumbjacksSatchel()

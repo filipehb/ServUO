@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class ShimmeringEffusionStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0x58D, 0x58E, 0x58F, 0x590, 0x591, 0x592, 0x593, 0x594, 0x595
         };
         [Constructable]

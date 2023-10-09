@@ -1,16 +1,19 @@
-using Server.Accounting;
-using Server.Commands;
-using Server.Commands.Generic;
-using Server.Gumps;
-using Server.Items;
-using Server.Multis;
-using Server.Network;
-using Server.Regions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using Server.Accounting;
+using Server.Commands;
+using Server.Commands.Generic;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Items;
+using Server.Misc;
+using Server.Multis;
+using Server.Network;
+using Server.Regions;
 
 namespace Server.Mobiles
 {
@@ -105,7 +108,7 @@ namespace Server.Mobiles
             public bool Dosearchnull;
             public bool Dosearcherr;
             public bool Dosearchage;
-            public bool Dohidevalidint = false;
+            public bool Dohidevalidint;
             public bool Searchagedirection;
             public double Searchage;
             public int Searchrange;
@@ -172,7 +175,7 @@ namespace Server.Mobiles
         private string SaveFilename;
         private string CommandString;
 
-        private bool SelectAll = false;
+        private bool SelectAll;
 
         private ArrayList m_SearchList;
 
@@ -355,7 +358,7 @@ namespace Server.Mobiles
                                        || i is CastleAddon))
                     return true;
 
-                if (i is BoatMountItem || i is Misc.TreasuresOfTokunoPersistence || i is StealableArtifactsSpawner)
+                if (i is BoatMountItem || i is TreasuresOfTokunoPersistence || i is StealableArtifactsSpawner)
                     return true;
 
                 if (i is ArisenController)
@@ -384,7 +387,7 @@ namespace Server.Mobiles
             {
                 tokunomap = Map.Parse("Tokuno");
             }
-            catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+            catch (Exception e) { ExceptionLogging.LogException(e); }
 
             // if the type is specified then get the search type
             if (criteria.Dosearchtype && criteria.Searchtype != null)
@@ -1488,10 +1491,10 @@ namespace Server.Mobiles
 
                 if (entity1 == null && entity2 == null)
                     return 0;
-                else if (entity1 == null)
-                    return Dsort ? 1 : -1;
-                else if (entity2 == null)
-                    return Dsort ? -1 : 1;
+                if (entity1 == null)
+	                return Dsort ? 1 : -1;
+                if (entity2 == null)
+	                return Dsort ? -1 : 1;
 
                 if (entity1.Map != From.Map && entity2.Map != From.Map)
                     return 0;
@@ -1586,7 +1589,7 @@ namespace Server.Mobiles
             if (m_SearchList == null) return;
 
             string dirname;
-            if (System.IO.Directory.Exists(XmlSpawner.XmlSpawnDir) && filename != null && !filename.StartsWith("/") && !filename.StartsWith("\\"))
+            if (Directory.Exists(XmlSpawner.XmlSpawnDir) && filename != null && !filename.StartsWith("/") && !filename.StartsWith("\\"))
             {
                 // put it in the defaults directory if it exists
                 dirname = string.Format("{0}/{1}", XmlSpawner.XmlSpawnDir, filename);
@@ -1698,7 +1701,7 @@ namespace Server.Mobiles
             if (tr?.Text != null && tr.Text.Length > 0)
             {
                 try { m_SearchCriteria.Searchage = double.Parse(tr.Text); }
-                catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                catch (Exception e) { ExceptionLogging.LogException(e); }
             }
 
             // read the text entries for the search criteria
@@ -1707,7 +1710,7 @@ namespace Server.Mobiles
             if (tr?.Text != null && tr.Text.Length > 0)
             {
                 try { m_SearchCriteria.Searchrange = int.Parse(tr.Text); }
-                catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                catch (Exception e) { ExceptionLogging.LogException(e); }
             }
 
             tr = info.GetTextEntry(101);        // type info
@@ -2145,7 +2148,7 @@ namespace Server.Mobiles
                                             {
                                                 item.Delete();
                                             }
-                                            catch (Exception ex) { Diagnostics.ExceptionLogging.LogException(ex); }
+                                            catch (Exception ex) { ExceptionLogging.LogException(ex); }
                                         }
                                         else if ((o is Mobile mobile) && !(mobile.Player))
                                         {
@@ -2153,7 +2156,7 @@ namespace Server.Mobiles
                                             {
                                                 mobile.Delete();
                                             }
-                                            catch (Exception ex) { Diagnostics.ExceptionLogging.LogException(ex); }
+                                            catch (Exception ex) { ExceptionLogging.LogException(ex); }
                                         }
                                     }
                                 }

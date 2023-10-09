@@ -1,5 +1,5 @@
-﻿using Server.Mobiles;
-using System;
+﻿using System;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -16,7 +16,7 @@ namespace Server.Items
         public override int NotAccessibleMessage => 1157376;  // The selected pet is not accessible to brand.
         public override int CannotEngraveMessage => 1157375;  // The selected pet cannot be branded by this branding iron.
 
-        public override Type[] Engraves => new Type[] { typeof(BaseCreature) };
+        public override Type[] Engraves => new[] { typeof(BaseCreature) };
 
         [Constructable]
         public PetBrandingIron()

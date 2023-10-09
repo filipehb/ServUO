@@ -14,7 +14,6 @@ namespace Server.Items
 
         [Constructable]
         public FallenLogAddon(bool east)
-            : base()
         {
             if (east)
             {
@@ -58,7 +57,6 @@ namespace Server.Items
 
         [Constructable]
         public FallenLogDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

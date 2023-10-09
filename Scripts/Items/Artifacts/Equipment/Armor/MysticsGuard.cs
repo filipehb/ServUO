@@ -15,7 +15,6 @@ namespace Server.Items
 
         [Constructable]
         public MysticsGuard()
-            : base()
         {
             ArmorAttributes.SoulCharge = 30;
             Attributes.SpellChanneling = 1;

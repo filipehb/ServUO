@@ -1,9 +1,10 @@
-using Server.Commands;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Engines.Points;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Despise
 {
@@ -131,7 +132,7 @@ namespace Server.Engines.Despise
             m_LowerRegion = new DespiseRegion("Despise Lower", m_LowerLevelBounds, true);
             m_EvilRegion = new DespiseRegion("Despise Evil", m_EvilBounds);
             m_GoodRegion = new DespiseRegion("Despise Good", m_GoodBounds);
-            m_StartRegion = new DespiseRegion("Despise Start", new Rectangle2D[] { new Rectangle2D(5568, 623, 22, 20) });
+            m_StartRegion = new DespiseRegion("Despise Start", new[] { new Rectangle2D(5568, 623, 22, 20) });
         }
 
         private void EndTimer()
@@ -610,20 +611,17 @@ namespace Server.Engines.Despise
         #region Location Defs
 
         public static Rectangle2D[] EvilBounds => m_EvilBounds;
-        private static readonly Rectangle2D[] m_EvilBounds = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_EvilBounds = {
             new Rectangle2D(5381, 644, 149, 120)
         };
 
         public static Rectangle2D[] GoodBounds => m_GoodBounds;
-        private static readonly Rectangle2D[] m_GoodBounds = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_GoodBounds = {
             new Rectangle2D(5380, 515, 134, 121)
         };
 
         public static Rectangle2D[] LowerLevelBounds => m_LowerLevelBounds;
-        private static readonly Rectangle2D[] m_LowerLevelBounds = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] m_LowerLevelBounds = {
             new Rectangle2D(5379, 771, 247, 250)
         };
 
@@ -706,7 +704,7 @@ namespace Server.Engines.Despise
                     int points = reader.ReadInt();
 
                     if (m != null && points > 0)
-                        Points.PointsSystem.DespiseCrystals.ConvertFromOldSystem((PlayerMobile)m, points);
+                        PointsSystem.DespiseCrystals.ConvertFromOldSystem((PlayerMobile)m, points);
                 }
             }
 

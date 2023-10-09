@@ -109,7 +109,7 @@ namespace Server.Items
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (dropped is Bandage)
+	        if (dropped is Bandage)
             {
                 bool allow = base.OnDragDrop(from, dropped);
 
@@ -118,16 +118,14 @@ namespace Server.Items
 
                 return allow;
             }
-            else
-            {
-                from.SendLocalizedMessage(1075209); // Only bandages may be dropped into the fountain.
-                return false;
-            }
+
+	        from.SendLocalizedMessage(1075209); // Only bandages may be dropped into the fountain.
+	        return false;
         }
 
         public override bool OnDragDropInto(Mobile from, Item item, Point3D p)
         {
-            if (item is Bandage)
+	        if (item is Bandage)
             {
                 bool allow = base.OnDragDropInto(from, item, p);
 
@@ -136,11 +134,9 @@ namespace Server.Items
 
                 return allow;
             }
-            else
-            {
-                from.SendLocalizedMessage(1075209); // Only bandages may be dropped into the fountain.
-                return false;
-            }
+
+	        from.SendLocalizedMessage(1075209); // Only bandages may be dropped into the fountain.
+	        return false;
         }
 
         public override void AddNameProperties(ObjectPropertyList list)
@@ -281,7 +277,6 @@ namespace Server.Items
 
         [Constructable]
         public FountainOfLifeDeed(int charges)
-            : base()
         {
             LootType = LootType.Blessed;
             m_Charges = charges;

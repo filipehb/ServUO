@@ -1,16 +1,17 @@
-using Server.Commands;
-using Server.ContextMenus;
-using Server.Engines.Auction;
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
-using Server.Regions;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Server.Commands;
+using Server.ContextMenus;
+using Server.Engines.Auction;
+using Server.Engines.Plants;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Regions;
+using Server.Targeting;
 
 namespace Server.Engines.VendorSearching
 {
@@ -30,10 +31,10 @@ namespace Server.Engines.VendorSearching
             bool excludefel = criteria.Details.FirstOrDefault(d => d.Attribute is Misc && (Misc)d.Attribute == Misc.ExcludeFel) != null;
 
             foreach (Auction.Auction pv in Auction.Auction.Auctions.Where(pv => pv.AuctionItem != null &&
-                                                                                pv.AuctionItem.Map != Map.Internal &&
-                                                                               pv.AuctionItem.Map != null &&
-                                                                               pv.OnGoing &&
-                                                                               (!excludefel || pv.AuctionItem.Map != Map.Felucca)))
+                                                                        pv.AuctionItem.Map != Map.Internal &&
+                                                                        pv.AuctionItem.Map != null &&
+                                                                        pv.OnGoing &&
+                                                                        (!excludefel || pv.AuctionItem.Map != Map.Felucca)))
             {
                 list.Add(new SearchItem(pv.Safe, pv.AuctionItem, (int)pv.Buyout, false));
             }
@@ -788,7 +789,7 @@ namespace Server.Engines.VendorSearching
         {
             typeof(BaseQuiver),         typeof(BaseResourceSatchel),
             typeof(FishBowl),           typeof(FirstAidBelt),
-            typeof(Plants.SeedBox),     typeof(BaseSpecialScrollBook),
+            typeof(SeedBox),     typeof(BaseSpecialScrollBook),
             typeof(GardenShedBarrel),   typeof(JewelryBox),
         };
     }

@@ -1,6 +1,6 @@
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -78,14 +78,14 @@ namespace Server.Items
         {
             if (IsCuttable && IsAccessibleTo(from))
             {
-                if (!m_Opened && m_Timer == null)
+	            if (!m_Opened && m_Timer == null)
                 {
                     m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(3), FinishOpening, from);
                     scissors.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1071897); // You carefully cut into the organ.
                     return true;
                 }
-                else
-                    scissors.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1071898); // You have already cut this organ open.
+
+	            scissors.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1071898); // You have already cut this organ open.
             }
 
             return false;
@@ -253,13 +253,11 @@ namespace Server.Items
 
     public class PlagueBeastRubbleOrgan : PlagueBeastOrgan
     {
-        private static readonly int[] m_Hues = new int[]
-        {
+        private static readonly int[] m_Hues = {
             0xD, 0x17, 0x2B, 0x42, 0x54, 0x5D
         };
         private int m_Veins;
         public PlagueBeastRubbleOrgan()
-            : base()
         {
             m_Veins = 3;
         }
@@ -402,10 +400,11 @@ namespace Server.Items
                 AddComponent(new PlagueBeastBlood(), 47, 72);
                 return true;
             }
-            else if (c.IsGland)
+
+            if (c.IsGland)
             {
-                m_Gland = null;
-                return true;
+	            m_Gland = null;
+	            return true;
             }
 
             return c.IsGland;
@@ -480,7 +479,6 @@ namespace Server.Items
     {
         private int m_Brains;
         public PlagueBeastMainOrgan()
-            : base()
         {
             m_Brains = 0;
         }

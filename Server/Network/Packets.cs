@@ -1,4 +1,5 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +8,6 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Diagnostics;
@@ -20,6 +20,7 @@ using Server.Menus.Questions;
 using Server.Mobiles;
 using Server.Prompts;
 using Server.Targeting;
+
 #endregion
 
 namespace Server.Network
@@ -2626,10 +2627,8 @@ namespace Server.Network
 
 				return p;
 			}
-			else
-			{
-				return new SeasonChange(season, playSound);
-			}
+
+			return new SeasonChange(season, playSound);
 		}
 
 		public SeasonChange(int season)

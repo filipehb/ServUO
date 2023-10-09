@@ -144,28 +144,27 @@ namespace Server.Items
 
                     if (!valid && FurnitureAttribute.Check(item))
                     {
-                        if (!from.InRange(m_Item.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
+	                    if (!from.InRange(m_Item.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
                         {
                             from.SendLocalizedMessage(500446); // That is too far away.
                             return;
                         }
-                        else
-                        {
-                            BaseHouse house = BaseHouse.FindHouseAt(item);
 
-                            if (house == null || (!house.IsLockedDown(item) && !house.IsSecure(item)))
-                            {
-                                from.SendLocalizedMessage(501022); // Furniture must be locked down to paint it.
-                                return;
-                            }
-                            else if (!house.IsCoOwner(from))
-                            {
-                                from.SendLocalizedMessage(501023); // You must be the owner to use this item.
-                                return;
-                            }
-                            else
-                                valid = true;
-                        }
+	                    BaseHouse house = BaseHouse.FindHouseAt(item);
+
+	                    if (house == null || (!house.IsLockedDown(item) && !house.IsSecure(item)))
+	                    {
+		                    from.SendLocalizedMessage(501022); // Furniture must be locked down to paint it.
+		                    return;
+	                    }
+
+	                    if (!house.IsCoOwner(from))
+	                    {
+		                    from.SendLocalizedMessage(501023); // You must be the owner to use this item.
+		                    return;
+	                    }
+
+	                    valid = true;
                     }
                     else if (!item.IsChildOf(from.Backpack))
                     {

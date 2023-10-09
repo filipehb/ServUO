@@ -1,6 +1,8 @@
-using Server.Accounting;
 using System;
 using System.Collections;
+using Server.Accounting;
+using Server.Diagnostics;
+using Server.Network;
 
 namespace Server.Gumps
 {
@@ -71,7 +73,7 @@ namespace Server.Gumps
             AddTextField(x + 35, y + 20, 100, 20, idx);
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             Mobile from = sender.Mobile;
 
@@ -121,7 +123,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -143,7 +145,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -165,7 +167,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -187,7 +189,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -209,7 +211,7 @@ namespace Server.Gumps
                             }
                             catch (Exception e)
                             {
-                                Diagnostics.ExceptionLogging.LogException(e);
+                                ExceptionLogging.LogException(e);
                             }
                         }
 

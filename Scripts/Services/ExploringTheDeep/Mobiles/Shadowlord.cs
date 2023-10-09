@@ -1,9 +1,8 @@
-using Server.Items;
-using Server.Spells;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -12,7 +11,7 @@ namespace Server.Mobiles
         Astaroth,
         Faulinei,
         Nosfentor
-    };
+    }
 
     [CorpseName("a shadowlord corpse")]
     public class Shadowlord : BasePeerless
@@ -23,8 +22,7 @@ namespace Server.Mobiles
         private ShadowlordType m_Type;
         public virtual Type[] ArtifactDrops => _ArtifactTypes;
 
-        private readonly Type[] _ArtifactTypes = new Type[]
-        {
+        private readonly Type[] _ArtifactTypes = {
             typeof(Abhorrence),         typeof(CaptainJohnesBlade),             typeof(Craven),
             typeof(Equivocation),       typeof(GargishCaptainJohnesBlade),      typeof(GargishEquivocation),
             typeof(GargishPincer),      typeof(Pincer)

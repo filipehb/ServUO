@@ -1,8 +1,11 @@
-using Server.Accounting;
-using Server.Network;
 using System;
 using System.Collections;
+using System.IO;
 using System.Text;
+using Server.Accounting;
+using Server.Items;
+using Server.Misc;
+using Server.Network;
 
 namespace Server.RemoteAdmin
 {
@@ -124,7 +127,7 @@ namespace Server.RemoteAdmin
             }
             else if (cmd == 0xFF)
             {
-                string statStr = string.Format(", Name={0}, Age={1}, Clients={2}, Items={3}, Chars={4}, Mem={5}K, Ver={6}", Misc.ServerList.ServerName, (int)(DateTime.UtcNow - Items.Clock.ServerStart).TotalHours, NetState.Instances.Count, World.Items.Count, World.Mobiles.Count, (int)(GC.GetTotalMemory(false) / 1024), ProtocolVersion);
+                string statStr = string.Format(", Name={0}, Age={1}, Clients={2}, Items={3}, Chars={4}, Mem={5}K, Ver={6}", ServerList.ServerName, (int)(DateTime.UtcNow - Clock.ServerStart).TotalHours, NetState.Instances.Count, World.Items.Count, World.Mobiles.Count, (int)(GC.GetTotalMemory(false) / 1024), ProtocolVersion);
                 state.Send(new UOGInfo(statStr));
                 state.Dispose();
             }
@@ -230,19 +233,15 @@ namespace Server.RemoteAdmin
                     Console.WriteLine("WARNING: Unable to compress admin packet, zlib error: {0}", error);
                     return p;
                 }
-                else
-                {
-                    return new AdminCompressedPacket(dest, destSize, length);
-                }
+
+                return new AdminCompressedPacket(dest, destSize, length);
             }
-            else
-            {
-                return p;
-            }
+
+            return p;
         }
     }
 
-    public class EventTextWriter : System.IO.TextWriter
+    public class EventTextWriter : TextWriter
     {
         public delegate void OnConsoleChar(char ch);
         public delegate void OnConsoleLine(string line);

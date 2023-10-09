@@ -51,7 +51,6 @@ namespace Server.Items
         private bool m_East;
         [Constructable]
         public WallBanner(int bannerID)
-            : base()
         {
             m_East = ((bannerID % 2) == 1);
 
@@ -266,7 +265,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public WallBannerDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

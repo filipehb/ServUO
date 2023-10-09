@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public SwordOfShatteredHopes()
-            : base()
         {
             Hue = 91;
             WeaponAttributes.HitDispel = 25;

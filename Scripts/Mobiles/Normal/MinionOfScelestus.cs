@@ -1,5 +1,6 @@
-using Server.Items;
 using System;
+using Server.Items;
+using Server.Spells.Ninjitsu;
 
 namespace Server.Mobiles
 {
@@ -69,7 +70,7 @@ namespace Server.Mobiles
             {
                 if (defender is PlayerMobile)
                 {
-                    if (Spells.Ninjitsu.AnimalForm.UnderTransformation(defender))
+                    if (AnimalForm.UnderTransformation(defender))
                     {
                         defender.SendLocalizedMessage(1114066, Name); // ~1_NAME~ knocked you out of animal form!
                     }
@@ -122,8 +123,7 @@ namespace Server.Mobiles
             }
         }
 
-        private readonly Type[] m_Types = new Type[]
-        {
+        private readonly Type[] m_Types = {
             typeof(ChallengeRite),          typeof(AnthenaeumDecree),       typeof(LetterFromTheKing),
             typeof(OnTheVoid),              typeof(ShilaxrinarsMemorial),   typeof(ToTheHighScholar),
             typeof(ToTheHighBroodmother),   typeof(ReplyToTheHighScholar),  typeof(AccessToTheIsle),

@@ -1,9 +1,11 @@
-using Server.Engines.CityLoyalty;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.CityLoyalty;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Engines.Blackthorn
 {
@@ -111,24 +113,24 @@ namespace Server.Engines.Blackthorn
         {
             if (from.AccessLevel > AccessLevel.GameMaster)
             {
-                from.SendGump(new Gumps.PropertiesGump(from, this));
+                from.SendGump(new PropertiesGump(from, this));
             }
         }
 
         private readonly Type[][] _SpawnTable =
         {
-            new Type[] { typeof(Dragon), typeof(Drake), typeof(GiantSerpent), typeof(Reptalon), typeof(Hydra) },
-            new Type[] { typeof(Lich), typeof(Wraith), typeof(Mummy), typeof(Zombie), typeof(SkeletalKnight), typeof(BoneKnight) },
-            new Type[] { typeof(MudElemental), typeof(MoltenEarthElemental), typeof(DiseasedBloodElemental), typeof(GreaterAirElemental),
+            new[] { typeof(Dragon), typeof(Drake), typeof(GiantSerpent), typeof(Reptalon), typeof(Hydra) },
+            new[] { typeof(Lich), typeof(Wraith), typeof(Mummy), typeof(Zombie), typeof(SkeletalKnight), typeof(BoneKnight) },
+            new[] { typeof(MudElemental), typeof(MoltenEarthElemental), typeof(DiseasedBloodElemental), typeof(GreaterAirElemental),
                          typeof(GreaterBloodElemental), typeof(GreaterEarthElemental), typeof(GreaterWaterElemental), typeof(ShameGreaterPoisonElemental),
                          typeof(StoneElemental) },
-            new Type[] { typeof(Daemon), typeof(Succubus), typeof(Imp), typeof(ChaosDaemon), typeof(BoneDemon) },
-            new Type[] { typeof(Orc), typeof(OrcBomber), typeof(OrcishMage), typeof(OrcishLord) },
-            new Type[] { typeof(SwampTentacle), typeof(PlagueBeast), typeof(Bogling), typeof(FeralTreefellow) },
-            new Type[] { typeof(IceElemental), typeof(SnowElemental), typeof(IceFiend), typeof(FrostTroll), typeof(IceSerpent) },
-            new Type[] { typeof(DreadSpider), typeof(GiantBlackWidow), typeof(Scorpion), typeof(TerathanWarrior), typeof(WolfSpider) },
-            new Type[] { typeof(Satyr), typeof(Centaur), typeof(CuSidhe), typeof(Wisp), typeof(MLDryad) },
-            new Type[] { typeof(DireWolf), typeof(GiantRat), typeof(Troglodyte), typeof(RagingGrizzlyBear), typeof(GreaterMongbat) },
+            new[] { typeof(Daemon), typeof(Succubus), typeof(Imp), typeof(ChaosDaemon), typeof(BoneDemon) },
+            new[] { typeof(Orc), typeof(OrcBomber), typeof(OrcishMage), typeof(OrcishLord) },
+            new[] { typeof(SwampTentacle), typeof(PlagueBeast), typeof(Bogling), typeof(FeralTreefellow) },
+            new[] { typeof(IceElemental), typeof(SnowElemental), typeof(IceFiend), typeof(FrostTroll), typeof(IceSerpent) },
+            new[] { typeof(DreadSpider), typeof(GiantBlackWidow), typeof(Scorpion), typeof(TerathanWarrior), typeof(WolfSpider) },
+            new[] { typeof(Satyr), typeof(Centaur), typeof(CuSidhe), typeof(Wisp), typeof(MLDryad) },
+            new[] { typeof(DireWolf), typeof(GiantRat), typeof(Troglodyte), typeof(RagingGrizzlyBear), typeof(GreaterMongbat) },
         };
 
         public void BeginInvasion()
@@ -352,7 +354,7 @@ namespace Server.Engines.Blackthorn
             foreach (Mobile m in eable)
             {
                 if (m != null && m.NetState != null)
-                    m.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1154550, m.NetState); // *A sound roars in the distance...Minax's Beacon is vulnerable to attack!!*
+                    m.PrivateOverheadMessage(MessageType.Regular, 1154, 1154550, m.NetState); // *A sound roars in the distance...Minax's Beacon is vulnerable to attack!!*
             }
 
             eable.Free();
@@ -559,7 +561,7 @@ namespace Server.Engines.Blackthorn
             Defs = new Dictionary<City, InvasionDefinition>();
 
             Defs[City.Moonglow] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6314, 2571, 10, 5),
                     new Rectangle2D(6288, 2535, 8, 15),
@@ -569,7 +571,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6317, 2555, 0));
 
             Defs[City.Britain] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6296, 2464, 7, 7),
                     new Rectangle2D(6332, 2473, 8, 10),
@@ -579,7 +581,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6316, 2477, 11));
 
             Defs[City.Jhelom] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6450, 2465, 10, 8),
                     new Rectangle2D(6418, 2497, 15, 5),
@@ -589,7 +591,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6448, 2492, 5));
 
             Defs[City.Yew] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6314, 2397, 12, 5),
                     new Rectangle2D(6317, 2440, 10, 10),
@@ -599,7 +601,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6305, 2423, 0));
 
             Defs[City.Minoc] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6309, 2339, 10, 5),
                     new Rectangle2D(6290, 2367, 5, 10),
@@ -609,7 +611,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6307, 2362, 15));
 
             Defs[City.Trinsic] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6356, 2371, 10, 10),
                     new Rectangle2D(6354, 2344, 5, 10),
@@ -619,7 +621,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6402, 2368, 25));
 
             Defs[City.SkaraBrae] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6434, 2330, 10, 5),
                     new Rectangle2D(6456, 2342, 5, 10),
@@ -630,7 +632,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6442, 2351, 0));
 
             Defs[City.NewMagincia] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6426, 2397, 10, 5),
                     new Rectangle2D(6444, 2446, 10, 5),
@@ -640,7 +642,7 @@ namespace Server.Engines.Blackthorn
                 new Point3D(6440, 2419, 26));
 
             Defs[City.Vesper] = new InvasionDefinition(
-                new Rectangle2D[]
+                new[]
                 {
                     new Rectangle2D(6428, 2534, 10, 5),
                     new Rectangle2D(6458, 2534, 5, 10),

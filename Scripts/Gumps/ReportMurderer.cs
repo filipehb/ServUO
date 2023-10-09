@@ -1,9 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
+using Server.SkillHandlers;
 using Server.Spells;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Gumps
 {
@@ -135,7 +136,7 @@ namespace Server.Gumps
 
                                     CheckMurderer(pk);
                                 }
-                                else if (SkillHandlers.Stealing.SuspendOnMurder && pk.Kills == 1 && pk.NpcGuild == NpcGuild.ThievesGuild)
+                                else if (Stealing.SuspendOnMurder && pk.Kills == 1 && pk.NpcGuild == NpcGuild.ThievesGuild)
                                 {
                                     pk.SendLocalizedMessage(501562); // You have been suspended by the Thieves Guild.
                                 }

@@ -1,5 +1,6 @@
-using Server.Network;
 using System;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -134,7 +135,7 @@ namespace Server.Items
             foreach (Mobile mob in eable)
             {
                 if (mob.Alive && !mob.IsDeadBondedPet)
-                    Spells.SpellHelper.Damage(TimeSpan.FromTicks(1), mob, mob, Utility.RandomMinMax(1, 6) * 6);
+                    SpellHelper.Damage(TimeSpan.FromTicks(1), mob, mob, Utility.RandomMinMax(1, 6) * 6);
             }
             eable.Free();
 

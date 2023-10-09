@@ -1,9 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
+using Server.Spells.Mysticism;
 using Server.Spells.Necromancy;
-using System;
-using System.Collections.Generic;
+using Server.Spells.SkillMasteries;
 
 namespace Server.Items
 {
@@ -123,7 +125,7 @@ namespace Server.Items
             TransformContext context = TransformationSpellHelper.GetContext(defender);
 
             if ((context != null && (context.Type == typeof(LichFormSpell) || context.Type == typeof(WraithFormSpell))) ||
-                (defender is BaseCreature && ((BaseCreature)defender).BleedImmune) || Spells.Mysticism.StoneFormSpell.CheckImmunity(defender))
+                (defender is BaseCreature && ((BaseCreature)defender).BleedImmune) || StoneFormSpell.CheckImmunity(defender))
             {
                 attacker.SendLocalizedMessage(1062052); // Your target is not affected by the bleed attack!
                 return;
@@ -148,7 +150,7 @@ namespace Server.Items
                 Priority = TimerPriority.TwoFiftyMS;
                 m_BloodDrinker = blooddrinker;
 
-                m_MaxCount = Spells.SkillMasteries.ResilienceSpell.UnderEffects(m) ? 3 : 5;
+                m_MaxCount = ResilienceSpell.UnderEffects(m) ? 3 : 5;
             }
 
             protected override void OnTick()
@@ -161,7 +163,7 @@ namespace Server.Items
                 {
                     int damage = 0;
 
-                    if (!Spells.SkillMasteries.WhiteTigerFormSpell.HasBleedMod(m_From, out damage))
+                    if (!WhiteTigerFormSpell.HasBleedMod(m_From, out damage))
                         damage = Math.Max(1, Utility.RandomMinMax(5 - m_Count, (5 - m_Count) * 2));
 
                     DoBleed(m_Mobile, m_From, damage, m_BloodDrinker);

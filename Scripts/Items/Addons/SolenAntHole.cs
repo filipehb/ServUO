@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -53,7 +53,6 @@ namespace Server.Items
         private List<Mobile> m_Spawned;
         [Constructable]
         public SolenAntHole()
-            : base()
         {
             m_Spawned = new List<Mobile>();
 

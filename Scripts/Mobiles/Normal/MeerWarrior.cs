@@ -1,5 +1,5 @@
-using Server.Spells;
 using System;
+using Server.Spells;
 
 namespace Server.Mobiles
 {

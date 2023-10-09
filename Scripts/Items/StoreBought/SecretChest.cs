@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -291,7 +291,7 @@ namespace Server.Items
             {
                 if (sk == null)
                 {
-                    TempSecretKey = new int[] { 0, 0, 0, 0, 0 };
+                    TempSecretKey = new[] { 0, 0, 0, 0, 0 };
                 }
                 else
                 {

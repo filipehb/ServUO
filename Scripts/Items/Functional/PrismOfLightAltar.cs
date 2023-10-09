@@ -1,6 +1,6 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -11,7 +11,7 @@ namespace Server.Items
         public override MasterKey MasterKey => new PrismOfLightKey();
         public List<Item> Pedestals = new List<Item>();
 
-        public override Type[] Keys => new Type[]
+        public override Type[] Keys => new[]
                 {
                     typeof(JaggedCrystals), typeof(BrokenCrystals), typeof(PiecesOfCrystal),
                     typeof(CrushedCrystals), typeof(ScatteredCrystals), typeof(ShatteredCrystals)
@@ -40,8 +40,7 @@ namespace Server.Items
 
         public override Rectangle2D[] BossBounds => m_Bounds;
 
-        private readonly Rectangle2D[] m_Bounds = new Rectangle2D[]
-        {
+        private readonly Rectangle2D[] m_Bounds = {
             new Rectangle2D(6500, 111, 45, 35),
         };
 

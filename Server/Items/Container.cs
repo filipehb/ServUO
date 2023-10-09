@@ -1,11 +1,12 @@
 #region References
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using Server.Network;
+
 #endregion
 
 namespace Server.Items
@@ -155,10 +156,8 @@ namespace Server.Items
 				{
 					return 0;
 				}
-				else
-				{
-					return DefaultMaxWeight;
-				}
+
+				return DefaultMaxWeight;
 			}
 		}
 
@@ -252,19 +251,17 @@ namespace Server.Items
 
 					return false;
 				}
-				else
+
+				var maxWeight = MaxWeight;
+
+				if (maxWeight != 0 && (TotalWeight + plusWeight + item.TotalWeight + item.PileWeight) > maxWeight)
 				{
-					var maxWeight = MaxWeight;
-
-					if (maxWeight != 0 && (TotalWeight + plusWeight + item.TotalWeight + item.PileWeight) > maxWeight)
+					if (message)
 					{
-						if (message)
-						{
-							SendFullWeightMessage(m, item);
-						}
-
-						return false;
+						SendFullWeightMessage(m, item);
 					}
+
+					return false;
 				}
 			}
 
@@ -276,7 +273,8 @@ namespace Server.Items
 				{
 					return ((Container)parent).CheckHold(m, item, message, checkItems, plusItems, plusWeight);
 				}
-				else if (parent is Item)
+
+				if (parent is Item)
 				{
 					parent = ((Item)parent).Parent;
 				}
@@ -489,7 +487,8 @@ namespace Server.Items
 			{
 				throw new ArgumentException();
 			}
-			else if (grouper == null)
+
+			if (grouper == null)
 			{
 				throw new ArgumentNullException();
 			}
@@ -624,7 +623,8 @@ namespace Server.Items
 			{
 				throw new ArgumentException();
 			}
-			else if (grouper == null)
+
+			if (grouper == null)
 			{
 				throw new ArgumentNullException();
 			}
@@ -1344,7 +1344,8 @@ namespace Server.Items
 					{
 						return item;
 					}
-					else if (recurse && item is Container)
+
+					if (recurse && item is Container)
 					{
 						var check = RecurseFindItemByType(item, type, recurse);
 
@@ -1383,7 +1384,8 @@ namespace Server.Items
 					{
 						return item;
 					}
-					else if (recurse && item is Container)
+
+					if (recurse && item is Container)
 					{
 						var check = RecurseFindItemByType(item, types, recurse);
 
@@ -1820,10 +1822,8 @@ namespace Server.Items
 
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+
+			return false;
 		}
 
 		public virtual bool TryDropItem(Mobile from, Item dropped, bool sendFullMessage)
@@ -2184,10 +2184,8 @@ namespace Server.Items
 			{
 				return data;
 			}
-			else
-			{
-				return m_Default;
-			}
+
+			return m_Default;
 		}
 
 		private readonly int m_GumpID;

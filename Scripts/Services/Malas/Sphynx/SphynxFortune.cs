@@ -1,8 +1,8 @@
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Network;
 
 namespace Server.Engines.SphynxFortune
 {

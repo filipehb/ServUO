@@ -1,8 +1,10 @@
 #region References
-using Server.Mobiles;
-using Server.Targeting;
+
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Services.Virtues

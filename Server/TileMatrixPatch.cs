@@ -1,6 +1,8 @@
 #region References
+
 using System.IO;
 using System.Runtime.CompilerServices;
+
 #endregion
 
 namespace Server

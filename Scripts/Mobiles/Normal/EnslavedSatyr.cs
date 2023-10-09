@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public EnslavedSatyr()
-            : base()
         {
             Name = "an enslaved satyr";
 

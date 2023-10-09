@@ -1,5 +1,5 @@
-using Server.Services.Virtues;
 using System;
+using Server.Services.Virtues;
 
 namespace Server.Items
 {

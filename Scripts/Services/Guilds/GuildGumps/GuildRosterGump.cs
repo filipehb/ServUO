@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+using Server.Engines.VvV;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System.Collections.Generic;
+using Server.Targeting;
 
 namespace Server.Guilds
 {
@@ -47,8 +49,7 @@ namespace Server.Guilds
                     return 1;
                 if (bState == null)
                     return -1;
-                else
-                    return 0;
+                return 0;
             }
         }
 
@@ -127,7 +128,7 @@ namespace Server.Guilds
 
             string name = string.Format("{0} {1}{2}",
                 pm.Name,
-                Engines.VvV.ViceVsVirtueSystem.IsVvV(pm) ? "VvV" : "",
+                ViceVsVirtueSystem.IsVvV(pm) ? "VvV" : "",
                 (player.GuildFealty == pm && player.GuildFealty != guild.Leader) ? " *" : "");
 
             if (pm == player)
@@ -175,7 +176,7 @@ namespace Server.Guilds
                 if (pm.GuildRank.GetFlag(RankFlags.CanInvitePlayer))
                 {
                     pm.SendLocalizedMessage(1063048); // Whom do you wish to invite into your guild?
-                    pm.BeginTarget(-1, false, Targeting.TargetFlags.None, new TargetStateCallback(InvitePlayer_Callback), guild);
+                    pm.BeginTarget(-1, false, TargetFlags.None, new TargetStateCallback(InvitePlayer_Callback), guild);
                 }
                 else
                     pm.SendLocalizedMessage(503301); // You don't have permission to do that.

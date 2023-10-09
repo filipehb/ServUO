@@ -3,14 +3,15 @@ snicker7
 Released: 03/26/06
 */
 
+using Server.Multis;
+
 namespace Server.Mobiles
 {
     public class GMEthereal : EtherealMount
     {
         public override int FollowerSlots => 0;
 
-        private static readonly EtherealInfo[] EthyItemTypes = new EtherealInfo[]
-        {
+        private static readonly EtherealInfo[] EthyItemTypes = {
             new EtherealInfo(0x20DD, 0x3EAA), //Horse
             new EtherealInfo(0x20F6, 0x3EAB), //Llama
             new EtherealInfo(0x2135, 0x3EAC), //Ostard
@@ -102,7 +103,7 @@ namespace Server.Mobiles
                     from.SendLocalizedMessage(1112281); // gargs can't mount
                 else if (from.HasTrade)
                     from.SendLocalizedMessage(1042317, "", 0x41); // You may not ride at this time
-                else if (Multis.DesignContext.Check(from))
+                else if (DesignContext.Check(from))
                 {
                     if (!Deleted && Rider == null && IsChildOf(from.Backpack))
                     {

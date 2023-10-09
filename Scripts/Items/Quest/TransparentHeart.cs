@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public TransparentHeart()
-            : base()
         {
             LootType = LootType.Blessed;
             Weight = 1;

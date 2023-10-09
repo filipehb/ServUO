@@ -1,8 +1,9 @@
-using Server.Mobiles;
-using Server.Regions;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Network;
+using Server.Regions;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -56,7 +57,7 @@ namespace Server.Items
             set
             {
                 m_Active = value;
-                PublicOverheadMessage(Network.MessageType.Regular, 25, false, string.Format("Corgul Altar for {0} has been {1}", Map, m_Active ? "activated" : "deactivated"));
+                PublicOverheadMessage(MessageType.Regular, 25, false, string.Format("Corgul Altar for {0} has been {1}", Map, m_Active ? "activated" : "deactivated"));
             }
         }
 
@@ -250,14 +251,14 @@ namespace Server.Items
 
             if (m_KeyStage >= 0 && m_KeyStage < m_Keys.Length && type == m_Keys[m_KeyStage])
                 return true;
-            else if (m_KeyStage == 1 && item is PresetMap && item.LabelNumber == 1041204)
-                return true;
-            else if (m_KeyStage == 1 && item is TreasureMap)
-                from.SendLocalizedMessage(1116360); // The island's location cannot be marked on a treasure map.
+            if (m_KeyStage == 1 && item is PresetMap && item.LabelNumber == 1041204)
+	            return true;
+            if (m_KeyStage == 1 && item is TreasureMap)
+	            from.SendLocalizedMessage(1116360); // The island's location cannot be marked on a treasure map.
             else if (m_KeyStage == 1 && item is MapItem)
-                from.SendLocalizedMessage(1116358); // The island's location cannot be marked on this map.
+	            from.SendLocalizedMessage(1116358); // The island's location cannot be marked on this map.
             else
-                from.SendLocalizedMessage(1072682); // This is not the proper key.
+	            from.SendLocalizedMessage(1072682); // This is not the proper key.
             return false;
         }
 

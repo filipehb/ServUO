@@ -1,6 +1,6 @@
-using Server.Engines.Craft;
 using System;
 using System.Collections.Generic;
+using Server.Engines.Craft;
 
 namespace Server.Engines.BulkOrders
 {
@@ -9,8 +9,7 @@ namespace Server.Engines.BulkOrders
     {
         public override BODType BODType => BODType.Smith;
 
-        public static double[] m_BlacksmithMaterialChances = new double[]
-        {
+        public static double[] m_BlacksmithMaterialChances = {
             0.501953125, // None
             0.250000000, // Dull Copper
             0.125000000, // Shadow Iron

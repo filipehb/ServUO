@@ -1,7 +1,8 @@
+using System;
+using Server.Engines.HuntsmasterChallenge;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -52,8 +53,7 @@ namespace Server.Items
         }
 
         public static TrophyInfo[] TrophyInfos => m_Table;
-        private static readonly TrophyInfo[] m_Table = new TrophyInfo[]
-        {
+        private static readonly TrophyInfo[] m_Table = {
             new TrophyInfo( typeof( BrownBear ),      0x1E60,       1041093, 1041107 ),
             new TrophyInfo( typeof( GreatHart ),      0x1E61,       1041095, 1041109 ),
             new TrophyInfo( typeof( BigFish ),        0x1E62,       1041096, 1041110 ),
@@ -168,9 +168,9 @@ namespace Server.Items
                     {
                         int index = lic.KillEntry.KillIndex;
 
-                        if (index >= 0 && index < Engines.HuntsmasterChallenge.HuntingTrophyInfo.Infos.Count)
+                        if (index >= 0 && index < HuntingTrophyInfo.Infos.Count)
                         {
-                            Engines.HuntsmasterChallenge.HuntingTrophyInfo info = Engines.HuntsmasterChallenge.HuntingTrophyInfo.Infos[index];
+                            HuntingTrophyInfo info = HuntingTrophyInfo.Infos[index];
 
                             if (info != null)
                             {
@@ -189,7 +189,6 @@ namespace Server.Items
                     else
                     {
                         from.SendLocalizedMessage(1042598); // You do not have enough boards.
-                        return;
                     }
                 }
                 #endregion
@@ -273,11 +272,9 @@ namespace Server.Items
                                     m_Kit.Delete();
                                     return;
                                 }
-                                else
-                                {
-                                    from.SendLocalizedMessage(1042598); // You do not have enough boards.
-                                    return;
-                                }
+
+                                from.SendLocalizedMessage(1042598); // You do not have enough boards.
+                                return;
                             }
                         }
                     }
@@ -373,8 +370,7 @@ namespace Server.Items
 
             if (ItemID == m_NorthID)
                 return BaseAddon.IsWall(p.X, p.Y - 1, p.Z, map); // North wall
-            else
-                return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // West wall
+            return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // West wall
         }
 
         public override void Serialize(GenericWriter writer)

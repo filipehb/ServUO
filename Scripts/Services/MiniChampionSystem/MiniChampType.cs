@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.MiniChamps
 {
@@ -69,8 +69,7 @@ namespace Server.Engines.MiniChamps
 
         public static MiniChampInfo[] Table => m_Table;
 
-        private static readonly MiniChampInfo[] m_Table = new MiniChampInfo[]
-        {
+        private static readonly MiniChampInfo[] m_Table = {
             new MiniChampInfo // Crimson Veins
             (
                 typeof(EssencePrecision),

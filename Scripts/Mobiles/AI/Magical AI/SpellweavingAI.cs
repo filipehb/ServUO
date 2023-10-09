@@ -1,7 +1,10 @@
 #region References
+
 using Server.Items;
 using Server.Spells;
 using Server.Spells.Spellweaving;
+using Server.Targeting;
+
 #endregion
 
 namespace Server.Mobiles
@@ -103,7 +106,7 @@ namespace Server.Mobiles
 
         protected override bool ProcessTarget()
         {
-            Targeting.Target t = m_Mobile.Target;
+            Target t = m_Mobile.Target;
 
             if (t is WildfireSpell.InternalTarget)
             {

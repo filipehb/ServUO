@@ -1019,7 +1019,7 @@ namespace Server
 
 			if (impassable && avgZ > z && (z + height) > lowZ)
 				return false;
-			else if (!impassable && z == avgZ && !lt.Ignored)
+			if (!impassable && z == avgZ && !lt.Ignored)
 				hasSurface = true;
 
 			var staticTiles = Tiles.GetStaticTiles(x, y, true);
@@ -1045,7 +1045,7 @@ namespace Server
 
 				if ((surface || impassable) && (staticTiles[i].Z + id.CalcHeight) > z && (z + height) > staticTiles[i].Z)
 					return false;
-				else if (surface && !impassable && z == (staticTiles[i].Z + id.CalcHeight))
+				if (surface && !impassable && z == (staticTiles[i].Z + id.CalcHeight))
 					hasSurface = true;
 
 
@@ -1080,7 +1080,7 @@ namespace Server
 
 					if ((surface || impassable || (checkBlocksFit && item.BlocksFit)) && (item.Z + id.CalcHeight) > z && (z + height) > item.Z)
 						return false;
-					else if (surface && !impassable && !item.Movable && z == (item.Z + id.CalcHeight))
+					if (surface && !impassable && !item.Movable && z == (item.Z + id.CalcHeight))
 						hasSurface = true;
 				}
 			}
@@ -1679,10 +1679,8 @@ namespace Server
 
 				return sec;
 			}
-			else
-			{
-				return m_InvalidSector;
-			}
+
+			return m_InvalidSector;
 		}
 		#endregion
 

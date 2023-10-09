@@ -1,14 +1,13 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests.Collector
 {
     public class Obsidian : Item
     {
-        private static readonly string[] m_Names = new string[]
-        {
+        private static readonly string[] m_Names = {
             null,
             "an aggressive cavalier",
             "a beguiling rogue",
@@ -135,8 +134,7 @@ namespace Server.Engines.Quests.Collector
             int index = Utility.Random(m_Names.Length);
             if (m_Names[index] == null)
                 return from.Name;
-            else
-                return m_Names[index];
+            return m_Names[index];
         }
 
         public override void AddNameProperty(ObjectPropertyList list)

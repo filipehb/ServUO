@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -158,7 +158,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public AnkhOfSacrificeAddon(bool east)
-            : base()
         {
             if (east)
             {
@@ -248,7 +247,6 @@ namespace Server.Items
 
         [Constructable]
         public AnkhOfSacrificeDeed(bool isRewardItem)
-            : base()
         {
             LootType = LootType.Blessed;
 

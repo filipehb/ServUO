@@ -1,7 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -195,12 +195,11 @@ namespace Server.Items
             }
         }
 
-        private readonly int[][] Labels = new int[][]
-        {
+        private readonly int[][] Labels = {
                         //Scour   Thread     Varnish
                         //Polish  Wash       Gloss
-			new int[] { 1153951, 1153948, 1153952 },
-            new int[] { 1153950, 1153949, 1153953 }
+			new[] { 1153951, 1153948, 1153952 },
+            new[] { 1153950, 1153949, 1153953 }
         };
 
         private int GetModLabel()
@@ -216,11 +215,10 @@ namespace Server.Items
             }
         }
 
-        private readonly int[][] ItemIDs = new int[][]
-        {
+        private readonly int[][] ItemIDs = {
                      // Smith  Tail  Carp
-			new int[] { 19673, 5163, 11617 }, //Reinforcing
-			new int[] { 19672, 5162, 19674 }  //Deflecting
+			new[] { 19673, 5163, 11617 }, //Reinforcing
+			new[] { 19672, 5162, 19674 }  //Deflecting
 		};
 
         private void GetItemID()
@@ -454,15 +452,13 @@ namespace Server.Items
             return string.Format("#{0}\t#{1}\t#{2}", LabelPrefix[(int)m_RefinementType][(int)m_CraftType], LabelSuffix[(int)m_CraftType], GetModLabel());
         }
 
-        public int[][] LabelPrefix = new int[][]
-        {             //Scoured  Cured    Varnished
+        public int[][] LabelPrefix = {             //Scoured  Cured    Varnished
                       //Polished Washed   Glazed
-		    new int[] { 1153971, 1153968, 1153972 }, // Reinforcing
-			new int[] { 1153970, 1153969, 1153973 }  // Deflecting
+		    new[] { 1153971, 1153968, 1153972 }, // Reinforcing
+			new[] { 1153970, 1153969, 1153973 }  // Deflecting
 		};
 
-        public int[] LabelSuffix = new int[]
-        {
+        public int[] LabelSuffix = {
           //Plating  Thread   Resin
 			1153975, 1153974, 1153976       //Reinforcing and Deflecting
 		};
@@ -480,10 +476,9 @@ namespace Server.Items
             }
         }
 
-        private readonly int[][] ItemIDs = new int[][]
-        {            // Smith  Tail   Carp  
-			new int[] { 19676, 19675, 19677 },  //Reinforcing
-			new int[] { 19676, 19675, 19677 }   //Deflecing
+        private readonly int[][] ItemIDs = {            // Smith  Tail   Carp  
+			new[] { 19676, 19675, 19677 },  //Reinforcing
+			new[] { 19676, 19675, 19677 }   //Deflecing
 		};
 
         public static bool CheckForVendor(Mobile from, RefinementItem item)

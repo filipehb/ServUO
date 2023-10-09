@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Craft;
 
@@ -40,7 +41,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        public override void GetContextMenuEntries(Mobile from, System.Collections.Generic.List<ContextMenuEntry> list)
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
 
@@ -111,7 +112,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        public override void GetContextMenuEntries(Mobile from, System.Collections.Generic.List<ContextMenuEntry> list)
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
 

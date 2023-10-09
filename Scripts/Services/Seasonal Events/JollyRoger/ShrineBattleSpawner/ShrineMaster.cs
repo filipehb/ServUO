@@ -1,12 +1,12 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells;
-using Server.Spells.Necromancy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 using Server.Misc;
+using Server.Mobiles;
 using Server.Network;
+using Server.Spells;
+using Server.Spells.Necromancy;
 
 namespace Server.Engines.JollyRoger
 {
@@ -97,7 +97,7 @@ namespace Server.Engines.JollyRoger
 
             SetBody();
 
-            Title = "the " + specialty.ToString();
+            Title = "the " + specialty;
 
             SetStr(250);
             SetDex(SpellCaster ? 150 : 200);

@@ -7,7 +7,7 @@ namespace Server.Items
         public override SetItem SetID => SetItem.Luck2;
         public override int Pieces => 2;
         [Constructable]
-        public LuneRouge() : base()
+        public LuneRouge()
         {
             Weight = 1.0;
             Hue = 1166;

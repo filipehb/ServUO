@@ -1,6 +1,7 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -11,7 +12,7 @@ namespace Server.Items
         public override int KeyCount => 16;
         public override MasterKey MasterKey => new ParoxysmusKey();
 
-        public override Type[] Keys => new Type[]
+        public override Type[] Keys => new[]
                 {
                     typeof( CoagulatedLegs ), typeof( PartiallyDigestedTorso ),
                     typeof( GelatanousSkull ), typeof( SpleenOfThePutrefier )
@@ -31,8 +32,7 @@ namespace Server.Items
 
         public override Rectangle2D[] BossBounds => m_Bounds;
 
-        private readonly Rectangle2D[] m_Bounds = new Rectangle2D[]
-        {
+        private readonly Rectangle2D[] m_Bounds = {
             new Rectangle2D(6501, 351, 35, 48),
         };
 
@@ -162,7 +162,7 @@ namespace Server.Items
 
             if (!from.InRange(GetWorldLocation(), 2))
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
             else if (Altar != null && Altar.Fighters.Contains(from))
             {

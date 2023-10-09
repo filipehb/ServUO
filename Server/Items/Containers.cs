@@ -1,8 +1,9 @@
 #region References
-using System;
 
+using System;
 using Server.Accounting;
 using Server.Network;
+
 #endregion
 
 namespace Server.Items

@@ -1,10 +1,11 @@
-using Server.ContextMenus;
-using Server.Engines.Craft;
-using Server.Misc;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Engines.Craft;
+using Server.Engines.VvV;
+using Server.Misc;
 
 namespace Server.Items
 {
@@ -299,8 +300,7 @@ namespace Server.Items
             return total;
         }
 
-        private static readonly Type[] m_Ammo = new Type[]
-        {
+        private static readonly Type[] m_Ammo = {
             typeof(Arrow), typeof(Bolt)
         };
 
@@ -467,7 +467,7 @@ namespace Server.Items
 
                 if (this is IAccountRestricted && ((IAccountRestricted)this).Account != null)
                 {
-                    Accounting.Account acct = m.Account as Accounting.Account;
+                    Account acct = m.Account as Account;
 
                     if (acct == null || acct.Username != ((IAccountRestricted)this).Account)
                     {
@@ -476,7 +476,7 @@ namespace Server.Items
                     }
                 }
 
-                if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(m))
+                if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(m))
                 {
                     m.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;

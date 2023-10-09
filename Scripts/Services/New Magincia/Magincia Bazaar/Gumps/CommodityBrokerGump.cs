@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.NewMagincia
 {
@@ -104,7 +105,7 @@ namespace Server.Engines.NewMagincia
                     {
                         amount = Convert.ToInt32(text1);
                     }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                    catch (Exception e) { ExceptionLogging.LogException(e); }
 
                     if (amount > 0)
                     {
@@ -120,7 +121,7 @@ namespace Server.Engines.NewMagincia
                     {
                         amount1 = Convert.ToInt32(text2);
                     }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                    catch (Exception e) { ExceptionLogging.LogException(e); }
 
                     if (amount1 > 0)
                     {
@@ -363,76 +364,79 @@ namespace Server.Engines.NewMagincia
                 from.SendGump(new BazaarInformationGump(0, 1150644, new SetPricesAndLimitsGump(m_Broker, m_Index, m_Page)));
                 return;
             }
-            else if (info.ButtonID == 400) // back page
+
+            if (info.ButtonID == 400) // back page
             {
-                from.SendGump(new SetPricesAndLimitsGump(m_Broker, -1, m_Page - 1));
-                return;
+	            from.SendGump(new SetPricesAndLimitsGump(m_Broker, -1, m_Page - 1));
+	            return;
             }
-            else if (info.ButtonID == 401) // forward page
+
+            if (info.ButtonID == 401) // forward page
             {
-                from.SendGump(new SetPricesAndLimitsGump(m_Broker, -1, m_Page + 1));
-                return;
+	            from.SendGump(new SetPricesAndLimitsGump(m_Broker, -1, m_Page + 1));
+	            return;
             }
-            else if (info.ButtonID == 500) // SET PRICES
+
+            if (info.ButtonID == 500) // SET PRICES
             {
-                if (m_Index >= 0 && m_Index < m_Broker.CommodityEntries.Count)
-                {
-                    CommodityBrokerEntry entry = m_Broker.CommodityEntries[m_Index];
+	            if (m_Index >= 0 && m_Index < m_Broker.CommodityEntries.Count)
+	            {
+		            CommodityBrokerEntry entry = m_Broker.CommodityEntries[m_Index];
 
-                    int buyAt = entry.BuyPricePer;
-                    int buyLmt = entry.BuyLimit;
-                    int sellAt = entry.SellPricePer;
-                    int sellLmt = entry.SellLimit;
+		            int buyAt = entry.BuyPricePer;
+		            int buyLmt = entry.BuyLimit;
+		            int sellAt = entry.SellPricePer;
+		            int sellLmt = entry.SellLimit;
 
-                    TextRelay relay1 = info.TextEntries[0];
-                    TextRelay relay2 = info.TextEntries[1];
-                    TextRelay relay3 = info.TextEntries[2];
-                    TextRelay relay4 = info.TextEntries[3];
-                    try
-                    {
-                        buyAt = Convert.ToInt32(relay1.Text);
-                    }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
-                    try
-                    {
-                        buyLmt = Convert.ToInt32(relay2.Text);
-                    }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
-                    try
-                    {
-                        sellAt = Convert.ToInt32(relay3.Text);
-                    }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
-                    try
-                    {
-                        sellLmt = Convert.ToInt32(relay4.Text);
-                    }
-                    catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+		            TextRelay relay1 = info.TextEntries[0];
+		            TextRelay relay2 = info.TextEntries[1];
+		            TextRelay relay3 = info.TextEntries[2];
+		            TextRelay relay4 = info.TextEntries[3];
+		            try
+		            {
+			            buyAt = Convert.ToInt32(relay1.Text);
+		            }
+		            catch (Exception e) { ExceptionLogging.LogException(e); }
+		            try
+		            {
+			            buyLmt = Convert.ToInt32(relay2.Text);
+		            }
+		            catch (Exception e) { ExceptionLogging.LogException(e); }
+		            try
+		            {
+			            sellAt = Convert.ToInt32(relay3.Text);
+		            }
+		            catch (Exception e) { ExceptionLogging.LogException(e); }
+		            try
+		            {
+			            sellLmt = Convert.ToInt32(relay4.Text);
+		            }
+		            catch (Exception e) { ExceptionLogging.LogException(e); }
 
-                    if (buyLmt < 0 || buyLmt > 60000 || sellLmt < 0 || sellLmt > 60000)
-                        from.SendLocalizedMessage(1150776); // You have entered an invalid numeric value. Negative values are not allowed. Trade quantities are limited to 60,000 per transaction.
-                    else
-                    {
-                        entry.BuyPricePer = buyAt;
-                        entry.BuyLimit = buyLmt;
-                        entry.SellPricePer = sellAt;
-                        entry.SellLimit = sellLmt;
-                    }
-                }
-                else
-                    from.SendLocalizedMessage(1150642); // You did not select a commodity.
+		            if (buyLmt < 0 || buyLmt > 60000 || sellLmt < 0 || sellLmt > 60000)
+			            from.SendLocalizedMessage(1150776); // You have entered an invalid numeric value. Negative values are not allowed. Trade quantities are limited to 60,000 per transaction.
+		            else
+		            {
+			            entry.BuyPricePer = buyAt;
+			            entry.BuyLimit = buyLmt;
+			            entry.SellPricePer = sellAt;
+			            entry.SellLimit = sellLmt;
+		            }
+	            }
+	            else
+		            from.SendLocalizedMessage(1150642); // You did not select a commodity.
             }
             else if (info.ButtonID == 501) // Main Menu
             {
-                from.SendGump(new CommodityBrokerGump(m_Broker, from));
-                return;
+	            from.SendGump(new CommodityBrokerGump(m_Broker, from));
+	            return;
             }
             else
             {
-                int id = info.ButtonID - 2;
+	            int id = info.ButtonID - 2;
 
-                if (id >= 0 && id < m_Broker.CommodityEntries.Count)
-                    m_Index = id;
+	            if (id >= 0 && id < m_Broker.CommodityEntries.Count)
+		            m_Index = id;
             }
 
             from.SendGump(new SetPricesAndLimitsGump(m_Broker, m_Index, m_Page));
@@ -539,7 +543,7 @@ namespace Server.Engines.NewMagincia
                         {
                             amount = Convert.ToInt32(relay.Text);
                         }
-                        catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                        catch (Exception e) { ExceptionLogging.LogException(e); }
 
                         if (amount <= 0 || amount > entry.Stock)
                             from.SendLocalizedMessage(1150215); // You have entered an invalid value, or a non-numeric value. Please try again.
@@ -558,8 +562,8 @@ namespace Server.Engines.NewMagincia
                         from.SendGump(new ConfirmRemoveEntryGump(m_Broker, m_Index));
                         return;
                     }
-                    else
-                        from.SendLocalizedMessage(1150642); // You did not select a commodity.
+
+                    from.SendLocalizedMessage(1150642); // You did not select a commodity.
                     break;
                 case 400:
                     from.SendGump(new ViewInventoryGump(m_Broker, -1, m_Page - 1));
@@ -846,11 +850,11 @@ namespace Server.Engines.NewMagincia
                             {
                                 amount = Convert.ToInt32(relay.Text);
                             }
-                            catch (Exception e) { Diagnostics.ExceptionLogging.LogException(e); }
+                            catch (Exception e) { ExceptionLogging.LogException(e); }
 
                             if (amount > 0)
                             {
-                                if (m_Buy && Banker.GetBalance(from) < entry.SellPricePer * amount)
+	                            if (m_Buy && Banker.GetBalance(from) < entry.SellPricePer * amount)
                                 {
                                     /* You do not have the funds needed to make this trade available in your bank box. Brokers are only able to transfer funds from your bank box.
                                     Please deposit the necessary funds into your bank box and try again.
@@ -858,41 +862,41 @@ namespace Server.Engines.NewMagincia
                                     from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150252));
                                     return;
                                 }
-                                else if (!m_Buy && !m_Broker.SellCommodityControl(from, entry, amount))
-                                {
-                                    /* You do not have the requested amount of that commodity (either in item or deed form) in your backpack to trade.
-                                     * Note that commodities cannot be traded from your bank box.
-                                    */
-                                    from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150667));
-                                    return;
-                                }
-                                else if (m_Buy && entry.PlayerCanBuy(amount))
-                                {
-                                    from.SendGump(new ConfirmBuyCommodityGump(m_Broker, amount, entry, true, new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 0)));
-                                    return;
-                                }
-                                else if (!m_Buy && entry.PlayerCanSell(amount))
-                                {
-                                    from.SendGump(new ConfirmBuyCommodityGump(m_Broker, amount, entry, false, new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 0)));
-                                    return;
-                                }
-                                else
-                                {
-                                    from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150215)); // You have entered an invalid value, or a non-numeric value. Please try again.
-                                    return;
-                                }
+
+	                            if (!m_Buy && !m_Broker.SellCommodityControl(from, entry, amount))
+	                            {
+		                            /* You do not have the requested amount of that commodity (either in item or deed form) in your backpack to trade.
+		                             * Note that commodities cannot be traded from your bank box.
+		                             */
+		                            /* You do not have the requested amount of that commodity (either in item or deed form) in your backpack to trade.
+		                             * Note that commodities cannot be traded from your bank box.
+		                             */
+		                            from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150667));
+		                            return;
+	                            }
+
+	                            if (m_Buy && entry.PlayerCanBuy(amount))
+	                            {
+		                            from.SendGump(new ConfirmBuyCommodityGump(m_Broker, amount, entry, true, new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 0)));
+		                            return;
+	                            }
+
+	                            if (!m_Buy && entry.PlayerCanSell(amount))
+	                            {
+		                            from.SendGump(new ConfirmBuyCommodityGump(m_Broker, amount, entry, false, new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 0)));
+		                            return;
+	                            }
+
+	                            from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150215)); // You have entered an invalid value, or a non-numeric value. Please try again.
+	                            return;
                             }
-                            else
-                            {
-                                from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150215)); // You have entered an invalid value, or a non-numeric value. Please try again.
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150642)); // You did not select a commodity.
+
+                            from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150215)); // You have entered an invalid value, or a non-numeric value. Please try again.
                             return;
                         }
+
+                        from.SendGump(new CommodityInventoryGump(m_Broker, m_Index, m_Buy, m_Page, 1150642)); // You did not select a commodity.
+                        return;
                     }
             }
         }

@@ -1,14 +1,13 @@
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
     public class CrystallineFragmentsQuest : BaseQuest
     {
         public CrystallineFragmentsQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(CrystallineFragments), "crystalline fragments", 10));
 
@@ -45,7 +44,6 @@ namespace Server.Engines.Quests
     public class ProtectorsEssenceQuest : BaseQuest
     {
         public ProtectorsEssenceQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(ProtectorsEssence), "protector's essences", 5, 0x1ED1));
 
@@ -82,7 +80,6 @@ namespace Server.Engines.Quests
     public class HeartOfIceQuest : BaseQuest
     {
         public HeartOfIceQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(IcyHeart), "icy hearts", 6, 0x1CED));
 
@@ -135,7 +132,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(CrystallineFragmentsQuest),
                     typeof(ProtectorsEssenceQuest),

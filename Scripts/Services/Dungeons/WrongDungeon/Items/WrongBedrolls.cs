@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Items
 {
     public class WrongBedrollBase : Item
@@ -97,7 +99,7 @@ namespace Server.Items
                         if (Utility.RandomBool())
                         {
                             from.AddToBackpack(soap);
-                            from.SendLocalizedMessage(1152268, string.Format("soap"));
+                            from.SendLocalizedMessage(1152268, "soap");
                         }
                         else
                         {
@@ -120,7 +122,7 @@ namespace Server.Items
             if (Deleted || !to.CanSee(this))
                 return;
 
-            to.Send(new Network.MessageLocalized(Serial, ItemID, Network.MessageType.Regular, hue, 3, number, "", ""));
+            to.Send(new MessageLocalized(Serial, ItemID, MessageType.Regular, hue, 3, number, "", ""));
         }
 
         private void SendMessageTo(Mobile to, string text, int hue)
@@ -128,7 +130,7 @@ namespace Server.Items
             if (Deleted || !to.CanSee(this))
                 return;
 
-            to.Send(new Network.UnicodeMessage(Serial, ItemID, Network.MessageType.Regular, hue, 3, "ENU", "", text));
+            to.Send(new UnicodeMessage(Serial, ItemID, MessageType.Regular, hue, 3, "ENU", "", text));
         }
 
         public override void Serialize(GenericWriter writer)

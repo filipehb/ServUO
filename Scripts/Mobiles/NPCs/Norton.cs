@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class DeliciousFishesQuest : BaseQuest
     {
         public DeliciousFishesQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(Fish), "fish", 5, 0x9CC));
 
@@ -61,7 +60,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(DeliciousFishesQuest)
                 };
@@ -105,7 +104,6 @@ namespace Server.Engines.Quests
     {
         [Constructable]
         public PeppercornFishsteak()
-            : base()
         {
         }
 

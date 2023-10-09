@@ -1,5 +1,5 @@
-using Server.Targeting;
 using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -166,10 +166,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public override void Serialize(GenericWriter writer)

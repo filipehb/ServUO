@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class DreadSpiderStatuette : BaseStatuette
     {
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0x493, 0x494, 0x495, 0x496, 0x497
         };
         [Constructable]

@@ -1,8 +1,9 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Mobiles;
+using Server.SkillHandlers;
+using Server.Spells;
 
 namespace Server.Engines.Despise
 {
@@ -61,7 +62,7 @@ namespace Server.Engines.Despise
         {
             int discordanceEffect = 0;
 
-            if (!CanBeHarmful(m, false) || SkillHandlers.Discordance.GetEffect(m, ref discordanceEffect))
+            if (!CanBeHarmful(m, false) || Discordance.GetEffect(m, ref discordanceEffect))
                 return false;
 
             if ((m is DespiseCreature && ((DespiseCreature)m).Alignment != Alignment.Neutral && ((DespiseCreature)m).Alignment != Alignment) || m is DespiseBoss)

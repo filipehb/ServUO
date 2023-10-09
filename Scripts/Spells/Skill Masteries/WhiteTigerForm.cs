@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells.Fifth;
 using Server.Spells.Ninjitsu;
 using Server.Spells.Seventh;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -51,15 +51,17 @@ namespace Server.Spells.SkillMasteries
                 Caster.SendLocalizedMessage(1061628); // You can't do that while polymorphed.
                 return false;
             }
-            else if (TransformationSpellHelper.UnderTransformation(Caster))
+
+            if (TransformationSpellHelper.UnderTransformation(Caster))
             {
-                Caster.SendLocalizedMessage(1063219); // You cannot mimic an animal while in that form.
-                return false;
+	            Caster.SendLocalizedMessage(1063219); // You cannot mimic an animal while in that form.
+	            return false;
             }
-            else if (DisguiseTimers.IsDisguised(Caster))
+
+            if (DisguiseTimers.IsDisguised(Caster))
             {
-                Caster.SendLocalizedMessage(1061631); // You can't do that while disguised.
-                return false;
+	            Caster.SendLocalizedMessage(1061631); // You can't do that while disguised.
+	            return false;
             }
 
             return base.CheckCast();
@@ -202,7 +204,7 @@ namespace Server.Spells.SkillMasteries
 
             if (bleedchance > Utility.RandomDouble())
             {
-                BleedAttack.BeginBleed(defender, attacker, false);
+                BleedAttack.BeginBleed(defender, attacker);
 
                 if (_Table == null)
                     _Table = new Dictionary<Mobile, DateTime>();

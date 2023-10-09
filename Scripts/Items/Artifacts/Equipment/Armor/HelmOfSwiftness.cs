@@ -11,7 +11,6 @@ namespace Server.Items
 
         [Constructable]
         public HelmOfSwiftness()
-            : base()
         {
             Hue = 0x592;
             ItemID = 0x2689;

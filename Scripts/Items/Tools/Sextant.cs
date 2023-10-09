@@ -8,7 +8,6 @@ namespace Server.Items
 
         [Constructable]
         public MarinersBrassSextant()
-            : base()
         {
             LootType = LootType.Blessed;
             Hue = 483;

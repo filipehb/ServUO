@@ -1,7 +1,10 @@
 #region References
-using Microsoft.Win32;
+
 using System;
 using System.IO;
+using Microsoft.Win32;
+using Server.Diagnostics;
+
 #endregion
 
 namespace Server.Misc
@@ -103,7 +106,7 @@ namespace Server.Misc
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return null;
             }
         }

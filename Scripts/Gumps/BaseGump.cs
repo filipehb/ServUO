@@ -1,9 +1,10 @@
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Gumps
 {
@@ -442,7 +443,7 @@ namespace Server.Gumps
             }
         }
 
-        public void AddTooltip(string text, System.Drawing.Color color)
+        public void AddTooltip(string text, Color color)
         {
             AddTooltip(string.Empty, text, System.Drawing.Color.Empty, color);
         }
@@ -521,7 +522,7 @@ namespace Server.Gumps
             AddProperties(spoof);
         }
 
-        public void AddTooltip(string title, string text, System.Drawing.Color titleColor, System.Drawing.Color textColor)
+        public void AddTooltip(string title, string text, Color titleColor, Color textColor)
         {
             title = title ?? string.Empty;
             text = text ?? string.Empty;
@@ -588,17 +589,15 @@ namespace Server.Gumps
 
             public static Spoof Acquire()
             {
-                if (_SpoofPool.Count == 0)
+	            if (_SpoofPool.Count == 0)
                 {
                     return new Spoof();
                 }
-                else
-                {
-                    Spoof spoof = _SpoofPool[0];
-                    _SpoofPool.Remove(spoof);
 
-                    return spoof;
-                }
+	            Spoof spoof = _SpoofPool[0];
+	            _SpoofPool.Remove(spoof);
+
+	            return spoof;
             }
 
             public void Free()

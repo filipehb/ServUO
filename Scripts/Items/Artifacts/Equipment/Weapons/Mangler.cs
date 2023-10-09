@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public Mangler()
-            : base()
         {
             Hue = 2001;
             WeaponAttributes.HitLeechMana = 50;

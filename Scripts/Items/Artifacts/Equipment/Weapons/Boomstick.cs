@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public Boomstick()
-            : base()
         {
             Hue = 0x25;
             Attributes.SpellChanneling = 1;

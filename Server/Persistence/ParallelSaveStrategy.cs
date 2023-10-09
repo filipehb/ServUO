@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-
+using Server.Diagnostics;
 using Server.Guilds;
 
 namespace Server
@@ -324,7 +324,7 @@ namespace Server
 				}
 				catch (Exception ex)
 				{
-					Diagnostics.ExceptionLogging.LogException(ex);
+					ExceptionLogging.LogException(ex);
 				}
 			}
 

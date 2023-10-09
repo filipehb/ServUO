@@ -1,11 +1,13 @@
 #region References
+
+using System;
+using System.Collections;
+using System.Reflection;
 using Server.Commands;
 using Server.Commands.Generic;
 using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections;
-using System.Reflection;
+
 #endregion
 
 namespace Server.Gumps

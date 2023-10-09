@@ -1,7 +1,9 @@
 using System;
+using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Server.Diagnostics;
 
 namespace Server.Misc
 {
@@ -50,7 +52,7 @@ namespace Server.Misc
                 _Client = new SmtpClient(EmailServer, EmailPort);
                 if (EmailUsername != null)
                 {
-                    _Client.Credentials = new System.Net.NetworkCredential(EmailUsername, EmailPassword);
+                    _Client.Credentials = new NetworkCredential(EmailUsername, EmailPassword);
                 }
                 if (EmailSsl)
                     _Client.EnableSsl = true;
@@ -68,7 +70,7 @@ namespace Server.Misc
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return false;
             }
 

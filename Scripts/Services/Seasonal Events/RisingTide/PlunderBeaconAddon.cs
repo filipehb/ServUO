@@ -1,9 +1,8 @@
-using Server.Mobiles;
-using Server.Engines.RisingTide;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.RisingTide;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -224,22 +223,23 @@ namespace Server.Items
             {
                 return;
             }
-            else if (!InitialSpawn)
+
+            if (!InitialSpawn)
             {
-                for (int i = 0; i < MaxSpawn; i++)
-                {
-                    SpawnHelper(true);
-                    InitialSpawn = true;
-                }
+	            for (int i = 0; i < MaxSpawn; i++)
+	            {
+		            SpawnHelper(true);
+		            InitialSpawn = true;
+	            }
             }
             else if (CannonsOperational && NextShoot < DateTime.UtcNow)
             {
-                foreach (MannedCannon cannon in Cannons.Where(c => c != null && !c.Deleted && (c.CanFireUnmanned || (c.Operator != null && !c.Operator.Deleted && c.Operator.Alive))))
-                {
-                    cannon.Scan(true);
-                }
+	            foreach (MannedCannon cannon in Cannons.Where(c => c != null && !c.Deleted && (c.CanFireUnmanned || (c.Operator != null && !c.Operator.Deleted && c.Operator.Alive))))
+	            {
+		            cannon.Scan(true);
+	            }
 
-                NextShoot = DateTime.UtcNow + TimeSpan.FromSeconds(2);
+	            NextShoot = DateTime.UtcNow + TimeSpan.FromSeconds(2);
             }
 
             if (NextSpawn < DateTime.UtcNow)
@@ -443,7 +443,7 @@ namespace Server.Items
             addon.AddComponent(ac, xoffset, yoffset, zoffset);
         }
 
-        private static readonly int[,] m_AddOnSimpleComponents = new int[,] {
+        private static readonly int[,] m_AddOnSimpleComponents = {
               {16017, -5, -3, 4}, {16011, -2, 4, 4}// 1	 2	 3	 
 			, {16011, -2, -4, 4}, {16020, -5, -5, 4}, {16008, -2, -5, 4}// 4	 5	 6	 
 			, {16014, -4, -3, 4}, {16011, 3, -4, 4}, {16008, -2, 3, 4}// 7	 8	 9	 

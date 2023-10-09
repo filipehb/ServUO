@@ -1,18 +1,26 @@
 #region References
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Engines.BulkOrders;
+using Server.Engines.CityLoyalty;
+using Server.Engines.VendorSearching;
+using Server.Gumps;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
 using Server.Regions;
 using Server.Services.Virtues;
+using Server.SkillHandlers;
+using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Mobiles
@@ -470,13 +478,14 @@ namespace Server.Mobiles
             {
                 return;
             }
-            else if (CheckNecromancer())
+
+            if (CheckNecromancer())
             {
-                return;
+	            return;
             }
-            else if (CheckTokuno())
+
+            if (CheckTokuno())
             {
-                return;
             }
         }
 
@@ -523,7 +532,7 @@ namespace Server.Mobiles
         {
             Map map = Map;
 
-            if (map != Map.TerMur || Spells.SpellHelper.IsEodon(map, Location))
+            if (map != Map.TerMur || SpellHelper.IsEodon(map, Location))
                 return false;
 
             if (Body != 0x29A && Body != 0x29B)
@@ -1144,11 +1153,9 @@ namespace Server.Mobiles
                     dropped.Delete();
                     return true;
                 }
-                else
-                {
-                    SayTo(from, 501550, 0x3B2); // I am not interested in this.
-                    return false;
-                }
+
+                SayTo(from, 501550, 0x3B2); // I am not interested in this.
+                return false;
             }
             #endregion
 
@@ -1176,20 +1183,23 @@ namespace Server.Mobiles
                     SayTo(from, 1079976, 0x3B2); // You'll have to wait a few seconds while I inspect the last order.
                     return false;
                 }
-                else if (!IsValidBulkOrder(dropped) || !SupportsBulkOrders(from))
+
+                if (!IsValidBulkOrder(dropped) || !SupportsBulkOrders(from))
                 {
-                    SayTo(from, 1045130, 0x3B2); // That order is for some other shopkeeper.
-                    return false;
+	                SayTo(from, 1045130, 0x3B2); // That order is for some other shopkeeper.
+	                return false;
                 }
-                else if (!BulkOrderSystem.CanClaimRewards(from))
+
+                if (!BulkOrderSystem.CanClaimRewards(from))
                 {
-                    SayTo(from, 1157083, 0x3B2); // You must claim your last turn-in reward in order for us to continue doing business.
-                    return false;
+	                SayTo(from, 1157083, 0x3B2); // You must claim your last turn-in reward in order for us to continue doing business.
+	                return false;
                 }
-                else if (bod == null || !bod.Complete)
+
+                if (bod == null || !bod.Complete)
                 {
-                    SayTo(from, 1045131, 0x3B2); // You have not completed the order yet.
-                    return false;
+	                SayTo(from, 1045131, 0x3B2); // You have not completed the order yet.
+	                return false;
                 }
 
                 Item reward;
@@ -1256,7 +1266,7 @@ namespace Server.Mobiles
                 Titles.AwardFame(from, fame, true);
 
                 OnSuccessfulBulkOrderReceive(from);
-                Engines.CityLoyalty.CityLoyaltySystem.OnBODTurnIn(from, gold);
+                CityLoyaltySystem.OnBODTurnIn(from, gold);
 
                 if (pm != null)
                 {
@@ -1266,9 +1276,10 @@ namespace Server.Mobiles
                 dropped.Delete();
                 return true;
             }
-            else if (AcceptsGift(from, dropped))
+
+            if (AcceptsGift(from, dropped))
             {
-                dropped.Delete();
+	            dropped.Delete();
             }
 
             return base.OnDragDrop(from, dropped);
@@ -1291,7 +1302,7 @@ namespace Server.Mobiles
             }
             else
             {
-                name = Engines.VendorSearching.VendorSearch.GetItemName(dropped);
+                name = VendorSearch.GetItemName(dropped);
             }
 
             if (!string.IsNullOrEmpty(name))
@@ -1400,7 +1411,7 @@ namespace Server.Mobiles
                             Bribes[m].Amount = amount;
                         }
 
-                        SayTo(from, 1152292, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")), 0x3B2);
+                        SayTo(from, 1152292, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US")), 0x3B2);
                         // If you help me out, I'll help you out. I can replace that bulk order with a better one, but it's gonna cost you ~1_amt~ gold coin. Payment is due immediately. Just hand me the order and I'll pull the old switcheroo.
                     }
                 }
@@ -2103,9 +2114,10 @@ namespace Server.Mobiles
                 SayTo(seller, "You may only sell {0} items at a time!", MaxSell, 0x3B2, true);
                 return false;
             }
-            else if (Sold == 0)
+
+            if (Sold == 0)
             {
-                return true;
+	            return true;
             }
 
             foreach (SellItemResponse resp in list)
@@ -2457,9 +2469,9 @@ namespace Server.Mobiles
             object state = convert.Armor;
 
             RemoveConvertEntry(convert);
-            from.CloseGump(typeof(Gumps.ConfirmCallbackGump));
+            from.CloseGump(typeof(ConfirmCallbackGump));
 
-            from.SendGump(new Gumps.ConfirmCallbackGump((PlayerMobile)from, 1049004, 1154115, state, null,
+            from.SendGump(new ConfirmCallbackGump((PlayerMobile)from, 1049004, 1154115, state, null,
                 (m, obj) =>
                 {
                     BaseArmor ar = obj as BaseArmor;
@@ -2502,7 +2514,7 @@ namespace Server.Mobiles
             }
 
             if (armor.ArmorAttributes.MageArmor == 0 &&
-                SkillHandlers.Imbuing.GetTotalMods(armor) > 4)
+                Imbuing.GetTotalMods(armor) > 4)
             {
                 from.SendLocalizedMessage(1154119); // This action would exceed a stat cap
                 return false;

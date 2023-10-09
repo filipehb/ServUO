@@ -1,10 +1,9 @@
+using System.Globalization;
+using System.Linq;
+using Server.Engines.UOStore;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Prompts;
-using Server.Engines.UOStore;
-
-using System.Globalization;
-using System.Linq;
 
 namespace Server.AccountVault
 {

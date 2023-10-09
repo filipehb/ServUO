@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Server.Multis;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Items
 {

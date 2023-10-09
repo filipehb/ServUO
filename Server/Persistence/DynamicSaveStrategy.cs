@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Server.Guilds;
 
 namespace Server
@@ -105,7 +104,7 @@ namespace Server
 
 			//Start the producer.
 			Parallel.ForEach(items, () => new QueuedMemoryWriter(),
-				(Item item, ParallelLoopState state, QueuedMemoryWriter writer) =>
+				(item, state, writer) =>
 				{
 					var startPosition = writer.Position;
 
@@ -127,7 +126,7 @@ namespace Server
 
 					return writer;
 				},
-				(writer) =>
+				writer =>
 				{
 					writer.Flush();
 
@@ -148,7 +147,7 @@ namespace Server
 
 			//Start the producer.
 			Parallel.ForEach(mobiles, () => new QueuedMemoryWriter(),
-				(Mobile mobile, ParallelLoopState state, QueuedMemoryWriter writer) =>
+				(mobile, state, writer) =>
 				{
 					var startPosition = writer.Position;
 
@@ -165,7 +164,7 @@ namespace Server
 
 					return writer;
 				},
-				(writer) =>
+				writer =>
 				{
 					writer.Flush();
 
@@ -186,7 +185,7 @@ namespace Server
 
 			//Start the producer.
 			Parallel.ForEach(guilds, () => new QueuedMemoryWriter(),
-				(BaseGuild guild, ParallelLoopState state, QueuedMemoryWriter writer) =>
+				(guild, state, writer) =>
 				{
 					var startPosition = writer.Position;
 
@@ -203,7 +202,7 @@ namespace Server
 
 					return writer;
 				},
-				(writer) =>
+				writer =>
 				{
 					writer.Flush();
 

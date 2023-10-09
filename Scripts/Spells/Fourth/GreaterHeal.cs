@@ -1,3 +1,4 @@
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
@@ -40,11 +41,11 @@ namespace Server.Spells.Fourth
             {
                 Caster.SendLocalizedMessage(1060177); // You cannot heal a creature that is already dead!
             }
-            else if (m is IRepairableMobile && ((IRepairableMobile)m).RepairResource != typeof(Items.Bandage))
+            else if (m is IRepairableMobile && ((IRepairableMobile)m).RepairResource != typeof(Bandage))
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 500951); // You cannot heal that.
             }
-            else if (m.Poisoned || Items.MortalStrike.IsWounded(m))
+            else if (m.Poisoned || MortalStrike.IsWounded(m))
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, (Caster == m) ? 1005000 : 1010398);
             }

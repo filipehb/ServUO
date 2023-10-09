@@ -1,8 +1,9 @@
-using Server.Engines.Quests;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -186,7 +187,7 @@ namespace Server.Items
 
             if (hatchling != null)
             {
-                focus.PublicOverheadMessage(Network.MessageType.Regular, 0x35, 1156496); // *The Hatchling safely burrows into the sand*
+                focus.PublicOverheadMessage(MessageType.Regular, 0x35, 1156496); // *The Hatchling safely burrows into the sand*
                 Timer.DelayCall(TimeSpan.FromSeconds(1), hatchling.Delete);
             }
 

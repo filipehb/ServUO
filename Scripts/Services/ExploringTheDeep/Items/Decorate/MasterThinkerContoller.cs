@@ -1,9 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.Commands;
 using Server.Engines.Quests;
 using Server.Mobiles;
 using Server.Network;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -12,7 +12,7 @@ namespace Server.Items
         Tunic,
         Pant,
         Book
-    };
+    }
 
     public class MasterThinkerContoller : Item
     {
@@ -126,7 +126,6 @@ namespace Server.Items
 
         [Constructable]
         public MasterThinkerDecor(int id, int hue, DecorType type, MasterThinkerContoller controller)
-            : base()
         {
             ItemID = id;
             m_Controller = controller;
@@ -180,7 +179,7 @@ namespace Server.Items
 
         public int ClickCheck(Mobile from)
         {
-            return m_Controller.Array.Where(s => s.Mobile == from && s.Pant == true && s.Book == true && s.Tunic == true).Count();
+            return m_Controller.Array.Where(s => s.Mobile == from && s.Pant && s.Book && s.Tunic).Count();
         }
 
         public override void Serialize(GenericWriter writer)

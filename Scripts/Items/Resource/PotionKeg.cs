@@ -1,5 +1,6 @@
-using Server.Targeting;
 using System;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -137,7 +138,7 @@ namespace Server.Items
             base.Serialize(writer);
             writer.Write(2); // version
 
-            writer.Write((bool)m_Unknown);
+            writer.Write(m_Unknown);
             writer.Write((int)m_Type);
             writer.Write(m_Held);
         }
@@ -251,7 +252,7 @@ namespace Server.Items
             }
             else
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
         }
 
@@ -305,7 +306,7 @@ namespace Server.Items
 
         public override bool OnDragDrop(Mobile from, Item item)
         {
-            if (item is BasePotion pot)
+	        if (item is BasePotion pot)
             {
                 int toHold = Math.Min(100 - m_Held, pot.Amount);
 
@@ -314,69 +315,64 @@ namespace Server.Items
                     from.SendLocalizedMessage(502232); // The keg is not designed to hold that type of object.
                     return false;
                 }
-                else if (toHold <= 0)
+
+                if (toHold <= 0)
                 {
-                    from.SendLocalizedMessage(502233); // The keg will not hold any more!
-                    return false;
+	                from.SendLocalizedMessage(502233); // The keg will not hold any more!
+	                return false;
                 }
-                else if (m_Held == 0)
+
+                if (m_Held == 0)
                 {
-                    if (GiveBottle(from, toHold))
-                    {
-                        m_Type = pot.PotionEffect;
-                        Held = toHold;
+	                if (GiveBottle(from, toHold))
+	                {
+		                m_Type = pot.PotionEffect;
+		                Held = toHold;
 
-                        from.PlaySound(0x240);
+		                from.PlaySound(0x240);
 
-                        from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
+		                from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
 
-                        item.Consume(toHold);
+		                item.Consume(toHold);
 
-                        if (!item.Deleted)
-                            item.Bounce(from);
+		                if (!item.Deleted)
+			                item.Bounce(from);
 
-                        return true;
-                    }
-                    else
-                    {
-                        from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
-                        return false;
-                    }
+		                return true;
+	                }
+
+	                from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
+	                return false;
                 }
-                else if (pot.PotionEffect != m_Type)
+
+                if (pot.PotionEffect != m_Type)
                 {
-                    from.SendLocalizedMessage(502236); // You decide that it would be a bad idea to mix different types of potions.
-                    return false;
+	                from.SendLocalizedMessage(502236); // You decide that it would be a bad idea to mix different types of potions.
+	                return false;
                 }
-                else
+
+                if (GiveBottle(from, toHold))
                 {
-                    if (GiveBottle(from, toHold))
-                    {
-                        Held += toHold;
+	                Held += toHold;
 
-                        from.PlaySound(0x240);
+	                from.PlaySound(0x240);
 
-                        from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
+	                from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
 
-                        item.Consume(toHold);
+	                item.Consume(toHold);
 
-                        if (!item.Deleted)
-                            item.Bounce(from);
+	                if (!item.Deleted)
+		                item.Bounce(from);
 
-                        return true;
-                    }
-                    else
-                    {
-                        from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
-                        return false;
-                    }
+	                return true;
                 }
-            }
-            else
-            {
-                from.SendLocalizedMessage(502232); // The keg is not designed to hold that type of object.
+
+                from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
                 return false;
             }
+
+	        from.SendLocalizedMessage(502232); // The keg is not designed to hold that type of object.
+	        return false;
         }
 
         public bool GiveBottle(Mobile m, int amount)

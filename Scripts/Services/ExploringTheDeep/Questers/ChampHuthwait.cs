@@ -12,7 +12,6 @@ namespace Server.Mobiles
 
         [Constructable]
         public ChampHuthwait()
-            : base()
         {
             Name = "Champ Huthwait";
             Title = "The Seedy Cobbler";

@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests.Doom
 {
@@ -75,10 +75,9 @@ namespace Server.Engines.Quests.Doom
 
             if (fame < 1500)
                 return Utility.Dice(2, 5, -1);
-            else if (fame < 20000)
-                return Utility.Dice(2, 4, 8);
-            else
-                return 50;
+            if (fame < 20000)
+	            return Utility.Dice(2, 4, 8);
+            return 50;
         }
 
         // NOTE: Quest not entirely OSI-accurate: some changes made to prevent numerous OSI bugs

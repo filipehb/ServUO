@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Collections.Generic;
+using Server.Spells.Ninjitsu;
 
 namespace Server.Mobiles
 {
@@ -66,10 +67,9 @@ namespace Server.Mobiles
         {
             get
             {
-                if (InternalItem != null)
+	            if (InternalItem != null)
                     return InternalItem.ItemID;
-                else
-                    return 0;
+	            return 0;
             }
             set
             {
@@ -166,7 +166,7 @@ namespace Server.Mobiles
 
         public static void Dismount(Mobile dismounter, Mobile dismounted, BlockMountType blockmounttype, TimeSpan delay, bool message)
         {
-            if (!dismounted.Mounted && !Spells.Ninjitsu.AnimalForm.UnderTransformation(dismounted) && !dismounted.Flying)
+            if (!dismounted.Mounted && !AnimalForm.UnderTransformation(dismounted) && !dismounted.Flying)
                 return;
 
             if (dismounted is ChaosDragoonElite)
@@ -183,9 +183,9 @@ namespace Server.Mobiles
                 if (message)
                     dismounted.SendLocalizedMessage(1040023); // You have been knocked off of your mount!
             }
-            else if (Spells.Ninjitsu.AnimalForm.UnderTransformation(dismounted))
+            else if (AnimalForm.UnderTransformation(dismounted))
             {
-                Spells.Ninjitsu.AnimalForm.RemoveContext(dismounted, true);
+                AnimalForm.RemoveContext(dismounted, true);
             }
             else if (dismounted.Flying)
             {
@@ -553,40 +553,38 @@ namespace Server.Mobiles
                     {
                         return false;
                     }
-                    else
-                    {
-                        if (mount != m_Mount)
-                        {
-                            return true;
-                        }
 
-                        switch (m_Type)
-                        {
-                            default:
-                            case BlockMountType.RidingSwipe:
-                                {
-                                    if (m_Mount is Mobile && ((Mobile)m_Mount).Hits >= ((Mobile)m_Mount).HitsMax)
-                                    {
-                                        ExpireMountPrevention(m_Mobile);
-                                        return true;
-                                    }
-                                }
-                                break;
-                            case BlockMountType.RidingSwipeEthereal:
-                                {
-                                    ExpireMountPrevention(m_Mobile);
-                                    return true;
-                                }
-                            case BlockMountType.RidingSwipeFlying:
-                                {
-                                    if (m_Mobile.Hits >= m_Mobile.HitsMax)
-                                    {
-                                        ExpireMountPrevention(m_Mobile);
-                                        return true;
-                                    }
-                                }
-                                break;
-                        }
+                    if (mount != m_Mount)
+                    {
+	                    return true;
+                    }
+
+                    switch (m_Type)
+                    {
+	                    default:
+	                    case BlockMountType.RidingSwipe:
+		                    {
+			                    if (m_Mount is Mobile && ((Mobile)m_Mount).Hits >= ((Mobile)m_Mount).HitsMax)
+			                    {
+				                    ExpireMountPrevention(m_Mobile);
+				                    return true;
+			                    }
+		                    }
+		                    break;
+	                    case BlockMountType.RidingSwipeEthereal:
+		                    {
+			                    ExpireMountPrevention(m_Mobile);
+			                    return true;
+		                    }
+	                    case BlockMountType.RidingSwipeFlying:
+		                    {
+			                    if (m_Mobile.Hits >= m_Mobile.HitsMax)
+			                    {
+				                    ExpireMountPrevention(m_Mobile);
+				                    return true;
+			                    }
+		                    }
+		                    break;
                     }
 
                     return false;

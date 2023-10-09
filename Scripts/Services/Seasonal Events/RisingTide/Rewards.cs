@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -357,7 +358,7 @@ namespace Server.Items
 
         public void AssignRandomName()
         {
-            System.Collections.Generic.List<string> list = BaseBoat.Boats.Where(b => !string.IsNullOrEmpty(b.ShipName)).Select(x => x.ShipName).ToList();
+            List<string> list = BaseBoat.Boats.Where(b => !string.IsNullOrEmpty(b.ShipName)).Select(x => x.ShipName).ToList();
 
             if (list.Count > 0)
             {

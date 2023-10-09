@@ -1,9 +1,11 @@
 #region References
+
+using System;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Regions;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.Services.Virtues

@@ -1,9 +1,9 @@
+using System.Collections.Generic;
+using System.IO;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Server.Engines.Fellowship
 {
@@ -108,7 +108,7 @@ namespace Server.Engines.Fellowship
 
         public override bool OnDragDrop(Mobile from, Item item)
         {
-            if (item is FellowshipCoin)
+	        if (item is FellowshipCoin)
             {
                 if (FellowshipChainList.ContainsKey(from))
                 {
@@ -147,12 +147,10 @@ namespace Server.Engines.Fellowship
 
                 return true;
             }
-            else
-            {
-                SayTo(from, 500607, 0x3B2); // I'm not interested in that.
 
-                return false;
-            }
+	        SayTo(from, 500607, 0x3B2); // I'm not interested in that.
+
+	        return false;
         }
 
         public override void OnDoubleClick(Mobile m)
@@ -176,8 +174,7 @@ namespace Server.Engines.Fellowship
 
         public class WorkerGump : Gump
         {
-            private static readonly int[,] clilocs = new int[,]
-            {
+            private static readonly int[,] clilocs = {
                 {1159238, 1159239},
                 {1159236, 1159240},
                 {1159236, 1159241},

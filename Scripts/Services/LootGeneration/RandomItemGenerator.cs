@@ -1,9 +1,9 @@
-using Server.Engines.Despise;
-using Server.Engines.Shadowguard;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Despise;
+using Server.Engines.Shadowguard;
+using Server.Mobiles;
 
 namespace Server.Items
 {

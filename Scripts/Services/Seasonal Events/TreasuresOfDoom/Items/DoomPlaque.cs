@@ -1,9 +1,8 @@
-using Server.Network;
-using Server.Prompts;
-using Server.Engines.TreasuresOfDoom;
-
 using System;
 using System.Collections.Generic;
+using Server.Engines.TreasuresOfDoom;
+using Server.Network;
+using Server.Prompts;
 
 namespace Server.Items
 {

@@ -21,11 +21,10 @@ namespace Server.Engines.Quests
            loitering around on the surface too.  Either way, they're not hard to find. */
         public override object Uncomplete => 1072685;
 
-        /* Excellent! That’s the old fighting spirit. */
+        /* Excellent! Thatâ€™s the old fighting spirit. */
         public override object Complete => 1075384;
 
         public SpringCleaningQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Ratman), "Ratmen", 15, "Sanctuary"));
 
@@ -69,7 +68,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1075409;
 
         public CowardsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(RatmanArcher), "Ratmen Archers", 10, "Sanctuary"));
 
@@ -96,7 +94,6 @@ namespace Server.Engines.Quests
         public override bool DoneOnce => true;
 
         public TokenOfLoveQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(StolenRing), "A ring engraved: 'Beloved Ciala'", 1, 0x1F09));
 

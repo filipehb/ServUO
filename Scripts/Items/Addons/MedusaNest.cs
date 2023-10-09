@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class MedusaSNestAddon : BaseAddon
     {
-        private static readonly int[,] m_AddOnSimpleComponents = new int[,]
-        {
+        private static readonly int[,] m_AddOnSimpleComponents = {
             { 7045, -1, 1, 0 }, { 12795, 0, 0, 0 }, { 7054, 1, 0, 0 }// 1	2	3	
             ,
             { 7042, 1, 1, 0 }, { 7046, -1, -1, 0 }, { 7054, -1, 0, 0 }// 4	5	6	

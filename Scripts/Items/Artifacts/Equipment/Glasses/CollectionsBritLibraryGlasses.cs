@@ -8,7 +8,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public MaceAndShieldGlasses()
-            : base()
         {
             Hue = 0x1DD;
             Attributes.BonusStr = 10;
@@ -89,7 +88,6 @@ namespace Server.Items
     {
         [Constructable]
         public GlassesOfTheArts()
-            : base()
         {
             Hue = 0x73;
             Attributes.BonusInt = 5;

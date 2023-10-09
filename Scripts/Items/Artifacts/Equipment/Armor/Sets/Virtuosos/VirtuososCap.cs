@@ -18,7 +18,7 @@ namespace Server.Items
         public override int InitMaxHits => 125;
 
         [Constructable]
-        public VirtuososCap() : base()
+        public VirtuososCap()
         {
             Hue = 1374;
             Weight = 5;

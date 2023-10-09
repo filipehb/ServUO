@@ -1,7 +1,8 @@
 #region References
-using System;
 
+using System;
 using Server.Network;
+
 #endregion
 
 namespace Server.ContextMenus

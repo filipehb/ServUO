@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
@@ -45,7 +45,6 @@ namespace Server.Engines.Quests
         public override object Complete => 1077619;
 
         public ScribingArcaneKnowledgeQuest()
-            : base()
         {
             AddObjective(new ApprenticeObjective(SkillName.Inscribe, 50, "Haven Library", 1077493, 1077587));
 
@@ -58,15 +57,15 @@ namespace Server.Engines.Quests
         public override bool CanOffer()
         {
             #region Scroll of Alacrity
-            PlayerMobile pm = Owner as PlayerMobile;
+            PlayerMobile pm = Owner;
             if (pm.AcceleratedStart > DateTime.UtcNow)
             {
                 Owner.SendLocalizedMessage(1077951); // You are already under the effect of an accelerated skillgain scroll.
                 return false;
             }
             #endregion
-            else
-                return Owner.Skills.Inscribe.Base < 50;
+
+            return Owner.Skills.Inscribe.Base < 50;
         }
 
         public override void OnCompleted()
@@ -92,7 +91,7 @@ namespace Server.Engines.Quests
 
     public class Jillian : MondainQuester
     {
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ScribingArcaneKnowledgeQuest)
                 };

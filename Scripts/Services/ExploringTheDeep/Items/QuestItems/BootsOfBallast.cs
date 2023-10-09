@@ -8,7 +8,6 @@ namespace Server.Items
 
         [Constructable]
         public BootsOfBallast()
-            : base()
         {
             Hue = 2969;
             LootType = LootType.Blessed;

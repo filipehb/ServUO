@@ -66,7 +66,7 @@ namespace Server.Engines.ResortAndCasino
 
         private static Point3D[] GetTramPoints()
         {
-            return new Point3D[]
+            return new[]
             {
                 new Point3D(4062, 3313, 1),
                 new Point3D(4050, 3332, 0),
@@ -87,7 +87,7 @@ namespace Server.Engines.ResortAndCasino
         {
             Point3D[] list = GetTramPoints();
 
-            return new Point3D[]
+            return new[]
             {
                 new Point3D(list[0].X - _MalasXOffset, list[0].Y - _MalasYOffset, list[0].Z - _MalasZOffset),
                 new Point3D(list[1].X - _MalasXOffset, list[1].Y - _MalasYOffset, list[1].Z - _MalasZOffset),

@@ -4,10 +4,6 @@ namespace Server
 {
 	public sealed class DualSaveStrategy : StandardSaveStrategy
 	{
-		public DualSaveStrategy()
-		{
-		}
-
 		public override string Name => "Dual";
 		public override void Save(SaveMetrics metrics, bool permitBackgroundWrite)
 		{

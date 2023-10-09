@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Engines.CannedEvil;
 using Server.Items;
 using Server.Services.Virtues;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -53,10 +53,10 @@ namespace Server.Mobiles
             double random = Utility.RandomDouble();
             if (0.05 >= random)
                 return CreateArtifact(UniqueList);
-            else if (0.15 >= random)
-                return CreateArtifact(SharedList);
-            else if (0.30 >= random)
-                return CreateArtifact(DecorativeList);
+            if (0.15 >= random)
+	            return CreateArtifact(SharedList);
+            if (0.30 >= random)
+	            return CreateArtifact(DecorativeList);
             return null;
         }
 

@@ -1,12 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Server.Commands;
 using Server.Engines.PartySystem;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -1086,7 +1087,7 @@ namespace Server.Spells.SkillMasteries
                             left = (_Cooldown[spell] - DateTime.UtcNow).TotalSeconds;
 
                             if (left > 0)
-                                m.SendLocalizedMessage(1079335, left.ToString("F", System.Globalization.CultureInfo.InvariantCulture)); // You must wait ~1_seconds~ seconds before you can use this ability again.
+                                m.SendLocalizedMessage(1079335, left.ToString("F", CultureInfo.InvariantCulture)); // You must wait ~1_seconds~ seconds before you can use this ability again.
                         }
                     }
 

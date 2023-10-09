@@ -1,13 +1,15 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-
+using Server.ContextMenus;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
+
 #endregion
 
 namespace Server
@@ -755,10 +757,8 @@ namespace Server
 			{
 				return m_Name;
 			}
-			else
-			{
-				return GetType().Name;
-			}
+
+			return GetType().Name;
 		}
 
 		public virtual void OnRegister()
@@ -1089,7 +1089,7 @@ namespace Server
 		{
 		}
 
-		public virtual void GetContextMenuEntries(Mobile from, List<Server.ContextMenus.ContextMenuEntry> list, Item item)
+		public virtual void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list, Item item)
 		{
 		}
 
@@ -1117,14 +1117,13 @@ namespace Server
 			{
 				return m_Parent.GetLogoutDelay(m);
 			}
-			else if (m.IsStaff())
+
+			if (m.IsStaff())
 			{
 				return m_StaffLogoutDelay;
 			}
-			else
-			{
-				return m_DefaultLogoutDelay;
-			}
+
+			return m_DefaultLogoutDelay;
 		}
 
 		static internal bool CanMove(Mobile m, Direction d, Point3D newLocation, Point3D oldLocation, Map map)
@@ -1265,7 +1264,7 @@ namespace Server
 				Region region = null;
 				try
 				{
-					region = (Region)Activator.CreateInstance(type, new object[] { xmlReg, map, parent });
+					region = (Region)Activator.CreateInstance(type, xmlReg, map, parent);
 				}
 				catch (Exception ex)
 				{
@@ -1369,21 +1368,20 @@ namespace Server
 
 				return null;
 			}
-			else if (xml.HasAttribute(attribute))
+
+			if (xml.HasAttribute(attribute))
 			{
 				return xml.GetAttribute(attribute);
 			}
-			else
-			{
-				if (mandatory)
-				{
-					Utility.PushColor(ConsoleColor.Red);
-					Console.WriteLine("Missing attribute '{0}' in element '{1}'", attribute, xml.Name);
-					Utility.PopColor();
-				}
 
-				return null;
+			if (mandatory)
+			{
+				Utility.PushColor(ConsoleColor.Red);
+				Console.WriteLine("Missing attribute '{0}' in element '{1}'", attribute, xml.Name);
+				Utility.PopColor();
 			}
+
+			return null;
 		}
 
 		public static bool ReadString(XmlElement xml, string attribute, ref string value)
@@ -1542,13 +1540,11 @@ namespace Server
 				value = tempVal;
 				return true;
 			}
-			else
-			{
-				Utility.PushColor(ConsoleColor.Red);
-				Console.WriteLine("Could not parse {0} enum attribute '{1}' in element '{2}'", type, attribute, xml.Name);
-				Utility.PopColor();
-				return false;
-			}
+
+			Utility.PushColor(ConsoleColor.Red);
+			Console.WriteLine("Could not parse {0} enum attribute '{1}' in element '{2}'", type, attribute, xml.Name);
+			Utility.PopColor();
+			return false;
 		}
 
 		public static bool ReadMap(XmlElement xml, string attribute, ref Map value)

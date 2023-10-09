@@ -1,11 +1,12 @@
+using System;
+using System.Globalization;
 using Server.Accounting;
+using Server.Guilds;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Globalization;
 
 namespace Server.Engines.Auction
 {
@@ -279,7 +280,7 @@ namespace Server.Engines.Auction
                 gold = (int)amount;
             }
 
-            return new int[] { plat, gold };
+            return new[] { plat, gold };
         }
 
         private class InternalTarget : Target
@@ -389,7 +390,7 @@ namespace Server.Engines.Auction
                             if (relay != null)
                                 str = relay.Text;
 
-                            if (str != null || Guilds.BaseGuildGump.CheckProfanity(str, 140))
+                            if (str != null || BaseGuildGump.CheckProfanity(str, 140))
                             {
                                 Auction.Description = Utility.FixHtml(str.Trim());
                             }

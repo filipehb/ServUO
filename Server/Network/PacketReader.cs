@@ -1,6 +1,9 @@
 #region References
+
+using System;
 using System.IO;
 using System.Text;
+
 #endregion
 
 namespace Server.Network
@@ -235,7 +238,7 @@ namespace Server.Network
 			if (m_Index >= m_Size)
 			{
 				m_Index += fixedLength;
-				return System.String.Empty;
+				return String.Empty;
 			}
 
 			var bound = m_Index + fixedLength;
@@ -298,7 +301,7 @@ namespace Server.Network
 		{
 			if (m_Index >= m_Size)
 			{
-				return System.String.Empty;
+				return String.Empty;
 			}
 
 			var count = 0;
@@ -350,7 +353,7 @@ namespace Server.Network
 		{
 			if (m_Index >= m_Size)
 			{
-				return System.String.Empty;
+				return String.Empty;
 			}
 
 			var count = 0;

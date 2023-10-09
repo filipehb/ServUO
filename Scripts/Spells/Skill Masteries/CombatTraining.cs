@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Server.Engines.Despise;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -353,7 +354,7 @@ namespace Server.Spells.SkillMasteries
 
             protected override void OnTarget(Mobile from, object targeted)
             {
-                if (targeted is Engines.Despise.DespiseCreature)
+                if (targeted is DespiseCreature)
                 {
                     return;
                 }

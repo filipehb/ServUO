@@ -1,7 +1,8 @@
-using Server.Items;
-using Server.Multis;
 using System;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Multis;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -30,9 +31,9 @@ namespace Server.Mobiles
         public override double TreasureMapChance => .50;
         public override int TreasureMapLevel => 7;
 
-        public override Type[] UniqueList => new Type[] { typeof(EnchantedCoralBracelet), typeof(WandOfThunderingGlory), typeof(LeviathanHideBracers), typeof(SmilingMoonBlade) };
-        public override Type[] SharedList => new Type[] { typeof(MiniSoulForgeDeed) };
-        public override Type[] DecorativeList => new Type[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
+        public override Type[] UniqueList => new[] { typeof(EnchantedCoralBracelet), typeof(WandOfThunderingGlory), typeof(LeviathanHideBracers), typeof(SmilingMoonBlade) };
+        public override Type[] SharedList => new[] { typeof(MiniSoulForgeDeed) };
+        public override Type[] DecorativeList => new[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
 
         public override bool NoGoodies => true;
 
@@ -181,7 +182,7 @@ namespace Server.Mobiles
                     x = Utility.RandomMinMax(loc.X - 1, loc.X + 1);
                     y = Utility.RandomMinMax(loc.Y - 1, loc.Y + 1);
 
-                    if (Spells.SpellHelper.CheckMulti(new Point3D(x, y, m.Z), map) || map.CanSpawnMobile(x, y, z))
+                    if (SpellHelper.CheckMulti(new Point3D(x, y, m.Z), map) || map.CanSpawnMobile(x, y, z))
                     {
                         var eel = new ParasiticEel(this);
                         eel.MoveToWorld(new Point3D(x, y, loc.Z), map);

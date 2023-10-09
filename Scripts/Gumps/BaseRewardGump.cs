@@ -1,6 +1,7 @@
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Gumps
 {
@@ -136,7 +137,7 @@ namespace Server.Gumps
             }
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             Mobile from = state.Mobile;
 

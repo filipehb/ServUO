@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Astronomy;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -82,7 +83,7 @@ namespace Server.Items
             }
             else
             {
-                m.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                m.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
         }
 

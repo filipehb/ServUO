@@ -1,6 +1,6 @@
-using Server.Mobiles;
 using System;
 using System.Collections;
+using Server.Mobiles;
 
 namespace Server.Engines.Quests.Collector
 {
@@ -31,8 +31,7 @@ namespace Server.Engines.Quests.Collector
 
     public class ImageTypeInfo
     {
-        private static readonly ImageTypeInfo[] m_Table = new ImageTypeInfo[]
-        {
+        private static readonly ImageTypeInfo[] m_Table = {
             new ImageTypeInfo(9734, typeof(Betrayer), 75, 45),
             new ImageTypeInfo(9735, typeof(Bogling), 75, 45),
             new ImageTypeInfo(9736, typeof(BogThing), 60, 47),
@@ -77,8 +76,7 @@ namespace Server.Engines.Quests.Collector
             int index = (int)image;
             if (index >= 0 && index < m_Table.Length)
                 return m_Table[index];
-            else
-                return m_Table[0];
+            return m_Table[0];
         }
 
         public static ImageType[] RandomList(int count)

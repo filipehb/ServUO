@@ -7,8 +7,7 @@ namespace Server.Items
 {
     public class RewardBrazier : Item, IRewardItem
     {
-        private static readonly int[] m_Art = new int[]
-        {
+        private static readonly int[] m_Art = {
             0x19AA, 0x19BB
         };
         private bool m_IsRewardItem;

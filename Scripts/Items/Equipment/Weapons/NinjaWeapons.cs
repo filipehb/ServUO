@@ -1,9 +1,11 @@
+using System;
 using Server.ContextMenus;
 using Server.Mobiles;
+using Server.SkillHandlers;
+using Server.Spells.Chivalry;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Targeting;
-using System;
 
 /*
  * There really was no prettier way to do this,  other than the one
@@ -89,7 +91,7 @@ namespace Server.Items
         {
             if (weapon.UsesRemaining > 0)
             {
-                INinjaAmmo ammo = Activator.CreateInstance(weapon.AmmoType, new object[] { weapon.UsesRemaining }) as INinjaAmmo;
+                INinjaAmmo ammo = Activator.CreateInstance(weapon.AmmoType, weapon.UsesRemaining) as INinjaAmmo;
 
                 ammo.Poison = weapon.Poison;
                 ammo.PoisonCharges = weapon.PoisonCharges;
@@ -177,14 +179,12 @@ namespace Server.Items
                 {
                     if (!from.NinjaWepCooldown)
                     {
-                        if (BasePotion.HasFreeHand(from))
+	                    if (BasePotion.HasFreeHand(from))
                         {
                             return true;
                         }
-                        else
-                        {
-                            from.SendLocalizedMessage(weapon.NoFreeHandMessage);
-                        }
+
+	                    from.SendLocalizedMessage(weapon.NoFreeHandMessage);
                     }
                     else
                     {
@@ -216,7 +216,7 @@ namespace Server.Items
                 defSkillValue = -19.9;
             }
 
-            if (Spells.Chivalry.DivineFurySpell.UnderEffect(attacker))
+            if (DivineFurySpell.UnderEffect(attacker))
             {
                 attackValue += 10;
             }
@@ -240,7 +240,7 @@ namespace Server.Items
 
             double defenseValue = AosAttributes.GetValue(defender, AosAttribute.DefendChance);
 
-            if (Spells.Chivalry.DivineFurySpell.UnderEffect(defender))
+            if (DivineFurySpell.UnderEffect(defender))
             {
                 defenseValue -= 20;
             }
@@ -254,7 +254,7 @@ namespace Server.Items
 
             int refBonus = 0;
 
-            if (SkillHandlers.Discordance.GetEffect(attacker, ref refBonus))
+            if (Discordance.GetEffect(attacker, ref refBonus))
             {
                 defenseValue -= refBonus;
             }

@@ -1,6 +1,6 @@
-using Server.ContextMenus;
 using System;
 using System.Collections.Generic;
+using Server.ContextMenus;
 
 namespace Server.Items
 {
@@ -88,23 +88,19 @@ namespace Server.Items
 
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
-            if (m_Owner == null)
+	        if (m_Owner == null)
             {
                 return;
             }
-            else
-            {
-                if (m_Owner != from)
-                {
-                    from.SendMessage("This is not yours to use.");
-                    return;
-                }
-                else
-                {
-                    base.GetContextMenuEntries(from, list);
-                    GetContextMenuEntries(from, this, list);
-                }
-            }
+
+	        if (m_Owner != from)
+	        {
+		        from.SendMessage("This is not yours to use.");
+		        return;
+	        }
+
+	        base.GetContextMenuEntries(from, list);
+	        GetContextMenuEntries(from, this, list);
         }
 
         public override DeathMoveResult OnInventoryDeath(Mobile parent)
@@ -136,22 +132,20 @@ namespace Server.Items
             if (m_Owner == null)
             {
                 m_Owner = from;
-                Name = m_Owner.Name.ToString() + "'s Staff Orb";
+                Name = m_Owner.Name + "'s Staff Orb";
                 HomeLocation = from.Location;
                 HomeMap = from.Map;
                 from.SendMessage("This orb has been assigned to you.");
             }
             else
             {
-                if (m_Owner != from)
+	            if (m_Owner != from)
                 {
                     from.SendMessage("This is not your's to use.");
                     return;
                 }
-                else
-                {
-                    SwitchAccessLevels(from);
-                }
+
+	            SwitchAccessLevels(from);
             }
         }
 

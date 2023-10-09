@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public MysticsGarb()
-            : base()
         {
             ItemID = 0x4000;
             Hue = 1420;

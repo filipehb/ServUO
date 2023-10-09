@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public StoneDragonsTooth()
-            : base()
         {
             Hue = 2407;
             Attributes.WeaponSpeed = 10;

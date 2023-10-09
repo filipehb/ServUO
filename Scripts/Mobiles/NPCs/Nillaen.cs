@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ParoxysmusSuccubiQuest : BaseQuest
     {
         public ParoxysmusSuccubiQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Succubus), "succubi", 3, "Palace of Paroxysmus"));
 
@@ -46,7 +45,6 @@ namespace Server.Engines.Quests
     public class ParoxysmusMolochQuest : BaseQuest
     {
         public ParoxysmusMolochQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Moloch), "molochs", 3, "Palace of Paroxysmus"));
 
@@ -85,7 +83,6 @@ namespace Server.Engines.Quests
     public class ParoxysmusDaemonsQuest : BaseQuest
     {
         public ParoxysmusDaemonsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Daemon), "daemons", 10, "Palace of Paroxysmus"));
 
@@ -124,7 +121,6 @@ namespace Server.Engines.Quests
     public class ParoxysmusArcaneDaemonsQuest : BaseQuest
     {
         public ParoxysmusArcaneDaemonsQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(ArcaneDaemon), "arcane daemons", 10, "Palace of Paroxysmus"));
 
@@ -163,7 +159,6 @@ namespace Server.Engines.Quests
     public class CausticComboQuest : BaseQuest
     {
         public CausticComboQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(PoisonElemental), "poison elementals", 3, "Palace of Paroxysmus"));
             AddObjective(new SlayObjective(typeof(ToxicElemental), "acid elementals", 6, "Palace of Paroxysmus"));
@@ -204,7 +199,6 @@ namespace Server.Engines.Quests
     public class PlagueLordQuest : BaseQuest
     {
         public PlagueLordQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(PlagueSpawn), "plague spawns", 10, "Palace of Paroxysmus"));
             AddObjective(new SlayObjective(typeof(PlagueBeast), "plague beasts", 3, "Palace of Paroxysmus"));
@@ -258,7 +252,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ParoxysmusSuccubiQuest),
                     typeof(ParoxysmusMolochQuest),

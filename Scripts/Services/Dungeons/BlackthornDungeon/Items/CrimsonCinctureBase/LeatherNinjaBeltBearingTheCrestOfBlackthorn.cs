@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public LeatherNinjaBeltBearingTheCrestOfBlackthorn2()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.BonusDex = 5;

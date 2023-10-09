@@ -100,7 +100,6 @@ namespace Server.Items
 
         [Constructable]
         public ClawFootTubDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

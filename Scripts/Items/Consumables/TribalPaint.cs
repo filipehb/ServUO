@@ -1,6 +1,9 @@
+using System;
 using Server.Mobiles;
 using Server.Spells;
-using System;
+using Server.Spells.Fifth;
+using Server.Spells.Ninjitsu;
+using Server.Spells.Seventh;
 
 namespace Server.Items
 {
@@ -25,11 +28,11 @@ namespace Server.Items
         {
             if (IsChildOf(from.Backpack))
             {
-                if (!from.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
+                if (!from.CanBeginAction(typeof(IncognitoSpell)))
                 {
                     from.SendLocalizedMessage(501698); // You cannot disguise yourself while incognitoed.
                 }
-                else if (!from.CanBeginAction(typeof(Spells.Seventh.PolymorphSpell)))
+                else if (!from.CanBeginAction(typeof(PolymorphSpell)))
                 {
                     from.SendLocalizedMessage(501699); // You cannot disguise yourself while polymorphed.
                 }
@@ -37,7 +40,7 @@ namespace Server.Items
                 {
                     from.SendLocalizedMessage(501699); // You cannot disguise yourself while polymorphed.
                 }
-                else if (Spells.Ninjitsu.AnimalForm.UnderTransformation(from))
+                else if (AnimalForm.UnderTransformation(from))
                 {
                     from.SendLocalizedMessage(1061634); // You cannot disguise yourself while in that form.
                 }

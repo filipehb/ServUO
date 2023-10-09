@@ -48,7 +48,6 @@ namespace Server.Items
         private bool m_East;
         [Constructable]
         public VanityDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

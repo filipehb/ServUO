@@ -51,7 +51,6 @@ namespace Server.Items
 
         [Constructable]
         public VollemHeld()
-            : base()
         {
         }
 

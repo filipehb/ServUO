@@ -1,4 +1,5 @@
 using System;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -34,7 +35,7 @@ namespace Server.Items
         {
             // TODO: Verify scaled; is it offset, duration, or both?
             int scale = Scale(from, DexOffset);
-            if (Spells.SpellHelper.AddStatOffset(from, StatType.Dex, scale, Duration))
+            if (SpellHelper.AddStatOffset(from, StatType.Dex, scale, Duration))
             {
                 from.FixedEffect(0x375A, 10, 15);
                 from.PlaySound(0x1E7);

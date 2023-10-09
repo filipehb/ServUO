@@ -20,7 +20,7 @@ namespace Server.Items
             get { return m_Ring; }
             set
             {
-                if (value == true)
+                if (value)
                     Clear();
 
                 m_Ring = value;
@@ -33,7 +33,7 @@ namespace Server.Items
             get { return m_Bracelet; }
             set
             {
-                if (value == true)
+                if (value)
                     Clear();
 
                 m_Bracelet = value;
@@ -46,7 +46,7 @@ namespace Server.Items
             get { return m_Earrings; }
             set
             {
-                if (value == true)
+                if (value)
                     Clear();
 
                 m_Earrings = value;
@@ -59,7 +59,7 @@ namespace Server.Items
             get { return m_Necklace; }
             set
             {
-                if (value == true)
+                if (value)
                     Clear();
 
                 m_Necklace = value;
@@ -72,7 +72,7 @@ namespace Server.Items
             get { return m_Talisman; }
             set
             {
-                if (value == true)
+                if (value)
                     Clear();
 
                 m_Talisman = value;

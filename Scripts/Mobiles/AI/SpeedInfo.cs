@@ -1,6 +1,8 @@
 #region References
-using Server.Mobiles;
+
 using System;
+using Server.Mobiles;
+
 #endregion
 
 namespace Server

@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Server.ContextMenus;
+using Server.Engines.Points;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.SkillHandlers;
-
-using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -88,7 +88,7 @@ namespace Server.Mobiles
 
                 if (q == null)
                 {
-                    BaseQuest quest = QuestHelper.RandomQuest(pm, new Type[] { typeof(WhisperingWithWispsQuest) }, this);
+                    BaseQuest quest = QuestHelper.RandomQuest(pm, new[] { typeof(WhisperingWithWispsQuest) }, this);
 
                     if (quest != null)
                     {
@@ -146,25 +146,23 @@ namespace Server.Mobiles
             }
         }
 
-        private readonly string[][] m_Keywords = new string[][]
-        {
+        private readonly string[][] m_Keywords = {
             new string[] { },
-            new string[] { "corporeal" },
-            new string[] { "sentient" },
-            new string[] { "deal" },
-            new string[] { "learn", "teach" },
-            new string[] { "good and evil", "good", "evil" },
-            new string[] { "guide" },
-            new string[] { "follow" },
-            new string[] { "fight" },
-            new string[] { "resonate" },
-            new string[] { "join" },
-            new string[] { "command" },
-            new string[] { "trade" },
+            new[] { "corporeal" },
+            new[] { "sentient" },
+            new[] { "deal" },
+            new[] { "learn", "teach" },
+            new[] { "good and evil", "good", "evil" },
+            new[] { "guide" },
+            new[] { "follow" },
+            new[] { "fight" },
+            new[] { "resonate" },
+            new[] { "join" },
+            new[] { "command" },
+            new[] { "trade" },
         };
 
-        private readonly int[] m_Responses = new int[]
-        {
+        private readonly int[] m_Responses = {
             1153441,
             1153443,
             1153445,
@@ -216,8 +214,8 @@ namespace Server.Mobiles
                     {
                         default:
                         case 0: item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(false, false, true); break;
-                        case 1: item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(false, true, false); break;
-                        case 2: item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(true, false, false); break;
+                        case 1: item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(false, true); break;
+                        case 2: item = Loot.RandomArmorOrShieldOrWeaponOrJewelry(true); break;
                     }
 
                     var failSafe = 0;
@@ -248,7 +246,7 @@ namespace Server.Mobiles
 
         public int GetCostFor(Item item)
         {
-            return (int)((double)Imbuing.GetTotalWeight(item, -1, false, true) * 2.18);
+            return (int)(Imbuing.GetTotalWeight(item, -1, false, true) * 2.18);
         }
 
         public void TryBuyItem(Mobile from, Item item)
@@ -259,12 +257,12 @@ namespace Server.Mobiles
                 return;
             }
 
-            int points = (int)Engines.Points.PointsSystem.DespiseCrystals.GetPoints(from);
+            int points = (int)PointsSystem.DespiseCrystals.GetPoints(from);
             int cost = GetCostFor(item);
 
             if (points >= cost)
             {
-                Engines.Points.PointsSystem.DespiseCrystals.DeductPoints(from, cost);
+                PointsSystem.DespiseCrystals.DeductPoints(from, cost);
                 item.Movable = true;
 
                 if (from.Backpack == null || !from.Backpack.TryDropItem(from, item, false))

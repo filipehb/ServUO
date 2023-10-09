@@ -1,8 +1,8 @@
-using Server.Engines.Quests;
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -13,7 +13,6 @@ namespace Server.Mobiles
 
         [Constructable]
         public OrcEngineer()
-            : base()
         {
             Title = "the Orcish Engineer";
 

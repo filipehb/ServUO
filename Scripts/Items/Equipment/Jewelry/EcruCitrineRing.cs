@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public EcruCitrineRing()
-            : base()
         {
             Weight = 1.0;
 

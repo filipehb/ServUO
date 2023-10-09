@@ -1,9 +1,11 @@
+using System;
+using Server.Engines.CityLoyalty;
 using Server.Gumps;
 using Server.Menus.Questions;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System;
+using Server.Regions;
 
 namespace Server.Engines.Help
 {
@@ -11,7 +13,7 @@ namespace Server.Engines.Help
     {
         private readonly Mobile m_From;
         public ContainedMenu(Mobile from)
-            : base("You already have an open help request. We will have someone assist you as soon as possible.  What would you like to do?", new string[] { "Leave my old help request like it is.", "Remove my help request from the queue." })
+            : base("You already have an open help request. We will have someone assist you as soon as possible.  What would you like to do?", new[] { "Leave my old help request like it is.", "Remove my help request from the queue." })
         {
             m_From = from;
         }
@@ -205,11 +207,11 @@ namespace Server.Engines.Help
                         {
                             from.Location = house.BanLocation;
                         }
-                        else if (CityLoyalty.CityTradeSystem.HasTrade(from))
+                        else if (CityTradeSystem.HasTrade(from))
                         {
                             from.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
                         }
-                        else if (from.Region.IsPartOf<Regions.Jail>())
+                        else if (from.Region.IsPartOf<Jail>())
                         {
                             from.SendLocalizedMessage(1114345, "", 0x35); // You'll need a better jailbreak plan than that!
                         }
@@ -262,11 +264,11 @@ namespace Server.Engines.Help
                     {
                         if (IsYoung(from))
                         {
-                            if (from.Region.IsPartOf<Regions.Jail>())
+                            if (from.Region.IsPartOf<Jail>())
                             {
                                 from.SendLocalizedMessage(1114345, "", 0x35); // You'll need a better jailbreak plan than that!
                             }
-                            else if (CityLoyalty.CityTradeSystem.HasTrade(from))
+                            else if (CityTradeSystem.HasTrade(from))
                             {
                                 from.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
                             }

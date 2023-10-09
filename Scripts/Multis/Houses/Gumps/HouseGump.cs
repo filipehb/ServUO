@@ -1,12 +1,14 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Server.Engines.Points;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Prompts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Gumps
 {
@@ -165,19 +167,16 @@ namespace Server.Gumps
             return 1 + (index * 15) + type;
         }
 
-        private static readonly int[] m_HangerNumbers = new int[]
-        {
+        private static readonly int[] m_HangerNumbers = {
             2968, 2970, 2972,
             2974, 2976, 2978
         };
 
-        private static readonly int[] m_FoundationNumbers = new int[]
-        {
+        private static readonly int[] m_FoundationNumbers = {
             20, 189, 765, 65, 101, 11767, 11771, 11207, 11715, 11181, 13938, 13942, 16806, 16732, 19208, 39614, 39888
         };
 
-        private static readonly int[] m_PostNumbers = new int[]
-        {
+        private static readonly int[] m_PostNumbers = {
             9, 29, 54, 90, 147, 169, 177, 204, 251, 257,
             263, 298, 347, 353, 424, 441, 466, 514, 553,
             600, 601, 602, 603, 660, 666, 672, 898, 970,
@@ -292,7 +291,7 @@ namespace Server.Gumps
                         AddLabel(250, 310, LabelHue, GetDateTime(house.LastTraded));
 
                         AddHtmlLocalized(20, 330, 200, 20, 1061793, SelectedColor, false, false); // House Value
-                        AddLabel(250, 330, LabelHue, house.Price.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US")));
+                        AddLabel(250, 330, LabelHue, house.Price.ToString("N0", CultureInfo.GetCultureInfo("en-US")));
 
                         AddHtmlLocalized(20, 360, 300, 20, 1011241, SelectedColor, false, false); // Number of visits this building has had: 
                         AddLabel(350, 360, LabelHue, house.TotalVisits.ToString());
@@ -377,7 +376,7 @@ namespace Server.Gumps
                         int vendors = house.PlayerVendors.Count + house.VendorRentalContracts.Count;
 
                         AddHtmlLocalized(10, 350, 300, 20, 1062391, LabelColor, false, false); // Vendor Count
-                        AddLabel(310, 350, LabelHue, vendors.ToString() + " / " + maxVendors.ToString());
+                        AddLabel(310, 350, LabelHue, vendors + " / " + maxVendors);
 
                         break;
                     }
@@ -1054,11 +1053,11 @@ namespace Server.Gumps
                                             break;
                                         }
 
-                                        else if (m_House.HasActiveAuction)
+                                        if (m_House.HasActiveAuction)
                                         {
-                                            // You cannot currently take this action because you have auction safes locked down in your home. You must remove them first.
-                                            from.SendLocalizedMessage(1156453);
-                                            break;
+	                                        // You cannot currently take this action because you have auction safes locked down in your home. You must remove them first.
+	                                        from.SendLocalizedMessage(1156453);
+	                                        break;
                                         }
 
                                         m_House.Public = false;
@@ -1126,7 +1125,7 @@ namespace Server.Gumps
                                             // are present in the house.  Please re-deed the add-on containers before customizing the house.
                                             from.SendGump(new NoticeGump(1060637, 30720, 1074863, 32512, 320, 180, CustomizeNotice_Callback, m_House));
                                         }
-                                        else if (m_House.Map == Map.TerMur && !Engines.Points.PointsSystem.QueensLoyalty.IsNoble(from))
+                                        else if (m_House.Map == Map.TerMur && !PointsSystem.QueensLoyalty.IsNoble(from))
                                         {
                                             from.SendLocalizedMessage(1113714, "2000"); //You can't resize a house in Ter Mur unless you have at least ~1_MIN~ loyalty to the Gargoyle Queen.
                                         }
@@ -1171,7 +1170,6 @@ namespace Server.Gumps
                                         else if (m_House.HasActiveAuction)
                                         {
                                             from.SendLocalizedMessage(1156453); // You cannot currently take this action because you have auction safes locked down in your home. You must remove them first.
-                                            return;
                                         }
                                         else
                                         {

@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Points
 {
@@ -95,8 +95,7 @@ namespace Server.Engines.Points
         }
 
         public static Type[] DoomArtifacts => m_DoomArtifact;
-        private static readonly Type[] m_DoomArtifact = new Type[]
-        {
+        private static readonly Type[] m_DoomArtifact = {
             typeof(LegacyOfTheDreadLord),       typeof(TheTaskmaster),              typeof(TheDragonSlayer),
             typeof(ArmorOfFortune),             typeof(GauntletsOfNobility),        typeof(HelmOfInsight),
             typeof(HolyKnightsBreastplate),     typeof(JackalsCollar),              typeof(LeggingsOfBane),
@@ -111,14 +110,13 @@ namespace Server.Engines.Points
         };
 
         public static Type[][] RewardTable => m_RewardTable;
-        private static readonly Type[][] m_RewardTable = new Type[][]
-        {
-            new Type[] { typeof(HatOfTheMagi) },            new Type[] { typeof(StaffOfTheMagi) },      new Type[] { typeof(OrnamentOfTheMagician) },
-            new Type[] { typeof(ShadowDancerLeggings) },    new Type[] {typeof(RingOfTheElements) },    new Type[] { typeof(GauntletsOfNobility) },
-            new Type[] { typeof(LeggingsOfBane) },          new Type[] { typeof(MidnightBracers) },     new Type[] { typeof(Glenda) },
-            new Type[] { typeof(BowOfTheInfiniteSwarm) },   new Type[] { typeof(TheDeceiver) },         new Type[] { typeof(TheScholarsHalo) },
-            new Type[] { typeof(DoomRecipeScroll) },
-            new Type[]
+        private static readonly Type[][] m_RewardTable = {
+            new[] { typeof(HatOfTheMagi) },            new[] { typeof(StaffOfTheMagi) },      new[] { typeof(OrnamentOfTheMagician) },
+            new[] { typeof(ShadowDancerLeggings) },    new[] {typeof(RingOfTheElements) },    new[] { typeof(GauntletsOfNobility) },
+            new[] { typeof(LeggingsOfBane) },          new[] { typeof(MidnightBracers) },     new[] { typeof(Glenda) },
+            new[] { typeof(BowOfTheInfiniteSwarm) },   new[] { typeof(TheDeceiver) },         new[] { typeof(TheScholarsHalo) },
+            new[] { typeof(DoomRecipeScroll) },
+            new[]
             {
                 typeof(LegacyOfTheDreadLord),       typeof(TheTaskmaster),
                 typeof(ArmorOfFortune),             typeof(HelmOfInsight),

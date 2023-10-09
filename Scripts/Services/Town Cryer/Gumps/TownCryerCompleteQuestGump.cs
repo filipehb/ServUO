@@ -1,7 +1,7 @@
+using System.Linq;
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Mobiles;
-using System.Linq;
 
 namespace Server.Services.TownCryer
 {

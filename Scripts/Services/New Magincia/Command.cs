@@ -1,5 +1,5 @@
-using Server.Commands;
 using System;
+using Server.Commands;
 
 namespace Server.Engines.NewMagincia
 {

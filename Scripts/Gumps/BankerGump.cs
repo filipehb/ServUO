@@ -1,8 +1,9 @@
-using Server.Accounting;
-using Server.Mobiles;
-using Server.Network;
 using System;
 using System.Globalization;
+using Server.Accounting;
+using Server.Engines.Quests;
+using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Gumps
 {
@@ -193,7 +194,7 @@ namespace Server.Gumps
         public NewCurrencyHelpGump() : base(50, 75)
         {
             AddBackground(0, 0, 875, 480, 5170);
-            AddHtmlLocalized(50, 40, 775, 440, 1156048, Engines.Quests.BaseQuestGump.C32216(0x6495ED), false, false);
+            AddHtmlLocalized(50, 40, 775, 440, 1156048, BaseQuestGump.C32216(0x6495ED), false, false);
         }
     }
 }

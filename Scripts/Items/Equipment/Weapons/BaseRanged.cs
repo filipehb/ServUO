@@ -1,8 +1,10 @@
 #region References
+
+using System;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
-using System;
+
 #endregion
 
 namespace Server.Items

@@ -68,7 +68,7 @@ namespace Server.Gumps
             y += 25;
 
             AddHtmlLocalized(10, y, 200, 16, 1154107, WhiteLabel, false, false); // BONUS MOD CHANCE:
-            AddHtmlLocalized(170, y, 15, 16, 1114057, m_Item.GetBonusChance().ToString() + "%", WhiteLabel, false, false);
+            AddHtmlLocalized(170, y, 15, 16, 1114057, m_Item.GetBonusChance() + "%", WhiteLabel, false, false);
 
             AddButton(10, 320, 4017, 4019, 0, GumpButtonType.Reply, 0);
             AddHtmlLocalized(50, 320, 100, 16, 3002084, WhiteLabel, false, false); // Close

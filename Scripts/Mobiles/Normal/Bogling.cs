@@ -1,3 +1,4 @@
+using Server.Engines.Plants;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -54,7 +55,7 @@ namespace Server.Mobiles
 
         private Item RandomSeed(IEntity e)
         {
-            return new Engines.Plants.Seed();
+            return new Seed();
         }
 
         public override void Serialize(GenericWriter writer)

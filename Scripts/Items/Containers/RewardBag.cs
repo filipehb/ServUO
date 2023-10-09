@@ -5,7 +5,6 @@ namespace Server.Items
     public class BaseRewardBag : Bag
     {
         public BaseRewardBag()
-            : base()
         {
             Hue = Reward.RewardBagHue();
 
@@ -59,7 +58,6 @@ namespace Server.Items
     {
         [Constructable]
         public SmallTrinketBag()
-            : base()
         {
         }
 
@@ -88,7 +86,6 @@ namespace Server.Items
     {
         [Constructable]
         public TrinketBag()
-            : base()
         {
         }
 
@@ -117,7 +114,6 @@ namespace Server.Items
     {
         [Constructable]
         public TreasureBag()
-            : base()
         {
         }
 
@@ -146,7 +142,6 @@ namespace Server.Items
     {
         [Constructable]
         public LargeTreasureBag()
-            : base()
         {
         }
 

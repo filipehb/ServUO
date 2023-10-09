@@ -1,4 +1,5 @@
 using System;
+using Server.Network;
 
 namespace Server.Engines.VvV
 {
@@ -38,7 +39,7 @@ namespace Server.Engines.VvV
                     m.FixedParticles(0x37C4, 1, 8, 9916, 39, 3, EffectLayer.CenterFeet);
                     m.FixedParticles(0x37C4, 1, 8, 9502, 39, 4, EffectLayer.CenterFeet);
                     m.PlaySound(0x210);
-                    m.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1155499, m.NetState); // *You drive the spike into the ground!*
+                    m.PrivateOverheadMessage(MessageType.Regular, 1154, 1155499, m.NetState); // *You drive the spike into the ground!*
 
                     Timer.DelayCall(TimeSpan.FromMilliseconds(250), () =>
                     {
@@ -62,7 +63,7 @@ namespace Server.Engines.VvV
                                 mobile.BoltEffect(0);
                                 AOS.Damage(mobile, m, Utility.RandomMinMax(50, 75), 0, 0, 0, 0, 100);
 
-                                mobile.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1155498, mobile.NetState); // *Your body convulses as energy surges through it!*
+                                mobile.PrivateOverheadMessage(MessageType.Regular, 1154, 1155498, mobile.NetState); // *Your body convulses as energy surges through it!*
                             }
                         }
 
@@ -82,7 +83,7 @@ namespace Server.Engines.VvV
 
             if (battle != null && battle.OnGoing && battle.ManaSpikeEndEffects != DateTime.MinValue && battle.ManaSpikeEndEffects > DateTime.UtcNow)
             {
-                m.PrivateOverheadMessage(Network.MessageType.Regular, 1154, 1155500, m.NetState); // *Your body is too charged with electrical energy to hide!*
+                m.PrivateOverheadMessage(MessageType.Regular, 1154, 1155500, m.NetState); // *Your body is too charged with electrical energy to hide!*
                 return true;
             }
 

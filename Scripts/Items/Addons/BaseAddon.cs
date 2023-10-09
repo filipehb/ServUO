@@ -1,8 +1,9 @@
 #region References
-using Server.Multis;
 
 using System;
 using System.Collections.Generic;
+using Server.Multis;
+
 #endregion
 
 namespace Server.Items
@@ -217,14 +218,12 @@ namespace Server.Items
 
                     if (house.IsStairArea(p, out frontStairs))
                     {
-                        if (frontStairs)
+	                    if (frontStairs)
                         {
                             return AddonFitResult.FoundationStairs;
                         }
-                        else
-                        {
-                            return AddonFitResult.InternalStairs;
-                        }
+
+	                    return AddonFitResult.InternalStairs;
                     }
                 }
             }

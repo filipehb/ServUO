@@ -1,8 +1,10 @@
-using Server.Engines.Quests;
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Quests;
+using Server.Items;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -124,7 +126,7 @@ namespace Server.Mobiles
                 z = Map.GetAverageZ(x, y);
                 Point3D p = new Point3D(x, y, z);
 
-                if (Spells.SpellHelper.AdjustField(ref p, Map, 12, false))/*Map.CanFit(x, y, z, 16, false, false, true))/*Map.CanSpawnMobile(x, y, z)*/
+                if (SpellHelper.AdjustField(ref p, Map, 12, false))/*Map.CanFit(x, y, z, 16, false, false, true))/*Map.CanSpawnMobile(x, y, z)*/
                 {
                     MovementPath path = new MovementPath(this, p);
 
@@ -163,7 +165,7 @@ namespace Server.Mobiles
             Map map = objs[1] as Map;
 
             FreezeItem item = new FreezeItem(Utility.RandomList(6913, 6915, 6917, 6919), this);
-            Spells.SpellHelper.GetSurfaceTop(ref p);
+            SpellHelper.GetSurfaceTop(ref p);
 
             item.MoveToWorld(new Point3D(p), Map);
         }
@@ -599,7 +601,7 @@ namespace Server.Mobiles
                 if (quest != null && !quest.Completed)
                     quest.Update(this);
 
-                Protector.PrivateOverheadMessage(Network.MessageType.Regular, 0x35, 1156501, Protector.NetState); // *You watch as the Tiger Cub safely returns to the Kurak Tribe*
+                Protector.PrivateOverheadMessage(MessageType.Regular, 0x35, 1156501, Protector.NetState); // *You watch as the Tiger Cub safely returns to the Kurak Tribe*
 
                 Timer.DelayCall(TimeSpan.FromSeconds(.25), Delete);
                 Protector = null;
@@ -610,7 +612,7 @@ namespace Server.Mobiles
         {
             if (from == Protector)
             {
-                PrivateOverheadMessage(Network.MessageType.Regular, 0x35, 1156500, from.NetState); // *The cub looks at you playfully. Your attack fails as you are overwhelmed by its cuteness*
+                PrivateOverheadMessage(MessageType.Regular, 0x35, 1156500, from.NetState); // *The cub looks at you playfully. Your attack fails as you are overwhelmed by its cuteness*
                 return 0;
             }
 

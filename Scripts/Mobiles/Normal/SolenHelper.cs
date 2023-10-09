@@ -31,8 +31,8 @@ namespace Server.Mobiles
 
                 if (bc.Controlled && bc.ControlMaster is PlayerMobile)
                     return CheckRedFriendship(bc.ControlMaster);
-                else if (bc.Summoned && bc.SummonMaster is PlayerMobile)
-                    return CheckRedFriendship(bc.SummonMaster);
+                if (bc.Summoned && bc.SummonMaster is PlayerMobile)
+	                return CheckRedFriendship(bc.SummonMaster);
             }
 
             PlayerMobile player = m as PlayerMobile;
@@ -48,8 +48,8 @@ namespace Server.Mobiles
 
                 if (bc.Controlled && bc.ControlMaster is PlayerMobile)
                     return CheckBlackFriendship(bc.ControlMaster);
-                else if (bc.Summoned && bc.SummonMaster is PlayerMobile)
-                    return CheckBlackFriendship(bc.SummonMaster);
+                if (bc.Summoned && bc.SummonMaster is PlayerMobile)
+	                return CheckBlackFriendship(bc.SummonMaster);
             }
 
             PlayerMobile player = m as PlayerMobile;

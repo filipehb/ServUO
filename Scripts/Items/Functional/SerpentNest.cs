@@ -1,6 +1,7 @@
+using System;
+using Server.Diagnostics;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -95,15 +96,14 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 
             Collapse(from);
         }
 
-        private static readonly Type[] m_SnakeTypes = new Type[]
-            {
+        private static readonly Type[] m_SnakeTypes = {
                 typeof( LavaSnake ),    typeof( Snake ),
                 typeof( CoralSnake ),   typeof( GiantSerpent )
             };

@@ -17,7 +17,7 @@ namespace Server.Items
         public override int InitMaxHits => 150;
 
         [Constructable]
-        public InitiationGloves() : base()
+        public InitiationGloves()
         {
 
             Weight = 1;

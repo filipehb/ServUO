@@ -1,6 +1,7 @@
 using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -96,7 +97,7 @@ namespace Server.Items
                 else
                     sos.MoveToWorld(Location, Map);
 
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 501891); // You extract the message from the bottle.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 501891); // You extract the message from the bottle.
             }
             else
             {

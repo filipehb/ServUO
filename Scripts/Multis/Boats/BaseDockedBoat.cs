@@ -124,77 +124,78 @@ namespace Server.Multis
 
         public void OnPlacement(Mobile from, Point3D p, int itemID, Direction d)
         {
-            if (Deleted)
+	        if (Deleted)
             {
                 return;
             }
-            else if (!IsChildOf(from.Backpack))
-            {
-                from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
-            }
-            else
-            {
-                Map map = from.Map;
 
-                if (map == null)
-                    return;
+	        if (!IsChildOf(from.Backpack))
+	        {
+		        from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+	        }
+	        else
+	        {
+		        Map map = from.Map;
 
-                BoatDirection = d;
-                BaseBoat boat = BoatItem;
+		        if (map == null)
+			        return;
 
-                if (boat == null || boat.Deleted)
-                    boat = Boat;
+		        BoatDirection = d;
+		        BaseBoat boat = BoatItem;
 
-                if (boat == null)
-                    return;
+		        if (boat == null || boat.Deleted)
+			        boat = Boat;
 
-                Mobile oldOwner = boat.Owner;
+		        if (boat == null)
+			        return;
 
-                boat.BoatItem = this;
-                boat.Owner = from;
+		        Mobile oldOwner = boat.Owner;
 
-                if (oldOwner != from && boat is BaseGalleon)
-                    ((BaseGalleon)boat).SecurityEntry = new SecurityEntry((BaseGalleon)boat);
+		        boat.BoatItem = this;
+		        boat.Owner = from;
 
-                p = new Point3D(p.X - Offset.X, p.Y - Offset.Y, p.Z - Offset.Z);
+		        if (oldOwner != from && boat is BaseGalleon)
+			        ((BaseGalleon)boat).SecurityEntry = new SecurityEntry((BaseGalleon)boat);
 
-                if (BaseBoat.IsValidLocation(p, map) && boat.CanFit(p, map, itemID) && map != Map.Ilshenar && map != Map.Malas)
-                {
-                    boat.SetFacing(d);
-                    boat.MoveToWorld(p, map);
-                    boat.OnPlacement(from);
-                    boat.Refresh();
+		        p = new Point3D(p.X - Offset.X, p.Y - Offset.Y, p.Z - Offset.Z);
 
-                    boat.OnAfterPlacement(false);
+		        if (BaseBoat.IsValidLocation(p, map) && boat.CanFit(p, map, itemID) && map != Map.Ilshenar && map != Map.Malas)
+		        {
+			        boat.SetFacing(d);
+			        boat.MoveToWorld(p, map);
+			        boat.OnPlacement(from);
+			        boat.Refresh();
 
-                    LighthouseAddon addon = LighthouseAddon.GetLighthouse(from);
+			        boat.OnAfterPlacement(false);
 
-                    if (addon != null)
-                    {
-                        if (boat.CanLinkToLighthouse)
-                            from.SendLocalizedMessage(1154592); // You have linked your boat lighthouse.
-                        else
-                            from.SendLocalizedMessage(1154597); // Failed to link to lighthouse.
-                    }
+			        LighthouseAddon addon = LighthouseAddon.GetLighthouse(from);
 
-                    if (boat.IsClassicBoat)
-                    {
-                        uint keyValue = boat.CreateKeys(from);
+			        if (addon != null)
+			        {
+				        if (boat.CanLinkToLighthouse)
+					        from.SendLocalizedMessage(1154592); // You have linked your boat lighthouse.
+				        else
+					        from.SendLocalizedMessage(1154597); // Failed to link to lighthouse.
+			        }
 
-                        if (boat.PPlank != null)
-                            boat.PPlank.KeyValue = keyValue;
+			        if (boat.IsClassicBoat)
+			        {
+				        uint keyValue = boat.CreateKeys(from);
 
-                        if (boat.SPlank != null)
-                            boat.SPlank.KeyValue = keyValue;
-                    }
+				        if (boat.PPlank != null)
+					        boat.PPlank.KeyValue = keyValue;
 
-                    Internalize();
-                }
-                else
-                {
-                    from.SendLocalizedMessage(1043284); // A ship can not be created here.
-                }
-            }
+				        if (boat.SPlank != null)
+					        boat.SPlank.KeyValue = keyValue;
+			        }
+
+			        Internalize();
+		        }
+		        else
+		        {
+			        from.SendLocalizedMessage(1043284); // A ship can not be created here.
+		        }
+	        }
         }
     }
 }

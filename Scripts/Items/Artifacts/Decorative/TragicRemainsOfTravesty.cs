@@ -3,8 +3,7 @@ namespace Server.Items
     public class TragicRemainsOfTravesty : BaseStatuette
     {
         public override bool IsArtifact => true;
-        private static readonly int[] m_Sounds = new int[]
-        {
+        private static readonly int[] m_Sounds = {
             0x314, 0x315, 0x316, 0x317  // TODO check
         };
         [Constructable]

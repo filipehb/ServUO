@@ -5,8 +5,7 @@ namespace Server.Items
 {
     public abstract class BaseRunicTool : BaseTool
     {
-        private static readonly SkillName[] m_PossibleBonusSkills = new SkillName[]
-        {
+        private static readonly SkillName[] m_PossibleBonusSkills = {
             SkillName.Swords,
             SkillName.Fencing,
             SkillName.Macing,
@@ -37,8 +36,7 @@ namespace Server.Items
             SkillName.Ninjitsu
         };
 
-        private static readonly SkillName[] m_PossibleSpellbookSkills = new SkillName[]
-        {
+        private static readonly SkillName[] m_PossibleSpellbookSkills = {
             SkillName.Magery,
             SkillName.Meditation,
             SkillName.EvalInt,

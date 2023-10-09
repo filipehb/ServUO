@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Server.Diagnostics;
 
 namespace Server.Engines.Chat
 {
@@ -36,7 +37,7 @@ namespace Server.Engines.Chat
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -78,7 +79,7 @@ namespace Server.Engines.Chat
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 

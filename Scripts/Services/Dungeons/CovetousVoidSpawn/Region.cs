@@ -1,16 +1,15 @@
+using System;
+using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
 using Server.Spells;
-using System;
-using System.Linq;
 
 namespace Server.Engines.VoidPool
 {
     public class VoidPoolRegion : BaseRegion
     {
-        private static readonly Rectangle2D[] Bounds = new Rectangle2D[]
-        {
+        private static readonly Rectangle2D[] Bounds = {
             new Rectangle2D(5383, 1960, 236, 80),
             new Rectangle2D(5429, 1948, 12, 10),
         };

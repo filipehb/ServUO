@@ -43,14 +43,16 @@ namespace Server.Mobiles
                 Say(501222); // Thou art a criminal.  I shall not resurrect thee.
                 return false;
             }
-            else if (m.Murderer)
+
+            if (m.Murderer)
             {
-                Say(501223); // Thou'rt not a decent and good person. I shall not resurrect thee.
-                return false;
+	            Say(501223); // Thou'rt not a decent and good person. I shall not resurrect thee.
+	            return false;
             }
-            else if (m.Karma < 0)
+
+            if (m.Karma < 0)
             {
-                Say(501224); // Thou hast strayed from the path of virtue, but thou still deservest a second chance.
+	            Say(501224); // Thou hast strayed from the path of virtue, but thou still deservest a second chance.
             }
 
             return true;

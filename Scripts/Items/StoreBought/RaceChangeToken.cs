@@ -1,8 +1,8 @@
-﻿using Server.Engines.Quests;
+﻿using System;
+using System.Collections.Generic;
+using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -69,10 +69,8 @@ namespace Server.Items
 
                 return true;
             }
-            else
-            {
-                m.SendLocalizedMessage(1062334); // This item must be in your backpack to be used.
-            }
+
+            m.SendLocalizedMessage(1062334); // This item must be in your backpack to be used.
 
             return false;
         }

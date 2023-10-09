@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class TroubleOnTheWingQuest : BaseQuest
     {
         public TroubleOnTheWingQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(Gargoyle), "gargoyles", 12, "Sanctuary"));
 
@@ -56,7 +55,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(TroubleOnTheWingQuest),
                     typeof(MaraudersQuest),

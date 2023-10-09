@@ -1,6 +1,6 @@
+using System;
 using Server.Engines.Craft;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {

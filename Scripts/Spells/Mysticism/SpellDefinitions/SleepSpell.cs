@@ -1,7 +1,7 @@
-using Server.Network;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Spells.Mysticism
 {
@@ -35,28 +35,29 @@ namespace Server.Spells.Mysticism
             {
                 return;
             }
-            else if (target.Paralyzed)
+
+            if (target.Paralyzed)
             {
-                Caster.SendLocalizedMessage(1080134); //Your target is already immobilized and cannot be slept.
+	            Caster.SendLocalizedMessage(1080134); //Your target is already immobilized and cannot be slept.
             }
             else if (m_ImmunityList.Contains(target))
             {
-                Caster.SendLocalizedMessage(1080135); //Your target cannot be put to sleep.
+	            Caster.SendLocalizedMessage(1080135); //Your target cannot be put to sleep.
             }
             else if (CheckHSequence(target))
             {
-                SpellHelper.CheckReflect(this, Caster, ref target);
+	            SpellHelper.CheckReflect(this, Caster, ref target);
 
-                double duration = ((Caster.Skills[CastSkill].Value + Caster.Skills[DamageSkill].Value) / 20) + 2;
-                duration -= GetResistSkill(target) / 10;
+	            double duration = ((Caster.Skills[CastSkill].Value + Caster.Skills[DamageSkill].Value) / 20) + 2;
+	            duration -= GetResistSkill(target) / 10;
 
-                if (duration <= 0 || StoneFormSpell.CheckImmunity(target))
-                {
-                    Caster.SendLocalizedMessage(1080136); //Your target resists sleep.
-                    target.SendLocalizedMessage(1080137); //You resist sleep.
-                }
-                else
-                    DoSleep(Caster, target, TimeSpan.FromSeconds(duration));
+	            if (duration <= 0 || StoneFormSpell.CheckImmunity(target))
+	            {
+		            Caster.SendLocalizedMessage(1080136); //Your target resists sleep.
+		            target.SendLocalizedMessage(1080137); //You resist sleep.
+	            }
+	            else
+		            DoSleep(Caster, target, TimeSpan.FromSeconds(duration));
             }
 
             FinishSequence();

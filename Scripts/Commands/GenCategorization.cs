@@ -1,9 +1,11 @@
-using Server.Items;
 using System;
 using System.Collections;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Xml;
+using Server.Diagnostics;
+using Server.Items;
 
 namespace Server.Commands
 {
@@ -42,7 +44,7 @@ namespace Server.Commands
         [Description("Rebuilds the categorization data file used by the Add command.")]
         public static void RebuildCategorization_OnCommand(CommandEventArgs e)
         {
-            CategoryEntry root = new CategoryEntry(null, "Add Menu", new CategoryEntry[] { Items, Mobiles });
+            CategoryEntry root = new CategoryEntry(null, "Add Menu", new[] { Items, Mobiles });
 
             Export(root, "Data/objects.xml", "Objects");
 
@@ -59,7 +61,7 @@ namespace Server.Commands
 
         public static void Export(CategoryEntry ce, string fileName, string title)
         {
-            XmlTextWriter xml = new XmlTextWriter(fileName, System.Text.Encoding.UTF8)
+            XmlTextWriter xml = new XmlTextWriter(fileName, Encoding.UTF8)
             {
                 Indentation = 1,
                 IndentChar = '\t',
@@ -219,7 +221,7 @@ namespace Server.Commands
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
         }

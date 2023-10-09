@@ -1,16 +1,25 @@
 #region References
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Engines.ArenaSystem;
 using Server.Engines.BulkOrders;
 using Server.Engines.CannedEvil;
 using Server.Engines.CityLoyalty;
 using Server.Engines.Craft;
 using Server.Engines.Help;
+using Server.Engines.JollyRoger;
 using Server.Engines.PartySystem;
 using Server.Engines.Points;
 using Server.Engines.Quests;
 using Server.Engines.Shadowguard;
 using Server.Engines.SphynxFortune;
+using Server.Engines.UOStore;
 using Server.Engines.VendorSearching;
 using Server.Engines.VoidPool;
 using Server.Engines.VvV;
@@ -28,19 +37,16 @@ using Server.Spells.Bushido;
 using Server.Spells.Fifth;
 using Server.Spells.First;
 using Server.Spells.Fourth;
+using Server.Spells.Mysticism;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
+using Server.Spells.Second;
 using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.SkillMasteries;
 using Server.Targeting;
+using LoyaltyRating = Server.Engines.Points.LoyaltyRating;
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Server.Engines.ArenaSystem;
-using RankDefinition = Server.Guilds.RankDefinition;
 #endregion
 
 namespace Server.Mobiles
@@ -117,7 +123,7 @@ namespace Server.Mobiles
     }
     #endregion
 
-    public partial class PlayerMobile : Mobile, IHonorTarget
+    public class PlayerMobile : Mobile, IHonorTarget
     {
         public static List<PlayerMobile> Instances { get; private set; }
 
@@ -377,14 +383,12 @@ namespace Server.Mobiles
         {
             get
             {
-                if (AccessLevel >= AccessLevel.GameMaster)
+	            if (AccessLevel >= AccessLevel.GameMaster)
                 {
                     return RankDefinition.Leader;
                 }
-                else
-                {
-                    return m_GuildRank;
-                }
+
+	            return m_GuildRank;
             }
             set { m_GuildRank = value; }
         }
@@ -566,7 +570,7 @@ namespace Server.Mobiles
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
 
                         if (ammo != null)
@@ -990,7 +994,7 @@ namespace Server.Mobiles
             }
             else
             {
-                max += Spells.Mysticism.StoneFormSpell.GetMaxResistBonus(this);
+                max += StoneFormSpell.GetMaxResistBonus(this);
             }
 
             if (Race == Race.Elf && type == ResistanceType.Energy)
@@ -1511,7 +1515,7 @@ namespace Server.Mobiles
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
             finally
             {
@@ -1695,8 +1699,8 @@ namespace Server.Mobiles
 
         public override void OnSubItemRemoved(Item item)
         {
-            if (Engines.UOStore.UltimaStore.HasPendingItem(this))
-                Timer.DelayCall(TimeSpan.FromSeconds(1.5), Engines.UOStore.UltimaStore.CheckPendingItem, this);
+            if (UltimaStore.HasPendingItem(this))
+                Timer.DelayCall(TimeSpan.FromSeconds(1.5), UltimaStore.CheckPendingItem, this);
         }
 
         public override void AggressiveAction(Mobile aggressor, bool criminal)
@@ -2143,8 +2147,7 @@ namespace Server.Mobiles
 
         public SkillName[] AnimalFormRestrictedSkills => m_AnimalFormRestrictedSkills;
 
-        private readonly SkillName[] m_AnimalFormRestrictedSkills = new[]
-        {
+        private readonly SkillName[] m_AnimalFormRestrictedSkills = {
             SkillName.ArmsLore, SkillName.Begging, SkillName.Discordance, SkillName.Forensics, SkillName.Inscribe,
             SkillName.ItemID, SkillName.Meditation, SkillName.Peacemaking, SkillName.Provocation, SkillName.RemoveTrap,
             SkillName.SpiritSpeak, SkillName.Stealing, SkillName.TasteID
@@ -2262,7 +2265,7 @@ namespace Server.Mobiles
 
                 if (Alive)
                 {
-                    list.Add(new Engines.Points.LoyaltyRating(this));
+                    list.Add(new LoyaltyRating(this));
                 }
 
                 list.Add(new OpenBackpackEntry(this));
@@ -2572,7 +2575,7 @@ namespace Server.Mobiles
                 _BlessedItem = null;
                 item.LootType = LootType.Regular;
 
-                SendLocalizedMessage(1075292, item.Name != null ? item.Name : "#" + item.LabelNumber.ToString()); // ~1_NAME~ has been unblessed.
+                SendLocalizedMessage(1075292, item.Name != null ? item.Name : "#" + item.LabelNumber); // ~1_NAME~ has been unblessed.
             }
 
             return drop;
@@ -3691,7 +3694,7 @@ namespace Server.Mobiles
             ClumsySpell.RemoveEffects(this);
             FeeblemindSpell.RemoveEffects(this);
             CurseSpell.RemoveEffect(this);
-            Spells.Second.ProtectionSpell.EndProtection(this);
+            ProtectionSpell.EndProtection(this);
 
 
             EndAction(typeof(PolymorphSpell));
@@ -4200,31 +4203,25 @@ namespace Server.Mobiles
             CountAndTimeStamp count = (CountAndTimeStamp)tbl[obj];
             if (count != null)
             {
-                if (count.TimeStamp + SkillCheck.AntiMacroExpire <= DateTime.UtcNow)
+	            if (count.TimeStamp + SkillCheck.AntiMacroExpire <= DateTime.UtcNow)
                 {
                     count.Count = 1;
                     return true;
                 }
-                else
-                {
-                    ++count.Count;
-                    if (count.Count <= SkillCheck.Allowance)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            else
-            {
-                tbl[obj] = count = new CountAndTimeStamp();
-                count.Count = 1;
 
-                return true;
+	            ++count.Count;
+	            if (count.Count <= SkillCheck.Allowance)
+	            {
+		            return true;
+	            }
+
+	            return false;
             }
+
+            tbl[obj] = count = new CountAndTimeStamp();
+            count.Count = 1;
+
+            return true;
         }
 
         public BOBFilter BOBFilter => BulkOrderSystem.GetBOBFilter(this);
@@ -4919,14 +4916,12 @@ namespace Server.Mobiles
         {
             get
             {
-                if (NetState != null)
+	            if (NetState != null)
                 {
                     return m_GameTime + (DateTime.UtcNow - m_SessionStart);
                 }
-                else
-                {
-                    return m_GameTime;
-                }
+
+	            return m_GameTime;
             }
         }
 
@@ -4957,14 +4952,15 @@ namespace Server.Mobiles
             {
                 return false;
             }
-            else if (AccessLevel == AccessLevel.Player)
-            {
-                Region r = item.GetRegion();
 
-                if (r is BaseRegion region && !region.CanSee(this, item))
-                {
-                    return false;
-                }
+            if (AccessLevel == AccessLevel.Player)
+            {
+	            Region r = item.GetRegion();
+
+	            if (r is BaseRegion region && !region.CanSee(this, item))
+	            {
+		            return false;
+	            }
             }
 
             return base.CanSee(item);
@@ -4987,8 +4983,8 @@ namespace Server.Mobiles
 
         public class PlayerPropertiesEventArgs : EventArgs
         {
-            public PlayerMobile Player = null;
-            public ObjectPropertyList PropertyList = null;
+            public PlayerMobile Player;
+            public ObjectPropertyList PropertyList;
 
             public PlayerPropertiesEventArgs(PlayerMobile player, ObjectPropertyList list)
             {
@@ -5001,7 +4997,7 @@ namespace Server.Mobiles
         {
             base.GetProperties(list);
 
-            Engines.JollyRoger.JollyRogerData.DisplayTitle(this, list);
+            JollyRogerData.DisplayTitle(this, list);
 
             if (m_SubtitleSkillTitle != null)
                 list.Add(1042971, m_SubtitleSkillTitle);
@@ -5763,26 +5759,22 @@ namespace Server.Mobiles
             return false;
         }
 
-        private static readonly Point3D[] m_TrammelDeathDestinations = new[]
-        {
+        private static readonly Point3D[] m_TrammelDeathDestinations = {
             new Point3D(1481, 1612, 20), new Point3D(2708, 2153, 0), new Point3D(2249, 1230, 0), new Point3D(5197, 3994, 37),
             new Point3D(1412, 3793, 0), new Point3D(3688, 2232, 20), new Point3D(2578, 604, 0), new Point3D(4397, 1089, 0),
             new Point3D(5741, 3218, -2), new Point3D(2996, 3441, 15), new Point3D(624, 2225, 0), new Point3D(1916, 2814, 0),
             new Point3D(2929, 854, 0), new Point3D(545, 967, 0), new Point3D(3469, 2559, 36)
         };
 
-        private static readonly Point3D[] m_IlshenarDeathDestinations = new[]
-        {
+        private static readonly Point3D[] m_IlshenarDeathDestinations = {
             new Point3D(1216, 468, -13), new Point3D(723, 1367, -60), new Point3D(745, 725, -28), new Point3D(281, 1017, 0),
             new Point3D(986, 1011, -32), new Point3D(1175, 1287, -30), new Point3D(1533, 1341, -3), new Point3D(529, 217, -44),
             new Point3D(1722, 219, 96)
         };
 
-        private static readonly Point3D[] m_MalasDeathDestinations = new[]
-        {new Point3D(2079, 1376, -70), new Point3D(944, 519, -71)};
+        private static readonly Point3D[] m_MalasDeathDestinations = {new Point3D(2079, 1376, -70), new Point3D(944, 519, -71)};
 
-        private static readonly Point3D[] m_TokunoDeathDestinations = new[]
-        {new Point3D(1166, 801, 27), new Point3D(782, 1228, 25), new Point3D(268, 624, 15)};
+        private static readonly Point3D[] m_TokunoDeathDestinations = {new Point3D(1166, 801, 27), new Point3D(782, 1228, 25), new Point3D(268, 624, 15)};
 
         public bool YoungDeathTeleport()
         {

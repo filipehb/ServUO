@@ -1,7 +1,8 @@
+using System.Linq;
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
-using System.Linq;
+using Server.Services.TownCryer;
 
 namespace Server.Engines.Despise
 {
@@ -62,7 +63,7 @@ namespace Server.Engines.Despise
                         from.SendLocalizedMessage(1158320, null, 0x23); // You've completed a quest objective!
                         from.PlaySound(0x5B5);
 
-                        Services.TownCryer.TownCryerSystem.CompleteQuest((PlayerMobile)from, 1158303, 1158308, 0x65C);
+                        TownCryerSystem.CompleteQuest((PlayerMobile)from, 1158303, 1158308, 0x65C);
                     }
                 }
                 else

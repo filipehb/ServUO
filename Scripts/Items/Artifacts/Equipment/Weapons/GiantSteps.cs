@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public GiantSteps()
-            : base()
         {
             Hue = 656;
             Attributes.BonusStr = 5;

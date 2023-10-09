@@ -1,9 +1,12 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Collections.Generic;
+
 #endregion
 
 namespace Server.Mobiles
@@ -14,8 +17,7 @@ namespace Server.Mobiles
         public static readonly object Vendor = new object();
         public static readonly object Price = new object();
 
-        private static readonly HairstylistBuyInfo[] m_SellList = new[]
-        {
+        private static readonly HairstylistBuyInfo[] m_SellList = {
             new HairstylistBuyInfo(
                 1018357,
                 50000,
@@ -66,8 +68,7 @@ namespace Server.Mobiles
                 new[] {From, Vendor, Price, false, true, ChangeHairHueEntry.BrightEntries})
         };
 
-        private static readonly HairstylistBuyInfo[] m_SellListElf = new[]
-        {
+        private static readonly HairstylistBuyInfo[] m_SellListElf = {
             new HairstylistBuyInfo(
                 1018357,
                 50000,
@@ -301,7 +302,7 @@ namespace Server.Mobiles
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
                 else
@@ -315,16 +316,14 @@ namespace Server.Mobiles
 
     public class ChangeHairHueEntry
     {
-        public static readonly ChangeHairHueEntry[] BrightEntries = new[]
-        {
+        public static readonly ChangeHairHueEntry[] BrightEntries = {
             new ChangeHairHueEntry("*****", 12, 10), new ChangeHairHueEntry("*****", 32, 5),
             new ChangeHairHueEntry("*****", 38, 8), new ChangeHairHueEntry("*****", 54, 3),
             new ChangeHairHueEntry("*****", 62, 10), new ChangeHairHueEntry("*****", 81, 2),
             new ChangeHairHueEntry("*****", 89, 2), new ChangeHairHueEntry("*****", 1153, 2)
         };
 
-        public static readonly ChangeHairHueEntry[] RegularEntries = new[]
-        {
+        public static readonly ChangeHairHueEntry[] RegularEntries = {
             new ChangeHairHueEntry("*****", 1602, 26), new ChangeHairHueEntry("*****", 1628, 27),
             new ChangeHairHueEntry("*****", 1502, 32), new ChangeHairHueEntry("*****", 1302, 32),
             new ChangeHairHueEntry("*****", 1402, 32), new ChangeHairHueEntry("*****", 1202, 24),
@@ -490,8 +489,7 @@ namespace Server.Mobiles
 
     public class ChangeHairstyleEntry
     {
-        public static readonly ChangeHairstyleEntry[] HairEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] HairEntries = {
             new ChangeHairstyleEntry(50700, 70 - 137, 20 - 60, 0x203B),
             new ChangeHairstyleEntry(60710, 193 - 260, 18 - 60, 0x2045),
             new ChangeHairstyleEntry(50703, 316 - 383, 25 - 60, 0x2044),
@@ -504,8 +502,7 @@ namespace Server.Mobiles
             new ChangeHairstyleEntry(0, 0, 0, 0)
         };
 
-        public static readonly ChangeHairstyleEntry[] BeardEntries = new[]
-        {
+        public static readonly ChangeHairstyleEntry[] BeardEntries = {
             new ChangeHairstyleEntry(50800, 120 - 187, 30 - 80, 0x2040),
             new ChangeHairstyleEntry(50904, 243 - 310, 33 - 80, 0x204B),
             new ChangeHairstyleEntry(50906, 120 - 187, 100 - 150, 0x204D),
@@ -515,8 +512,7 @@ namespace Server.Mobiles
             new ChangeHairstyleEntry(50808, 120 - 187, 242 - 290, 0x2041), new ChangeHairstyleEntry(0, 0, 0, 0)
         };
 
-        public static readonly ChangeHairstyleEntry[] HairEntriesElf = new ChangeHairstyleEntry[]
-        {
+        public static readonly ChangeHairstyleEntry[] HairEntriesElf = {
             new ChangeHairstyleEntry( 0xEDF5, 0xC6E5, 70 - 137,   20 -  60,  0x2FC0, 0x2FC0 ),
             new ChangeHairstyleEntry( 0xEDF6, 0xC6E6, 198 - 260,  18 -  60,  0x2FC1, 0x2FC1 ),
             new ChangeHairstyleEntry( 0xEDF7, 0xC6E7, 316 - 383,  20 -  60,  0x2FC2, 0x2FC2 ),
@@ -529,8 +525,7 @@ namespace Server.Mobiles
             new ChangeHairstyleEntry( 0, 0, 0, 0 )
         };
 
-        public static readonly ChangeHairstyleEntry[] HairEntriesGargoyle = new ChangeHairstyleEntry[]
-        {
+        public static readonly ChangeHairstyleEntry[] HairEntriesGargoyle = {
             new ChangeHairstyleEntry( 0x7A0, 0x76C, 47 - 137,   12 -  60,  0x4261, 0x4258  ),
             new ChangeHairstyleEntry( 0x7A1, 0x76D, 170 - 260,  12 -  60,  0x4262, 0x4259 ),
             new ChangeHairstyleEntry( 0x79E, 0x773, 295 - 383,  12 -  60,  0x4273, 0x425A ),
@@ -543,8 +538,7 @@ namespace Server.Mobiles
             new ChangeHairstyleEntry( 0, 0, 0, 0 )
         };
 
-        public static readonly ChangeHairstyleEntry[] BeardEntriesGargoyle = new ChangeHairstyleEntry[]
-        {
+        public static readonly ChangeHairstyleEntry[] BeardEntriesGargoyle = {
             new ChangeHairstyleEntry( 0xC5E9, 120 - 187,  30 -  80, 0x42AD ),
             new ChangeHairstyleEntry( 0x770,  220 - 310,  23 -  80, 0x42AE ),
             new ChangeHairstyleEntry( 0xC5DA, 120 - 187, 100 - 150, 0x42AF ),

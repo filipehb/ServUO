@@ -1,13 +1,17 @@
+using System;
+using Server.Accounting;
 using Server.Commands;
+using Server.Diagnostics;
 using Server.Engines.Craft;
+using Server.Engines.VvV;
 using Server.Mobiles;
+using Server.Network;
 using Server.Spells.Fifth;
 using Server.Spells.First;
 using Server.Spells.Fourth;
 using Server.Spells.Necromancy;
 using Server.Spells.Second;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -477,7 +481,7 @@ namespace Server.Items
                     MaxHitPoints--;
 
                     if (Parent is Mobile)
-                        ((Mobile)Parent).LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
+                        ((Mobile)Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
 
                     if (m_MaxHitPoints == 0)
                     {
@@ -527,7 +531,7 @@ namespace Server.Items
 
                 if (this is IAccountRestricted && ((IAccountRestricted)this).Account != null)
                 {
-                    Accounting.Account acct = from.Account as Accounting.Account;
+                    Account acct = from.Account as Account;
 
                     if (acct == null || acct.Username != ((IAccountRestricted)this).Account)
                     {
@@ -536,7 +540,7 @@ namespace Server.Items
                     }
                 }
 
-                if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(from))
+                if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(from))
                 {
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
@@ -626,7 +630,7 @@ namespace Server.Items
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
 
                     if (obj is Item)
@@ -1228,8 +1232,7 @@ namespace Server.Items
         #endregion
 
         #region Randomize
-        private static readonly int[] m_ItemIDs = new int[]
-        {
+        private static readonly int[] m_ItemIDs = {
             0x2F58, 0x2F59, 0x2F5A, 0x2F5B
         };
 
@@ -1239,8 +1242,7 @@ namespace Server.Items
         }
 
         public static Type[] Summons => m_Summons;
-        private static readonly Type[] m_Summons = new Type[]
-        {
+        private static readonly Type[] m_Summons = {
             typeof(SummonedAntLion),
             typeof(SummonedCow),
             typeof(SummonedLavaSerpent),
@@ -1264,8 +1266,7 @@ namespace Server.Items
         };
 
         public static int[] SummonLabels => m_SummonLabels;
-        private static readonly int[] m_SummonLabels = new int[]
-        {
+        private static readonly int[] m_SummonLabels = {
             1075211, // Ant Lion
             1072494, // Cow
             1072434, // Lava Serpent
@@ -1302,8 +1303,7 @@ namespace Server.Items
 
                 if (num > 14)
                     return new TalismanAttribute(m_Summons[num], m_SummonLabels[num], 10);
-                else
-                    return new TalismanAttribute(m_Summons[num], m_SummonLabels[num]);
+                return new TalismanAttribute(m_Summons[num], m_SummonLabels[num]);
             }
 
             return new TalismanAttribute();
@@ -1318,8 +1318,7 @@ namespace Server.Items
         }
 
         public static Type[] Killers => m_Killers;
-        private static readonly Type[] m_Killers = new Type[]
-        {
+        private static readonly Type[] m_Killers = {
             typeof(OrcBomber), typeof(OrcBrute), typeof(Sewerrat), typeof(Rat), typeof(GiantRat),
             typeof(Ratman), typeof(RatmanArcher), typeof(GiantSpider), typeof(FrostSpider), typeof(GiantBlackWidow),
             typeof(DreadSpider), typeof(SilverSerpent), typeof(DeepSeaSerpent), typeof(GiantSerpent), typeof(Snake),
@@ -1337,8 +1336,7 @@ namespace Server.Items
         };
 
         public static int[] KillerLabels => m_KillerLabels;
-        private static readonly int[] m_KillerLabels = new int[]
-        {
+        private static readonly int[] m_KillerLabels = {
             1072413, 1072414, 1072418, 1072419, 1072420,
             1072421, 1072423, 1072424, 1072425, 1072426,
             1072427, 1072428, 1072429, 1072430, 1072431,
@@ -1385,8 +1383,7 @@ namespace Server.Items
         }
 
         public static SkillName[] SkillsOld => m_SkillsOld;
-        private static readonly SkillName[] m_SkillsOld = new SkillName[]
-        {
+        private static readonly SkillName[] m_SkillsOld = {
             SkillName.Alchemy,
             SkillName.Blacksmith,
             SkillName.Carpentry,
@@ -1399,8 +1396,7 @@ namespace Server.Items
         };
 
         public static TalismanSkill[] Skills => m_Skills;
-        private static readonly TalismanSkill[] m_Skills = new TalismanSkill[]
-        {
+        private static readonly TalismanSkill[] m_Skills = {
             TalismanSkill.Alchemy,
             TalismanSkill.Blacksmithy,
             TalismanSkill.Fletching,

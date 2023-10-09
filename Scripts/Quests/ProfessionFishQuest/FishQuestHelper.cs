@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests
 {
@@ -74,36 +74,36 @@ namespace Server.Engines.Quests
 
         private static readonly Type[][][] m_RewardTable =
         {
-            new Type[][]
+            new[]
             {
-                new Type[] { typeof(Bait) },
-                new Type[] { typeof(LavaLobsterTrap) },
-                new Type[] { typeof(FishingGuideBook1), typeof(FishingGuideBook2) },
-                new Type[] { typeof(PowerScroll), typeof(FishingPole) },
+                new[] { typeof(Bait) },
+                new[] { typeof(LavaLobsterTrap) },
+                new[] { typeof(FishingGuideBook1), typeof(FishingGuideBook2) },
+                new[] { typeof(PowerScroll), typeof(FishingPole) },
             },
 
-            new Type[][]
+            new[]
             {
-                new Type[] { typeof(Bait) },
-                new Type[] { typeof(LavaHook), typeof(LavaLobsterTrap), typeof(JunkProofHook) },
-                new Type[] { typeof(FishingGuideBook1), typeof(FishingGuideBook2), typeof(FishingGuideBook3), typeof(FishingPole) },
-                new Type[] { typeof(PowerScroll), typeof(OracleOfTheSea), typeof(DredgingHook) },
+                new[] { typeof(Bait) },
+                new[] { typeof(LavaHook), typeof(LavaLobsterTrap), typeof(JunkProofHook) },
+                new[] { typeof(FishingGuideBook1), typeof(FishingGuideBook2), typeof(FishingGuideBook3), typeof(FishingPole) },
+                new[] { typeof(PowerScroll), typeof(OracleOfTheSea), typeof(DredgingHook) },
             },
 
-            new Type[][]
+            new[]
             {
-                new Type[] { typeof(Bait) },
-                new Type[] { typeof(LavaHook), typeof(DredgingHook), typeof(JunkProofHook), typeof(FishingPole) },
-                new Type[] { typeof(FishingGuideBook3), typeof(FishingGuideBook4), typeof(FishingGuideBook5), },
-                new Type[] { typeof(PowerScroll), typeof(OracleOfTheSea) },
+                new[] { typeof(Bait) },
+                new[] { typeof(LavaHook), typeof(DredgingHook), typeof(JunkProofHook), typeof(FishingPole) },
+                new[] { typeof(FishingGuideBook3), typeof(FishingGuideBook4), typeof(FishingGuideBook5), },
+                new[] { typeof(PowerScroll), typeof(OracleOfTheSea) },
             },
 
-            new Type[][]
+            new[]
             {
-                new Type[] { typeof(Bait),  typeof(JunkProofHook) },
-                new Type[] { typeof(OracleOfTheSea), typeof(LavaHook), typeof(FishingPole) },
-                new Type[] { typeof(FishingGuideBook4), typeof(FishingGuideBook5), typeof(FishingGuideBook6) },
-                new Type[] { typeof(PowerScroll), typeof(PermanentBoatPaint) },
+                new[] { typeof(Bait),  typeof(JunkProofHook) },
+                new[] { typeof(OracleOfTheSea), typeof(LavaHook), typeof(FishingPole) },
+                new[] { typeof(FishingGuideBook4), typeof(FishingGuideBook5), typeof(FishingGuideBook6) },
+                new[] { typeof(PowerScroll), typeof(PermanentBoatPaint) },
             }
         };
 
@@ -410,8 +410,7 @@ namespace Server.Engines.Quests
                 return 11;
             if (skill < 106.0)
                 return 41;
-            else
-                return m_Fish.Length; //TODO CHECK
+            return m_Fish.Length; //TODO CHECK
         }
 
         public static int GetIndexForType(Type type)

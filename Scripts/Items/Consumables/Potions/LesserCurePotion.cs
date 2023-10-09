@@ -2,8 +2,7 @@ namespace Server.Items
 {
     public class LesserCurePotion : BaseCurePotion
     {
-        private static readonly CureLevelInfo[] m_AosLevelInfo = new CureLevelInfo[]
-        {
+        private static readonly CureLevelInfo[] m_AosLevelInfo = {
             new CureLevelInfo(Poison.Lesser, 1.00),
             new CureLevelInfo(Poison.Regular, 0.35),
             new CureLevelInfo(Poison.Greater, 0.15),

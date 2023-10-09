@@ -1,6 +1,6 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -134,8 +134,8 @@ namespace Server.Mobiles
 
             if (0.05 >= random)
                 return CreateArtifact(UniqueSAList);
-            else if (0.15 >= random)
-                return CreateArtifact(SharedSAList);
+            if (0.15 >= random)
+	            return CreateArtifact(SharedSAList);
 
             return null;
         }

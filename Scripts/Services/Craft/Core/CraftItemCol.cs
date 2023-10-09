@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 
 namespace Server.Engines.Craft
 {
-    public class CraftItemCol : System.Collections.CollectionBase
+    public class CraftItemCol : CollectionBase
     {
         public int Add(CraftItem craftItem)
         {

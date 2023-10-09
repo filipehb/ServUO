@@ -1,8 +1,8 @@
-using Server.ContextMenus;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Mobiles;
 
 namespace Server.Engines.VoidPool
 {
@@ -87,15 +87,15 @@ namespace Server.Engines.VoidPool
                 Spawns.Clear();
 
             Spawns = new List<SpawnEntry>();
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5564, 1888, 26, 31) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5554, 1888, 8, 28) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5596, 1888, 8, 28) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5536, 1876, 8, 8), new Rectangle2D(5552, 1840, 11, 42) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5600, 1860, 8, 8), new Rectangle2D(5596, 1872, 15, 12) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5608, 1832, 15, 15), new Rectangle2D(5616, 1848, 11, 34) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5568, 1852, 22, 14) }, 15));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5568, 1824, 22, 11) }));
-            Spawns.Add(new SpawnEntry(this, new Rectangle2D[] { new Rectangle2D(5501, 1800, 42, 19) }, 15));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5564, 1888, 26, 31) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5554, 1888, 8, 28) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5596, 1888, 8, 28) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5536, 1876, 8, 8), new Rectangle2D(5552, 1840, 11, 42) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5600, 1860, 8, 8), new Rectangle2D(5596, 1872, 15, 12) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5608, 1832, 15, 15), new Rectangle2D(5616, 1848, 11, 34) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5568, 1852, 22, 14) }, 15));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5568, 1824, 22, 11) }));
+            Spawns.Add(new SpawnEntry(this, new[] { new Rectangle2D(5501, 1800, 42, 19) }, 15));
         }
 
         public void RemoveFromSpawner(ISpawnable spawnable)

@@ -1,9 +1,12 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Network;
 using Server.Spells;
 using Server.Targeting;
-using System;
-using System.Linq;
+
 #endregion
 
 namespace Server.Items
@@ -134,7 +137,7 @@ namespace Server.Items
             int min = Scale(from, MinDamage);
             int max = Scale(from, MaxDamage);
 
-            System.Collections.Generic.List<Mobile> list = SpellHelper.AcquireIndirectTargets(from, loc, map, ExplosionRange, false).OfType<Mobile>().ToList();
+            List<Mobile> list = SpellHelper.AcquireIndirectTargets(from, loc, map, ExplosionRange, false).OfType<Mobile>().ToList();
 
             if (damageThrower && !list.Contains(from))
             {

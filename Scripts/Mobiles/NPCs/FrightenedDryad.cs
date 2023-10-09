@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class BoundToTheLandQuest : BaseQuest
     {
         public BoundToTheLandQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(InsaneDryad), "insane dryads", 12));
             AddObjective(new SlayObjective(typeof(Saliva), "saliva", 1));
@@ -64,7 +63,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(BoundToTheLandQuest)
                 };

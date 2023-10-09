@@ -23,11 +23,11 @@ namespace Server.Items
         public override void OnDoubleClick(Mobile from)
         {
             ItemID = m_OpenedID;
-            Timer.DelayCall(TimeSpan.FromSeconds(1.6), delegate ()
+            Timer.DelayCall(TimeSpan.FromSeconds(1.6), delegate
             {
                 Z += -22;
                 Visible = false;
-                Timer.DelayCall(TimeSpan.FromSeconds(5.0), delegate ()
+                Timer.DelayCall(TimeSpan.FromSeconds(5.0), delegate
                 {
                     ItemID = m_ClosedID;
                     Visible = true;

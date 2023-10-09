@@ -1,8 +1,8 @@
+using System;
+using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.SkillHandlers;
-using System;
-using System.Linq;
 
 namespace Server.Gumps
 {
@@ -24,7 +24,7 @@ namespace Server.Gumps
         private ItemPropertyInfo m_Info;
 
         public ImbueGump(PlayerMobile pm, Item item, int id, int value)
-            : base(pm, 50, 50)
+            : base(pm)
         {
             pm.CloseGump(typeof(ImbuingGump));
             pm.CloseGump(typeof(ImbueSelectGump));
@@ -265,16 +265,15 @@ namespace Server.Gumps
 
         private int GetSuccessChanceHue(double suc)
         {
-            if (suc >= 100)
+	        if (suc >= 100)
                 return IceHue;
-            else if (suc >= 80)
-                return Green;
-            else if (suc >= 50)
-                return Yellow;
-            else if (suc >= 10)
-                return DarkYellow;
-            else
-                return Red;
+	        if (suc >= 80)
+		        return Green;
+	        if (suc >= 50)
+		        return Yellow;
+	        if (suc >= 10)
+		        return DarkYellow;
+	        return Red;
         }
 
         public override void OnResponse(RelayInfo info)
@@ -381,30 +380,30 @@ namespace Server.Gumps
                 // OnHitEffect replace OnHitEffect
                 if (id >= 35 && id <= 39)
                 {
-                    if (i.WeaponAttributes.HitMagicArrow > 0)
+	                if (i.WeaponAttributes.HitMagicArrow > 0)
                         return GetNameForAttribute(AosWeaponAttribute.HitMagicArrow);
-                    else if (i.WeaponAttributes.HitHarm > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitHarm);
-                    else if (i.WeaponAttributes.HitFireball > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitFireball);
-                    else if (i.WeaponAttributes.HitLightning > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitLightning);
-                    else if (i.WeaponAttributes.HitDispel > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitDispel);
+	                if (i.WeaponAttributes.HitHarm > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitHarm);
+	                if (i.WeaponAttributes.HitFireball > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitFireball);
+	                if (i.WeaponAttributes.HitLightning > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitLightning);
+	                if (i.WeaponAttributes.HitDispel > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitDispel);
                 }
                 // OnHitArea replace OnHitArea
                 if (id >= 30 && id <= 34)
                 {
-                    if (i.WeaponAttributes.HitPhysicalArea > 0)
+	                if (i.WeaponAttributes.HitPhysicalArea > 0)
                         return GetNameForAttribute(AosWeaponAttribute.HitPhysicalArea);
-                    else if (i.WeaponAttributes.HitColdArea > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitFireArea);
-                    else if (i.WeaponAttributes.HitFireArea > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitColdArea);
-                    else if (i.WeaponAttributes.HitPoisonArea > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitPoisonArea);
-                    else if (i.WeaponAttributes.HitEnergyArea > 0)
-                        return GetNameForAttribute(AosWeaponAttribute.HitEnergyArea);
+	                if (i.WeaponAttributes.HitColdArea > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitFireArea);
+	                if (i.WeaponAttributes.HitFireArea > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitColdArea);
+	                if (i.WeaponAttributes.HitPoisonArea > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitPoisonArea);
+	                if (i.WeaponAttributes.HitEnergyArea > 0)
+		                return GetNameForAttribute(AosWeaponAttribute.HitEnergyArea);
                 }
             }
             if (item is BaseJewel)

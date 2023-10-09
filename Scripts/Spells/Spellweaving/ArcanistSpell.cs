@@ -1,9 +1,11 @@
 #region References
+
+using System;
+using System.Globalization;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells.SkillMasteries;
-using System;
-using System.Globalization;
+
 #endregion
 
 namespace Server.Spells.Spellweaving

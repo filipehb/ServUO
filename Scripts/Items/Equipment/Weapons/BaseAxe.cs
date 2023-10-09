@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Harvest;
-using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -41,13 +42,14 @@ namespace Server.Items
 
             if (!from.InLOS(loc) || !from.InRange(loc, 2))
             {
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3E9, 1019045); // I can't reach that
+                from.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1019045); // I can't reach that
                 return;
             }
-            else if (!IsAccessibleTo(from))
+
+            if (!IsAccessibleTo(from))
             {
-                PublicOverheadMessage(Network.MessageType.Regular, 0x3E9, 1061637); // You are not allowed to access 
-                return;
+	            PublicOverheadMessage(MessageType.Regular, 0x3E9, 1061637); // You are not allowed to access 
+	            return;
             }
 
             if (!(HarvestSystem is Mining))

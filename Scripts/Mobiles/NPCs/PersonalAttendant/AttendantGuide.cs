@@ -1,11 +1,12 @@
-using Server.Commands;
-using Server.ContextMenus;
-using Server.Gumps;
-using Server.Items;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Server.Commands;
+using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Gumps;
+using Server.Items;
+using Server.Network;
 using Vertex = Server.Mobiles.GuideHelper.GuideVertex;
 
 namespace Server.Mobiles
@@ -14,7 +15,7 @@ namespace Server.Mobiles
     {
         private static readonly Dictionary<string, List<Vertex>> m_GraphDefinitions = new Dictionary<string, List<Vertex>>();
         private static readonly List<int> m_ShopDefinitions = new List<int>();
-        private static readonly char[] m_Separators = new char[] { '\t', ' ' };
+        private static readonly char[] m_Separators = { '\t', ' ' };
         private static readonly string m_Delimiter = "--------------------------------------------------------------------------";
         public static void LogMessage(string line)
         {
@@ -28,7 +29,7 @@ namespace Server.Mobiles
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 
@@ -151,7 +152,7 @@ namespace Server.Mobiles
                                         current.Teleporter = bool.Parse(split[5]);
                                     }
                                     else
-                                        throw new Exception(string.Format("Incomplete vertex definition!"));
+                                        throw new Exception("Incomplete vertex definition!");
                                 }
                             }
                         }
@@ -162,7 +163,7 @@ namespace Server.Mobiles
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 LogMessage(m_Delimiter);
             }
         }
@@ -382,14 +383,14 @@ namespace Server.Mobiles
 
                     foreach (Vertex v in list)
                     {
-                        writer.WriteLine(string.Format("V:\t{0}\t{1}\t{2}\t{3}\t{4}", v.ID, v.Location.X, v.Location.Y, v.Location.Z, v.Teleporter.ToString()));
+                        writer.WriteLine("V:\t{0}\t{1}\t{2}\t{3}\t{4}", v.ID, v.Location.X, v.Location.Y, v.Location.Z, v.Teleporter.ToString());
 
                         if (v.Shops.Count > 0)
                         {
                             writer.Write("S:");
 
                             foreach (int i in v.Shops)
-                                writer.Write(string.Format("\t{0}", i));
+                                writer.Write("\t{0}", i);
 
                             writer.WriteLine();
                         }
@@ -399,7 +400,7 @@ namespace Server.Mobiles
                             writer.Write("N:");
 
                             foreach (Vertex n in v.Vertices)
-                                writer.Write(string.Format("\t{0}", n.ID));
+                                writer.Write("\t{0}", n.ID);
 
                             writer.WriteLine();
                         }
@@ -873,7 +874,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public AttendantMaleGuide()
-            : base()
         {
         }
 
@@ -924,7 +924,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public AttendantFemaleGuide()
-            : base()
         {
         }
 

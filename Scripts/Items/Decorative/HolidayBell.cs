@@ -2,8 +2,7 @@
 {
     public class HolidayBell : Item
     {
-        private static readonly string[] m_StaffNames = new string[]
-        {
+        private static readonly string[] m_StaffNames = {
             "Adrick",
             "Alai",
             "Bulldoz",
@@ -27,8 +26,7 @@
             "Tyrant",
             "Vex"
         };
-        private static readonly int[] m_Hues = new int[]
-        {
+        private static readonly int[] m_Hues = {
             0xA, 0x24, 0x42, 0x56, 0x1A, 0x4C, 0x3C, 0x60, 0x2E, 0x55, 0x23, 0x38, 0x482, 0x6, 0x10
         };
         private string m_Maker;

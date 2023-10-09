@@ -1,9 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Server.Accounting;
 using Server.Engines.BulkOrders;
 using Server.Engines.CityLoyalty;
 using Server.Engines.Points;
 using Server.Misc;
-using System;
 
 namespace Server.Mobiles
 {
@@ -256,7 +258,7 @@ namespace Server.Mobiles
             if (Player.Account == null)
                 return "...";
 
-            return (Player.Account.TotalCurrency * Account.CurrencyThreshold).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"));
+            return (Player.Account.TotalCurrency * Account.CurrencyThreshold).ToString("N0", CultureInfo.GetCultureInfo("en-US"));
         }
 
         public PlayerMobile Player { get; set; }
@@ -321,7 +323,7 @@ namespace Server.Mobiles
 
             if (context != null)
             {
-                foreach (System.Collections.Generic.KeyValuePair<BODType, BODEntry> kvp in context.Entries)
+                foreach (KeyValuePair<BODType, BODEntry> kvp in context.Entries)
                 {
                     switch (kvp.Key)
                     {

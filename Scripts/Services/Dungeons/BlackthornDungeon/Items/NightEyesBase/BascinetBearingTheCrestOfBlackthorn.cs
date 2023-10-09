@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public BascinetBearingTheCrestOfBlackthorn1()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.NightSight = 1;

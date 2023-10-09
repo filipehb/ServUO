@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.Plants;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Engines.Quests.Matriarch
 {
@@ -123,7 +123,7 @@ namespace Server.Engines.Quests.Matriarch
 
             if (player != null)
             {
-                if (dropped is Seed)
+	            if (dropped is Seed)
                 {
                     SolenMatriarchQuest qs = player.Quest as SolenMatriarchQuest;
 
@@ -148,12 +148,13 @@ namespace Server.Engines.Quests.Matriarch
                     dropped.Delete();
                     return true;
                 }
-                else if (dropped is ZoogiFungus)
-                {
-                    OnGivenFungi(player, (ZoogiFungus)dropped);
 
-                    return dropped.Deleted;
-                }
+	            if (dropped is ZoogiFungus)
+	            {
+		            OnGivenFungi(player, (ZoogiFungus)dropped);
+
+		            return dropped.Deleted;
+	            }
             }
 
             return base.OnDragDrop(from, dropped);

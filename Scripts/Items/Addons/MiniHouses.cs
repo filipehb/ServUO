@@ -240,8 +240,7 @@ namespace Server.Items
 
     public class MiniHouseInfo
     {
-        public static MiniHouseInfo[] Info { get; } = new MiniHouseInfo[]
-        {
+        public static MiniHouseInfo[] Info { get; } = {
             /* Stone and plaster house           */ new MiniHouseInfo(0x22C4, 1, 1011303),
             /* Field stone house                 */ new MiniHouseInfo(0x22DE, 1, 1011304),
             /* Small brick house                 */ new MiniHouseInfo(0x22DF, 1, 1011305),

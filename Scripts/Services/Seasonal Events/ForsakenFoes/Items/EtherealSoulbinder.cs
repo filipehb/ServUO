@@ -1,5 +1,5 @@
-using Server.Mobiles;
 using System.Linq;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -53,18 +53,17 @@ namespace Server.Items
 
         private int GetDescription()
         {
-            if (SoulPoint <= 0)
+	        if (SoulPoint <= 0)
                 return 1159177; // An Empty Soulbinder
-            else if (SoulPoint <= 1)
-                return 1159176; // Meager
-            else if (SoulPoint <= 25)
-                return 1159175; // Grand
-            else if (SoulPoint <= 50)
-                return 1159174; // Exalted
-            else if (SoulPoint <= 90)
-                return 1159173; // Legendary
-            else
-                return 1159172; // Mythical
+	        if (SoulPoint <= 1)
+		        return 1159176; // Meager
+	        if (SoulPoint <= 25)
+		        return 1159175; // Grand
+	        if (SoulPoint <= 50)
+		        return 1159174; // Exalted
+	        if (SoulPoint <= 90)
+		        return 1159173; // Legendary
+	        return 1159172; // Mythical
         }
 
         [Constructable]

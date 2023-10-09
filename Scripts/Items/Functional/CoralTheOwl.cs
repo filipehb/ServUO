@@ -1,10 +1,11 @@
+using System;
+using Server.Engines.VeteranRewards;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
-    public class CoralTheOwl : Item, Engines.VeteranRewards.IRewardItem
+    public class CoralTheOwl : Item, IRewardItem
     {
         public override int LabelNumber => 1123603;  // Coral the Owl
 

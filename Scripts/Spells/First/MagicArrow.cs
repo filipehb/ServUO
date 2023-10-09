@@ -1,5 +1,6 @@
-using Server.Targeting;
 using System;
+using Server.Spells.Mysticism;
+using Server.Targeting;
 
 namespace Server.Spells.First
 {
@@ -18,7 +19,7 @@ namespace Server.Spells.First
         public override SpellCircle Circle => SpellCircle.First;
         public override bool DelayedDamageStacking => false;
         public override bool DelayedDamage => true;
-        public override Type[] DelayDamageFamily => new Type[] { typeof(Mysticism.NetherBoltSpell) };
+        public override Type[] DelayDamageFamily => new[] { typeof(NetherBoltSpell) };
         public override void OnCast()
         {
             Caster.Target = new InternalTarget(this);

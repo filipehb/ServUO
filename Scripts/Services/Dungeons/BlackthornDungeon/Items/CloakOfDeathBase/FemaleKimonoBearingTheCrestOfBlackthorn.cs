@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public FemaleKimonoBearingTheCrestOfBlackthorn6()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.AttackChance = 3;

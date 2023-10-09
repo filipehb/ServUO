@@ -1,7 +1,7 @@
+using System;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -234,8 +234,7 @@ namespace Server.Items
 
             if (FacingEast)
                 return BaseAddon.IsWall(p.X - 1, p.Y, p.Z, map); // west wall                
-            else
-                return BaseAddon.IsWall(p.X, p.Y - 1, p.Z, map); // north wall
+            return BaseAddon.IsWall(p.X, p.Y - 1, p.Z, map); // north wall
         }
     }
 

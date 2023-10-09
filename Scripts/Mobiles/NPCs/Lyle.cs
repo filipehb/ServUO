@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ThePenIsMightierQuest : BaseQuest
     {
         public ThePenIsMightierQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(RecallScroll), "recall scroll", 5, 0x1F4C));
 
@@ -59,7 +58,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ThePenIsMightierQuest)
                 };

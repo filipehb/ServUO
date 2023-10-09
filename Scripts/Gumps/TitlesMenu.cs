@@ -1,13 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Engines.CannedEvil;
 using Server.Engines.CityLoyalty;
 using Server.Guilds;
 using Server.Misc;
 using Server.Mobiles;
+using Server.Network;
 using Server.Spells.SkillMasteries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Gumps
 {
@@ -943,7 +944,7 @@ namespace Server.Gumps
             }
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse(NetState state, RelayInfo info)
         {
             GumpButton button = ButtonCallbacks.Keys.FirstOrDefault(b => b.ButtonID == info.ButtonID);
 

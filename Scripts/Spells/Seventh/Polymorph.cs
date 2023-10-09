@@ -1,7 +1,8 @@
+using System.Collections;
 using Server.Gumps;
 using Server.Items;
+using Server.Mobiles;
 using Server.Spells.Fifth;
-using System.Collections;
 
 namespace Server.Spells.Seventh
 {
@@ -115,7 +116,7 @@ namespace Server.Spells.Seventh
                     {
                         if (!((Body)m_NewBody).IsHuman)
                         {
-                            Mobiles.IMount mt = Caster.Mount;
+                            IMount mt = Caster.Mount;
 
                             if (mt != null)
                                 mt.Rider = null;

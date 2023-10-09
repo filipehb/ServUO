@@ -1,3 +1,5 @@
+using Server.Mobiles;
+
 namespace Server.Items
 {
     public class KhaldunPitTeleporter : Item
@@ -92,7 +94,7 @@ namespace Server.Items
 
             if (m.InRange(this, 3))
             {
-                Mobiles.BaseCreature.TeleportPets(m, m_PointDest, m_MapDest);
+                BaseCreature.TeleportPets(m, m_PointDest, m_MapDest);
 
                 m.MoveToWorld(m_PointDest, m_MapDest);
             }

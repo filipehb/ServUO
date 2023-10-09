@@ -1,6 +1,6 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Craft
 {
@@ -41,12 +41,12 @@ namespace Server.Engines.Craft
 
             if (tool == null || tool.Deleted || tool.UsesRemaining <= 0)
                 return 1044038; // You have worn out your tool!
-            else if (tool is Item && !BaseTool.CheckTool((Item)tool, from))
-                return 1048146; // If you have a tool equipped, you must use that tool.
-            else if (!(from is PlayerMobile && ((PlayerMobile)from).Glassblowing && from.Skills[SkillName.Alchemy].Base >= 100.0))
-                return 1044634; // You havent learned glassblowing.
-            else if (!tool.CheckAccessible(from, ref num))
-                return num; // The tool must be on your person to use.
+            if (tool is Item && !BaseTool.CheckTool((Item)tool, from))
+	            return 1048146; // If you have a tool equipped, you must use that tool.
+            if (!(from is PlayerMobile && ((PlayerMobile)from).Glassblowing && from.Skills[SkillName.Alchemy].Base >= 100.0))
+	            return 1044634; // You havent learned glassblowing.
+            if (!tool.CheckAccessible(from, ref num))
+	            return num; // The tool must be on your person to use.
 
             bool anvil, forge;
 
@@ -73,24 +73,20 @@ namespace Server.Engines.Craft
 
             if (failed)
             {
-                if (lostMaterial)
+	            if (lostMaterial)
                     return 1044043; // You failed to create the item, and some of your materials are lost.
-                else
-                    return 1044157; // You failed to create the item, but no materials were lost.
+	            return 1044157; // You failed to create the item, but no materials were lost.
             }
-            else
-            {
-                from.PlaySound(0x41); // glass breaking
 
-                if (quality == 0)
-                    return 502785; // You were barely able to make this item.  It's quality is below average.
-                else if (makersMark && quality == 2)
-                    return 1044156; // You create an exceptional quality item and affix your maker's mark.
-                else if (quality == 2)
-                    return 1044155; // You create an exceptional quality item.
-                else
-                    return 1044154; // You create the item.
-            }
+            from.PlaySound(0x41); // glass breaking
+
+            if (quality == 0)
+	            return 502785; // You were barely able to make this item.  It's quality is below average.
+            if (makersMark && quality == 2)
+	            return 1044156; // You create an exceptional quality item and affix your maker's mark.
+            if (quality == 2)
+	            return 1044155; // You create an exceptional quality item.
+            return 1044154; // You create the item.
         }
 
         public override void InitCraftList()

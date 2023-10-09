@@ -5,7 +5,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public KatrinasCrook()
-            : base()
         {
             WeaponAttributes.HitLeechStam = 40;
             WeaponAttributes.HitLeechMana = 55;

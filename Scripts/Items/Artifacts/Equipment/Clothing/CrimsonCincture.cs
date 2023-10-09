@@ -8,7 +8,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public CrimsonCincture()
-            : base()
         {
             Hue = 0x485;
             Attributes.BonusDex = 5;
@@ -43,7 +42,6 @@ namespace Server.Items
 
         [Constructable]
         public GargishCrimsonCincture()
-            : base()
         {
             Hue = 0x485;
             Attributes.BonusDex = 5;

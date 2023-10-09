@@ -1,7 +1,8 @@
-using Server.Items;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Items;
+using Server.Misc;
 
 namespace Server.Engines.Plants
 {
@@ -102,12 +103,11 @@ namespace Server.Engines.Plants
 
                 if (perc < 33)
                     return PlantHealth.Dying;
-                else if (perc < 66)
-                    return PlantHealth.Wilted;
-                else if (perc < 100)
-                    return PlantHealth.Healthy;
-                else
-                    return PlantHealth.Vibrant;
+                if (perc < 66)
+	                return PlantHealth.Wilted;
+                if (perc < 100)
+	                return PlantHealth.Healthy;
+                return PlantHealth.Vibrant;
             }
         }
 
@@ -237,10 +237,9 @@ namespace Server.Engines.Plants
         {
             get
             {
-                if (Pollinated)
+	            if (Pollinated)
                     return m_SeedType;
-                else
-                    return Plant.PlantType;
+	            return Plant.PlantType;
             }
             set { m_SeedType = value; }
         }
@@ -249,10 +248,9 @@ namespace Server.Engines.Plants
         {
             get
             {
-                if (Pollinated)
+	            if (Pollinated)
                     return m_SeedHue;
-                else
-                    return Plant.PlantHue;
+	            return Plant.PlantHue;
             }
             set { m_SeedHue = value; }
         }
@@ -327,12 +325,11 @@ namespace Server.Engines.Plants
 
             if (Water <= 1)
                 return 1060826; // hard
-            else if (Water <= 2)
-                return 1060827; // soft
-            else if (Water <= 3)
-                return 1060828; // squishy
-            else
-                return 1060829; // sopping wet
+            if (Water <= 2)
+	            return 1060827; // soft
+            if (Water <= 3)
+	            return 1060828; // squishy
+            return 1060829; // sopping wet
         }
 
         public int GetLocalizedHealth()
@@ -350,7 +347,7 @@ namespace Server.Engines.Plants
         {
             EventSink.WorldLoad += EventSink_WorldLoad;
 
-            if (!Misc.AutoRestart.Enabled)
+            if (!AutoRestart.Enabled)
                 EventSink.WorldSave += EventSink_WorldSave;
 
             EventSink.Login += EventSink_Login;

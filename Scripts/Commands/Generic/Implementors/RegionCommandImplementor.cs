@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Diagnostics;
 
 namespace Server.Commands.Generic
 {
@@ -7,7 +8,7 @@ namespace Server.Commands.Generic
     {
         public RegionCommandImplementor()
         {
-            Accessors = new string[] { "Region" };
+            Accessors = new[] { "Region" };
             SupportRequirement = CommandSupport.Region;
             SupportsConditionals = true;
             AccessLevel = AccessLevel.GameMaster;
@@ -54,7 +55,7 @@ namespace Server.Commands.Generic
             catch (Exception ex)
             {
                 from.SendMessage(ex.Message);
-                Diagnostics.ExceptionLogging.LogException(ex);
+                ExceptionLogging.LogException(ex);
             }
         }
     }

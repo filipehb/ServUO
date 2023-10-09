@@ -1,8 +1,10 @@
-using Server.Items;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Network;
+using Server.Spells;
+using Server.Spells.Bushido;
 
 namespace Server.Mobiles
 {
@@ -538,7 +540,7 @@ namespace Server.Mobiles
 
             if (def.AttacksMultipleTargets)
             {
-                List<Mobile> list = Spells.SpellHelper.AcquireIndirectTargets(creature, target, creature.Map, 5).OfType<Mobile>().Where(m => m.InRange(creature.Location, MaxRange)).ToList();
+                List<Mobile> list = SpellHelper.AcquireIndirectTargets(creature, target, creature.Map, 5).OfType<Mobile>().Where(m => m.InRange(creature.Location, MaxRange)).ToList();
 
                 for (int i = 0; i < 5; i++)
                 {
@@ -600,7 +602,7 @@ namespace Server.Mobiles
 
         public void BreathDealDamage(BaseCreature creature, Mobile target, DragonBreathDefinition def)
         {
-            if (!Spells.Bushido.Evasion.CheckSpellEvasion(target))
+            if (!Evasion.CheckSpellEvasion(target))
             {
                 AOS.Damage(
                     target,
@@ -716,7 +718,7 @@ namespace Server.Mobiles
                     0x227,
                     12,
                     false,
-                    new Type[] { typeof(SkeletalDragonRenowned), typeof(SkeletalDragon) }));
+                    new[] { typeof(SkeletalDragonRenowned), typeof(SkeletalDragon) }));
 
                 // Leviathan
                 Definitions.Add(new DragonBreathDefinition(
@@ -736,7 +738,7 @@ namespace Server.Mobiles
                     0x227,
                     12,
                     false,
-                    new Type[] { typeof(Leviathan) }));
+                    new[] { typeof(Leviathan) }));
 
                 // Red Death
                 Definitions.Add(new DragonBreathDefinition(
@@ -756,7 +758,7 @@ namespace Server.Mobiles
                     0x227,
                     12,
                     false,
-                    new Type[] { typeof(RedDeath) }));
+                    new[] { typeof(RedDeath) }));
 
                 // Frost Dragon/Drake
                 Definitions.Add(new DragonBreathDefinition(
@@ -776,7 +778,7 @@ namespace Server.Mobiles
                     0x227,
                     12,
                     false,
-                    new Type[] { typeof(FrostDragon), typeof(ColdDrake) }));
+                    new[] { typeof(FrostDragon), typeof(ColdDrake) }));
 
                 // Antlion
                 Definitions.Add(new DragonBreathDefinition(
@@ -796,7 +798,7 @@ namespace Server.Mobiles
                     0,
                     12,
                     false,
-                    new Type[] { typeof(AntLion) }));
+                    new[] { typeof(AntLion) }));
 
                 // Rend
                 Definitions.Add(new DragonBreathDefinition(
@@ -816,7 +818,7 @@ namespace Server.Mobiles
                     0x227,
                     12,
                     false,
-                    new Type[] { typeof(Rend) }));
+                    new[] { typeof(Rend) }));
 
                 // Crystal Sea Serpent
                 Definitions.Add(new DragonBreathDefinition(
@@ -836,7 +838,7 @@ namespace Server.Mobiles
                    0x227,
                    12,
                    false,
-                   new Type[] { typeof(CrystalSeaSerpent) }));
+                   new[] { typeof(CrystalSeaSerpent) }));
 
                 // Crystal Hydra
                 Definitions.Add(new DragonBreathDefinition(
@@ -856,7 +858,7 @@ namespace Server.Mobiles
                     0x56D,
                     12,
                     true,
-                    new Type[] { typeof(CrystalHydra) }));
+                    new[] { typeof(CrystalHydra) }));
             }
 
             public static DragonBreathDefinition GetDefinition(BaseCreature bc)
@@ -929,64 +931,50 @@ namespace Server.Mobiles
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Physical ? 100 : 0;
                         }
-                        else
-                        {
-                            return PhysicalDamage;
-                        }
+
+                        return PhysicalDamage;
                     case ElementType.Fire:
                         if (bc is IElementalCreature)
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Fire ? 100 : 0;
                         }
-                        else
-                        {
-                            return FireDamage;
-                        }
+
+                        return FireDamage;
                     case ElementType.Cold:
                         if (bc is IElementalCreature)
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Cold ? 100 : 0;
                         }
-                        else
-                        {
-                            return ColdDamage;
-                        }
+
+                        return ColdDamage;
                     case ElementType.Poison:
                         if (bc is IElementalCreature)
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Poison ? 100 : 0;
                         }
-                        else
-                        {
-                            return PoisonDamage;
-                        }
+
+                        return PoisonDamage;
                     case ElementType.Energy:
                         if (bc is IElementalCreature)
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Energy ? 100 : 0;
                         }
-                        else
-                        {
-                            return EnergyDamage;
-                        }
+
+                        return EnergyDamage;
                     case ElementType.Chaos:
                         if (bc is IElementalCreature)
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Chaos ? 100 : 0;
                         }
-                        else
-                        {
-                            return ChaosDamage;
-                        }
+
+                        return ChaosDamage;
                     case ElementType.Direct:
                         if (bc is IElementalCreature)
                         {
                             return ((IElementalCreature)bc).ElementType == ElementType.Direct ? 100 : 0;
                         }
-                        else
-                        {
-                            return DirectDamage;
-                        }
+
+                        return DirectDamage;
                 }
             }
         }

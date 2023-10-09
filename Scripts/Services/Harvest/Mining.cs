@@ -1,8 +1,11 @@
-using Server.Items;
-using Server.Mobiles;
-using Server.Targeting;
 using System;
 using System.Linq;
+using Server.Diagnostics;
+using Server.Items;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Regions;
+using Server.Targeting;
 
 namespace Server.Engines.Harvest
 {
@@ -59,9 +62,9 @@ namespace Server.Engines.Harvest
             oreAndStone.ConsumedPerFeluccaHarvest = 2;
 
             // The digging effect
-            oreAndStone.EffectActions = new int[] { 3 };
-            oreAndStone.EffectSounds = new int[] { 0x125, 0x126 };
-            oreAndStone.EffectCounts = new int[] { 1 };
+            oreAndStone.EffectActions = new[] { 3 };
+            oreAndStone.EffectSounds = new[] { 0x125, 0x126 };
+            oreAndStone.EffectCounts = new[] { 1 };
             oreAndStone.EffectDelay = TimeSpan.FromSeconds(1.6);
             oreAndStone.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
 
@@ -73,7 +76,7 @@ namespace Server.Engines.Harvest
             oreAndStone.PackFullMessage = 1010481; // Your backpack is full, so the ore you mined is lost.
             oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
 
-            res = new HarvestResource[]
+            res = new[]
             {
                 new HarvestResource(00.0, 00.0, 100.0, 1007072, typeof(IronOre), typeof(Granite)),
                 new HarvestResource(65.0, 25.0, 105.0, 1007073, typeof(DullCopperOre),  typeof(DullCopperGranite), typeof(DullCopperElemental)),
@@ -86,7 +89,7 @@ namespace Server.Engines.Harvest
                 new HarvestResource(99.0, 59.0, 139.0, 1007080, typeof(ValoriteOre), typeof(ValoriteGranite), typeof(ValoriteElemental))
             };
 
-            veins = new HarvestVein[]
+            veins = new[]
             {
                 new HarvestVein(49.6, 0.0, res[0], null), // Iron
                 new HarvestVein(11.2, 0.5, res[1], res[0]), // Dull Copper
@@ -102,7 +105,7 @@ namespace Server.Engines.Harvest
             oreAndStone.Resources = res;
             oreAndStone.Veins = veins;
 
-            oreAndStone.BonusResources = new BonusHarvestResource[]
+            oreAndStone.BonusResources = new[]
             {
                 new BonusHarvestResource(0, 99.2, null, null), //Nothing
                 new BonusHarvestResource(100, .1, 1072562, typeof(BlueDiamond)),
@@ -150,9 +153,9 @@ namespace Server.Engines.Harvest
             sand.ConsumedPerFeluccaHarvest = 2;
 
             // The digging effect
-            sand.EffectActions = new int[] { 3 };
-            sand.EffectSounds = new int[] { 0x125, 0x126 };
-            sand.EffectCounts = new int[] { 6 };
+            sand.EffectActions = new[] { 3 };
+            sand.EffectSounds = new[] { 0x125, 0x126 };
+            sand.EffectCounts = new[] { 6 };
             sand.EffectDelay = TimeSpan.FromSeconds(1.6);
             sand.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
 
@@ -164,12 +167,12 @@ namespace Server.Engines.Harvest
             sand.PackFullMessage = 1044632; // Your backpack can't hold the sand, and it is lost!
             sand.ToolBrokeMessage = 1044038; // You have worn out your tool!
 
-            res = new HarvestResource[]
+            res = new[]
             {
                 new HarvestResource(100.0, 70.0, 100.0, 1044631, typeof(Sand))
             };
 
-            veins = new HarvestVein[]
+            veins = new[]
             {
                 new HarvestVein(100.0, 0.0, res[0], null)
             };
@@ -204,10 +207,9 @@ namespace Server.Engines.Harvest
 
                 if (tool is ImprovedRockHammer)
                 {
-                    if (from.Skills[SkillName.Mining].Base >= 100.0)
+	                if (from.Skills[SkillName.Mining].Base >= 100.0)
                         return resource.Types[1];
-                    else
-                        return null;
+	                return null;
                 }
 
                 if (pm != null && pm.GemMining && pm.ToggleMiningGem && from.Skills[SkillName.Mining].Base >= 100.0 && 0.1 > Utility.RandomDouble())
@@ -285,15 +287,17 @@ namespace Server.Engines.Harvest
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return false;
             }
-            else if (from.Mounted)
+
+            if (from.Mounted)
             {
-                from.SendLocalizedMessage(501864); // You can't mine while riding.
-                return false;
+	            from.SendLocalizedMessage(501864); // You can't mine while riding.
+	            return false;
             }
-            else if (from.IsBodyMod && !from.Body.IsHuman)
+
+            if (from.IsBodyMod && !from.Body.IsHuman)
             {
-                from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
-                return false;
+	            from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
+	            return false;
             }
 
             return true;
@@ -312,8 +316,7 @@ namespace Server.Engines.Harvest
             return base.MutateVein(from, tool, def, bank, toHarvest, vein);
         }
 
-        private static readonly int[] m_Offsets = new int[]
-        {
+        private static readonly int[] m_Offsets = {
             -1, -1,
             -1, 0,
             -1, 1,
@@ -355,17 +358,15 @@ namespace Server.Engines.Harvest
                                     spawned.Combatant = from;
                                     return;
                                 }
-                                else
-                                {
-                                    int z = map.GetAverageZ(x, y);
 
-                                    if (Math.Abs(z - from.Z) < 10 && map.CanSpawnMobile(x, y, z))
-                                    {
-                                        spawned.OnBeforeSpawn(new Point3D(x, y, z), map);
-                                        spawned.MoveToWorld(new Point3D(x, y, z), map);
-                                        spawned.Combatant = from;
-                                        return;
-                                    }
+                                int z = map.GetAverageZ(x, y);
+
+                                if (Math.Abs(z - from.Z) < 10 && map.CanSpawnMobile(x, y, z))
+                                {
+	                                spawned.OnBeforeSpawn(new Point3D(x, y, z), map);
+	                                spawned.MoveToWorld(new Point3D(x, y, z), map);
+	                                spawned.Combatant = from;
+	                                return;
                                 }
                             }
 
@@ -376,7 +377,7 @@ namespace Server.Engines.Harvest
                     }
                     catch (Exception e)
                     {
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
             }
@@ -390,7 +391,7 @@ namespace Server.Engines.Harvest
             if (bank == null)
                 return false;
 
-            bool boat = Multis.BaseBoat.FindBoatAt(from, from.Map) != null;
+            bool boat = BaseBoat.FindBoatAt(from, from.Map) != null;
             bool dungeon = IsDungeonRegion(from);
 
             if (!boat && !dungeon)
@@ -423,21 +424,19 @@ namespace Server.Engines.Harvest
                         NiterDeposit.AddBank(bank);
                         return true;
                     }
-                    else
-                    {
-                        for (int i = 0; i < 50; i++)
-                        {
-                            int x = Utility.RandomMinMax(loc.X - 2, loc.X + 2);
-                            int y = Utility.RandomMinMax(loc.Y - 2, loc.Y + 2);
-                            int z = from.Z;
 
-                            if (from.Map.CanSpawnMobile(x, y, z))
-                            {
-                                niter.MoveToWorld(new Point3D(x, y, z), from.Map);
-                                from.SendLocalizedMessage(1149918, niter.Size.ToString()); //You have uncovered a ~1_SIZE~ deposit of niter! Mine it to obtain saltpeter.
-                                return true;
-                            }
-                        }
+                    for (int i = 0; i < 50; i++)
+                    {
+	                    int x = Utility.RandomMinMax(loc.X - 2, loc.X + 2);
+	                    int y = Utility.RandomMinMax(loc.Y - 2, loc.Y + 2);
+	                    int z = from.Z;
+
+	                    if (from.Map.CanSpawnMobile(x, y, z))
+	                    {
+		                    niter.MoveToWorld(new Point3D(x, y, z), from.Map);
+		                    from.SendLocalizedMessage(1149918, niter.Size.ToString()); //You have uncovered a ~1_SIZE~ deposit of niter! Mine it to obtain saltpeter.
+		                    return true;
+	                    }
                     }
 
                     niter.Delete();
@@ -459,7 +458,7 @@ namespace Server.Engines.Harvest
             if ((map == Map.Felucca || map == Map.Trammel) && bounds.Contains(new Point2D(from.X, from.Y)))
                 return false;
 
-            return reg != null && (reg.IsPartOf<Regions.DungeonRegion>() || map == Map.Ilshenar);
+            return reg != null && (reg.IsPartOf<DungeonRegion>() || map == Map.Ilshenar);
         }
         #endregion
 
@@ -496,8 +495,7 @@ namespace Server.Engines.Harvest
         }
 
         #region Tile lists
-        private static readonly int[] m_MountainAndCaveTiles = new int[]
-        {
+        private static readonly int[] m_MountainAndCaveTiles = {
             220, 221, 222, 223, 224, 225, 226, 227, 228, 229,
             230, 231, 236, 237, 238, 239, 240, 241, 242, 243,
             244, 245, 246, 247, 252, 253, 254, 255, 256, 257,
@@ -533,8 +531,7 @@ namespace Server.Engines.Harvest
             0x4549, 0x454A, 0x454B, 0x454C, 0x454D, 0x454E, 0x454F
         };
 
-        private static readonly int[] m_SandTiles = new int[]
-        {
+        private static readonly int[] m_SandTiles = {
             22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
             32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
             42, 43, 44, 45, 46, 47, 48, 49, 50, 51,

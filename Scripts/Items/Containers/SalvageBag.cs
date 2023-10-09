@@ -1,9 +1,10 @@
-using Server.ContextMenus;
-using Server.Engines.Craft;
-using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Engines.Craft;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -162,7 +163,7 @@ namespace Server.Items
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             return false;

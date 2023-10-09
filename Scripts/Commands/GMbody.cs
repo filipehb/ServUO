@@ -1,7 +1,7 @@
+using System.Collections;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System.Collections;
 
 namespace Server.Commands
 {

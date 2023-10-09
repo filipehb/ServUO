@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -154,30 +154,30 @@ namespace Server.Mobiles
 
             if (rand <= 0)
                 return 0x855C;
-            else if (rand <= 1)
-                return 0x8490;
-            else if (rand <= 3)
-                return 0x8030;
-            else if (rand <= 5)
-                return 0x8037;
-            else if (rand <= 8)
-                return 0x8295;
-            else if (rand <= 11)
-                return 0x8123;
-            else if (rand <= 16)
-                return 0x8482;
-            else if (rand <= 24)
-                return 0x8487;
-            else if (rand <= 34)
-                return 0x8032;
-            else if (rand <= 44)
-                return 0x8899;
-            else if (rand <= 54)
-                return 0x8495;
-            else if (rand <= 64)
-                return 0x848D;
-            else if (rand <= 74)
-                return 0x847F;
+            if (rand <= 1)
+	            return 0x8490;
+            if (rand <= 3)
+	            return 0x8030;
+            if (rand <= 5)
+	            return 0x8037;
+            if (rand <= 8)
+	            return 0x8295;
+            if (rand <= 11)
+	            return 0x8123;
+            if (rand <= 16)
+	            return 0x8482;
+            if (rand <= 24)
+	            return 0x8487;
+            if (rand <= 34)
+	            return 0x8032;
+            if (rand <= 44)
+	            return 0x8899;
+            if (rand <= 54)
+	            return 0x8495;
+            if (rand <= 64)
+	            return 0x848D;
+            if (rand <= 74)
+	            return 0x847F;
 
             return 0;
         }

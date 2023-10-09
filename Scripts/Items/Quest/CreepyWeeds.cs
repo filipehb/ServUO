@@ -1,6 +1,6 @@
+using System;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
@@ -14,7 +14,7 @@ namespace Server.Items
             Weight = 1;
             Movable = false;
 
-            Timer.DelayCall(TimeSpan.FromMinutes(10.0), delegate ()
+            Timer.DelayCall(TimeSpan.FromMinutes(10.0), delegate
             {
                 Delete();
             });
@@ -82,19 +82,18 @@ namespace Server.Items
 
         protected virtual bool CheckUse(Mobile from)
         {
-            if (Deleted || !IsAccessibleTo(from))
+	        if (Deleted || !IsAccessibleTo(from))
             {
                 return false;
             }
-            else if (from.Map != Map || !from.InRange(GetWorldLocation(), 1))
-            {
-                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+
+	        if (from.Map != Map || !from.InRange(GetWorldLocation(), 1))
+	        {
+		        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+		        return false;
+	        }
+
+	        return true;
         }
     }
 }

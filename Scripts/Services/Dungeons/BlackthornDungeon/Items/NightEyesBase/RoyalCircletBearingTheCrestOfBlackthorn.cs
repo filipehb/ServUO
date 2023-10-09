@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public RoyalCircletBearingTheCrestOfBlackthorn1()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.NightSight = 1;

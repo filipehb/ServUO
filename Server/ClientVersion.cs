@@ -1,7 +1,9 @@
 #region References
+
 using System;
 using System.Collections;
 using System.Text;
+
 #endregion
 
 namespace Server
@@ -227,38 +229,43 @@ namespace Server
 			{
 				return 1;
 			}
-			else if (m_Major < o.m_Major)
+
+			if (m_Major < o.m_Major)
 			{
 				return -1;
 			}
-			else if (m_Minor > o.m_Minor)
+
+			if (m_Minor > o.m_Minor)
 			{
 				return 1;
 			}
-			else if (m_Minor < o.m_Minor)
+
+			if (m_Minor < o.m_Minor)
 			{
 				return -1;
 			}
-			else if (m_Revision > o.m_Revision)
+
+			if (m_Revision > o.m_Revision)
 			{
 				return 1;
 			}
-			else if (m_Revision < o.m_Revision)
+
+			if (m_Revision < o.m_Revision)
 			{
 				return -1;
 			}
-			else if (m_Patch > o.m_Patch)
+
+			if (m_Patch > o.m_Patch)
 			{
 				return 1;
 			}
-			else if (m_Patch < o.m_Patch)
+
+			if (m_Patch < o.m_Patch)
 			{
 				return -1;
 			}
-			else
-			{
-				return 0;
-			}
+
+			return 0;
 		}
 
 		public static bool IsNull(object x)
@@ -272,11 +279,13 @@ namespace Server
 			{
 				return 0;
 			}
-			else if (IsNull(x))
+
+			if (IsNull(x))
 			{
 				return -1;
 			}
-			else if (IsNull(y))
+
+			if (IsNull(y))
 			{
 				return 1;
 			}
@@ -298,11 +307,13 @@ namespace Server
 			{
 				return 0;
 			}
-			else if (IsNull(a))
+
+			if (IsNull(a))
 			{
 				return -1;
 			}
-			else if (IsNull(b))
+
+			if (IsNull(b))
 			{
 				return 1;
 			}

@@ -1,12 +1,16 @@
 #region References
+
+using System;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
+using Server.Regions;
 using Server.Spells.Fifth;
 using Server.Spells.Seventh;
-using System;
-using System.Collections.Generic;
+using Server.Spells.SkillMasteries;
+
 #endregion
 
 namespace Server.Spells.Ninjitsu
@@ -46,7 +50,7 @@ namespace Server.Spells.Ninjitsu
         {
             if (CasterIsMoving() && GetLastAnimalForm(Caster) == 16)
             {
-                SkillMasteries.WhiteTigerFormSpell.AutoCast(Caster);
+                WhiteTigerFormSpell.AutoCast(Caster);
                 return false;
             }
 
@@ -60,15 +64,17 @@ namespace Server.Spells.Ninjitsu
                 Caster.SendLocalizedMessage(1061628); // You can't do that while polymorphed.
                 return false;
             }
-            else if (TransformationSpellHelper.UnderTransformation(Caster))
+
+            if (TransformationSpellHelper.UnderTransformation(Caster))
             {
-                Caster.SendLocalizedMessage(1063219); // You cannot mimic an animal while in that form.
-                return false;
+	            Caster.SendLocalizedMessage(1063219); // You cannot mimic an animal while in that form.
+	            return false;
             }
-            else if (DisguiseTimers.IsDisguised(Caster))
+
+            if (DisguiseTimers.IsDisguised(Caster))
             {
-                Caster.SendLocalizedMessage(1061631); // You can't do that while disguised.
-                return false;
+	            Caster.SendLocalizedMessage(1061631); // You can't do that while disguised.
+	            return false;
             }
 
             return base.CheckCast();
@@ -312,7 +318,7 @@ namespace Server.Spells.Ninjitsu
 
             if (context.SpeedBoost)
             {
-                if (m.Region is Regions.TwistedWealdDesert)
+                if (m.Region is TwistedWealdDesert)
                     m.SendSpeedControl(SpeedControlType.WalkSpeed);
                 else
                     m.SendSpeedControl(SpeedControlType.Disable);
@@ -432,8 +438,7 @@ namespace Server.Spells.Ninjitsu
             }
         }
 
-        private static readonly AnimalFormEntry[] m_Entries = new[]
-        {
+        private static readonly AnimalFormEntry[] m_Entries = {
             new AnimalFormEntry(typeof(Kirin), "kirin", 9632, 0, 1070811, 100.0, 0x84, 0, 0, false, true, false),
             new AnimalFormEntry(typeof(Unicorn), "unicorn", 9678, 0, 1070812, 100.0, 0x7A, 0, 0, false, true, false),
             new AnimalFormEntry(typeof(BakeKitsune), "bake-kitsune", 10083, 0, 1070810, 82.5, 0xF6, 0, 0, false, true, false),

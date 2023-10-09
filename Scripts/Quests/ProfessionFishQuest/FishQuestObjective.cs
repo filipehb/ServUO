@@ -32,7 +32,7 @@ namespace Server.Engines.Quests
 
             foreach (KeyValuePair<Type, int> kvp in line)
             {
-                Line[kvp.Key] = new int[] { 0, kvp.Value };
+                Line[kvp.Key] = new[] { 0, kvp.Value };
             }
         }
 

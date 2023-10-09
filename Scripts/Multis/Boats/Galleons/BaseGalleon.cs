@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Engines.PartySystem;
@@ -5,9 +8,6 @@ using Server.Guilds;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Multis
 {
@@ -795,14 +795,15 @@ namespace Server.Multis
 
             if (Addons != null)
             {
-                if (item is BaseAddon && Addons.ContainsKey(item))
+	            if (item is BaseAddon && Addons.ContainsKey(item))
                 {
                     return true;
                 }
-                else if (item is AddonComponent && ((AddonComponent)item).Addon != null && Addons.ContainsKey(((AddonComponent)item).Addon))
-                {
-                    return true;
-                }
+
+	            if (item is AddonComponent && ((AddonComponent)item).Addon != null && Addons.ContainsKey(((AddonComponent)item).Addon))
+	            {
+		            return true;
+	            }
             }
 
             if (Cannons != null && Cannons.Contains(item))
@@ -1004,13 +1005,12 @@ namespace Server.Multis
         }
 
         public static int[][] CannonIDs => m_CannonIDs;
-        private static readonly int[][] m_CannonIDs = new int[][]
-        { 
+        private static readonly int[][] m_CannonIDs = { 
                       //Light  Heavy, Blunder, Pumpkin
-            new int[] { 16918, 16922, 41664, 41979 }, //South
-            new int[] { 16919, 16923, 41665, 41980 }, //West
-            new int[] { 16920, 16924, 41666, 41981 }, //North
-            new int[] { 16921, 16925, 41667, 41982 }, //East
+            new[] { 16918, 16922, 41664, 41979 }, //South
+            new[] { 16919, 16923, 41665, 41980 }, //West
+            new[] { 16920, 16924, 41666, 41981 }, //North
+            new[] { 16921, 16925, 41667, 41982 }, //East
         };
 
         public virtual ShipPosition GetCannonPosition(Point3D pnt)
@@ -1085,8 +1085,8 @@ namespace Server.Multis
                     from.SendLocalizedMessage(1116771); //You apply a fresh coat of paint to your ship.
                     return true;
                 }
-                else
-                    from.SendLocalizedMessage(1116774); //You have reached this paint color's maximum intensity.
+
+                from.SendLocalizedMessage(1116774); //You have reached this paint color's maximum intensity.
             }
             return false;
         }

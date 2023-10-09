@@ -1,9 +1,9 @@
+using System;
 using Server.Engines.Quests.Haven;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Network;
 using Server.Targeting;
-using System;
 
 namespace Server.Items
 {
@@ -51,8 +51,7 @@ namespace Server.Items
 
     public class CannonAddon : BaseAddon
     {
-        private static readonly int[] m_Effects = new int[]
-        {
+        private static readonly int[] m_Effects = {
             0x36B0, 0x3728, 0x3709, 0x36FE
         };
         private CannonDirection m_CannonDirection;
@@ -179,12 +178,12 @@ namespace Server.Items
         {
             if (keg != null && !keg.Deleted && keg.Held == 100)
             {
-                if (keg.Type == PotionEffect.ExplosionLesser)
+	            if (keg.Type == PotionEffect.ExplosionLesser)
                     return 5;
-                else if (keg.Type == PotionEffect.Explosion)
-                    return 10;
-                else if (keg.Type == PotionEffect.ExplosionGreater)
-                    return 15;
+	            if (keg.Type == PotionEffect.Explosion)
+		            return 10;
+	            if (keg.Type == PotionEffect.ExplosionGreater)
+		            return 15;
             }
 
             return 0;
@@ -367,7 +366,6 @@ namespace Server.Items
         private bool m_IsRewardItem;
         [Constructable]
         public CannonDeed()
-            : base()
         {
             LootType = LootType.Blessed;
         }

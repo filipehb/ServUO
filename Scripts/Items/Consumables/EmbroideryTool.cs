@@ -31,7 +31,7 @@ namespace Server.Items
         {
         }
 
-        public override Type[] Engraves => new Type[]
+        public override Type[] Engraves => new[]
                 {
                     typeof(BaseClothing)
                 };

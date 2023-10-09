@@ -1,9 +1,12 @@
 #region References
+
+using System;
+using Server.Diagnostics;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System;
+
 #endregion
 
 namespace Server.Services.Virtues
@@ -55,7 +58,7 @@ namespace Server.Services.Virtues
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
         }
 

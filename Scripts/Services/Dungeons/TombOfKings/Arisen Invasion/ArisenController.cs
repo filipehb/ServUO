@@ -1,6 +1,6 @@
+using System;
 using Server.Commands;
 using Server.Mobiles;
-using System;
 
 namespace Server.Items
 {
@@ -51,8 +51,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly ArisenEntry[] m_Entries = new ArisenEntry[]
-            {
+        private static readonly ArisenEntry[] m_Entries = {
                 new ArisenEntry( Map.TerMur, new Point3D( 996, 3862, -42 ), "EffeteUndeadGargoyle", 5, 20, 15, TimeSpan.FromSeconds( 15.0 ), TimeSpan.FromSeconds( 30.0 ) ),
                 new ArisenEntry( Map.TerMur, new Point3D( 996, 3863, -42 ), "EffetePutridGargoyle", 5, 20, 15, TimeSpan.FromSeconds( 30.0 ), TimeSpan.FromSeconds( 60.0 ) ),
                 new ArisenEntry( Map.TerMur, new Point3D( 996, 3864, -42 ), "GargoyleShade",        2, 15, 10, TimeSpan.FromSeconds( 60.0 ), TimeSpan.FromSeconds( 90.0 ) ),

@@ -1,13 +1,15 @@
-using Server.ContextMenus;
-using Server.Engines.Craft;
-using Server.Network;
-using Server.Misc;
-using AMA = Server.Items.ArmorMeditationAllowance;
-using AMT = Server.Items.ArmorMaterialType;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Accounting;
+using Server.ContextMenus;
+using Server.Diagnostics;
+using Server.Engines.Craft;
+using Server.Engines.VvV;
+using Server.Misc;
+using Server.Network;
+using AMA = Server.Items.ArmorMeditationAllowance;
+using AMT = Server.Items.ArmorMaterialType;
 
 namespace Server.Items
 {
@@ -242,10 +244,9 @@ namespace Server.Items
         {
             get
             {
-                if (m_ArmorBase == -1)
+	            if (m_ArmorBase == -1)
                     return ArmorBase;
-                else
-                    return m_ArmorBase;
+	            return m_ArmorBase;
             }
             set
             {
@@ -894,12 +895,11 @@ namespace Server.Items
 
         public int ComputeStatBonus(StatType type)
         {
-            if (type == StatType.Str)
+	        if (type == StatType.Str)
                 return StrBonus + Attributes.BonusStr;
-            else if (type == StatType.Dex)
-                return DexBonus + Attributes.BonusDex;
-            else
-                return IntBonus + Attributes.BonusInt;
+	        if (type == StatType.Dex)
+		        return DexBonus + Attributes.BonusDex;
+	        return IntBonus + Attributes.BonusInt;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -1094,7 +1094,7 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
 
@@ -1421,7 +1421,7 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.ColdBonus, m_ColdBonus != 0);
             SetSaveFlag(ref flags, SaveFlag.PoisonBonus, m_PoisonBonus != 0);
             SetSaveFlag(ref flags, SaveFlag.EnergyBonus, m_EnergyBonus != 0);
-            SetSaveFlag(ref flags, SaveFlag.Identified, m_Identified != false);
+            SetSaveFlag(ref flags, SaveFlag.Identified, m_Identified);
             SetSaveFlag(ref flags, SaveFlag.MaxHitPoints, m_MaxHitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.HitPoints, m_HitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.Crafter, m_Crafter != null);
@@ -1436,7 +1436,7 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.IntReq, m_IntReq != -1);
             SetSaveFlag(ref flags, SaveFlag.MedAllowance, m_Meditate != (AMA)(-1));
             SetSaveFlag(ref flags, SaveFlag.SkillBonuses, !m_AosSkillBonuses.IsEmpty);
-            SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, m_PlayerConstructed != false);
+            SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, m_PlayerConstructed);
             SetSaveFlag(ref flags, SaveFlag.xAbsorptionAttributes, !m_SAAbsorptionAttributes.IsEmpty);
             SetSaveFlag(ref flags, SaveFlag.Altered, m_Altered);
 
@@ -1863,7 +1863,7 @@ namespace Server.Items
 
                 if (this is IAccountRestricted && ((IAccountRestricted)this).Account != null)
                 {
-                    Accounting.Account acct = from.Account as Accounting.Account;
+                    Account acct = from.Account as Account;
 
                     if (acct == null || acct.Username != ((IAccountRestricted)this).Account)
                     {
@@ -1872,7 +1872,7 @@ namespace Server.Items
                     }
                 }
 
-                if (IsVvVItem && !Engines.VvV.ViceVsVirtueSystem.IsVvV(from))
+                if (IsVvVItem && !ViceVsVirtueSystem.IsVvV(from))
                 {
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
@@ -1882,53 +1882,56 @@ namespace Server.Items
                 {
                     return false;
                 }
-                else if (!AllowMaleWearer && !from.Female)
-                {
-                    if (AllowFemaleWearer)
-                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1010388); // Only females can wear this.
-                    else
-                        from.SendLocalizedMessage(1071936); // You cannot equip that.
 
-                    return false;
+                if (!AllowMaleWearer && !from.Female)
+                {
+	                if (AllowFemaleWearer)
+		                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1010388); // Only females can wear this.
+	                else
+		                from.SendLocalizedMessage(1071936); // You cannot equip that.
+
+	                return false;
                 }
-                else if (!AllowFemaleWearer && from.Female)
-                {
-                    if (AllowMaleWearer)
-                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1063343); // Only males can wear this.
-                    else
-                        from.SendLocalizedMessage(1071936); // You cannot equip that.
 
-                    return false;
+                if (!AllowFemaleWearer && from.Female)
+                {
+	                if (AllowMaleWearer)
+		                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1063343); // Only males can wear this.
+	                else
+		                from.SendLocalizedMessage(1071936); // You cannot equip that.
+
+	                return false;
                 }
                 #region Personal Bless Deed
-                else if (BlessedBy != null && BlessedBy != from)
-                {
-                    from.SendLocalizedMessage(1075277); // That item is blessed by another player.
 
-                    return false;
+                if (BlessedBy != null && BlessedBy != from)
+                {
+	                from.SendLocalizedMessage(1075277); // That item is blessed by another player.
+
+	                return false;
                 }
                 #endregion
-                else
-                {
-                    int strBonus = ComputeStatBonus(StatType.Str), strReq = ComputeStatReq(StatType.Str);
-                    int dexBonus = ComputeStatBonus(StatType.Dex), dexReq = ComputeStatReq(StatType.Dex);
-                    int intBonus = ComputeStatBonus(StatType.Int), intReq = ComputeStatReq(StatType.Int);
 
-                    if (from.Dex < dexReq || (from.Dex + dexBonus) < 1)
-                    {
-                        from.SendLocalizedMessage(502077); // You do not have enough dexterity to equip this item.
-                        return false;
-                    }
-                    else if (from.Str < strReq || (from.Str + strBonus) < 1)
-                    {
-                        from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
-                        return false;
-                    }
-                    else if (from.Int < intReq || (from.Int + intBonus) < 1)
-                    {
-                        from.SendLocalizedMessage(1071936); // You cannot equip that.
-                        return false;
-                    }
+                int strBonus = ComputeStatBonus(StatType.Str), strReq = ComputeStatReq(StatType.Str);
+                int dexBonus = ComputeStatBonus(StatType.Dex), dexReq = ComputeStatReq(StatType.Dex);
+                int intBonus = ComputeStatBonus(StatType.Int), intReq = ComputeStatReq(StatType.Int);
+
+                if (from.Dex < dexReq || (from.Dex + dexBonus) < 1)
+                {
+	                from.SendLocalizedMessage(502077); // You do not have enough dexterity to equip this item.
+	                return false;
+                }
+
+                if (from.Str < strReq || (from.Str + strBonus) < 1)
+                {
+	                from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
+	                return false;
+                }
+
+                if (from.Int < intReq || (from.Int + intBonus) < 1)
+                {
+	                from.SendLocalizedMessage(1071936); // You cannot equip that.
+	                return false;
                 }
             }
 
@@ -2662,8 +2665,7 @@ namespace Server.Items
             return false;
         }
 
-        public static Type[] _MageArmorTypes = new Type[]
-        {
+        public static Type[] _MageArmorTypes = {
             typeof(HeavyPlateJingasa),  typeof(LightPlateJingasa),
             typeof(PlateMempo),         typeof(PlateDo),
             typeof(PlateHiroSode),      typeof(PlateSuneate),

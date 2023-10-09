@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class ATangledWeb : BaseQuest
     {
         public ATangledWeb()
-            : base()
         {
             AddObjective(new BloodCreaturesObjective(typeof(IBloodCreature), "blood creatures", 12));
 
@@ -59,7 +58,7 @@ namespace Server.Engines.Quests
                 base.OnKill(killed);
 
                 if (!Completed)
-                    Quest.Owner.SendLocalizedMessage(1095037); // Blood from the creature goes into Jaacar’s barrel.
+                    Quest.Owner.SendLocalizedMessage(1095037); // Blood from the creature goes into Jaacarâ€™s barrel.
             }
 
             public override void Serialize(GenericWriter writer)

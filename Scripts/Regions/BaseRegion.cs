@@ -1,9 +1,10 @@
-using Server.Gumps;
-using Server.Items;
-using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Spells;
 
 namespace Server.Regions
 {
@@ -525,12 +526,11 @@ namespace Server.Regions
 
         public override string ToString()
         {
-            if (Name != null)
+	        if (Name != null)
                 return Name;
-            else if (RuneName != null)
-                return RuneName;
-            else
-                return GetType().Name;
+	        if (RuneName != null)
+		        return RuneName;
+	        return GetType().Name;
         }
 
         private void InitRectangles()
@@ -602,7 +602,7 @@ namespace Server.Regions
             }
         }
 
-        public virtual bool CheckTravel(Mobile traveller, Point3D p, Spells.TravelCheckType type)
+        public virtual bool CheckTravel(Mobile traveller, Point3D p, TravelCheckType type)
         {
             return true;
         }

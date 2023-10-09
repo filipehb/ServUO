@@ -1,8 +1,8 @@
+using System.Linq;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -133,15 +133,13 @@ namespace Server.Items
                         }
                         else
                         {
-                            if (_Item.CheckMagicalItem(i))
+	                        if (_Item.CheckMagicalItem(i))
                             {
                                 from.SendLocalizedMessage(1159504); // The destination item must be free of any magical properties.
                                 return;
                             }
-                            else
-                            {
-                                _Item.DestinationObject = i;
-                            }
+
+	                        _Item.DestinationObject = i;
                         }
 
                         from.CloseGump(typeof(TransmogrificationPotionGump));

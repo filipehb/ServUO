@@ -33,7 +33,7 @@ namespace Server.Items
 
     public class BadCard : Item
     {
-        private static readonly int[] m_CardHues = new int[] { 0x45, 0x27, 0x3D0 };
+        private static readonly int[] m_CardHues = { 0x45, 0x27, 0x3D0 };
 
         public override int LabelNumber => 1041428; // Maybe next year youll get a better...
 

@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -209,7 +209,7 @@ namespace Server.Items
 
             for (int i = 0; i < stabled.Count; i++)
             {
-                BaseCreature pet = stabled[i] as BaseCreature;
+                BaseCreature pet = stabled[i];
 
                 if (pet == null || pet.Deleted)
                 {
@@ -220,7 +220,6 @@ namespace Server.Items
 
                     stabled.RemoveAt(i);
                     --i;
-                    continue;
                 }
             }
 
@@ -262,23 +261,27 @@ namespace Server.Items
 
         public void BeginStable(Mobile from)
         {
-            if (Deleted || !from.CheckAlive() || !CanUse() || !CheckAccess(from))
+	        if (Deleted || !from.CheckAlive() || !CanUse() || !CheckAccess(from))
                 return;
 
-            else if (GetCount() >= MaxStables)
-            {
-                from.SendLocalizedMessage(1114325); // There is no more room in your chicken coop!
-            }
-            else
-            {
-                /*from.SendLocalizedMessage(1042558);  I charge 30 gold per pet for a real week's stable time.
-										 * I will withdraw it from thy bank account.
-										 * Which animal wouldst thou like to stable here?
-										 */
+	        if (GetCount() >= MaxStables)
+	        {
+		        from.SendLocalizedMessage(1114325); // There is no more room in your chicken coop!
+	        }
+	        else
+	        {
+		        /*from.SendLocalizedMessage(1042558);  I charge 30 gold per pet for a real week's stable time.
+		         * I will withdraw it from thy bank account.
+		         * Which animal wouldst thou like to stable here?
+		         */
 
-                from.Target = new StableTarget(this);
-                from.SendLocalizedMessage(1112559); // Which chicken do you wish to stable?
-            }
+		        /*from.SendLocalizedMessage(1042558);  I charge 30 gold per pet for a real week's stable time.
+		         * I will withdraw it from thy bank account.
+		         * Which animal wouldst thou like to stable here?
+		         */
+		        from.Target = new StableTarget(this);
+		        from.SendLocalizedMessage(1112559); // Which chicken do you wish to stable?
+	        }
         }
 
         private int GetCount()
@@ -296,58 +299,58 @@ namespace Server.Items
 
         public void EndStable(Mobile from, BaseCreature pet)
         {
-            if (Deleted || !from.CheckAlive() || !CanUse() || !CheckAccess(from))
+	        if (Deleted || !from.CheckAlive() || !CanUse() || !CheckAccess(from))
                 return;
 
-            else if (!pet.Controlled || pet.ControlMaster != from)
-            {
-                from.SendLocalizedMessage(1042562); // You do not own that pet!
-            }
-            else if (pet.IsDeadPet)
-            {
-                from.SendLocalizedMessage(1049668); // Living pets only, please.
-            }
-            else if (pet.Summoned)
-            {
-                from.SendLocalizedMessage(502673); // I can not stable summoned creatures.
-            }
-            else if (pet.Allured)
-            {
-                from.SendLocalizedMessage(1048053); // You can't stable that!
-            }
-            else if (pet.Body.IsHuman)
-            {
-                from.SendLocalizedMessage(502672); // HA HA HA! Sorry, I am not an inn.
-            }
-            else if (pet.Combatant != null && pet.InRange(pet.Combatant, 12) && pet.Map == pet.Combatant.Map)
-            {
-                from.SendLocalizedMessage(1042564); // I'm sorry.  Your pet seems to be busy.
-            }
-            else if (GetCount() >= MaxStables)
-            {
-                from.SendLocalizedMessage(1114325); // There is no more room in your chicken coop!
-            }
-            else
-            {
-                pet.ControlTarget = null;
-                pet.ControlOrder = OrderType.Stay;
-                pet.Internalize();
+	        if (!pet.Controlled || pet.ControlMaster != from)
+	        {
+		        from.SendLocalizedMessage(1042562); // You do not own that pet!
+	        }
+	        else if (pet.IsDeadPet)
+	        {
+		        from.SendLocalizedMessage(1049668); // Living pets only, please.
+	        }
+	        else if (pet.Summoned)
+	        {
+		        from.SendLocalizedMessage(502673); // I can not stable summoned creatures.
+	        }
+	        else if (pet.Allured)
+	        {
+		        from.SendLocalizedMessage(1048053); // You can't stable that!
+	        }
+	        else if (pet.Body.IsHuman)
+	        {
+		        from.SendLocalizedMessage(502672); // HA HA HA! Sorry, I am not an inn.
+	        }
+	        else if (pet.Combatant != null && pet.InRange(pet.Combatant, 12) && pet.Map == pet.Combatant.Map)
+	        {
+		        from.SendLocalizedMessage(1042564); // I'm sorry.  Your pet seems to be busy.
+	        }
+	        else if (GetCount() >= MaxStables)
+	        {
+		        from.SendLocalizedMessage(1114325); // There is no more room in your chicken coop!
+	        }
+	        else
+	        {
+		        pet.ControlTarget = null;
+		        pet.ControlOrder = OrderType.Stay;
+		        pet.Internalize();
 
-                pet.SetControlMaster(null);
-                pet.SummonMaster = null;
+		        pet.SetControlMaster(null);
+		        pet.SummonMaster = null;
 
-                pet.IsStabled = true;
+		        pet.IsStabled = true;
 
-                pet.Loyalty = BaseCreature.MaxLoyalty; // Wonderfully happy
+		        pet.Loyalty = BaseCreature.MaxLoyalty; // Wonderfully happy
 
-                if (!m_Stored.ContainsKey(from))
-                    m_Stored.Add(from, new List<BaseCreature>());
+		        if (!m_Stored.ContainsKey(from))
+			        m_Stored.Add(from, new List<BaseCreature>());
 
-                if (!m_Stored[from].Contains(pet))
-                    m_Stored[from].Add(pet);
+		        if (!m_Stored[from].Contains(pet))
+			        m_Stored[from].Add(pet);
 
-                from.SendMessage("Your chicken has been stabled.");
-            }
+		        from.SendMessage("Your chicken has been stabled.");
+	        }
         }
 
         public void Claim(Mobile from)
@@ -362,7 +365,7 @@ namespace Server.Items
 
             for (int i = 0; i < stabled.Count; ++i)
             {
-                BaseCreature pet = stabled[i] as BaseCreature;
+                BaseCreature pet = stabled[i];
 
                 if (pet == null || pet.Deleted)
                 {

@@ -1,13 +1,14 @@
-using Server.ContextMenus;
-using Server.Gumps;
-using Server.Items;
-using Server.Multis;
-using Server.Network;
-using Server.Targeting;
-using Server.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using Server.ContextMenus;
+using Server.Gumps;
+using Server.Items;
+using Server.Misc;
+using Server.Multis;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Mobiles
 {
@@ -163,7 +164,7 @@ namespace Server.Mobiles
         {
             List<Type> ll = new List<Type>();
 
-            var rs = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+            var rs = Assembly.GetExecutingAssembly().GetTypes();
 
             for (var index = 0; index < rs.Length; index++)
             {
@@ -196,7 +197,7 @@ namespace Server.Mobiles
         {
             List<Type> ll = new List<Type>();
 
-            var rs = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+            var rs = Assembly.GetExecutingAssembly().GetTypes();
 
             for (var index = 0; index < rs.Length; index++)
             {
@@ -229,7 +230,7 @@ namespace Server.Mobiles
         {
             List<Type> ll = new List<Type>();
 
-            var rs = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+            var rs = Assembly.GetExecutingAssembly().GetTypes();
 
             for (var index = 0; index < rs.Length; index++)
             {

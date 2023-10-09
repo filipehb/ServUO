@@ -1,12 +1,11 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Engines.Quests
 {
     public class ScaleArmorQuest : BaseQuest
     {
         public ScaleArmorQuest()
-            : base()
         {
             AddObjective(new ObtainObjective(typeof(ThrashersTail), "thrasher's tail", 1));
             AddObjective(new ObtainObjective(typeof(HydraScale), "hydra scales", 10));
@@ -63,7 +62,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(ScaleArmorQuest),
                     typeof(ThePuffyShirtQuest),

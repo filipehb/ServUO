@@ -1,8 +1,8 @@
+using System.Linq;
 using Server.Engines.JollyRoger;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -10,7 +10,6 @@ namespace Server.Items
     {
         [Constructable]
         public WOSAnkhOfSacrifice()
-            : base()
         {
             AddComponent(new AnkhOfSacrificeComponent(0x1E5D), 0, 0, 0);
             AddComponent(new AnkhOfSacrificeComponent(0x1E5C), 1, 0, 0);

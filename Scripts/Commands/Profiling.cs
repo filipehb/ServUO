@@ -1,7 +1,7 @@
-using Server.Diagnostics;
 using System;
 using System.Collections;
 using System.IO;
+using Server.Diagnostics;
 
 namespace Server.Commands
 {
@@ -203,8 +203,7 @@ namespace Server.Commands
             {
                 using (StreamWriter op = new StreamWriter("expandedItems.log", true))
                 {
-                    string[] names = new string[]
-                    {
+                    string[] names = {
                         "Name",
                         "Items",
                         "Bounce",
@@ -261,7 +260,7 @@ namespace Server.Commands
                 int[] parms = (int[])table[type];
 
                 if (parms == null)
-                    table[type] = parms = new int[] { 0, 0 };
+                    table[type] = parms = new[] { 0, 0 };
 
                 parms[0]++;
                 parms[1] += item.Amount;

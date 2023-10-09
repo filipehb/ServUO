@@ -1,5 +1,6 @@
-using Server.Network;
 using System;
+using Server.Network;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -83,7 +84,7 @@ namespace Server.Items
             Effects.SendLocationEffect(Location, Map, GetBaseID(Type) + 1, 6, 3, GetEffectHue(), 0);
             Effects.PlaySound(Location, Map, 0x21C);
 
-            Spells.SpellHelper.Damage(TimeSpan.FromTicks(1), from, from, Utility.RandomMinMax(5, 15));
+            SpellHelper.Damage(TimeSpan.FromTicks(1), from, from, Utility.RandomMinMax(5, 15));
 
             from.LocalOverheadMessage(MessageType.Regular, 0x22, 500853); // You stepped onto a blade trap!
         }

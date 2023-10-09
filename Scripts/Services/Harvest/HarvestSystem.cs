@@ -1,11 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Server.Diagnostics;
+using Server.Engines.Harvest;
 using Server.Engines.Quests;
 using Server.Engines.Quests.Hag;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.Harvest
 {
@@ -289,7 +291,7 @@ namespace Server.Engines.Harvest
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
                 return null;
             }
         }
@@ -734,7 +736,7 @@ namespace Server
 
     public interface IHarvestTool : IEntity
     {
-        Engines.Harvest.HarvestSystem HarvestSystem { get; }
+        HarvestSystem HarvestSystem { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class)]

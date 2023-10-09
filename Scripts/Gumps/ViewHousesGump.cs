@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using Server.Accounting;
 using Server.Commands;
 using Server.Items;
 using Server.Multis;
+using Server.Network;
 using Server.Targeting;
-using System.Collections.Generic;
 
 namespace Server.Gumps
 {
@@ -175,7 +176,7 @@ namespace Server.Gumps
             return list;
         }
 
-        public override void OnResponse(Network.NetState sender, RelayInfo info)
+        public override void OnResponse(NetState sender, RelayInfo info)
         {
             if (m_Selection == null)
             {

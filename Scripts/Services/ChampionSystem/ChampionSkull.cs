@@ -1,6 +1,6 @@
-using Server.Engines.CannedEvil;
 using System;
 using System.Linq;
+using Server.Engines.CannedEvil;
 
 namespace Server.Items
 {

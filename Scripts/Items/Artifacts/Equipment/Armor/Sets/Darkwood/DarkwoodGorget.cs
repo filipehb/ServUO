@@ -1,5 +1,5 @@
-using Server.Engines.Craft;
 using System;
+using Server.Engines.Craft;
 
 namespace Server.Items
 {
@@ -9,7 +9,6 @@ namespace Server.Items
         public override bool IsArtifact => true;
         [Constructable]
         public DarkwoodGorget()
-            : base()
         {
             Hue = 0x455;
             SetHue = 0x494;

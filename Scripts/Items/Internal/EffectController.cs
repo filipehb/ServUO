@@ -419,7 +419,7 @@ namespace Server.Items
             else
                 writer.Write(m_Target as Mobile);
 
-            writer.Write(m_Trigger as Item);
+            writer.Write(m_Trigger);
 
             writer.Write(m_FixedDirection);
             writer.Write(m_Explodes);

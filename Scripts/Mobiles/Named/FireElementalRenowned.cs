@@ -1,5 +1,5 @@
-using Server.Items;
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -51,8 +51,8 @@ namespace Server.Mobiles
         {
         }
 
-        public override Type[] UniqueSAList => new Type[] { typeof(JadeWarAxe) };
-        public override Type[] SharedSAList => new Type[] { typeof(TokenOfHolyFavor), typeof(SwordOfShatteredHopes), typeof(LegacyOfDespair) };
+        public override Type[] UniqueSAList => new[] { typeof(JadeWarAxe) };
+        public override Type[] SharedSAList => new[] { typeof(TokenOfHolyFavor), typeof(SwordOfShatteredHopes), typeof(LegacyOfDespair) };
         public override double DispelDifficulty => 117.5;
         public override double DispelFocus => 45.0;
         public override bool BleedImmune => true;

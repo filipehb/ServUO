@@ -1,11 +1,15 @@
-using Server.Engines.Craft;
-using Server.Gumps;
-using Server.Mobiles;
-using Server.SkillHandlers;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Commands;
+using Server.Diagnostics;
+using Server.Engines.Craft;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
+using Server.SkillHandlers;
+using Server.Spells.Mysticism;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -118,7 +122,7 @@ namespace Server.Items
                     goodtogo = false;
                 else if (item.LootType == LootType.Blessed || item.LootType == LootType.Newbied)
                     goodtogo = false;
-                else if (item is BaseWeapon && Spells.Mysticism.EnchantSpell.IsUnderSpellEffects(from, (BaseWeapon)item))
+                else if (item is BaseWeapon && EnchantSpell.IsUnderSpellEffects(from, (BaseWeapon)item))
                     goodtogo = false;
                 else if (item is BaseWeapon && ((BaseWeapon)item).FocusWeilder != null)
                     goodtogo = false;
@@ -206,7 +210,7 @@ namespace Server.Items
                     catch (Exception e)
                     {
                         Console.WriteLine("Error: Prefix not in collection: {0}", prefixID);
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
 
@@ -221,7 +225,7 @@ namespace Server.Items
                     catch (Exception e)
                     {
                         Console.WriteLine("Error: Suffix not in collection: {0}", suffixID);
-                        Diagnostics.ExceptionLogging.LogException(e);
+                        ExceptionLogging.LogException(e);
                     }
                 }
 
@@ -366,8 +370,8 @@ namespace Server.Items
                     case CraftResource.ShadowIron:
                         if (index == 8 && HasOption(options, ReforgingOption.PowerfulAndFundamental, ReforgingOption.StructuralAndFundamental))
                             return false;
-                        else if (index >= 8 && index <= 10 && HasOption(options, ReforgingOption.PowerfulStructuralAndFundamental))
-                            return false;
+                        if (index >= 8 && index <= 10 && HasOption(options, ReforgingOption.PowerfulStructuralAndFundamental))
+	                        return false;
                         break;
                     case CraftResource.Copper:
                         if (index == 8 && HasOption(options, ReforgingOption.PowerfulAndStructural, ReforgingOption.PowerfulAndFundamental))
@@ -481,20 +485,20 @@ namespace Server.Items
                     case CraftResource.Copper:
                         if (index == 8 && HasOption(options, ReforgingOption.PowerfulAndStructural, ReforgingOption.PowerfulAndFundamental))
                             return false;
-                        else if ((index == 8 || index == 9) && HasOption(options, ReforgingOption.StructuralAndFundamental))
-                            return false;
-                        else if ((index == 5 || index == 8 || index == 9) && HasOption(options, ReforgingOption.PowerfulStructuralAndFundamental))
-                            return false;
+                        if ((index == 8 || index == 9) && HasOption(options, ReforgingOption.StructuralAndFundamental))
+	                        return false;
+                        if ((index == 5 || index == 8 || index == 9) && HasOption(options, ReforgingOption.PowerfulStructuralAndFundamental))
+	                        return false;
                         break;
                     case CraftResource.Bronze:
                         if (index == 8)
                             return false;
-                        else if (index == 9 && HasOption(options, ReforgingOption.PowerfulAndStructural))
-                            return false;
-                        else if ((index == 9 || index == 5) && HasOption(options, ReforgingOption.PowerfulAndFundamental))
-                            return false;
+                        if (index == 9 && HasOption(options, ReforgingOption.PowerfulAndStructural))
+	                        return false;
+                        if ((index == 9 || index == 5) && HasOption(options, ReforgingOption.PowerfulAndFundamental))
+	                        return false;
                         else if ((index == 9 || index == 5 || index == 11) && HasOption(options, ReforgingOption.StructuralAndFundamental, ReforgingOption.PowerfulStructuralAndFundamental))
-                            return false;
+	                        return false;
                         break;
                     case CraftResource.Gold:
                         if (index == 8)
@@ -828,16 +832,16 @@ namespace Server.Items
             {
                 if (item is BaseArmor)
                 {
-                    _Elements[item] = new int[] { ((BaseArmor)item).PhysicalBonus, ((BaseArmor)item).FireBonus, ((BaseArmor)item).ColdBonus, ((BaseArmor)item).PoisonBonus, ((BaseArmor)item).EnergyBonus };
+                    _Elements[item] = new[] { ((BaseArmor)item).PhysicalBonus, ((BaseArmor)item).FireBonus, ((BaseArmor)item).ColdBonus, ((BaseArmor)item).PoisonBonus, ((BaseArmor)item).EnergyBonus };
                 }
                 else if (item is BaseWeapon)
                 {
-                    _Elements[item] = new int[] { ((BaseWeapon)item).WeaponAttributes.ResistPhysicalBonus, ((BaseWeapon)item).WeaponAttributes.ResistFireBonus,
+                    _Elements[item] = new[] { ((BaseWeapon)item).WeaponAttributes.ResistPhysicalBonus, ((BaseWeapon)item).WeaponAttributes.ResistFireBonus,
                             ((BaseWeapon)item).WeaponAttributes.ResistColdBonus, ((BaseWeapon)item).WeaponAttributes.ResistPoisonBonus, ((BaseWeapon)item).WeaponAttributes.ResistEnergyBonus };
                 }
                 else if (resists != null)
                 {
-                    _Elements[item] = new int[] { resists[AosElementAttribute.Physical], resists[AosElementAttribute.Fire], resists[AosElementAttribute.Cold],
+                    _Elements[item] = new[] { resists[AosElementAttribute.Physical], resists[AosElementAttribute.Fire], resists[AosElementAttribute.Cold],
                         resists[AosElementAttribute.Poison], resists[AosElementAttribute.Energy] };
                 }
                 else
@@ -855,15 +859,17 @@ namespace Server.Items
                         ((BaseArmor)item).PhysicalBonus = value;
                         return true;
                     }
-                    else if (item is BaseWeapon && (!_Elements.ContainsKey(item) || ((BaseWeapon)item).WeaponAttributes.ResistPhysicalBonus == _Elements[item][0]))
+
+                    if (item is BaseWeapon && (!_Elements.ContainsKey(item) || ((BaseWeapon)item).WeaponAttributes.ResistPhysicalBonus == _Elements[item][0]))
                     {
-                        ((BaseWeapon)item).WeaponAttributes.ResistPhysicalBonus = value;
-                        return true;
+	                    ((BaseWeapon)item).WeaponAttributes.ResistPhysicalBonus = value;
+	                    return true;
                     }
-                    else if (resists != null && (!_Elements.ContainsKey(item) || resists[attribute] == _Elements[item][0]))
+
+                    if (resists != null && (!_Elements.ContainsKey(item) || resists[attribute] == _Elements[item][0]))
                     {
-                        resists[attribute] = value;
-                        return true;
+	                    resists[attribute] = value;
+	                    return true;
                     }
                     break;
                 case AosElementAttribute.Fire:
@@ -872,15 +878,17 @@ namespace Server.Items
                         ((BaseArmor)item).FireBonus = value;
                         return true;
                     }
-                    else if (item is BaseWeapon && (!_Elements.ContainsKey(item) || ((BaseWeapon)item).WeaponAttributes.ResistFireBonus == _Elements[item][1]))
+
+                    if (item is BaseWeapon && (!_Elements.ContainsKey(item) || ((BaseWeapon)item).WeaponAttributes.ResistFireBonus == _Elements[item][1]))
                     {
-                        ((BaseWeapon)item).WeaponAttributes.ResistFireBonus = value;
-                        return true;
+	                    ((BaseWeapon)item).WeaponAttributes.ResistFireBonus = value;
+	                    return true;
                     }
-                    else if (resists != null && (!_Elements.ContainsKey(item) || resists[attribute] == _Elements[item][1]))
+
+                    if (resists != null && (!_Elements.ContainsKey(item) || resists[attribute] == _Elements[item][1]))
                     {
-                        resists[attribute] = value;
-                        return true;
+	                    resists[attribute] = value;
+	                    return true;
                     }
                     break;
                 case AosElementAttribute.Cold:
@@ -889,15 +897,16 @@ namespace Server.Items
                         ((BaseArmor)item).ColdBonus = value;
                         return true;
                     }
-                    else if (item is BaseWeapon && (!_Elements.ContainsKey(item) || ((BaseWeapon)item).WeaponAttributes.ResistColdBonus == _Elements[item][2]))
+
+                    if (item is BaseWeapon && (!_Elements.ContainsKey(item) || ((BaseWeapon)item).WeaponAttributes.ResistColdBonus == _Elements[item][2]))
                     {
-                        ((BaseWeapon)item).WeaponAttributes.ResistColdBonus = value;
-                        return true;
+	                    ((BaseWeapon)item).WeaponAttributes.ResistColdBonus = value;
+	                    return true;
                     }
                     else if (resists != null && (!_Elements.ContainsKey(item) || resists[attribute] == _Elements[item][2]))
                     {
-                        resists[attribute] = value;
-                        return true;
+	                    resists[attribute] = value;
+	                    return true;
                     }
                     break;
                 case AosElementAttribute.Poison:
@@ -1147,13 +1156,13 @@ namespace Server.Items
 
         public static void Configure()
         {
-            Commands.CommandSystem.Register("GetCreatureScore", AccessLevel.GameMaster, e =>
+            CommandSystem.Register("GetCreatureScore", AccessLevel.GameMaster, e =>
                 {
                     e.Mobile.BeginTarget(12, false, TargetFlags.None, (from, targeted) =>
                         {
                             if (targeted is BaseCreature)
                             {
-                                ((BaseCreature)targeted).PrivateOverheadMessage(Network.MessageType.Regular, 0x25, false, GetDifficultyFor((BaseCreature)targeted).ToString(), e.Mobile.NetState);
+                                ((BaseCreature)targeted).PrivateOverheadMessage(MessageType.Regular, 0x25, false, GetDifficultyFor((BaseCreature)targeted).ToString(), e.Mobile.NetState);
                             }
                         });
                 });
@@ -1161,9 +1170,9 @@ namespace Server.Items
             // TypeIndex 0 - Weapon; 1 - Armor; 2 - Shield; 3 - Jewels
             // RunicIndex 0 - dullcopper; 1 - shadow; 2 - copper; 3 - spined; 4 - Oak; 5 - ash
             m_PrefixSuffixInfo[0] = null;
-            m_PrefixSuffixInfo[1] = new NamedInfoCol[][] 	//Might
+            m_PrefixSuffixInfo[1] = new[] //Might
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.HitLeechHits, HitsAndManaLeechTable),
                         new NamedInfoCol(AosAttribute.BonusHits, WeaponHitsTable),
@@ -1171,7 +1180,7 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.RegenHits, WeaponRegenTable),
                     },
 
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol("RandomEater", EaterTable),
                         new NamedInfoCol(AosAttribute.BonusHits, ArmorHitsTable),
@@ -1179,7 +1188,7 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.RegenHits, ArmorRegenTable),
                     },
 
-                    new NamedInfoCol[] // shield
+                    new[] // shield
                     {
                         new NamedInfoCol("RandomEater", EaterTable),
                         new NamedInfoCol(AosAttribute.BonusHits, ArmorHitsTable),
@@ -1187,16 +1196,16 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.RegenHits, ArmorRegenTable),
                     },
 
-                    new NamedInfoCol[] // jewels
+                    new[] // jewels
                     {
                         new NamedInfoCol(AosAttribute.BonusHits, ArmorHitsTable),
                         new NamedInfoCol(AosAttribute.BonusStr, ArmorStrTable),
                     }
                 };
 
-            m_PrefixSuffixInfo[2] = new NamedInfoCol[][] 	//Mystic
+            m_PrefixSuffixInfo[2] = new[] //Mystic
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.HitLeechMana, HitsAndManaLeechTable),
                         new NamedInfoCol(AosAttribute.BonusMana, WeaponStamManaLMCTable),
@@ -1205,21 +1214,21 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.RegenMana, WeaponRegenTable),
                         /*new NamedInfoCol(AosAttribute.LowerRegCost, LowerRegTable), */
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.BonusInt, DexIntTable),
                         new NamedInfoCol(AosAttribute.BonusMana, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.LowerManaCost, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.RegenMana, ArmorRegenTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.BonusMana, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusInt, DexIntTable),
                         new NamedInfoCol(AosAttribute.LowerManaCost, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.RegenMana, ArmorRegenTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.BonusMana, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusInt, DexIntTable),
@@ -1228,9 +1237,9 @@ namespace Server.Items
                     },
                 };
 
-            m_PrefixSuffixInfo[3] = new NamedInfoCol[][]	// Animated
+            m_PrefixSuffixInfo[3] = new[] // Animated
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.HitLeechStam, HitStamLeechTable),
                         new NamedInfoCol(AosAttribute.BonusStam, WeaponStamManaLMCTable),
@@ -1238,29 +1247,29 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.RegenStam, WeaponRegenTable),
                         new NamedInfoCol(AosAttribute.WeaponSpeed, WeaponWeaponSpeedTable),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.BonusStam, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusDex, DexIntTable),
                         new NamedInfoCol(AosAttribute.RegenStam, ArmorRegenTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.BonusStam, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusDex, DexIntTable),
                         new NamedInfoCol(AosAttribute.RegenStam, ArmorRegenTable),
                         new NamedInfoCol(AosAttribute.WeaponSpeed, ShieldWeaponSpeedTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.BonusStam, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusDex, DexIntTable),
                         new NamedInfoCol(AosAttribute.WeaponSpeed, ShieldWeaponSpeedTable),
                     },
                 };
-            m_PrefixSuffixInfo[4] = new NamedInfoCol[][]	//Arcane
+            m_PrefixSuffixInfo[4] = new[] //Arcane
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.HitLeechMana, HitsAndManaLeechTable),
                         new NamedInfoCol(AosWeaponAttribute.HitManaDrain, HitWeaponTable2),
@@ -1272,7 +1281,7 @@ namespace Server.Items
                         new NamedInfoCol(AosWeaponAttribute.MageWeapon, MageWeaponTable),
                         new NamedInfoCol(AosAttribute.RegenMana, WeaponRegenTable),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.BonusMana, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusInt, DexIntTable),
@@ -1280,14 +1289,14 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.RegenMana, ArmorRegenTable),
                         new NamedInfoCol(AosAttribute.LowerRegCost, LowerRegTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.BonusMana, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusInt, DexIntTable),
                         new NamedInfoCol(AosAttribute.LowerManaCost, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.RegenMana, ArmorRegenTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.BonusMana, ArmorStamManaLMCTable),
                         new NamedInfoCol(AosAttribute.BonusInt, DexIntTable),
@@ -1299,9 +1308,9 @@ namespace Server.Items
                         new NamedInfoCol(AosAttribute.SpellDamage, 18),
                     },
                 };
-            m_PrefixSuffixInfo[5] = new NamedInfoCol[][]	// Exquisite
+            m_PrefixSuffixInfo[5] = new[] // Exquisite
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.SelfRepair, SelfRepairTable), //
                         new NamedInfoCol(AosWeaponAttribute.DurabilityBonus, DurabilityTable), //
@@ -1313,13 +1322,13 @@ namespace Server.Items
                         new NamedInfoCol("WeaponVelocity", WeaponVelocityTable), // 
                         new NamedInfoCol("ElementalDamage", ElementalDamageTable), //
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosArmorAttribute.SelfRepair, SelfRepairTable),
                         new NamedInfoCol(AosArmorAttribute.DurabilityBonus, DurabilityTable),
                         new NamedInfoCol(AosArmorAttribute.LowerStatReq, LowerStatReqTable),
                     },
-                    new NamedInfoCol[] // shield
+                    new[] // shield
                     {
                         new NamedInfoCol(AosArmorAttribute.SelfRepair, SelfRepairTable),
                         new NamedInfoCol(AosArmorAttribute.DurabilityBonus, DurabilityTable),
@@ -1329,9 +1338,9 @@ namespace Server.Items
                     {
                     },
                 };
-            m_PrefixSuffixInfo[6] = new NamedInfoCol[][]	//Vampiric
+            m_PrefixSuffixInfo[6] = new[] //Vampiric
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.HitLeechHits, HitsAndManaLeechTable),
                         new NamedInfoCol(AosWeaponAttribute.HitLeechStam, HitStamLeechTable),
@@ -1350,15 +1359,15 @@ namespace Server.Items
                     {
                     },
                 };
-            m_PrefixSuffixInfo[7] = new NamedInfoCol[][]	// Invigorating
+            m_PrefixSuffixInfo[7] = new[] // Invigorating
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosAttribute.RegenHits, WeaponRegenTable),
                         new NamedInfoCol(AosAttribute.RegenStam, WeaponRegenTable),
                         new NamedInfoCol(AosAttribute.RegenMana, WeaponRegenTable),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.RegenHits, ArmorRegenTable),
                         new NamedInfoCol(AosAttribute.RegenStam, ArmorRegenTable),
@@ -1366,7 +1375,7 @@ namespace Server.Items
 
                         new NamedInfoCol("RandomEater",  EaterTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.RegenHits, ArmorRegenTable),
                         new NamedInfoCol(AosAttribute.RegenStam, ArmorRegenTable),
@@ -1374,16 +1383,16 @@ namespace Server.Items
                         new NamedInfoCol(AosArmorAttribute.SoulCharge, ShieldSoulChargeTable),
                         new NamedInfoCol("RandomEater", EaterTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.RegenHits, ArmorRegenTable),
                         new NamedInfoCol(AosAttribute.RegenStam, ArmorRegenTable),
                         new NamedInfoCol(AosAttribute.RegenMana, ArmorRegenTable),
                     },
                 };
-            m_PrefixSuffixInfo[8] = new NamedInfoCol[][]	// Fortified
+            m_PrefixSuffixInfo[8] = new[] // Fortified
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.ResistPhysicalBonus, ResistTable),
                         new NamedInfoCol(AosWeaponAttribute.ResistFireBonus, ResistTable),
@@ -1391,7 +1400,7 @@ namespace Server.Items
                         new NamedInfoCol(AosWeaponAttribute.ResistPoisonBonus, ResistTable),
                         new NamedInfoCol(AosWeaponAttribute.ResistEnergyBonus, ResistTable),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosElementAttribute.Physical, ResistTable),
                         new NamedInfoCol(AosElementAttribute.Fire, ResistTable),
@@ -1400,7 +1409,7 @@ namespace Server.Items
                         new NamedInfoCol(AosElementAttribute.Energy, ResistTable),
                         new NamedInfoCol("RandomEater", EaterTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosElementAttribute.Physical, ResistTable),
                         new NamedInfoCol(AosElementAttribute.Fire, ResistTable),
@@ -1409,7 +1418,7 @@ namespace Server.Items
                         new NamedInfoCol(AosElementAttribute.Energy, ResistTable),
                         new NamedInfoCol("RandomEater", EaterTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosElementAttribute.Physical, ResistTable),
                         new NamedInfoCol(AosElementAttribute.Fire, ResistTable),
@@ -1418,47 +1427,47 @@ namespace Server.Items
                         new NamedInfoCol(AosElementAttribute.Energy, ResistTable),
                     },
                 };
-            m_PrefixSuffixInfo[9] = new NamedInfoCol[][]	// Auspicious
+            m_PrefixSuffixInfo[9] = new[] // Auspicious
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosAttribute.Luck, LuckTable, RangedLuckTable),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.Luck, LuckTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.Luck, LuckTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.Luck, LuckTable),
                     },
                 };
-            m_PrefixSuffixInfo[10] = new NamedInfoCol[][]	// Charmed
+            m_PrefixSuffixInfo[10] = new[] // Charmed
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosAttribute.EnhancePotions, WeaponEnhancePots),
                         new NamedInfoCol(AosAttribute.BalancedWeapon, 1),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.EnhancePotions, ArmorEnhancePotsTable),
                     },
                     new NamedInfoCol[]
                     {
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.EnhancePotions, ArmorEnhancePotsTable),
                     },
                 };
-            m_PrefixSuffixInfo[11] = new NamedInfoCol[][]	//Vicious
+            m_PrefixSuffixInfo[11] = new[] //Vicious
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol("HitSpell", HitWeaponTable1),
                         new NamedInfoCol("HitArea", HitWeaponTable1),
@@ -1468,40 +1477,40 @@ namespace Server.Items
                         new NamedInfoCol(AosWeaponAttribute.SplinteringWeapon, 30),
                         new NamedInfoCol("Slayer", 1),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.AttackChance, ArmorHCIDCITable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.AttackChance, WeaponHCITable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.AttackChance, WeaponHCITable),
                         new NamedInfoCol(AosAttribute.SpellDamage, 18),
                     },
                 };
-            m_PrefixSuffixInfo[12] = new NamedInfoCol[][]	// Towering
+            m_PrefixSuffixInfo[12] = new[] // Towering
 				{
-                    new NamedInfoCol[] // Weapon
+                    new[] // Weapon
                     {
                         new NamedInfoCol(AosWeaponAttribute.HitLowerAttack, HitWeaponTable1),
                         new NamedInfoCol(AosWeaponAttribute.ReactiveParalyze, 1),
                         new NamedInfoCol(AosAttribute.DefendChance, WeaponDCITable, RangedDCITable),
                     },
-                    new NamedInfoCol[] // armor
+                    new[] // armor
                     {
                         new NamedInfoCol(AosAttribute.DefendChance, ArmorHCIDCITable),
                         new NamedInfoCol(SAAbsorptionAttribute.CastingFocus, ArmorCastingFocusTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.DefendChance, WeaponDCITable),
                         new NamedInfoCol(AosArmorAttribute.ReactiveParalyze, 1),
                         new NamedInfoCol(AosArmorAttribute.SoulCharge, ShieldSoulChargeTable),
                     },
-                    new NamedInfoCol[]
+                    new[]
                     {
                         new NamedInfoCol(AosAttribute.DefendChance, ArmorHCIDCITable),
                         //new NamedInfoCol(SAAbsorptionAttribute.CastingFocus, ArmorCastingFocusTable),
@@ -1713,11 +1722,11 @@ namespace Server.Items
 
         public static int[][] NameTable => _NameTable;
         private static readonly int[][] _NameTable = {
-            new int[] { 1151682, 1151683 }, // Might
-            new int[] { 1151684, 1151685 }, // Mystic
-            new int[] { 1151686, 1151687 }, // Animated
-            new int[] { 1151688, 1151689 }, // Arcane
-            new int[] { 1151690, 1151691 }, // Exquisite
+            new[] { 1151682, 1151683 }, // Might
+            new[] { 1151684, 1151685 }, // Mystic
+            new[] { 1151686, 1151687 }, // Animated
+            new[] { 1151688, 1151689 }, // Arcane
+            new[] { 1151690, 1151691 }, // Exquisite
             new int[] { 1151692, 1151693 }, // Vampiric
             new int[] { 1151694, 1151695 }, // Invigorating
             new int[] { 1151696, 1151697 }, // Fortified
@@ -2118,28 +2127,23 @@ namespace Server.Items
 
             if (rnd < p10)
                 return 10;
-            else
-                rnd -= p10;
+            rnd -= p10;
 
             if (rnd < p9)
                 return 9;
-            else
-                rnd -= p9;
+            rnd -= p9;
 
             if (rnd < p8)
                 return 8;
-            else
-                rnd -= p8;
+            rnd -= p8;
 
             if (rnd < p7)
                 return 7;
-            else
-                rnd -= p7;
+            rnd -= p7;
 
             if (rnd < p6)
                 return 6;
-            else
-                rnd -= p6;
+            rnd -= p6;
 
             if (rnd < p5)
                 return 5;
@@ -2414,25 +2418,25 @@ namespace Server.Items
 
                             return 100;
                         }
-                        else if (.5 > chance)
-                        {
-                            neg.Prized = 1;
-                            return 100;
-                        }
-                        else if (.85 > chance)
-                        {
-                            if (Utility.RandomBool() || item is BaseJewel)
-                                neg.Antique = 1;
-                            else
-                                neg.Brittle = 1;
 
-                            return 150;
-                        }
-                        else
+                        if (.5 > chance)
                         {
-                            item.LootType = LootType.Cursed;
-                            return 100;
+	                        neg.Prized = 1;
+	                        return 100;
                         }
+
+                        if (.85 > chance)
+                        {
+	                        if (Utility.RandomBool() || item is BaseJewel)
+		                        neg.Antique = 1;
+	                        else
+		                        neg.Brittle = 1;
+
+	                        return 150;
+                        }
+
+                        item.LootType = LootType.Cursed;
+                        return 100;
                     }
                 case ItemPower.Major: // major magic
                     {
@@ -2446,31 +2450,33 @@ namespace Server.Items
                             neg.Prized = 1;
                             return 100;
                         }
-                        else if (.6 > chance)
-                        {
-                            switch (Utility.Random(item is BaseJewel ? 6 : 8))
-                            {
-                                case 0: neg.Prized = 1; break;
-                                case 1: neg.Antique = 1; break;
-                                case 2:
-                                case 3: neg.Unwieldly = 1; break;
-                                case 4:
-                                case 5: item.LootType = LootType.Cursed; break;
-                                case 6:
-                                case 7: neg.Massive = 1; break;
-                            }
 
-                            return 100;
-                        }
-                        else if (.9 > chance || item is BaseJewel)
+                        if (.6 > chance)
                         {
-                            neg.Antique = 1;
-                            return 150;
+	                        switch (Utility.Random(item is BaseJewel ? 6 : 8))
+	                        {
+		                        case 0: neg.Prized = 1; break;
+		                        case 1: neg.Antique = 1; break;
+		                        case 2:
+		                        case 3: neg.Unwieldly = 1; break;
+		                        case 4:
+		                        case 5: item.LootType = LootType.Cursed; break;
+		                        case 6:
+		                        case 7: neg.Massive = 1; break;
+	                        }
+
+	                        return 100;
+                        }
+
+                        if (.9 > chance || item is BaseJewel)
+                        {
+	                        neg.Antique = 1;
+	                        return 150;
                         }
                         else
                         {
-                            neg.Brittle = 1;
-                            return 150;
+	                        neg.Brittle = 1;
+	                        return 150;
                         }
                     }
                 case ItemPower.LesserArtifact: // lesser arty
@@ -2767,14 +2773,14 @@ namespace Server.Items
             if (item is BaseClothing)
                 return ((BaseClothing)item).Resistances;
 
-            else if (item is BaseJewel)
-                return ((BaseJewel)item).Resistances;
+            if (item is BaseJewel)
+	            return ((BaseJewel)item).Resistances;
 
-            else if (item is BaseWeapon)
-                return ((BaseWeapon)item).AosElementDamages;
+            if (item is BaseWeapon)
+	            return ((BaseWeapon)item).AosElementDamages;
 
-            else if (item is BaseQuiver)
-                return ((BaseQuiver)item).Resistances;
+            if (item is BaseQuiver)
+	            return ((BaseQuiver)item).Resistances;
 
             return null;
         }
@@ -2784,14 +2790,14 @@ namespace Server.Items
             if (item is BaseArmor)
                 return ((BaseArmor)item).AbsorptionAttributes;
 
-            else if (item is BaseJewel)
-                return ((BaseJewel)item).AbsorptionAttributes;
+            if (item is BaseJewel)
+	            return ((BaseJewel)item).AbsorptionAttributes;
 
-            else if (item is BaseWeapon)
-                return ((BaseWeapon)item).AbsorptionAttributes;
+            if (item is BaseWeapon)
+	            return ((BaseWeapon)item).AbsorptionAttributes;
 
-            else if (item is BaseClothing)
-                return ((BaseClothing)item).SAAbsorptionAttributes;
+            if (item is BaseClothing)
+	            return ((BaseClothing)item).SAAbsorptionAttributes;
 
             return null;
         }
@@ -2801,23 +2807,23 @@ namespace Server.Items
             if (item is BaseJewel)
                 return ((BaseJewel)item).SkillBonuses;
 
-            else if (item is BaseWeapon)
-                return ((BaseWeapon)item).SkillBonuses;
+            if (item is BaseWeapon)
+	            return ((BaseWeapon)item).SkillBonuses;
 
-            else if (item is BaseArmor)
-                return ((BaseArmor)item).SkillBonuses;
+            if (item is BaseArmor)
+	            return ((BaseArmor)item).SkillBonuses;
 
-            else if (item is BaseTalisman)
-                return ((BaseTalisman)item).SkillBonuses;
+            if (item is BaseTalisman)
+	            return ((BaseTalisman)item).SkillBonuses;
 
-            else if (item is Spellbook)
-                return ((Spellbook)item).SkillBonuses;
+            if (item is Spellbook)
+	            return ((Spellbook)item).SkillBonuses;
 
-            else if (item is BaseQuiver)
-                return ((BaseQuiver)item).SkillBonuses;
+            if (item is BaseQuiver)
+	            return ((BaseQuiver)item).SkillBonuses;
 
             else if (item is BaseClothing)
-                return ((BaseClothing)item).SkillBonuses;
+	            return ((BaseClothing)item).SkillBonuses;
 
             return null;
         }
@@ -2868,61 +2874,61 @@ namespace Server.Items
         #region All
         public static readonly int[][] DexIntTable =
         {
-            new int[] { 3, 4, 4, 4, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 3, 4, 4, 4, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
             new int[] { 5, 5, 5, 5, 5, 5, 5 },
         };
 
         public static readonly int[][] LowerStatReqTable =
         {
-            new int[] { 60, 70, 80, 100, 100, 100, 100 },
-            new int[] { 80, 100, 100, 100, 100, 100, 100 },
-            new int[] { 100, 100, 100, 100, 100, 100, 100 },
-            new int[] { 70, 100, 100, 100, 100, 100, 100 },
-            new int[] { 80, 100, 100, 100, 100, 100, 100 },
+            new[] { 60, 70, 80, 100, 100, 100, 100 },
+            new[] { 80, 100, 100, 100, 100, 100, 100 },
+            new[] { 100, 100, 100, 100, 100, 100, 100 },
+            new[] { 70, 100, 100, 100, 100, 100, 100 },
+            new[] { 80, 100, 100, 100, 100, 100, 100 },
             new int[] { 100, 100, 100, 100, 100, 100, 100 },
         };
 
         public static readonly int[][] SelfRepairTable =
         {
-            new int[] { 2, 4, 0, 0, 0, 0, 0 },
-            new int[] { 5, 5, 0, 0, 0, 0, 0 },
-            new int[] { 6, 7, 0, 0, 0, 0, 0 },
-            new int[] { 5, 5, 0, 0, 0, 0, 0 },
-            new int[] { 5, 5, 0, 0, 0, 0, 0 },
+            new[] { 2, 4, 0, 0, 0, 0, 0 },
+            new[] { 5, 5, 0, 0, 0, 0, 0 },
+            new[] { 6, 7, 0, 0, 0, 0, 0 },
+            new[] { 5, 5, 0, 0, 0, 0, 0 },
+            new[] { 5, 5, 0, 0, 0, 0, 0 },
             new int[] { 7, 7, 0, 0, 0, 0, 0 },
         };
 
         public static readonly int[][] DurabilityTable =
         {
-            new int[] { 90, 100, 0, 0, 0, 0, 0 },
-            new int[] { 110, 140, 0, 0, 0, 0, 0 },
-            new int[] { 150, 150, 0, 0, 0, 0, 0 },
-            new int[] { 100, 140, 0, 0, 0, 0, 0 },
-            new int[] { 110, 140, 0, 0, 0, 0, 0 },
+            new[] { 90, 100, 0, 0, 0, 0, 0 },
+            new[] { 110, 140, 0, 0, 0, 0, 0 },
+            new[] { 150, 150, 0, 0, 0, 0, 0 },
+            new[] { 100, 140, 0, 0, 0, 0, 0 },
+            new[] { 110, 140, 0, 0, 0, 0, 0 },
             new int[] { 150, 150, 0, 0, 0, 0, 0 },
         };
 
         public static readonly int[][] ResistTable =
         {
-            new int[] { 10, 15, 15, 15, 20, 20, 20 },
-            new int[] { 15, 15, 15, 20, 20, 20, 20 },
-            new int[] { 20, 20, 20, 20, 20, 20, 20 },
-            new int[] { 20, 20, 20, 20, 20, 20, 20 },
-            new int[] { 15, 15, 20, 20, 20, 20, 20 },
+            new[] { 10, 15, 15, 15, 20, 20, 20 },
+            new[] { 15, 15, 15, 20, 20, 20, 20 },
+            new[] { 20, 20, 20, 20, 20, 20, 20 },
+            new[] { 20, 20, 20, 20, 20, 20, 20 },
+            new[] { 15, 15, 20, 20, 20, 20, 20 },
             new int[] { 20, 20, 20, 20, 20, 20, 20 },
         };
 
         public static readonly int[][] EaterTable =
         {
-            new int[] { 9, 12, 12, 15, 15, 15, 15 },
-            new int[] { 12, 15, 15, 15, 15, 15, 15 },
-            new int[] { 15, 15, 15, 15, 15, 15, 15 },
-            new int[] { 12, 15, 15, 15, 15, 15, 15 },
-            new int[] { 12, 15, 15, 15, 15, 15, 15 },
+            new[] { 9, 12, 12, 15, 15, 15, 15 },
+            new[] { 12, 15, 15, 15, 15, 15, 15 },
+            new[] { 15, 15, 15, 15, 15, 15, 15 },
+            new[] { 12, 15, 15, 15, 15, 15, 15 },
+            new[] { 12, 15, 15, 15, 15, 15, 15 },
             new int[] { 15, 15, 15, 15, 15, 15, 15 },
         };
         #endregion
@@ -2930,196 +2936,196 @@ namespace Server.Items
         #region Weapon Tables
         public static readonly int[][] ElementalDamageTable =
         {
-            new int[] { 60, 70, 80, 100, 100, 100, 100 },
-            new int[] { 80, 100, 100, 100, 100, 100, 100 },
-            new int[] { 100, 100, 100, 100, 100, 100, 100 },
+            new[] { 60, 70, 80, 100, 100, 100, 100 },
+            new[] { 80, 100, 100, 100, 100, 100, 100 },
+            new[] { 100, 100, 100, 100, 100, 100, 100 },
             new int[] {  },
-            new int[] { 100, 100, 100, 100, 100, 100, 100 },
-            new int[] { 100, 100, 100, 100, 100, 100, 100 },
+            new[] { 100, 100, 100, 100, 100, 100, 100 },
+            new[] { 100, 100, 100, 100, 100, 100, 100 },
         };
 
         // Hit magic, area, HLA
         public static readonly int[][] HitWeaponTable1 =
         {
-            new int[] { 30, 50, 50, 60, 70, 70, 70 },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 30, 50, 50, 60, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
             new int[] {  },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
         };
 
         // hit fatigue, mana drain, HLD
         public static readonly int[][] HitWeaponTable2 =
         {
-            new int[] { 30, 40, 50, 50, 60, 70, 70 },
-            new int[] { 50, 50, 50, 60, 70, 70, 70 },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 30, 40, 50, 50, 60, 70, 70 },
+            new[] { 50, 50, 50, 60, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
             new int[] {  },
-            new int[] { 50, 50, 50, 60, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 50, 50, 50, 60, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
         };
 
         public static readonly int[][] WeaponVelocityTable =
         {
-            new int[] { 25, 35, 40, 40, 40, 45, 50 },
-            new int[] { 40, 40, 40, 45, 50, 50, 50 },
-            new int[] { 40, 45, 50, 50, 50, 50, 50 },
+            new[] { 25, 35, 40, 40, 40, 45, 50 },
+            new[] { 40, 40, 40, 45, 50, 50, 50 },
+            new[] { 40, 45, 50, 50, 50, 50, 50 },
             new int[] {  },
-            new int[] { 40, 40, 40, 45, 50, 50, 50 },
-            new int[] { 45, 50, 50, 50, 50, 50, 50 },
+            new[] { 40, 40, 40, 45, 50, 50, 50 },
+            new[] { 45, 50, 50, 50, 50, 50, 50 },
         };
 
         public static readonly int[][] HitsAndManaLeechTable =
         {
-            new int[] { 15, 25, 25, 30, 35, 35, 35 },
-            new int[] { 25, 25, 30, 35, 35, 35, 35 },
-            new int[] { 30, 35, 35, 35, 35, 35, 35 },
+            new[] { 15, 25, 25, 30, 35, 35, 35 },
+            new[] { 25, 25, 30, 35, 35, 35, 35 },
+            new[] { 30, 35, 35, 35, 35, 35, 35 },
             new int[] {  },
-            new int[] { 25, 25, 30, 35, 35, 35, 35 },
-            new int[] { 35, 35, 35, 35, 35, 35, 35 },
+            new[] { 25, 25, 30, 35, 35, 35, 35 },
+            new[] { 35, 35, 35, 35, 35, 35, 35 },
         };
 
         public static readonly int[][] HitStamLeechTable =
         {
-            new int[] { 30, 50, 50, 60, 70, 70, 70 },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 30, 50, 50, 60, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
             new int[] {  },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
         };
 
         public static readonly int[][] LuckTable =
         {
-            new int[] { 80, 100, 100, 120, 140, 150, 150 },
-            new int[] { 100, 120, 140, 150, 150, 150, 150 },
-            new int[] { 130, 150, 150, 150, 150, 150, 150 },
-            new int[] { 100, 120, 140, 150, 150, 150, 150 },
-            new int[] { 100, 120, 140, 150, 150, 150, 150 },
+            new[] { 80, 100, 100, 120, 140, 150, 150 },
+            new[] { 100, 120, 140, 150, 150, 150, 150 },
+            new[] { 130, 150, 150, 150, 150, 150, 150 },
+            new[] { 100, 120, 140, 150, 150, 150, 150 },
+            new[] { 100, 120, 140, 150, 150, 150, 150 },
             new int[] { 150, 150, 150, 150, 150, 150, 150 },
         };
 
         public static readonly int[][] MageWeaponTable =
         {
-            new int[] { 25, 20, 20, 20, 20, 15, 15 },
-            new int[] { 20, 20, 20, 15, 15, 15, 15 },
-            new int[] { 20, 15, 15, 15, 15, 15, 15 },
+            new[] { 25, 20, 20, 20, 20, 15, 15 },
+            new[] { 20, 20, 20, 15, 15, 15, 15 },
+            new[] { 20, 15, 15, 15, 15, 15, 15 },
             new int[] {  },
-            new int[] { 20, 20, 20, 15, 15, 15, 15 },
-            new int[] { 15, 15, 15, 15, 15, 15, 15 },
+            new[] { 20, 20, 20, 15, 15, 15, 15 },
+            new[] { 15, 15, 15, 15, 15, 15, 15 },
         };
 
         public static readonly int[][] WeaponRegenTable =
         {
-            new int[] { 2, 3, 6, 6, 6, 6, 6 },
-            new int[] { 3, 6, 6, 6, 6, 6, 6 },
-            new int[] { 6, 6, 6, 6, 6, 9, 9 },
+            new[] { 2, 3, 6, 6, 6, 6, 6 },
+            new[] { 3, 6, 6, 6, 6, 6, 6 },
+            new[] { 6, 6, 6, 6, 6, 9, 9 },
             new int[] {  },
-            new int[] { 3, 6, 6, 6, 6, 6, 9 },
-            new int[] { 6, 9, 9, 9, 9, 9, 9 },
+            new[] { 3, 6, 6, 6, 6, 6, 9 },
+            new[] { 6, 9, 9, 9, 9, 9, 9 },
         };
 
         public static readonly int[][] WeaponHitsTable =
         {
-            new int[] { 2, 3, 3, 3, 4, 4, 4 },
-            new int[] { 3, 3, 4, 4, 4, 4, 4 },
-            new int[] { 4, 4, 4, 4, 4, 4, 4 },
+            new[] { 2, 3, 3, 3, 4, 4, 4 },
+            new[] { 3, 3, 4, 4, 4, 4, 4 },
+            new[] { 4, 4, 4, 4, 4, 4, 4 },
             new int[] { },
-            new int[] { 3, 3, 4, 4, 4, 4, 4 },
-            new int[] { 4, 4, 4, 4, 4, 4, 4 },
+            new[] { 3, 3, 4, 4, 4, 4, 4 },
+            new[] { 4, 4, 4, 4, 4, 4, 4 },
         };
 
         public static readonly int[][] WeaponStamManaLMCTable =
         {
-            new int[] { 2, 4, 4, 4, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 2, 4, 4, 4, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
             new int[] { },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
         };
 
         public static readonly int[][] WeaponStrTable =
         {
-            new int[] { 2, 4, 4, 4, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 2, 4, 4, 4, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
             new int[] {  },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
         };
 
         public static readonly int[][] WeaponHCITable =
         {
-            new int[] { 5, 10, 15, 15, 15, 20, 20 },
-            new int[] { 15, 15, 15, 20, 20, 20, 20 },
-            new int[] { 15, 20, 20, 20, 20, 20, 20 },
+            new[] { 5, 10, 15, 15, 15, 20, 20 },
+            new[] { 15, 15, 15, 20, 20, 20, 20 },
+            new[] { 15, 20, 20, 20, 20, 20, 20 },
             new int[] {  },
-            new int[] { 15, 15, 20, 20, 20, 20, 20 },
-            new int[] { 20, 20, 20, 20, 20, 20, 20 },
+            new[] { 15, 15, 20, 20, 20, 20, 20 },
+            new[] { 20, 20, 20, 20, 20, 20, 20 },
         };
 
         public static readonly int[][] WeaponDCITable =
         {
-            new int[] { 10, 15, 15, 15, 20, 20, 20 },
-            new int[] { 15, 15, 20, 20, 20, 20, 20 },
-            new int[] { 20, 20, 20, 20, 20, 20, 20 },
+            new[] { 10, 15, 15, 15, 20, 20, 20 },
+            new[] { 15, 15, 20, 20, 20, 20, 20 },
+            new[] { 20, 20, 20, 20, 20, 20, 20 },
             new int[] {  },
-            new int[] { 15, 15, 20, 20, 20, 20, 20 },
-            new int[] { 20, 20, 20, 20, 20, 20, 20 },
+            new[] { 15, 15, 20, 20, 20, 20, 20 },
+            new[] { 20, 20, 20, 20, 20, 20, 20 },
         };
 
         public static readonly int[][] WeaponDamageTable =
         {
-            new int[] { 30, 50, 50, 60, 70, 70, 70 },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 30, 50, 50, 60, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
             new int[] {  },
-            new int[] { 50, 60, 70, 70, 70, 70, 70 },
-            new int[] { 70, 70, 70, 70, 70, 70, 70 },
+            new[] { 50, 60, 70, 70, 70, 70, 70 },
+            new[] { 70, 70, 70, 70, 70, 70, 70 },
         };
 
         public static readonly int[][] WeaponEnhancePots =
         {
-            new int[] { 5, 10, 10, 10, 10, 15, 15 },
-            new int[] { 10, 10, 10, 15, 15, 15, 15 },
-            new int[] { 10, 15, 15, 15, 15, 15, 15 },
+            new[] { 5, 10, 10, 10, 10, 15, 15 },
+            new[] { 10, 10, 10, 15, 15, 15, 15 },
+            new[] { 10, 15, 15, 15, 15, 15, 15 },
             new int[] {  },
-            new int[] { 10, 10, 10, 15, 15, 15, 15 },
-            new int[] { 15, 15, 15, 15, 15, 15, 15 },
+            new[] { 10, 10, 10, 15, 15, 15, 15 },
+            new[] { 15, 15, 15, 15, 15, 15, 15 },
         };
 
         public static readonly int[][] WeaponWeaponSpeedTable =
         {
-            new int[] { 20, 30, 30, 35, 40, 40, 40 },
-            new int[] { 30, 35, 40, 40, 40, 40, 40 },
-            new int[] { 35, 40, 40, 40, 40, 40, 40 },
+            new[] { 20, 30, 30, 35, 40, 40, 40 },
+            new[] { 30, 35, 40, 40, 40, 40, 40 },
+            new[] { 35, 40, 40, 40, 40, 40, 40 },
             new int[] {  },
-            new int[] { 30, 35, 40, 40, 40, 40, 40 },
-            new int[] { 40, 40, 40, 40, 40, 40, 40 },
+            new[] { 30, 35, 40, 40, 40, 40, 40 },
+            new[] { 40, 40, 40, 40, 40, 40, 40 },
         };
         #endregion
 
         #region Ranged Weapons
         public static readonly int[][] RangedLuckTable =
         {
-            new int[] { 90, 120, 120, 140, 170, 170, 170 },
-            new int[] { 120, 140, 160, 170, 170, 170, 170 },
-            new int[] { 160, 170, 170, 170, 170, 170, 170 },
+            new[] { 90, 120, 120, 140, 170, 170, 170 },
+            new[] { 120, 140, 160, 170, 170, 170, 170 },
+            new[] { 160, 170, 170, 170, 170, 170, 170 },
             new int[] {  },
-            new int[] { 120, 140, 160, 170, 170, 170, 170 },
-            new int[] { 170, 170, 170, 170, 170, 170, 170 },
+            new[] { 120, 140, 160, 170, 170, 170, 170 },
+            new[] { 170, 170, 170, 170, 170, 170, 170 },
         };
 
         public static readonly int[][] RangedHCITable =
         {
-            new int[] { 15, 25, 25, 30, 35, 35, 35 },
-            new int[] { 25, 30, 35, 35, 35, 35, 35 },
-            new int[] { 35, 35, 35, 35, 35, 35, 35 },
+            new[] { 15, 25, 25, 30, 35, 35, 35 },
+            new[] { 25, 30, 35, 35, 35, 35, 35 },
+            new[] { 35, 35, 35, 35, 35, 35, 35 },
             new int[] {  },
-            new int[] { 25, 25, 30, 35, 35, 35, 35 },
-            new int[] { 35, 35, 35, 35, 35, 35, 35 },
+            new[] { 25, 25, 30, 35, 35, 35, 35 },
+            new[] { 35, 35, 35, 35, 35, 35, 35 },
         };
 
         public static readonly int[][] RangedDCITable =
@@ -3128,110 +3134,110 @@ namespace Server.Items
             new int[] {  },
             new int[] {  },
             new int[] {  },
-            new int[] { 25, 25, 30, 35, 35, 35, 35 },
-            new int[] { 35, 35, 35, 35, 35, 35, 35 },
+            new[] { 25, 25, 30, 35, 35, 35, 35 },
+            new[] { 35, 35, 35, 35, 35, 35, 35 },
         };
         #endregion
 
         #region Armor Tables
         public static readonly int[][] LowerRegTable =
         {
-            new int[] { 10, 20, 20, 20, 25, 25, 25 },
-            new int[] { 20, 20, 25, 25, 25, 25, 25 },
-            new int[] { 25, 25, 25, 25, 25, 25, 25 },
-            new int[] { 20, 20, 25, 25, 25, 25, 25 },
-            new int[] { 20, 20, 25, 25, 25, 25, 25 },
+            new[] { 10, 20, 20, 20, 25, 25, 25 },
+            new[] { 20, 20, 25, 25, 25, 25, 25 },
+            new[] { 25, 25, 25, 25, 25, 25, 25 },
+            new[] { 20, 20, 25, 25, 25, 25, 25 },
+            new[] { 20, 20, 25, 25, 25, 25, 25 },
             new int[] { 25, 25, 25, 25, 25, 25, 25 },
         };
 
         public static readonly int[][] ArmorHitsTable =
         {
-            new int[] { 3, 5, 5, 6, 7, 7, 7 },
-            new int[] { 5, 6, 7, 7, 7, 7, 7 },
-            new int[] { 7, 7, 7, 7, 7, 7, 7 },
-            new int[] { 5, 5, 6, 7, 7, 7, 7 },
-            new int[] { 5, 6, 7, 7, 7, 7, 7 },
+            new[] { 3, 5, 5, 6, 7, 7, 7 },
+            new[] { 5, 6, 7, 7, 7, 7, 7 },
+            new[] { 7, 7, 7, 7, 7, 7, 7 },
+            new[] { 5, 5, 6, 7, 7, 7, 7 },
+            new[] { 5, 6, 7, 7, 7, 7, 7 },
             new int[] { 7, 7, 7, 7, 7, 7, 7 },
         };
 
         public static readonly int[][] ArmorStrTable =
         {
-            new int[] { 3, 4, 4, 4, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 3, 4, 4, 4, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
             new int[] { 5, 5, 5, 5, 5, 5, 5 },
         };
 
         public static readonly int[][] ArmorRegenTable =
         {
-            new int[] { 2, 3, 3, 3, 4, 4, 4 },
-            new int[] { 3, 3, 4, 4, 4, 4, 4 },
-            new int[] { 4, 4, 4, 4, 4, 4, 4 },
-            new int[] { 3, 3, 4, 4, 4, 4, 4 },
-            new int[] { 3, 3, 4, 4, 4, 4, 4 },
+            new[] { 2, 3, 3, 3, 4, 4, 4 },
+            new[] { 3, 3, 4, 4, 4, 4, 4 },
+            new[] { 4, 4, 4, 4, 4, 4, 4 },
+            new[] { 3, 3, 4, 4, 4, 4, 4 },
+            new[] { 3, 3, 4, 4, 4, 4, 4 },
             new int[] { 4, 4, 4, 4, 4, 4, 4 },
         };
 
         public static readonly int[][] ArmorStamManaLMCTable =
         {
-            new int[] { 4, 8, 8, 8, 10, 10, 10 },
-            new int[] { 8, 8, 10, 10, 10, 10, 10 },
-            new int[] { 10, 10, 10, 10, 10, 10, 10 },
-            new int[] { 8, 8, 10, 10, 10, 10, 10 },
-            new int[] { 8, 8, 10, 10, 10, 10, 10 },
+            new[] { 4, 8, 8, 8, 10, 10, 10 },
+            new[] { 8, 8, 10, 10, 10, 10, 10 },
+            new[] { 10, 10, 10, 10, 10, 10, 10 },
+            new[] { 8, 8, 10, 10, 10, 10, 10 },
+            new[] { 8, 8, 10, 10, 10, 10, 10 },
             new int[] { 10, 10, 10, 10, 10, 10, 10 },
         };
 
         public static readonly int[][] ArmorEnhancePotsTable =
         {
-            new int[] { 2, 2, 3, 3, 3, 3, 3 },
-            new int[] { 3, 3, 3, 3, 3, 3, 3 },
-            new int[] { 3, 3, 3, 3, 3, 3, 3 },
-            new int[] { 3, 3, 3, 3, 3, 3, 3 },
-            new int[] { 3, 3, 3, 3, 3, 3, 3 },
+            new[] { 2, 2, 3, 3, 3, 3, 3 },
+            new[] { 3, 3, 3, 3, 3, 3, 3 },
+            new[] { 3, 3, 3, 3, 3, 3, 3 },
+            new[] { 3, 3, 3, 3, 3, 3, 3 },
+            new[] { 3, 3, 3, 3, 3, 3, 3 },
             new int[] { 3, 3, 3, 3, 3, 3, 3 },
         };
 
         public static readonly int[][] ArmorHCIDCITable =
         {
-            new int[] { 4, 4, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
-            new int[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 4, 4, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
+            new[] { 5, 5, 5, 5, 5, 5, 5 },
             new int[] { 5, 5, 5, 5, 5, 5, 5 },
         };
 
         public static readonly int[][] ArmorCastingFocusTable =
         {
-            new int[] { 1, 2, 2, 2, 3, 3, 3 },
-            new int[] { 2, 2, 3, 3, 3, 3, 3 },
-            new int[] { 3, 3, 3, 3, 3, 3, 3 },
-            new int[] { 2, 2, 3, 3, 3, 3, 3 },
-            new int[] { 2, 2, 3, 3, 3, 3, 3 },
+            new[] { 1, 2, 2, 2, 3, 3, 3 },
+            new[] { 2, 2, 3, 3, 3, 3, 3 },
+            new[] { 3, 3, 3, 3, 3, 3, 3 },
+            new[] { 2, 2, 3, 3, 3, 3, 3 },
+            new[] { 2, 2, 3, 3, 3, 3, 3 },
             new int[] { 3, 3, 3, 3, 3, 3, 3 },
         };
 
         public static readonly int[][] ShieldWeaponSpeedTable =
         {
-            new int[] { 5, 5, 5, 5, 10, 10, 10 },
-            new int[] { 5, 5, 10, 10, 10, 10, 10 },
-            new int[] { 10, 10, 10, 10, 10, 10, 10 },
+            new[] { 5, 5, 5, 5, 10, 10, 10 },
+            new[] { 5, 5, 10, 10, 10, 10, 10 },
+            new[] { 10, 10, 10, 10, 10, 10, 10 },
             new int[] {  },
-            new int[] { 5, 5, 10, 10, 10, 10, 10 },
-            new int[] { 10, 10, 10, 10, 10, 10, 10 },
+            new[] { 5, 5, 10, 10, 10, 10, 10 },
+            new[] { 10, 10, 10, 10, 10, 10, 10 },
         };
 
         public static readonly int[][] ShieldSoulChargeTable =
         {
-            new int[] { 15, 20, 20, 20, 25, 25, 25 },
-            new int[] { 20, 20, 25, 30, 30, 30, 30 },
-            new int[] { 25, 30, 30, 30, 30, 30, 30 },
+            new[] { 15, 20, 20, 20, 25, 25, 25 },
+            new[] { 20, 20, 25, 30, 30, 30, 30 },
+            new[] { 25, 30, 30, 30, 30, 30, 30 },
             new int[] {  },
-            new int[] { 20, 20, 25, 30, 30, 30, 30 },
-            new int[] { 25, 30, 30, 30, 30, 30, 30 },
+            new[] { 20, 20, 25, 30, 30, 30, 30 },
+            new[] { 25, 30, 30, 30, 30, 30, 30 },
         };
         #endregion
         #endregion

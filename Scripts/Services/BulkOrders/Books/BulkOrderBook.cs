@@ -1,11 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
+using Server.Network;
 using Server.Prompts;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Engines.BulkOrders
 {
@@ -75,7 +76,7 @@ namespace Server.Engines.BulkOrders
         public override void OnDoubleClick(Mobile from)
         {
             if (!from.InRange(GetWorldLocation(), 2))
-                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             else if (m_Entries.Count == 0)
                 from.SendLocalizedMessage(1062381); // The book is empty.
             else if (from is PlayerMobile)
@@ -114,43 +115,42 @@ namespace Server.Engines.BulkOrders
         {
             if (dropped is LargeBOD || dropped is SmallBOD)
             {
-                if (!IsChildOf(from.Backpack))
+	            if (!IsChildOf(from.Backpack))
                 {
                     from.SendLocalizedMessage(1062385); // You must have the book in your backpack to add deeds to it.
                     return false;
                 }
-                else if (!from.Backpack.CheckHold(from, dropped, true, true))
-                    return false;
-                else if (m_Entries.Count < 500)
-                {
-                    if (dropped is LargeBOD)
-                        m_Entries.Add(new BOBLargeEntry((LargeBOD)dropped));
-                    else if (dropped is SmallBOD) // Sanity
-                        m_Entries.Add(new BOBSmallEntry((SmallBOD)dropped));
 
-                    InvalidateProperties();
+	            if (!from.Backpack.CheckHold(from, dropped, true, true))
+		            return false;
+	            if (m_Entries.Count < 500)
+	            {
+		            if (dropped is LargeBOD)
+			            m_Entries.Add(new BOBLargeEntry((LargeBOD)dropped));
+		            else if (dropped is SmallBOD) // Sanity
+			            m_Entries.Add(new BOBSmallEntry((SmallBOD)dropped));
 
-                    if (m_Entries.Count / 5 > m_ItemCount)
-                    {
-                        m_ItemCount++;
-                        InvalidateItems();
-                    }
+		            InvalidateProperties();
 
-                    from.SendSound(0x42, GetWorldLocation());
-                    from.SendLocalizedMessage(1062386); // Deed added to book.
+		            if (m_Entries.Count / 5 > m_ItemCount)
+		            {
+			            m_ItemCount++;
+			            InvalidateItems();
+		            }
 
-                    if (from is PlayerMobile)
-                        from.SendGump(new BOBGump((PlayerMobile)from, this));
+		            from.SendSound(0x42, GetWorldLocation());
+		            from.SendLocalizedMessage(1062386); // Deed added to book.
 
-                    dropped.Delete();
+		            if (from is PlayerMobile)
+			            from.SendGump(new BOBGump((PlayerMobile)from, this));
 
-                    return true;
-                }
-                else
-                {
-                    from.SendLocalizedMessage(1062387); // The book is full of deeds.
-                    return false;
-                }
+		            dropped.Delete();
+
+		            return true;
+	            }
+
+	            from.SendLocalizedMessage(1062387); // The book is full of deeds.
+	            return false;
             }
 
             from.SendLocalizedMessage(1062388); // That is not a bulk order deed.

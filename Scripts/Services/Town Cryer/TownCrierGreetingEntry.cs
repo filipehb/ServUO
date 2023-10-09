@@ -101,14 +101,15 @@ namespace Server.Services.TownCryer
 
             if ((CanEdit || PreLoaded) && (two.CanEdit || two.PreLoaded))
             {
-                if (Created > two.Created)
+	            if (Created > two.Created)
                 {
                     return -1;
                 }
-                else if (two.Created > Created)
-                {
-                    return 1;
-                }
+
+	            if (two.Created > Created)
+	            {
+		            return 1;
+	            }
             }
 
             return 0;

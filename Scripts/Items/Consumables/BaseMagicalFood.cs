@@ -110,7 +110,7 @@ namespace Server.Items
         {
             if (!IsUnderInfluence(from, FoodID))
             {
-                if (!CoolingDown(from, FoodID))
+	            if (!CoolingDown(from, FoodID))
                 {
                     from.SendLocalizedMessage(EatMessage);
 
@@ -119,8 +119,8 @@ namespace Server.Items
 
                     return true;
                 }
-                else
-                    from.SendLocalizedMessage(1070772); // You must wait a few seconds before you can use that item.
+
+	            from.SendLocalizedMessage(1070772); // You must wait a few seconds before you can use that item.
             }
 
             return false;

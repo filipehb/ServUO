@@ -65,8 +65,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly Point3D[] m_BarrierLocations = new Point3D[]
-        {
+        private static readonly Point3D[] m_BarrierLocations = {
             new Point3D( 33, 207, 0 ),
             new Point3D( 34, 207, 0 ),
             new Point3D( 35, 207, 0 ),

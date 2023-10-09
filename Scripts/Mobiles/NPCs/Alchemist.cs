@@ -1,6 +1,7 @@
-using Server.Engines.BulkOrders;
 using System;
 using System.Collections.Generic;
+using Server.Engines.BulkOrders;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -53,7 +54,7 @@ namespace Server.Mobiles
         {
             base.InitOutfit();
 
-            SetWearable(new Items.Robe(), Utility.RandomPinkHue());
+            SetWearable(new Robe(), Utility.RandomPinkHue());
         }
 
         public override void Serialize(GenericWriter writer)

@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public AquariumMessage()
-            : base()
         {
         }
 

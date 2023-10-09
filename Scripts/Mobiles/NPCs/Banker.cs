@@ -1,11 +1,14 @@
 #region References
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 #endregion
 
 namespace Server.Mobiles
@@ -96,7 +99,7 @@ namespace Server.Mobiles
             if (AccountGold.Enabled && from.Account != null && from.Account.WithdrawGold(amount))
             {
                 if (message)
-                    from.SendLocalizedMessage(1155856, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold has been removed from your bank box.
+                    from.SendLocalizedMessage(1155856, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold has been removed from your bank box.
 
                 return true;
             }
@@ -140,7 +143,7 @@ namespace Server.Mobiles
             }
 
             if (message)
-                from.SendLocalizedMessage(1155856, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold has been removed from your bank box.
+                from.SendLocalizedMessage(1155856, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold has been removed from your bank box.
 
             return true;
         }
@@ -151,7 +154,7 @@ namespace Server.Mobiles
             if (AccountGold.Enabled && from.Account != null && from.Account.DepositGold(amount))
             {
                 if (message)
-                    from.SendLocalizedMessage(1042763, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold was deposited in your account.
+                    from.SendLocalizedMessage(1042763, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold was deposited in your account.
 
                 return true;
             }
@@ -201,7 +204,7 @@ namespace Server.Mobiles
             }
 
             if (message)
-                from.SendLocalizedMessage(1042763, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold was deposited in your account.
+                from.SendLocalizedMessage(1042763, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold was deposited in your account.
 
             return true;
         }
@@ -212,7 +215,7 @@ namespace Server.Mobiles
             if (AccountGold.Enabled && from.Account != null && from.Account.DepositGold(amount))
             {
                 if (message)
-                    from.SendLocalizedMessage(1042763, amount.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold was deposited in your account.
+                    from.SendLocalizedMessage(1042763, amount.ToString("N0", CultureInfo.GetCultureInfo("en-US"))); // ~1_AMOUNT~ gold was deposited in your account.
 
                 return amount;
             }

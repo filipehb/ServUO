@@ -7,7 +7,6 @@ namespace Server.Items
 
         [Constructable]
         public ClawsOfTheBerserker()
-            : base()
         {
             Hue = 1172;
             WeaponAttributes.HitLightning = 45;

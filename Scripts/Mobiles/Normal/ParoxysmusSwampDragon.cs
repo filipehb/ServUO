@@ -6,7 +6,6 @@ namespace Server.Mobiles
     {
         [Constructable]
         public ParoxysmusSwampDragon()
-            : base()
         {
             Name = "Chief Paroxysmus' Swamp Dragon";
 

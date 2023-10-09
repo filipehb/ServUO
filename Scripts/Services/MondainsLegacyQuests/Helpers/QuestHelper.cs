@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Regions;
 using Server.Targeting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Engines.Quests
 {
@@ -65,16 +65,17 @@ namespace Server.Engines.Quests
                 {
                     return quest;
                 }
-                else if (quester is Mobile && message)
+
+                if (quester is Mobile && message)
                 {
-                    if (quester is MondainQuester)
-                    {
-                        ((MondainQuester)quester).OnOfferFailed();
-                    }
-                    else if (quester is Mobile)
-                    {
-                        ((Mobile)quester).Say(1080107); // I'm sorry, I have nothing for you at this time.
-                    }
+	                if (quester is MondainQuester)
+	                {
+		                ((MondainQuester)quester).OnOfferFailed();
+	                }
+	                else if (quester is Mobile)
+	                {
+		                ((Mobile)quester).Say(1080107); // I'm sorry, I have nothing for you at this time.
+	                }
                 }
             }
 
@@ -88,15 +89,16 @@ namespace Server.Engines.Quests
 
             if (quest.ChainID != QuestChain.None)
             {
-                // if a player wants to start quest chain (already started) again (not osi)
+	            // if a player wants to start quest chain (already started) again (not osi)
                 if (from.Chains.ContainsKey(quest.ChainID) && FirstChainQuest(quest, quest.Quester))
                 {
                     return false;
                 }
                 // if player already has an active quest from the chain
-                else if (InChainProgress(from, quest))
+
+                if (InChainProgress(from, quest))
                 {
-                    return false;
+	                return false;
                 }
             }
 
@@ -232,10 +234,8 @@ namespace Server.Engines.Quests
 
                         return false;
                     }
-                    else
-                    {
-                        info.Reset(delay);
-                    }
+
+                    info.Reset(delay);
                 }
                 else
                 {
@@ -573,12 +573,12 @@ namespace Server.Engines.Quests
 
                     if (quest.StartingItem != null)
                         continue;
-                    else if (deliver.MaxProgress > CountQuestItems(quest.Owner, deliver.Delivery))
+                    if (deliver.MaxProgress > CountQuestItems(quest.Owner, deliver.Delivery))
                     {
-                        quest.Owner.SendLocalizedMessage(1074813);  // You have failed to complete your delivery.
-                        deliver.Fail();
+	                    quest.Owner.SendLocalizedMessage(1074813);  // You have failed to complete your delivery.
+	                    deliver.Fail();
 
-                        return false;
+	                    return false;
                     }
                 }
             }

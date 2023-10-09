@@ -18,6 +18,7 @@
  *
  ***************************************************************************/
 
+using System;
 using Server.Network;
 
 namespace Server.Gumps
@@ -67,9 +68,8 @@ namespace Server.Gumps
 		public override string Compile()
 		{
 			if (m_Hue == 0)
-				return System.String.Format("{{ gumppic {0} {1} {2} }}", m_X, m_Y, m_GumpID);
-			else
-				return System.String.Format("{{ gumppic {0} {1} {2} hue={3} }}", m_X, m_Y, m_GumpID, m_Hue);
+				return String.Format("{{ gumppic {0} {1} {2} }}", m_X, m_Y, m_GumpID);
+			return String.Format("{{ gumppic {0} {1} {2} hue={3} }}", m_X, m_Y, m_GumpID, m_Hue);
 		}
 
 		private static readonly byte[] m_LayoutName = Gump.StringToBuffer("gumppic");

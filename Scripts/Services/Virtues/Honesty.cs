@@ -1,15 +1,17 @@
 #region References
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-
+using Server.Diagnostics;
 using Server.Engines.CannedEvil;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Regions;
+
 #endregion
 
 namespace Server.Services.Virtues
@@ -239,7 +241,7 @@ namespace Server.Services.Virtues
                         }
                         catch (Exception e)
                         {
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                     }
 
@@ -288,7 +290,7 @@ namespace Server.Services.Virtues
                         catch (Exception e)
                         {
                             item.Delete();
-                            Diagnostics.ExceptionLogging.LogException(e);
+                            ExceptionLogging.LogException(e);
                         }
                         finally
                         {
@@ -307,7 +309,7 @@ namespace Server.Services.Virtues
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+                ExceptionLogging.LogException(e);
             }
 
             Utility.PushColor(ConsoleColor.Yellow);

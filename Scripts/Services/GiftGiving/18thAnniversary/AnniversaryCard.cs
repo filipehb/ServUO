@@ -1,3 +1,5 @@
+using Server.Misc;
+
 namespace Server.Items
 {
     [Flipable(0x9C14, 0x9C15)]
@@ -6,7 +8,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public string Args { get; set; }
 
-        private readonly string[] _Staff = new string[] { Misc.ServerList.ServerName }; // TODO: Get More
+        private readonly string[] _Staff = { ServerList.ServerName }; // TODO: Get More
 
         [Constructable]
         public AnniversaryCard()

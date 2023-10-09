@@ -1,7 +1,7 @@
-using Server.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -42,7 +42,7 @@ namespace Server.Spells.SkillMasteries
 
         public override void OnCast()
         {
-            Caster.Target = new MasteryTarget(this, 10, true, Targeting.TargetFlags.None);
+            Caster.Target = new MasteryTarget(this, 10, true);
         }
 
         protected override void OnTarget(object o)

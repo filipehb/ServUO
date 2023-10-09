@@ -1,13 +1,13 @@
+using System;
+using Server.Diagnostics;
 using Server.Mobiles;
 using Server.Network;
-using System;
 
 namespace Server.Items
 {
     public class DeceitBrazier : Item
     {
-        private static readonly Type[] m_Creatures = new Type[]
-        {
+        private static readonly Type[] m_Creatures = {
             #region Animals
             typeof(FireSteed), //Set the tents up people!
             #endregion
@@ -182,8 +182,8 @@ namespace Server.Items
 
                 if (Map.CanSpawnMobile(new Point2D(x, y), Z))
                     return new Point3D(x, y, Z);
-                else if (Map.CanSpawnMobile(new Point2D(x, y), z))
-                    return new Point3D(x, y, z);
+                if (Map.CanSpawnMobile(new Point2D(x, y), z))
+	                return new Point3D(x, y, z);
             }
 
             return Location;
@@ -212,7 +212,7 @@ namespace Server.Items
 
                             DoEffect(spawnLoc, map);
 
-                            Timer.DelayCall(TimeSpan.FromSeconds(1), delegate ()
+                            Timer.DelayCall(TimeSpan.FromSeconds(1), delegate
                             {
                                 bc.Home = Location;
                                 bc.RangeHome = m_SpawnRange;
@@ -235,7 +235,7 @@ namespace Server.Items
                 }
                 catch (Exception e)
                 {
-                    Diagnostics.ExceptionLogging.LogException(e);
+                    ExceptionLogging.LogException(e);
                 }
             }
             else

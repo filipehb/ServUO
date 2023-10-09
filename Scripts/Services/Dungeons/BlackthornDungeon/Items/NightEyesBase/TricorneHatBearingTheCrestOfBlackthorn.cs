@@ -6,7 +6,6 @@ namespace Server.Items
 
         [Constructable]
         public TricorneHatBearingTheCrestOfBlackthorn1()
-            : base()
         {
             ReforgedSuffix = ReforgedSuffix.Blackthorn;
             Attributes.NightSight = 1;

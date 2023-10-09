@@ -1,22 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Engines.CityLoyalty;
 using Server.Engines.SphynxFortune;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
+using Server.Network;
 using Server.Services.Virtues;
 using Server.SkillHandlers;
 using Server.Spells;
 using Server.Spells.Bushido;
 using Server.Spells.Chivalry;
 using Server.Spells.Fifth;
+using Server.Spells.Mysticism;
 using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Spells.Seventh;
 using Server.Spells.SkillMasteries;
 using Server.Spells.Spellweaving;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server
 {
@@ -373,8 +375,8 @@ namespace Server
 
             SoulChargeContext.CheckHit(from, m, totalDamage);
 
-            Spells.Mysticism.SleepSpell.OnDamage(m);
-            Spells.Mysticism.PurgeMagicSpell.OnMobileDoDamage(from);
+            SleepSpell.OnDamage(m);
+            PurgeMagicSpell.OnMobileDoDamage(from);
 
             BaseCostume.OnDamaged(m);
 
@@ -647,10 +649,10 @@ namespace Server
                 if (CityLoyaltySystem.HasTradeDeal(m, TradeDeal.BardicCollegium))
                     value += 1;
 
-                if (Spells.Mysticism.SleepSpell.IsUnderSleepEffects(m))
+                if (SleepSpell.IsUnderSleepEffects(m))
                     value -= 2;
 
-                if (TransformationSpellHelper.UnderTransformation(m, typeof(Spells.Mysticism.StoneFormSpell)))
+                if (TransformationSpellHelper.UnderTransformation(m, typeof(StoneFormSpell)))
                     value -= 2;
             }
             else if (attribute == AosAttribute.CastRecovery)
@@ -660,7 +662,7 @@ namespace Server
 
                 value -= ThunderstormSpell.GetCastRecoveryMalus(m);
 
-                if (Spells.Mysticism.SleepSpell.IsUnderSleepEffects(m))
+                if (SleepSpell.IsUnderSleepEffects(m))
                     value -= 3;
             }
             else if (attribute == AosAttribute.WeaponSpeed)
@@ -690,10 +692,10 @@ namespace Server
                 if (CityLoyaltySystem.HasTradeDeal(m, TradeDeal.GuildOfAssassins))
                     value += 5;
 
-                if (Spells.Mysticism.SleepSpell.IsUnderSleepEffects(m))
+                if (SleepSpell.IsUnderSleepEffects(m))
                     value -= 45;
 
-                if (TransformationSpellHelper.UnderTransformation(m, typeof(Spells.Mysticism.StoneFormSpell)))
+                if (TransformationSpellHelper.UnderTransformation(m, typeof(StoneFormSpell)))
                     value -= 10;
 
                 if (StickySkin.IsUnderEffects(m))
@@ -726,7 +728,7 @@ namespace Server
                 if (CityLoyaltySystem.HasTradeDeal(m, TradeDeal.WarriorsGuild))
                     value += 5;
 
-                if (Spells.Mysticism.SleepSpell.IsUnderSleepEffects(m))
+                if (SleepSpell.IsUnderSleepEffects(m))
                     value -= 45;
 
                 if (m.Race == Race.Gargoyle)
@@ -2431,7 +2433,6 @@ namespace Server
                 BaseClothing.ValidateMobile(m);
                 BuffInfo.RemoveBuff(m, BuffIcon.Incognito);
             }
-            return;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -3120,7 +3121,7 @@ namespace Server
                         dur.MaxHitPoints--;
 
                         if (item.Parent is Mobile)
-                            ((Mobile)item.Parent).LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
+                            ((Mobile)item.Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
                     }
                     else
                     {

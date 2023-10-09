@@ -1,5 +1,6 @@
-using Server.Items;
 using System;
+using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -84,7 +85,7 @@ namespace Server.Mobiles
             FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);
 
             IPooledEnumerable eable = Map.GetMobilesInRange(Location, 4);
-            System.Collections.Generic.List<Mobile> list = new System.Collections.Generic.List<Mobile>();
+            List<Mobile> list = new List<Mobile>();
 
             foreach (Mobile m in eable)
             {

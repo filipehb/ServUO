@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Mobiles;
-using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -20,20 +21,20 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (RootParent != null || !from.InRange(GetWorldLocation(), 3) || Movable || IsLockedDown || IsSecure)
+	        if (RootParent != null || !from.InRange(GetWorldLocation(), 3) || Movable || IsLockedDown || IsSecure)
                 return;
-            else if (from.Backpack != null && m_Span == 0)
-            {
-                Item key = from.Backpack.FindItemByType(typeof(MagicKey));
+	        if (from.Backpack != null && m_Span == 0)
+	        {
+		        Item key = from.Backpack.FindItemByType(typeof(MagicKey));
 
-                if (key == null)
-                {
-                    if (from.HasGump(typeof(MagicKeyConfirmGump)))
-                        from.CloseGump(typeof(MagicKeyConfirmGump));
+		        if (key == null)
+		        {
+			        if (from.HasGump(typeof(MagicKeyConfirmGump)))
+				        from.CloseGump(typeof(MagicKeyConfirmGump));
 
-                    from.SendGump(new MagicKeyConfirmGump(this));
-                }
-            }
+			        from.SendGump(new MagicKeyConfirmGump(this));
+		        }
+	        }
         }
 
         public void StartTimer()
@@ -111,7 +112,7 @@ namespace Server.Items
                 AddHtmlLocalized(250, 87, 80, 25, 1006044, 0x7FFF, false, false);  //OK
             }
 
-            public override void OnResponse(Network.NetState state, RelayInfo info)
+            public override void OnResponse(NetState state, RelayInfo info)
             {
                 Mobile from = state.Mobile;
 

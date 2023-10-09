@@ -1,10 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using Server.Accounting;
 using Server.ContextMenus;
+using Server.Engines.Despise;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items
 {
@@ -250,7 +251,7 @@ namespace Server.Items
 
         public override bool DropToWorld(Mobile m, Point3D p)
         {
-            Engines.Despise.WispOrb.CheckDrop(this, m);
+            WispOrb.CheckDrop(this, m);
 
             return base.DropToWorld(m, p);
         }
@@ -473,10 +474,8 @@ namespace Server.Items
                 {
                     return Config.Get("CarryWeight.PlayerBackbackMax", 550);
                 }
-                else
-                {
-                    return base.DefaultMaxWeight;
-                }
+
+                return base.DefaultMaxWeight;
             }
         }
         public bool Dye(Mobile from, DyeTub sender)

@@ -1,13 +1,12 @@
+using System;
 using Server.Items;
 using Server.Mobiles;
-using System;
 
 namespace Server.Engines.Quests
 {
     public class AllThatGlittersIsNotGoodQuest : BaseQuest
     {
         public AllThatGlittersIsNotGoodQuest()
-            : base()
         {
             AddObjective(new SlayObjective(typeof(ShimmeringEffusion), "shimmering effusion", 10));
 
@@ -64,7 +63,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests => new Type[]
+        public override Type[] Quests => new[]
                 {
                     typeof(AllThatGlittersIsNotGoodQuest)
                 };

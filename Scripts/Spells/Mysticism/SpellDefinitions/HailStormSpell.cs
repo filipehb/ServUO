@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Server.Mobiles;
 using Server.Targeting;
-using System;
-using System.Linq;
 
 namespace Server.Spells.Mysticism
 {
@@ -67,7 +68,7 @@ namespace Server.Spells.Mysticism
                     }
                 }
 
-                System.Collections.Generic.List<IDamageable> list = AcquireIndirectTargets(p, 2).ToList();
+                List<IDamageable> list = AcquireIndirectTargets(p, 2).ToList();
                 int count = list.Count;
 
                 foreach (IDamageable id in list)

@@ -1,11 +1,15 @@
 #region References
+
+using System;
+using Server.Engines.Despise;
 using Server.Engines.Quests;
+using Server.Engines.VvV;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Regions;
 using Server.Spells.SkillMasteries;
-using System;
+
 #endregion
 
 namespace Server.Misc
@@ -310,7 +314,7 @@ namespace Server.Misc
 
         private static bool AllowGain(Mobile from, Skill skill, object obj)
         {
-            if (Engines.VvV.ViceVsVirtueSystem.InSkillLoss(from)) //Changed some time between the introduction of AoS and SE.
+            if (ViceVsVirtueSystem.InSkillLoss(from)) //Changed some time between the introduction of AoS and SE.
                 return false;
 
             if (from is PlayerMobile)
@@ -396,7 +400,7 @@ namespace Server.Misc
                 #endregion
 
                 #region Skill Masteries
-                else if (from is BaseCreature && !(from is Engines.Despise.DespiseCreature) && (((BaseCreature)from).Controlled || ((BaseCreature)from).Summoned))
+                else if (from is BaseCreature && !(from is DespiseCreature) && (((BaseCreature)from).Controlled || ((BaseCreature)from).Summoned))
                 {
                     Mobile master = ((BaseCreature)from).GetMaster();
 

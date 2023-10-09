@@ -4,7 +4,6 @@ namespace Server.Items
     {
         [Constructable]
         public PerfectEmeraldRing()
-            : base()
         {
             Weight = 1.0;
 
